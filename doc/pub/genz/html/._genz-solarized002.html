@@ -1,0 +1,239 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Generalizations of exponential decay models">
+<meta name="keywords" content="lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method">
+
+<title>Generalizations of exponential decay models</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Model extensions', 1, None, '___sec0'),
+              ('Generalization: including a variable coefficient',
+               2,
+               None,
+               '___sec1'),
+              ('Generalization: including a source term',
+               2,
+               'decay:source',
+               'decay:source'),
+              ('Implementation of the generalized model problem',
+               2,
+               'decay:general',
+               'decay:general'),
+              ('Deriving the $\\theta$-rule formula', 3, None, '___sec4'),
+              ('Python code', 3, None, '___sec5'),
+              ('Coding of variable coefficients', 3, None, '___sec6'),
+              ('Verifying a constant solution',
+               2,
+               'decay:verify:trivial',
+               'decay:verify:trivial'),
+              ('Verification via manufactured solutions',
+               2,
+               'decay:MMS',
+               'decay:MMS'),
+              ('Computing convergence rates',
+               2,
+               'decay:convergence:rate',
+               'decay:convergence:rate'),
+              ('Estimating $r$', 3, None, '___sec10'),
+              ('Implementation', 3, None, '___sec11'),
+              ('Extension to systems of ODEs', 2, None, '___sec12'),
+              ('General first-order ODEs', 1, None, '___sec13'),
+              ('Generic form of first-order ODEs', 2, None, '___sec14'),
+              ('The $\\theta$-rule', 2, None, '___sec15'),
+              ('An implicit 2-step backward scheme', 2, None, '___sec16'),
+              ('Leapfrog schemes', 2, None, '___sec17'),
+              ('The ordinary Leapfrog scheme', 3, None, '___sec18'),
+              ('The filtered Leapfrog scheme', 3, None, '___sec19'),
+              ('The 2nd-order Runge-Kutta method', 2, None, '___sec20'),
+              ('A 2nd-order Taylor-series method', 2, None, '___sec21'),
+              ('The 2nd- and 3rd-order Adams-Bashforth schemes',
+               2,
+               None,
+               '___sec22'),
+              ('The 4th-order Runge-Kutta method',
+               2,
+               'decay:fd2:RK4',
+               'decay:fd2:RK4'),
+              ('The Odespy software', 2, None, '___sec24'),
+              ('Example: Runge-Kutta methods', 2, None, '___sec25'),
+              ('Remark about using the $\\theta$-rule in Odespy',
+               3,
+               None,
+               '___sec26'),
+              ('Example: Adaptive Runge-Kutta methods',
+               2,
+               'decay:fd2:adaptiveRK',
+               'decay:fd2:adaptiveRK'),
+              ('Exercises', 1, None, '___sec28'),
+              ('Exercise 1: Experiment with precision in tests and the size of $u$',
+               2,
+               'decay:fd2:exer:precision',
+               'decay:fd2:exer:precision'),
+              ('Exercise 2: Implement the 2-step backward scheme',
+               2,
+               'decay:fd2:exer:bw2',
+               'decay:fd2:exer:bw2'),
+              ('Exercise 3: Implement the 2nd-order Adams-Bashforth scheme',
+               2,
+               'decay:fd2:exer:AB2',
+               'decay:fd2:exer:AB2'),
+              ('Exercise 4: Implement the 3rd-order Adams-Bashforth scheme',
+               2,
+               'decay:fd2:exer:AB3',
+               'decay:fd2:exer:AB3'),
+              ('Exercise 5: Analyze explicit 2nd-order methods',
+               2,
+               'decay:exer:RK2:Taylor:analysis',
+               'decay:exer:RK2:Taylor:analysis'),
+              ('Problem 6: Implement and investigate the Leapfrog scheme',
+               2,
+               'decay:fd2:exer:leapfrog1',
+               'decay:fd2:exer:leapfrog1'),
+              ('Problem 7: Make a unified implementation of many schemes',
+               2,
+               'decay:fd2:exer:uni',
+               'decay:fd2:exer:uni'),
+              ('Bibliography', 1, None, '___sec36')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\tp}{\thinspace .}
+\newcommand{\uex}{{u_{\small\mbox{e}}}}
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<a name="part0002"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._genz-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1 id="___sec36">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="Petzold_Ascher_1998"></div> <b>L. Petzold and U. M. Ascher</b>. 
+    <em>Computer Methods for Ordinary Differential Equations and Differential-Algebraic Equations</em>,
+    SIAM,
+    1998.</li>
+ <li> <div id="Griffiths_et_al_2010"></div> <b>D. Griffiths, F. David and D. J. Higham</b>. 
+    <em>Numerical Methods for Ordinary Differential Equations: Initial Value Problems</em>,
+    Springer,
+    2010.</li>
+ <li> <div id="Hairer_Wanner_Norsett_bookI"></div> <b>E. Hairer, S. P. N\orsett and G. Wanner</b>. 
+    <em>Solving Ordinary Differential Equations I. Nonstiff Problems</em>,
+    Springer,
+    1993.</li>
+ <li> <div id="Hairer_Wanner_bookII"></div> <b>G. Hairer and E. Wanner</b>. 
+    <em>Solving Ordinary Differential Equations II</em>,
+    Springer,
+    2010.</li>
+ <li> <div id="odespy"></div> <b>H. P. Langtangen and L. Wang</b>. 
+    Odespy Software Package,
+    <a href="https://github.com/hplgit/odespy" target="_self"><tt>https://github.com/hplgit/odespy</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._genz-solarized001.html">&laquo; Previous</a></div>
+</td><td>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

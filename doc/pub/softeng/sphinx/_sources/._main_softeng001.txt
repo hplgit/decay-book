@@ -1,0 +1,36 @@
+.. !split
+
+Teaching material on scientific computing has traditionally been very
+focused on the mathematics and the applications, while details on how
+the computer is programmed to solve the problems have received little attention.
+Many end up writing as simple programs as possible, without being
+aware of much useful computer science technology that would increase
+the fun, efficiency, and reliability of the their scientific computing
+activities.
+
+This chapter demonstrates a series of good practices and tools
+from modern computer science, using the simple mathematical problem
+:math:`u^{\prime}=-au`, :math:`u(0)=I`, such that we minimize the
+mathematical details and can go more in depth with implementations.
+The goal is to increase the technological
+quality of computer programming and make it match the more
+well-established quality of the mathematics of scientific computing.
+
+The conventions and techniques outlined here will save you a lot of time
+when you incrementally extend software over time from simpler to more
+complicated problems. In particular, you will benefit from
+many good habits:
+
+ * new code is added in a modular fashion to a library (modules),
+
+ * programs are run through convenient user interfaces,
+
+ * it takes one quick command to let all your code undergo heavy testing,
+
+ * tedious manual work with running programs is automated,
+
+ * your scientific investigations are reproducible,
+
+ * scientific reports with top quality typesetting are produced both
+   for paper and electronic devices.
+

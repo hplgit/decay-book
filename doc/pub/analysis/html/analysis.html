@@ -1,0 +1,218 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Analysis of exponential decay models">
+<meta name="keywords" content="stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence">
+
+<title>Analysis of exponential decay models</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Experimental investigations', 1, None, '___sec0'),
+              ('Discouraging numerical solutions', 2, None, '___sec1'),
+              ('Detailed experiments', 2, None, '___sec2'),
+              ('Stability', 1, None, '___sec3'),
+              ('Exact numerical solution', 2, None, '___sec4'),
+              ('Stability properties derived from the amplification factor',
+               2,
+               None,
+               '___sec5'),
+              ('Accuracy', 1, None, '___sec6'),
+              ('Visual comparison of amplification factors',
+               2,
+               None,
+               '___sec7'),
+              ('Series expansion of amplification factors',
+               2,
+               None,
+               '___sec8'),
+              ('The ratio of numerical and exact amplification factors',
+               2,
+               None,
+               '___sec9'),
+              ('The global error at a point',
+               2,
+               'decay:analysis:gobal:error',
+               'decay:analysis:gobal:error'),
+              ('Integrated error',
+               2,
+               'decay:analysis:gobal:error_int',
+               'decay:analysis:gobal:error_int'),
+              ('Truncation error',
+               2,
+               'decay:analysis:trunc',
+               'decay:analysis:trunc'),
+              ('Consistency, stability, and convergence',
+               2,
+               None,
+               '___sec13'),
+              ('Exercises', 1, None, '___sec14'),
+              ('Exercise 1: Visualize the accuracy of finite differences',
+               2,
+               'decay:analysis:exer:fd:exp:plot',
+               'decay:analysis:exer:fd:exp:plot'),
+              ('Exercise 2: Explore the $\\theta$-rule for exponential growth',
+               2,
+               'decay:analysis:exer:growth',
+               'decay:analysis:exer:growth'),
+              ('Bibliography', 1, None, '___sec17')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\tp}{\thinspace .}
+\newcommand{\uex}{{u_{\small\mbox{e}}}}
+\newcommand{\Aex}{{A_{\small\mbox{e}}}}
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="analysis.html">Analysis of exponential decay models</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec0" style="font-size: 80%;">Experimental investigations</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec3" style="font-size: 80%;">Stability</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec6" style="font-size: 80%;">Accuracy</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec14" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis002.html#___sec17" style="font-size: 80%;">Bibliography</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Analysis of exponential decay models</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<p>
+<center><h4>Aug 4, 2015</h4></center> <!-- date -->
+
+<h2>Table of contents</h2>
+
+<p>
+<a href="._analysis001.html#___sec0"> Experimental investigations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#___sec1"> Discouraging numerical solutions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#___sec2"> Detailed experiments </a><br>
+<a href="._analysis001.html#___sec3"> Stability </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#___sec4"> Exact numerical solution </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#___sec5"> Stability properties derived from the amplification factor </a><br>
+<a href="._analysis001.html#___sec6"> Accuracy </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#___sec7"> Visual comparison of amplification factors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#___sec8"> Series expansion of amplification factors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#___sec9"> The ratio of numerical and exact amplification factors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#decay:analysis:gobal:error"> The global error at a point </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#decay:analysis:gobal:error_int"> Integrated error </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#decay:analysis:trunc"> Truncation error </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#___sec13"> Consistency, stability, and convergence </a><br>
+<a href="._analysis001.html#___sec14"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#decay:analysis:exer:fd:exp:plot"> Exercise 1: Visualize the accuracy of finite differences </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis001.html#decay:analysis:exer:growth"> Exercise 2: Explore the \( \theta \)-rule for exponential growth </a><br>
+<a href="._analysis002.html#___sec17"> Bibliography </a><br>
+</p>
+<p>
+
+
+<p><a href="._analysis001.html" class="btn btn-primary btn-lg">Read &raquo;</a></p>
+
+
+</div> <!-- end jumbotron -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="next">
+    <a href="._analysis001.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

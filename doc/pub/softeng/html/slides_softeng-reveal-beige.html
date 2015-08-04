@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Study guide: Software engineering with exponential decay models">
+<meta name="keywords" content="doctests,software testing doctests,unit testing,software testing nose,numerical experiments,scientific experiments">
+
+<title>Study guide: Software engineering with exponential decay models</title>
+
+
+
+
+
+
+
+<!-- reveal.js: http://lab.hakim.se/reveal-js/ -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<link rel="stylesheet" href="reveal.js/css/reveal.css">
+<link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
+<!--
+<link rel="stylesheet" href="reveal.js/css/reveal.css">
+<link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/beigesmall.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/solarized.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/serif.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/moon.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/darkgray.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/default.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/cbc.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/simula.css" id="theme">
+-->
+
+<!-- For syntax highlighting -->
+<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+
+<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<script>
+document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+</script>
+
+<style type="text/css">
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    p.caption { width: 80%; font-size: 60%; font-style: italic; text-align: left; }
+    hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .reveal .alert-text-small   { font-size: 80%;  }
+    .reveal .alert-text-large   { font-size: 130%; }
+    .reveal .alert-text-normal  { font-size: 90%;  }
+    .reveal .alert {
+             padding:8px 35px 8px 14px; margin-bottom:18px;
+             text-shadow:0 1px 0 rgba(255,255,255,0.5);
+             border:5px solid #bababa;
+             -webkit-border-radius: 14px; -moz-border-radius: 14px;
+             border-radius:14px
+             background-position: 10px 10px;
+             background-repeat: no-repeat;
+             background-size: 38px;
+             padding-left: 30px; /* 55px; if icon */
+     }
+     .reveal .alert-block {padding-top:14px; padding-bottom:14px}
+     .reveal .alert-block > p, .alert-block > ul {margin-bottom:1em}
+     /*.reveal .alert li {margin-top: 1em}*/
+     .reveal .alert-block p+p {margin-top:5px}
+     /*.reveal .alert-notice { background-image: url(http://hplgit.github.io/doconce/bundled/html_images/small_gray_notice.png); }
+     .reveal .alert-summary  { background-image:url(http://hplgit.github.io/doconce/bundled/html_images/small_gray_summary.png); }
+     .reveal .alert-warning { background-image: url(http://hplgit.github.io/doconce/bundled/html_images/small_gray_warning.png); }
+     .reveal .alert-question {background-image:url(http://hplgit.github.io/doconce/bundled/html_images/small_gray_question.png); } */
+
+</style>
+
+
+
+<!-- Styles for table layout of slides -->
+<style type="text/css">
+td.padding {
+  padding-top:20px;
+  padding-bottom:20px;
+  padding-right:50px;
+  padding-left:50px;
+}
+</style>
+
+</head>
+
+<body>
+<div class="reveal">
+
+<!-- Any section element inside the <div class="slides"> container
+     is displayed as a slide -->
+
+<div class="slides">
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+
+
+
+<section>
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<center><h1 style="text-align: center;">Study guide: Software engineering with exponential decay models</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+<p>&nbsp;<br>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<p>&nbsp;<br>
+<center><h4>Aug 4, 2015</h4></center> <!-- date -->
+</section>
+
+
+<section>
+<h1 id="___sec0">From flat program to module with functions </h1>
+</section>
+
+
+<section>
+<h2 id="___sec1">Mathematical model problem </h2>
+
+<p>&nbsp;<br>
+$$
+\begin{align*}
+u'(t) &= -au(t), \quad t \in (0,T]\\ 
+u(0)  &= I
+\end{align*}
+$$
+<p>&nbsp;<br>
+
+<p>
+Solution by \( \theta \)-scheme:
+
+<p>&nbsp;<br>
+$$
+\begin{equation*}
+u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n
+\end{equation*}
+$$
+<p>&nbsp;<br>
+
+<p>
+\( \theta =0 \): Forward Euler, \( \theta =1 \): Backward Euler, \( \theta =1/2 \): Crank-Nicolson (midpoint method)
+</section>
+
+
+<section>
+<h2 id="___sec2">Many will make a rough, flat program first </h2>
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">numpy</span> <span style="color: #8B008B; font-weight: bold">import</span> *
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">matplotlib.pyplot</span> <span style="color: #8B008B; font-weight: bold">import</span> *
+
+A = <span style="color: #B452CD">1</span>
+a = <span style="color: #B452CD">2</span>
+T = <span style="color: #B452CD">4</span>
+dt = <span style="color: #B452CD">0.2</span>
+N = <span style="color: #658b00">int</span>(<span style="color: #658b00">round</span>(T/dt))
+y = zeros(N+<span style="color: #B452CD">1</span>)
+t = linspace(<span style="color: #B452CD">0</span>, T, N+<span style="color: #B452CD">1</span>)
+theta = <span style="color: #B452CD">1</span>
+y[<span style="color: #B452CD">0</span>] = A
+<span style="color: #8B008B; font-weight: bold">for</span> n <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">0</span>, N):
+    y[n+<span style="color: #B452CD">1</span>] = (<span style="color: #B452CD">1</span> - (<span style="color: #B452CD">1</span>-theta)*a*dt)/(<span style="color: #B452CD">1</span> + theta*dt*a)*y[n]
+
+y_e = A*exp(-a*t) - y
+error = y_e - y
+E = sqrt(dt*<span style="color: #658b00">sum</span>(error**<span style="color: #B452CD">2</span>))
+<span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;Norm of the error: %.3E&#39;</span> % E
+plot(t, y, <span style="color: #CD5555">&#39;r--o&#39;</span>)
+t_e = linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)
+y_e = A*exp(-a*t_e)
+plot(t_e, y_e, <span style="color: #CD5555">&#39;b-&#39;</span>)
+legend([<span style="color: #CD5555">&#39;numerical, theta=%g&#39;</span> % theta, <span style="color: #CD5555">&#39;exact&#39;</span>])
+xlabel(<span style="color: #CD5555">&#39;t&#39;</span>)
+ylabel(<span style="color: #CD5555">&#39;y&#39;</span>)
+show()
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec3">There are major issues with this solution </h2>
+
+<ol>
+<p><li> The notation in the program does not correspond exactly to
+   the notation in the mathematical problem: the solution is called
+   <code>y</code> and corresponds to \( u \) in the mathematical description,
+   the variable <code>A</code> corresponds to the mathematical parameter \( I \),
+   <code>N</code> in the program is called \( N_t \) in the mathematics.</li>
+<p><li> There are no comments in the program.</li>
+</ol>
+</section>
+
+
+<section>
+<h2 id="___sec4">New flat program </h2>
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">numpy</span> <span style="color: #8B008B; font-weight: bold">import</span> *
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">matplotlib.pyplot</span> <span style="color: #8B008B; font-weight: bold">import</span> *
+
+I = <span style="color: #B452CD">1</span>
+a = <span style="color: #B452CD">2</span>
+T = <span style="color: #B452CD">4</span>
+dt = <span style="color: #B452CD">0.2</span>
+Nt = <span style="color: #658b00">int</span>(<span style="color: #658b00">round</span>(T/dt))     <span style="color: #228B22"># no of time intervals</span>
+u = zeros(Nt+<span style="color: #B452CD">1</span>)           <span style="color: #228B22"># array of u[n] values</span>
+t = linspace(<span style="color: #B452CD">0</span>, T, Nt+<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># time mesh</span>
+theta = <span style="color: #B452CD">1</span>                 <span style="color: #228B22"># Backward Euler method</span>
+
+u[<span style="color: #B452CD">0</span>] = I                  <span style="color: #228B22"># assign initial condition</span>
+<span style="color: #8B008B; font-weight: bold">for</span> n <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">0</span>, Nt):    <span style="color: #228B22"># n=0,1,...,Nt-1</span>
+    u[n+<span style="color: #B452CD">1</span>] = (<span style="color: #B452CD">1</span> - (<span style="color: #B452CD">1</span>-theta)*a*dt)/(<span style="color: #B452CD">1</span> + theta*dt*a)*u[n]
+
+<span style="color: #228B22"># Compute norm of the error</span>
+u_e = I*exp(-a*t) - u     <span style="color: #228B22"># exact u at the mesh points</span>
+error = u_e - u
+E = sqrt(dt*<span style="color: #658b00">sum</span>(error**<span style="color: #B452CD">2</span>))
+<span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;Norm of the error: %.3E&#39;</span> % E
+
+<span style="color: #228B22"># Compare numerical (u) and exact solution (u_e) in a plot</span>
+plot(t, u, <span style="color: #CD5555">&#39;r--o&#39;</span>)
+t_e = linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)       <span style="color: #228B22"># very fine mesh for u_e</span>
+u_e = I*exp(-a*t_e)
+plot(t_e, u_e, <span style="color: #CD5555">&#39;b-&#39;</span>)
+legend([<span style="color: #CD5555">&#39;numerical, theta=%g&#39;</span> % theta, <span style="color: #CD5555">&#39;exact&#39;</span>])
+xlabel(<span style="color: #CD5555">&#39;t&#39;</span>)
+ylabel(<span style="color: #CD5555">&#39;u&#39;</span>)
+show()
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec5">Such flat programs are ideal for IPython notebooks! </h2>
+
+<p>
+<center><p><img src="fig-softeng/ipynb_flat.png" align="bottom" width=800></p></center>
+</section>
+
+
+<section>
+<h2 id="___sec6">But: Further development of such flat programs require many scattered edits - easy to make mistakes! </h2>
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+The solution formula for \( u^{n+1} \) is completely general and
+should be available as a Python function with all input data as
+function arguments and all output data returned to the calling code
+</div>
+<!-- end box -->
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solver</span>(I, a, T, dt, theta):
+    <span style="color: #CD5555">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
+    dt = <span style="color: #658b00">float</span>(dt)               <span style="color: #228B22"># avoid integer division</span>
+    Nt = <span style="color: #658b00">int</span>(<span style="color: #658b00">round</span>(T/dt))        <span style="color: #228B22"># no of time intervals</span>
+    T = Nt*dt                    <span style="color: #228B22"># adjust T to fit time step dt</span>
+    u = np.zeros(Nt+<span style="color: #B452CD">1</span>)           <span style="color: #228B22"># array of u[n] values</span>
+    t = np.linspace(<span style="color: #B452CD">0</span>, T, Nt+<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># time mesh</span>
+
+    u[<span style="color: #B452CD">0</span>] = I                  <span style="color: #228B22"># assign initial condition</span>
+    <span style="color: #8B008B; font-weight: bold">for</span> n <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">0</span>, Nt):    <span style="color: #228B22"># n=0,1,...,Nt-1</span>
+        u[n+<span style="color: #B452CD">1</span>] = (<span style="color: #B452CD">1</span> - (<span style="color: #B452CD">1</span>-theta)*a*dt)/(<span style="color: #B452CD">1</span> + theta*dt*a)*u[n]
+    <span style="color: #8B008B; font-weight: bold">return</span> u, t
+</pre></div>
+<p>
+Call:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">u, t = solver(I=<span style="color: #B452CD">1</span>, a=<span style="color: #B452CD">2</span>, T=<span style="color: #B452CD">4</span>, dt=<span style="color: #B452CD">0.2</span>, theta=<span style="color: #B452CD">0.5</span>)
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec7">The DRY principle: Don't repeat yourself! </h2>
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>DRY:</b>
+<p>
+When implementing a particular functionality in a computer program, make sure
+this functionality and its variations are implemented in just one piece
+of code. That is, if you need to revise the implementation, there should be
+<em>one and only one</em> place to edit. It follows that you should never
+duplicate code (don't repeat yourself!), and code snippets that are
+similar should be factored into one piece (function) and parameterized (by
+function arguments).
+</div>
+</section>
+
+
+<section>
+<h2 id="___sec8">Make sure any program file is a valid Python module </h2>
+
+<ul>
+ <p><li> Module requires code to be divided into functions :-)</li>
+ <p><li> Why module? Other programs can import the functions</li>
+</ul>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">decay</span> <span style="color: #8B008B; font-weight: bold">import</span> solver
+<span style="color: #228B22"># Solve a decay problem</span>
+u, t = solver(I=<span style="color: #B452CD">1</span>, a=<span style="color: #B452CD">2</span>, T=<span style="color: #B452CD">4</span>, dt=<span style="color: #B452CD">0.2</span>, theta=<span style="color: #B452CD">0.5</span>)
+</pre></div>
+<p>
+or prefix function names by the module name:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">decay</span>
+<span style="color: #228B22"># Solve a decay problem</span>
+u, t = decay.solver(I=<span style="color: #B452CD">1</span>, a=<span style="color: #B452CD">2</span>, T=<span style="color: #B452CD">4</span>, dt=<span style="color: #B452CD">0.2</span>, theta=<span style="color: #B452CD">0.5</span>)
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec9">The requirements of a module are so simple </h2>
+
+<ol>
+<p><li> The filename without <code>.py</code> must be a valid Python variable name.</li>
+<p><li> The main program must be executed (through statements or
+   a function call) in the <em>test block</em>.</li>
+</ol>
+<p>
+
+The <em>test block</em> is normally placed at the end of a module file:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">if</span> __name__ == <span style="color: #CD5555">&#39;__main__&#39;</span>:
+    <span style="color: #228B22"># Statements</span>
+</pre></div>
+<p>
+If the file is imported, the if test fails and no main program is run,
+otherwise, the file works as a program
+</section>
+
+
+<section>
+<h2 id="___sec10">The module file <code>decay.py</code> for our example </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">numpy</span> <span style="color: #8B008B; font-weight: bold">import</span> *
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">matplotlib.pyplot</span> <span style="color: #8B008B; font-weight: bold">import</span> *
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solver</span>(I, a, T, dt, theta):
+    ...
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">exact_solution</span>(t, I, a):
+    <span style="color: #8B008B; font-weight: bold">return</span> I*exp(-a*t)
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">experiment_compare_numerical_and_exact</span>():
+    I = <span style="color: #B452CD">1</span>;  a = <span style="color: #B452CD">2</span>;  T = <span style="color: #B452CD">4</span>;  dt = <span style="color: #B452CD">0.4</span>;  theta = <span style="color: #B452CD">1</span>
+    u, t = solver(I, a, T, dt, theta)
+
+    t_e = linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)       <span style="color: #228B22"># very fine mesh for u_e</span>
+    u_e = exact_solution(t_e, I, a)
+
+    plot(t,   u,   <span style="color: #CD5555">&#39;r--o&#39;</span>)           <span style="color: #228B22"># dashed red line with circles</span>
+    plot(t_e, u_e, <span style="color: #CD5555">&#39;b-&#39;</span>)             <span style="color: #228B22"># blue line for u_e</span>
+    legend([<span style="color: #CD5555">&#39;numerical, theta=%g&#39;</span> % theta, <span style="color: #CD5555">&#39;exact&#39;</span>])
+    xlabel(<span style="color: #CD5555">&#39;t&#39;</span>)
+    ylabel(<span style="color: #CD5555">&#39;u&#39;</span>)
+    plotfile = <span style="color: #CD5555">&#39;tmp&#39;</span>
+    savefig(plotfile + <span style="color: #CD5555">&#39;.png&#39;</span>);  savefig(plotfile + <span style="color: #CD5555">&#39;.pdf&#39;</span>)
+
+    error = exact_solution(t, I, a) - u
+    E = sqrt(dt*<span style="color: #658b00">sum</span>(error**<span style="color: #B452CD">2</span>))
+    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;Error norm:&#39;</span>, E
+
+<span style="color: #8B008B; font-weight: bold">if</span> __name__ == <span style="color: #CD5555">&#39;__main__&#39;</span>:
+    experiment_compare_numerical_and_exact()
+</pre></div>
+<p>
+Complete file: <a href="http://tinyurl.com/ofkw6kc/softeng/decay.py" target="_self"><tt>decay.py</tt></a>
+</section>
+
+
+<section>
+<h2 id="___sec11">The module file <code>decay.py</code> for our example w/prefix </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">numpy</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">np</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">matplotlib.pyplot</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">plt</span>
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solver</span>(I, a, T, dt, theta):
+    ...
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">exact_solution</span>(t, I, a):
+    <span style="color: #8B008B; font-weight: bold">return</span> I*np.exp(-a*t)
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">experiment_compare_numerical_and_exact</span>():
+    I = <span style="color: #B452CD">1</span>;  a = <span style="color: #B452CD">2</span>;  T = <span style="color: #B452CD">4</span>;  dt = <span style="color: #B452CD">0.4</span>;  theta = <span style="color: #B452CD">1</span>
+    u, t = solver(I, a, T, dt, theta)
+
+    t_e = np.linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)       <span style="color: #228B22"># very fine mesh for u_e</span>
+    u_e = exact_solution(t_e, I, a)
+
+    plt.plot(t,   u,   <span style="color: #CD5555">&#39;r--o&#39;</span>)       <span style="color: #228B22"># dashed red line with circles</span>
+    plt.plot(t_e, u_e, <span style="color: #CD5555">&#39;b-&#39;</span>)         <span style="color: #228B22"># blue line for u_e</span>
+    plt.legend([<span style="color: #CD5555">&#39;numerical, theta=%g&#39;</span> % theta, <span style="color: #CD5555">&#39;exact&#39;</span>])
+    plt.xlabel(<span style="color: #CD5555">&#39;t&#39;</span>)
+    plt.ylabel(<span style="color: #CD5555">&#39;u&#39;</span>)
+    plotfile = <span style="color: #CD5555">&#39;tmp&#39;</span>
+    plt.savefig(plotfile + <span style="color: #CD5555">&#39;.png&#39;</span>);  plt.savefig(plotfile + <span style="color: #CD5555">&#39;.pdf&#39;</span>)
+
+    error = exact_solution(t, I, a) - u
+    E = np.sqrt(dt*np.sum(error**<span style="color: #B452CD">2</span>))
+    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;Error norm:&#39;</span>, E
+
+<span style="color: #8B008B; font-weight: bold">if</span> __name__ == <span style="color: #CD5555">&#39;__main__&#39;</span>:
+    experiment_compare_numerical_and_exact()
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec12">How do we add code for comparing schemes visually? </h2>
+
+<p>
+<center><p><img src="fig-softeng/compare.png" align="bottom" width=700></p></center>
+
+<p>
+Think of edits in the flat program that are required to produce this plot (!)
+</section>
+
+
+<section>
+<h2 id="___sec13">We just add a new function with the tailored plotting </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">experiment_compare_schemes</span>():
+    <span style="color: #CD5555">&quot;&quot;&quot;Compare theta=0,1,0.5 in the same plot.&quot;&quot;&quot;</span>
+    I = <span style="color: #B452CD">1</span>;  a = <span style="color: #B452CD">2</span>;  T = <span style="color: #B452CD">4</span>;  dt = <span style="color: #B452CD">0.4</span>
+    legends = []
+    <span style="color: #8B008B; font-weight: bold">for</span> theta <span style="color: #8B008B">in</span> [<span style="color: #B452CD">0</span>, <span style="color: #B452CD">1</span>, <span style="color: #B452CD">0.5</span>]:
+        u, t = solver(I, a, T, dt, theta)
+        plt.plot(t, u, <span style="color: #CD5555">&#39;--o&#39;</span>)
+        legends.append(<span style="color: #CD5555">&#39;theta=%g&#39;</span> % theta)
+    t_e = np.linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)        <span style="color: #228B22"># very fine mesh for u_e</span>
+    u_e = exact_solution(t_e, I, a)
+    plt.plot(t_e, u_e, <span style="color: #CD5555">&#39;b-&#39;</span>)
+    legends.append(<span style="color: #CD5555">&#39;exact&#39;</span>)
+    plt.legend(legends, loc=<span style="color: #CD5555">&#39;upper right&#39;</span>)
+    plotfile = <span style="color: #CD5555">&#39;tmp&#39;</span>
+    plt.savefig(plotfile + <span style="color: #CD5555">&#39;.png&#39;</span>);  plt.savefig(plotfile + <span style="color: #CD5555">&#39;.pdf&#39;</span>)
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec14">The comparison </h2>
+</section>
+
+
+<section>
+<h2 id="___sec15">Prefixing imported functions by the module name </h2>
+
+<p>
+MATLAB-style names (<code>linspace</code>, <code>plot</code>):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">numpy</span> <span style="color: #8B008B; font-weight: bold">import</span> *
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">matplotlib.pyplot</span> <span style="color: #8B008B; font-weight: bold">import</span> *
+</pre></div>
+<p>
+Python community convention is to prefix with module name
+(<code>np.linspace</code>, <code>plt.plot</code>):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">numpy</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">np</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">matplotlib.pyplot</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">plt</span>
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="softeng1:basic:docstring">Documenting functions and modules</h2>
+
+<ul>
+ <p><li> Use NumPy-style doc strings!</li>
+ <p><li> See <a href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt" target="_self">extensive documentation</a></li>
+ <p><li> These dominate in the Python scientific computing community</li>
+ <p><li> Easy to read with <code>pydoc</code> in the terminal</li>
+ <p><li> Can easily autogenerate beautiful online manuals</li>
+</ul>
+</section>
+
+
+<section>
+<h2 id="___sec17">Example on NumPy-style doc string </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solver</span>(I, a, T, dt, theta):
+    <span style="color: #CD5555">&quot;&quot;&quot;</span>
+<span style="color: #CD5555">    Solve :math:`u&#39;=-au` with :math:`u(0)=I` for :math:`t \in (0,T]`</span>
+<span style="color: #CD5555">    with steps of `dt` and the method implied by `theta`.</span>
+
+<span style="color: #CD5555">    Parameters</span>
+<span style="color: #CD5555">    ----------</span>
+<span style="color: #CD5555">    I: float</span>
+<span style="color: #CD5555">        Initial condition.</span>
+<span style="color: #CD5555">    a: float</span>
+<span style="color: #CD5555">        Parameter in the differential equation.</span>
+<span style="color: #CD5555">    T: float</span>
+<span style="color: #CD5555">        Total simulation time.</span>
+<span style="color: #CD5555">    theta: float, int</span>
+<span style="color: #CD5555">        Parameter in the numerical scheme. 0 gives</span>
+<span style="color: #CD5555">        Forward Euler, 1 Backward Euler, and 0.5</span>
+<span style="color: #CD5555">        the centered Crank-Nicolson scheme.</span>
+
+<span style="color: #CD5555">    Returns</span>
+<span style="color: #CD5555">    -------</span>
+<span style="color: #CD5555">    `u`: array</span>
+<span style="color: #CD5555">        Solution array.</span>
+<span style="color: #CD5555">    `t`: array</span>
+<span style="color: #CD5555">        Array with time points corresponding to `u`.</span>
+
+<span style="color: #CD5555">    Examples</span>
+<span style="color: #CD5555">    --------</span>
+<span style="color: #CD5555">    Solve :math:`u&#39; = -\\frac{1}{2}u, u(0)=1.5`</span>
+<span style="color: #CD5555">    with the Crank-Nicolson method:</span>
+
+<span style="color: #CD5555">    &gt;&gt;&gt; u, t = solver(I=1.5, a=0.5, T=9, theta=0.5)</span>
+<span style="color: #CD5555">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span style="color: #CD5555">    &gt;&gt;&gt; plt.plot(t, u)</span>
+<span style="color: #CD5555">    &gt;&gt;&gt; plt.show()</span>
+<span style="color: #CD5555">    &quot;&quot;&quot;</span>
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec18">Example on an autogenerated nice HTML manual </h2>
+
+<ul>
+ <p><li> Can use a <a href="http://tinyurl.com/ofkw6kc/softeng/make_sphinx_api.py" target="_self">premade script</a> to use <a href="http://sphinx-doc.org/" target="_self">Sphinx</a> to generate an API manual in (e.g.) HTML</li>
+</ul>
+<p>
+
+<center><p><img src="fig-softeng/selfdoc_numpy.png" align="bottom" width=700></p></center>
+</section>
+
+
+<section>
+<h1 id="decay:GUI">User interfaces</h1>
+
+<ul>
+ <p><li> Never edit the program to change input!</li>
+ <p><li> Set input data on the command line or in a graphical user interface</li>
+ <p><li> How is explained next</li>
+</ul>
+</section>
+
+
+<section>
+<h2 id="___sec20">Accessing command-line arguments </h2>
+
+<ul>
+ <p><li> All command-line arguments are available in <code>sys.argv</code></li>
+ <p><li> <code>sys.argv[0]</code> is the program</li>
+ <p><li> <code>sys.argv[1:]</code> holds the command-line arguments</li>
+ <p><li> Method 1: fixed sequence of parameters on the command line</li>
+ <p><li> Method 2: <code>--option value</code> pairs on the command line (with default values)</li>
+</ul>
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; python myprog.py 1.5 2 0.5 0.8 0.4
+Terminal&gt; python myprog.py --I 1.5 --a 2 --dt 0.8 0.4
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec21">Reading a sequence of command-line arguments </h2>
+
+<p>
+Required input:
+
+<ul>
+ <p><li> \( I \)</li>
+ <p><li> \( a \)</li>
+ <p><li> \( T \)</li>
+ <p><li> name of scheme (FE, BE, CN)</li>
+ <p><li> a list of \( \Delta t \) values</li>
+</ul>
+<p>
+
+Give these on the command line in correct sequence
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; python decay_cml.py 1.5 0.5 4 CN 0.1 0.2 0.05
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec22">Implementation </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">define_command_line_options</span>():
+    <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">argparse</span>
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        <span style="color: #CD5555">&#39;--I&#39;</span>, <span style="color: #CD5555">&#39;--initial_condition&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+        default=<span style="color: #B452CD">1.0</span>, help=<span style="color: #CD5555">&#39;initial condition, u(0)&#39;</span>,
+        metavar=<span style="color: #CD5555">&#39;I&#39;</span>)
+    parser.add_argument(
+        <span style="color: #CD5555">&#39;--a&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>, default=<span style="color: #B452CD">1.0</span>,
+        help=<span style="color: #CD5555">&#39;coefficient in ODE&#39;</span>, metavar=<span style="color: #CD5555">&#39;a&#39;</span>)
+    parser.add_argument(
+        <span style="color: #CD5555">&#39;--T&#39;</span>, <span style="color: #CD5555">&#39;--stop_time&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+        default=<span style="color: #B452CD">1.0</span>, help=<span style="color: #CD5555">&#39;end time of simulation&#39;</span>,
+        metavar=<span style="color: #CD5555">&#39;T&#39;</span>)
+    parser.add_argument(
+        <span style="color: #CD5555">&#39;--scheme&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">str</span>, default=<span style="color: #CD5555">&#39;CN&#39;</span>,
+        help=<span style="color: #CD5555">&#39;FE, BE, or CN&#39;</span>)
+    parser.add_argument(
+        <span style="color: #CD5555">&#39;--dt&#39;</span>, <span style="color: #CD5555">&#39;--time_step_values&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+        default=[<span style="color: #B452CD">1.0</span>], help=<span style="color: #CD5555">&#39;time step values&#39;</span>,
+        metavar=<span style="color: #CD5555">&#39;dt&#39;</span>, nargs=<span style="color: #CD5555">&#39;+&#39;</span>, dest=<span style="color: #CD5555">&#39;dt_values&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">return</span> parser
+</pre></div>
+<p>
+Note:
+
+<ul>
+
+<p><li> <code>sys.argv[i]</code> is <em>always a string</em></li>
+
+<p><li> Must explicitly convert to (e.g.) <code>float</code> for computations</li>
+
+<p><li> List comprehensions make lists: <code>[expression for e in somelist]</code></li>
+</ul>
+</section>
+
+
+<section>
+<h2 id="___sec23">Working with an argument parser </h2>
+
+<p>
+Set option-value pairs on the command line if the default value is not
+suitable:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; python decay_argparse.py --I 1.5 --a 2 --dt 0.8 0.4
+</pre></div>
+<p>
+Code:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">read_command_line_argparse</span>():
+    parser = define_command_line_options()
+    args = parser.parse_args()
+    scheme2theta = {<span style="color: #CD5555">&#39;BE&#39;</span>: <span style="color: #B452CD">1</span>, <span style="color: #CD5555">&#39;CN&#39;</span>: <span style="color: #B452CD">0.5</span>, <span style="color: #CD5555">&#39;FE&#39;</span>: <span style="color: #B452CD">0</span>}
+    data = (args.I, args.a, args.T, scheme2theta[args.scheme],
+            args.dt_values)
+    <span style="color: #8B008B; font-weight: bold">return</span> data
+</pre></div>
+<p>
+(<code>metavar</code> is the symbol used in help output)
+</section>
+
+
+<section>
+<h2 id="___sec24">A graphical user interface </h2>
+
+<p>
+<center><p><img src="fig-softeng/web_GUI.png" align="bottom" width=800></p></center>
+
+<p>
+Normally very much programming required - and much competence on
+graphical user interfaces.
+
+<p>
+Here: use a tool to automatically create it in a few minutes (!)
+</section>
+
+
+<section>
+<h2 id="___sec25">The Parampool package </h2>
+
+<ul>
+ <p><li> <a href="https://github.com/hplgit/parampool" target="_self">Parampool</a> is a package
+   for handling a large pool of input parameters in simulation programs</li>
+ <p><li> Parampool can automatically create a sophisticated web-based
+   graphical user interface (GUI) to set parameters and view solutions</li>
+</ul>
+<p>
+
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Remark.</b>
+<p>
+The forthcoming material aims at those with particular interest in
+equipping their programs with a GUI - others can safely skip it.
+</div>
+</section>
+
+
+<section>
+<h2 id="___sec26">Making a compute function </h2>
+
+<ul>
+ <p><li> Key concept: a <em>compute function</em> that takes all input data as arguments
+   and returning HTML code for viewing the results (e.g., plots and numbers)</li>
+ <p><li> What we have: <a href="http://tinyurl.com/ofkw6kc/softeng/decay_plot.py" target="_self"><tt>decay_plot.py</tt></a></li>
+ <p><li> <code>main</code> function carries out simulations and plotting for a
+   series of \( \Delta t \) values</li>
+ <p><li> Goal: steer and view these experiments from a web GUI</li>
+ <p><li> What to do:</li>
+
+<ul>
+
+<p><li> create a compute function</li>
+
+<p><li> call <code>parampool</code> functionality</li>
+</ul>
+<p>
+</ul>
+</section>
+
+
+<section>
+<h2 id="___sec27">The compute function must return HTML code  </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">main_GUI</span>(I=<span style="color: #B452CD">1.0</span>, a=.<span style="color: #B452CD">2</span>, T=<span style="color: #B452CD">4.0</span>,
+             dt_values=[<span style="color: #B452CD">1.25</span>, <span style="color: #B452CD">0.75</span>, <span style="color: #B452CD">0.5</span>, <span style="color: #B452CD">0.1</span>],
+             theta_values=[<span style="color: #B452CD">0</span>, <span style="color: #B452CD">0.5</span>, <span style="color: #B452CD">1</span>]):
+    <span style="color: #228B22"># Build HTML code for web page. Arrange plots in columns</span>
+    <span style="color: #228B22"># corresponding to the theta values, with dt down the rows</span>
+    theta2name = {<span style="color: #B452CD">0</span>: <span style="color: #CD5555">&#39;FE&#39;</span>, <span style="color: #B452CD">1</span>: <span style="color: #CD5555">&#39;BE&#39;</span>, <span style="color: #B452CD">0.5</span>: <span style="color: #CD5555">&#39;CN&#39;</span>}
+    html_text = <span style="color: #CD5555">&#39;&lt;table&gt;\n&#39;</span>
+    <span style="color: #8B008B; font-weight: bold">for</span> dt <span style="color: #8B008B">in</span> dt_values:
+        html_text += <span style="color: #CD5555">&#39;&lt;tr&gt;\n&#39;</span>
+        <span style="color: #8B008B; font-weight: bold">for</span> theta <span style="color: #8B008B">in</span> theta_values:
+            E, html = compute4web(I, a, T, dt, theta)
+            html_text += <span style="color: #CD5555">&quot;&quot;&quot;</span>
+<span style="color: #CD5555">&lt;td&gt;</span>
+<span style="color: #CD5555">&lt;center&gt;&lt;b&gt;%s, dt=%g, error: %.3E&lt;/b&gt;&lt;/center&gt;&lt;br&gt;</span>
+<span style="color: #CD5555">%s</span>
+<span style="color: #CD5555">&lt;/td&gt;</span>
+<span style="color: #CD5555">&quot;&quot;&quot;</span> % (theta2name[theta], dt, E, html)
+        html_text += <span style="color: #CD5555">&#39;&lt;/tr&gt;\n&#39;</span>
+    html_text += <span style="color: #CD5555">&#39;&lt;/table&gt;\n&#39;</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> html_text
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec28">Generating the user interface </h2>
+
+<p>
+Make a file <code>decay_GUI_generate.py</code>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">parampool.generator.flask</span> <span style="color: #8B008B; font-weight: bold">import</span> generate
+<span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">decay</span> <span style="color: #8B008B; font-weight: bold">import</span> main_GUI
+generate(main_GUI,
+         filename_controller=<span style="color: #CD5555">&#39;decay_GUI_controller.py&#39;</span>,
+         filename_template=<span style="color: #CD5555">&#39;decay_GUI_view.py&#39;</span>,
+         filename_model=<span style="color: #CD5555">&#39;decay_GUI_model.py&#39;</span>)
+</pre></div>
+<p>
+Running <code>decay_GUI_generate.py</code> results in
+
+<ol>
+ <p><li> <code>decay_GUI_model.py</code> defines HTML widgets to be used to set
+    input data in the web interface,</li>
+ <p><li> <code>templates/decay_GUI_views.py</code> defines the layout of the web page,</li>
+ <p><li> <code>decay_GUI_controller.py</code> runs the web application.</li>
+</ol>
+<p>
+
+Good news: we only need to run <code>decay_GUI_controller.py</code>
+and there is no need to look into any of these files!
+</section>
+
+
+<section>
+<h2 id="___sec29">Running the web application </h2>
+
+<p>
+Start the GUI
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; python decay_GUI_controller.py
+</pre></div>
+<p>
+Open a web browser at <code>127.0.0.1:5000</code>
+
+<p>
+<center><p><img src="fig-softeng/web_GUI.png" align="bottom" width=800></p></center>
+</section>
+
+
+<section>
+<h2 id="___sec30">More advanced use </h2>
+
+<ul>
+ <p><li> The compute function can have arguments of type float, int, string,
+   list, dict, numpy array, filename (file upload)</li>
+ <p><li> Alternative: specify a hierarchy of input parameters with name,
+   default value, data type, widget type, unit (m, kg, s), validity check</li>
+ <p><li> The generated web GUI can have user accounts with login and storage
+   of results in a database</li>
+</ul>
+</section>
+
+
+<section>
+<h1 id="___sec31">Tests for verifying implementations </h1>
+</section>
+
+
+<section>
+<h2 id="___sec32">Doctests </h2>
+
+<p>
+Doc strings can be equipped with interactive Python sessions for
+demonstrating usage and <em>automatic testing</em> of functions.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solver</span>(I, a, T, dt, theta):
+    <span style="color: #CD5555">&quot;&quot;&quot;</span>
+<span style="color: #CD5555">    Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.</span>
+
+
+<span style="color: #CD5555">    &gt;&gt;&gt; u, t = solver(I=0.8, a=1.2, T=2, dt=0.5, theta=0.5)</span>
+<span style="color: #CD5555">    &gt;&gt;&gt; for t_n, u_n in zip(t, u):</span>
+<span style="color: #CD5555">    ...     print &#39;t=%.1f, u=%.14f&#39; % (t_n, u_n)</span>
+<span style="color: #CD5555">    t=0.0, u=0.80000000000000</span>
+<span style="color: #CD5555">    t=0.5, u=0.43076923076923</span>
+<span style="color: #CD5555">    t=1.0, u=0.23195266272189</span>
+<span style="color: #CD5555">    t=1.5, u=0.12489758761948</span>
+<span style="color: #CD5555">    t=2.0, u=0.06725254717972</span>
+<span style="color: #CD5555">    &quot;&quot;&quot;</span>
+    ...
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec33">Running doctests </h2>
+
+<p>
+Automatic check that the code reproduces the doctest output:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; python -m doctest decay.py
+</pre></div>
+<p>
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Floats are difficult to compare.</b>
+<p>
+Limit the number of digits in the output in doctests! Otherwise,
+round-off errors on a different machine may ruin the test.
+</div>
+</section>
+
+
+<section>
+<h2 id="___sec34">Unit testing with nose </h2>
+
+<ul>
+ <p><li> Nose and pytest are a very user-friendly testing frameworks</li>
+ <p><li> Based on <em>unit testing</em></li>
+ <p><li> Identify (small) units of code and test each unit</li>
+ <p><li> Nose automates running all tests</li>
+ <p><li> Good habit: run all tests after (small) edits of a code</li>
+ <p><li> Even better habit: write tests <em>before</em> the code (!)</li>
+ <p><li> Remark: unit testing in scientific computing is not yet well established</li>
+</ul>
+</section>
+
+
+<section>
+<h2 id="___sec35">Basic use of nose and pytest </h2>
+
+<ol>
+ <p><li> Implement tests in <em>test functions</em> with names starting with <code>test_</code>.</li>
+ <p><li> Test functions cannot have arguments.</li>
+ <p><li> Test functions perform assertions on computed results
+    using <code>assert</code> functions from the <code>nose.tools</code> module.</li>
+ <p><li> Test functions can be in the source code files or be
+    collected in separate files <code>test*.py</code>.</li>
+</ol>
+</section>
+
+
+<section>
+<h2 id="___sec36">Example on a test function in the source code </h2>
+
+<p>
+Very simple module <code>mymod</code> (in file <code>mymod.py</code>):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">double</span>(n):
+    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">2</span>*n
+</pre></div>
+<p>
+Write test function in <code>mymod.py</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">double</span>(n):
+    <span style="color: #8B008B; font-weight: bold">return</span> <span style="color: #B452CD">2</span>*n
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_double</span>():
+    n = <span style="color: #B452CD">4</span>
+    expected = <span style="color: #B452CD">2</span>*<span style="color: #B452CD">4</span>
+    computed = double(n)
+    <span style="color: #8B008B; font-weight: bold">assert</span> expected == computed
+</pre></div>
+<p>
+Running one of
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; nosetests -s -v mymod
+Terminal&gt; py.test   -s -v mymod
+</pre></div>
+<p>
+makes the framework run all <code>test_*()</code> functions in <code>mymod.py</code>.
+</section>
+
+
+<section>
+<h2 id="___sec37">Example on test functions in a separate file </h2>
+
+<p>
+Write the test in a separate file, say <code>test_mymod.py</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">mymod</span>
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_double</span>():
+    n = <span style="color: #B452CD">4</span>
+    expected = <span style="color: #B452CD">2</span>*<span style="color: #B452CD">4</span>
+    computed = double(n)
+    <span style="color: #8B008B; font-weight: bold">assert</span> expected == computed
+</pre></div>
+<p>
+Running one of
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; nosetests -s -v
+Terminal&gt; py.test   -s -v
+</pre></div>
+<p>
+makes the frameworks run all <code>test_*()</code> functions in all files
+<code>test*.py</code> in the current directory and in all subdirectories (pytest)
+or just those with names <code>tests</code> or <code>*_tests</code> (nose)
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Tip.</b>
+<p>
+Start with test functions in the source code file. When the file
+contains many tests, or when you have many source code files,
+move tests to separate files.
+</div>
+</section>
+
+
+<section>
+<h2 id="___sec38">Test function for solver </h2>
+
+<p>
+Use exact discrete solution of the \( \theta \) scheme as test:
+
+<p>&nbsp;<br>
+$$ u^n = I\left(
+\frac{1 - (1-\theta) a\Delta t}{1 + \theta a \Delta t}
+\right)^n$$
+<p>&nbsp;<br>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">exact_discrete_solution</span>(n, I, a, theta, dt):
+    <span style="color: #CD5555">&quot;&quot;&quot;Return exact discrete solution of the numerical schemes.&quot;&quot;&quot;</span>
+    dt = <span style="color: #658b00">float</span>(dt)  <span style="color: #228B22"># avoid integer division</span>
+    A = (<span style="color: #B452CD">1</span> - (<span style="color: #B452CD">1</span>-theta)*a*dt)/(<span style="color: #B452CD">1</span> + theta*dt*a)
+    <span style="color: #8B008B; font-weight: bold">return</span> I*A**n
+</pre></div>
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_exact_discrete_solution</span>():
+    <span style="color: #CD5555">&quot;&quot;&quot;Check that solver reproduces the exact discr. sol.&quot;&quot;&quot;</span>
+    theta = <span style="color: #B452CD">0.8</span>; a = <span style="color: #B452CD">2</span>; I = <span style="color: #B452CD">0.1</span>; dt = <span style="color: #B452CD">0.8</span>
+    Nt = <span style="color: #658b00">int</span>(<span style="color: #B452CD">8</span>/dt)  <span style="color: #228B22"># no of steps</span>
+    u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
+
+    <span style="color: #228B22"># Evaluate exact discrete solution on the mesh</span>
+    u_de = np.array([exact_discrete_solution(n, I, a, theta, dt)
+                     <span style="color: #8B008B; font-weight: bold">for</span> n <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(Nt+<span style="color: #B452CD">1</span>)])
+
+    <span style="color: #228B22"># Find largest deviation</span>
+    diff = np.abs(u_de - u).max()
+    tol = <span style="color: #B452CD">1E-14</span>
+    success = diff &lt; tol
+    <span style="color: #8B008B; font-weight: bold">assert</span> success
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec39">Can test that potential integer division is avoided too </h2>
+
+<p>
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Warning.</b>
+<p>
+If \( a \), \( \Delta t \), and
+\( \theta \) are integers, the formula for \( u^{n+1} \) in the solver
+function may lead to 0 because of unintended integer division.
+</div>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_potential_integer_division</span>():
+    <span style="color: #CD5555">&quot;&quot;&quot;Choose variables that can trigger integer division.&quot;&quot;&quot;</span>
+    theta = <span style="color: #B452CD">1</span>; a = <span style="color: #B452CD">1</span>; I = <span style="color: #B452CD">1</span>; dt = <span style="color: #B452CD">2</span>
+    Nt = <span style="color: #B452CD">4</span>
+    u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
+    u_de = np.array([exact_discrete_solution(n, I, a, theta, dt)
+                     <span style="color: #8B008B; font-weight: bold">for</span> n <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(Nt+<span style="color: #B452CD">1</span>)])
+    diff = np.abs(u_de - u).max()
+    <span style="color: #8B008B; font-weight: bold">assert</span> diff &lt; <span style="color: #B452CD">1E-14</span>
+</pre></div>
+</section>
+
+
+<section>
+<h1 id="___sec40">Packaging the software for other users </h1>
+
+<h2 id="___sec41">Python convention: install your software with setup.py </h2>
+
+<p>
+Installation of a single module file <code>decay.py</code>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">distutils.core</span> <span style="color: #8B008B; font-weight: bold">import</span> setup
+setup(name=<span style="color: #CD5555">&#39;decay&#39;</span>,
+      version=<span style="color: #CD5555">&#39;0.1&#39;</span>,
+      py_modules=[<span style="color: #CD5555">&#39;decay&#39;</span>],
+      scripts=[<span style="color: #CD5555">&#39;decay.py&#39;</span>],
+      )
+</pre></div>
+<p>
+Installation:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; sudo python setup.py install
+</pre></div>
+<p>
+(Many variants!)
+</section>
+
+
+<section>
+<h2 id="___sec42">split.py for several modules in a package </h2>
+
+<ul>
+ <p><li> Python package = several modules</li>
+ <p><li> Modules be in a directory with a <code>__init__.py</code> file</li>
+ <p><li> Name of package = name of directory</li>
+</ul>
+<p>
+
+<code>setup.py</code>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">distutils.core</span> <span style="color: #8B008B; font-weight: bold">import</span> setup
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">os</span>
+
+setup(name=<span style="color: #CD5555">&#39;decay&#39;</span>,
+      version=<span style="color: #CD5555">&#39;0.1&#39;</span>,
+      author=<span style="color: #CD5555">&#39;Hans Petter Langtangen&#39;</span>,
+      author_email=<span style="color: #CD5555">&#39;hpl@simula.no&#39;</span>,
+      url=<span style="color: #CD5555">&#39;https://github.com/hplgit/decay-package/&#39;</span>,
+      packages=[<span style="color: #CD5555">&#39;decay&#39;</span>],
+      scripts=[os.path.join(<span style="color: #CD5555">&#39;decay&#39;</span>, <span style="color: #CD5555">&#39;decay.py&#39;</span>)]
+     )
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec43">The <code>__init__.py</code> file can be empty </h2>
+
+<p>
+Empty <code>__init__.py</code>:
+
+<p>
+
+<!-- code=text typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">import decay
+u, t = decay.decay.solver(...)
+</pre></div>
+<p>
+Do this in <code>__init__.py</code> to avoid <code>decay.decay.solver</code>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">decay</span> <span style="color: #8B008B; font-weight: bold">import</span> *
+</pre></div>
+<p>
+Can now write
+
+<p>
+
+<!-- code=text typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">import decay
+u, t = decay.solver(...)
+
+# or
+from decay import solver
+u, t = solver(...)
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec44">Always develop software and write reports with Git </h2>
+
+<ul>
+ <p><li> Git keeps track of different versions of files</li>
+ <p><li> Can roll back to previous versions</li>
+ <p><li> Can see who did what when</li>
+ <p><li> Can merge simultaneous edits by different users</li>
+ <p><li> Professionals rely on Git!</li>
+</ul>
+<p>
+
+The Git work cycle:
+
+<p>
+
+<!-- code=text typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">git pull                # before starting a new session
+# edit files
+git add mynewfile       # remember to add new files!
+git commit -am &#39;Short description of what I did&#39;
+git push origin master  # before end of day or a break
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec45">More pro use with Git </h2>
+
+<p>
+See what others have done in the project:
+
+<p>
+
+<!-- code=text typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">git fetch origin         # instead of git pull
+git diff origin/master   # what are the changes?
+git merge origin/master  # update my files
+</pre></div>
+<p>
+Develop new features in a separate branch:
+
+<p>
+
+<!-- code=text typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">git branch newstuff
+git checkout newstuff
+# edit files
+git commit -am &#39;Changed ...&#39;
+git push origin newstuff
+</pre></div>
+<p>
+When <code>newstuff</code> is tested and matured, merge back in master:
+
+<p>
+
+<!-- code=text typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">git checkout master
+git merge newstuff
+</pre></div>
+</section>
+
+
+<section>
+<!-- ===== Put your software on GitHub! ===== -->
+</section>
+
+
+<section>
+<h1 id="softeng1:prog:se:class">Classes for problem and solution method</h1>
+</section>
+
+
+<section>
+<h2 id="___sec47">Collect physical problem and parameters in class Problem </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">numpy</span> <span style="color: #8B008B; font-weight: bold">import</span> exp
+
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Problem</span>(<span style="color: #658b00">object</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, I=<span style="color: #B452CD">1</span>, a=<span style="color: #B452CD">1</span>, T=<span style="color: #B452CD">10</span>):
+        <span style="color: #658b00">self</span>.T, <span style="color: #658b00">self</span>.I, <span style="color: #658b00">self</span>.a = I, <span style="color: #658b00">float</span>(a), T
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">u_exact</span>(<span style="color: #658b00">self</span>, t):
+        I, a = <span style="color: #658b00">self</span>.I, <span style="color: #658b00">self</span>.a
+        <span style="color: #8B008B; font-weight: bold">return</span> I*exp(-a*t)
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec48">Collect numerical parameters and methods in class Solver </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Solver</span>(<span style="color: #658b00">object</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, problem, dt=<span style="color: #B452CD">0.1</span>, theta=<span style="color: #B452CD">0.5</span>):
+        <span style="color: #658b00">self</span>.problem = problem
+        <span style="color: #658b00">self</span>.dt, <span style="color: #658b00">self</span>.theta = <span style="color: #658b00">float</span>(dt), theta
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solve</span>(<span style="color: #658b00">self</span>):
+        <span style="color: #658b00">self</span>.u, <span style="color: #658b00">self</span>.t = solver(
+            <span style="color: #658b00">self</span>.problem.I, <span style="color: #658b00">self</span>.problem.a, <span style="color: #658b00">self</span>.problem.T,
+            <span style="color: #658b00">self</span>.dt, <span style="color: #658b00">self</span>.theta)
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">error</span>(<span style="color: #658b00">self</span>):
+        <span style="color: #CD5555">&quot;&quot;&quot;Return norm of error at the mesh points.&quot;&quot;&quot;</span>
+        u_e = <span style="color: #658b00">self</span>.problem.u_exact(<span style="color: #658b00">self</span>.t)
+        e = u_e - <span style="color: #658b00">self</span>.u
+        E = np.sqrt(<span style="color: #658b00">self</span>.dt*np.sum(e**<span style="color: #B452CD">2</span>))
+        <span style="color: #8B008B; font-weight: bold">return</span> E
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec49">Get input from the command line; class Problem </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Problem</span>(<span style="color: #658b00">object</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, I=<span style="color: #B452CD">1</span>, a=<span style="color: #B452CD">1</span>, T=<span style="color: #B452CD">10</span>):
+        <span style="color: #658b00">self</span>.T, <span style="color: #658b00">self</span>.I, <span style="color: #658b00">self</span>.a = I, <span style="color: #658b00">float</span>(a), T
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">define_command_line_options</span>(<span style="color: #658b00">self</span>, parser=<span style="color: #658b00">None</span>):
+        <span style="color: #CD5555">&quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;</span>
+        <span style="color: #8B008B; font-weight: bold">if</span> parser <span style="color: #8B008B">is</span> <span style="color: #658b00">None</span>:
+            <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">argparse</span>
+            parser = argparse.ArgumentParser()
+
+        parser.add_argument(
+            <span style="color: #CD5555">&#39;--I&#39;</span>, <span style="color: #CD5555">&#39;--initial_condition&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+            default=<span style="color: #B452CD">1.0</span>, help=<span style="color: #CD5555">&#39;initial condition, u(0)&#39;</span>,
+            metavar=<span style="color: #CD5555">&#39;I&#39;</span>)
+        parser.add_argument(
+            <span style="color: #CD5555">&#39;--a&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>, default=<span style="color: #B452CD">1.0</span>,
+            help=<span style="color: #CD5555">&#39;coefficient in ODE&#39;</span>, metavar=<span style="color: #CD5555">&#39;a&#39;</span>)
+        parser.add_argument(
+            <span style="color: #CD5555">&#39;--T&#39;</span>, <span style="color: #CD5555">&#39;--stop_time&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+            default=<span style="color: #B452CD">1.0</span>, help=<span style="color: #CD5555">&#39;end time of simulation&#39;</span>,
+            metavar=<span style="color: #CD5555">&#39;T&#39;</span>)
+        <span style="color: #8B008B; font-weight: bold">return</span> parser
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">init_from_command_line</span>(<span style="color: #658b00">self</span>, args):
+        <span style="color: #CD5555">&quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;</span>
+        <span style="color: #658b00">self</span>.I, <span style="color: #658b00">self</span>.a, <span style="color: #658b00">self</span>.T = args.I, args.a, args.T
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec50">Get input from the command line; class Problem </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Solver</span>(<span style="color: #658b00">object</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, problem, dt=<span style="color: #B452CD">0.1</span>, theta=<span style="color: #B452CD">0.5</span>):
+        <span style="color: #658b00">self</span>.problem = problem
+        <span style="color: #658b00">self</span>.dt, <span style="color: #658b00">self</span>.theta = <span style="color: #658b00">float</span>(dt), theta
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">define_command_line_options</span>(<span style="color: #658b00">self</span>, parser):
+        <span style="color: #CD5555">&quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;</span>
+        parser.add_argument(
+            <span style="color: #CD5555">&#39;--scheme&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">str</span>, default=<span style="color: #CD5555">&#39;CN&#39;</span>,
+            help=<span style="color: #CD5555">&#39;FE, BE, or CN&#39;</span>)
+        parser.add_argument(
+            <span style="color: #CD5555">&#39;--dt&#39;</span>, <span style="color: #CD5555">&#39;--time_step_values&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+            default=[<span style="color: #B452CD">1.0</span>], help=<span style="color: #CD5555">&#39;time step values&#39;</span>,
+            metavar=<span style="color: #CD5555">&#39;dt&#39;</span>, nargs=<span style="color: #CD5555">&#39;+&#39;</span>, dest=<span style="color: #CD5555">&#39;dt_values&#39;</span>)
+        <span style="color: #8B008B; font-weight: bold">return</span> parser
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">init_from_command_line</span>(<span style="color: #658b00">self</span>, args):
+        <span style="color: #CD5555">&quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;</span>
+        <span style="color: #658b00">self</span>.dt, <span style="color: #658b00">self</span>.theta = args.dt, args.theta
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec51">How to combine class Problem and class Solver </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">experiment_classes</span>():
+    problem = Problem()
+    solver = Solver(problem)
+
+    <span style="color: #228B22"># Read input from the command line</span>
+    parser = problem.define_command_line_options()
+    parser = solver. define_command_line_options(parser)
+    args = parser.parse_args()
+    problem.init_from_command_line(args)
+    solver. init_from_command_line(args)
+
+    <span style="color: #228B22"># Solve and plot</span>
+    solver.solve()
+    <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">matplotlib.pyplot</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">plt</span>
+    t_e = np.linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)    <span style="color: #228B22"># very fine mesh for u_e</span>
+    u_e = problem.u_exact(t_e)
+
+    plt.plot(t,   u,   <span style="color: #CD5555">&#39;r--o&#39;</span>)       <span style="color: #228B22"># dashed red line with circles</span>
+    plt.plot(t_e, u_e, <span style="color: #CD5555">&#39;b-&#39;</span>)         <span style="color: #228B22"># blue line for u_e</span>
+    plt.legend([<span style="color: #CD5555">&#39;numerical, theta=%g&#39;</span> % theta, <span style="color: #CD5555">&#39;exact&#39;</span>])
+    plt.xlabel(<span style="color: #CD5555">&#39;t&#39;</span>)
+    plt.ylabel(<span style="color: #CD5555">&#39;u&#39;</span>)
+    plt.show()
+</pre></div>
+</section>
+
+
+<section>
+<h1 id="decay:experiments">Performning scientific experiments</h1>
+
+<p>
+Goals:
+
+<ol>
+<p><li> Explore the behavior of a numerical method for an ODE</li>
+<p><li> Show how a program can set up, execute, and report scientific investigations</li>
+<p><li> Demonstrate how to write a scientific report</li>
+<p><li> Demonstrate various technologies for reports: HTML w/MathJax, LaTeX, Sphinx, IPython notebooks, ...</li>
+</ol>
+</section>
+
+
+<section>
+<h2 id="___sec53">Model problem and numerical solution method </h2>
+
+<p>
+Problem:
+
+<p>&nbsp;<br>
+$$
+\begin{equation}
+u'(t) = -au(t),\quad u(0)=I,\ 0 < t \leq T,
+\tag{1}
+\end{equation}
+$$
+<p>&nbsp;<br>
+
+<p>
+Solution method (\( \theta \)-rule):
+
+<p>&nbsp;<br>
+$$
+u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
+\quad u^0=I\tp
+$$
+<p>&nbsp;<br>
+</section>
+
+
+<section>
+<h2 id="___sec54">Plan for the experiments </h2>
+
+<p>
+For fixed \( I \), \( a \), and \( T \), we run the three schemes for various
+values of \( \Delta t \), and present in a report the following results:
+
+<ol>
+<p><li> visual comparison of the numerical and exact solution in a plot for
+   each \( \Delta t \) and \( \theta=0,1,\frac{1}{2} \),</li>
+<p><li> a table and a plot of the norm of the numerical error versus \( \Delta t \)
+   for \( \theta=0,1,\frac{1}{2} \).</li>
+</ol>
+</section>
+
+
+<section>
+<h2 id="___sec55">Available software </h2>
+
+<p>
+<a href="http://tinyurl.com/nc4upel/doconce_src/model.py" target="_self"><tt>model.py</tt></a>:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; python model.py --I 1.5 --a 0.25 --T 6 --dt 1.25 0.75 0.5
+0.0   1.25:    5.998E-01
+0.0   0.75:    1.926E-01
+0.0   0.50:    1.123E-01
+0.0   0.10:    1.558E-02
+0.5   1.25:    6.231E-02
+0.5   0.75:    1.543E-02
+0.5   0.50:    7.237E-03
+0.5   0.10:    2.469E-04
+1.0   1.25:    1.766E-01
+1.0   0.75:    8.579E-02
+1.0   0.50:    6.884E-02
+1.0   0.10:    1.411E-02
+</pre></div>
+<p>
++ a set of plot files of numerial vs exact solution
+</section>
+
+
+<section>
+<h2 id="___sec56">Required new results </h2>
+
+<ul>
+ <p><li> Put plots together in table of plots</li>
+ <p><li> Table of numerical error vs \( \Delta t \) and \( \theta \)</li>
+ <p><li> Log-log convergence plot of numerical error vs \( \Delta t \) for \( \theta=0,1,0.5 \)</li>
+</ul>
+<p>
+
+Must write a script <code>exper1.py</code> to automate running <code>model.py</code>
+and generating these results
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; python exper1.py 0.5 0.25 0.1 0.05
+</pre></div>
+<p>
+(\( \Delta t \) values on the comand line)
+</section>
+
+
+<section>
+<h2 id="___sec57">Reproducible science is key! </h2>
+
+<p>
+Let your scientific investigations be automated by
+scripts!
+
+<ul>
+ <p><li> Excellent documentation</li>
+ <p><li> Trivial to re-run experiments</li>
+ <p><li> Easy to extend investigations</li>
+</ul>
+</section>
+
+
+<section>
+<h2 id="___sec58">What actions are needed in the script? </h2>
+
+<ol>
+<p><li> Run <code>model.py</code> program with appropriate input</li>
+<p><li> Interpret the output and make table and plot of numerical errors</li>
+<p><li> Combine plot files to new figures</li>
+</ol>
+<p>
+
+Complete script: <a href="http://tinyurl.com/nc4upel/report_generation/exper1.py" target="_self"><tt>exper1.py</tt></a>
+</section>
+
+
+<section>
+<h2 id="___sec59">Run a program from a program with <code>subprocess</code> </h2>
+
+<p>
+Command to be run:
+
+<p>
+
+<!-- code=text typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">python model.py --I 1.2 --a 0.2 --T 8 -dt 1.25 0.75 0.5 0.1
+</pre></div>
+<p>
+Constructed in Python:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #228B22"># Given I, a, T, and a list dt_values</span>
+cmd = <span style="color: #CD5555">&#39;python model.py --I %g --a %g --T %g&#39;</span> % (I, a, T)
+dt_values_str = <span style="color: #CD5555">&#39; &#39;</span>.join([<span style="color: #658b00">str</span>(v) <span style="color: #8B008B; font-weight: bold">for</span> v <span style="color: #8B008B">in</span> dt_values])
+cmd += <span style="color: #CD5555">&#39; --dt %s&#39;</span> % dt_values_str
+</pre></div>
+<p>
+Run under the operating system:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">subprocess</span> <span style="color: #8B008B; font-weight: bold">import</span> Popen, PIPE, STDOUT
+p = Popen(cmd, shell=<span style="color: #658b00">True</span>, stdout=PIPE, stderr=STDOUT)
+output, dummy = p.communicate()
+
+failure = p.returncode
+<span style="color: #8B008B; font-weight: bold">if</span> failure:
+    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;Command failed:&#39;</span>, cmd; sys.exit(<span style="color: #B452CD">1</span>)
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec60">Interpreting the output from an operating system command </h2>
+
+<p>
+The output if the previous command run by <code>subprocess</code> is in a string
+<code>output</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">errors = {<span style="color: #CD5555">&#39;dt&#39;</span>: dt_values, <span style="color: #B452CD">1</span>: [], <span style="color: #B452CD">0</span>: [], <span style="color: #B452CD">0.5</span>: []}
+<span style="color: #8B008B; font-weight: bold">for</span> line <span style="color: #8B008B">in</span> output.splitlines():
+    words = line.split()
+    <span style="color: #8B008B; font-weight: bold">if</span> words[<span style="color: #B452CD">0</span>] <span style="color: #8B008B">in</span> (<span style="color: #CD5555">&#39;0.0&#39;</span>, <span style="color: #CD5555">&#39;0.5&#39;</span>, <span style="color: #CD5555">&#39;1.0&#39;</span>):  <span style="color: #228B22"># line with E?</span>
+        <span style="color: #228B22"># typical line: 0.0   1.25:    7.463E+00</span>
+        theta = <span style="color: #658b00">float</span>(words[<span style="color: #B452CD">0</span>])
+        E = <span style="color: #658b00">float</span>(words[<span style="color: #B452CD">2</span>])
+        errors[theta].append(E)
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec61">Combining plot files: PNG and PDF solutions </h2>
+
+<p>
+PNG:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; montage -background white -geometry 100% -tile 2x \ 
+          f1.png f2.png f3.png f4.png f.png
+Terminal&gt; convert -trim f.png f.png
+Terminal&gt; convert f.png -transparent white f.png
+</pre></div>
+<p>
+PDF:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; pdftk f1.pdf f2.pdf f3.pdf f4.pdf output tmp.pdf
+Terminal&gt; pdfnup --nup 2x2 --outfile tmp.pdf tmp.pdf
+Terminal&gt; pdfcrop tmp.pdf f.pdf
+Terminal&gt; rm -f tmp.pdf
+</pre></div>
+<p>
+Easy to build these commands in Python and execute them with <code>subprocess</code>
+or <code>os.system</code>: <code>os.system(cmd)</code>
+</section>
+
+
+<section>
+<h2 id="decay:exper:report">Making a report</h2>
+
+<ul>
+ <p><li> Scientific investigations are best documented in a report!</li>
+ <p><li> <a href="http://hplgit.github.com/INF5620/doc/writing_reports/sphinx-cloud/" target="_self">A sample report</a></li>
+ <p><li> How can we write such a report?</li>
+ <p><li> First problem: what format should I write in?</li>
+ <p><li> <a href="http://tinyurl.com/nc4upel/_static/report_html.html" target="_self">Plain HTML</a></li>
+ <p><li> <a href="http://tinyurl.com/nc4upel/_static/report_html_mathjax.html" target="_self">HTML with MathJax</a></li>
+ <p><li> <a href="http://tinyurl.com/nc4upel/_static/report.pdf" target="_self">LaTeX PDF</a>, based on <a href="http://tinyurl.com/nc4upel/_static/report.tex.html" target="_self">LaTeX source</a></li>
+ <p><li> <a href="http://tinyurl.com/nc4upel/_static/sphinx-cloud/index.html" target="_self">Sphinx HTML</a>, based on <a href="http://tinyurl.com/nc4upel/_static/report_sphinx.rst.html" target="_self">reStructuredText</a></li>
+ <p><li> IPython notebook, Markdown, MediaWiki, ...</li>
+ <p><li> <a href="https://github.com/hplgit/doconce" target="_self">DocOnce</a> can generate LaTeX, HTML w/MathJax, Sphinx, IPython notebook, Markdown, MediaWiki, ... (<a href="http://tinyurl.com/nc4upel/_static/report.do.txt.html" target="_self">DocOnce source</a> for the examples above)</li>
+ <p><li> <a href="http://hplgit.github.com/INF5620/doc/writing_reports/" target="_self">Examples on different report formats</a></li>
+</ul>
+</section>
+
+
+<section>
+<h2 id="decay:exper:github">Publishing a complete project</h2>
+
+<ul>
+ <p><li> Make folder (directory) tree</li>
+ <p><li> Keep track of all files via a <em>version control system</em> (Git!)</li>
+ <p><li> Publish as private or public repository</li>
+ <p><li> Utilize Bitbucket or GitHub</li>
+ <p><li> See the <a href="http://hplgit.github.com/teamods/bitgit/html/" target="_self">intro to project hosting sites with version control</a></li>
+</ul>
+</section>
+
+
+
+</div> <!-- class="slides" -->
+</div> <!-- class="reveal" -->
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.min.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+    // Display navigation controls in the bottom right corner
+    controls: true,
+
+    // Display progress bar (below the horiz. slider)
+    progress: true,
+
+    // Display the page number of the current slide
+    slideNumber: true,
+
+    // Push each slide change to the browser history
+    history: false,
+
+    // Enable keyboard shortcuts for navigation
+    keyboard: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    //center: true,
+    center: false,
+
+    // Enables touch navigation on devices with touch input
+    touch: true,
+
+    // Loop the presentation
+    loop: false,
+
+    // Change the presentation direction to be RTL
+    rtl: false,
+
+    // Turns fragments on and off globally
+    fragments: true,
+
+    // Flags if the presentation is running in an embedded mode,
+    // i.e. contained within a limited portion of the screen
+    embedded: false,
+
+    // Number of milliseconds between automatically proceeding to the
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    autoSlide: 0,
+
+    // Stop auto-sliding after user input
+    autoSlideStoppable: true,
+
+    // Enable slide navigation via mouse wheel
+    mouseWheel: false,
+
+    // Hides the address bar on mobile devices
+    hideAddressBar: true,
+
+    // Opens links in an iframe preview overlay
+    previewLinks: false,
+
+    // Transition style
+    transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Transition speed
+    transitionSpeed: 'default', // default/fast/slow
+
+    // Transition style for full page slide backgrounds
+    backgroundTransition: 'default', // default/none/slide/concave/convex/zoom
+
+    // Number of slides away from the current that are visible
+    viewDistance: 3,
+
+    // Parallax background image
+    //parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+    // Parallax background size
+    //parallaxBackgroundSize: '' // CSS syntax, e.g. "2100px 900px"
+
+    theme: Reveal.getQueryHash().theme, // available themes are in reveal.js/css/theme
+    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+});
+
+Reveal.initialize({
+    dependencies: [
+        // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+        { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+        // Interpret Markdown in <section> elements
+        { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+        // Syntax highlight for <code> elements
+        { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+        // Zoom in and out with Alt+click
+        { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Speaker notes
+        { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Remote control your reveal.js presentation using a touch device
+        //{ src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // MathJax
+        //{ src: 'reveal.js/plugin/math/math.js', async: true }
+    ]
+});
+
+Reveal.initialize({
+
+    // The "normal" size of the presentation, aspect ratio will be preserved
+    // when the presentation is scaled to fit different resolutions. Can be
+    // specified using percentage units.
+    width: 1170,  // original: 960,
+    height: 700,
+
+    // Factor of the display size that should remain empty around the content
+    margin: 0.1,
+
+    // Bounds for smallest/largest possible scale to apply to content
+    minScale: 0.2,
+    maxScale: 1.0
+
+});
+</script>
+
+<!-- begin footer logo
+<div style="position: absolute; bottom: 0px; left: 0; margin-left: 0px">
+<img src="somelogo.png">
+</div>
+     end footer logo -->
+
+
+
+</body>
+</html>

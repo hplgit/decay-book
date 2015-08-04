@@ -1,0 +1,22 @@
+
+.. Master file automatically created by doconce sphinx_dir
+
+Analysis of exponential decay models
+====================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 3
+
+   ._main_analysis000
+   ._main_analysis001
+   ._main_analysis002
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

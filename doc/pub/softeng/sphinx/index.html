@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Software engineering with exponential decay models</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Software engineering with exponential decay models" href="#" />
+    <link rel="next" title="Software engineering with exponential decay models" href="._main_softeng000.html" />
+ 
+  
+       <style type="text/css">
+         div.admonition {
+           background-color: whiteSmoke;
+           border: 1px solid #bababa;
+         }
+       </style>
+      </head>
+    
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="._main_softeng000.html" title="Software engineering with exponential decay models"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">Software engineering with exponential decay models</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="software-engineering-with-exponential-decay-models">
+<h1>Software engineering with exponential decay models<a class="headerlink" href="#software-engineering-with-exponential-decay-models" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="._main_softeng000.html">Software engineering with exponential decay models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._main_softeng002.html">Basic implementations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng002.html#mathematical-problem-and-solution-technique">Mathematical problem and solution technique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng002.html#a-first-quick-implementation">A first, quick implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng002.html#a-more-decent-program">A more decent program</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng002.html#comments-in-a-program">Comments in a program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng002.html#refactoring-into-functions">Refactoring into functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng002.html#program-file-vs-ide-vs-notebook">Program file vs IDE vs notebook</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng002.html#prefixing-imported-functions-by-the-module-name">Prefixing imported functions by the module name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng002.html#implementing-the-numerical-algorithm-in-a-function">Implementing the numerical algorithm in a function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng002.html#do-not-have-several-versions-of-a-code">Do not have several versions of a code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng002.html#making-a-module">Making a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng002.html#example-on-extending-the-module-code">Example on extending the module code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng002.html#documenting-functions-and-modules">Documenting functions and modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._main_softeng003.html">User interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng003.html#command-line-arguments">Command-line arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng003.html#positional-command-line-arguments">Positional command-line arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng003.html#option-value-pairs-on-the-command-line">Option-value pairs on the command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng003.html#creating-a-graphical-web-user-interface">Creating a graphical web user interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng003.html#making-a-compute-function">Making a compute function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng003.html#generating-the-user-interface">Generating the user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng003.html#running-the-web-application">Running the web application</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._main_softeng004.html">Tests for verifying implementations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng004.html#doctests">Doctests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng004.html#unit-tests-and-test-functions">Unit tests and test functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng004.html#two-python-test-frameworks-nose-and-pytest">Two Python test frameworks: nose and pytest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng004.html#test-function-requirements">Test function requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng004.html#comparison-of-real-numbers">Comparison of real numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng004.html#special-assert-functions-from-nose">Special assert functions from nose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng004.html#locating-test-functions">Locating test functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng004.html#running-tests">Running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng004.html#embedding-doctests-in-a-test-function">Embedding doctests in a test function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng004.html#installing-nose-and-pytest">Installing nose and pytest</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng004.html#test-function-for-the-solver">Test function for the solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng004.html#test-function-for-reading-positional-command-line-arguments">Test function for reading positional command-line arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng004.html#test-function-for-reading-option-value-pairs">Test function for reading option-value pairs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng004.html#classical-class-based-unit-testing">Classical class-based unit testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._main_softeng005.html">Sharing the software with other users</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng005.html#organizing-the-software-directory-tree">Organizing the software directory tree</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng005.html#distributing-just-a-module-file">Distributing just a module file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng005.html#distributing-a-package">Distributing a package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng005.html#publishing-the-software-at-github">Publishing the software at GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng005.html#downloading-and-installing-the-software">Downloading and installing the software</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng005.html#installing-just-a-module-file">Installing just a module file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng005.html#installing-a-package">Installing a package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._main_softeng006.html">Classes for problem and solution method</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng006.html#the-problem-class">The problem class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng006.html#the-solver-class">The solver class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng006.html#combining-the-objects">Combining the objects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng006.html#improving-the-problem-and-solver-classes">Improving the problem and solver classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng006.html#a-generic-class-for-parameters">A generic class for parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._main_softeng007.html">Automating scientific experiments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng007.html#available-software">Available software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng007.html#the-results-we-want-to-produce">The results we want to produce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng007.html#combining-plot-files">Combining plot files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng007.html#running-a-program-from-python">Running a program from Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng007.html#the-automating-script">The automating script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng007.html#making-a-report">Making a report</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng007.html#word-openoffice-googledocs">Word, OpenOffice, GoogleDocs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng007.html#html-with-mathjax">HTML with MathJax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng007.html#latex">LaTeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng007.html#sphinx">Sphinx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng007.html#markdown">Markdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng007.html#ipython-jupyter-notebooks">IPython/Jupyter notebooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng007.html#wiki-formats">Wiki formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng007.html#doconce">DocOnce</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng007.html#publishing-a-complete-project">Publishing a complete project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._main_softeng008.html">Exercises</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng008.html#problem-1-make-a-tool-for-differentiating-curves">Problem 1: Make a tool for differentiating curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng008.html#problem-2-make-solid-software-for-the-trapezoidal-rule">Problem 2: Make solid software for the Trapezoidal rule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng008.html#problem-3-implement-classes-for-the-trapezoidal-rule">Problem 3: Implement classes for the Trapezoidal rule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng008.html#problem-4-write-a-doctest-and-a-test-function">Problem 4: Write a doctest and a test function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng008.html#problem-5-experiment-with-tolerances-in-comparisons">Problem 5: Experiment with tolerances in comparisons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._main_softeng008.html#remarks">Remarks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng008.html#exercise-6-make-use-of-a-class-implementation">Exercise 6: Make use of a class implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_softeng008.html#exercise-7-make-solid-software-for-a-difference-equation">Exercise 7: Make solid software for a difference equation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="._main_softeng009.html">Bibliography</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <center>
+            <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+            </center>
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Software engineering with exponential decay models</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._main_softeng000.html"
+                        title="next chapter">Software engineering with exponential decay models</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._main_softeng000.html" title="Software engineering with exponential decay models"
+             >next</a> |</li>
+        <li><a href="#">Software engineering with exponential decay models</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="wrapper">
+  <div class="footer">
+  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+  </div>
+</div>
+
+  </body>
+</html>

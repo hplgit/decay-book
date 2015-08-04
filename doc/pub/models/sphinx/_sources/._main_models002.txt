@@ -1,0 +1,22 @@
+
+
+.. |nbsp| unicode:: 0xA0
+   :trim:
+
+.. !split
+
+Bibliography
+============
+
+.. [Ref1]
+   **H. P. Langtangen**. Scaling,
+   `http://tinyurl.com/k3sdbuv/pub/scale <http://tinyurl.com/k3sdbuv/pub/scale>`_.
+
+.. [Ref2]
+   **D. B. Meade and A. A. Struthers**. Differential Equations in the New Millenium: the Parachute Problem,
+   *International Journal of Engineering Education*,
+   15(6),
+   pp. 417-424,
+   1999,
+   `http://www.matematicas.unam.mx/gfgf/ode/ode_files/parachute.pdf <http://www.matematicas.unam.mx/gfgf/ode/ode_files/parachute.pdf>`_.
+

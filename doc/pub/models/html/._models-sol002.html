@@ -1,0 +1,333 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Generalizations of exponential decay models">
+<meta name="keywords" content="population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,terminal velocity,geometric mean,averaging geometric,scaling">
+
+<title>Generalizations of exponential decay models</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Scaling', 1, 'decay:app:scaling', 'decay:app:scaling'),
+              ('Dimensionless variables', 2, None, '___sec1'),
+              ('Dimensionless numbers', 2, None, '___sec2'),
+              ('A scaling for vanishing initial condition',
+               2,
+               None,
+               '___sec3'),
+              ('Evolution of a population',
+               1,
+               'decay:app:pop',
+               'decay:app:pop'),
+              ('Exponential growth', 2, None, '___sec5'),
+              ('Logistic growth', 2, None, '___sec6'),
+              ('Compound interest and inflation',
+               1,
+               'decay:app:interest',
+               'decay:app:interest'),
+              ("Newton's law of cooling",
+               1,
+               'decay:app:Newton:cooling',
+               'decay:app:Newton:cooling'),
+              ('Radioactive decay',
+               1,
+               'decay:app:nuclear',
+               'decay:app:nuclear'),
+              ('Deterministic model', 2, None, '___sec10'),
+              ('Stochastic model', 2, None, '___sec11'),
+              ('Relation between stochastic and deterministic models',
+               2,
+               None,
+               '___sec12'),
+              ('Generalization of the radioactive decay modeling',
+               2,
+               'decay:app:waitingtime',
+               'decay:app:waitingtime'),
+              ('Chemical kinetics',
+               1,
+               'decay:app:kinetics',
+               'decay:app:kinetics'),
+              ('Irreversible reaction of two substances',
+               2,
+               None,
+               '___sec15'),
+              ('Reversible reaction of two substances', 2, None, '___sec16'),
+              ('Irreversible reaction of two substances into a third',
+               2,
+               None,
+               '___sec17'),
+              ('A biochemical reaction', 2, None, '___sec18'),
+              ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
+              ('Decay of atmospheric pressure with altitude',
+               1,
+               'decay:app:atm',
+               'decay:app:atm'),
+              ('The general model', 2, None, '___sec21'),
+              ('Multiple atmospheric layers', 2, None, '___sec22'),
+              ('Simplifications', 2, None, '___sec23'),
+              ('Constant layer temperature', 3, None, '___sec24'),
+              ('One-layer model', 3, None, '___sec25'),
+              ('Compaction of sediments',
+               1,
+               'decay:app:sediment',
+               'decay:app:sediment'),
+              ('Vertical motion of a body in a viscous fluid',
+               1,
+               'decay:app:drag',
+               'decay:app:drag'),
+              ('Overview of forces', 2, None, '___sec28'),
+              ('Equation of motion', 2, None, '___sec29'),
+              ('Terminal velocity', 2, None, '___sec30'),
+              ('A Crank-Nicolson scheme', 2, None, '___sec31'),
+              ('Physical data', 2, None, '___sec32'),
+              ('Verification', 2, None, '___sec33'),
+              ('Scaling',
+               2,
+               'decay:app:drag:scaling',
+               'decay:app:drag:scaling'),
+              ('Decay ODEs from solving a PDE by Fourier expansions',
+               1,
+               'decay:app:diffusion:Fourier',
+               'decay:app:diffusion:Fourier'),
+              ('Exercises', 1, None, '___sec36'),
+              ('Exercise 1: Radioactive decay of Carbon-14',
+               2,
+               'decay:app:exer:radio:C14',
+               'decay:app:exer:radio:C14'),
+              ("Exercise 2: Derive schemes for Newton's law of cooling",
+               2,
+               'decay:app:exer:cooling:schemes',
+               'decay:app:exer:cooling:schemes'),
+              ("Exercise 3: Implement schemes for Newton's law of cooling",
+               2,
+               'decay:app:exer:cooling:py',
+               'decay:app:exer:cooling:py'),
+              ('Bug 1: Wrong time level in the $T_s$ function',
+               3,
+               None,
+               '___sec40'),
+              ('Bug 2: Wrong time level in the $T$ function',
+               3,
+               None,
+               '___sec41'),
+              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec42'),
+              ('Bug 4: Missing `k` in the updating formula',
+               3,
+               None,
+               '___sec43'),
+              ('Bug 5: Using `1-theta` instead of `theta`',
+               3,
+               None,
+               '___sec44'),
+              ('Exercise 4: Find time of murder from body temperature',
+               2,
+               'decay:app:exer:cooling:murder',
+               'decay:app:exer:cooling:murder'),
+              ('Exercise 5: Simulate an oscillating cooling process',
+               2,
+               'decay:app:exer:cooling:osc',
+               'decay:app:exer:cooling:osc'),
+              ('Exercise 6: Simulate stochastic radioactive decay',
+               2,
+               'decay:app:exer:stoch:nuclear',
+               'decay:app:exer:stoch:nuclear'),
+              ('Exercise 7: Radioactive decay of two substances',
+               2,
+               'decay:app:exer:radio:twosubst',
+               'decay:app:exer:radio:twosubst'),
+              ('Exercise 8: Simulate a simple chemical reaction',
+               2,
+               'decay:app:exer:kinetics:AB',
+               'decay:app:exer:kinetics:AB'),
+              ('Exercise 9: Simulate an $n$-th order chemical reaction',
+               2,
+               'decay:app:exer:kinetics:ABn',
+               'decay:app:exer:kinetics:ABn'),
+              ('Exercise 10: Simulate spreading of a disease',
+               2,
+               'decay:app:exer:SIR',
+               'decay:app:exer:SIR'),
+              ('Exercise 11: Simulate a biochemical process',
+               2,
+               'decay:app:exer:MMK',
+               'decay:app:exer:MMK'),
+              ('Exercise 12: Simulate the pressure drop in the atmosphere',
+               2,
+               'decay:app:exer:atm1',
+               'decay:app:exer:atm1'),
+              ('Exercise 13: Make a program for vertical motion in a fluid',
+               2,
+               'decay:app:exer:drag:prog',
+               'decay:app:exer:drag:prog'),
+              ('Project 14: Simulate parachuting',
+               2,
+               'decay:app:exer:parachute',
+               'decay:app:exer:parachute'),
+              ('Exercise 15: Formulate vertical motion in the atmosphere',
+               2,
+               'decay:app:exer:drag:atm1',
+               'decay:app:exer:drag:atm1'),
+              ('Exercise 16: Simulate vertical motion in the atmosphere',
+               2,
+               'decay:app:exer:drag:atm2',
+               'decay:app:exer:drag:atm2'),
+              ('Exercise 17: Compute $y=|x|$ by solving an ODE',
+               2,
+               'decay:app:exer:signum',
+               'decay:app:exer:signum'),
+              ('Exercise 18: Simulate fortune growth with random interest rate',
+               2,
+               'decay:app:exer:interest',
+               'decay:app:exer:interest'),
+              ('Exercise 19: Simulate a population in a changing environment',
+               2,
+               'decay:app:exer:pop:at',
+               'decay:app:exer:pop:at'),
+              ('Exercise 20: Simulate logistic growth',
+               2,
+               'decay:app:exer:pop:logistic1',
+               'decay:app:exer:pop:logistic1'),
+              ('Exercise 21: Rederive the equation for continuous compound interest',
+               2,
+               'decay:app:exer:interest:derive',
+               'decay:app:exer:interest:derive'),
+              ('Bibliography', 1, None, '___sec63')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\tp}{\thinspace .}
+\newcommand{\E}[1]{\hbox{E}\lbrack #1 \rbrack}
+\newcommand{\Var}[1]{\hbox{Var}\lbrack #1 \rbrack}
+\newcommand{\Std}[1]{\hbox{Std}\lbrack #1 \rbrack}
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="models-sol.html">Generalizations of exponential decay models</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:scaling" style="font-size: 80%;">Scaling</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:pop" style="font-size: 80%;">Evolution of a population</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:interest" style="font-size: 80%;">Compound interest and inflation</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:Newton:cooling" style="font-size: 80%;">Newton's law of cooling</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:nuclear" style="font-size: 80%;">Radioactive decay</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:kinetics" style="font-size: 80%;">Chemical kinetics</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:SIR" style="font-size: 80%;">Spreading of diseases</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:atm" style="font-size: 80%;">Decay of atmospheric pressure with altitude</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:sediment" style="font-size: 80%;">Compaction of sediments</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:drag" style="font-size: 80%;">Vertical motion of a body in a viscous fluid</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#decay:app:diffusion:Fourier" style="font-size: 80%;">Decay ODEs from solving a PDE by Fourier expansions</a></li>
+     <!-- navigation toc: --> <li><a href="._models-sol001.html#___sec36" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec63" style="font-size: 80%;">Bibliography</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0002"></a>
+<!-- !split -->
+
+<h1 id="___sec63">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="Langtangen_deqbook_scale"></div> <b>H. P. Langtangen</b>. 
+    Scaling,
+    <a href="http://tinyurl.com/k3sdbuv/pub/scale" target="_self"><tt>http://tinyurl.com/k3sdbuv/pub/scale</tt></a>.</li>
+ <li> <div id="parachute_1999"></div> <b>D. B. Meade and A. A. Struthers</b>. 
+    Differential Equations in the New Millenium: the Parachute Problem,
+    <em>International Journal of Engineering Education</em>,
+    15(6),
+    pp. 417-424,
+    1999,
+    <a href="http://www.matematicas.unam.mx/gfgf/ode/ode_files/parachute.pdf" target="_self"><tt>http://www.matematicas.unam.mx/gfgf/ode/ode_files/parachute.pdf</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._models-sol001.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
