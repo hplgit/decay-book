@@ -1,0 +1,18 @@
+.. Automatically generated Sphinx-extended reStructuredText file from DocOnce source
+   (https://github.com/hplgit/doconce/)
+
+.. |nbsp| unicode:: 0xA0
+   :trim:
+
+.. TITLE:  A Gentle Introduction to Finite Difference Computing Using Exponential Decay Models: Modeling, Algorithms, Analysis, Programming, and Verification
+
+.. TITLE:  A Gentle Introduction to Finite Difference Computing Using Exponential Decay Models
+
+.. Document title:
+
+Finite Difference Computing with Exponential Decay Models
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:Authors: Hans Petter Langtangen
+:Date: Aug 5, 2015
+

@@ -1,0 +1,1455 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Finite Difference Computing with Exponential Decay Models">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,terminal velocity,geometric mean,averaging geometric,scaling,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+
+<title>Finite Difference Computing with Exponential Decay Models</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [('Preface', 0, 'ch:preface', 'ch:preface'),
+              ('Acknowledgments', 3, None, '___sec1'),
+              ('Algorithms and implementations', 0, None, '___sec2'),
+              ('Finite difference methods',
+               1,
+               'decay:basics',
+               'decay:basics'),
+              ('A basic model for exponential decay',
+               2,
+               'decay:model',
+               'decay:model'),
+              ('The exact solution', 3, None, '___sec5'),
+              ('A complete problem formulation', 3, None, '___sec6'),
+              ('The Forward Euler scheme',
+               2,
+               'decay:schemes:FE',
+               'decay:schemes:FE'),
+              ('Step 1: Discretizing the domain', 3, None, '___sec8'),
+              ('Step 2: Fulfilling the equation at discrete time points',
+               3,
+               None,
+               '___sec9'),
+              ('Step 3: Replacing derivatives by finite differences',
+               3,
+               None,
+               '___sec10'),
+              ('Step 4: Formulating a recursive algorithm',
+               3,
+               None,
+               '___sec11'),
+              ('Interpretation', 3, None, '___sec12'),
+              ('Computing with the recursive formula', 3, None, '___sec13'),
+              ('The Backward Euler scheme',
+               2,
+               'decay:schemes:BE',
+               'decay:schemes:BE'),
+              ('The Crank-Nicolson scheme',
+               2,
+               'decay:schemes:CN',
+               'decay:schemes:CN'),
+              ('The unifying $\\theta$-rule',
+               2,
+               'decay:schemes:theta',
+               'decay:schemes:theta'),
+              ('Constant time step', 2, None, '___sec17'),
+              ('Mathematical derivation of finite difference formulas',
+               2,
+               'decay:fd:taylor',
+               'decay:fd:taylor'),
+              ('The forward difference', 3, None, '___sec19'),
+              ('The backward difference', 3, None, '___sec20'),
+              ('The centered difference', 3, None, '___sec21'),
+              ('Compact operator notation for finite differences',
+               2,
+               'decay:fd:op',
+               'decay:fd:op'),
+              ('Implementation', 1, 'decay:impl1', 'decay:impl1'),
+              ('Computer language: Python', 2, None, '___sec24'),
+              ('Making a solver function', 2, 'decay:py1', 'decay:py1'),
+              ('Integer division', 2, None, '___sec26'),
+              ('Doc strings', 2, None, '___sec27'),
+              ('Formatting numbers', 2, None, '___sec28'),
+              ('Running the program', 2, None, '___sec29'),
+              ('Plotting the solution', 2, None, '___sec30'),
+              ('Verifying the implementation', 2, None, '___sec31'),
+              ('Running a few algorithmic steps by hand',
+               3,
+               None,
+               '___sec32'),
+              ('Computing the numerical error as a mesh function',
+               2,
+               'decay:computing:error',
+               'decay:computing:error'),
+              ('Computing the norm of the error mesh function',
+               2,
+               'decay:computing:error:norm',
+               'decay:computing:error:norm'),
+              ('Scalar computing', 3, None, '___sec35'),
+              ('Experiments with computing and plotting',
+               2,
+               None,
+               '___sec36'),
+              ('Combining plot files', 3, None, '___sec37'),
+              ('Plotting with SciTools', 3, None, '___sec38'),
+              ('Memory-saving implementation', 2, None, '___sec39'),
+              ('Exercises', 1, None, '___sec40'),
+              ('Exercise 1: Define a mesh function and visualize it',
+               2,
+               'decay:exer:meshfunc',
+               'decay:exer:meshfunc'),
+              ('Remarks', 3, None, '___sec42'),
+              ('Exercise 2: Differentiate a function',
+               2,
+               'decay:exer:dudt',
+               'decay:exer:dudt'),
+              ('Exercise 3: Experiment with divisions',
+               2,
+               'decay:exer:intdiv',
+               'decay:exer:intdiv'),
+              ('Exercise 4: Experiment with wrong computations',
+               2,
+               'decay:exer:decay1err',
+               'decay:exer:decay1err'),
+              ('Exercise 5: Plot the error function',
+               2,
+               'decay:exer:plot:error',
+               'decay:exer:plot:error'),
+              ('Exercise 6: Change formatting of numbers and debug',
+               2,
+               'decay:exer:inexact:output',
+               'decay:exer:inexact:output'),
+              ('Analysis', 0, 'decay:analysis', 'decay:analysis'),
+              ('Experimental investigations', 1, None, '___sec49'),
+              ('Discouraging numerical solutions', 2, None, '___sec50'),
+              ('Detailed experiments', 2, None, '___sec51'),
+              ('Stability', 1, None, '___sec52'),
+              ('Exact numerical solution', 2, None, '___sec53'),
+              ('Stability properties derived from the amplification factor',
+               2,
+               None,
+               '___sec54'),
+              ('Accuracy', 1, None, '___sec55'),
+              ('Visual comparison of amplification factors',
+               2,
+               None,
+               '___sec56'),
+              ('Series expansion of amplification factors',
+               2,
+               None,
+               '___sec57'),
+              ('The ratio of numerical and exact amplification factors',
+               2,
+               None,
+               '___sec58'),
+              ('The global error at a point',
+               2,
+               'decay:analysis:gobal:error',
+               'decay:analysis:gobal:error'),
+              ('Integrated error',
+               2,
+               'decay:analysis:gobal:error_int',
+               'decay:analysis:gobal:error_int'),
+              ('Truncation error',
+               2,
+               'decay:analysis:trunc',
+               'decay:analysis:trunc'),
+              ('Consistency, stability, and convergence',
+               2,
+               None,
+               '___sec62'),
+              ('Exercises', 1, None, '___sec63'),
+              ('Exercise 7: Visualize the accuracy of finite differences',
+               2,
+               'decay:analysis:exer:fd:exp:plot',
+               'decay:analysis:exer:fd:exp:plot'),
+              ('Exercise 8: Explore the $\\theta$-rule for exponential growth',
+               2,
+               'decay:analysis:exer:growth',
+               'decay:analysis:exer:growth'),
+              ('Generalizations', 0, None, '___sec66'),
+              ('Model extensions', 1, None, '___sec67'),
+              ('Generalization: including a variable coefficient',
+               2,
+               None,
+               '___sec68'),
+              ('Generalization: including a source term',
+               2,
+               'decay:source',
+               'decay:source'),
+              ('Implementation of the generalized model problem',
+               2,
+               'decay:general',
+               'decay:general'),
+              ('Deriving the $\\theta$-rule formula', 3, None, '___sec71'),
+              ('Python code', 3, None, '___sec72'),
+              ('Coding of variable coefficients', 3, None, '___sec73'),
+              ('Verifying a constant solution',
+               2,
+               'decay:verify:trivial',
+               'decay:verify:trivial'),
+              ('Verification via manufactured solutions',
+               2,
+               'decay:MMS',
+               'decay:MMS'),
+              ('Computing convergence rates',
+               2,
+               'decay:convergence:rate',
+               'decay:convergence:rate'),
+              ('Estimating $r$', 3, None, '___sec77'),
+              ('Implementation', 3, None, '___sec78'),
+              ('Extension to systems of ODEs', 2, None, '___sec79'),
+              ('General first-order ODEs', 1, None, '___sec80'),
+              ('Generic form of first-order ODEs', 2, None, '___sec81'),
+              ('The $\\theta$-rule', 2, None, '___sec82'),
+              ('An implicit 2-step backward scheme', 2, None, '___sec83'),
+              ('Leapfrog schemes', 2, None, '___sec84'),
+              ('The ordinary Leapfrog scheme', 3, None, '___sec85'),
+              ('The filtered Leapfrog scheme', 3, None, '___sec86'),
+              ('The 2nd-order Runge-Kutta method', 2, None, '___sec87'),
+              ('A 2nd-order Taylor-series method', 2, None, '___sec88'),
+              ('The 2nd- and 3rd-order Adams-Bashforth schemes',
+               2,
+               None,
+               '___sec89'),
+              ('The 4th-order Runge-Kutta method',
+               2,
+               'decay:fd2:RK4',
+               'decay:fd2:RK4'),
+              ('The Odespy software', 2, None, '___sec91'),
+              ('Example: Runge-Kutta methods', 2, None, '___sec92'),
+              ('Remark about using the $\\theta$-rule in Odespy',
+               3,
+               None,
+               '___sec93'),
+              ('Example: Adaptive Runge-Kutta methods',
+               2,
+               'decay:fd2:adaptiveRK',
+               'decay:fd2:adaptiveRK'),
+              ('Exercises', 1, None, '___sec95'),
+              ('Exercise 9: Experiment with precision in tests and the size of $u$',
+               2,
+               'decay:fd2:exer:precision',
+               'decay:fd2:exer:precision'),
+              ('Exercise 10: Implement the 2-step backward scheme',
+               2,
+               'decay:fd2:exer:bw2',
+               'decay:fd2:exer:bw2'),
+              ('Exercise 11: Implement the 2nd-order Adams-Bashforth scheme',
+               2,
+               'decay:fd2:exer:AB2',
+               'decay:fd2:exer:AB2'),
+              ('Exercise 12: Implement the 3rd-order Adams-Bashforth scheme',
+               2,
+               'decay:fd2:exer:AB3',
+               'decay:fd2:exer:AB3'),
+              ('Exercise 13: Analyze explicit 2nd-order methods',
+               2,
+               'decay:exer:RK2:Taylor:analysis',
+               'decay:exer:RK2:Taylor:analysis'),
+              ('Project 14: Implement and investigate the Leapfrog scheme',
+               2,
+               'decay:fd2:exer:leapfrog1',
+               'decay:fd2:exer:leapfrog1'),
+              ('Problem 15: Make a unified implementation of many schemes',
+               2,
+               'decay:fd2:exer:uni',
+               'decay:fd2:exer:uni'),
+              ('Models', 0, 'decay:app', 'decay:app'),
+              ('Scaling', 1, 'decay:app:scaling', 'decay:app:scaling'),
+              ('Dimensionless variables', 2, None, '___sec105'),
+              ('Dimensionless numbers', 2, None, '___sec106'),
+              ('A scaling for vanishing initial condition',
+               2,
+               None,
+               '___sec107'),
+              ('Evolution of a population',
+               1,
+               'decay:app:pop',
+               'decay:app:pop'),
+              ('Exponential growth', 2, None, '___sec109'),
+              ('Logistic growth', 2, None, '___sec110'),
+              ('Compound interest and inflation',
+               1,
+               'decay:app:interest',
+               'decay:app:interest'),
+              ("Newton's law of cooling",
+               1,
+               'decay:app:Newton:cooling',
+               'decay:app:Newton:cooling'),
+              ('Radioactive decay',
+               1,
+               'decay:app:nuclear',
+               'decay:app:nuclear'),
+              ('Deterministic model', 2, None, '___sec114'),
+              ('Stochastic model', 2, None, '___sec115'),
+              ('Relation between stochastic and deterministic models',
+               2,
+               None,
+               '___sec116'),
+              ('Generalization of the radioactive decay modeling',
+               2,
+               'decay:app:waitingtime',
+               'decay:app:waitingtime'),
+              ('Chemical kinetics',
+               1,
+               'decay:app:kinetics',
+               'decay:app:kinetics'),
+              ('Irreversible reaction of two substances',
+               2,
+               None,
+               '___sec119'),
+              ('Reversible reaction of two substances', 2, None, '___sec120'),
+              ('Irreversible reaction of two substances into a third',
+               2,
+               None,
+               '___sec121'),
+              ('A biochemical reaction', 2, None, '___sec122'),
+              ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
+              ('Decay of atmospheric pressure with altitude',
+               1,
+               'decay:app:atm',
+               'decay:app:atm'),
+              ('The general model', 2, None, '___sec125'),
+              ('Multiple atmospheric layers', 2, None, '___sec126'),
+              ('Simplifications', 2, None, '___sec127'),
+              ('Constant layer temperature', 3, None, '___sec128'),
+              ('One-layer model', 3, None, '___sec129'),
+              ('Compaction of sediments',
+               1,
+               'decay:app:sediment',
+               'decay:app:sediment'),
+              ('Vertical motion of a body in a viscous fluid',
+               1,
+               'decay:app:drag',
+               'decay:app:drag'),
+              ('Overview of forces', 2, None, '___sec132'),
+              ('Equation of motion', 2, None, '___sec133'),
+              ('Terminal velocity', 2, None, '___sec134'),
+              ('A Crank-Nicolson scheme', 2, None, '___sec135'),
+              ('Physical data', 2, None, '___sec136'),
+              ('Verification', 2, None, '___sec137'),
+              ('Scaling',
+               2,
+               'decay:app:drag:scaling',
+               'decay:app:drag:scaling'),
+              ('Decay ODEs from solving a PDE by Fourier expansions',
+               1,
+               'decay:app:diffusion:Fourier',
+               'decay:app:diffusion:Fourier'),
+              ('Exercises', 1, None, '___sec140'),
+              ('Exercise 16: Radioactive decay of Carbon-14',
+               2,
+               'decay:app:exer:radio:C14',
+               'decay:app:exer:radio:C14'),
+              ("Exercise 17: Derive schemes for Newton's law of cooling",
+               2,
+               'decay:app:exer:cooling:schemes',
+               'decay:app:exer:cooling:schemes'),
+              ("Exercise 18: Implement schemes for Newton's law of cooling",
+               2,
+               'decay:app:exer:cooling:py',
+               'decay:app:exer:cooling:py'),
+              ('Bug 1: Wrong time level in the $T_s$ function',
+               3,
+               None,
+               '___sec144'),
+              ('Bug 2: Wrong time level in the $T$ function',
+               3,
+               None,
+               '___sec145'),
+              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec146'),
+              ('Bug 4: Missing `k` in the updating formula',
+               3,
+               None,
+               '___sec147'),
+              ('Bug 5: Using `1-theta` instead of `theta`',
+               3,
+               None,
+               '___sec148'),
+              ('Exercise 19: Find time of murder from body temperature',
+               2,
+               'decay:app:exer:cooling:murder',
+               'decay:app:exer:cooling:murder'),
+              ('Exercise 20: Simulate an oscillating cooling process',
+               2,
+               'decay:app:exer:cooling:osc',
+               'decay:app:exer:cooling:osc'),
+              ('Exercise 21: Simulate stochastic radioactive decay',
+               2,
+               'decay:app:exer:stoch:nuclear',
+               'decay:app:exer:stoch:nuclear'),
+              ('Exercise 22: Radioactive decay of two substances',
+               2,
+               'decay:app:exer:radio:twosubst',
+               'decay:app:exer:radio:twosubst'),
+              ('Exercise 23: Simulate a simple chemical reaction',
+               2,
+               'decay:app:exer:kinetics:AB',
+               'decay:app:exer:kinetics:AB'),
+              ('Exercise 24: Simulate an $n$-th order chemical reaction',
+               2,
+               'decay:app:exer:kinetics:ABn',
+               'decay:app:exer:kinetics:ABn'),
+              ('Exercise 25: Simulate spreading of a disease',
+               2,
+               'decay:app:exer:SIR',
+               'decay:app:exer:SIR'),
+              ('Exercise 26: Simulate a biochemical process',
+               2,
+               'decay:app:exer:MMK',
+               'decay:app:exer:MMK'),
+              ('Exercise 27: Simulate the pressure drop in the atmosphere',
+               2,
+               'decay:app:exer:atm1',
+               'decay:app:exer:atm1'),
+              ('Exercise 28: Make a program for vertical motion in a fluid',
+               2,
+               'decay:app:exer:drag:prog',
+               'decay:app:exer:drag:prog'),
+              ('Project 29: Simulate parachuting',
+               2,
+               'decay:app:exer:parachute',
+               'decay:app:exer:parachute'),
+              ('Exercise 30: Formulate vertical motion in the atmosphere',
+               2,
+               'decay:app:exer:drag:atm1',
+               'decay:app:exer:drag:atm1'),
+              ('Exercise 31: Simulate vertical motion in the atmosphere',
+               2,
+               'decay:app:exer:drag:atm2',
+               'decay:app:exer:drag:atm2'),
+              ('Exercise 32: Compute $y=|x|$ by solving an ODE',
+               2,
+               'decay:app:exer:signum',
+               'decay:app:exer:signum'),
+              ('Exercise 33: Simulate fortune growth with random interest rate',
+               2,
+               'decay:app:exer:interest',
+               'decay:app:exer:interest'),
+              ('Exercise 34: Simulate a population in a changing environment',
+               2,
+               'decay:app:exer:pop:at',
+               'decay:app:exer:pop:at'),
+              ('Exercise 35: Simulate logistic growth',
+               2,
+               'decay:app:exer:pop:logistic1',
+               'decay:app:exer:pop:logistic1'),
+              ('Exercise 36: Rederive the equation for continuous compound interest',
+               2,
+               'decay:app:exer:interest:derive',
+               'decay:app:exer:interest:derive'),
+              ('Scientific software engineering', 0, 'decay:se', 'decay:se'),
+              ('Basic implementations',
+               1,
+               'softeng1:basic',
+               'softeng1:basic'),
+              ('Mathematical problem and solution technique',
+               2,
+               'softeng1:basic:math',
+               'softeng1:basic:math'),
+              ('A first, quick implementation',
+               2,
+               'softeng1:basic:impl1',
+               'softeng1:basic:impl1'),
+              ('A more decent program',
+               2,
+               'softeng1:basic:impl2',
+               'softeng1:basic:impl2'),
+              ('Comments in a program', 3, None, '___sec172'),
+              ('Refactoring into functions', 3, None, '___sec173'),
+              ('Program file vs IDE vs notebook', 3, None, '___sec174'),
+              ('Prefixing imported functions by the module name',
+               2,
+               'softeng1:basic:modprefix',
+               'softeng1:basic:modprefix'),
+              ('Implementing the numerical algorithm in a function',
+               2,
+               'softeng1:basic:func',
+               'softeng1:basic:func'),
+              ('Do not have several versions of a code',
+               2,
+               None,
+               '___sec177'),
+              ('Making a module',
+               2,
+               'softeng1:basic:module',
+               'softeng1:basic:module'),
+              ('Example on extending the module code',
+               2,
+               'softeng1:basic:experiment2',
+               'softeng1:basic:experiment2'),
+              ('Documenting functions and modules',
+               2,
+               'softeng1:basic:docstring',
+               'softeng1:basic:docstring'),
+              ('User interfaces',
+               1,
+               'softeng1:basic:UI',
+               'softeng1:basic:UI'),
+              ('Command-line arguments', 2, None, '___sec182'),
+              ('Positional command-line arguments', 2, None, '___sec183'),
+              ('Option-value pairs on the command line',
+               2,
+               None,
+               '___sec184'),
+              ('Creating a graphical web user interface',
+               2,
+               None,
+               '___sec185'),
+              ('Making a compute function', 3, None, '___sec186'),
+              ('Generating the user interface', 3, None, '___sec187'),
+              ('Running the web application', 3, None, '___sec188'),
+              ('Tests for verifying implementations', 1, None, '___sec189'),
+              ('Doctests', 2, None, '___sec190'),
+              ('Unit tests and test functions', 2, None, '___sec191'),
+              ('Two Python test frameworks: nose and pytest',
+               3,
+               None,
+               '___sec192'),
+              ('Test function requirements', 3, None, '___sec193'),
+              ('Comparison of real numbers', 3, None, '___sec194'),
+              ('Special assert functions from nose', 3, None, '___sec195'),
+              ('Locating test functions', 3, None, '___sec196'),
+              ('Running tests', 3, None, '___sec197'),
+              ('Embedding doctests in a test function', 3, None, '___sec198'),
+              ('Installing nose and pytest', 3, None, '___sec199'),
+              ('Test function for the solver', 2, None, '___sec200'),
+              ('Test function for reading positional command-line arguments',
+               2,
+               None,
+               '___sec201'),
+              ('Test function for reading option-value pairs',
+               2,
+               None,
+               '___sec202'),
+              ('Classical class-based unit testing',
+               2,
+               'softeng1:basic:unittest',
+               'softeng1:basic:unittest'),
+              ('Sharing the software with other users',
+               1,
+               'softeng1:prog:se:git',
+               'softeng1:prog:se:git'),
+              ('Organizing the software directory tree',
+               2,
+               None,
+               '___sec205'),
+              ('Distributing just a module file', 3, None, '___sec206'),
+              ('Distributing a package', 3, None, '___sec207'),
+              ('Publishing the software at GitHub', 2, None, '___sec208'),
+              ('Downloading and installing the software',
+               2,
+               None,
+               '___sec209'),
+              ('Installing just a module file', 3, None, '___sec210'),
+              ('Installing a package', 3, None, '___sec211'),
+              ('Classes for problem and solution method',
+               1,
+               'softeng1:prog:se:class',
+               'softeng1:prog:se:class'),
+              ('The problem class', 2, None, '___sec213'),
+              ('The solver class', 2, None, '___sec214'),
+              ('Combining the objects', 3, None, '___sec215'),
+              ('Improving the problem and solver classes',
+               2,
+               'softeng1:prog:se:class2',
+               'softeng1:prog:se:class2'),
+              ('A generic class for parameters', 3, None, '___sec217'),
+              ('Automating scientific experiments',
+               1,
+               'softeng1:experiments',
+               'softeng1:experiments'),
+              ('Available software', 2, None, '___sec219'),
+              ('The results we want to produce', 2, None, '___sec220'),
+              ('Combining plot files', 2, None, '___sec221'),
+              ('Running a program from Python', 2, None, '___sec222'),
+              ('The automating script', 2, None, '___sec223'),
+              ('Making a report',
+               2,
+               'softeng1:exper:report',
+               'softeng1:exper:report'),
+              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec225'),
+              ('HTML with MathJax', 3, None, '___sec226'),
+              ('LaTeX', 3, None, '___sec227'),
+              ('Sphinx', 3, None, '___sec228'),
+              ('Markdown', 3, None, '___sec229'),
+              ('IPython/Jupyter notebooks', 3, None, '___sec230'),
+              ('Wiki formats', 3, None, '___sec231'),
+              ('DocOnce', 3, None, '___sec232'),
+              ('Publishing a complete project',
+               2,
+               'softeng1:exper:github',
+               'softeng1:exper:github'),
+              ('Exercises', 1, None, '___sec234'),
+              ('Problem 37: Make a tool for differentiating curves',
+               2,
+               'softeng1:exer:derivative',
+               'softeng1:exer:derivative'),
+              ('Problem 38: Make solid software for the Trapezoidal rule',
+               2,
+               'softeng1:exer:integral:flat',
+               'softeng1:exer:integral:flat'),
+              ('Problem 39: Implement classes for the Trapezoidal rule',
+               2,
+               'softeng1:exer:integral:flat2',
+               'softeng1:exer:integral:flat2'),
+              ('Problem 40: Write a doctest and a test function',
+               2,
+               'softeng1:exer:doctest1',
+               'softeng1:exer:doctest1'),
+              ('Problem 41: Experiment with tolerances in comparisons',
+               2,
+               'softeng1:exer:tol',
+               'softeng1:exer:tol'),
+              ('Remarks', 3, None, '___sec240'),
+              ('Exercise 42: Make use of a class implementation',
+               2,
+               'softeng1:exer:class:dts',
+               'softeng1:exer:class:dts'),
+              ('Exercise 43: Make solid software for a difference equation',
+               2,
+               'softeng1:exer:logistic',
+               'softeng1:exer:logistic'),
+              ('References', 1, None, '___sec243')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="decay-book.html">Finite Difference Computing with Exponential Decay Models</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._decay-book001.html#ch:preface" style="font-size: 80%;">Preface</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book002.html#___sec2" style="font-size: 80%;">Algorithms and implementations</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:analysis" style="font-size: 80%;">Analysis</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec66" style="font-size: 80%;">Generalizations</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:app" style="font-size: 80%;">Models</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:se" style="font-size: 80%;">Scientific software engineering</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0011"></a>
+<!-- !split -->
+
+<h1 id="___sec189">Tests for verifying implementations </h1>
+
+<p>
+Any module with functions should have a set of tests that can
+check the
+correctness of the implementations.
+There exists
+well-established procedures and corresponding tools for automating
+the execution of such tests. These tools allow large test sets to be
+run with a one-line command, making it easy to check of the
+still software works (as far as the
+tests tell!). Here we shall illustrate two important
+software testing techniques: <em>doctest</em> and <em>unit testing</em>.
+The first one is Python specific, while unit testing is the dominating
+test technique in the software industry today.
+
+<h2 id="___sec190">Doctests </h2>
+
+<p>
+A doc string, the first string after the function header, is used to
+document the purpose of functions and their arguments
+(see the section <a href="._decay-book009.html#softeng1:basic:func">Implementing the numerical algorithm in a function</a>). Very often it
+is instructive to include an example in the doc string
+on how to use the function.
+Interactive examples in the Python shell are most illustrative as
+we can see the output resulting from the statements and expressions.
+For example,
+in the <code>solver</code> function, we can include an example on calling
+this function and printing the computed <code>u</code> and <code>t</code> arrays:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver</span>(I, a, T, dt, theta):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.</span>
+
+
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; u, t = solver(I=0.8, a=1.2, T=1.5, dt=0.5, theta=0.5)</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; for n in range(len(t)):</span>
+<span style="color: #BA2121; font-style: italic">    ...     print &#39;t=%.1f, u=%.14f&#39; % (t[n], u[n])</span>
+<span style="color: #BA2121; font-style: italic">    t=0.0, u=0.80000000000000</span>
+<span style="color: #BA2121; font-style: italic">    t=0.5, u=0.43076923076923</span>
+<span style="color: #BA2121; font-style: italic">    t=1.0, u=0.23195266272189</span>
+<span style="color: #BA2121; font-style: italic">    t=1.5, u=0.12489758761948</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #666666">...</span>
+</pre></div>
+<p>
+When such interactive demonstrations are inserted in doc strings,
+Python's <a href="http://docs.python.org/library/doctest.html" target="_self"><tt>doctest</tt></a>
+module can be used to automate running all commands
+in interactive sessions and compare new output with the output
+appearing in the doc string.  All we have to do in the current example
+is to run the module file <code>decay.py</code> with
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal<span style="color: #666666">&gt;</span> python <span style="color: #666666">-</span>m doctest decay<span style="color: #666666">.</span>py
+</pre></div>
+<p>
+This command imports the <code>doctest</code> module, which runs all
+doctests found in the file and reports discrepancies between
+expected and computed output.
+Alternatively, the test block in a module may run all doctests
+by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">doctest</span>
+    doctest<span style="color: #666666">.</span>testmod()
+</pre></div>
+<p>
+Doctests can also be embedded in nose/pytest unit tests
+as explained in the next section.
+
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Doctests prevent command-line arguments!</b>
+No additional command-line argument is allowed when running doctests.
+If your program relies on command-line input, make sure the doctests
+can be run <em>without</em> such input on the command line.
+
+<p>
+However, you can simulate command-line input by filling <code>sys.argv</code>
+with values, e.g.,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>; sys<span style="color: #666666">.</span>argv <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;--I 1.0 --a 5&#39;</span><span style="color: #666666">.</span>split()
+</pre></div>
+<p>
+</div>
+
+
+<p>
+The execution command above will report any problem if a test fails.
+As an illustration, let us alter the <code>u</code> value at <code>t=1.5</code> in
+the output of the doctest by replacing the last digit <code>8</code> by <code>7</code>.
+This edit triggers a report:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python -m doctest decay.py
+********************************************************
+File &quot;decay.py&quot;, line ...
+Failed example:
+    for n in range(len(t)):
+        print &#39;t=%.1f, u=%.14f&#39; % (t[n], u[n])
+Expected:
+    t=0.0, u=0.80000000000000
+    t=0.5, u=0.43076923076923
+    t=1.0, u=0.23195266272189
+    t=1.5, u=0.12489758761948
+Got:
+    t=0.0, u=0.80000000000000
+    t=0.5, u=0.43076923076923
+    t=1.0, u=0.23195266272189
+    t=1.5, u=0.12489758761947
+</pre></div>
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Pay attention to the number of digits in doctest results!</b>
+Note that in the output of <code>t</code> and <code>u</code> we write <code>u</code> with 14 digits.
+Writing all 16 digits is not a good idea: if the tests are run on
+different hardware, round-off errors might be different, and
+the <code>doctest</code> module detects that the numbers are not precisely the same
+and reports failures. In the present application, where \( 0 < u(t) \leq 0.8 \),
+we expect round-off errors to be of size \( 10^{-16} \), so comparing 15
+digits would probably be reliable, but we compare 14 to be on the
+safe side. On the other hand, comparing a small number of digits may
+hide software errors.
+</div>
+
+
+<p>
+Doctests are highly encouraged as they do two things: 1) demonstrate
+how a function is used and 2) test that the function works.
+
+<h2 id="___sec191">Unit tests and test functions </h2>
+
+<p>
+The unit testing technique consists of identifying smaller units
+of code and writing one or more tests for
+each unit. One unit can typically be a function.
+Each test should, ideally, not depend on the outcome of
+other tests. The recommended practice is actually to
+design and write the unit tests first and <em>then</em> implement the functions!
+
+<p>
+In scientific computing it is not always obvious how to best perform
+unit testing. The units are naturally larger than in non-scientific
+software. Very often the solution procedure of a mathematical problem
+identifies a unit, such as our <code>solver</code> function.
+
+<h3 id="___sec192">Two Python test frameworks: nose and pytest </h3>
+
+<p>
+Python offers two very easy-to-use software frameworks for implementing
+unit tests: nose and pytest. These work (almost) in the same way,
+but our recommendation is to go for pytest.
+
+<h3 id="___sec193">Test function requirements </h3>
+
+<p>
+For a test to qualify as a <em>test function</em> in nose or pytest, three
+rules must be followed:
+
+<ol>
+ <li> The function name must start with <code>test_</code>.</li>
+ <li> Function arguments are not allowed.</li>
+ <li> An <code>AssertionError</code> exception must be raised if the test fails.</li>
+</ol>
+
+A specific example might be illustrative before proceeding.
+We have the following function that we want to test:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">double</span>(n):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">2*</span>n
+</pre></div>
+<p>
+The corresponding test function could, in principle, have been written
+as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_double</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Test that double(n) works for one specific n.&quot;&quot;&quot;</span>
+    n <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+    expected <span style="color: #666666">=</span> <span style="color: #666666">2*4</span>
+    computed <span style="color: #666666">=</span> double(<span style="color: #666666">4</span>)
+    <span style="color: #008000; font-weight: bold">if</span> expected <span style="color: #666666">!=</span> computed:
+        <span style="color: #008000; font-weight: bold">raise</span> <span style="color: #D2413A; font-weight: bold">AssertionError</span>
+</pre></div>
+<p>
+The last two lines, however, are never written like this in test functions.
+Instead, Python's <code>assert</code> statement is used: <code>assert success, msg</code>, where
+<code>success</code> is a boolean variable, which is <code>False</code> if the test fails, and
+<code>msg</code> is <em>an optional</em> message string that is printed when the test fails.
+A better version of the test function is therefore
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_double</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Test that double(n) works for one specific n.&quot;&quot;&quot;</span>
+    n <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+    expected <span style="color: #666666">=</span> <span style="color: #666666">2*4</span>
+    computed <span style="color: #666666">=</span> double(<span style="color: #666666">4</span>)
+    msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;expected </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, computed </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (expected, computed)
+    success <span style="color: #666666">=</span> expected <span style="color: #666666">==</span> computed
+    <span style="color: #008000; font-weight: bold">assert</span> success, msg
+</pre></div>
+
+<h3 id="___sec194">Comparison of real numbers </h3>
+
+<p>
+Because of the finite precision arithmetics on a computer, which gives
+rise to round-off errors, the <code>==</code> operator is not suitable for
+checking whether two real numbers are equal. Obviously, this principle
+also applies to tests in test functions.
+We must therefore replace <code>a == b</code> by a comparison
+based on a tolerance <code>tol</code>: <code>abs(a-b) &lt; tol</code>. The next example illustrates
+the problem and its solution.
+
+<p>
+Here is a slightly different function that
+we want to test:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">third</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">/3.</span>
+</pre></div>
+<p>
+We write a test function where the expected result is computed as
+\( \frac{1}{3}x \) rather than \( x/3 \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_third</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Check that third(x) works for many x values.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">21</span>):
+        expected <span style="color: #666666">=</span> (<span style="color: #666666">1/3.0</span>)<span style="color: #666666">*</span>x
+        computed <span style="color: #666666">=</span> third(x)
+        success <span style="color: #666666">=</span> expected <span style="color: #666666">==</span> computed
+        <span style="color: #008000; font-weight: bold">assert</span> success
+</pre></div>
+<p>
+This <code>test_third</code> function executes silently, i.e., no failure,
+until <code>x</code> becomes 0.15. Then round-off errors make the <code>==</code> comparison
+<code>False</code>. In fact, seven of the <code>x</code> values above face this problem.
+The solution is to compare <code>expected</code> and <code>computed</code>
+with a small tolerance:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_third</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Check that third(x) works for many x values.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">for</span> x <span style="color: #AA22FF; font-weight: bold">in</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">21</span>):
+        expected <span style="color: #666666">=</span> (<span style="color: #666666">1/3.</span>)<span style="color: #666666">*</span>x
+        computed <span style="color: #666666">=</span> third(x)
+        tol <span style="color: #666666">=</span> <span style="color: #666666">1E-15</span>
+        success <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(expected <span style="color: #666666">-</span> computed) <span style="color: #666666">&lt;</span> tol
+        <span style="color: #008000; font-weight: bold">assert</span> success
+</pre></div>
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Always compare real numbers with a tolerance!</b>
+Real numbers should never be compared with the <code>==</code> operator, but always
+with the absolute value of the difference and a tolerance.
+So, replace <code>a == b</code>, if <code>a</code> and/or <code>b</code> is <code>float</code>, by
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+<span style="color: #008000">abs</span>(a <span style="color: #666666">-</span> b) <span style="color: #666666">&lt;</span> tol
+</pre></div>
+<p>
+The suitable size of <code>tol</code> depends on the size of <code>a</code> and <code>b</code>
+(see <a href="._decay-book015.html#softeng1:exer:tol">Problem 41: Experiment with tolerances in comparisons</a>).
+</div>
+
+
+<h3 id="___sec195">Special assert functions from nose </h3>
+
+<p>
+Test frameworks often contain more tailored
+<em>assert functions</em> that can be called instead of using the <code>assert</code>
+statement. For example, comparing two objects within
+a tolerance, as in the present
+case, can be done by the <code>assert_almost_equal</code> from the nose
+framework:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">nose.tools</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">nt</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_third</span>():
+    x <span style="color: #666666">=</span> <span style="color: #666666">0.15</span>
+    expected <span style="color: #666666">=</span> (<span style="color: #666666">1/3.</span>)<span style="color: #666666">*</span>x
+    computed <span style="color: #666666">=</span> third(x)
+    nt<span style="color: #666666">.</span>assert_almost_equal(
+        expected, computed, delta<span style="color: #666666">=1E-15</span>,
+        msg<span style="color: #666666">=</span><span style="color: #BA2121">&#39;diff=</span><span style="color: #BB6688; font-weight: bold">%.17E</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (expected <span style="color: #666666">-</span> computed))
+</pre></div>
+<p>
+Whether to use the plain <code>assert</code> statement with a comparison based on
+a tolerance or to use the ready-made function <code>assert_almost_equal</code>
+depends on the programmer's preference. The examples used in the
+documentation of the pytest framework stick to the plain <code>assert</code>
+statement.
+
+<h3 id="___sec196">Locating test functions </h3>
+
+<p>
+Test functions can reside in a module together with the functions they
+are supposed to verify, or the test functions can be collected in
+separate files having names starting with <code>test</code>. Actually,
+nose and pytest can recursively run all test functions
+in all <code>test*.py</code>
+files in the current directory, as well as in all subdirectories!
+
+<p>
+The <a href="http://tinyurl.com/ofkw6kc/softeng/decay.py" target="_self"><tt>decay.py</tt></a> module file features
+test functions in the module, but we could equally well have made
+a subdirectory <code>tests</code> and put the test functions in
+<a href="http://tinyurl.com/ofkw6kc/softeng/tests/test_decay.py" target="_self"><tt>tests/test_decay.py</tt></a>.
+
+<h3 id="___sec197">Running tests </h3>
+
+<p>
+To run all test functions in the file <code>decay.py</code> do
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; nosetests -s -v decay.py
+Terminal&gt; py.test -s -v decay.py
+</pre></div>
+<p>
+The <code>-s</code> option ensures that output from the test functions is printed
+in the terminal window, while <code>-v</code> prints the outcome of each individual
+test function.
+
+<p>
+Alternatively, if the test functions are located in some separate
+<code>test*.py</code> files,
+we can just write
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; py.test -s -v
+</pre></div>
+<p>
+to <em>recursively</em> run <em>all</em> test functions in the current
+directory tree. The corresponding
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; nosetests -s -v
+</pre></div>
+<p>
+command does the same, but requires subdirectory names to start
+with <code>test</code> or end with <code>_test</code> or <code>_tests</code> (which is a good habit anyway).
+An example of a <code>tests</code> directory with a <code>test*.py</code>
+file is found in <a href="http://tinyurl.com/ofkw6kc/softeng/tests" target="_self"><tt>src/softeng/tests</tt></a>.
+
+<h3 id="___sec198">Embedding doctests in a test function </h3>
+
+<p>
+Doctests can also be executed from nose/pytest unit tests. Here is an
+example of a file <a href="http://tinyurl.com/ofkw6kc/softeng/tests/test_decay_doctest.py" target="_self"><tt>test_decay_doctest.py</tt></a> where we in the test
+block run all the doctests in the imported module <code>decay</code>, but we also
+include a local test function that does the same:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">os</span>
+sys<span style="color: #666666">.</span>path<span style="color: #666666">.</span>insert(<span style="color: #666666">0</span>, os<span style="color: #666666">.</span>pardir)
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">decay</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">doctest</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_decay_module_with_doctest</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Doctest embedded in a nose/pytest unit test.&quot;&quot;&quot;</span>
+    <span style="color: #408080; font-style: italic"># Test all functions with doctest in module decay</span>
+    failure_count, test_count <span style="color: #666666">=</span> doctest<span style="color: #666666">.</span>testmod(m<span style="color: #666666">=</span>decay)
+    <span style="color: #008000; font-weight: bold">assert</span> failure_count <span style="color: #666666">==</span> <span style="color: #666666">0</span>
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #408080; font-style: italic"># Run all functions with doctests in this module</span>
+    failure_count, test_count <span style="color: #666666">=</span> doctest<span style="color: #666666">.</span>testmod(m<span style="color: #666666">=</span>decay)
+</pre></div>
+<p>
+Running this file as a program from the command line
+triggers the <code>doctest.testmod</code> call
+in the test block, while applying <code>py.test</code> or <code>nosetests</code> to the file triggers
+an import of the file and execution of the test function
+<code>test_decay_modue_with_doctest</code>.
+
+<h3 id="___sec199">Installing nose and pytest </h3>
+
+<p>
+With <code>pip</code> available, it is trivial to install nose and/or pytest:
+<code>sudo pip install nose</code> and <code>sudo pip install pytest</code>.
+
+<h2 id="___sec200">Test function for the solver </h2>
+
+<p>
+Finding good test problems for verifying the implementation of numerical
+methods is a topic on its own. The challenge is that we very seldom know
+what the numerical errors are. For the present model problem
+<a href="._decay-book009.html#mjx-eqn-112">(112)</a>-<a href="._decay-book009.html#mjx-eqn-113">(113)</a> solved by
+<a href="._decay-book009.html#mjx-eqn-114">(114)</a> one can, fortunately, derive a formula for
+the numerical approximation:
+
+$$ u^n = I\left(
+\frac{1 - (1-\theta) a\Delta t}{1 + \theta a \Delta t}
+\right)^n\tp$$
+
+Then we know that the implementation should
+produce numbers that agree with this formula to machine precision.
+The formula for \( u^n \) is known as an <em>exact discrete solution</em> of the
+problem and can be coded as
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_discrete_solution</span>(n, I, a, theta, dt):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return exact discrete solution of the numerical schemes.&quot;&quot;&quot;</span>
+    dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt)  <span style="color: #408080; font-style: italic"># avoid integer division</span>
+    A <span style="color: #666666">=</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)
+    <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>A<span style="color: #666666">**</span>n
+</pre></div>
+<p>
+A test function can evaluate this solution on a time mesh
+and check that the <code>u</code> values produced by the <code>solver</code> function
+do not deviate with more than a small tolerance:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_exact_discrete_solution</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Check that solver reproduces the exact discr. sol.&quot;&quot;&quot;</span>
+    theta <span style="color: #666666">=</span> <span style="color: #666666">0.8</span>; a <span style="color: #666666">=</span> <span style="color: #666666">2</span>; I <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>; dt <span style="color: #666666">=</span> <span style="color: #666666">0.8</span>
+    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #666666">8/</span>dt)  <span style="color: #408080; font-style: italic"># no of steps</span>
+    u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
+
+    <span style="color: #408080; font-style: italic"># Evaluate exact discrete solution on the mesh</span>
+    u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([exact_discrete_solution(n, I, a, theta, dt)
+                     <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nt<span style="color: #666666">+1</span>)])
+
+    <span style="color: #408080; font-style: italic"># Find largest deviation</span>
+    diff <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(u_de <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+    success <span style="color: #666666">=</span> diff <span style="color: #666666">&lt;</span> tol
+    <span style="color: #008000; font-weight: bold">assert</span> success
+</pre></div>
+<p>
+Among important things to consider when constructing test functions
+is testing the effect of wrong input to the function being tested.
+In our <code>solver</code> function, for example, integer values of \( a \), \( \Delta t \), and
+\( \theta \) may cause unintended integer
+division. We should therefore add a test to make sure our <code>solver</code>
+function does not fall into this potential trap:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_potential_integer_division</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Choose variables that can trigger integer division.&quot;&quot;&quot;</span>
+    theta <span style="color: #666666">=</span> <span style="color: #666666">1</span>; a <span style="color: #666666">=</span> <span style="color: #666666">1</span>; I <span style="color: #666666">=</span> <span style="color: #666666">1</span>; dt <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+    Nt <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+    u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
+    u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([exact_discrete_solution(n, I, a, theta, dt)
+                     <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nt<span style="color: #666666">+1</span>)])
+    diff <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(u_de <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
+    <span style="color: #008000; font-weight: bold">assert</span> diff <span style="color: #666666">&lt;</span> <span style="color: #666666">1E-14</span>
+</pre></div>
+<p>
+In more complicated problems where there is no exact solution of the
+numerical problem solved by the software, one must use the method
+of manufactured solutions, compute convergence rates for a series
+of \( \Delta t \) values, and check that the rates converges to the
+expected ones (from theory).
+This type of testing is fully explained in
+the section <a href="._decay-book006.html#decay:convergence:rate">Computing convergence rates</a>.
+
+<h2 id="___sec201">Test function for reading positional command-line arguments </h2>
+
+<p>
+The function <code>read_command_line_positional</code> extracts numbers from the
+command line. To test it, we must decide on a set of values for
+the input data, fill <code>sys.argv</code>
+accordingly, and check that we get the expected values:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_read_command_line_positional</span>():
+    <span style="color: #408080; font-style: italic"># Decide on a data set of input parameters</span>
+    I <span style="color: #666666">=</span> <span style="color: #666666">1.6</span>;  a <span style="color: #666666">=</span> <span style="color: #666666">1.8</span>;  T <span style="color: #666666">=</span> <span style="color: #666666">2.2</span>;  theta <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+    dt_values <span style="color: #666666">=</span> [<span style="color: #666666">0.1</span>, <span style="color: #666666">0.2</span>, <span style="color: #666666">0.05</span>]
+    <span style="color: #408080; font-style: italic"># Expected return from read_command_line_positional</span>
+    expected <span style="color: #666666">=</span> [I, a, T, theta, dt_values]
+    <span style="color: #408080; font-style: italic"># Construct corresponding sys.argv array</span>
+    sys<span style="color: #666666">.</span>argv <span style="color: #666666">=</span> [sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>], <span style="color: #008000">str</span>(I), <span style="color: #008000">str</span>(a), <span style="color: #008000">str</span>(T), <span style="color: #BA2121">&#39;CN&#39;</span>] <span style="color: #666666">+</span> \ 
+               [<span style="color: #008000">str</span>(dt) <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values]
+    computed <span style="color: #666666">=</span> read_command_line_positional()
+    <span style="color: #008000; font-weight: bold">for</span> expected_arg, computed_arg <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(expected, computed):
+        <span style="color: #008000; font-weight: bold">assert</span> expected_arg <span style="color: #666666">==</span> computed_arg
+</pre></div>
+<p>
+Note that <code>sys.argv[0]</code> is always the program name and that we have to
+copy that string from the original <code>sys.argv</code> array to the new one we
+construct in the test function. (Actually, this test function destroys
+the original <code>sys.argv</code> that Python fetched from the command line.)
+
+<p>
+Any numerical code writer should always be skeptical to the use of the exact
+equality operator <code>==</code> in test functions, since round-off errors often
+come into play. Here, however, we set some real values, convert them
+to strings and convert back again to real numbers (of the same precision).
+This string-number conversion does not involve any finite precision
+arithmetics effects so we
+can safely use <code>==</code> in tests. Note also that the last element in
+<code>expected</code> and <code>computed</code> is the list <code>dt_values</code>, and <code>==</code> works
+for comparing two lists as well.
+
+<h2 id="___sec202">Test function for reading option-value pairs </h2>
+
+<p>
+The function <code>read_command_line_argparse</code> can be verified with a
+test function that has the same setup as <code>test_read_command_line_positional</code>
+above.
+However, the construction of the command line is a bit more complicated.
+We find it convenient to construct the line as a string and then
+split the line into words to get the desired list <code>sys.argv</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_read_command_line_argparse</span>():
+    I <span style="color: #666666">=</span> <span style="color: #666666">1.6</span>;  a <span style="color: #666666">=</span> <span style="color: #666666">1.8</span>;  T <span style="color: #666666">=</span> <span style="color: #666666">2.2</span>;  theta <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+    dt_values <span style="color: #666666">=</span> [<span style="color: #666666">0.1</span>, <span style="color: #666666">0.2</span>, <span style="color: #666666">0.05</span>]
+    <span style="color: #408080; font-style: italic"># Expected return from read_command_line_argparse</span>
+    expected <span style="color: #666666">=</span> [I, a, T, theta, dt_values]
+    <span style="color: #408080; font-style: italic"># Construct corresponding sys.argv array</span>
+    command_line <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> --a </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> --I </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> --T </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> --scheme CN --dt &#39;</span> <span style="color: #666666">%</span> \ 
+                   (sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>], a, I, T)
+    command_line <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39; &#39;</span><span style="color: #666666">.</span>join([<span style="color: #008000">str</span>(dt) <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values])
+    sys<span style="color: #666666">.</span>argv <span style="color: #666666">=</span> command_line<span style="color: #666666">.</span>split()
+    computed <span style="color: #666666">=</span> read_command_line_argparse()
+    <span style="color: #008000; font-weight: bold">for</span> expected_arg, computed_arg <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(expected, computed):
+        <span style="color: #008000; font-weight: bold">assert</span> expected_arg <span style="color: #666666">==</span> computed_arg
+</pre></div>
+<p>
+Recall that the Python function <code>zip</code> enables iteration over
+several lists, tuples, or arrays at the same time.
+
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Let silent test functions speak up during development!</b>
+When you develop test functions in a module, it is common to use IPython
+for interactive experimentation:
+
+<p>
+
+<!-- code=ipy (!bc ipy) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">In[<span style="color: #666666">1</span>]: <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">decay</span>
+
+In[<span style="color: #666666">2</span>]: decay<span style="color: #666666">.</span>test_read_command_line_argparse()
+</pre></div>
+<p>
+Note that a working test function is completely silent! Many
+find it psychologically annoying to convince themselves that a
+completely silent function is doing the right things. It can therefore,
+during development of a test function, be convenient to insert
+print statements in the function to monitor that the function body
+is indeed executed. For example, one can print the expected and
+computed values in the terminal window:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_read_command_line_argparse</span>():
+    <span style="color: #666666">...</span>
+    <span style="color: #008000; font-weight: bold">for</span> expected_arg, computed_arg <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(expected, computed):
+        <span style="color: #008000; font-weight: bold">print</span> expected_arg, computed_arg
+        <span style="color: #008000; font-weight: bold">assert</span> expected_arg <span style="color: #666666">==</span> computed_arg
+</pre></div>
+<p>
+After performing this edit, we want to run the test again, but
+in IPython the module must first be reloaded (reimported):
+
+<p>
+
+<!-- code=ipy (!bc ipy) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">In[<span style="color: #666666">3</span>]: <span style="color: #008000">reload</span>(decay)  <span style="color: #408080; font-style: italic"># force new import</span>
+
+In[<span style="color: #666666">2</span>]: decay<span style="color: #666666">.</span>test_read_command_line_argparse()
+<span style="color: #666666">1.6</span> <span style="color: #666666">1.6</span>
+<span style="color: #666666">1.8</span> <span style="color: #666666">1.8</span>
+<span style="color: #666666">2.2</span> <span style="color: #666666">2.2</span>
+<span style="color: #666666">0.5</span> <span style="color: #666666">0.5</span>
+[<span style="color: #666666">0.1</span>, <span style="color: #666666">0.2</span>, <span style="color: #666666">0.05</span>] [<span style="color: #666666">0.1</span>, <span style="color: #666666">0.2</span>, <span style="color: #666666">0.05</span>]
+</pre></div>
+<p>
+Now we clearly see the objects that are compared.
+</div>
+
+
+<h2 id="softeng1:basic:unittest">Classical class-based unit testing</h2>
+
+<p>
+The test functions written for the nose and pytest frameworks are
+very straightforward and to the point, with no framework-required boilerplate
+code. We just write the statements we need to get the computations and
+comparisons done, before applying the required <code>assert</code>.
+
+<p>
+The classical way of implementing unit tests (which derives from the
+JUnit object-oriented tool in Java) leads to much more comprehensive
+implementations with a lot of boilerplate code.  Python comes with a
+built-in module <code>unittest</code> for doing this type of classical unit
+tests. Although nose or pytest are much more convenient to use than
+<code>unittest</code>, class-based unit testing in the style of <code>unittest</code> has a
+very strong position in computer science and is so widespread in
+the software industry that
+even computational scientists should have an idea how such unit test
+code is written. A short demo of <code>unittest</code> is therefore included
+next. (Readers who are not familiar with object-oriented programming
+in Python may find the text hard to understand, but one can safely
+jump to the next section.)
+
+<p>
+Suppose we have a function <code>double(x)</code> in a module file <code>mymod.py</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">double</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">2*</span>x
+</pre></div>
+<p>
+Unit testing with the aid of the <code>unittest</code> module
+consists of writing a file <code>test_mymod.py</code> for testing the functions
+in <code>mymod.py</code>. The individual tests must be methods with names
+starting with <code>test_</code> in a class derived from class <code>TestCase</code> in
+<code>unittest</code>. With one test method for the function <code>double</code>, the
+<code>test_mymod.py</code> file becomes
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">unittest</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">mymod</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">TestMyCode</span>(unittest<span style="color: #666666">.</span>TestCase):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_double</span>(<span style="color: #008000">self</span>):
+        x <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+        expected <span style="color: #666666">=</span> <span style="color: #666666">2*</span>x
+        computed <span style="color: #666666">=</span> mymod<span style="color: #666666">.</span>double(x)
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>assertEqual(expected, computed)
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    unittest<span style="color: #666666">.</span>main()
+</pre></div>
+<p>
+The test is run by executing the test file <code>test_mymod.py</code> as a standard
+Python program. There is no support in <code>unittest</code> for automatically
+locating and running all tests in all test files in a directory tree.
+
+<p>
+We could use the basic <code>assert</code> statement as we did with nose and pytest
+functions, but those who write code based on <code>unittest</code> almost
+exclusively use the wide range of built-in assert functions such
+as <code>assertEqual</code>, <code>assertNotEqual</code>, <code>assertAlmostEqual</code>, to mention
+some of them.
+
+<p>
+Translation of the test functions from the previous sections
+to <code>unittest</code> means making a new file <code>test_decay.py</code> file with a
+test class <code>TestDecay</code> where the stand-alone functions for
+nose/pytest now become methods in this class.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">unittest</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">decay</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_discrete_solution</span>(n, I, a, theta, dt):
+    <span style="color: #666666">...</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">TestDecay</span>(unittest<span style="color: #666666">.</span>TestCase):
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_exact_discrete_solution</span>(<span style="color: #008000">self</span>):
+        theta <span style="color: #666666">=</span> <span style="color: #666666">0.8</span>; a <span style="color: #666666">=</span> <span style="color: #666666">2</span>; I <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>; dt <span style="color: #666666">=</span> <span style="color: #666666">0.8</span>
+        Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #666666">8/</span>dt)  <span style="color: #408080; font-style: italic"># no of steps</span>
+        u, t <span style="color: #666666">=</span> decay<span style="color: #666666">.</span>solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
+        <span style="color: #408080; font-style: italic"># Evaluate exact discrete solution on the mesh</span>
+        u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([exact_discrete_solution(n, I, a, theta, dt)
+                         <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nt<span style="color: #666666">+1</span>)])
+        diff <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(u_de <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()  <span style="color: #408080; font-style: italic"># largest deviation</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>assertAlmostEqual(diff, <span style="color: #666666">0</span>, delta<span style="color: #666666">=1E-14</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_potential_integer_division</span>(<span style="color: #008000">self</span>):
+        <span style="color: #666666">...</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>assertAlmostEqual(diff, <span style="color: #666666">0</span>, delta<span style="color: #666666">=1E-14</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_read_command_line_positional</span>(<span style="color: #008000">self</span>):
+        <span style="color: #666666">...</span>
+        <span style="color: #008000; font-weight: bold">for</span> expected_arg, computed_arg <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(expected, computed):
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>assertEqual(expected_arg, computed_arg)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_read_command_line_argparse</span>(<span style="color: #008000">self</span>):
+        <span style="color: #666666">...</span>
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    unittest<span style="color: #666666">.</span>main()
+</pre></div>
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._decay-book010.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._decay-book012.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

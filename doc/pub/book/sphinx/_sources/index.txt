@@ -1,0 +1,29 @@
+
+.. Master file automatically created by doconce sphinx_dir
+
+Finite Difference Computing with Exponential Decay Models
+=========================================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 3
+
+   ._book000
+   ._book001
+   ._book002
+   ._book003
+   ._book004
+   ._book005
+   ._book006
+   ._book007
+   ._book008
+   ._book009
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
