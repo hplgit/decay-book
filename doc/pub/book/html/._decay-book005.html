@@ -668,11 +668,11 @@ MathJax.Hub.Config({
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="._decay-book001.html#ch:preface" style="font-size: 80%;">Preface</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book002.html#___sec2" style="font-size: 80%;">Algorithms and implementations</a></li>
-     <!-- navigation toc: --> <li><a href="#decay:analysis" style="font-size: 80%;">Analysis</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec66" style="font-size: 80%;">Generalizations</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:app" style="font-size: 80%;">Models</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:se" style="font-size: 80%;">Scientific software engineering</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec2" style="font-size: 80%;">Algorithms and implementations</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis" style="font-size: 80%;">Analysis</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec66" style="font-size: 80%;">Generalizations</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app" style="font-size: 80%;">Models</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#decay:se" style="font-size: 80%;">Scientific software engineering</a></li>
 
         </ul>
       </li>
@@ -688,1183 +688,43 @@ MathJax.Hub.Config({
 <a name="part0005"></a>
 <!-- !split -->
 
-<center><h1 id="decay:analysis">Analysis</h1></center> <!-- chapter heading -->
-
-<p>
-We address the ODE for exponential decay,
-$$
-\begin{equation}
-u'(t) = -au(t),\quad u(0)=I,
-\end{equation}
-$$
-
-where \( a \) and \( I \) are given constants. This problem is solved
-by the \( \theta \)-rule finite difference scheme, resulting in
-the recursive equations
-$$
-\begin{equation}
-u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n
-\tag{50}
-\end{equation}
-$$
-
-for the numerical solution \( u^{n+1} \), which approximates the exact
-solution \( \uex \) at time point \( t_{n+1} \). For constant mesh spacing,
-which we assume here, \( t_{n+1}=(n+1)\Delta t \).
-
-<p>
-The example programs associated with this chapter are found in
-the directory <a href="http://tinyurl.com/ofkw6kc/analysis" target="_self"><tt>src/analysis</tt></a>.
-
-<h1 id="___sec49">Experimental investigations </h1>
-
-<p>
-We first perform a series of numerical explorations to see how the
-methods behave as we change the parameters \( I \), \( a \), and \( \Delta t \)
-in the problem.
-
-<h2 id="___sec50">Discouraging numerical solutions </h2>
-
-<p>
-Choosing \( I=1 \), \( a=2 \), and running experiments with \( \theta =1,0.5, 0 \)
-for \( \Delta t=1.25, 0.75, 0.5, 0.1 \), gives the results in
-Figures <a href="#decay:analysis:BE4c">10</a>, <a href="#decay:analysis:CN4c">11</a>, and
-<a href="#decay:analysis:FE4c">12</a>.
-
-<p>
-<center> <!-- figure -->
-<hr class="figure">
-<center><p class="caption">Figure 10:  Backward Euler. <div id="decay:analysis:BE4c"></div> </p></center>
-<p><img src="fig-analysis/BE4c.png" align="bottom" width=600></p>
-</center>
-
-<p>
-<center> <!-- figure -->
-<hr class="figure">
-<center><p class="caption">Figure 11:  Crank-Nicolson. <div id="decay:analysis:CN4c"></div> </p></center>
-<p><img src="fig-analysis/CN4c.png" align="bottom" width=600></p>
-</center>
-
-<p>
-<center> <!-- figure -->
-<hr class="figure">
-<center><p class="caption">Figure 12:  Forward Euler. <div id="decay:analysis:FE4c"></div> </p></center>
-<p><img src="fig-analysis/FE4c.png" align="bottom" width=600></p>
-</center>
-
-<p>
-The characteristics of the displayed curves can be summarized as follows:
-
-<ul>
-  <li> The Backward Euler scheme gives a monotone solution in all cases,
-    lying above the exact curve.</li>
-  <li> The Crank-Nicolson scheme gives the most accurate results, but for
-    \( \Delta t=1.25 \) the solution oscillates.</li>
-  <li> The Forward Euler scheme gives a growing, oscillating solution for
-    \( \Delta t=1.25 \); a decaying, oscillating solution for \( \Delta t=0.75 \);
-    a strange solution \( u^n=0 \) for \( n\geq 1 \) when \( \Delta t=0.5 \); and
-    a solution seemingly as accurate as the one by the Backward Euler
-    scheme for \( \Delta t = 0.1 \), but the curve lies below the exact
-    solution.</li>
-</ul>
-
-Since the exact solution of our model problem is a monotone function,
-\( u(t)=Ie^{-at} \), some of these qualitatively wrong results indeed seem alarming!
-
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Key questions.</b>
-
-<ul>
- <li> Under what circumstances, i.e., values of
-   the input data \( I \), \( a \), and \( \Delta t \) will the Forward Euler and
-   Crank-Nicolson schemes result in undesired oscillatory solutions?</li>
- <li> How does \( \Delta t \) impact the error in the numerical solution?</li>
-</ul>
-
-The first question will be investigated both by numerical experiments and
-by precise mathematical theory. The theory will help establish
-general criteria on \( \Delta t \) for avoiding non-physical oscillatory
-or growing solutions.
-
-<p>
-For our simple model problem we can answer the second
-question very precisely, but
-we will also look at simplified formulas for small \( \Delta t \)
-and touch upon important concepts such as <em>convergence rate</em> and
-<em>the order of a scheme</em>. Other fundamental concepts mentioned are
-stability, consistency, and convergence.
-</div>
-
-
-<h2 id="___sec51">Detailed experiments </h2>
-
-<p>
-To address the first question above,
-we may set up an experiment where we loop over values of \( I \), \( a \),
-and \( \Delta t \) in our chosen model problem.
-For each experiment, we flag the solution as
-oscillatory if
-
-$$ u^{n} > u^{n-1},$$
-
-for some value of \( n \). This seems like a reasonable choice,
-since we expect \( u^n \) to decay with \( n \), but oscillations will make
-\( u \) increase over a time step. Doing some initial experimentation
-with varying \( I \), \( a \), and \( \Delta t \), quickly reveals that
-oscillations are independent of \( I \), but they do depend on \( a \) and
-\( \Delta t \). We can therefore limit the investigation to
-vary \( a \) and \( \Delta t \). Based on this observation,
-we introduce a two-dimensional
-function \( B(a,\Delta t) \) which is 1 if oscillations occur
-and 0 otherwise. We can visualize \( B \) as a contour plot
-(lines for which \( B=\hbox{const} \)). The contour \( B=0.5 \)
-corresponds to the borderline between oscillatory regions with \( B=1 \)
-and monotone regions with \( B=0 \) in the \( a,\Delta t \) plane.
-
-<p>
-The \( B \) function is defined at discrete \( a \) and \( \Delta t \) values.
-Say we have given \( P \) values for \( a \), \( a_0,\ldots,a_{P-1} \), and
-\( Q \) values for \( \Delta t \), \( \Delta t_0,\ldots,\Delta t_{Q-1} \).
-These \( a_i \) and \( \Delta t_j \) values, \( i=0,\ldots,P-1 \),
-\( j=0,\ldots,Q-1 \), form a rectangular mesh of \( P\times Q \) points
-in the plane spanned by \( a \) and \( \Delta t \).
-At each point \( (a_i, \Delta t_j) \), we associate
-the corresponding value \( B(a_i,\Delta t_j) \), denoted \( B_{ij} \).
-The \( B_{ij} \) values are naturally stored in a two-dimensional
-array. We can thereafter create a plot of the
-contour line \( B_{ij}=0.5 \) dividing the oscillatory and monotone
-regions. The file <a href="http://tinyurl.com/ofkw6kc/analysis/decay_osc_regions.py" target="_self"><tt>decay_osc_regions.py</tt></a>  given below (<code>osc_regions</code> stands for &quot;oscillatory regions&quot;) contains all nuts and
-bolts to produce the \( B=0.5 \) line in Figures <a href="#decay:analysis:B:FE">13</a>
-and <a href="#decay:analysis:B:CN">14</a>. The oscillatory region is above this line.
-
-<p>
-
-<!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">decay_mod</span> <span style="color: #008000; font-weight: bold">import</span> solver
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">st</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">non_physical_behavior</span>(I, a, T, dt, theta):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Given lists/arrays a and dt, and numbers I, dt, and theta,</span>
-<span style="color: #BA2121; font-style: italic">    make a two-dimensional contour line B=0.5, where B=1&gt;0.5</span>
-<span style="color: #BA2121; font-style: italic">    means oscillatory (unstable) solution, and B=0&lt;0.5 means</span>
-<span style="color: #BA2121; font-style: italic">    monotone solution of u&#39;=-au.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    a <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(a); dt <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(dt)  <span style="color: #408080; font-style: italic"># must be arrays</span>
-    B <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((<span style="color: #008000">len</span>(a), <span style="color: #008000">len</span>(dt)))         <span style="color: #408080; font-style: italic"># results</span>
-    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(a)):
-        <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(dt)):
-            u, t <span style="color: #666666">=</span> solver(I, a[i], T, dt[j], theta)
-            <span style="color: #408080; font-style: italic"># Does u have the right monotone decay properties?</span>
-            correct_qualitative_behavior <span style="color: #666666">=</span> <span style="color: #008000">True</span>
-            <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #008000">len</span>(u)):
-                <span style="color: #008000; font-weight: bold">if</span> u[n] <span style="color: #666666">&gt;</span> u[n<span style="color: #666666">-1</span>]:  <span style="color: #408080; font-style: italic"># Not decaying?</span>
-                    correct_qualitative_behavior <span style="color: #666666">=</span> <span style="color: #008000">False</span>
-                    <span style="color: #008000; font-weight: bold">break</span>  <span style="color: #408080; font-style: italic"># Jump out of loop</span>
-            B[i,j] <span style="color: #666666">=</span> <span style="color: #008000">float</span>(correct_qualitative_behavior)
-    a_, dt_ <span style="color: #666666">=</span> st<span style="color: #666666">.</span>ndgrid(a, dt)  <span style="color: #408080; font-style: italic"># make mesh of a and dt values</span>
-    st<span style="color: #666666">.</span>contour(a_, dt_, B, <span style="color: #666666">1</span>)
-    st<span style="color: #666666">.</span>grid(<span style="color: #BA2121">&#39;on&#39;</span>)
-    st<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;theta=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> theta)
-    st<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;a&#39;</span>); st<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;dt&#39;</span>)
-    st<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;osc_region_theta_</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">.png&#39;</span> <span style="color: #666666">%</span> theta)
-    st<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;osc_region_theta_</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">.pdf&#39;</span> <span style="color: #666666">%</span> theta)
-
-non_physical_behavior(
-    I<span style="color: #666666">=1</span>,
-    a<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0.01</span>, <span style="color: #666666">4</span>, <span style="color: #666666">22</span>),
-    dt<span style="color: #666666">=</span>np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0.01</span>, <span style="color: #666666">4</span>, <span style="color: #666666">22</span>),
-    T<span style="color: #666666">=6</span>,
-    theta<span style="color: #666666">=0.5</span>)
-</pre></div>
-<p>
-<center> <!-- figure -->
-<hr class="figure">
-<center><p class="caption">Figure 13:  Forward Euler scheme: oscillatory solutions occur for points above the curve. <div id="decay:analysis:B:FE"></div> </p></center>
-<p><img src="fig-analysis/osc_region_FE.png" align="bottom" width=500></p>
-</center>
-
-<p>
-<center> <!-- figure -->
-<hr class="figure">
-<center><p class="caption">Figure 14:  Crank-Nicolson scheme: oscillatory solutions occur for points above the curve. <div id="decay:analysis:B:CN"></div> </p></center>
-<p><img src="fig-analysis/osc_region_CN.png" align="bottom" width=500></p>
-</center>
-
-<p>
-By looking at the curves in the figures one may guess that \( a\Delta t \)
-must be less than a critical limit to avoid the undesired
-oscillations.  This limit seems to be about 2 for Crank-Nicolson and 1
-for Forward Euler.  We shall now establish a precise mathematical
-analysis of the discrete model that can explain the observations in
-our numerical experiments.
-
-<h1 id="___sec52">Stability </h1>
-
-<p>
-The goal now is to understand the results in the previous section.
-To this end, we shall investigate the properties of the mathematical
-formula for the solution of the equations arising from the finite
-difference methods.
-
-<h2 id="___sec53">Exact numerical solution </h2>
-
-<p>
-Starting with \( u^0=I \), the simple recursion <a href="#mjx-eqn-50">(50)</a>
-can be applied repeatedly \( n \) times, with the result that
-$$
-\begin{equation}
-u^{n} = IA^n,\quad A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}\tp
-\tag{51}
-\end{equation}
-$$
-
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Solving difference equations.</b>
-Difference equations where all terms are linear in
-\( u^{n+1} \), \( u^n \), and maybe \( u^{n-1} \), \( u^{n-2} \), etc., are
-called <em>homogeneous, linear</em> difference equations, and their solutions
-are generally of the form \( u^n=A^n \), where \( A \) is a constant to be
-determined. Inserting this expression in the difference equation
-and dividing by \( A^{n+1} \) gives
-a polynomial equation in \( A \). In the present case we get
-
-$$ A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}\tp $$
-
-This is a solution technique of wider applicability than repeated use of
-the recursion <a href="#mjx-eqn-50">(50)</a>.
-</div>
-
-
-<p>
-Regardless of the solution approach, we have obtained a formula for
-\( u^n \).  This formula can explain everything we see in the figures
-above, but it also gives us a more general insight into accuracy and
-stability properties of the three schemes.
-
-<p>
-Since \( u^n \) is a factor \( A \)
-raised to an integer power \( n \), we realize that \( A < 0 \)
-will imply \( u^n < 0 \) for odd \( n \) and \( u^n > 0 \) for even \( n \).
-That is, the solution oscillates between the mesh points.
-We have oscillations due to \( A < 0 \) when
-
-$$
-\begin{equation}
-(1-\theta)a\Delta t > 1 \tp
-\tag{52}
-\end{equation}
-$$
-
-Since \( A>0 \) is a requirement for having a numerical solution with the
-same basic property (monotonicity) as the exact solution, we may say
-that \( A>0 \) is a <em>stability criterion</em>. Expressed in terms of \( \Delta t \)
-the stability criterion reads
-
-$$
-\begin{equation}
-\Delta t < \frac{1}{(1-\theta)a}\tp
-\end{equation}
-$$
-
-<p>
-The Backward
-Euler scheme is always stable since \( A < 0 \) is impossible for \( \theta=1 \), while
-non-oscillating solutions for Forward Euler and Crank-Nicolson
-demand \( \Delta t\leq 1/a \) and \( \Delta t\leq 2/a \), respectively.
-The relation between \( \Delta t \) and \( a \) look reasonable: a larger
-\( a \) means faster decay and hence a need for smaller time steps.
-
-<p>
-Looking at the upper left plot in Figure <a href="#decay:analysis:FE4c">12</a>,
-we see that \( \Delta t=1.25 \), and remembering that \( a=2 \) in these
-experiments, \( A \) can be calculated to be
-\( -1.5 \), so the Forward Euler solution becomes \( u^n=(-1.5)^n \) (\( I=1 \)).
-This solution oscillates <em>and</em> grows. The upper right plot has
-\( a\Delta t = 2\cdot 0.75=1.5 \), so \( A=-0.5 \),
-and \( u^n=(-0.5)^n \) decays but oscillates. The lower left plot
-is a peculiar case where the Forward Euler scheme produces a solution
-that is stuck on the \( t \) axis. Now we can understand why this is so,
-because \( a\Delta t= 2\cdot 0.5=1 \), which gives \( A=0 \),
-and therefore \( u^n=0 \) for \( n\geq 1 \).  The decaying oscillations in the Crank-Nicolson scheme in the upper left plot in Figure <a href="#decay:analysis:CN4c">11</a>
-for \( \Delta t=1.25 \) are easily explained by the fact that \( A\approx -0.11 < 0 \).
-
-<h2 id="___sec54">Stability properties derived from the amplification factor </h2>
-
-<p>
-The factor \( A \) is called the <em>amplification factor</em> since the solution
-at a new time level is the solution at the previous time
-level amplified by a factor \( A \).
-For a decay process, we must obviously have \( |A|\leq 1 \), which
-is fulfilled for all \( \Delta t \) if \( \theta \geq 1/2 \). Arbitrarily
-large values of \( u \) can be generated when \( |A|>1 \) and \( n \) is large
-enough. The numerical solution is in such cases totally irrelevant to
-an ODE modeling decay processes! To avoid this situation, we must
-demand \( |A|\leq 1 \) also for \( \theta < 1/2 \), which implies
-
-$$
-\begin{equation}
-\Delta t \leq \frac{2}{(1-2\theta)a},
-\end{equation}
-$$
-
-For example, \( \Delta t \) must not exceed  \( 2/a \) when computing with
-the Forward Euler scheme.
-
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Stability properties.</b>
-We may summarize the stability investigations as follows:
-
-<ol>
-<li> The Forward Euler method is a <em>conditionally stable</em> scheme because
-   it requires \( \Delta t < 2/a \) for avoiding growing solutions
-   and \( \Delta t < 1/a \) for avoiding oscillatory solutions.</li>
-<li> The Crank-Nicolson is <em>unconditionally stable</em> with respect to
-   growing solutions, while it is conditionally stable with
-   the criterion \( \Delta t < 2/a \) for avoiding oscillatory solutions.</li>
-<li> The Backward Euler method is unconditionally stable with respect
-   to growing and oscillatory solutions - any \( \Delta t \) will work.</li>
-</ol>
-
-Much literature on ODEs speaks about L-stable and A-stable methods.
-In our case A-stable methods ensures non-growing solutions, while
-L-stable methods also avoids oscillatory solutions.
-</div>
-
-
-<h1 id="___sec55">Accuracy </h1>
-
-<p>
-While stability concerns the qualitative properties of the numerical
-solution, it remains to investigate the quantitative properties to
-see exactly how large the numerical errors are.
-
-<h2 id="___sec56">Visual comparison of amplification factors </h2>
-
-<p>
-After establishing how \( A \) impacts the qualitative features of the
-solution, we shall now look more into how well the numerical amplification
-factor approximates the exact one. The exact solution reads
-\( u(t)=Ie^{-at} \), which can be rewritten as
-$$
-\begin{equation}
-{\uex}(t_n) = Ie^{-a n\Delta t} = I(e^{-a\Delta t})^n \tp
-\end{equation}
-$$
-
-From this formula we see that the exact amplification factor is
-$$
-\begin{equation}
-\Aex = e^{-a\Delta t} \tp
-\end{equation}
-$$
-
-<p>
-We see from all of our analysis
-that the exact and numerical amplification factors depend
-on \( a \) and \( \Delta t \) through the dimensionless
-product \( a\Delta t \): whenever there is a
-\( \Delta t \) in the analysis, there is always an associated \( a \)
-parameter. Therefore, it
-is convenient to introduce a symbol for this product, \( p=a\Delta t \),
-and view \( A \) and \( \Aex \) as functions of \( p \). Figure
-<a href="#decay:analysis:fig:A">15</a> shows these functions. The two amplification
-factors are clearly closest for the
-Crank-Nicolson method, but that method has
-the unfortunate oscillatory behavior when \( p>2 \).
-
-<p>
-<center> <!-- figure -->
-<hr class="figure">
-<center><p class="caption">Figure 15:  Comparison of amplification factors. <div id="decay:analysis:fig:A"></div> </p></center>
-<p><img src="fig-analysis/A_factors.png" align="bottom" width=500></p>
-</center>
-
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Significance of the \( p=a\Delta t \) parameter.</b>
-The key parameter for numerical performance of a scheme is in this model
-problem \( p=a\Delta t \). This is a <em>dimensionless number</em> (\( a \) has dimension
-1/s and \( \Delta t \) has dimension s) reflecting how the discretization
-parameter plays together with a physical parameter in the problem.
-
-<p>
-One can bring the present model problem on dimensionless form
-through a process called scaling. The scaled modeled has a modified
-time \( \bar t = at \) and modified response \( \bar u =u/I \) such that
-the model reads \( d\bar u/d\bar t = -\bar u \), \( \bar u(0)=1 \).
-Analyzing this model, where there are no physical parameters,
-we find that \( \Delta \bar t \) is the key parameter
-for numerical performance. In the unscaled model,
-this corresponds to \( \Delta \bar t = a\Delta t \).
-
-<p>
-It is common that the numerical performance of methods for solving ordinary and
-partial differential equations is governed by dimensionless parameters
-that combine mesh sizes with physical parameters.
-</div>
-
-
-<h2 id="___sec57">Series expansion of amplification factors </h2>
-
-<p>
-As an alternative to the visual understanding inherent in Figure
-<a href="#decay:analysis:fig:A">15</a>, there is a strong tradition in numerical
-analysis to establish formulas for approximation errors when the
-discretization parameter, here \( \Delta t \), becomes small. In the
-present case, we let \( p \) be our small discretization parameter, and it
-makes sense to simplify the expressions for \( A \) and \( \Aex \) by using
-Taylor polynomials around \( p=0 \).  The Taylor polynomials are accurate
-for small \( p \) and greatly simplifies the comparison of the analytical
-expressions since we then can compare polynomials, term by term.
-
-<p>
-Calculating the Taylor series for \( \Aex \) is easily done by hand, but
-the three versions of \( A \) for \( \theta=0,1,{\half} \) lead to more
-cumbersome calculations.
-Nowadays, analytical computations can benefit greatly by
-symbolic computer algebra software. The Python package <code>sympy</code>
-represents a powerful computer algebra system, not yet as sophisticated as
-the famous Maple and Mathematica systems, but it is free and
-very easy to integrate with our numerical computations in Python.
-
-<p>
-When using <code>sympy</code>, it is convenient to enter an interactive Python
-shell where the results of expressions and statements can be shown
-immediately.
-Here is a simple example. We strongly recommend to use
-<code>isympy</code> (or <code>ipython</code>) for such interactive sessions.
-
-<p>
-Let us illustrate <code>sympy</code> with a standard Python shell syntax
-(<code>&gt;&gt;&gt;</code> prompt) to compute a Taylor polynomial approximation to \( e^{-p} \):
-
-<p>
-
-<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #408080; font-style: italic"># Create p as a mathematical symbol with name &#39;p&#39;</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> p <span style="color: #666666">=</span> Symbol(<span style="color: #BA2121">&#39;p&#39;</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #408080; font-style: italic"># Create a mathematical expression with p</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> A_e <span style="color: #666666">=</span> exp(<span style="color: #666666">-</span>p)
-<span style="color: #666666">&gt;&gt;&gt;</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #408080; font-style: italic"># Find the first 6 terms of the Taylor series of A_e</span>
-<span style="color: #666666">&gt;&gt;&gt;</span> A_e<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">6</span>)
-<span style="color: #666666">1</span> <span style="color: #666666">+</span> (<span style="color: #666666">1/2</span>)<span style="color: #666666">*</span>p<span style="color: #666666">**2</span> <span style="color: #666666">-</span> p <span style="color: #666666">-</span> <span style="color: #666666">1/6*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">-</span> <span style="color: #666666">1/120*</span>p<span style="color: #666666">**5</span> <span style="color: #666666">+</span> (<span style="color: #666666">1/24</span>)<span style="color: #666666">*</span>p<span style="color: #666666">**4</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**6</span>)
-</pre></div>
-<p>
-Lines with <code>&gt;&gt;&gt;</code> represent input lines, whereas without
-this prompt represent the result of the previous command (note that
-<code>isympy</code> and <code>ipython</code> apply other prompts, but in this text
-we always apply <code>&gt;&gt;&gt;</code> for interactive Python computing).
-Apart from the order of the powers, the computed formula is easily
-recognized as the beginning of the Taylor series for \( e^{-p} \).
-
-<p>
-Let us define the numerical amplification factor where \( p \) and \( \theta \)
-enter the formula as symbols:
-<p>
-
-<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> theta <span style="color: #666666">=</span> Symbol(<span style="color: #BA2121">&#39;theta&#39;</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> A <span style="color: #666666">=</span> (<span style="color: #666666">1-</span>(<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>p)<span style="color: #666666">/</span>(<span style="color: #666666">1+</span>theta<span style="color: #666666">*</span>p)
-</pre></div>
-<p>
-To work with the factor for the Backward Euler scheme we
-can substitute the value 1 for <code>theta</code>:
-
-<p>
-
-<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">.</span>subs(theta, <span style="color: #666666">1</span>)
-<span style="color: #666666">1/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> p)
-</pre></div>
-<p>
-Similarly, we can substitute <code>theta</code> by 1/2 for Crank-Nicolson,
-preferably using an exact rational representation of 1/2 in <code>sympy</code>:
-
-<p>
-
-<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> half <span style="color: #666666">=</span> Rational(<span style="color: #666666">1</span>,<span style="color: #666666">2</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">.</span>subs(theta, half)
-<span style="color: #666666">1/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> (<span style="color: #666666">1/2</span>)<span style="color: #666666">*</span>p)<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> <span style="color: #666666">1/2*</span>p)
-</pre></div>
-<p>
-The Taylor series of the amplification factor for the Crank-Nicolson
-scheme can be computed as
-
-<p>
-
-<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> A<span style="color: #666666">.</span>subs(theta, half)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>)
-<span style="color: #666666">1</span> <span style="color: #666666">+</span> (<span style="color: #666666">1/2</span>)<span style="color: #666666">*</span>p<span style="color: #666666">**2</span> <span style="color: #666666">-</span> p <span style="color: #666666">-</span> <span style="color: #666666">1/4*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**4</span>)
-</pre></div>
-<p>
-We are now in a position to compare Taylor series:
-
-<p>
-
-<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> FE <span style="color: #666666">=</span> A_e<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>) <span style="color: #666666">-</span> A<span style="color: #666666">.</span>subs(theta, <span style="color: #666666">0</span>)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> BE <span style="color: #666666">=</span> A_e<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>) <span style="color: #666666">-</span> A<span style="color: #666666">.</span>subs(theta, <span style="color: #666666">1</span>)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> CN <span style="color: #666666">=</span> A_e<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>) <span style="color: #666666">-</span> A<span style="color: #666666">.</span>subs(theta, half)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span> )
-<span style="color: #666666">&gt;&gt;&gt;</span> FE
-(<span style="color: #666666">1/2</span>)<span style="color: #666666">*</span>p<span style="color: #666666">**2</span> <span style="color: #666666">-</span> <span style="color: #666666">1/6*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> BE
-<span style="color: #666666">-1/2*</span>p<span style="color: #666666">**2</span> <span style="color: #666666">+</span> (<span style="color: #666666">5/6</span>)<span style="color: #666666">*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> CN
-(<span style="color: #666666">1/12</span>)<span style="color: #666666">*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**4</span>)
-</pre></div>
-<p>
-From these expressions we see that the error \( A-\Aex\sim \Oof{p^2} \)
-for the Forward and Backward Euler schemes, while
-\( A-\Aex\sim \Oof{p^3} \) for the Crank-Nicolson scheme.
-The notation \( \Oof{p^m} \) here means a polynomial in \( p \) where
-\( p^m \) is the term of lowest-degree, and consequently the term that
-dominates the expression for \( p < 0 \). We call this the
-<em>leading order term</em>. As \( p\rightarrow 0 \), the leading order term
-clearly dominates over the higher-order terms (think of \( p=0.01 \):
-\( p \) is a hundred times larger than \( p^2 \)).
-
-<p>
-Now, \( a \) is a given parameter in the problem, while \( \Delta t \) is
-what we can vary. Not surprisingly, the error expressions are usually
-written in terms \( \Delta t \). When then have
-$$
-\begin{equation}
-A-\Aex = \left\lbrace\begin{array}{ll}
-\Oof{\Delta t^2}, & \hbox{Forward and Backward Euler},\\ 
-\Oof{\Delta t^3}, & \hbox{Crank-Nicolson}
-\end{array}\right.
-\end{equation}
-$$
-
-<p>
-We say that the Crank-Nicolson scheme has an error in the amplification
-factor of order \( \Delta t^3 \), while the two other schemes are
-of order \( \Delta t^2 \) in the same quantity.
-
-<p>
-What is the significance of the order expression? If we halve \( \Delta t \),
-the error in amplification factor at a time level will be reduced
-by a factor of 4 in the Forward and Backward Euler schemes, and by
-a factor of 8 in the Crank-Nicolson scheme. That is, as we
-reduce \( \Delta t \) to obtain more accurate results, the Crank-Nicolson
-scheme reduces the error more efficiently than the other schemes.
-
-<h2 id="___sec58">The ratio of numerical and exact amplification factors </h2>
-
-<p>
-An alternative comparison of the schemes is provided by looking at the
-ratio \( A/\Aex \), or the error \( 1-A/\Aex \) in this ratio:
-
-<p>
-
-<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> FE <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">-</span> (A<span style="color: #666666">.</span>subs(theta, <span style="color: #666666">0</span>)<span style="color: #666666">/</span>A_e)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> BE <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">-</span> (A<span style="color: #666666">.</span>subs(theta, <span style="color: #666666">1</span>)<span style="color: #666666">/</span>A_e)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> CN <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">-</span> (A<span style="color: #666666">.</span>subs(theta, half)<span style="color: #666666">/</span>A_e)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> FE
-(<span style="color: #666666">1/2</span>)<span style="color: #666666">*</span>p<span style="color: #666666">**2</span> <span style="color: #666666">+</span> (<span style="color: #666666">1/3</span>)<span style="color: #666666">*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> BE
-<span style="color: #666666">-1/2*</span>p<span style="color: #666666">**2</span> <span style="color: #666666">+</span> (<span style="color: #666666">1/3</span>)<span style="color: #666666">*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> CN
-(<span style="color: #666666">1/12</span>)<span style="color: #666666">*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**4</span>)
-</pre></div>
-<p>
-The leading-order terms have the same powers as
-in the analysis of \( A-\Aex \).
-
-<h2 id="decay:analysis:gobal:error">The global error at a point</h2>
-
-<p>
-The error in the amplification factor reflects the error when
-progressing from time level \( t_n \) to \( t_{n-1} \) only. That is,
-we disregard the error already present in the solution at \( t_{n-1} \).
-The real error at a point, however, depends on the error development
-over all previous time steps. This error,
-\( e^n = u^n-\uex(t_n) \), is known as the <em>global error</em>. We
-may look at \( u^n \) for some \( n \) and Taylor expand the
-mathematical expressions as functions of \( p=a\Delta t \) to get a simple
-expression for the global error (for small \( p \)):
-
-<p>
-
-<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> n <span style="color: #666666">=</span> Symbol(<span style="color: #BA2121">&#39;n&#39;</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> u_e <span style="color: #666666">=</span> exp(<span style="color: #666666">-</span>p<span style="color: #666666">*</span>n)
-<span style="color: #666666">&gt;&gt;&gt;</span> u_n <span style="color: #666666">=</span> A<span style="color: #666666">**</span>n
-<span style="color: #666666">&gt;&gt;&gt;</span> FE <span style="color: #666666">=</span> u_e<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>) <span style="color: #666666">-</span> u_n<span style="color: #666666">.</span>subs(theta, <span style="color: #666666">0</span>)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> BE <span style="color: #666666">=</span> u_e<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>) <span style="color: #666666">-</span> u_n<span style="color: #666666">.</span>subs(theta, <span style="color: #666666">1</span>)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> CN <span style="color: #666666">=</span> u_e<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>) <span style="color: #666666">-</span> u_n<span style="color: #666666">.</span>subs(theta, half)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> FE
-(<span style="color: #666666">1/2</span>)<span style="color: #666666">*</span>n<span style="color: #666666">*</span>p<span style="color: #666666">**2</span> <span style="color: #666666">-</span> <span style="color: #666666">1/2*</span>n<span style="color: #666666">**2*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> (<span style="color: #666666">1/3</span>)<span style="color: #666666">*</span>n<span style="color: #666666">*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> BE
-(<span style="color: #666666">1/2</span>)<span style="color: #666666">*</span>n<span style="color: #666666">**2*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">-</span> <span style="color: #666666">1/2*</span>n<span style="color: #666666">*</span>p<span style="color: #666666">**2</span> <span style="color: #666666">+</span> (<span style="color: #666666">1/3</span>)<span style="color: #666666">*</span>n<span style="color: #666666">*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**4</span>)
-<span style="color: #666666">&gt;&gt;&gt;</span> CN
-(<span style="color: #666666">1/12</span>)<span style="color: #666666">*</span>n<span style="color: #666666">*</span>p<span style="color: #666666">**3</span> <span style="color: #666666">+</span> O(p<span style="color: #666666">**4</span>)
-</pre></div>
-<p>
-Note that <code>sympy</code> does not sort the polynomial terms in the output,
-so \( p^3 \) appears before \( p^2 \) in the output of <code>BE</code>.
-
-<p>
-For a fixed time \( t \), the parameter \( n \) in these expressions increases
-as \( p\rightarrow 0 \) since \( t=n\Delta t =\mbox{const} \) and hence
-\( n \) must increase like \( \Delta t^{-1} \). With \( n \) substituted by
-\( t/\Delta t \) in
-the leading-order error terms, these become
-
-$$
-\begin{align}
-e^n &= \half n p^2 = {\half}ta^2\Delta t, &\hbox{Forward Euler}
-\tag{53}\\ 
-e^n &= -\half n p^2 = -{\half}ta^2\Delta t, &\hbox{Backward Euler}
-\tag{54}\\ 
-e^n &= \frac{1}{12}np^3 = \frac{1}{12}ta^3\Delta t^2, &\hbox{Crank-Nicolson}
-\tag{55}
-\end{align}
-$$
-
-The global error is therefore of
-second order (in \( \Delta t \)) for the Crank-Nicolson scheme and of
-first order for the other two schemes.
-
-<p>
-<div class="alert alert-block alert-success alert-text-normal"><b>Convergence.</b>
-When the global error \( e^n\rightarrow 0 \) as \( \Delta t\rightarrow 0 \),
-we say that the scheme is <em>convergent</em>. It means that the numerical
-solution approaches the exact solution as the mesh is refined, and
-this is a much desired property of a numerical method.
-</div>
-
-
-<h2 id="decay:analysis:gobal:error_int">Integrated error</h2>
-
-<p>
-It is common to study the norm of the numerical error, as
-explained in detail in the section <a href="._decay-book003.html#decay:computing:error:norm">Computing the norm of the error mesh function</a>.
-The \( L^2 \) norm of the error can be computed by treating \( e^n \) as a function
-of \( t \) in <code>sympy</code> and performing symbolic integration. For
-the Forward Euler scheme we have
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">p, n, a, dt, t, T, theta <span style="color: #666666">=</span> symbols(<span style="color: #BA2121">&#39;p n a dt t T &#39;</span>theta<span style="color: #BA2121">&#39;)</span>
-A <span style="color: #666666">=</span> (<span style="color: #666666">1-</span>(<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>p)<span style="color: #666666">/</span>(<span style="color: #666666">1+</span>theta<span style="color: #666666">*</span>p)
-u_e <span style="color: #666666">=</span> exp(<span style="color: #666666">-</span>p<span style="color: #666666">*</span>n)
-u_n <span style="color: #666666">=</span> A<span style="color: #666666">**</span>n
-error <span style="color: #666666">=</span> u_e<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>) <span style="color: #666666">-</span> u_n<span style="color: #666666">.</span>subs(theta, <span style="color: #666666">0</span>)<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">4</span>)
-<span style="color: #408080; font-style: italic"># Introduce t and dt instead of n and p</span>
-error <span style="color: #666666">=</span> error<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;n&#39;</span>, <span style="color: #BA2121">&#39;t/dt&#39;</span>)<span style="color: #666666">.</span>subs(p, <span style="color: #BA2121">&#39;a*dt&#39;</span>)
-error <span style="color: #666666">=</span> error<span style="color: #666666">.</span>as_leading_term(dt) <span style="color: #408080; font-style: italic"># study only the first term</span>
-<span style="color: #008000; font-weight: bold">print</span> error
-error_L2 <span style="color: #666666">=</span> sqrt(integrate(error<span style="color: #666666">**2</span>, (t, <span style="color: #666666">0</span>, T)))
-<span style="color: #008000; font-weight: bold">print</span> error_L2
-</pre></div>
-<p>
-The output reads
-
-<p>
-
-<!-- code=text typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">sqrt(30)*sqrt(T**3*a**4*dt**2*(6*T**2*a**2 - 15*T*a + 10))/60
-</pre></div>
-<p>
-which means that the \( L^2 \) error behaves like \( a^2\Delta t \).
-
-<p>
-Strictly speaking, the numerical error is only defined at the
-mesh points so it makes most sense to compute the
-\( \ell^2 \) error
-
-$$ ||e^n||_{\ell^2} = \sqrt{\Delta t\sum_{n=0}^{N_t} ({\uex}(t_n) - u^n)^2}
-\tp $$
-
-We have obtained an exact analytical expression for the error at
-\( t=t_n \), but here we use the leading-order error term only since we
-are mostly interested in how the error behaves as a polynomial in
-\( \Delta t \) or \( p \), and then the leading order term will dominate.  For
-the Forward Euler scheme, \( \uex(t_n) - u^n \approx {\half}np^2 \), and
-we have
-
-$$
-||e^n||_{\ell^2}^2 = \Delta t\sum_{n=0}^{N_t} \frac{1}{4}n^2p^4
-=\Delta t\frac{1}{4}p^4 \sum_{n=0}^{N_t} n^2\tp
-$$
-
-Now, \( \sum_{n=0}^{N_t} n^2\approx \frac{1}{3}N_t^3 \). Using this approximation,
-setting \( N_t =T/\Delta t \), and taking the square root gives the expression
-
-$$
-\begin{equation}
-||e^n||_{\ell^2} = \half\sqrt{\frac{T^3}{3}} a^2\Delta t\tp
-\tag{56}
-\end{equation}
-$$
-
-Calculations for the Backward Euler scheme are very similar and provide
-the same result, while the Crank-Nicolson scheme leads to
-
-$$
-\begin{equation}
-||e^n||_{\ell^2} = \frac{1}{12}\sqrt{\frac{T^3}{3}}a^3\Delta t^2\tp
-\tag{57}
-\end{equation}
-$$
-
-<p>
-<div class="alert alert-block alert-warning alert-text-normal"><b>Summary of errors.</b>
-Both the global point-wise errors <a href="#mjx-eqn-53">(53)</a>-<a href="#mjx-eqn-55">(55)</a>
-and their time-integrated versions <a href="#mjx-eqn-56">(56)</a> and <a href="#mjx-eqn-57">(57)</a> show that
-
-<ul>
- <li> the Crank-Nicolson scheme is of second order in \( \Delta t \), and</li>
- <li> the Forward Euler and Backward Euler schemes are of first order in \( \Delta t \).</li>
-</ul>
-</div>
-
-
-<h2 id="decay:analysis:trunc">Truncation error</h2>
-
-<p>
-The truncation error is a very frequently used error measure for
-finite difference methods. It is defined as <em>the error
-in the difference equation that arises when inserting the exact
-solution</em>. Contrary to many other error measures, e.g., the
-true error \( e^n=\uex(t_n)-u^n \), the truncation error is a quantity that
-is easily computable.
-
-<p>
-Before reading on, it is wise to review the section <a href="._decay-book002.html#decay:fd:taylor">Mathematical derivation of finite difference formulas</a>
-on how Taylor polynomials were used to derive finite differences and
-quantify the error in the formulas. Very similar reasoning, and almost
-identical mathematical details, will be carried out below, but in a slightly
-different context. Now, the
-focus is on the error when solving a differential
-equation, while in the section <a href="._decay-book002.html#decay:fd:taylor">Mathematical derivation of finite difference formulas</a> we derived
-errors for a finite difference formula. These errors are tightly
-connected in the present model problem.
-
-<p>
-Let us illustrate the calculation of the truncation error
-for the Forward Euler scheme.
-We start with the difference equation on operator form,
-
-$$ \lbrack D_t^+ u = -au\rbrack^n,$$
-
-which is the short form for
-
-$$ \frac{u^{n+1}-u^n}{\Delta t} = -au^n\tp$$
-
-The idea is to see how well the exact solution \( \uex(t) \) fulfills
-this equation. Since \( \uex(t) \) in general will not obey the
-discrete equation, we get an error in the discrete equation. This
-error is called
-a <em>residual</em>, denoted here by \( R^n \):
-
-$$
-\begin{equation}
-R^n = \frac{\uex(t_{n+1})-\uex(t_n)}{\Delta t} + a\uex(t_n)
-\tp
-\tag{58}
-\end{equation}
-$$
-
-The residual is defined at each mesh point and is therefore a mesh
-function with a superscript \( n \).
-
-<p>
-The interesting feature of \( R^n \) is to see how it
-depends on the discretization parameter \( \Delta t \).
-The tool for reaching
-this goal is to Taylor expand \( \uex \) around the point where the
-difference equation is supposed to hold, here \( t=t_n \).
-We have that
-
-$$ \uex(t_{n+1}) = \uex(t_n) + \uex'(t_n)\Delta t + \half\uex''(t_n)
-\Delta t^2 + \cdots, $$
-
-which may be used to reformulate the fraction in
-<a href="#mjx-eqn-58">(58)</a> so that
-
-$$ R^n = \uex'(t_n) + \half\uex''(t_n)\Delta t + \ldots + a\uex(t_n)\tp$$
-
-Now, \( \uex \) fulfills the ODE \( \uex'=-a\uex \), which means that the first and last
-term cancel and we have
-
-$$ R^n = \half\uex''(t_n)\Delta t + \Oof{\Delta t^2}\tp $$
-
-This \( R^n \) is the <em>truncation error</em>, which for the Forward Euler is seen
-to be of first order in \( \Delta t \) as \( \Delta \rightarrow 0 \).
-
-<p>
-The above procedure can be repeated for the Backward Euler and the
-Crank-Nicolson schemes. We start with the scheme in operator notation,
-write it out in detail, Taylor expand \( \uex \) around the point \( \tilde t \)
-at which the difference equation is defined, collect terms that
-correspond to the ODE (here \( \uex' + a\uex \)), and identify the remaining
-terms as the residual \( R \), which is the truncation error.
-The Backward Euler scheme leads to
-
-$$ R^n \approx -\half\uex''(t_n)\Delta t, $$
-
-while the Crank-Nicolson scheme gives
-
-$$ R^{n+\half} \approx \frac{1}{24}\uex'''(t_{n+\half})\Delta t^2,$$
-
-when \( \Delta t\rightarrow 0 \).
-
-<p>
-The <em>order</em> \( r \) of a finite difference scheme is often defined through
-the leading term \( \Delta t^r \) in the truncation error. The above
-expressions point out that the Forward and Backward Euler schemes are
-of first order, while Crank-Nicolson is of second order.  We have
-looked at other error measures in other sections, like the error in
-amplification factor and the error \( e^n=\uex(t_n)-u^n \), and expressed
-these error measures in terms of \( \Delta t \) to see the order of the
-method. Normally, calculating the truncation error is more
-straightforward than deriving the expressions for other error measures
-and therefore the easiest way to establish the order of a scheme.
-
-<h2 id="___sec62">Consistency, stability, and convergence </h2>
-
-<p>
-Three fundamental concepts when solving differential equations by
-numerical methods are consistency, stability, and convergence.  We
-shall briefly touch upon these concepts below in the context of the present
-model problem.
-
-<p>
-Consistency means that the error in the difference equation, measured
-through the truncation error, goes to zero as \( \Delta t\rightarrow
-0 \). Since the truncation error tells how well the exact solution
-fulfills the difference equation, and the exact solution fulfills the
-differential equation, consistency ensures that the difference
-equation approaches the differential equation in the limit. The
-expressions for the truncation errors in the previous section are all
-proportional to \( \Delta t \) or \( \Delta t^2 \), hence they vanish as
-\( \Delta t\rightarrow 0 \), and all the schemes are consistent.  Lack of
-consistency implies that we actually solve some other differential
-equation in the limit \( \Delta t\rightarrow 0 \) than we aim at.
-
-<p>
-Stability means that the numerical solution exhibits the same
-qualitative properties as the exact solution. This is obviously a
-feature we want the numerical solution to have. In the present
-exponential decay model, the exact solution is monotone and
-decaying. An increasing numerical solution is not in accordance with
-the decaying nature of the exact solution and hence unstable. We can
-also say that an oscillating numerical solution lacks the property of
-monotonicity of the exact solution and is also unstable. We have seen
-that the Backward Euler scheme always leads to monotone and decaying
-solutions, regardless of \( \Delta t \), and is hence stable. The Forward
-Euler scheme can lead to increasing solutions and oscillating
-solutions if \( \Delta t \) is too large and is therefore unstable unless
-\( \Delta t \) is sufficiently small.  The Crank-Nicolson can never lead
-to increasing solutions and has no problem to fulfill that stability
-property, but it can produce oscillating solutions and is unstable in
-that sense, unless \( \Delta t \) is sufficiently small.
-
-<p>
-Convergence implies that the global (true) error mesh function \( e^n =
-\uex(t_n)-u^n\rightarrow 0 \) as \( \Delta t\rightarrow 0 \). This is really
-what we want: the numerical solution gets as close to the exact
-solution as we request by having a sufficiently fine mesh.
-
-<p>
-Convergence is hard to establish theoretically, except in quite simple
-problems like the present one. Stability and consistency are much
-easier to calculate. A major breakthrough in the understanding of
-numerical methods for differential equations came in 1956 when Lax and
-Richtmeyer established equivalence between convergence on one hand and
-consistency and stability on the other (the <a href="http://en.wikipedia.org/wiki/Lax_equivalence_theorem" target="_self">Lax equivalence theorem</a>).  In practice
-it meant that one can first establish that a method is stable and
-consistent, and then it is automatically convergent (which is much
-harder to establish).  The result holds for linear problems only, and
-in the world of nonlinear differential equations the relations between
-consistency, stability, and convergence are much more complicated.
-
-<p>
-We have seen in the previous analysis that the Forward Euler,
-Backward Euler, and Crank-Nicolson schemes are convergent (\( e^n\rightarrow 0 \)),
-that they are consistent (\( R^n\rightarrow 0 \), and that they are
-stable under certain conditions on the size of \( \Delta t \).
-We have also derived explicit mathematical expressions for \( e^n \),
-the truncation error, and the stability criteria.
-
-<p>
-<!-- Look in Asher and Petzold, p 40 -->
-
-<h1 id="___sec63">Exercises </h1>
+<h1 id="___sec40">Exercises </h1>
 
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:analysis:exer:fd:exp:plot">Exercise 7: Visualize the accuracy of finite differences</h2>
-
-<p>
-The purpose of this exercise is to visualize the accuracy of finite difference
-approximations of the derivative of a given function.
-For any finite difference approximation, take the Forward Euler difference
-as an example, and any specific function, take  \( u=e^{-at} \),
-we may introduce an error fraction
-
-$$
-\begin{align*}
-E = \frac{[D_t^+ u]^n}{u'(t_n)} &= \frac{\exp{(-a(t_n+\Delta t))} - \exp{(-at_n)}}{-a\exp{(-at_n)\Delta t}}\\ 
-&= \frac{1}{a\Delta t}\left(1 -\exp{(-a\Delta t)}\right),
-\end{align*}
-$$
-
-and view \( E \) as a function of \( \Delta t \). We expect that
-\( \lim_{\Delta t\rightarrow 0}E=1 \), while \( E \) may deviate significantly from
-unity for large \( \Delta t \). How the error depends on \( \Delta t \) is best
-visualized in a graph where we use a logarithmic scale for \( \Delta t \),
-so we can cover many orders of magnitude of that quantity. Here is
-a code segment creating an array of 100 intervals, on the logarithmic
-scale, ranging from \( 10^{-6} \) to \( 10^{-0.5} \) and then plotting \( E \) versus
-\( p=a\Delta t \) with logarithmic scale on the \( p \) axis:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, exp
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> semilogx
-p <span style="color: #666666">=</span> logspace(<span style="color: #666666">-6</span>, <span style="color: #666666">-0.5</span>, <span style="color: #666666">101</span>)
-y <span style="color: #666666">=</span> (<span style="color: #666666">1-</span>exp(<span style="color: #666666">-</span>p))<span style="color: #666666">/</span>p
-semilogx(p, y)
-</pre></div>
-<p>
-Illustrate such errors for the finite difference operators \( [D_t^+u]^n \)
-(forward), \( [D_t^-u]^n \) (backward), and \( [D_t u]^n \) (centered) in
-the same plot.
-
-<p>
-Perform a Taylor series expansions of the error fractions and find
-the leading order \( r \) in the expressions of type
-\( 1 + Cp^r + \Oof{p^{r+1}} \), where \( C \) is some constant.
-
-<p>
-<!-- --- begin hint in exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_7_1" style="font-size: 80%;"></a>
-<b>Hint.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_7_1">
-
-<p>
-To save manual calculations and learn more about symbolic computing,
-make functions for the three difference operators and use <code>sympy</code>
-to perform the symbolic differences, differentiation, and Taylor series
-expansion. To plot a symbolic expression <code>E</code> against <code>p</code>, convert the
-expression to a Python function first: <code>E = sympy.lamdify([p], E)</code>.
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end hint in exercise --- -->
-
-<p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_7_2" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_7_2">
-
-<p>
-Here is Python code for the exercise:
-
-<p>
-
-<!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sym</span>
-
-<span style="color: #408080; font-style: italic"># Define finite difference operators as functions</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">D_f</span>(u, dt, t):
-    <span style="color: #008000; font-weight: bold">return</span> (u(t <span style="color: #666666">+</span> dt) <span style="color: #666666">-</span> u(t))<span style="color: #666666">/</span>dt
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">D_b</span>(u, dt, t):
-    <span style="color: #008000; font-weight: bold">return</span> (u(t) <span style="color: #666666">-</span> u(t <span style="color: #666666">-</span> dt))<span style="color: #666666">/</span>dt
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">D_c</span>(u, dt, t):
-    <span style="color: #008000; font-weight: bold">return</span> (u(t <span style="color: #666666">+</span> dt) <span style="color: #666666">-</span> u(t <span style="color: #666666">-</span> dt))<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>dt)
-
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">make_plot</span>():
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u</span>(t):
-        <span style="color: #008000; font-weight: bold">return</span> sym<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)
-
-    a, t, dt, p <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;a t dt p&#39;</span>)
-    dudt <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>diff(u(t), t)
-
-    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, exp
-    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> (
-        semilogx, legend, show, loglog, savefig)
-
-    <span style="color: #408080; font-style: italic"># Map operator function name to logical names</span>
-    operator2name <span style="color: #666666">=</span> <span style="color: #008000">dict</span>(
-        D_f<span style="color: #666666">=</span><span style="color: #BA2121">&#39;forward&#39;</span>, D_b<span style="color: #666666">=</span><span style="color: #BA2121">&#39;backward&#39;</span>, D_c<span style="color: #666666">=</span><span style="color: #BA2121">&#39;central&#39;</span>)
-    legends <span style="color: #666666">=</span> []
-    <span style="color: #008000; font-weight: bold">for</span> operator <span style="color: #AA22FF; font-weight: bold">in</span> D_f, D_b, D_c:
-        E <span style="color: #666666">=</span> operator(u, dt, t)<span style="color: #666666">/</span>dudt
-        <span style="color: #408080; font-style: italic"># Expand, set p=a*dt, simplify</span>
-        E <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>expand(E)
-        E <span style="color: #666666">=</span> E<span style="color: #666666">.</span>subs(a<span style="color: #666666">*</span>dt, p)
-        E <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>simplify(E)
-        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> E:&#39;</span> <span style="color: #666666">%</span> operator2name[operator<span style="color: #666666">.</span>__name__], E
-        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Taylor series:&#39;</span>, E<span style="color: #666666">.</span>series(p, <span style="color: #666666">0</span>, <span style="color: #666666">3</span>)
-        latex_expr <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>latex(E)
-
-        E <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([p], E, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
-        p_values <span style="color: #666666">=</span> logspace(<span style="color: #666666">-6</span>, <span style="color: #666666">-0.5</span>, <span style="color: #666666">101</span>)
-        y <span style="color: #666666">=</span> E(p_values)
-        semilogx(p_values, y)
-        legends<span style="color: #666666">.</span>append(operator2name[operator<span style="color: #666666">.</span>__name__] <span style="color: #666666">+</span>
-                       <span style="color: #BA2121">&#39;: $&#39;</span> <span style="color: #666666">+</span> latex_expr <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;$&#39;</span>)
-    legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;lower left&#39;</span>)
-    savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>); savefig(<span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
-    show()
-
-make_plot()
-</pre></div>
-<p>
-The output of the Taylor polynomials reads
-
-<p>
-
-<!-- code=text typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">forward E: (exp(p) - 1)*exp(-p)/p
-Taylor series: 1 - p/2 + p**2/6 + O(p**3)
-backward E: (exp(p) - 1)/p
-Taylor series: 1 + p/2 + p**2/6 + O(p**3)
-central E: sinh(p)/p
-Taylor series: 1 + p**2/6 + O(p**3)
-</pre></div>
-<p>
-<center> <!-- figure -->
-<hr class="figure">
-<center><p class="caption">Figure 16:  Plot for <a href="#decay:analysis:exer:fd:exp:plot">Exercise 7: Visualize the accuracy of finite differences</a>. </p></center>
-<p><img src="fig-analysis/decay_plot_fd_error.png" align="bottom" width=700></p>
-</center>
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-Filename: <code>decay_plot_fd_error</code>.
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:analysis:exer:growth">Exercise 8: Explore the \( \theta \)-rule for exponential growth</h2>
-
-<p>
-This exercise asks you to solve the ODE \( u'=-au \) with \( a < 0 \) such that
-the ODE models exponential growth instead of exponential decay.  A
-central theme is to investigate numerical artifacts and non-physical
-solution behavior.
+<h2 id="decay:exer:meshfunc">Exercise 1: Define a mesh function and visualize it</h2>
 
 <p>
 <b>a)</b>
-Set \( a=-1 \) and run experiments with \( \theta=0, 0.5, 1 \) for
-various values of \( \Delta t \) to uncover numerical artifacts.
-Recall that the exact solution is a
-monotone, growing function when \( a < 0 \). Oscillations or significantly
-wrong growth are signs of wrong qualitative behavior.
-
-<p>
-From the experiments, select four values of \( \Delta t \) that
-demonstrate the kind of numerical solutions that are characteristic
-for this model.
+Write a function <code>mesh_function(f, t)</code> that returns an array with
+mesh point values \( f(t_0),\ldots,f(t_{N_t}) \), where <code>f</code> is a Python
+function implementing a mathematical function <code>f(t)</code> and \( t_0,\ldots,t_{N_t} \)
+are mesh points stored in the array <code>t</code>. Use a loop over the mesh
+points and compute one mesh function value at the time.
 
 <p>
 <!-- --- begin solution of exercise --- -->
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_8_2" style="font-size: 80%;"></a>
+ data-target="#exer_1_1" style="font-size: 80%;"></a>
 <b>Solution.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_8_2">
+<p><div class="collapse" id="exer_1_1">
 
 <p>
-<!-- Does not work: @@@CODE exer-analysis/exponential_growth.do.txt envir=None fromto: The schemes are@=== Analysis -->
-
-<p>
-The schemes are exactly the same as in the case \( a>0 \).
-A program solving the problem numerically is shown below.
+The function may look like
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
-
-<span style="color: #408080; font-style: italic"># Exercise a</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver</span>(I, a, T, dt, theta):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
-    dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt)            <span style="color: #408080; font-style: italic"># avoid integer division</span>
-    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span>dt))     <span style="color: #408080; font-style: italic"># no of time intervals</span>
-    T <span style="color: #666666">=</span> Nt<span style="color: #666666">*</span>dt                 <span style="color: #408080; font-style: italic"># adjust T to fit time step dt</span>
-    u <span style="color: #666666">=</span> zeros(Nt<span style="color: #666666">+1</span>)           <span style="color: #408080; font-style: italic"># array of u[n] values</span>
-    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, Nt<span style="color: #666666">+1</span>)  <span style="color: #408080; font-style: italic"># time mesh</span>
-
-    u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> I                  <span style="color: #408080; font-style: italic"># assign initial condition</span>
-    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Nt):    <span style="color: #408080; font-style: italic"># n=0,1,...,Nt-1</span>
-        u[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)<span style="color: #666666">*</span>u[n]
-    <span style="color: #008000; font-weight: bold">return</span> u, t
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t, I, a):
-    <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">numerical_and_exact</span>(theta, I, a, T, dt):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Compare the numerical and exact solution in a plot.&quot;&quot;&quot;</span>
-    u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>T, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
-
-    t_e <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)        <span style="color: #408080; font-style: italic"># fine mesh for u_e</span>
-    u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
-    <span style="color: #008000; font-weight: bold">return</span> u, t, u_e, t_e
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">demo</span>(dt):
-    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> (
-        plot, xlabel, ylabel, legend, title, savefig, show)
-    <span style="color: #008000; font-weight: bold">for</span> theta <span style="color: #AA22FF; font-weight: bold">in</span> [<span style="color: #666666">0</span>, <span style="color: #666666">0.5</span>, <span style="color: #666666">1</span>]:
-        u, t, u_e, t_e <span style="color: #666666">=</span> numerical_and_exact(
-            I<span style="color: #666666">=1</span>, a<span style="color: #666666">=-1</span>, T<span style="color: #666666">=2.5</span>, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
-        xlabel(<span style="color: #BA2121">&#39;t&#39;</span>)
-        ylabel(<span style="color: #BA2121">&#39;u&#39;</span>)
-        plot(t,   u)
-
-    plot(t_e, u_e, <span style="color: #BA2121">&#39;k-&#39;</span>)  <span style="color: #408080; font-style: italic"># black line</span>
-    legend([<span style="color: #BA2121">&#39;FE&#39;</span>, <span style="color: #BA2121">&#39;CN&#39;</span>, <span style="color: #BA2121">&#39;BE&#39;</span>, <span style="color: #BA2121">&#39;exact&#39;</span>], loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;upper left&#39;</span>)
-    title(<span style="color: #BA2121">&#39;Timestep: </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> dt)
-    savefig(<span style="color: #BA2121">&#39;tmp_</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">.png&#39;</span> <span style="color: #666666">%</span> dt); savefig(<span style="color: #BA2121">&#39;tmp_</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">.pdf&#39;</span> <span style="color: #666666">%</span> dt)
-    show()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mesh_function</span>(f, t):
+    u <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(<span style="color: #008000">len</span>(t))  <span style="color: #408080; font-style: italic"># or t.size</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(t)):
+        u[i] <span style="color: #666666">=</span> f(t[i])
+    <span style="color: #008000; font-weight: bold">return</span> u
 </pre></div>
-<p>
-We can try different \( \Delta t \) values: 3, 0.5, 0.1, and 0.01.
-
-<p>
-<center><p><img src="fig-analysis/exponential_growth_demo.png" align="bottom" width=800></p></center>
-
 <p>
 </div></p>
 </div>
@@ -1875,23 +735,137 @@ We can try different \( \Delta t \) values: 3, 0.5, 0.1, and 0.01.
 
 <p>
 <b>b)</b>
-Write up the amplification factor and plot it for \( \theta=0,0.5,1 \)
-together with the exact one for \( a\Delta t < 0 \). Use the plot to
-explain the observations made in the experiments.
+Use <code>mesh_function</code> to compute the mesh function corresponding to
+
+$$
+f(t) = \left\lbrace
+\begin{array}{ll}
+e^{-t},& 0\leq t\leq 3,\\ 
+e^{-3t}, & 3 < t\leq 4
+\end{array}\right.
+$$
+
+Choose a mesh \( t_n=n\Delta t \) with \( \Delta t=0.1 \).
+Plot the mesh function.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_1_2" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_1_2">
+
+<p>
+An appropriate function is
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">demo</span>():
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(t):
+        <span style="color: #008000; font-weight: bold">if</span> t <span style="color: #666666">&lt;=</span> <span style="color: #666666">3</span>:
+            <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>t)
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>exp(<span style="color: #666666">-3*</span>t)
+
+    <span style="color: #408080; font-style: italic"># Compute mesh and mesh function</span>
+    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">4</span>, <span style="color: #666666">41</span>)
+    u <span style="color: #666666">=</span> mesh_function(f, t)
+
+    <span style="color: #408080; font-style: italic"># Plot</span>
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+    plt<span style="color: #666666">.</span>plot(t, u)
+    plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;t&#39;</span>)
+    plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;mesh function&#39;</span>)
+    plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>); plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
+    plt<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>mesh_function</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec42">Remarks </h3>
+
+<p>
+In the section <a href="._decay-book004.html#decay:computing:error">Computing the numerical error as a mesh function</a> we show how easy it is to
+compute a mesh function by array arithmetics (or array computing).
+Using this technique, one could simply implement <code>mesh_function(f,t)</code>
+as <code>return f(t)</code>. However, <code>f(t)</code> will not work if there are
+if tests involving <code>t</code> inside <code>f</code> as is the case in b). Typically,
+<code>if t &lt; 3</code> must have <code>t &lt; 3</code> as a boolean expression, but if <code>t</code> is
+array, <code>t &lt; 3</code>, is an <em>array of boolean values</em>, which is not legal
+as a boolean expression in an if test.
+Computing one element
+at a time as suggested in a) is a way of out of this problem.
+
+<p>
+We also remark that the function in b) is the solution of \( u^{\prime}=-au \),
+\( u(0)=1 \), for \( t\in [0,4] \), where \( a=1 \) for \( t\in [0,3] \) and \( a=3 \) for
+\( t\in [3,4] \).
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:exer:dudt">Exercise 2: Differentiate a function</h2>
+
+<p>
+Given a mesh function \( u^n \) as an array <code>u</code> with \( u^n \) values at mesh
+points \( t_n=n\Delta t \), the discrete derivative can be based on
+centered differences:
+
+$$
+\begin{equation}
+d^n = [D_{2t}u]^n =
+\frac{u^{n+1}-u^{n-1}}{2\Delta t},\quad n=1,\ldots,N_t-1\tp
+\tag{49}
+\end{equation}
+$$
+
+At the end points we use forward and backward differences:
+
+$$ d^0 = [D_t^+u]^n = \frac{u^{1}-u^{0}}{\Delta t},$$
+
+and
+
+$$ d^{N_t} = [D_t^-u]^n = \frac{u^{N_t}-u^{N_t-1}}{\Delta t}\tp$$
+
+<p>
+<b>a)</b>
+Write a function
+<code>differentiate(u, dt)</code> that returns the discrete derivative \( d^n \) of the
+mesh function \( u^n \). The parameter <code>dt</code> reflects the
+mesh spacing \( \Delta t \). Write a corresponding test function
+<code>test_differentiate()</code> for verifying the implementation.
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_8_1" style="font-size: 80%;"></a>
+ data-target="#exer_2_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_8_1">
+<p><div class="collapse" id="exer_2_1">
 
 <p>
-Modify the <a href="http://tinyurl.com/ofkw6kc/analysis/decay_ampf_plot.py" target="_self"><tt>decay_ampf_plot.py</tt></a> code
-(in the <code>src/analysis</code> directory).
+The three differentiation formulas are
+exact for quadratic polynomials. Use this property to verify the program.
 
 <p>
 </div></p>
@@ -1906,75 +880,39 @@ Modify the <a href="http://tinyurl.com/ofkw6kc/analysis/decay_ampf_plot.py" targ
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_8_3" style="font-size: 80%;"></a>
+ data-target="#exer_2_2" style="font-size: 80%;"></a>
 <b>Solution.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_8_3">
+<p><div class="collapse" id="exer_2_2">
 
 <p>
-<!-- @@@CODE exer-analysis/exponential_growth.do.txt envir=None fromto: === Analysis@ -->
-
-<p>
-The amplification factor is the same as when \( a>0 \), but here we introduce
-\( p=-a\Delta t>0 \) since \( a < 0 \):
-
-$$
-\begin{equation}
-A(p) = \frac{1+(1-\theta)p}{1-\theta p}.
-\end{equation}
-$$
-
-A major problem is that the denominator can be zero when \( a < 0 \). This
-happens for \( p=1/\theta \). The exact amplification factor is \( \Aex = e^{p} \).
-
-<p>
-Here is code for computing and plotting the factors:
+The functions can be written as
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># Exercise b</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_amplification_factors</span>(names):
-    <span style="color: #408080; font-style: italic"># Substitute -p by p since a is negative for a growth model</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">differentiate</span>(u, dt):
+    dudt <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(<span style="color: #008000">len</span>(u))
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #008000">len</span>(dudt)<span style="color: #666666">-1</span>, <span style="color: #666666">1</span>):
+        dudt[i] <span style="color: #666666">=</span> (u[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> u[i<span style="color: #666666">-1</span>])<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>dt)
+    i <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    dudt[i] <span style="color: #666666">=</span> (u[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> u[i])<span style="color: #666666">/</span>dt
+    i <span style="color: #666666">=</span> <span style="color: #008000">len</span>(dudt)<span style="color: #666666">-1</span>
+    dudt[i] <span style="color: #666666">=</span> (u[i] <span style="color: #666666">-</span> u[i<span style="color: #666666">-1</span>])<span style="color: #666666">/</span>dt
+    <span style="color: #008000; font-weight: bold">return</span> dudt
 
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">A_exact</span>(p):
-        <span style="color: #008000; font-weight: bold">return</span> exp(p)
-
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">A</span>(p, theta):
-        <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1+</span>(<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>p)<span style="color: #666666">/</span>(<span style="color: #666666">1-</span>theta<span style="color: #666666">*</span>p)
-
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">amplification_factor</span>(names):
-        <span style="color: #408080; font-style: italic"># Use SciTools since it adds markers to colored lines</span>
-        <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scitools.std</span> <span style="color: #008000; font-weight: bold">import</span> (
-            plot, title, xlabel, ylabel, hold, savefig,
-            axis, legend, grid, show, figure)
-        figure()
-        curves <span style="color: #666666">=</span> {}
-        p <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, <span style="color: #666666">99</span>)
-        curves[<span style="color: #BA2121">&#39;exact&#39;</span>] <span style="color: #666666">=</span> A_exact(p)
-        plot(p, curves[<span style="color: #BA2121">&#39;exact&#39;</span>])
-        hold(<span style="color: #BA2121">&#39;on&#39;</span>)
-        name2theta <span style="color: #666666">=</span> <span style="color: #008000">dict</span>(FE<span style="color: #666666">=0</span>, BE<span style="color: #666666">=1</span>, CN<span style="color: #666666">=0.5</span>)
-        <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> names:
-            curves[name] <span style="color: #666666">=</span> A(p, name2theta[name])
-            plot(p, curves[name])
-            axis([p[<span style="color: #666666">0</span>], p[<span style="color: #666666">-1</span>], <span style="color: #666666">-20</span>, <span style="color: #666666">20</span>])
-            <span style="color: #408080; font-style: italic">#semilogy(p, curves[name])</span>
-        plot([p[<span style="color: #666666">0</span>], p[<span style="color: #666666">-1</span>]], [<span style="color: #666666">0</span>, <span style="color: #666666">0</span>], <span style="color: #BA2121">&#39;--&#39;</span>)  <span style="color: #408080; font-style: italic"># A=0 line</span>
-        title(<span style="color: #BA2121">&#39;Amplification factors&#39;</span>)
-        grid(<span style="color: #BA2121">&#39;on&#39;</span>)
-        legend([<span style="color: #BA2121">&#39;exact&#39;</span>] <span style="color: #666666">+</span> names, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;lower left&#39;</span>, fancybox<span style="color: #666666">=</span><span style="color: #008000">True</span>)
-        xlabel(<span style="color: #BA2121">r&#39;$p=-a\cdot dt$&#39;</span>)
-        ylabel(<span style="color: #BA2121">&#39;Amplification factor&#39;</span>)
-        savefig(<span style="color: #BA2121">&#39;A_growth.png&#39;</span>); savefig(<span style="color: #BA2121">&#39;A_growth.pdf&#39;</span>)
-        <span style="color: #408080; font-style: italic">#show()</span>
-
-    amplification_factor(names)
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_differentiate</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Test differentiate with a linear u.&quot;&quot;&quot;</span>
+    <span style="color: #408080; font-style: italic"># Expect exact results</span>
+    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">4</span>, <span style="color: #666666">9</span>)
+    u <span style="color: #666666">=</span> <span style="color: #666666">2*</span>t <span style="color: #666666">+</span> <span style="color: #666666">7</span>
+    dudt <span style="color: #666666">=</span> differentiate(u, dt<span style="color: #666666">=</span>t[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>t[<span style="color: #666666">0</span>])
+    diff <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(dudt <span style="color: #666666">-</span> <span style="color: #666666">2</span>)<span style="color: #666666">.</span>max()
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-15</span>
+    <span style="color: #008000; font-weight: bold">assert</span> diff <span style="color: #666666">&lt;</span> tol
 </pre></div>
-<p>
-<center><p><img src="fig-analysis/A_growth.png" align="bottom" width=700></p></center>
-
 <p>
 </div></p>
 </div>
@@ -1984,7 +922,451 @@ Here is code for computing and plotting the factors:
 <!-- --- end solution of exercise --- -->
 
 <p>
-Filename: <code>exponential_growth</code>.
+<b>b)</b>
+A standard implementation of the formula <a href="#mjx-eqn-49">(49)</a> is to
+have a loop over \( i \). For large \( N_t \), such loop may run slowly in
+Python. A technique for speeding up the computations, called vectorization
+or array computing,
+replaces the loop by array operations. To see how this can be done in
+the present mathematical problem, we
+define two arrays
+
+$$
+\begin{align*}
+u^+ &= (u^2,u^3,\ldots,u^{N_t}),
+u^- &= (u^0,u^1,\ldots,u^{N_t-2})\tp
+\end{align*}
+$$
+
+The formula <a href="#mjx-eqn-49">(49)</a> can now be expressed as
+
+$$ (d^1,d^2,\ldots,d^{N_t-1}) = \frac{1}{2\Delta t}(u^+ - u^-)\tp$$
+
+The corresponding Python code reads
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">d[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (u[<span style="color: #666666">2</span>:] <span style="color: #666666">-</span> u[<span style="color: #666666">0</span>:<span style="color: #666666">-2</span>])<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>dt)
+<span style="color: #408080; font-style: italic"># or</span>
+d[<span style="color: #666666">1</span>:N_t] <span style="color: #666666">=</span> (u[<span style="color: #666666">2</span>:N_t<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> u[<span style="color: #666666">0</span>:N_t<span style="color: #666666">-1</span>])<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>dt)
+</pre></div>
+<p>
+Recall that an array slice <code>u[1:-1]</code> contains the elements in <code>u</code> starting
+with index 1 and going all indices up to, but not including, the last one
+(<code>-1</code>).
+
+<p>
+Use the ideas above to implement a vectorized version of the
+<code>differentiate</code> function without loops. Make a corresponding
+test function that compares the result with that of
+<code>differentiate</code>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_2_3" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_2_3">
+
+<p>
+Appropriate functions are
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">differentiate_vec</span>(u, dt):
+    dudt <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(<span style="color: #008000">len</span>(u))
+    dudt[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (u[<span style="color: #666666">2</span>:] <span style="color: #666666">-</span> u[<span style="color: #666666">0</span>:<span style="color: #666666">-2</span>])<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>dt)
+    dudt[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> (u[<span style="color: #666666">1</span>] <span style="color: #666666">-</span> u[<span style="color: #666666">0</span>])<span style="color: #666666">/</span>dt
+    dudt[<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (u[<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> u[<span style="color: #666666">-2</span>])<span style="color: #666666">/</span>dt
+    <span style="color: #008000; font-weight: bold">return</span> dudt
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_differentiate_vec</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Test differentiate_vec by comparing with differentiate.&quot;&quot;&quot;</span>
+    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">4</span>, <span style="color: #666666">9</span>)
+    u <span style="color: #666666">=</span> <span style="color: #666666">2*</span>np<span style="color: #666666">.</span>sin(t) <span style="color: #666666">+</span> <span style="color: #666666">7</span>
+    dudt_expected <span style="color: #666666">=</span> differentiate(u, dt<span style="color: #666666">=</span>t[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>t[<span style="color: #666666">0</span>])
+    dudt_computed <span style="color: #666666">=</span> differentiate_vec(u, dt<span style="color: #666666">=</span>t[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>t[<span style="color: #666666">0</span>])
+    diff <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(dudt_expected <span style="color: #666666">-</span> dudt_computed)<span style="color: #666666">.</span>max()
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-15</span>
+    <span style="color: #008000; font-weight: bold">assert</span> diff <span style="color: #666666">&lt;</span> tol
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>differentiate</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:exer:intdiv">Exercise 3: Experiment with divisions</h2>
+
+<p>
+Explain what happens in the following computations, where
+some are mathematically unexpected:
+
+<p>
+
+<!-- code=ipy (!bc ipy) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> dt <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> T <span style="color: #666666">=</span> <span style="color: #666666">8</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> Nt <span style="color: #666666">=</span> T<span style="color: #666666">/</span>dt
+<span style="color: #666666">&gt;&gt;&gt;</span> Nt
+<span style="color: #666666">2</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> theta <span style="color: #666666">=</span> <span style="color: #666666">1</span>; a <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)
+<span style="color: #666666">0</span>
+</pre></div>
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_3_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_3_1">
+
+<p>
+We add some more investiations of the types and values involved
+in the computations:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> dt <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> T <span style="color: #666666">=</span> <span style="color: #666666">8</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> Nt <span style="color: #666666">=</span> T<span style="color: #666666">/</span>dt
+<span style="color: #666666">&gt;&gt;&gt;</span> Nt
+<span style="color: #666666">2</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000">type</span>(Nt)
+<span style="color: #666666">&lt;</span><span style="color: #008000">type</span> <span style="color: #BA2121">&#39;int&#39;</span><span style="color: #666666">&gt;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace
+<span style="color: #666666">&gt;&gt;&gt;</span> theta <span style="color: #666666">=</span> <span style="color: #666666">1</span>; a <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)
+<span style="color: #666666">0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)
+<span style="color: #666666">1</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> (<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)
+<span style="color: #666666">2</span>
+</pre></div>
+<p>
+From this we realize at the unexpected results are caused by
+integer division: <code>int</code> object divided by <code>int</code> object.
+For example,
+<code>Nt</code> is an integer, not a real as we want, because 8/3 according integer
+division is 2, not the 2.66666 approximation to \( \frac{8}{3} \).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>pyproblems</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:exer:decay1err">Exercise 4: Experiment with wrong computations</h2>
+
+<p>
+Consider the <code>solver</code> function in the <a href="http://tinyurl.com/ofkw6kc/alg/decay_v1.py" target="_self"><tt>decay_v1.py</tt></a> file
+and the following call:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=1</span>, a<span style="color: #666666">=1</span>, T<span style="color: #666666">=7</span>, dt<span style="color: #666666">=2</span>, theta<span style="color: #666666">=1</span>)
+</pre></div>
+<p>
+The output becomes
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">t= 0.000 u=1
+t= 2.000 u=0
+t= 4.000 u=0
+t= 6.000 u=0
+</pre></div>
+<p>
+Print out the result of all intermediate computations and use
+<code>type(v)</code> to see the object type of the result stored in some variable <code>v</code>.
+Examine the intermediate calculations and explain
+why <code>u</code> is wrong and why we compute up to \( t=6 \) only even though we
+specified \( T=7 \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_4_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_4_1">
+
+<p>
+A code for investigating this problem may look as follows.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver</span>(I, a, T, dt, theta):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
+    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(T<span style="color: #666666">/</span>dt)            <span style="color: #408080; font-style: italic"># no of time intervals</span>
+    T <span style="color: #666666">=</span> Nt<span style="color: #666666">*</span>dt                 <span style="color: #408080; font-style: italic"># adjust T to fit time step dt</span>
+    u <span style="color: #666666">=</span> zeros(Nt<span style="color: #666666">+1</span>)           <span style="color: #408080; font-style: italic"># array of u[n] values</span>
+    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, Nt<span style="color: #666666">+1</span>)  <span style="color: #408080; font-style: italic"># time mesh</span>
+
+    u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> I                  <span style="color: #408080; font-style: italic"># assign initial condition</span>
+    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Nt):    <span style="color: #408080; font-style: italic"># n=0,1,...,Nt-1</span>
+        factor1 <span style="color: #666666">=</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)
+        factor2 <span style="color: #666666">=</span> (<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)
+        factor3 <span style="color: #666666">=</span> factor1<span style="color: #666666">/</span>factor2
+        <span style="color: #008000; font-weight: bold">print</span> factor1, <span style="color: #008000">type</span>(factor1), factor2, <span style="color: #008000">type</span>(factor2),
+        <span style="color: #008000; font-weight: bold">print</span> factor3, <span style="color: #008000">type</span>(factor3)
+        u[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)<span style="color: #666666">*</span>u[n]
+    <span style="color: #008000; font-weight: bold">return</span> u, t
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=1</span>, a<span style="color: #666666">=1</span>, T<span style="color: #666666">=7</span>, dt<span style="color: #666666">=2</span>, theta<span style="color: #666666">=1</span>)
+
+<span style="color: #408080; font-style: italic"># Write out a table of t and u values:</span>
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(t)):
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;t=</span><span style="color: #BB6688; font-weight: bold">%6.3f</span><span style="color: #BA2121"> u=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (t[i], u[i])
+    <span style="color: #408080; font-style: italic"># or print &#39;t={t:6.3f} u={u:g}&#39;.format(t=t[i], u=u[i])</span>
+</pre></div>
+<p>
+Running this code show
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python decay_v1_err.py
+1 &lt;type &#39;int&#39;&gt; 3 &lt;type &#39;int&#39;&gt; 0 &lt;type &#39;int&#39;&gt;
+1 &lt;type &#39;int&#39;&gt; 3 &lt;type &#39;int&#39;&gt; 0 &lt;type &#39;int&#39;&gt;
+1 &lt;type &#39;int&#39;&gt; 3 &lt;type &#39;int&#39;&gt; 0 &lt;type &#39;int&#39;&gt;
+t= 0.000 u=1
+t= 2.000 u=0
+t= 4.000 u=0
+t= 6.000 u=0
+</pre></div>
+<p>
+We realize that we have integer divided by integer in the numerical
+formula, i.e., the result of 1/3 is 0 because of integer division.
+This fraction is multiplied by <code>u[n]</code>, but the result remains zero.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>decay_v1_err</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:exer:plot:error">Exercise 5: Plot the error function</h2>
+
+<p>
+Solve the problem \( u'=-au \), \( u(0)=I \), using the Forward Euler, Backward
+Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
+function \( e^n = \uex(t_n)-u^n \) for \( \Delta t \), \( \frac{1}{4}\Delta t \), and
+\( \frac{1}{8}\Delta t \), where \( \uex \) is the exact solution of the ODE and
+\( u^n \) is the numerical solution at mesh point \( t_n \).
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_5_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_5_1">
+
+<p>
+Modify the <a href="http://tinyurl.com/ofkw6kc/alg/decay_plot_mpl.py" target="_self"><tt>decay_plot_mpl.py</tt></a> code.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_5_2" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_5_2">
+
+<p>
+Looking at the <code>decay_plot_mpl.py</code> file, we realize that we only
+need to change the <code>explore</code> method such that the error and not
+the solutions are plotted. We also need to run a loop over
+\( \Delta t \) values and get all the corresponding curves in the same
+plot. Quite some editing is necessary. Also the <code>main</code> function needs
+some edits.
+
+<p>
+The <code>solver</code> and <code>exact_solution</code> functions are not altered.
+The <code>explore</code> and <code>main</code> functions as well as the call to <code>main</code> are
+edited to
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">explore</span>(I, a, T, dt_values, theta<span style="color: #666666">=0.5</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Run cases with the solver, compute error measure,</span>
+<span style="color: #BA2121; font-style: italic">    and plot the error.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    figure() <span style="color: #408080; font-style: italic"># create new plot</span>
+    <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;dt&#39;</span>, dt
+        u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)    <span style="color: #408080; font-style: italic"># Numerical solution</span>
+        u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+        e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
+        plot(t, e)
+        hold(<span style="color: #BA2121">&#39;on&#39;</span>)
+    legend([<span style="color: #BA2121">&#39;dt=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> dt <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values])
+    xlabel(<span style="color: #BA2121">&#39;t&#39;</span>)
+    ylabel(<span style="color: #BA2121">&#39;u&#39;</span>)
+    title(<span style="color: #BA2121">&#39;theta=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> theta)
+    theta2name <span style="color: #666666">=</span> {<span style="color: #666666">0</span>: <span style="color: #BA2121">&#39;FE&#39;</span>, <span style="color: #666666">1</span>: <span style="color: #BA2121">&#39;BE&#39;</span>, <span style="color: #666666">0.5</span>: <span style="color: #BA2121">&#39;CN&#39;</span>}
+    savefig(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">_</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">.png&#39;</span> <span style="color: #666666">%</span> (theta2name[theta], dt))
+    savefig(<span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">_</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">.pdf&#39;</span> <span style="color: #666666">%</span> (theta2name[theta], dt))
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main</span>(I, a, T, dt_values, theta_values<span style="color: #666666">=</span>(<span style="color: #666666">0</span>, <span style="color: #666666">0.5</span>, <span style="color: #666666">1</span>)):
+    <span style="color: #008000; font-weight: bold">for</span> theta <span style="color: #AA22FF; font-weight: bold">in</span> theta_values:
+        explore(I, a, T, dt_values, theta)
+
+dt <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
+dt_values <span style="color: #666666">=</span> [dt, dt<span style="color: #666666">/4</span>, dt<span style="color: #666666">/8</span>]
+main(I<span style="color: #666666">=1</span>, a<span style="color: #666666">=2</span>, T<span style="color: #666666">=5</span>, dt_values<span style="color: #666666">=</span>dt_values)
+show()
+</pre></div>
+<p>
+<center><p><img src="fig-alg/decay_plot_error.png" align="bottom" width=800></p></center>
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>decay_plot_error</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:exer:inexact:output">Exercise 6: Change formatting of numbers and debug</h2>
+
+<p>
+The <a href="http://tinyurl.com/ofkw6kc/alg/decay_memsave.py" target="_self"><tt>decay_memsave.py</tt></a> program
+writes the time values and solution values to a file which looks
+like
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">0.0000000000000000E+00  1.0000000000000000E+00
+2.0000000000000001E-01  8.3333333333333337E-01
+4.0000000000000002E-01  6.9444444444444453E-01
+6.0000000000000009E-01  5.7870370370370383E-01
+8.0000000000000004E-01  4.8225308641975323E-01
+1.0000000000000000E+00  4.0187757201646102E-01
+1.2000000000000000E+00  3.3489797668038418E-01
+1.3999999999999999E+00  2.7908164723365347E-01
+</pre></div>
+<p>
+Modify the file output such that it looks like
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">0.000  1.00000
+0.200  0.83333
+0.400  0.69444
+0.600  0.57870
+0.800  0.48225
+1.000  0.40188
+1.200  0.33490
+1.400  0.27908
+</pre></div>
+<p>
+If you have just modified the formatting of numbers in the file,
+running the modified program
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python decay_memsave_v2.py --T 10 --theta 1 \ 
+          --dt 0.2 --makeplot
+</pre></div>
+<p>
+leads to printing of the message <code>Bug in the implementation!</code> in the
+terminal window. Why?
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_6_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_6_1">
+
+<p>
+The new formatting is obtained by replacing the format <code>%.16E</code> for
+<code>t</code> by <code>%.3f</code> and the format for <code>u</code> must be <code>%.5f</code>.
+
+<p>
+With only 5 decimals in the file, the <code>test_solver_minmem</code> function compares
+truncated elements <code>u</code>, accurate only to \( 10^{-5} \) with the
+exact discrete solution and applies a far too small <code>tol</code> value.
+<code>tol</code> must be <code>1E-4</code>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>decay_memsave_v2</code>.
 
 <p>
 <!-- --- end exercise --- -->
