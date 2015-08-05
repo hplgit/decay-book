@@ -1,0 +1,530 @@
+.. !split
+
+Exercises  (1)
+==============
+
+.. --- begin exercise ---
+
+.. _decay:exer:meshfunc:
+
+Exercise 1: Define a mesh function and visualize it
+---------------------------------------------------
+
+**a)**
+Write a function ``mesh_function(f, t)`` that returns an array with
+mesh point values :math:`f(t_0),\ldots,f(t_{N_t})`, where ``f`` is a Python
+function implementing a mathematical function ``f(t)`` and :math:`t_0,\ldots,t_{N_t}`
+are mesh points stored in the array ``t``. Use a loop over the mesh
+points and compute one mesh function value at the time.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The function may look like
+
+.. code-block:: python
+
+        def mesh_function(f, t):
+            u = np.zeros(len(t))  # or t.size
+            for i in range(len(t)):
+                u[i] = f(t[i])
+            return u
+
+.. --- end solution of exercise ---
+
+**b)**
+Use ``mesh_function`` to compute the mesh function corresponding to
+
+.. math::
+        
+        f(t) = \left\lbrace
+        \begin{array}{ll}
+        e^{-t},& 0\leq t\leq 3,\\ 
+        e^{-3t}, & 3 < t\leq 4
+        \end{array}\right.
+        
+
+Choose a mesh :math:`t_n=n\Delta t` with :math:`\Delta t=0.1`.
+Plot the mesh function.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+An appropriate function is
+
+.. code-block:: python
+
+        def demo():
+            def f(t):
+                if t <= 3:
+                    return np.exp(-t)
+                else:
+                    return np.exp(-3*t)
+        
+            # Compute mesh and mesh function
+            t = np.linspace(0, 4, 41)
+            u = mesh_function(f, t)
+        
+            # Plot
+            import matplotlib.pyplot as plt
+            plt.plot(t, u)
+            plt.xlabel('t')
+            plt.ylabel('mesh function')
+            plt.savefig('tmp.png'); plt.savefig('tmp.pdf')
+            plt.show()
+
+.. --- end solution of exercise ---
+
+Filename: ``mesh_function``.
+
+.. Closing remarks for this Exercise
+
+Remarks  (1)
+~~~~~~~~~~~~
+
+In the section :ref:`decay:computing:error` we show how easy it is to
+compute a mesh function by array arithmetics (or array computing).
+Using this technique, one could simply implement ``mesh_function(f,t)``
+as ``return f(t)``. However, ``f(t)`` will not work if there are
+if tests involving ``t`` inside ``f`` as is the case in b). Typically,
+``if t < 3`` must have ``t < 3`` as a boolean expression, but if ``t`` is
+array, ``t < 3``, is an *array of boolean values*, which is not legal
+as a boolean expression in an if test.
+Computing one element
+at a time as suggested in a) is a way of out of this problem.
+
+We also remark that the function in b) is the solution of :math:`u^{\prime}=-au`,
+:math:`u(0)=1`, for :math:`t\in [0,4]`, where :math:`a=1` for :math:`t\in [0,3]` and :math:`a=3` for
+:math:`t\in [3,4]`.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _decay:exer:dudt:
+
+Exercise 2: Differentiate a function
+------------------------------------
+
+.. index:: array arithmetics
+
+.. index:: array computing
+
+.. index:: vectorization
+
+Given a mesh function :math:`u^n` as an array ``u`` with :math:`u^n` values at mesh
+points :math:`t_n=n\Delta t`, the discrete derivative can be based on
+centered differences:
+
+.. _Eq:decay:exer:dudt:D2t:
+
+.. math::
+   :label: decay:exer:dudt:D2t
+        
+        d^n = [D_{2t}u]^n =
+        \frac{u^{n+1}-u^{n-1}}{2\Delta t},\quad n=1,\ldots,N_t-1\tp
+        
+        
+
+At the end points we use forward and backward differences:
+
+.. math::
+         d^0 = [D_t^+u]^n = \frac{u^{1}-u^{0}}{\Delta t},
+
+and
+
+.. math::
+         d^{N_t} = [D_t^-u]^n = \frac{u^{N_t}-u^{N_t-1}}{\Delta t}\tp
+
+**a)**
+Write a function
+``differentiate(u, dt)`` that returns the discrete derivative :math:`d^n` of the
+mesh function :math:`u^n`. The parameter ``dt`` reflects the
+mesh spacing :math:`\Delta t`. Write a corresponding test function
+``test_differentiate()`` for verifying the implementation.
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+The three differentiation formulas are
+exact for quadratic polynomials. Use this property to verify the program.
+
+.. --- end hint in exercise ---
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The functions can be written as
+
+.. code-block:: python
+
+        import numpy as np
+        
+        def differentiate(u, dt):
+            dudt = np.zeros(len(u))
+            for i in range(1, len(dudt)-1, 1):
+                dudt[i] = (u[i+1] - u[i-1])/(2*dt)
+            i = 0
+            dudt[i] = (u[i+1] - u[i])/dt
+            i = len(dudt)-1
+            dudt[i] = (u[i] - u[i-1])/dt
+            return dudt
+        
+        def test_differentiate():
+            """Test differentiate with a linear u."""
+            # Expect exact results
+            t = np.linspace(0, 4, 9)
+            u = 2*t + 7
+            dudt = differentiate(u, dt=t[1]-t[0])
+            diff = abs(dudt - 2).max()
+            tol = 1E-15
+            assert diff < tol
+
+.. --- end solution of exercise ---
+
+**b)**
+A standard implementation of the formula :eq:`decay:exer:dudt:D2t` is to
+have a loop over :math:`i`. For large :math:`N_t`, such loop may run slowly in
+Python. A technique for speeding up the computations, called vectorization
+or array computing,
+replaces the loop by array operations. To see how this can be done in
+the present mathematical problem, we
+define two arrays
+
+.. math::
+        
+        u^+ &= (u^2,u^3,\ldots,u^{N_t}),
+        u^- &= (u^0,u^1,\ldots,u^{N_t-2})\tp
+        
+
+The formula :eq:`decay:exer:dudt:D2t` can now be expressed as
+
+.. math::
+         (d^1,d^2,\ldots,d^{N_t-1}) = \frac{1}{2\Delta t}(u^+ - u^-)\tp
+
+The corresponding Python code reads
+
+.. code-block:: python
+
+        d[1:-1] = (u[2:] - u[0:-2])/(2*dt)
+        # or
+        d[1:N_t] = (u[2:N_t+1] - u[0:N_t-1])/(2*dt)
+
+Recall that an array slice ``u[1:-1]`` contains the elements in ``u`` starting
+with index 1 and going all indices up to, but not including, the last one
+(``-1``).
+
+Use the ideas above to implement a vectorized version of the
+``differentiate`` function without loops. Make a corresponding
+test function that compares the result with that of
+``differentiate``.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Appropriate functions are
+
+.. code-block:: python
+
+        def differentiate_vec(u, dt):
+            dudt = np.zeros(len(u))
+            dudt[1:-1] = (u[2:] - u[0:-2])/(2*dt)
+            dudt[0] = (u[1] - u[0])/dt
+            dudt[-1] = (u[-1] - u[-2])/dt
+            return dudt
+        
+        def test_differentiate_vec():
+            """Test differentiate_vec by comparing with differentiate."""
+            t = np.linspace(0, 4, 9)
+            u = 2*np.sin(t) + 7
+            dudt_expected = differentiate(u, dt=t[1]-t[0])
+            dudt_computed = differentiate_vec(u, dt=t[1]-t[0])
+            diff = abs(dudt_expected - dudt_computed).max()
+            tol = 1E-15
+            assert diff < tol
+
+.. --- end solution of exercise ---
+
+Filename: ``differentiate``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _decay:exer:intdiv:
+
+Exercise 3: Experiment with divisions
+-------------------------------------
+
+Explain what happens in the following computations, where
+some are mathematically unexpected:
+
+.. code-block:: ipy
+
+        >>> dt = 3
+        >>> T = 8
+        >>> Nt = T/dt
+        >>> Nt
+        2
+        >>> theta = 1; a = 1
+        >>> (1 - (1-theta)*a*dt)/(1 + theta*dt*a)
+        0
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+We add some more investiations of the types and values involved
+in the computations:
+
+.. code-block:: python
+
+        >>> dt = 3
+        >>> T = 8
+        >>> Nt = T/dt
+        >>> Nt
+        2
+        >>> type(Nt)
+        <type 'int'>
+        >>> from numpy import linspace
+        >>> theta = 1; a = 1
+        >>> (1 - (1-theta)*a*dt)/(1 + theta*dt*a)
+        0
+        >>> (1 - (1-theta)*a*dt)
+        1
+        >>> (1 + theta*dt*a)
+        2
+
+From this we realize at the unexpected results are caused by
+integer division: ``int`` object divided by ``int`` object.
+For example,
+``Nt`` is an integer, not a real as we want, because 8/3 according integer
+division is 2, not the 2.66666 approximation to :math:`\frac{8}{3}`.
+
+.. --- end solution of exercise ---
+
+Filename: ``pyproblems``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _decay:exer:decay1err:
+
+Exercise 4: Experiment with wrong computations
+----------------------------------------------
+
+Consider the ``solver`` function in the `decay_v1.py <http://tinyurl.com/ofkw6kc/alg/decay_v1.py>`__ file
+and the following call:
+
+.. code-block:: python
+
+        u, t = solver(I=1, a=1, T=7, dt=2, theta=1)
+
+The output becomes
+
+.. code-block:: text
+
+        t= 0.000 u=1
+        t= 2.000 u=0
+        t= 4.000 u=0
+        t= 6.000 u=0
+
+Print out the result of all intermediate computations and use
+``type(v)`` to see the object type of the result stored in some variable ``v``.
+Examine the intermediate calculations and explain
+why ``u`` is wrong and why we compute up to :math:`t=6` only even though we
+specified :math:`T=7`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+A code for investigating this problem may look as follows.
+
+.. code-block:: python
+
+        def solver(I, a, T, dt, theta):
+            """Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt."""
+            Nt = int(T/dt)            # no of time intervals
+            T = Nt*dt                 # adjust T to fit time step dt
+            u = zeros(Nt+1)           # array of u[n] values
+            t = linspace(0, T, Nt+1)  # time mesh
+        
+            u[0] = I                  # assign initial condition
+            for n in range(0, Nt):    # n=0,1,...,Nt-1
+                factor1 = (1 - (1-theta)*a*dt)
+                factor2 = (1 + theta*dt*a)
+                factor3 = factor1/factor2
+                print factor1, type(factor1), factor2, type(factor2),
+                print factor3, type(factor3)
+                u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
+            return u, t
+        
+        from numpy import *
+        u, t = solver(I=1, a=1, T=7, dt=2, theta=1)
+        
+        # Write out a table of t and u values:
+        for i in range(len(t)):
+            print 't=%6.3f u=%g' % (t[i], u[i])
+            # or print 't={t:6.3f} u={u:g}'.format(t=t[i], u=u[i])
+
+Running this code show
+
+.. code-block:: text
+
+        Terminal> python decay_v1_err.py
+        1 <type 'int'> 3 <type 'int'> 0 <type 'int'>
+        1 <type 'int'> 3 <type 'int'> 0 <type 'int'>
+        1 <type 'int'> 3 <type 'int'> 0 <type 'int'>
+        t= 0.000 u=1
+        t= 2.000 u=0
+        t= 4.000 u=0
+        t= 6.000 u=0
+
+We realize that we have integer divided by integer in the numerical
+formula, i.e., the result of 1/3 is 0 because of integer division.
+This fraction is multiplied by ``u[n]``, but the result remains zero.
+
+.. --- end solution of exercise ---
+
+Filename: ``decay_v1_err``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _decay:exer:plot:error:
+
+Exercise 5: Plot the error function
+-----------------------------------
+
+Solve the problem :math:`u'=-au`, :math:`u(0)=I`, using the Forward Euler, Backward
+Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
+function :math:`e^n = \uex(t_n)-u^n` for :math:`\Delta t`, :math:`\frac{1}{4}\Delta t`, and
+:math:`\frac{1}{8}\Delta t`, where :math:`\uex` is the exact solution of the ODE and
+:math:`u^n` is the numerical solution at mesh point :math:`t_n`.
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+Modify the `decay_plot_mpl.py <http://tinyurl.com/ofkw6kc/alg/decay_plot_mpl.py>`__ code.
+
+.. --- end hint in exercise ---
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Looking at the ``decay_plot_mpl.py`` file, we realize that we only
+need to change the ``explore`` method such that the error and not
+the solutions are plotted. We also need to run a loop over
+:math:`\Delta t` values and get all the corresponding curves in the same
+plot. Quite some editing is necessary. Also the ``main`` function needs
+some edits.
+
+The ``solver`` and ``exact_solution`` functions are not altered.
+The ``explore`` and ``main`` functions as well as the call to ``main`` are
+edited to
+
+.. code-block:: python
+
+        def explore(I, a, T, dt_values, theta=0.5):
+            """
+            Run cases with the solver, compute error measure,
+            and plot the error.
+            """
+            figure() # create new plot
+            for dt in dt_values:
+                print 'dt', dt
+                u, t = solver(I, a, T, dt, theta)    # Numerical solution
+                u_e = exact_solution(t, I, a)
+                e = u_e - u
+                plot(t, e)
+                hold('on')
+            legend(['dt=%g' % dt for dt in dt_values])
+            xlabel('t')
+            ylabel('u')
+            title('theta=%g' % theta)
+            theta2name = {0: 'FE', 1: 'BE', 0.5: 'CN'}
+            savefig('%s_%g.png' % (theta2name[theta], dt))
+            savefig('%s_%g.pdf' % (theta2name[theta], dt))
+        
+        def main(I, a, T, dt_values, theta_values=(0, 0.5, 1)):
+            for theta in theta_values:
+                explore(I, a, T, dt_values, theta)
+        
+        dt = 0.1
+        dt_values = [dt, dt/4, dt/8]
+        main(I=1, a=2, T=5, dt_values=dt_values)
+        show()
+
+.. figure:: decay_plot_error.png
+   :width: 800
+
+.. --- end solution of exercise ---
+
+Filename: ``decay_plot_error``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _decay:exer:inexact:output:
+
+Exercise 6: Change formatting of numbers and debug
+--------------------------------------------------
+
+The `decay_memsave.py <http://tinyurl.com/ofkw6kc/alg/decay_memsave.py>`__ program
+writes the time values and solution values to a file which looks
+like
+
+.. code-block:: text
+
+        0.0000000000000000E+00  1.0000000000000000E+00
+        2.0000000000000001E-01  8.3333333333333337E-01
+        4.0000000000000002E-01  6.9444444444444453E-01
+        6.0000000000000009E-01  5.7870370370370383E-01
+        8.0000000000000004E-01  4.8225308641975323E-01
+        1.0000000000000000E+00  4.0187757201646102E-01
+        1.2000000000000000E+00  3.3489797668038418E-01
+        1.3999999999999999E+00  2.7908164723365347E-01
+
+Modify the file output such that it looks like
+
+.. code-block:: text
+
+        0.000  1.00000
+        0.200  0.83333
+        0.400  0.69444
+        0.600  0.57870
+        0.800  0.48225
+        1.000  0.40188
+        1.200  0.33490
+        1.400  0.27908
+
+If you have just modified the formatting of numbers in the file,
+running the modified program
+
+.. code-block:: text
+
+        Terminal> python decay_memsave_v2.py --T 10 --theta 1 \ 
+                  --dt 0.2 --makeplot
+
+leads to printing of the message ``Bug in the implementation!`` in the
+terminal window. Why?
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The new formatting is obtained by replacing the format ``%.16E`` for
+``t`` by ``%.3f`` and the format for ``u`` must be ``%.5f``.
+
+With only 5 decimals in the file, the ``test_solver_minmem`` function compares
+truncated elements ``u``, accurate only to :math:`10^{-5}` with the
+exact discrete solution and applies a far too small ``tol`` value.
+``tol`` must be ``1E-4``.
+
+.. --- end solution of exercise ---
+
+Filename: ``decay_memsave_v2``.
+
+.. --- end exercise ---
+

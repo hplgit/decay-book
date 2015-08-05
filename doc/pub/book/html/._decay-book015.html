@@ -1,0 +1,1097 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Finite Difference Computing with Exponential Decay Models">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,terminal velocity,geometric mean,averaging geometric,scaling,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+
+<title>Finite Difference Computing with Exponential Decay Models</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [('Preface', 0, 'ch:preface', 'ch:preface'),
+              ('Acknowledgments', 3, None, '___sec1'),
+              ('Algorithms and implementations', 0, None, '___sec2'),
+              ('Finite difference methods',
+               1,
+               'decay:basics',
+               'decay:basics'),
+              ('A basic model for exponential decay',
+               2,
+               'decay:model',
+               'decay:model'),
+              ('The exact solution', 3, None, '___sec5'),
+              ('A complete problem formulation', 3, None, '___sec6'),
+              ('The Forward Euler scheme',
+               2,
+               'decay:schemes:FE',
+               'decay:schemes:FE'),
+              ('Step 1: Discretizing the domain', 3, None, '___sec8'),
+              ('Step 2: Fulfilling the equation at discrete time points',
+               3,
+               None,
+               '___sec9'),
+              ('Step 3: Replacing derivatives by finite differences',
+               3,
+               None,
+               '___sec10'),
+              ('Step 4: Formulating a recursive algorithm',
+               3,
+               None,
+               '___sec11'),
+              ('Interpretation', 3, None, '___sec12'),
+              ('Computing with the recursive formula', 3, None, '___sec13'),
+              ('The Backward Euler scheme',
+               2,
+               'decay:schemes:BE',
+               'decay:schemes:BE'),
+              ('The Crank-Nicolson scheme',
+               2,
+               'decay:schemes:CN',
+               'decay:schemes:CN'),
+              ('The unifying $\\theta$-rule',
+               2,
+               'decay:schemes:theta',
+               'decay:schemes:theta'),
+              ('Constant time step', 2, None, '___sec17'),
+              ('Mathematical derivation of finite difference formulas',
+               2,
+               'decay:fd:taylor',
+               'decay:fd:taylor'),
+              ('The forward difference', 3, None, '___sec19'),
+              ('The backward difference', 3, None, '___sec20'),
+              ('The centered difference', 3, None, '___sec21'),
+              ('Compact operator notation for finite differences',
+               2,
+               'decay:fd:op',
+               'decay:fd:op'),
+              ('Implementation', 1, 'decay:impl1', 'decay:impl1'),
+              ('Computer language: Python', 2, None, '___sec24'),
+              ('Making a solver function', 2, 'decay:py1', 'decay:py1'),
+              ('Integer division', 2, None, '___sec26'),
+              ('Doc strings', 2, None, '___sec27'),
+              ('Formatting numbers', 2, None, '___sec28'),
+              ('Running the program', 2, None, '___sec29'),
+              ('Plotting the solution', 2, None, '___sec30'),
+              ('Verifying the implementation', 2, None, '___sec31'),
+              ('Running a few algorithmic steps by hand',
+               3,
+               None,
+               '___sec32'),
+              ('Computing the numerical error as a mesh function',
+               2,
+               'decay:computing:error',
+               'decay:computing:error'),
+              ('Computing the norm of the error mesh function',
+               2,
+               'decay:computing:error:norm',
+               'decay:computing:error:norm'),
+              ('Scalar computing', 3, None, '___sec35'),
+              ('Experiments with computing and plotting',
+               2,
+               None,
+               '___sec36'),
+              ('Combining plot files', 3, None, '___sec37'),
+              ('Plotting with SciTools', 3, None, '___sec38'),
+              ('Memory-saving implementation', 2, None, '___sec39'),
+              ('Exercises', 1, None, '___sec40'),
+              ('Exercise 1: Define a mesh function and visualize it',
+               2,
+               'decay:exer:meshfunc',
+               'decay:exer:meshfunc'),
+              ('Remarks', 3, None, '___sec42'),
+              ('Exercise 2: Differentiate a function',
+               2,
+               'decay:exer:dudt',
+               'decay:exer:dudt'),
+              ('Exercise 3: Experiment with divisions',
+               2,
+               'decay:exer:intdiv',
+               'decay:exer:intdiv'),
+              ('Exercise 4: Experiment with wrong computations',
+               2,
+               'decay:exer:decay1err',
+               'decay:exer:decay1err'),
+              ('Exercise 5: Plot the error function',
+               2,
+               'decay:exer:plot:error',
+               'decay:exer:plot:error'),
+              ('Exercise 6: Change formatting of numbers and debug',
+               2,
+               'decay:exer:inexact:output',
+               'decay:exer:inexact:output'),
+              ('Analysis', 0, 'decay:analysis', 'decay:analysis'),
+              ('Experimental investigations', 1, None, '___sec49'),
+              ('Discouraging numerical solutions', 2, None, '___sec50'),
+              ('Detailed experiments', 2, None, '___sec51'),
+              ('Stability', 1, None, '___sec52'),
+              ('Exact numerical solution', 2, None, '___sec53'),
+              ('Stability properties derived from the amplification factor',
+               2,
+               None,
+               '___sec54'),
+              ('Accuracy', 1, None, '___sec55'),
+              ('Visual comparison of amplification factors',
+               2,
+               None,
+               '___sec56'),
+              ('Series expansion of amplification factors',
+               2,
+               None,
+               '___sec57'),
+              ('The ratio of numerical and exact amplification factors',
+               2,
+               None,
+               '___sec58'),
+              ('The global error at a point',
+               2,
+               'decay:analysis:gobal:error',
+               'decay:analysis:gobal:error'),
+              ('Integrated error',
+               2,
+               'decay:analysis:gobal:error_int',
+               'decay:analysis:gobal:error_int'),
+              ('Truncation error',
+               2,
+               'decay:analysis:trunc',
+               'decay:analysis:trunc'),
+              ('Consistency, stability, and convergence',
+               2,
+               None,
+               '___sec62'),
+              ('Exercises', 1, None, '___sec63'),
+              ('Exercise 7: Visualize the accuracy of finite differences',
+               2,
+               'decay:analysis:exer:fd:exp:plot',
+               'decay:analysis:exer:fd:exp:plot'),
+              ('Exercise 8: Explore the $\\theta$-rule for exponential growth',
+               2,
+               'decay:analysis:exer:growth',
+               'decay:analysis:exer:growth'),
+              ('Generalizations', 0, None, '___sec66'),
+              ('Model extensions', 1, None, '___sec67'),
+              ('Generalization: including a variable coefficient',
+               2,
+               None,
+               '___sec68'),
+              ('Generalization: including a source term',
+               2,
+               'decay:source',
+               'decay:source'),
+              ('Implementation of the generalized model problem',
+               2,
+               'decay:general',
+               'decay:general'),
+              ('Deriving the $\\theta$-rule formula', 3, None, '___sec71'),
+              ('Python code', 3, None, '___sec72'),
+              ('Coding of variable coefficients', 3, None, '___sec73'),
+              ('Verifying a constant solution',
+               2,
+               'decay:verify:trivial',
+               'decay:verify:trivial'),
+              ('Verification via manufactured solutions',
+               2,
+               'decay:MMS',
+               'decay:MMS'),
+              ('Computing convergence rates',
+               2,
+               'decay:convergence:rate',
+               'decay:convergence:rate'),
+              ('Estimating $r$', 3, None, '___sec77'),
+              ('Implementation', 3, None, '___sec78'),
+              ('Extension to systems of ODEs', 2, None, '___sec79'),
+              ('General first-order ODEs', 1, None, '___sec80'),
+              ('Generic form of first-order ODEs', 2, None, '___sec81'),
+              ('The $\\theta$-rule', 2, None, '___sec82'),
+              ('An implicit 2-step backward scheme', 2, None, '___sec83'),
+              ('Leapfrog schemes', 2, None, '___sec84'),
+              ('The ordinary Leapfrog scheme', 3, None, '___sec85'),
+              ('The filtered Leapfrog scheme', 3, None, '___sec86'),
+              ('The 2nd-order Runge-Kutta method', 2, None, '___sec87'),
+              ('A 2nd-order Taylor-series method', 2, None, '___sec88'),
+              ('The 2nd- and 3rd-order Adams-Bashforth schemes',
+               2,
+               None,
+               '___sec89'),
+              ('The 4th-order Runge-Kutta method',
+               2,
+               'decay:fd2:RK4',
+               'decay:fd2:RK4'),
+              ('The Odespy software', 2, None, '___sec91'),
+              ('Example: Runge-Kutta methods', 2, None, '___sec92'),
+              ('Remark about using the $\\theta$-rule in Odespy',
+               3,
+               None,
+               '___sec93'),
+              ('Example: Adaptive Runge-Kutta methods',
+               2,
+               'decay:fd2:adaptiveRK',
+               'decay:fd2:adaptiveRK'),
+              ('Exercises', 1, None, '___sec95'),
+              ('Exercise 9: Experiment with precision in tests and the size of $u$',
+               2,
+               'decay:fd2:exer:precision',
+               'decay:fd2:exer:precision'),
+              ('Exercise 10: Implement the 2-step backward scheme',
+               2,
+               'decay:fd2:exer:bw2',
+               'decay:fd2:exer:bw2'),
+              ('Exercise 11: Implement the 2nd-order Adams-Bashforth scheme',
+               2,
+               'decay:fd2:exer:AB2',
+               'decay:fd2:exer:AB2'),
+              ('Exercise 12: Implement the 3rd-order Adams-Bashforth scheme',
+               2,
+               'decay:fd2:exer:AB3',
+               'decay:fd2:exer:AB3'),
+              ('Exercise 13: Analyze explicit 2nd-order methods',
+               2,
+               'decay:exer:RK2:Taylor:analysis',
+               'decay:exer:RK2:Taylor:analysis'),
+              ('Project 14: Implement and investigate the Leapfrog scheme',
+               2,
+               'decay:fd2:exer:leapfrog1',
+               'decay:fd2:exer:leapfrog1'),
+              ('Problem 15: Make a unified implementation of many schemes',
+               2,
+               'decay:fd2:exer:uni',
+               'decay:fd2:exer:uni'),
+              ('Models', 0, 'decay:app', 'decay:app'),
+              ('Scaling', 1, 'decay:app:scaling', 'decay:app:scaling'),
+              ('Dimensionless variables', 2, None, '___sec105'),
+              ('Dimensionless numbers', 2, None, '___sec106'),
+              ('A scaling for vanishing initial condition',
+               2,
+               None,
+               '___sec107'),
+              ('Evolution of a population',
+               1,
+               'decay:app:pop',
+               'decay:app:pop'),
+              ('Exponential growth', 2, None, '___sec109'),
+              ('Logistic growth', 2, None, '___sec110'),
+              ('Compound interest and inflation',
+               1,
+               'decay:app:interest',
+               'decay:app:interest'),
+              ("Newton's law of cooling",
+               1,
+               'decay:app:Newton:cooling',
+               'decay:app:Newton:cooling'),
+              ('Radioactive decay',
+               1,
+               'decay:app:nuclear',
+               'decay:app:nuclear'),
+              ('Deterministic model', 2, None, '___sec114'),
+              ('Stochastic model', 2, None, '___sec115'),
+              ('Relation between stochastic and deterministic models',
+               2,
+               None,
+               '___sec116'),
+              ('Generalization of the radioactive decay modeling',
+               2,
+               'decay:app:waitingtime',
+               'decay:app:waitingtime'),
+              ('Chemical kinetics',
+               1,
+               'decay:app:kinetics',
+               'decay:app:kinetics'),
+              ('Irreversible reaction of two substances',
+               2,
+               None,
+               '___sec119'),
+              ('Reversible reaction of two substances', 2, None, '___sec120'),
+              ('Irreversible reaction of two substances into a third',
+               2,
+               None,
+               '___sec121'),
+              ('A biochemical reaction', 2, None, '___sec122'),
+              ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
+              ('Decay of atmospheric pressure with altitude',
+               1,
+               'decay:app:atm',
+               'decay:app:atm'),
+              ('The general model', 2, None, '___sec125'),
+              ('Multiple atmospheric layers', 2, None, '___sec126'),
+              ('Simplifications', 2, None, '___sec127'),
+              ('Constant layer temperature', 3, None, '___sec128'),
+              ('One-layer model', 3, None, '___sec129'),
+              ('Compaction of sediments',
+               1,
+               'decay:app:sediment',
+               'decay:app:sediment'),
+              ('Vertical motion of a body in a viscous fluid',
+               1,
+               'decay:app:drag',
+               'decay:app:drag'),
+              ('Overview of forces', 2, None, '___sec132'),
+              ('Equation of motion', 2, None, '___sec133'),
+              ('Terminal velocity', 2, None, '___sec134'),
+              ('A Crank-Nicolson scheme', 2, None, '___sec135'),
+              ('Physical data', 2, None, '___sec136'),
+              ('Verification', 2, None, '___sec137'),
+              ('Scaling',
+               2,
+               'decay:app:drag:scaling',
+               'decay:app:drag:scaling'),
+              ('Decay ODEs from solving a PDE by Fourier expansions',
+               1,
+               'decay:app:diffusion:Fourier',
+               'decay:app:diffusion:Fourier'),
+              ('Exercises', 1, None, '___sec140'),
+              ('Exercise 16: Radioactive decay of Carbon-14',
+               2,
+               'decay:app:exer:radio:C14',
+               'decay:app:exer:radio:C14'),
+              ("Exercise 17: Derive schemes for Newton's law of cooling",
+               2,
+               'decay:app:exer:cooling:schemes',
+               'decay:app:exer:cooling:schemes'),
+              ("Exercise 18: Implement schemes for Newton's law of cooling",
+               2,
+               'decay:app:exer:cooling:py',
+               'decay:app:exer:cooling:py'),
+              ('Bug 1: Wrong time level in the $T_s$ function',
+               3,
+               None,
+               '___sec144'),
+              ('Bug 2: Wrong time level in the $T$ function',
+               3,
+               None,
+               '___sec145'),
+              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec146'),
+              ('Bug 4: Missing `k` in the updating formula',
+               3,
+               None,
+               '___sec147'),
+              ('Bug 5: Using `1-theta` instead of `theta`',
+               3,
+               None,
+               '___sec148'),
+              ('Exercise 19: Find time of murder from body temperature',
+               2,
+               'decay:app:exer:cooling:murder',
+               'decay:app:exer:cooling:murder'),
+              ('Exercise 20: Simulate an oscillating cooling process',
+               2,
+               'decay:app:exer:cooling:osc',
+               'decay:app:exer:cooling:osc'),
+              ('Exercise 21: Simulate stochastic radioactive decay',
+               2,
+               'decay:app:exer:stoch:nuclear',
+               'decay:app:exer:stoch:nuclear'),
+              ('Exercise 22: Radioactive decay of two substances',
+               2,
+               'decay:app:exer:radio:twosubst',
+               'decay:app:exer:radio:twosubst'),
+              ('Exercise 23: Simulate a simple chemical reaction',
+               2,
+               'decay:app:exer:kinetics:AB',
+               'decay:app:exer:kinetics:AB'),
+              ('Exercise 24: Simulate an $n$-th order chemical reaction',
+               2,
+               'decay:app:exer:kinetics:ABn',
+               'decay:app:exer:kinetics:ABn'),
+              ('Exercise 25: Simulate spreading of a disease',
+               2,
+               'decay:app:exer:SIR',
+               'decay:app:exer:SIR'),
+              ('Exercise 26: Simulate a biochemical process',
+               2,
+               'decay:app:exer:MMK',
+               'decay:app:exer:MMK'),
+              ('Exercise 27: Simulate the pressure drop in the atmosphere',
+               2,
+               'decay:app:exer:atm1',
+               'decay:app:exer:atm1'),
+              ('Exercise 28: Make a program for vertical motion in a fluid',
+               2,
+               'decay:app:exer:drag:prog',
+               'decay:app:exer:drag:prog'),
+              ('Project 29: Simulate parachuting',
+               2,
+               'decay:app:exer:parachute',
+               'decay:app:exer:parachute'),
+              ('Exercise 30: Formulate vertical motion in the atmosphere',
+               2,
+               'decay:app:exer:drag:atm1',
+               'decay:app:exer:drag:atm1'),
+              ('Exercise 31: Simulate vertical motion in the atmosphere',
+               2,
+               'decay:app:exer:drag:atm2',
+               'decay:app:exer:drag:atm2'),
+              ('Exercise 32: Compute $y=|x|$ by solving an ODE',
+               2,
+               'decay:app:exer:signum',
+               'decay:app:exer:signum'),
+              ('Exercise 33: Simulate fortune growth with random interest rate',
+               2,
+               'decay:app:exer:interest',
+               'decay:app:exer:interest'),
+              ('Exercise 34: Simulate a population in a changing environment',
+               2,
+               'decay:app:exer:pop:at',
+               'decay:app:exer:pop:at'),
+              ('Exercise 35: Simulate logistic growth',
+               2,
+               'decay:app:exer:pop:logistic1',
+               'decay:app:exer:pop:logistic1'),
+              ('Exercise 36: Rederive the equation for continuous compound interest',
+               2,
+               'decay:app:exer:interest:derive',
+               'decay:app:exer:interest:derive'),
+              ('Scientific software engineering', 0, 'decay:se', 'decay:se'),
+              ('Basic implementations',
+               1,
+               'softeng1:basic',
+               'softeng1:basic'),
+              ('Mathematical problem and solution technique',
+               2,
+               'softeng1:basic:math',
+               'softeng1:basic:math'),
+              ('A first, quick implementation',
+               2,
+               'softeng1:basic:impl1',
+               'softeng1:basic:impl1'),
+              ('A more decent program',
+               2,
+               'softeng1:basic:impl2',
+               'softeng1:basic:impl2'),
+              ('Comments in a program', 3, None, '___sec172'),
+              ('Refactoring into functions', 3, None, '___sec173'),
+              ('Program file vs IDE vs notebook', 3, None, '___sec174'),
+              ('Prefixing imported functions by the module name',
+               2,
+               'softeng1:basic:modprefix',
+               'softeng1:basic:modprefix'),
+              ('Implementing the numerical algorithm in a function',
+               2,
+               'softeng1:basic:func',
+               'softeng1:basic:func'),
+              ('Do not have several versions of a code',
+               2,
+               None,
+               '___sec177'),
+              ('Making a module',
+               2,
+               'softeng1:basic:module',
+               'softeng1:basic:module'),
+              ('Example on extending the module code',
+               2,
+               'softeng1:basic:experiment2',
+               'softeng1:basic:experiment2'),
+              ('Documenting functions and modules',
+               2,
+               'softeng1:basic:docstring',
+               'softeng1:basic:docstring'),
+              ('User interfaces',
+               1,
+               'softeng1:basic:UI',
+               'softeng1:basic:UI'),
+              ('Command-line arguments', 2, None, '___sec182'),
+              ('Positional command-line arguments', 2, None, '___sec183'),
+              ('Option-value pairs on the command line',
+               2,
+               None,
+               '___sec184'),
+              ('Creating a graphical web user interface',
+               2,
+               None,
+               '___sec185'),
+              ('Making a compute function', 3, None, '___sec186'),
+              ('Generating the user interface', 3, None, '___sec187'),
+              ('Running the web application', 3, None, '___sec188'),
+              ('Tests for verifying implementations', 1, None, '___sec189'),
+              ('Doctests', 2, None, '___sec190'),
+              ('Unit tests and test functions', 2, None, '___sec191'),
+              ('Two Python test frameworks: nose and pytest',
+               3,
+               None,
+               '___sec192'),
+              ('Test function requirements', 3, None, '___sec193'),
+              ('Comparison of real numbers', 3, None, '___sec194'),
+              ('Special assert functions from nose', 3, None, '___sec195'),
+              ('Locating test functions', 3, None, '___sec196'),
+              ('Running tests', 3, None, '___sec197'),
+              ('Embedding doctests in a test function', 3, None, '___sec198'),
+              ('Installing nose and pytest', 3, None, '___sec199'),
+              ('Test function for the solver', 2, None, '___sec200'),
+              ('Test function for reading positional command-line arguments',
+               2,
+               None,
+               '___sec201'),
+              ('Test function for reading option-value pairs',
+               2,
+               None,
+               '___sec202'),
+              ('Classical class-based unit testing',
+               2,
+               'softeng1:basic:unittest',
+               'softeng1:basic:unittest'),
+              ('Sharing the software with other users',
+               1,
+               'softeng1:prog:se:git',
+               'softeng1:prog:se:git'),
+              ('Organizing the software directory tree',
+               2,
+               None,
+               '___sec205'),
+              ('Distributing just a module file', 3, None, '___sec206'),
+              ('Distributing a package', 3, None, '___sec207'),
+              ('Publishing the software at GitHub', 2, None, '___sec208'),
+              ('Downloading and installing the software',
+               2,
+               None,
+               '___sec209'),
+              ('Installing just a module file', 3, None, '___sec210'),
+              ('Installing a package', 3, None, '___sec211'),
+              ('Classes for problem and solution method',
+               1,
+               'softeng1:prog:se:class',
+               'softeng1:prog:se:class'),
+              ('The problem class', 2, None, '___sec213'),
+              ('The solver class', 2, None, '___sec214'),
+              ('Combining the objects', 3, None, '___sec215'),
+              ('Improving the problem and solver classes',
+               2,
+               'softeng1:prog:se:class2',
+               'softeng1:prog:se:class2'),
+              ('A generic class for parameters', 3, None, '___sec217'),
+              ('Automating scientific experiments',
+               1,
+               'softeng1:experiments',
+               'softeng1:experiments'),
+              ('Available software', 2, None, '___sec219'),
+              ('The results we want to produce', 2, None, '___sec220'),
+              ('Combining plot files', 2, None, '___sec221'),
+              ('Running a program from Python', 2, None, '___sec222'),
+              ('The automating script', 2, None, '___sec223'),
+              ('Making a report',
+               2,
+               'softeng1:exper:report',
+               'softeng1:exper:report'),
+              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec225'),
+              ('HTML with MathJax', 3, None, '___sec226'),
+              ('LaTeX', 3, None, '___sec227'),
+              ('Sphinx', 3, None, '___sec228'),
+              ('Markdown', 3, None, '___sec229'),
+              ('IPython/Jupyter notebooks', 3, None, '___sec230'),
+              ('Wiki formats', 3, None, '___sec231'),
+              ('DocOnce', 3, None, '___sec232'),
+              ('Publishing a complete project',
+               2,
+               'softeng1:exper:github',
+               'softeng1:exper:github'),
+              ('Exercises', 1, None, '___sec234'),
+              ('Problem 37: Make a tool for differentiating curves',
+               2,
+               'softeng1:exer:derivative',
+               'softeng1:exer:derivative'),
+              ('Problem 38: Make solid software for the Trapezoidal rule',
+               2,
+               'softeng1:exer:integral:flat',
+               'softeng1:exer:integral:flat'),
+              ('Problem 39: Implement classes for the Trapezoidal rule',
+               2,
+               'softeng1:exer:integral:flat2',
+               'softeng1:exer:integral:flat2'),
+              ('Problem 40: Write a doctest and a test function',
+               2,
+               'softeng1:exer:doctest1',
+               'softeng1:exer:doctest1'),
+              ('Problem 41: Experiment with tolerances in comparisons',
+               2,
+               'softeng1:exer:tol',
+               'softeng1:exer:tol'),
+              ('Remarks', 3, None, '___sec240'),
+              ('Exercise 42: Make use of a class implementation',
+               2,
+               'softeng1:exer:class:dts',
+               'softeng1:exer:class:dts'),
+              ('Exercise 43: Make solid software for a difference equation',
+               2,
+               'softeng1:exer:logistic',
+               'softeng1:exer:logistic'),
+              ('References', 1, None, '___sec243')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="decay-book.html">Finite Difference Computing with Exponential Decay Models</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._decay-book001.html#ch:preface" style="font-size: 80%;">Preface</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book002.html#___sec2" style="font-size: 80%;">Algorithms and implementations</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:analysis" style="font-size: 80%;">Analysis</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec66" style="font-size: 80%;">Generalizations</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:app" style="font-size: 80%;">Models</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:se" style="font-size: 80%;">Scientific software engineering</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0015"></a>
+<!-- !split -->
+
+<h1 id="___sec234">Exercises </h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="softeng1:exer:derivative">Problem 37: Make a tool for differentiating curves</h2>
+
+<p>
+Suppose we have a curve specified through a set
+of discrete coordinates \( (x_i,y_i) \), \( i=0,\ldots,n \), where the \( x_i \)
+values are uniformly distributed with spacing \( \Delta x \): \( x_i=\Delta x \).
+The derivative of this curve, defined as a new curve with points
+\( (x_i, d_i) \), can be computed via finite differences:
+
+$$
+\begin{align}
+d_0 &= \frac{y_1-y_0}{\Delta x},\\ 
+d_i &= \frac{y_{i+1}-y_{i-1}}{2\Delta x},\quad i=1,\ldots,n-1,\\ 
+d_n &= \frac{y_n-y_{n-1}}{\Delta x}\tp
+\end{align}
+$$
+
+<p>
+<b>a)</b>
+Write a function
+<code>differentiate(x, y)</code> for differentiating a curve
+with coordinates in the arrays <code>x</code> and <code>y</code>, using the
+formulas above. The function should return the coordinate arrays
+of the resulting differentiated curve.
+
+<p>
+<b>b)</b>
+Since the formulas for differentiation used here are only approximate,
+with unknown approximation errors, it is challenging to construct
+test cases. Here are three approaches, which should be implemented
+in three separate test functions.
+
+<ol>
+<li> Consider a curve with three points and compute \( d_i \), \( i=0,1,2 \),
+   by hand. Make a test that compares the hand-calculated results with those
+   from the function in a).</li>
+<li> The formulas for \( d_i \) are exact for points on
+   a straight line, as all the \( d_i \) values are then the same, equal to
+   the slope of the line. A test can check this property.</li>
+<li> For point lying on a parabola, the values for \( d_i \), \( i=1,\ldots,n-1 \),
+   should equal the exact derivative of the parabola. Make a test based on
+   this property.</li>
+</ol>
+
+<b>c)</b>
+Start with a curve corresponding to \( y=\sin(\pi x) \) and \( n+1 \)
+points in \( [0,1] \). Apply <code>differentiate</code> four times and plot the
+resulting curve and the exact \( y=\sin\pi x \) for \( n=6, 11, 21, 41 \).
+
+<p>
+<!-- Using a 2nd-order backward formula at x=1 does not improve the -->
+<!-- results much, one gets large errors at the end points. -->
+
+<p>
+Filename: <code>curvediff</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="softeng1:exer:integral:flat">Problem 38: Make solid software for the Trapezoidal rule</h2>
+
+<p>
+An integral
+
+$$ \int_a^b f(x)dx $$
+
+can be numerically approximated by the Trapezoidal rule,
+
+$$ \int_a^b f(x)dx \approx \frac{h}{2}(f(a) + f(b)) + h\sum_{i=1}^{n-1} f(x_i),
+$$
+
+where \( x_i \) is a set of uniformly spaced points in \( [a,b] \):
+
+$$ h = \frac{b-a}{n},\quad x_i=a + ih,\ i=1,\ldots,n-1\tp $$
+
+<p>
+Somebody has used this rule to compute the integral \( \int_0^\pi \sin^2x\, dx \):
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> pi, sin
+np <span style="color: #666666">=</span> <span style="color: #666666">20</span>
+h <span style="color: #666666">=</span> pi<span style="color: #666666">/</span>np
+I <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, np):
+    I <span style="color: #666666">+=</span> sin(k<span style="color: #666666">*</span>h)<span style="color: #666666">**2</span>
+<span style="color: #008000; font-weight: bold">print</span> I
+</pre></div>
+<p>
+<b>a)</b>
+The &quot;flat&quot; implementation above suffers from serious flaws:
+
+<ol>
+<li> A general numerical algorithm (the Trapezoidal rule) is implemented
+   in a specialized form where the formula for \( f \) is inserted directly
+   into the code for the general integration formula.</li>
+<li> A general numerical algorithm is not encapsulated as a general
+   function, with appropriate parameters, which can be reused
+   across a wide range of applications.</li>
+<li> The lazy programmer dropped the first terms in the general formula
+   since \( \sin(0)=\sin(\pi)=0 \).</li>
+<li> The sloppy programmer used <code>np</code> (number of points?) as variable for
+   <code>n</code> in the formula and a counter <code>k</code> instead of <code>i</code>. Such small
+   deviations from the mathematical notation are completely unnecessary.
+   The closer the code and the mathematics can get, the easier it is
+   to spot errors in formulas.</li>
+</ol>
+
+Write a function <code>trapezoidal</code> that fixes these flaws.
+Place the function in a module <code>trapezoidal</code>.
+
+<p>
+<b>b)</b>
+Write a test function <code>test_trapezoidal</code>. Call the test function
+explicitly to check that it works. Remove the call and run pytest
+on the module:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; py.test -s -v trapezoidal
+</pre></div>
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_38_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_38_1">
+
+<p>
+Note that even if you know the value of the integral, you do not know
+the error in the approximation produced by the Trapezoidal rule.
+However, the Trapezoidal rule will integrate linear functions
+exactly (i.e., to machine precision). Base a test function
+on a linear \( f(x) \).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>c)</b>
+Add functionality such that we can compute \( \int_a^b f(x)dx \) by providing
+\( f \), \( a \), \( b \), and \( n \) as positional command-line arguments to the
+module file:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python trapezoidal.py &#39;sin(x)**2&#39; 0 pi 20
+</pre></div>
+<p>
+Here, \( a=0 \), \( b=\pi \), and \( n=20 \).
+
+<p>
+Note that the <code>trapezoidal.py</code> file must still be a valid module file, so the
+interpretation of command-line data and computation of the integral
+must be performed from calls in a test block.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_38_2" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_38_2">
+
+<p>
+To translate a string formula on the command line, like <code>sin(x)**2</code>,
+into a Python function, you can wrap a function declaration around
+the formula and run <code>exec</code> on the string to turn it into live Python code:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">math</span><span style="color: #666666">,</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+formula <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]
+f_code <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;&quot;&quot;</span>
+<span style="color: #BA2121">def f(x):</span>
+<span style="color: #BA2121">    return </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"></span>
+<span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> formula
+<span style="color: #008000; font-weight: bold">exec</span>(code, math<span style="color: #666666">.</span>__dict__)
+</pre></div>
+<p>
+The result is the same as if we had hardcoded
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> sin(x)<span style="color: #666666">**2</span>
+</pre></div>
+<p>
+in the program. Note that <code>exec</code> needs the namespace
+<code>math.__dict__</code>, i.e., all names in the <code>math</code> module, such that
+it understands <code>sin</code> and other mathematical functions.
+Similarly, to allow \( a \) and \( b \) to be <code>math</code> expressions like <code>pi/4</code>
+and <code>exp(4)</code>, do
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a = eval(sys.argv[2], math.__dict__)
+b = eval(sys.argv[2], math.__dict__)
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>d)</b>
+Write a test function for verifying the implementation of
+data reading from the command line.
+
+<p>
+Filename: <code>trapezoidal</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="softeng1:exer:integral:flat2">Problem 39: Implement classes for the Trapezoidal rule</h2>
+
+<p>
+We consider the same problem setting as in <a href="#softeng1:exer:integral:flat">Problem 38: Make solid software for the Trapezoidal rule</a>. Make a module with a class <code>Problem</code>
+representing the mathematical problem to be solved and a class
+<code>Solver</code> representing the solution method.  The rest of the
+functionality of the module, including test functions and reading data
+from the command line, should be as in <a href="#softeng1:exer:integral:flat">Problem 38: Make solid software for the Trapezoidal rule</a>.
+Filename: <code>trapezoidal_class</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="softeng1:exer:doctest1">Problem 40: Write a doctest and a test function</h2>
+
+<p>
+Type in the following program:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+<span style="color: #408080; font-style: italic"># This sqrt(x) returns real if x&gt;0 and complex if x&lt;0</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.lib.scimath</span> <span style="color: #008000; font-weight: bold">import</span> sqrt
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">roots</span>(a, b, c):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Return the roots of the quadratic polynomial</span>
+<span style="color: #BA2121; font-style: italic">    p(x) = a*x**2 + b*x + c.</span>
+
+<span style="color: #BA2121; font-style: italic">    The roots are real or complex objects.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    q <span style="color: #666666">=</span> b<span style="color: #666666">**2</span> <span style="color: #666666">-</span> <span style="color: #666666">4*</span>a<span style="color: #666666">*</span>c
+    r1 <span style="color: #666666">=</span> (<span style="color: #666666">-</span>b <span style="color: #666666">+</span> sqrt(q))<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>a)
+    r2 <span style="color: #666666">=</span> (<span style="color: #666666">-</span>b <span style="color: #666666">-</span> sqrt(q))<span style="color: #666666">/</span>(<span style="color: #666666">2*</span>a)
+    <span style="color: #008000; font-weight: bold">return</span> r1, r2
+
+a, b, c <span style="color: #666666">=</span> [<span style="color: #008000">float</span>(arg) <span style="color: #008000; font-weight: bold">for</span> arg <span style="color: #AA22FF; font-weight: bold">in</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>:]]
+<span style="color: #008000; font-weight: bold">print</span> roots(a, b, c)
+</pre></div>
+<p>
+<b>a)</b>
+Equip the <code>roots</code> function with a doctest.
+Make sure to test both real and complex roots.
+Write out numbers in the doctest with 14 digits or less.
+
+<p>
+<b>b)</b>
+Make a test function for the <code>roots</code> function. Perform the
+same mathematical tests as in a), but with different
+programming technology.
+
+<p>
+Filename: <code>test_roots</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="softeng1:exer:tol">Problem 41: Experiment with tolerances in comparisons</h2>
+
+<p>
+When we replace a comparison <code>a == b</code>, where <code>a</code> and/or <code>b</code> are
+<code>float</code> objects, by a comparison with tolerance, <code>abs(a-b) &lt; tol</code>,
+the appropriate size of <code>tol</code> depends on the size <code>a</code> and <code>b</code>.
+Investigate how the size of <code>abs(a-b)</code> varies when <code>b</code> takes on
+values \( 10^k \), \( k=-5,-9,\ldots,20 \) and <code>a=1.0/49*b*49</code>.
+Filename: <code>tolerance</code>.
+
+<p>
+<!-- Closing remarks for this Problem -->
+
+<h3 id="___sec240">Remarks </h3>
+
+<p>
+You will experience that if <code>a</code> and <code>b</code> are large, as they can be
+in geophysical applications where lengths measured in meters can be of size
+\( 10^6 \) m, <code>tol</code> must be about \( 10^{-9} \), while <code>a</code> and <code>b</code> around unity can
+have <code>tol</code> of size \( 10^{-15} \).
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="softeng1:exer:class:dts">Exercise 42: Make use of a class implementation</h2>
+
+<p>
+Implement the <code>experiment_compare_dt</code> function from <code>decay.py</code>
+using class <code>Problem</code> and class <code>Solver</code> from
+the section <a href="._decay-book013.html#softeng1:prog:se:class">Classes for problem and solution method</a>.
+The parameters <code>I</code>, <code>a</code>, <code>T</code>, the scheme name, and a series of
+<code>dt</code> values should be read from the command line.
+Filename: <code>experiment_compare_dt_class</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="softeng1:exer:logistic">Exercise 43: Make solid software for a difference equation</h2>
+
+<p>
+We have the following evolutionary difference equation for the number
+of individuals \( u^n \) of a certain specie at time \( n\Delta t \):
+
+$$
+\begin{equation}
+u^{n+1} = u^n + \Delta t r u^n\left(1 - \frac{u^n}{M^n}\right),
+\quad u^0=U_0\tp
+\tag{117}
+\end{equation}
+$$
+
+Here, \( n \) is a counter in time, \( \Delta t \) is time between time levels
+\( n \) and \( n+1 \) (assumed constant), \( r \) is a net reproduction rate
+for the specie,
+and \( M^n \) is the upper limit of the population that the environment can
+sustain at time level \( n \).
+Filename: <code>logistic</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._decay-book014.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._decay-book016.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
