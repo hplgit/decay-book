@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Implementation (1)</title>
+    <title>Algorithms and implementations</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -45,8 +45,8 @@
 
     
     <link rel="top" title="Finite Difference Computing with Exponential Decay Models" href="index.html" />
-    <link rel="next" title="Exercises (1)" href="._book004.html" />
-    <link rel="prev" title="Algorithms and implementations" href="._book002.html" />
+    <link rel="next" title="Implementation (1)" href="._book004.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="._book002.html" />
  
   
        <style type="text/css">
@@ -65,10 +65,10 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="._book004.html" title="Exercises (1)"
+          <a href="._book004.html" title="Implementation (1)"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="._book002.html" title="Algorithms and implementations"
+          <a href="._book002.html" title="&lt;no title&gt;"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Finite Difference Computing with Exponential Decay Models</a> &raquo;</li> 
       </ul>
@@ -79,991 +79,683 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="implementation-1">
-<span id="decay-impl1"></span><h1>Implementation  (1)<a class="headerlink" href="#implementation-1" title="Permalink to this headline">¶</a></h1>
-<p>We want to make a computer program for solving</p>
+  <div class="section" id="algorithms-and-implementations">
+<h1>Algorithms and implementations<a class="headerlink" href="#algorithms-and-implementations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="finite-difference-methods">
+<span id="decay-basics"></span><h2>Finite difference methods<a class="headerlink" href="#finite-difference-methods" title="Permalink to this headline">¶</a></h2>
+<p>We explain the basic ideas of finite difference methods
+primarily via the simple ordinary differential equation <span class="math">\(u^{\prime}=-au\)</span>.
+Emphasis is put on the reasoning behind problem discretizing and
+introduction of key concepts such as mesh, mesh function,
+finite difference approximations, averaging in a mesh,
+derivation of algorithms, and discrete operator notation.</p>
+<div class="section" id="a-basic-model-for-exponential-decay">
+<span id="decay-model"></span><h3>A basic model for exponential decay<a class="headerlink" href="#a-basic-model-for-exponential-decay" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-0"></span><p id="index-1">Our model problem is perhaps the simplest ordinary differential
+equation (ODE):</p>
 <div class="math">
-\[u^{\prime}(t) = -au(t),\quad t\in (0,T], \quad u(0)=I,\]</div>
-<p>by finite difference methods. The program should also display
-the numerical solution as a curve on the
-screen, preferably together with the
-exact solution.</p>
-<span class="target" id="index-0"></span><p id="index-1">All programs referred to in this section are found in the
-<a class="reference external" href="http://tinyurl.com/ofkw6kc/alg">src/alg</a> directory (we use the classical
-Unix term <em>directory</em> for what many others nowadays call <em>folder</em>).</p>
-<p><strong>Mathematical problem.</strong>
-We want to explore the Forward Euler scheme, the
-Backward Euler, and the Crank-Nicolson schemes applied to our model problem.
-From an implementational point of view, it is advantageous to
-implement the <span class="math">\(\theta\)</span>-rule</p>
+\[u^{\prime}(t) = -au(t)\tp\]</div>
+<p>In this equation, <span class="math">\(u(t)\)</span> is a scalar function of time <span class="math">\(t\)</span>,
+<span class="math">\(a\)</span> is a constant, and <span class="math">\(u^{\prime}(t)\)</span> means differentiation with
+respect to <span class="math">\(t\)</span>. This type of equation arises in a number of
+widely different phenomena where some quantity <span class="math">\(u\)</span> undergoes
+exponential reduction. Examples include radioactive decay, population
+decay, investment decay, cooling of an object, pressure decay in the
+atmosphere, and retarded motion in fluids (for some of these models,
+<span class="math">\(a\)</span> can be negative as
+well), see the chapter <a class="reference internal" href="._book008.html#decay-app"><span class="std std-ref">Models</span></a> for details and motivation.
+We have chosen this particular ODE not only because
+its applications are relevant, but even more because studying
+numerical solution methods for this particular ODE gives important insight
+that can be reused in far more complicated settings, in particular
+when solving diffusion-type partial differential equations.</p>
+<div class="section" id="the-exact-solution">
+<h4>The exact solution<a class="headerlink" href="#the-exact-solution" title="Permalink to this headline">¶</a></h4>
+<p>Although our interest is in <em>approximate</em> numerical solutions of <span class="math">\(u^{\prime}=-au\)</span>, it is convenient to know the exact analytical solution of the problem so
+we can compute the error in numerical approximations.
+The analytical solution of this ODE is found by
+separation of variables, which results in</p>
 <div class="math">
-\[u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,\]</div>
-<p>since it can generate the three other schemes by various of
-choices of <span class="math">\(\theta\)</span>: <span class="math">\(\theta=0\)</span> for Forward Euler, <span class="math">\(\theta =1\)</span> for
-Backward Euler, and <span class="math">\(\theta =1/2\)</span> for Crank-Nicolson.
-Given <span class="math">\(a\)</span>, <span class="math">\(u^0=I\)</span>, <span class="math">\(T\)</span>, and <span class="math">\(\Delta t\)</span>,
-our task is to use the <span class="math">\(\theta\)</span>-rule to
-compute <span class="math">\(u^1, u^2,\ldots,u^{N_t}\)</span>, where <span class="math">\(t_{N_t}=N_t\Delta t\)</span>, and
-<span class="math">\(N_t\)</span> the closest integer to <span class="math">\(T/\Delta t\)</span>.</p>
-<div class="section" id="computer-language-python">
-<h2>Computer language: Python<a class="headerlink" href="#computer-language-python" title="Permalink to this headline">¶</a></h2>
-<p>Any programming language can be used to generate the <span class="math">\(u^{n+1}\)</span> values from
-the formula above. However, in this document we shall mainly make use of
-Python. There several good reasons for this choice:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Python has a very clean, readable syntax (often known as
-&#8220;executable pseudo-code&#8221;).</li>
-<li>Python code is very similar to MATLAB code (and MATLAB has a
-particularly widespread use for scientific computing).</li>
-<li>Python is a full-fledged, very powerful programming language.</li>
-<li>Python is similar to C++, but is much simpler to work with and
-results in more reliable code.</li>
-<li>Python has a rich set of modules for scientific computing, and its
-popularity in scientific computing is rapidly growing.</li>
-<li>Python was made for being combined with compiled languages
-(C, C++, Fortran), so that existing numerical software can be reused,
-and thereby easing high computational performance with new implementations.</li>
-<li>Python has extensive support for administrative tasks
-needed when doing large-scale computational investigations.</li>
-<li>Python has extensive support for graphics (visualization,
-user interfaces, web applications).</li>
-</ul>
-</div></blockquote>
-<p>Learning Python is easy. Many newcomers to the language will probably
-learn enough from the forthcoming examples to perform their own computer
-experiments. The examples start with simple Python code and gradually
-make use of more powerful constructs as we proceed. Unless it is
-inconvenient for the problem at hand, our Python code is made as
-close as possible to MATLAB code for easy transition between the two
-languages.</p>
-<p>The coming programming examples assumes familiarity with
-variables, for loops, lists, arrays,
-functions, positional arguments, and keyword (named) arguments.
-A background in basic MATLAB programming is often enough to understand
-Python examples.
-Readers who feel the Python examples are too hard to follow will
-benefit from reading a tutorial, e.g.,</p>
-<blockquote>
-<div><ul class="simple">
-<li><a class="reference external" href="http://docs.python.org/2/tutorial/">The Official Python Tutorial</a></li>
-<li><a class="reference external" href="http://www.tutorialspoint.com/python/">Python Tutorial on tutorialspoint.com</a></li>
-<li><a class="reference external" href="http://www.learnpython.org/">Interactive Python tutorial site</a></li>
-<li><a class="reference external" href="http://en.wikibooks.org/wiki/A_Beginner's_Python_Tutorial">A Beginner&#8217;s Python Tutorial</a></li>
-</ul>
-</div></blockquote>
-<p>The author also has a comprehensive book <a class="reference internal" href="._book009.html#ref01" id="id1">[Ref01]</a> that teaches
-scientific programming with Python from the ground up.</p>
+\[u(t) = Ce^{-at},\]</div>
+<p>for any arbitrary constant <span class="math">\(C\)</span>.
+To obtain a unique solution, we need a condition to fix the value of <span class="math">\(C\)</span>.
+This condition is known as the <em>initial condition</em> and stated as
+<span class="math">\(u(0)=I\)</span>. That is, we know that the value of <span class="math">\(u\)</span> is <span class="math">\(I\)</span> when the process
+starts at <span class="math">\(t=0\)</span>. With this knowledge, the exact solution becomes
+<span class="math">\(u(t)=Ie^{-at}\)</span>. The initial condition is also crucial for numerical
+methods: without it, we can never start the numerical algorithms!</p>
 </div>
-<div class="section" id="making-a-solver-function">
-<span id="decay-py1"></span><h2>Making a solver function<a class="headerlink" href="#making-a-solver-function" title="Permalink to this headline">¶</a></h2>
-<p>We choose to have an array <code class="docutils literal"><span class="pre">u</span></code> for storing the <span class="math">\(u^n\)</span> values, <span class="math">\(n=0,1,\ldots,N_t\)</span>.
-The algorithmic steps are</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li>initialize <span class="math">\(u^0\)</span></li>
-<li>for <span class="math">\(t=t_n\)</span>, <span class="math">\(n=1,2,\ldots,N_t\)</span>: compute <span class="math">\(u_n\)</span> using
-the <span class="math">\(\theta\)</span>-rule formula</li>
+<div class="section" id="a-complete-problem-formulation">
+<h4>A complete problem formulation<a class="headerlink" href="#a-complete-problem-formulation" title="Permalink to this headline">¶</a></h4>
+<p>Besides an initial condition for the ODE, we also need to specify a
+time interval for the solution: <span class="math">\(t\in (0,T]\)</span>.
+The point <span class="math">\(t=0\)</span> is not
+included since we know that <span class="math">\(u(0)=I\)</span> and assume that the equation governs
+<span class="math">\(u\)</span> for <span class="math">\(t&gt;0\)</span>.
+Let us now summarize the information that is required to
+state the complete problem formulation:
+find <span class="math">\(u(t)\)</span>
+such that</p>
+<div class="math" id="equation-decay:problem">
+<span id="eq-decay-problem"></span><span class="eqno">(1)</span>\[     u^{\prime} = -au,\ t\in (0,T], \quad u(0)=I\tp\]</div>
+<p>This is known as a <em>continuous problem</em> because the parameter <span class="math">\(t\)</span>
+varies continuously from <span class="math">\(0\)</span> to <span class="math">\(T\)</span>. For each <span class="math">\(t\)</span> we have a corresponding
+<span class="math">\(u(t)\)</span>. There are hence infinitely many values of <span class="math">\(t\)</span> and <span class="math">\(u(t)\)</span>.
+The purpose of a numerical method is to formulate a corresponding
+<em>discrete</em> problem whose solution is characterized by a finite number of values,
+which can be computed in a finite number of steps on a computer.
+Typically, we choose a finite set of time values <span class="math">\(t_0,t_1,\ldots,t_{N_t}\)</span>,
+and create algorithms that generate the corresponding <span class="math">\(u\)</span> values
+<span class="math">\(u_0,u_1,\ldots,u_{N_t}\)</span>.</p>
+</div>
+</div>
+<div class="section" id="the-forward-euler-scheme">
+<span id="decay-schemes-fe"></span><h3>The Forward Euler scheme<a class="headerlink" href="#the-forward-euler-scheme" title="Permalink to this headline">¶</a></h3>
+<p>Solving an ODE like <a href="#equation-decay:problem">(1)</a> by a finite difference method
+consists of the following four steps:</p>
+<ol class="arabic simple">
+<li>discretizing the domain,</li>
+<li>requiring fulfillment of the equation at discrete time points,</li>
+<li>replacing derivatives by finite differences,</li>
+<li>formulating a recursive algorithm.</li>
 </ol>
-</div></blockquote>
-<p>An implementation of a numerical algorithm is often referred to as
-a <em>solver</em>. We shall now make a solver for our model problem and
-realize the solver as a Python function. The function must take
-the input data <span class="math">\(I\)</span>, <span class="math">\(a\)</span>, <span class="math">\(T\)</span>, <span class="math">\(\Delta t\)</span>, and <span class="math">\(\theta\)</span> of the problem
-as arguments and return the solution as arrays <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">t</span></code> for
-<span class="math">\(u^n\)</span> and <span class="math">\(t^n\)</span>, <span class="math">\(n=0,\ldots,N_t\)</span>. The solver function used as</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
-</pre></div>
+<span class="target" id="index-2"></span><div class="section" id="step-1-discretizing-the-domain">
+<span id="index-3"></span><h4>Step 1: Discretizing the domain<a class="headerlink" href="#step-1-discretizing-the-domain" title="Permalink to this headline">¶</a></h4>
+<p>The time domain <span class="math">\([0,T]\)</span> is represented by a finite number of
+<span class="math">\(N_t+1\)</span> points</p>
+<div class="math">
+\[\begin{split}0 = t_0 &lt; t_1 &lt; t_2 &lt; \cdots &lt; t_{N_t-1} &lt; t_{N_t} = T\tp\end{split}\]</div>
+<p>The collection of points <span class="math">\(t_0,t_1,\ldots,t_{N_t}\)</span> constitutes a <em>mesh</em>
+or <em>grid</em>. Often the mesh points will be uniformly spaced in
+the domain <span class="math">\([0,T]\)</span>, which means that the spacing <span class="math">\(t_{n+1}-t_n\)</span> is
+the same for all <span class="math">\(n\)</span>. This spacing is often denoted by <span class="math">\(\Delta t\)</span>,
+which means that <span class="math">\(t_n=n\Delta t\)</span>.</p>
+<p id="index-4">We want the solution <span class="math">\(u\)</span> at the mesh points:
+<span class="math">\(u(t_n)\)</span>, <span class="math">\(n=0,1,\ldots,N_t\)</span>.
+A notational short-form for <span class="math">\(u(t_n)\)</span>,
+which will be used extensively, is <span class="math">\(u^{n}\)</span>. More precisely, we let
+<span class="math">\(u^n\)</span> be the <em>numerical approximation</em> to the exact solution <span class="math">\(u(t_n)\)</span>
+at <span class="math">\(t=t_n\)</span>.</p>
+<p>When we need to clearly distinguish between the numerical and exact solution,
+we often place a subscript e on the exact solution, as in <span class="math">\(\uex(t_n)\)</span>.
+Figure <a class="reference internal" href="#decay-fdu-e"><span class="std std-ref">Time mesh with discrete solution values at points and a dashed line indicating the true solution</span></a> shows the <span class="math">\(t_n\)</span> and <span class="math">\(u^n\)</span> points for <span class="math">\(n=0,1,\ldots,N_t=7\)</span> as well as <span class="math">\(\uex(t)\)</span> as the dashed line.</p>
+<div class="figure" id="id1">
+<span id="decay-fdu-e"></span><a class="reference internal image-reference" href="_images/fdm_u_ue.png"><img alt="_images/fdm_u_ue.png" src="_images/fdm_u_ue.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text"><em>Time mesh with discrete solution values at points and a dashed line indicating the true solution</em></span></p>
 </div>
-<p>One can now easily plot <code class="docutils literal"><span class="pre">u</span></code> versus <code class="docutils literal"><span class="pre">t</span></code> to visualize the solution.</p>
-<p>The function <code class="docutils literal"><span class="pre">solver</span></code> may look as follows in Python:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="k">def</span> <span class="nf">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
-    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>            <span class="c"># no of time intervals</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="n">Nt</span><span class="o">*</span><span class="n">dt</span>                 <span class="c"># adjust T to fit time step dt</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>           <span class="c"># array of u[n] values</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c"># time mesh</span>
-
-    <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">I</span>                  <span class="c"># assign initial condition</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="p">):</span>    <span class="c"># n=0,1,...,Nt-1</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span>
-</pre></div>
+<p>We say that the numerical approximation, i.e.,
+the collection of <span class="math">\(u^n\)</span> values for <span class="math">\(n=0,\ldots,N_t\)</span>,
+constitutes a <em>mesh function</em>.
+A &#8220;normal&#8221; continuous function is a curve defined for all real <span class="math">\(t\)</span>
+values in <span class="math">\([0,T]\)</span>, but a mesh function is only defined at discrete
+points in time. If you want to compute the mesh function <em>between</em> the
+mesh points, where it is not defined, an <em>interpolation method</em> must be
+used. Usually, linear interpolation, i.e., drawing a straight line between
+the mesh function values, see Figure <a class="reference internal" href="#decay-fdu-e"><span class="std std-ref">Time mesh with discrete solution values at points and a dashed line indicating the true solution</span></a>, suffices.
+To compute the solution for some <span class="math">\(t\in [t_n, t_{n+1}]\)</span>, we use the
+linear interpolation formula</p>
+<div class="math">
+\[u(t) \approx u^n + \frac{u^{n+1}-u^n}{t_{n+1}-t_n}(t - t_n)\tp\]</div>
+<div class="figure" id="id2">
+<span id="decay-fdu-ei"></span><a class="reference internal image-reference" href="_images/fdm_u_uei.png"><img alt="_images/fdm_u_uei.png" src="_images/fdm_u_uei.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text"><em>Linear interpolation between the discrete solution values (dashed curve is exact solution)</em></span></p>
 </div>
-<p>The <code class="docutils literal"><span class="pre">numpy</span></code> library contains a lot of functions for array computing. Most
-of the function names are similar to what is found
-in the alternative scientific computing language MATLAB. Here
-we make use of</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The goal of a numerical solution method for ODEs is
+to compute the mesh function by solving a finite set of
+<em>algebraic equations</em> derived from the original ODE problem.</p>
+</div>
+</div>
+<div class="section" id="step-2-fulfilling-the-equation-at-discrete-time-points">
+<h4>Step 2: Fulfilling the equation at discrete time points<a class="headerlink" href="#step-2-fulfilling-the-equation-at-discrete-time-points" title="Permalink to this headline">¶</a></h4>
+<p>The ODE is supposed to hold for all <span class="math">\(t\in (0,T]\)</span>, i.e., at an infinite
+number of points. Now we relax that requirement and require that
+the ODE is fulfilled at a finite set of discrete points in time.
+The mesh points <span class="math">\(t_0,t_1,\ldots,t_{N_t}\)</span> are a natural
+(but not the only) choice of points.
+The original ODE is then reduced to  the following equations:</p>
+<div class="math" id="equation-decay:step2">
+<span id="eq-decay-step2"></span><span class="eqno">(2)</span>\[     u^{\prime}(t_n) = -au(t_n),\quad n=0,\ldots,N_t,\quad u(0)=I\tp\]</div>
+<p>Even though the original ODE is not stated to be valid at <span class="math">\(t=0\)</span>, it
+is valid as close to <span class="math">\(t=0\)</span> as we like, and it turns out that it
+is useful for construction of numerical methods to have
+<a href="#equation-decay:step2">(2)</a> valid for <span class="math">\(n=0\)</span>. The next two steps show that we
+need <a href="#equation-decay:step2">(2)</a> for <span class="math">\(n=0\)</span>.</p>
+</div>
+<div class="section" id="step-3-replacing-derivatives-by-finite-differences">
+<span id="index-5"></span><h4>Step 3: Replacing derivatives by finite differences<a class="headerlink" href="#step-3-replacing-derivatives-by-finite-differences" title="Permalink to this headline">¶</a></h4>
+<p>The next and most essential step of the method is to replace the
+derivative <span class="math">\(u^{\prime}\)</span> by a finite difference approximation. Let us first
+try a <em>forward</em> difference approximation (see Figure <a class="reference internal" href="#decay-sketch-fe"><span class="std std-ref">Illustration of a forward difference</span></a>),</p>
+<span class="target" id="index-6"></span><div class="math" id="equation-decay:FEdiff">
+<span id="eq-decay-fediff"></span><span id="index-7"></span><span class="eqno">(3)</span>\[     u^{\prime}(t_n) \approx \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n}\tp\]</div>
+<p>The name forward relates to the fact that we use a value forward in
+time, <span class="math">\(u^{n+1}\)</span>, together with the value <span class="math">\(u^n\)</span> at the point <span class="math">\(t_n\)</span>, where
+we seek the derivative, to approximate <span class="math">\(u^{\prime}(t_n)\)</span>.
+Inserting this approximation in <a href="#equation-decay:step2">(2)</a> results in</p>
+<div class="math" id="equation-decay:step3">
+<span id="eq-decay-step3"></span><span class="eqno">(4)</span>\[     \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -au^{n},\quad n=0,1,\ldots,N_t-1\tp\]</div>
+<p>Note that if we want to compute the solution
+up to time level <span class="math">\(N_t\)</span>,
+we only need <a href="#equation-decay:step2">(2)</a> to hold for <span class="math">\(n=0,\ldots,N_t-1\)</span> since
+<a href="#equation-decay:step3">(4)</a> for <span class="math">\(n=N_t-1\)</span> creates an equation for the final
+value <span class="math">\(u^{N_t}\)</span>.</p>
+<p>Also note that we use the approximation symbol <span class="math">\(\approx\)</span> in <a href="#equation-decay:FEdiff">(3)</a>,
+but not in <a href="#equation-decay:step3">(4)</a>. Instead, we view <a href="#equation-decay:step3">(4)</a> as
+an equation that is not mathematically equivalent to <a href="#equation-decay:FEdiff">(3)</a>,
+but represents an approximation to the equation <a href="#equation-decay:FEdiff">(3)</a>.</p>
+<p>Equation <a href="#equation-decay:step3">(4)</a>
+is the discrete counterpart to the original ODE problem
+<a href="#equation-decay:problem">(1)</a>, and often referred to as a <em>finite difference scheme</em>
+or more generally as the <em>discrete equations</em> of the problem.
+The fundamental feature of these equations is that they are <em>algebraic</em>
+and can hence be straightforwardly solved to produce the mesh function, i.e.,
+the approximate values of <span class="math">\(u\)</span> at
+the mesh points: <span class="math">\(u^n\)</span>, <span class="math">\(n=1,2,\ldots,N_t\)</span>.</p>
+<div class="figure" id="id3">
+<span id="decay-sketch-fe"></span><a class="reference internal image-reference" href="_images/fd_forward.png"><img alt="_images/fd_forward.png" src="_images/fd_forward.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text"><em>Illustration of a forward difference</em></span></p>
+</div>
+<span class="target" id="index-8"></span><span class="target" id="index-9"></span><span class="target" id="index-10"></span><span class="target" id="index-11"></span></div>
+<div class="section" id="step-4-formulating-a-recursive-algorithm">
+<span id="index-12"></span><h4>Step 4: Formulating a recursive algorithm<a class="headerlink" href="#step-4-formulating-a-recursive-algorithm" title="Permalink to this headline">¶</a></h4>
+<p>The final step is to identify the computational algorithm to be implemented
+in a program. The key observation here is to realize that
+<a href="#equation-decay:step3">(4)</a> can be used to compute <span class="math">\(u^{n+1}\)</span> if <span class="math">\(u^n\)</span> is known.
+Starting with <span class="math">\(n=0\)</span>, <span class="math">\(u^0\)</span> is known since <span class="math">\(u^0=u(0)=I\)</span>, and
+<a href="#equation-decay:step3">(4)</a> gives an equation for <span class="math">\(u^1\)</span>. Knowing <span class="math">\(u^1\)</span>,
+<span class="math">\(u^2\)</span> can be found from <a href="#equation-decay:step3">(4)</a>. In general, <span class="math">\(u^n\)</span>
+in <a href="#equation-decay:step3">(4)</a> can be assumed known, and then we can easily solve for
+the unknown <span class="math">\(u^{n+1}\)</span>:</p>
+<div class="math" id="equation-decay:FE">
+<span id="eq-decay-fe"></span><span class="eqno">(5)</span>\[     u^{n+1} = u^n - a(t_{n+1} -t_n)u^n\tp\]</div>
+<p>We shall refer to <a href="#equation-decay:FE">(5)</a> as the Forward Euler (FE) scheme
+for our model problem. From a mathematical point of view,
+equations of the form <a href="#equation-decay:FE">(5)</a> are known as
+<em>difference equations</em> since they express how differences in
+the dependent variable, here <span class="math">\(u\)</span>, evolve with <span class="math">\(n\)</span>. In our case,
+the differences in <span class="math">\(u\)</span> are given by <span class="math">\(u^{n+1}-u^n = -a(t_{n+1}-t_n)u^n\)</span>.
+The finite difference method can be viewed as a method for turning
+a differential equation into an algebraic difference equation that
+can be easily solved by repeated use of a formula like <a href="#equation-decay:FE">(5)</a>.</p>
+</div>
+<div class="section" id="interpretation">
+<h4>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">¶</a></h4>
+<p>There is a very intuitive interpretation of the FE scheme, illustrated
+in the sketch below. We have computed some point values
+on the solution curve (small red disks), and the question is how we reason
+about the next point. Since we know <span class="math">\(u\)</span> and <span class="math">\(t\)</span> at the most recently
+computed point, the differential equation gives us the <em>slope</em> of
+the solution curve: <span class="math">\(u'=-au\)</span>. We can draw this slope as a red line
+and continue the solution curve along that slope. As soon as we have
+chosen the next point on this line, we have a new <span class="math">\(t\)</span> and <span class="math">\(u\)</span> value and
+can compute a new slope and continue the process.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/FE_idea.png"><img alt="_images/FE_idea.png" src="_images/FE_idea.png" style="width: 600px;" /></a>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="computing-with-the-recursive-formula">
+<h4>Computing with the recursive formula<a class="headerlink" href="#computing-with-the-recursive-formula" title="Permalink to this headline">¶</a></h4>
+<p>Mathematical computation with <a href="#equation-decay:FE">(5)</a> is straightforward:</p>
+<div class="math">
+\[\begin{split}u_0 &amp;= I,\\
+u_1 &amp; = u^0 - a(t_{1} -t_0)u^0 = I(1-a(t_1-t_0)),\\
+u_2 &amp; = u^1 - a(t_{2} -t_1)u^1 = I(1-a(t_1-t_0))(1 - a(t_2-t_1)),\\
+u^3 &amp;= u^2 - a(t_{3} -t_2)u^2 = I(1-a(t_1-t_0))(1 - a(t_2-t_1))(1 - a(t_3-t_2)),\end{split}\]</div>
+<p>and so on until we reach <span class="math">\(u^{N_t}\)</span>.
+Very often, <span class="math">\(t_{n+1}-t_n\)</span> is constant for all <span class="math">\(n\)</span>, so we can introduce
+the common symbol
+<span class="math">\(\Delta t = t_{n+1}-t_n\)</span>, <span class="math">\(n=0,1,\ldots,N_t-1\)</span>.
+Using a constant mesh spacing <span class="math">\(\Delta t\)</span> in the above calculations gives</p>
+<div class="math">
+\[\begin{split}u_0 &amp;= I,\\
+u_1 &amp; = I(1-a\Delta t),\\
+u_2 &amp; = I(1-a\Delta t)^2,\\
+u^3 &amp;= I(1-a\Delta t)^3,\\
+&amp;\vdots\\
+u^{N_t} &amp;= I(1-a\Delta t)^{N_t}\tp\end{split}\]</div>
+<p>This means that we have found a closed formula for <span class="math">\(u^n\)</span>, and there is
+no need to let a computer generate the sequence <span class="math">\(u^1, u^2, u^3, \ldots\)</span>.
+However, finding such a formula for <span class="math">\(u^n\)</span> is possible only for a few very
+simple problems, so in general finite difference equations must be
+solved on a computer.</p>
+<p>As the next sections will show, the scheme <a href="#equation-decay:FE">(5)</a> is just one
+out of many alternative finite difference (and other) methods for
+the model problem <a href="#equation-decay:problem">(1)</a>.</p>
+</div>
+</div>
+<div class="section" id="the-backward-euler-scheme">
+<span id="decay-schemes-be"></span><h3>The Backward Euler scheme<a class="headerlink" href="#the-backward-euler-scheme" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-13"></span><p id="index-14">There are several choices of difference approximations in step 3 of
+the finite difference method as presented in the previous section.
+Another alternative is</p>
+<div class="math" id="equation-decay:BEdiff">
+<span id="eq-decay-bediff"></span><span class="eqno">(6)</span>\[     u^{\prime}(t_n) \approx \frac{u^{n}-u^{n-1}}{t_{n}-t_{n-1}}\tp\]</div>
+<p>Since this difference is based on going backward in time (<span class="math">\(t_{n-1}\)</span>)
+for information, it is known as a <em>backward</em> difference, also called
+Backward Euler difference.
+Figure <a class="reference internal" href="#decay-sketch-be"><span class="std std-ref">Illustration of a backward difference</span></a> explains the idea.</p>
+<div class="figure" id="id4">
+<span id="decay-sketch-be"></span><a class="reference internal image-reference" href="_images/fd_backward.png"><img alt="_images/fd_backward.png" src="_images/fd_backward.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text"><em>Illustration of a backward difference</em></span></p>
+</div>
+<span class="target" id="index-15"></span><p id="index-16">Inserting <a href="#equation-decay:BEdiff">(6)</a> in <a href="#equation-decay:step2">(2)</a> yields
+the Backward Euler (BE) scheme:</p>
+<div class="math" id="equation-decay:BE0">
+<span id="eq-decay-be0"></span><span class="eqno">(7)</span>\[     \frac{u^{n}-u^{n-1}}{t_{n}-t_{n-1}} = -a u^n,\quad n=1,\ldots,N_t\tp\]</div>
+<p>We assume, as explained under step 4 in the section <a class="reference internal" href="#decay-schemes-fe"><span class="std std-ref">The Forward Euler scheme</span></a>,
+that we have computed <span class="math">\(u^0, u^1, \ldots, u^{n-1}\)</span> such that
+<a href="#equation-decay:BE0">(7)</a> can be used to compute <span class="math">\(u^n\)</span>. Note that
+<a href="#equation-decay:BE0">(7)</a> needs <span class="math">\(n\)</span> to start at 1 (then it involves <span class="math">\(u^0\)</span>, but
+no <span class="math">\(u^{-1}\)</span>) and end at <span class="math">\(N_t\)</span>.</p>
+<p>For direct similarity with the formula for the
+Forward Euler scheme <a href="#equation-decay:FE">(5)</a>
+we replace <span class="math">\(n\)</span> by <span class="math">\(n+1\)</span> in <a href="#equation-decay:BE0">(7)</a> and solve for the
+unknown value <span class="math">\(u^{n+1}\)</span>:</p>
+<div class="math" id="equation-decay:BE">
+<span id="eq-decay-be"></span><span class="eqno">(8)</span>\[     u^{n+1} = \frac{1}{1+ a(t_{n+1}-t_n)} u^n,\quad n=0,\ldots,N_t-1\tp\]</div>
+</div>
+<div class="section" id="the-crank-nicolson-scheme">
+<span id="decay-schemes-cn"></span><h3>The Crank-Nicolson scheme<a class="headerlink" href="#the-crank-nicolson-scheme" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-17"></span><span class="target" id="index-18"></span><p id="index-19">The finite difference approximations
+<a href="#equation-decay:FEdiff">(3)</a> and <a href="#equation-decay:BEdiff">(6)</a> used to derive the schemes
+<a href="#equation-decay:FE">(5)</a> and <a href="#equation-decay:BE">(8)</a>, respectively,
+are both one-sided differences, i.e.,
+we collect information either forward or backward in time when approximating
+the derivative at a point. Such one-sided differences are
+known to be less accurate than central (or midpoint)
+differences, where we use information both forward and backward in
+time. A natural next step is therefore to construct
+a central difference approximation that will yield a more accurate
+numerical solution.</p>
+<p>The central difference approximation to the derivative is sought at the
+point <span class="math">\(t_{n+\half}=\half (t_n + t_{n+1})\)</span> (or
+<span class="math">\(t_{n+\half}=(n+\half)\Delta t\)</span> if the mesh spacing is uniform in time).
+The approximation reads</p>
+<div class="math" id="equation-decay:CNdiff">
+<span id="eq-decay-cndiff"></span><span class="eqno">(9)</span>\[     u^{\prime}(t_{n+\half}) \approx \frac{u^{n+1}-u^n}{t_{n+1}-t_n}\tp\]</div>
+<p>Figure <a class="reference internal" href="#decay-sketch-cn"><span class="std std-ref">Illustration of a centered difference</span></a> sketches the geometric interpretation of
+such a centered difference.
+Note that the fraction on the right-hand side is the same as for the
+Forward Euler approximation <a href="#equation-decay:FEdiff">(3)</a> and
+the Backward Euler approximation <a href="#equation-decay:BEdiff">(6)</a> (with
+<span class="math">\(n\)</span> replaced by <span class="math">\(n+1\)</span>). The accuracy of this fraction as an approximation
+to the derivative of <span class="math">\(u\)</span> depends on <em>where</em> we seek the derivative:
+in the center of the interval <span class="math">\([t_{n},t_{n+1}]\)</span> or at the end points.
+We shall later see that it is more accurate at the center point.</p>
+<div class="figure" id="id5">
+<span id="decay-sketch-cn"></span><a class="reference internal image-reference" href="_images/fd_centered_CN.png"><img alt="_images/fd_centered_CN.png" src="_images/fd_centered_CN.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text"><em>Illustration of a centered difference</em></span></p>
+</div>
+<p>With the formula <a href="#equation-decay:CNdiff">(9)</a>, where <span class="math">\(u^{\prime}\)</span> is evaluated at
+<span class="math">\(t_{n+\half}\)</span>, it is natural to demand the
+ODE to be fulfilled at the time points <em>between</em> the mesh points:</p>
+<div class="math" id="equation-decay:step2m">
+<span id="eq-decay-step2m"></span><span class="eqno">(10)</span>\[     u^{\prime}(t_{n+\half}) = -au(t_{n+\half}),\quad n=0,
+     \ldots,N_t-1\tp\]</div>
+<p>Using <a href="#equation-decay:CNdiff">(9)</a> in <a href="#equation-decay:step2m">(10)</a> results in
+the approximate discrete equation</p>
+<div class="math" id="equation-decay:CN0">
+<span id="eq-decay-cn0"></span><span class="eqno">(11)</span>\[     \frac{u^{n+1}-u^n}{t_{n+1}-t_n} = -au^{n+\half},\quad n=0,\ldots,N_t-1,\]</div>
+<p>where <span class="math">\(u^{n+\half}\)</span> is a short form for the numerical approximation
+to <span class="math">\(u(t_{n+\half})\)</span>.</p>
+<p>There is a fundamental problem with the right-hand side of
+<a href="#equation-decay:CN0">(11)</a>: we aim to compute <span class="math">\(u^n\)</span> for integer <span class="math">\(n\)</span>, which means
+that <span class="math">\(u^{n+\half}\)</span> is not a quantity computed by our method. The
+quantity must
+therefore be
+expressed by the quantities that we actually produce, i.e.,
+the numerical solution at the
+mesh points. One possibility is to approximate <span class="math">\(u^{n+\half}\)</span>
+as an arithmetic mean of the <span class="math">\(u\)</span> values at the neighboring mesh points:</p>
+<div class="math" id="equation-decay:uhalfavg">
+<span id="eq-decay-uhalfavg"></span><span id="index-20"></span><span class="eqno">(12)</span>\[     u^{n+\half} \approx \half (u^n + u^{n+1})\tp\]</div>
+<p>Using <a href="#equation-decay:uhalfavg">(12)</a> in <a href="#equation-decay:CN0">(11)</a> results in a new
+approximate discrete equation</p>
+<div class="math" id="equation-decay:CN1">
+<span id="eq-decay-cn1"></span><span class="eqno">(13)</span>\[     \frac{u^{n+1}-u^n}{t_{n+1}-t_n} = -a\half (u^n + u^{n+1})\tp\]</div>
+<p>There are three approximation steps leading to this formula:
+1) the ODE is only valid at discrete points (between the mesh points),
+2) the derivative is approximated by a finite difference, and 3) the
+value of <span class="math">\(u\)</span> between mesh points is approximated by an arithmetic mean
+value. Despite one more approximation than for the Backward and Forward
+Euler schemes, the use of a centered difference leads to a more
+accurate method.</p>
+<p>To formulate a recursive algorithm,
+we assume that <span class="math">\(u^n\)</span> is already computed so that <span class="math">\(u^{n+1}\)</span> is the
+unknown, which we can solve for:</p>
+<div class="math" id="equation-decay:CN">
+<span id="eq-decay-cn"></span><span class="eqno">(14)</span>\[     u^{n+1} = \frac{1-\half a(t_{n+1}-t_n)}{1 + \half a(t_{n+1}-t_n)}u^n\tp\]</div>
+<p>The finite difference scheme <a href="#equation-decay:CN">(14)</a> is often called
+the Crank-Nicolson (CN) scheme or a midpoint or centered scheme.
+Note that <a href="#equation-decay:CN">(14)</a> as well as <a href="#equation-decay:FE">(5)</a> and <a href="#equation-decay:BE">(8)</a>
+apply whether the spacing in the time mesh, <span class="math">\(t_{n+1}-t_n\)</span>, depends on <span class="math">\(n\)</span>
+or is constant.</p>
+</div>
+<div class="section" id="the-unifying-rule">
+<span id="decay-schemes-theta"></span><h3>The unifying <span class="math">\(\theta\)</span>-rule<a class="headerlink" href="#the-unifying-rule" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-21"></span><span class="target" id="index-22"></span><p id="index-23">The Forward Euler, Backward Euler, and Crank-Nicolson schemes can be
+formulated as one scheme with a varying parameter <span class="math">\(\theta\)</span>:</p>
+<div class="math" id="equation-decay:th0">
+<span id="eq-decay-th0"></span><span class="eqno">(15)</span>\[     \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -a (\theta u^{n+1} + (1-\theta) u^{n})\]\[     \tp\]</div>
+<p>Observe:</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal"><span class="pre">zeros(Nt+1)</span></code> for creating an array of size <code class="docutils literal"><span class="pre">Nt+1</span></code>
-and initializing the elements to zero</li>
-<li><code class="docutils literal"><span class="pre">linspace(0,</span> <span class="pre">T,</span> <span class="pre">Nt+1)</span></code> for creating an array with <code class="docutils literal"><span class="pre">Nt+1</span></code>
-coordinates uniformly distributed between <code class="docutils literal"><span class="pre">0</span></code> and <code class="docutils literal"><span class="pre">T</span></code></li>
+<li><span class="math">\(\theta =0\)</span> gives the Forward Euler scheme</li>
+<li><span class="math">\(\theta =1\)</span> gives the Backward Euler scheme, and</li>
+<li><span class="math">\(\theta =\half\)</span> gives the Crank-Nicolson scheme.</li>
 </ul>
 </div></blockquote>
-<p>The <code class="docutils literal"><span class="pre">for</span></code> loop deserves a comment, especially for newcomers to Python.
-The construction <code class="docutils literal"><span class="pre">range(0,</span> <span class="pre">Nt,</span> <span class="pre">s)</span></code> generates all integers from <code class="docutils literal"><span class="pre">0</span></code> to <code class="docutils literal"><span class="pre">Nt</span></code>
-in steps of <code class="docutils literal"><span class="pre">s</span></code>, <em>but not including</em> <code class="docutils literal"><span class="pre">Nt</span></code>. Omitting <code class="docutils literal"><span class="pre">s</span></code> means <code class="docutils literal"><span class="pre">s=1</span></code>.
-For example, <code class="docutils literal"><span class="pre">range(0,</span> <span class="pre">6,</span> <span class="pre">3)</span></code>
-gives <code class="docutils literal"><span class="pre">0</span></code> and <code class="docutils literal"><span class="pre">3</span></code>, while <code class="docutils literal"><span class="pre">range(0,</span> <span class="pre">6)</span></code> generates
-the list <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5]</span></code>.
-Our loop implies the following assignments to <code class="docutils literal"><span class="pre">u[n+1]</span></code>: <code class="docutils literal"><span class="pre">u[1]</span></code>, <code class="docutils literal"><span class="pre">u[2]</span></code>, ...,
-<code class="docutils literal"><span class="pre">u[Nt]</span></code>, which is what we want since <code class="docutils literal"><span class="pre">u</span></code> has length <code class="docutils literal"><span class="pre">Nt+1</span></code>.
-The first index in Python arrays or lists is <em>always</em> <code class="docutils literal"><span class="pre">0</span></code> and the
-last is then <code class="docutils literal"><span class="pre">len(u)-1</span></code> (the length of an array <code class="docutils literal"><span class="pre">u</span></code> is obtained by
-<code class="docutils literal"><span class="pre">len(u)</span></code> or <code class="docutils literal"><span class="pre">u.size</span></code>).</p>
-</div>
-<div class="section" id="integer-division">
-<h2>Integer division<a class="headerlink" href="#integer-division" title="Permalink to this headline">¶</a></h2>
-<p>The shown implementation of the <code class="docutils literal"><span class="pre">solver</span></code> may face problems and
-wrong results if <code class="docutils literal"><span class="pre">T</span></code>, <code class="docutils literal"><span class="pre">a</span></code>, <code class="docutils literal"><span class="pre">dt</span></code>, and <code class="docutils literal"><span class="pre">theta</span></code> are given as integers
-(see <a class="reference internal" href="._book004.html#decay-exer-intdiv"><span class="std std-ref">Exercise 3: Experiment with divisions</span></a> and <a class="reference internal" href="._book004.html#decay-exer-decay1err"><span class="std std-ref">Exercise 4: Experiment with wrong computations</span></a>).
-The problem is related to <em>integer division</em> in Python (as
-in Fortran, C, C++, and many other computer languages!): <code class="docutils literal"><span class="pre">1/2</span></code> becomes <code class="docutils literal"><span class="pre">0</span></code>,
-while <code class="docutils literal"><span class="pre">1.0/2</span></code>, <code class="docutils literal"><span class="pre">1/2.0</span></code>, or <code class="docutils literal"><span class="pre">1.0/2.0</span></code> all become <code class="docutils literal"><span class="pre">0.5</span></code>. So, it is enough
-that at least the nominator or the denominator is a real number
-(i.e., a <code class="docutils literal"><span class="pre">float</span></code> object)
-to ensure a correct mathematical division. Inserting
-a conversion <code class="docutils literal"><span class="pre">dt</span> <span class="pre">=</span> <span class="pre">float(dt)</span></code>
-guarantees that <code class="docutils literal"><span class="pre">dt</span></code> is
-<code class="docutils literal"><span class="pre">float</span></code>.</p>
-<p>Another problem with computing <span class="math">\(N_t=T/\Delta t\)</span> is that we should
-round <span class="math">\(N_t\)</span> to the nearest integer. With <code class="docutils literal"><span class="pre">Nt</span> <span class="pre">=</span> <span class="pre">int(T/dt)</span></code> the <code class="docutils literal"><span class="pre">int</span></code>
-operation picks the largest integer smaller than <code class="docutils literal"><span class="pre">T/dt</span></code>. Correct
-mathematical rounding as known from school is obtained by</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>The complete version of our improved, safer <code class="docutils literal"><span class="pre">solver</span></code> function then becomes</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="k">def</span> <span class="nf">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>            <span class="c"># avoid integer division</span>
-    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>     <span class="c"># no of time intervals</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="n">Nt</span><span class="o">*</span><span class="n">dt</span>                 <span class="c"># adjust T to fit time step dt</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>           <span class="c"># array of u[n] values</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c"># time mesh</span>
-
-    <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">I</span>                  <span class="c"># assign initial condition</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="p">):</span>    <span class="c"># n=0,1,...,Nt-1</span>
-        <span class="n">u</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="doc-strings">
-<h2>Doc strings<a class="headerlink" href="#doc-strings" title="Permalink to this headline">¶</a></h2>
-<p id="index-2">Right below the header line in the <code class="docutils literal"><span class="pre">solver</span></code> function there is a
-Python string enclosed in triple double quotes <code class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></code>.
-The purpose of this string object is to document what the function
-does and what the arguments are. In this case the necessary
-documentation do not span more than one line, but with triple double
-quoted strings the text may span several lines:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Solve</span>
-
-<span class="sd">        u&#39;(t) = -a*u(t),</span>
-
-<span class="sd">    with initial condition u(0)=I, for t in the time interval</span>
-<span class="sd">    (0,T]. The time interval is divided into time steps of</span>
-<span class="sd">    length dt.</span>
-
-<span class="sd">    theta=1 corresponds to the Backward Euler scheme, theta=0</span>
-<span class="sd">    to the Forward Euler scheme, and theta=0.5 to the Crank-</span>
-<span class="sd">    Nicolson method.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="o">...</span>
-</pre></div>
-</div>
-<p>Such documentation strings appearing right after the header of
-a function are called <em>doc strings</em>. There are tools that can automatically
-produce nicely formatted documentation by extracting the definition of
-functions and the contents of doc strings.</p>
-<p>It is strongly recommended to equip any function with a doc string,
-unless the purpose of the function
-is not obvious. Nevertheless, the forthcoming
-text deviates from this rule if the function is explained in the text.</p>
-</div>
-<div class="section" id="formatting-numbers">
-<h2>Formatting numbers<a class="headerlink" href="#formatting-numbers" title="Permalink to this headline">¶</a></h2>
-<p>Having computed the discrete solution <code class="docutils literal"><span class="pre">u</span></code>, it is natural to look at
-the numbers:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># Write out a table of t and u values:</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
-    <span class="k">print</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>This compact <code class="docutils literal"><span class="pre">print</span></code> statement unfortunately gives less readable output
-because the <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">u</span></code> values are not aligned in nicely formatted columns.
-To fix this problem, we recommend to use the <em>printf format</em>, supported in most
-programming languages inherited from C. Another choice is
-Python&#8217;s recent <em>format string syntax</em>. Both kind of syntax is illustrated
-below.</p>
-<p id="index-3">Writing <code class="docutils literal"><span class="pre">t[i]</span></code> and <code class="docutils literal"><span class="pre">u[i]</span></code> in two nicely formatted columns is done like
-this with the printf format:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;t=</span><span class="si">%6.3f</span><span class="s"> u=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>The percentage signs signify &#8220;slots&#8221; in the text where the variables
-listed at the end of the statement are inserted. For each &#8220;slot&#8221; one
-must specify a format for how the variable is going to appear in the
-string: <code class="docutils literal"><span class="pre">f</span></code> for float (with 6 decimals),
-<code class="docutils literal"><span class="pre">s</span></code> for pure text, <code class="docutils literal"><span class="pre">d</span></code> for an integer, <code class="docutils literal"><span class="pre">g</span></code> for a real number
-written as compactly as possible, <code class="docutils literal"><span class="pre">9.3E</span></code> for scientific notation with
-three decimals in a field of width 9 characters (e.g., <code class="docutils literal"><span class="pre">-1.351E-2</span></code>),
-or <code class="docutils literal"><span class="pre">.2f</span></code> for standard decimal notation with two decimals
-formatted with minimum width. The printf syntax provides a quick way
-of formatting tabular output of numbers with full control of the
-layout.</p>
-<p id="index-4">The alternative <em>format string syntax</em> looks like</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;t={t:6.3f} u={u:g}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>As seen, this format allows logical names in the &#8220;slots&#8221; where
-<code class="docutils literal"><span class="pre">t[i]</span></code> and <code class="docutils literal"><span class="pre">u[i]</span></code> are to be inserted. The &#8220;slots&#8221; are surrounded
-by curly braces, and the logical name is followed by a colon and
-then the printf-like specification of how to format real numbers,
-integers, or strings.</p>
-</div>
-<div class="section" id="running-the-program">
-<h2>Running the program<a class="headerlink" href="#running-the-program" title="Permalink to this headline">¶</a></h2>
-<p>The function and main program shown above must be placed in a file,
-say with name <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_v1.py">decay_v1.py</a> (<code class="docutils literal"><span class="pre">v1</span></code> for 1st version of this program).  Make sure you
-write the code with a suitable text editor (Gedit, Emacs, Vim,
-Notepad++, or similar).  The program is run by executing the file this
-way:</p>
-<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python decay_v1.py
-</pre></div>
-</div>
-<p>The text <code class="docutils literal"><span class="pre">Terminal&gt;</span></code> just indicates a prompt in a
-Unix/Linux or DOS terminal window. After this prompt, which may look
-different in your terminal window (depending on the terminal application
-and how it is set up), commands like <code class="docutils literal"><span class="pre">python</span> <span class="pre">decay_v1.py</span></code> can be issued.
-These commands are interpreted by the operating system.</p>
-<p>We strongly recommend to run Python programs within the IPython shell.
-First start IPython by typing <code class="docutils literal"><span class="pre">ipython</span></code> in the terminal window.
-Inside the IPython shell, our program <code class="docutils literal"><span class="pre">decay_v1.py</span></code> is run by the command
-<code class="docutils literal"><span class="pre">run</span> <span class="pre">decay_v1.py</span></code>:</p>
-<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; ipython
-
-In [1]: run decay_v1.py
-t= 0.000 u=1
-t= 0.800 u=0.384615
-t= 1.600 u=0.147929
-t= 2.400 u=0.0568958
-t= 3.200 u=0.021883
-t= 4.000 u=0.00841653
-t= 4.800 u=0.00323713
-t= 5.600 u=0.00124505
-t= 6.400 u=0.000478865
-t= 7.200 u=0.000184179
-t= 8.000 u=7.0838e-05
-</pre></div>
-</div>
-<p>The advantage of running programs in IPython are many, but here
-we explicitly mention a few of the most
-useful features:</p>
-<blockquote>
-<div><ul class="simple">
-<li>previous commands are easily recalled with the up arrow,</li>
-<li><code class="docutils literal"><span class="pre">%pdb</span></code> turns on a debugger so that variables can be examined if the program
-aborts (due to a Python exception),</li>
-<li>output of commands are stored in variables,</li>
-<li>the computing time spent on a set of statements can be measured with
-the <code class="docutils literal"><span class="pre">%timeit</span></code> command,</li>
-<li>any operating system command can be executed,</li>
-<li>modules can be loaded automatically and other customizations can
-be performed when starting IPython</li>
-</ul>
-</div></blockquote>
-<p>Although running programs in IPython is strongly recommended, most
-execution examples in the forthcoming text use the standard
-Python shell with prompt <code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> and run programs through
-a typesetting like</p>
-<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python programname
-</pre></div>
-</div>
-<p>The reason is that such typesetting
-makes the text more compact in the vertical direction
-than showing sessions with IPython syntax.</p>
-<span class="target" id="index-5"></span></div>
-<div class="section" id="plotting-the-solution">
-<span id="index-6"></span><h2>Plotting the solution<a class="headerlink" href="#plotting-the-solution" title="Permalink to this headline">¶</a></h2>
-<p>Having the <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">u</span></code> arrays, the approximate solution <code class="docutils literal"><span class="pre">u</span></code> is visualized
-by the intuitive command <code class="docutils literal"><span class="pre">plot(t,</span> <span class="pre">u)</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
-<span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>It will be illustrative to also plot the exact solution
-<span class="math">\(\uex(t)=Ie^{-at}\)</span> for comparison. We first
-need to make a Python function for computing the exact solution:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">I</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>It is tempting to just do</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u_e</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>However, this is not exactly what we want: the <code class="docutils literal"><span class="pre">plot</span></code> function draws
-straight lines between the discrete points <code class="docutils literal"><span class="pre">(t[n],</span> <span class="pre">u_e[n])</span></code> while
-<span class="math">\(\uex(t)\)</span> varies as an exponential function between the mesh points.
-The technique for showing the &#8220;exact&#8221; variation of <span class="math">\(\uex(t)\)</span> between
-the mesh points is to introduce a very fine mesh for <span class="math">\(\uex(t)\)</span>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">t_e</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>      <span class="c"># fine mesh</span>
-<span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>We can also plot the curves with different colors and styles, e.g.,</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">,</span>         <span class="c"># blue line for u_e</span>
-     <span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">)</span>       <span class="c"># red dashes w/circles</span>
-</pre></div>
-</div>
-<p>With more than one curve in the plot we need to associate each curve
-with a legend. We also want appropriate names on the axes, a title,
-and a file containing the plot as an image for inclusion in reports.
-The Matplotlib package (<code class="docutils literal"><span class="pre">matplotlib.pyplot</span></code>) contains functions for
-this purpose. The names of the functions are similar to the plotting
-functions known from MATLAB.  A complete function for creating
-the comparison plot becomes</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="k">def</span> <span class="nf">plot_numerical_and_exact</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compare the numerical and exact solution in a plot.&quot;&quot;&quot;</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
-
-    <span class="n">t_e</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>        <span class="c"># fine mesh for u_e</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-
-    <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">,</span>            <span class="c"># red dashes w/circles</span>
-         <span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>              <span class="c"># blue line for exact sol.</span>
-    <span class="n">legend</span><span class="p">([</span><span class="s">&#39;numerical&#39;</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">])</span>
-    <span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
-    <span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;u&#39;</span><span class="p">)</span>
-    <span class="n">title</span><span class="p">(</span><span class="s">&#39;theta=</span><span class="si">%g</span><span class="s">, dt=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">))</span>
-    <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;plot_</span><span class="si">%s</span><span class="s">_</span><span class="si">%g</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">))</span>
-
-<span class="n">plot_numerical_and_exact</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Note that <code class="docutils literal"><span class="pre">savefig</span></code> here creates a PNG file whose name includes the
-values of <span class="math">\(\theta\)</span> and <span class="math">\(\Delta t\)</span> so that we can easily distinguish
-files from different runs with <span class="math">\(\theta\)</span> and <span class="math">\(\Delta t\)</span>.</p>
-<p>The complete code is found in the file
-<a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_v2.py">decay_v2.py</a>. The resulting plot
-is shown in Figure <a class="reference internal" href="#decay-fig-v2"><span class="std std-ref">Comparison of numerical and exact solution</span></a>. As seen, there is quite some
-discrepancy between the exact and the numerical solution.
-Fortunately, the numerical solution approaches the exact one as
-<span class="math">\(\Delta t\)</span> is reduced.</p>
-<div class="figure" id="id7">
-<span id="decay-fig-v2"></span><a class="reference internal image-reference" href="_images/decay_v2.png"><img alt="_images/decay_v2.png" src="_images/decay_v2.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-text"><em>Comparison of numerical and exact solution</em></span></p>
-</div>
-</div>
-<div class="section" id="verifying-the-implementation">
-<h2>Verifying the implementation<a class="headerlink" href="#verifying-the-implementation" title="Permalink to this headline">¶</a></h2>
-<p>It is easy to make mistakes while deriving and implementing numerical
-algorithms, so we should never believe in the solution before it has
-been thoroughly verified.  The most obvious idea for verification
-of the
-computations is to compare the numerical solution with the exact
-solution, when that exists. However, note that there will always
-be a discrepancy
-between these two solutions because of the numerical
-approximations. We cannot precisely quantify the approximation
-errors. The challenging question is therefore whether we have the
-mathematically correct discrepancy or if we have another, maybe small,
-discrepancy due to both an approximation error <em>and</em> an error in the
-implementation. It is thus
-impossible to judge whether the program is correct or not by
-just looking at the graphs in Figure <a class="reference internal" href="#decay-fig-v2"><span class="std std-ref">Comparison of numerical and exact solution</span></a>.</p>
-<div class="admonition-verification-and-validation admonition">
-<p class="first admonition-title">Verification and validation</p>
-<p class="last">The purpose of <em>verifying</em> a program is to bring evidence for the
-property that there are no errors in the implementation. A related
-term, <em>validate</em> (and <em>validation</em>),
-addresses the question if the ODE model is a good
-representation of the phenomena we want to simulate. To remember the
-difference between verification and validation, verification is
-about <em>solving the equations right</em>, while validation is about <em>solving
-the right equations</em>. We must always perform a verification before
-it is meaningful to believe in the computations and perform validation
-(which compares the program results with physical experiments or observations).</p>
-</div>
-<p>To avoid
-mixing the unavoidable numerical approximation errors and the
-undesired implementation errors, we should try to make tests where
-we have some exact
-computation of the discrete solution or at least parts of it.
-Examples will show how this can be done.</p>
-<div class="section" id="running-a-few-algorithmic-steps-by-hand">
-<h3>Running a few algorithmic steps by hand<a class="headerlink" href="#running-a-few-algorithmic-steps-by-hand" title="Permalink to this headline">¶</a></h3>
-<p>The simplest approach to produce a correct non-trivial reference
-solution for the discrete solution <span class="math">\(u\)</span>, is to compute a few steps of
-the algorithm by hand. Then we can compare the hand calculations with
-numbers produced by the program.</p>
-<p>A straightforward approach is to use a calculator and
-compute <span class="math">\(u^1\)</span>, <span class="math">\(u^2\)</span>, and <span class="math">\(u^3\)</span>. With <span class="math">\(I=0.1\)</span>, <span class="math">\(\theta=0.8\)</span>,
-and <span class="math">\(\Delta t =0.8\)</span> we get</p>
+<p>We shall later, in the chapter <a class="reference internal" href="._book006.html#decay-analysis"><span class="std std-ref">Analysis</span></a>, learn the pros and cons
+of the three alternatives.
+One may alternatively choose any other value of <span class="math">\(\theta\)</span> in <span class="math">\([0,1]\)</span>, but
+this is not so common since the accuracy and stability of
+the scheme do not improve compared
+to the values <span class="math">\(\theta=0,1,\half\)</span>.</p>
+<p>As before, <span class="math">\(u^n\)</span> is considered known and <span class="math">\(u^{n+1}\)</span> unknown, so
+we solve for the latter:</p>
+<div class="math" id="equation-decay:th">
+<span id="eq-decay-th"></span><span class="eqno">(16)</span>\[     u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)}\tp\]</div>
+<p>This scheme is known as the <span class="math">\(\theta\)</span>-rule, or alternatively written as
+the &#8220;theta-rule&#8221;.</p>
+<div class="admonition-derivation admonition">
+<p class="first admonition-title">Derivation</p>
+<p>We start with replacing <span class="math">\(u^{\prime}\)</span> by the fraction</p>
 <div class="math">
-\[A\equiv \frac{1 - (1-\theta) a\Delta t}{1 + \theta a \Delta t} = 0.298245614035\]</div>
-<div class="math">
-\[\begin{split}u^1 &amp;= AI=0.0298245614035,\\
-u^2 &amp;= Au^1= 0.00889504462912,\\
-u^3 &amp;=Au^2= 0.00265290804728\end{split}\]</div>
-<p>Comparison of these manual calculations with the result of the
-<code class="docutils literal"><span class="pre">solver</span></code> function is carried out in the function</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_solver_three_steps</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Compare three steps with known manual computations.&quot;&quot;&quot;</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">I</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span> <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.8</span>
-    <span class="n">u_by_hand</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="n">I</span><span class="p">,</span>
-                       <span class="mf">0.0298245614035</span><span class="p">,</span>
-                       <span class="mf">0.00889504462912</span><span class="p">,</span>
-                       <span class="mf">0.00265290804728</span><span class="p">])</span>
-
-    <span class="n">Nt</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c"># number of time steps</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">Nt</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
-
-    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-15</span>  <span class="c"># tolerance for comparing floats</span>
-    <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">u_by_hand</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="n">success</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="n">tol</span>
-    <span class="k">assert</span> <span class="n">success</span>
-</pre></div>
+\[\frac{u^{n+1}-u^{n}}{t_{n+1}-t_n},\]</div>
+<p class="last">in the Forward Euler, Backward Euler,
+and Crank-Nicolson schemes. Then we observe that
+the difference between the methods concerns which point this
+fraction approximates the derivative. Or in other words, at which point we
+sample the ODE. So far this has been the
+end points or the midpoint of <span class="math">\([t_n,t_{n+1}]\)</span>. However, we may choose any point
+<span class="math">\(\tilde t \in [t_n,t_{n+1}]\)</span>.
+The difficulty
+is that evaluating the right-hand side <span class="math">\(-au\)</span> at an arbitrary point
+faces the same problem as in
+the section <a class="reference internal" href="#decay-schemes-cn"><span class="std std-ref">The Crank-Nicolson scheme</span></a>: the point value must be expressed
+by the discrete <span class="math">\(u\)</span> quantities that we compute by the scheme, i.e.,
+<span class="math">\(u^n\)</span> and <span class="math">\(u^{n+1}\)</span>. Following the averaging idea from
+the section <a class="reference internal" href="#decay-schemes-cn"><span class="std std-ref">The Crank-Nicolson scheme</span></a>,
+the value of <span class="math">\(u\)</span> at an arbitrary point <span class="math">\(\tilde t\)</span> can be
+calculated as a <em>weighted average</em>, which generalizes the arithmetic mean
+<span class="math">\(\half u^n + {\half}u^{n+1}\)</span>.
+The weighted average reads</p>
 </div>
-<p>The <code class="docutils literal"><span class="pre">test_solver_three_steps</span></code> function follows widely used conventions
-for <em>unit testing</em>. By following such conventions we can at a later
-stage easily execute a big test suite for our software. That is, after
-a small modification is made to the program, we can by typing just
-a short command, run through a large number of tests to check that the
-modifications do not break any computations.
-The conventions boil down to three rules:</p>
-<blockquote>
-<div><ul class="simple">
-<li>The test function name must start with <code class="docutils literal"><span class="pre">test_</span></code> and the function
-cannot take any arguments.</li>
-<li>The test must end up in a boolean expression that is <code class="docutils literal"><span class="pre">True</span></code> if
-the test was passed and <code class="docutils literal"><span class="pre">False</span></code> if it failed.</li>
-<li>The function must run <code class="docutils literal"><span class="pre">assert</span></code> on the boolean expression, resulting
-in program abortion (due to an <code class="docutils literal"><span class="pre">AssertionError</span></code> exception) if
-the test failed.</li>
-</ul>
-</div></blockquote>
-<p>The main program can routinely run the verification test prior to
-solving the real problem:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">test_solver_three_steps</span><span class="p">()</span>
-<span class="n">plot_numerical_and_exact</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">show</span><span class="p">()</span>
-</pre></div>
+<div class="math" id="equation-decay:thetaavg_u">
+<span id="eq-decay-thetaavg-u"></span><span class="eqno">(17)</span>\[        u(\tilde t) \approx \theta u^{n+1} + (1-\theta) u^{n},\]\[where  \( \theta\in [0,1] \)  is a weighting factor.
+We can also express  \( \tilde t \)  as a similar weighted average\]\[.. _Eq:decay:thetaavg_t:\]</div>
+<div class="math" id="equation-decay:thetaavg_t">
+<span class="eqno">(18)</span>\[        \tilde t \approx \theta t_{n+1} + (1-\theta) t_{n}\tp\]\[Let now the ODE hold at the point
+ \( \tilde t\in [t_n,t_{n+1}] \) , approximate  \( u^{\prime} \)  by the fraction
+ \( (u^{n+1}-u^{n})/(t_{n+1}-t_n) \) , and approximate the right-hand
+side  \( -au \)  by the weighted average :eq:`decay:thetaavg_u`.
+The result is :eq:`decay:th0`.\]</div>
 </div>
-<p>(Rather than calling <code class="docutils literal"><span class="pre">test_*()</span></code> functions explicitly, one will
-normally ask a testing framework like nose
-or pytest to find and run such functions.)
-The complete program including the verification above is
-found in the file <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_v3.py">decay_v3.py</a>.</p>
+<div class="section" id="constant-time-step">
+<h3>Constant time step<a class="headerlink" href="#constant-time-step" title="Permalink to this headline">¶</a></h3>
+<p>All schemes up to now have been formulated for a general non-uniform
+mesh in time: <span class="math">\(t_0 &lt; t_1 &lt; \cdots &lt; t_{N_t}\)</span>.
+Non-uniform meshes are highly relevant
+since one can use many points in regions where <span class="math">\(u\)</span> varies rapidly, and
+fewer points in regions where <span class="math">\(u\)</span> is slowly varying. This idea saves
+the total number of points and therefore makes it faster to compute the mesh
+function <span class="math">\(u^n\)</span>. Non-uniform meshes are used together with
+<em>adaptive</em> methods that are able to adjust the time mesh during the
+computations (the section <a class="reference internal" href="._book007.html#decay-fd2-adaptiverk"><span class="std std-ref">Example: Adaptive Runge-Kutta methods</span></a> applies adaptive methods).</p>
+<p id="index-24">However, a uniformly distributed set of mesh points is not only
+convenient, but also
+sufficient for many applications. Therefore, it is a very common
+choice. We shall
+present the finite difference schemes for a uniform point distribution
+<span class="math">\(t_n=n\Delta t\)</span>, where <span class="math">\(\Delta t\)</span> is the constant spacing between
+the mesh points, also referred to as the <em>time step</em>.
+The resulting formulas look simpler and are more
+well known.</p>
+<div class="admonition-summary-of-schemes-for-constant-time-step admonition">
+<p class="first last admonition-title">Summary of schemes for constant time step</p>
 </div>
-</div>
-<div class="section" id="computing-the-numerical-error-as-a-mesh-function">
-<span id="decay-computing-error"></span><h2>Computing the numerical error as a mesh function<a class="headerlink" href="#computing-the-numerical-error-as-a-mesh-function" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have some evidence for a correct implementation, we are in
-position to compare the computed <span class="math">\(u^n\)</span> values in the <code class="docutils literal"><span class="pre">u</span></code> array with
-the exact <span class="math">\(u\)</span> values at the mesh points, in order to study the error
-in the numerical solution.</p>
-<p id="index-7">A natural way to compare the exact and discrete solutions is to
-calculate their difference as a mesh function for the error:</p>
-<div class="math">
-\[e^n = \uex(t_n) - u^n,\quad n=0,1,\ldots,N_t \tp\]</div>
-<p>We may view the mesh function
-<span class="math">\(\uex^n = \uex(t_n)\)</span> as a representation of the continuous function <span class="math">\(\uex(t)\)</span>
-defined for all <span class="math">\(t\in [0,T]\)</span>. In fact,
-<span class="math">\(\uex^n\)</span> is often called the <em>representative</em> of
-<span class="math">\(\uex\)</span> on the mesh. Then, <span class="math">\(e^n = \uex^n - u^n\)</span> is clearly
-the difference of two mesh functions.</p>
-<p>The error mesh function <span class="math">\(e^n\)</span> can be computed by</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>  <span class="c"># Numerical sol.</span>
-<span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>      <span class="c"># Representative of exact sol.</span>
-<span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
-</pre></div>
-</div>
-<p>Note that the mesh functions <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">u_e</span></code> are represented by arrays
-and associated with the points in the array <code class="docutils literal"><span class="pre">t</span></code>.</p>
-<span class="target" id="index-8"></span><span class="target" id="index-9"></span><div class="admonition-array-arithmetics admonition" id="index-10">
-<p class="first admonition-title">Array arithmetics</p>
-<p>The last statements</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-<span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
-</pre></div>
-</div>
-<p>demonstrate some standard examples of array arithmetics: <code class="docutils literal"><span class="pre">t</span></code> is an
-array of mesh points that we pass to <code class="docutils literal"><span class="pre">exact_solution</span></code>. This function
-evaluates <code class="docutils literal"><span class="pre">-a*t</span></code>, which is a scalar times an array, meaning that
-the scalar is multiplied with each array element.
-The result is an array, let us call it <code class="docutils literal"><span class="pre">tmp1</span></code>. Then
-<code class="docutils literal"><span class="pre">exp(tmp1)</span></code> means applying the exponential function to each element in
-<code class="docutils literal"><span class="pre">tmp1</span></code>, giving an array, say <code class="docutils literal"><span class="pre">tmp2</span></code>. Finally, <code class="docutils literal"><span class="pre">I*tmp2</span></code> is computed
-(scalar times array) and <code class="docutils literal"><span class="pre">u_e</span></code> refers to this array returned from
-<code class="docutils literal"><span class="pre">exact_solution</span></code>. The expression <code class="docutils literal"><span class="pre">u_e</span> <span class="pre">-</span> <span class="pre">u</span></code> is the difference between
-two arrays, resulting in a new array referred to by <code class="docutils literal"><span class="pre">e</span></code>.</p>
-<p class="last">Replacement of array element computations inside a loop by array
-arithmetics is known as <em>vectorization</em>.</p>
-</div>
-</div>
-<div class="section" id="computing-the-norm-of-the-error-mesh-function">
-<span id="decay-computing-error-norm"></span><h2>Computing the norm of the error mesh function<a class="headerlink" href="#computing-the-norm-of-the-error-mesh-function" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-11"></span><p id="index-12">Instead of working with the error <span class="math">\(e^n\)</span> on the entire mesh, we
-often want a single number expressing the size of the error.
-This is obtained by taking the norm of the error function.</p>
-<p>Let us first define norms of a function <span class="math">\(f(t)\)</span>
-defined for all <span class="math">\(t\in [0,T]\)</span>.
-Three common norms are</p>
-<div class="math" id="equation-decay:norms:L2">
-<span id="eq-decay-norms-l2"></span><span class="eqno">(1)</span>\[     ||f||_{L^2} = \left( \int_0^T f(t)^2 dt\right)^{1/2},\]</div>
-<div class="math" id="equation-decay:norms:L1">
-<span id="eq-decay-norms-l1"></span><span class="eqno">(2)</span>\[     ||f||_{L^1} = \int_0^T |f(t)| dt,\]</div>
-<div class="math" id="equation-decay:norms:Linf">
-<span id="eq-decay-norms-linf"></span><span class="eqno">(3)</span>\[     ||f||_{L^\infty} = \max_{t\in [0,T]}|f(t)|\tp\]</div>
-<p>The <span class="math">\(L^2\)</span> norm <a href="#equation-decay:norms:L2">(1)</a> (&#8220;L-two norm&#8221;)
-has nice mathematical properties and
-is the most popular norm. It is a generalization
-of the well-known Eucledian norm of vectors to functions.
-The <span class="math">\(L^1\)</span> norm looks simpler and more intuitive, but has less
-nice mathematical properties compared to the two other norms, so
-it is much less used in computations.
-The <span class="math">\(L^\infty\)</span> is also called the max norm or the supremum norm
-and is widely used. It focuses on a single point with the largest
-value of <span class="math">\(|f|\)</span>, while the other norms measure average behavior of
-the function.</p>
-<p>In fact, there is a whole family of norms,</p>
-<div class="math">
-\[||f||_{L^p} = \left(\int_0^T f(t)^pdt\right)^{1/p},\]</div>
-<p>with <span class="math">\(p\)</span> real. In particular,
-<span class="math">\(p=1\)</span> corresponds to the <span class="math">\(L^1\)</span> norm above while <span class="math">\(p=\infty\)</span> is the
-<span class="math">\(L^\infty\)</span> norm.</p>
-<span class="target" id="index-13"></span><span class="target" id="index-14"></span><p id="index-15">Numerical computations involving mesh functions need corresponding norms.
-Given a set of function values, <span class="math">\(f^n\)</span>, and some associated mesh points, <span class="math">\(t_n\)</span>,
-a numerical integration rule can be used to calculate the <span class="math">\(L^2\)</span> and
-<span class="math">\(L^1\)</span> norms defined above. Imagining that the mesh function is extended
-to vary linearly between the mesh points, the Trapezoidal rule is
-in fact an exact integration rule. A possible modification of the <span class="math">\(L^2\)</span>
-norm for a mesh function <span class="math">\(f^n\)</span> on a uniform mesh with spacing <span class="math">\(\Delta t\)</span>
-is therefore the well-known Trapezoidal integration formula</p>
-<div class="math">
-\[||f^n|| = \left(\Delta t\left(\half(f^0)^2 + \half(f^{N_t})^2
-+ \sum_{n=1}^{N_t-1} (f^n)^2\right)\right)^{1/2}\]</div>
-<p>A common approximation of this expression, motivated by the
-convenience of having a simpler formula, is</p>
-<div class="math">
-\[||f^n||_{\ell^2} = \left(\Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2} \tp\]</div>
-<p>This is called the discrete <span class="math">\(L^2\)</span> norm and denoted by <span class="math">\(\ell^2\)</span>.
-If <span class="math">\(||f||_{\ell^2}^2\)</span> (i.e., the square of the norm) is used
-instead of the Trapezoidal integration formula,
-the error
-is <span class="math">\(\Delta t((f^0)^2 + (f^{N_t})^2)/2\)</span>. This means that the
-weights at the end points of the mesh function are perturbed,
-but as <span class="math">\(\Delta t\rightarrow 0\)</span>, the error from this perturbation goes
-to zero. As long as we are consistent and
-stick to one kind of integration
-rule for the norm of a mesh function, the details and accuracy of this
-rule is of no concern.</p>
-<p>The three discrete norms for a mesh function <span class="math">\(f^n\)</span>, corresponding to
-the <span class="math">\(L^2\)</span>, <span class="math">\(L^1\)</span>, and <span class="math">\(L^\infty\)</span> norms of <span class="math">\(f(t)\)</span> defined above, are
-defined by</p>
-<div class="math" id="equation-decay:norms:l2">
-<span id="id2"></span><span class="eqno">(4)</span>\[     ||f^n||_{\ell^2} = \left( \Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2},\]</div>
-<div class="math" id="equation-decay:norms:l1">
-<span id="id3"></span><span class="eqno">(5)</span>\[     ||f^n||_{\ell^1} = \Delta t\sum_{n=0}^{N_t} |f^n|\]</div>
-<div class="math" id="equation-decay:norms:linf">
-<span id="id4"></span><span class="eqno">(6)</span>\[     ||f^n||_{\ell^\infty} = \max_{0\leq n\leq N_t}|f^n|\tp\]</div>
-<p>Note that the <span class="math">\(L^2\)</span>, <span class="math">\(L^1\)</span>, <span class="math">\(\ell^2\)</span>, and <span class="math">\(\ell^1\)</span> norms depend on the
-length of the interval of interest (think of <span class="math">\(f=1\)</span>, then the
-norms are proportional to <span class="math">\(\sqrt{T}\)</span> or <span class="math">\(T\)</span>). In some applications it
-is convenient to think of a mesh function as just a vector of function
-values without any relation to the interval <span class="math">\([0,T]\)</span>.
-Then one can replace <span class="math">\(\Delta t\)</span> by <span class="math">\(T/N_t\)</span> and simply drop <span class="math">\(T\)</span> (which
-is just a common scaling factor in the norm,
-independent of the vector of function
-values). Moreover, people prefer
-to divide by the total length of the vector, <span class="math">\(N_t+1\)</span>, instead of <span class="math">\(N_t\)</span>.
-This reasoning gives rise to the <em>vector norms</em> for a vector
-<span class="math">\(f=(f_0,\ldots,f_{N})\)</span>:</p>
-<div class="math" id="equation-decay:norms:vl2">
-<span id="eq-decay-norms-vl2"></span><span class="eqno">(7)</span>\[     ||f||_2 = \left( \frac{1}{N+1}\sum_{n=0}^{N} (f_n)^2\right)^{1/2},\]</div>
-<div class="math" id="equation-decay:norms:vl1">
-<span id="eq-decay-norms-vl1"></span><span class="eqno">(8)</span>\[     ||f||_1 = \frac{1}{N+1}\sum_{n=0}^{N} |f_n|\]</div>
-<div class="math" id="equation-decay:norms:vlinf">
-<span id="eq-decay-norms-vlinf"></span><span class="eqno">(9)</span>\[     ||f||_{\ell^\infty} = \max_{0\leq n\leq N}|f_n|\tp\]</div>
-<p>Here we have used the common vector component notation with subscripts
-(<span class="math">\(f_n\)</span>) and <span class="math">\(N\)</span> as length. We will mostly work with mesh functions
-and use the discrete <span class="math">\(\ell^2\)</span>
-norm <a href="#equation-decay:norms:l2">(4)</a> or the max norm <span class="math">\(\ell^\infty\)</span>
-<a href="#equation-decay:norms:linf">(6)</a>, but the corresponding vector norms
-<a href="#equation-decay:norms:vl2">(7)</a>-<a href="#equation-decay:norms:vlinf">(9)</a> are also much used
-in numerical computations, so it is important to know the different
-norms and the relations between them.</p>
-<p id="index-16">A single number that expresses the size of the numerical error
-will be taken as <span class="math">\(||e^n||_{\ell^2}\)</span> and called <span class="math">\(E\)</span>:</p>
-<div class="math" id="equation-decay:E">
-<span id="eq-decay-e"></span><span class="eqno">(10)</span>\[     E = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}\]</div>
-<p>The corresponding Python code, using array arithmetics, reads</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal"><span class="pre">sum</span></code> function comes from <code class="docutils literal"><span class="pre">numpy</span></code> and computes the sum of the elements
-of an array. Also the <code class="docutils literal"><span class="pre">sqrt</span></code> function is from <code class="docutils literal"><span class="pre">numpy</span></code> and computes the
-square root of each element in the array argument.</p>
-<div class="section" id="scalar-computing">
-<span id="index-17"></span><h3>Scalar computing<a class="headerlink" href="#scalar-computing" title="Permalink to this headline">¶</a></h3>
-<p>Instead of doing array computing <code class="docutils literal"><span class="pre">sqrt(dt*sum(e**2))</span></code> we can compute with
-one element at a time:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>     <span class="c"># length of u array (alt: u.size)</span>
-<span class="n">u_e</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="n">u_e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">dt</span>
-<span class="n">e</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-<span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c"># summation variable</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">error</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="n">s</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Such element-wise computing, often called <em>scalar</em> computing, takes
-more code, is less readable, and runs much slower than what we
-can achieve with array computing.</p>
-</div>
-</div>
-<div class="section" id="experiments-with-computing-and-plotting">
-<h2>Experiments with computing and plotting<a class="headerlink" href="#experiments-with-computing-and-plotting" title="Permalink to this headline">¶</a></h2>
-<p>Let us write down a new function that wraps up the computation and all
-the plotting statements used for comparing the exact and numerical
-solutions. This function can be called with various <span class="math">\(\theta\)</span> and
-<span class="math">\(\Delta t\)</span> values to see how the error depends on the method and mesh
-resolution.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">explore</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">makeplot</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Run a case with the solver, compute error measure,</span>
-<span class="sd">    and plot the numerical and exact solutions (if makeplot=True).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>    <span class="c"># Numerical solution</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-    <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
-    <span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">makeplot</span><span class="p">:</span>
-        <span class="n">figure</span><span class="p">()</span>                         <span class="c"># create new plot</span>
-        <span class="n">t_e</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>       <span class="c"># fine mesh for u_e</span>
-        <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-        <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">)</span>           <span class="c"># red dashes w/circles</span>
-        <span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>             <span class="c"># blue line for exact sol.</span>
-        <span class="n">legend</span><span class="p">([</span><span class="s">&#39;numerical&#39;</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">])</span>
-        <span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
-        <span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;u&#39;</span><span class="p">)</span>
-        <span class="n">title</span><span class="p">(</span><span class="s">&#39;theta=</span><span class="si">%g</span><span class="s">, dt=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">))</span>
-        <span class="n">theta2name</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;FE&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;BE&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">:</span> <span class="s">&#39;CN&#39;</span><span class="p">}</span>
-        <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_</span><span class="si">%g</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta2name</span><span class="p">[</span><span class="n">theta</span><span class="p">],</span> <span class="n">dt</span><span class="p">))</span>
-        <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_</span><span class="si">%g</span><span class="s">.pdf&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta2name</span><span class="p">[</span><span class="n">theta</span><span class="p">],</span> <span class="n">dt</span><span class="p">))</span>
-        <span class="n">show</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">E</span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal"><span class="pre">figure()</span></code> call is key: without it, a new <code class="docutils literal"><span class="pre">plot</span></code> command will
-draw the new pair of curves in the same plot window, while we want
-the different pairs to appear in separate windows and files.
-Calling <code class="docutils literal"><span class="pre">figure()</span></code> ensures this.</p>
-<p>Instead of including the <span class="math">\(\theta\)</span> value in the filename to implicitly
-inform about the applied method, the code utilizes a little Python
-dictionary that maps each relevant <span class="math">\(\theta\)</span> value to a corresponding
-acronym for the method name (FE, BE, or CN):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">theta2name</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;FE&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;BE&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">:</span> <span class="s">&#39;CN&#39;</span><span class="p">}</span>
-<span class="n">savefig</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_</span><span class="si">%g</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta2name</span><span class="p">[</span><span class="n">theta</span><span class="p">],</span> <span class="n">dt</span><span class="p">))</span>
-</pre></div>
-</div>
-<span class="target" id="index-18"></span><span class="target" id="index-19"></span><span class="target" id="index-20"></span><p id="index-21">The <code class="docutils literal"><span class="pre">explore</span></code> function stores the plot in two different image file formats:
-PNG and PDF. The PNG format is suitable for
-being included in HTML documents, while the PDF format provides
-higher quality for LaTeX (i.e., pdfLaTeX) documents.
-Frequently used viewers for these
-image files on Unix systems are <code class="docutils literal"><span class="pre">gv</span></code> (comes with Ghostscript)
-for the PDF format and
-<code class="docutils literal"><span class="pre">display</span></code> (from the ImageMagick software suite) for PNG files:</p>
-<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; gv BE_0.5.pdf
-Terminal&gt; display BE_0.5.png
-</pre></div>
-</div>
-<p>A main program may run a loop over the three methods (given by
-their corresponding <span class="math">\(\theta\)</span> values)
-and call <code class="docutils literal"><span class="pre">explore</span></code> to compute errors and make plots:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt_values</span><span class="p">,</span> <span class="n">theta_values</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
-    <span class="k">print</span> <span class="s">&#39;theta   dt       error&#39;</span>  <span class="c"># Column headings in table</span>
-    <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">theta_values</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">:</span>
-            <span class="n">E</span> <span class="o">=</span> <span class="n">explore</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">makeplot</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-            <span class="k">print</span> <span class="s">&#39;</span><span class="si">%4.1f</span><span class="s"> </span><span class="si">%6.2f</span><span class="s">: </span><span class="si">%12.3E</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span>
-
-<span class="n">main</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">dt_values</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>The file <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_plot_mpl.py">decay_plot_mpl.py</a>
-contains the complete code with the functions above.
-Running this program results in</p>
-<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python decay_plot_mpl.py
-theta   dt       error
- 0.0   0.40:    2.105E-01
- 0.0   0.04:    1.449E-02
- 0.5   0.40:    3.362E-02
- 0.5   0.04:    1.887E-04
- 1.0   0.40:    1.030E-01
- 1.0   0.04:    1.382E-02
-</pre></div>
-</div>
-<p>We observe that reducing <span class="math">\(\Delta t\)</span> by a factor of 10 increases the
-accuracy for all three methods. We also see that
-the combination of <span class="math">\(\theta=0.5\)</span> and a small time step <span class="math">\(\Delta t =0.04\)</span>
-gives a much more accurate solution, and that <span class="math">\(\theta=0\)</span> and <span class="math">\(\theta=1\)</span>
-with <span class="math">\(\Delta t = 0.4\)</span> result in the least accurate solutions.</p>
-<p>Figure <a class="reference internal" href="#decay-fig-fe1"><span class="std std-ref">The Forward Euler scheme for two values of the time step</span></a> demonstrates that the numerical solution
-produced by the Forward Euler method with
-<span class="math">\(\Delta t=0.4\)</span> clearly lies below the exact curve, but that the
-accuracy improves considerably by reducing the time step by a factor
-of 10.</p>
-<div class="figure" id="id8">
-<span id="decay-fig-fe1"></span><a class="reference internal image-reference" href="_images/FE1.png"><img alt="_images/FE1.png" src="_images/FE1.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-text"><em>The Forward Euler scheme for two values of the time step</em></span></p>
-</div>
-<p>The behavior of the two other schemes is shown in Figures <a class="reference internal" href="#decay-fig-be1"><span class="std std-ref">The Backward Euler scheme for two values of the time step</span></a>
-and <a class="reference internal" href="#decay-fig-cn1"><span class="std std-ref">The Crank-Nicolson scheme for two values of the time step</span></a>. Crank-Nicolson is obviously the most accurate
-scheme from this visual point of view.</p>
-<div class="figure" id="id9">
-<span id="decay-fig-be1"></span><a class="reference internal image-reference" href="_images/BE1.png"><img alt="_images/BE1.png" src="_images/BE1.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-text"><em>The Backward Euler scheme for two values of the time step</em></span></p>
-</div>
-<div class="figure" id="id10">
-<span id="decay-fig-cn1"></span><a class="reference internal image-reference" href="_images/CN1.png"><img alt="_images/CN1.png" src="_images/CN1.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-text"><em>The Crank-Nicolson scheme for two values of the time step</em></span></p>
-</div>
-<span class="target" id="index-22"></span><div class="section" id="combining-plot-files-1">
-<span id="index-23"></span><h3>Combining plot files  (1)<a class="headerlink" href="#combining-plot-files-1" title="Permalink to this headline">¶</a></h3>
-<p>Mounting two PNG files beside each other, as done in Figures
-<a class="reference internal" href="#decay-fig-fe1"><span class="std std-ref">The Forward Euler scheme for two values of the time step</span></a>-<a class="reference internal" href="#decay-fig-cn1"><span class="std std-ref">The Crank-Nicolson scheme for two values of the time step</span></a>, is easily carried out by the
-<a class="reference external" href="http://www.imagemagick.org/script/montage.php">montage</a> program
-from the ImageMagick suite:</p>
-<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; montage -background white -geometry 100% -tile 2x1 \
-          FE_0.4.png FE_0.04.png FE1.png
-Terminal&gt; convert -trim FE1.png FE1.png
-</pre></div>
-</div>
-<p>The <code class="docutils literal"><span class="pre">-geometry</span></code> argument is used to specify the size of the image. Here,
-we preserve the individual sizes of the images. The <code class="docutils literal"><span class="pre">-tile</span> <span class="pre">HxV</span></code> option
-specifies <code class="docutils literal"><span class="pre">H</span></code> images in the horizontal direction and <code class="docutils literal"><span class="pre">V</span></code> images in
-the vertical direction. A series of image files to be combined are then listed,
-with the name of the resulting combined image, here <code class="docutils literal"><span class="pre">FE1.png</span></code> at the end.
-The <code class="docutils literal"><span class="pre">convert</span> <span class="pre">-trim</span></code> command removes surrounding white areas in the figure
-(an operation usually known as <em>cropping</em> in image manipulation programs).</p>
-<span class="target" id="index-24"></span><span class="target" id="index-25"></span><p id="index-26">For LaTeX reports it is not recommended to use <code class="docutils literal"><span class="pre">montage</span></code> and PNG files
-as the result has too low resolution. Instead, plots should be made
-in the PDF format and combined using the <code class="docutils literal"><span class="pre">pdftk</span></code>, <code class="docutils literal"><span class="pre">pdfnup</span></code>, and <code class="docutils literal"><span class="pre">pdfcrop</span></code> tools
-(on Linux/Unix):</p>
-<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; pdftk FE_0.4.png FE_0.04.png output tmp.pdf
-Terminal&gt; pdfnup --nup 2x1 --outfile tmp.pdf tmp.pdf
-Terminal&gt; pdfcrop tmp.pdf FE1.png  # output in FE1.png
-</pre></div>
-</div>
-<p>Here, <code class="docutils literal"><span class="pre">pdftk</span></code> combines images into a multi-page PDF file, <code class="docutils literal"><span class="pre">pdfnup</span></code>
-combines the images in individual pages to a table of images (pages),
-and <code class="docutils literal"><span class="pre">pdfcrop</span></code> removes white margins in the resulting combined image file.</p>
-</div>
-<div class="section" id="plotting-with-scitools">
-<h3>Plotting with SciTools<a class="headerlink" href="#plotting-with-scitools" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference external" href="https://github.com/hplgit/scitools">SciTools package</a> provides a
-unified plotting interface, called Easyviz, to many different plotting
-packages, including Matplotlib, Gnuplot, Grace, MATLAB,
-VTK, OpenDX, and VisIt. The syntax is very similar to that of
-Matplotlib and MATLAB. In fact, the plotting commands shown above look
-the same in SciTool&#8217;s Easyviz interface, apart from the import
-statement, which reads</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">scitools.std</span> <span class="kn">import</span> <span class="o">*</span>
-</pre></div>
-</div>
-<p>This statement performs a <code class="docutils literal"><span class="pre">from</span> <span class="pre">numpy</span> <span class="pre">import</span> <span class="pre">*</span></code> as well as an import
-of the most common pieces of the Easyviz (<code class="docutils literal"><span class="pre">scitools.easyviz</span></code>) package,
-along with some additional numerical functionality.</p>
-<p>With Easyviz one can
-merge several plotting commands into a single one
-using keyword arguments:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">,</span>           <span class="c"># red dashes w/circles</span>
-     <span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">,</span>             <span class="c"># blue line for exact sol.</span>
-     <span class="n">legend</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;numerical&#39;</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">],</span>
-     <span class="n">xlabel</span><span class="o">=</span><span class="s">&#39;t&#39;</span><span class="p">,</span>
-     <span class="n">ylabel</span><span class="o">=</span><span class="s">&#39;u&#39;</span><span class="p">,</span>
-     <span class="n">title</span><span class="o">=</span><span class="s">&#39;theta=</span><span class="si">%g</span><span class="s">, dt=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">),</span>
-     <span class="n">savefig</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_</span><span class="si">%g</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta2name</span><span class="p">[</span><span class="n">theta</span><span class="p">],</span> <span class="n">dt</span><span class="p">),</span>
-     <span class="n">show</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_plot_st.py">decay_plot_st.py</a> file
-contains such a demo.</p>
-<p>By default, Easyviz employs Matplotlib for plotting, but <a class="reference external" href="http://www.gnuplot.info/">Gnuplot</a> and <a class="reference external" href="http://plasma-gate.weizmann.ac.il/Grace/">Grace</a> are viable alternatives:</p>
-<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python decay_plot_st.py --SCITOOLS_easyviz_backend gnuplot
-Terminal&gt; python decay_plot_st.py --SCITOOLS_easyviz_backend grace
-</pre></div>
-</div>
-<p>The actual tool used for creating plots (called <em>backend</em>)
-and numerous other options
-can be permanently set in SciTool&#8217;s configuration file.</p>
-<p>All the Gnuplot windows are launched without any need to kill one before
-the next one pops up (as is the case with Matplotlib) and one can
-press the key &#8216;q&#8217; anywhere in a plot window to kill it.
-Another advantage of Gnuplot is the automatic choice of sensible
-and distinguishable line types in black-and-white PDF and PostScript
-files.</p>
-<p>For more detailed information on syntax and plotting capabilities,
-we refer to the Matplotlib <a class="reference internal" href="._book009.html#ref02" id="id5">[Ref02]</a>
-and SciTools <a class="reference internal" href="._book009.html#ref03" id="id6">[Ref03]</a> documentation.
-The hope is that
-the programming syntax explained so far suffices for understanding the
-basic plotting functionality and being able to look up
-the cited technical documentation.</p>
+<div class="math" id="equation-decay:FE:u">
+<span id="eq-decay-fe-u"></span><span class="eqno">(19)</span>\[        u^{n+1} = (1 - a\Delta t )u^n  \quad (\hbox{FE})\]\[.. _Eq:decay:BE:u:\]</div>
+<div class="math" id="equation-decay:BE:u">
+<span class="eqno">(20)</span>\[        u^{n+1} = \frac{1}{1+ a\Delta t} u^n  \quad (\hbox{BE})\]\[.. _Eq:decay:CN:u:\]</div>
+<div class="math" id="equation-decay:CN:u">
+<span class="eqno">(21)</span>\[        u^{n+1} = \frac{1-\half a\Delta t}{1 + \half a\Delta t} u^n \quad (\hbox{CN})\]\[.. _Eq:decay:th:u:\]</div>
+<div class="math" id="equation-decay:th:u">
+<span class="eqno">(22)</span>\[        u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n \quad (\theta-\hbox{rule})\]</div>
+<p>It is not accidental that we focus on presenting the Forward Euler, Backward
+Euler, and Crank-Nicolson schemes. They complement each other with their
+different pros and cons, thus providing a useful collection of
+solution methods for many differential equation problems.
+The unifying notation of the <span class="math">\(\theta\)</span>-rule makes it convenient to
+work with all three methods through just one formula.</p>
 <div class="admonition-test-your-understanding admonition">
 <p class="first admonition-title">Test your understanding</p>
-<p class="last"><a class="reference internal" href="._book007.html#decay-app-exer-cooling-py"><span class="std std-ref">Exercise 18: Implement schemes for Newton&#8217;s law of cooling</span></a> asks you to implement
-a solver for a problem that is slightly different from the
-one above. You may use the <code class="docutils literal"><span class="pre">solver</span></code> and <code class="docutils literal"><span class="pre">explore</span></code> functions
-explained above as a starting point. Apply the new solver
-to solve <a class="reference internal" href="._book007.html#decay-app-exer-cooling-murder"><span class="std std-ref">Exercise 19: Find time of murder from body temperature</span></a>.</p>
+<p class="last">To check that key concepts are really understood, the reader is
+encouraged to apply the explained finite difference techniques
+to a slightly different equation. For this purpose, we recommend
+you do <a class="reference internal" href="._book008.html#decay-app-exer-cooling-schemes"><span class="std std-ref">Exercise 17: Derive schemes for Newton&#8217;s law of cooling</span></a> now!</p>
 </div>
 </div>
+<div class="section" id="mathematical-derivation-of-finite-difference-formulas">
+<span id="decay-fd-taylor"></span><h3>Mathematical derivation of finite difference formulas<a class="headerlink" href="#mathematical-derivation-of-finite-difference-formulas" title="Permalink to this headline">¶</a></h3>
+<p>The finite difference formulas for approximating the first derivative
+of a function have so far been somewhat justified through graphical
+illustrations in Figures <a class="reference internal" href="#decay-sketch-fe"><span class="std std-ref">Illustration of a forward difference</span></a>, <a class="reference internal" href="#decay-sketch-be"><span class="std std-ref">Illustration of a backward difference</span></a>,
+and <a class="reference internal" href="#decay-sketch-cn"><span class="std std-ref">Illustration of a centered difference</span></a>. The task is to approximate the derivative
+at a point of a curve using only two function values. By drawing
+a straight line through the points, we have some approximation to
+the tangent of the curve and use the slope of this line as
+an approximation to the derivative. The slope can be computed by
+inspecting the figures.</p>
+<p>However, we can alternatively derive the finite difference formulas by
+pure mathematics. The key tool for this approach is Taylor series,
+or more precisely, approximation of functions by lower-order
+Taylor polynomials. Given a function <span class="math">\(f(x)\)</span> that is sufficiently
+smooth (i.e., <span class="math">\(f(x)\)</span> has &#8220;enough derivatives&#8221;),
+a Taylor polynomial of degree <span class="math">\(m\)</span> can be used to approximate the
+value of the function <span class="math">\(f(x)\)</span> if we know the values of <span class="math">\(f\)</span> and its
+first <span class="math">\(m\)</span> derivatives at some other point <span class="math">\(x=a\)</span>. The formula for the
+Taylor polynomial reads</p>
+<div class="math">
+\[f(x)  \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2 +
+\frac{1}{6}f'''(a)(x-a)^3 + \cdots \nonumber\]</div>
+<div class="math">
+\[\quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(a)(x-a)^m\tp\]</div>
+<p>For a function of time, <span class="math">\(f(t)\)</span>, related to a mesh with spacing <span class="math">\(\Delta t\)</span>,
+we often need the Taylor polynomial approximation at <span class="math">\(f(t_n\pm\Delta t)\)</span>
+given <span class="math">\(f\)</span> and its derivatives at <span class="math">\(t=t_n\)</span>. Replacing <span class="math">\(x\)</span> by <span class="math">\(t_n+\Delta t\)</span> and
+<span class="math">\(a\)</span> by <span class="math">\(t_n\)</span> gives</p>
+<div class="math">
+\[f(t_n+\Delta t)  \approx f(t_n) + f'(t_n)\Delta t + \frac{1}{2}f''(t_n)
+\Delta t^2 +
+\frac{1}{6}f'''(t_n)\Delta t^3 + \cdots\nonumber\]</div>
+<div class="math" id="equation-decay:taylor:FE1">
+<span id="eq-decay-taylor-fe1"></span><span class="eqno">(23)</span>\[     \quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^m\tp\]</div>
+<div class="section" id="the-forward-difference">
+<h4>The forward difference<a class="headerlink" href="#the-forward-difference" title="Permalink to this headline">¶</a></h4>
+<p>We can use <a href="#equation-decay:taylor:FE1">(23)</a> to find an approximation for
+<span class="math">\(f'(t_n)\)</span> simply by solving with respect to this quantity:</p>
+<div class="math">
+\[f'(t_n)  \approx  \frac{f(t_n+\Delta t) - f(t_n)}{\Delta t}
+- \frac{1}{2}f''(t_n)\Delta t -
+\frac{1}{6}f'''(t_n)\Delta t^2 + \cdots\nonumber\]</div>
+<div class="math" id="equation-decay:taylor:FE2">
+<span id="eq-decay-taylor-fe2"></span><span class="eqno">(24)</span>\[     \quad - \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^{m-1}\tp\]</div>
+<p>By letting <span class="math">\(m\rightarrow\infty\)</span>, this formula is exact, but that is not
+so much of practical value. A more interesting observation is that
+all the power terms in <span class="math">\(\Delta t\)</span> vanish as <span class="math">\(\Delta t\rightarrow 0\)</span>, i.e.,
+the formula</p>
+<div class="math" id="equation-decay:taylor:FE3">
+<span id="eq-decay-taylor-fe3"></span><span class="eqno">(25)</span>\[     f'(t_n) \approx \frac{f(t_n+\Delta t) - f(t_n)}{\Delta t}\]</div>
+<p>is exact in the limit <span class="math">\(\Delta t\rightarrow 0\)</span>.</p>
+<p>The interesting feature of <a href="#equation-decay:taylor:FE2">(24)</a> is that we have
+a measure of the error in the formula <a href="#equation-decay:taylor:FE3">(25)</a>: the
+error is given by the extra terms on the right-hand side of
+<a href="#equation-decay:taylor:FE2">(24)</a>. We assume that <span class="math">\(\Delta t\)</span> is a small quantity
+(<span class="math">\(\Delta t\ll 1\)</span>).
+Then <span class="math">\(\Delta t^2\ll\Delta t\)</span>, <span class="math">\(\Delta t^3\ll \Delta t^2\)</span>, and so on,
+which means that the first term is the dominating term. This first
+term reads <span class="math">\(-\frac{1}{2}f''(t_n)\Delta t\)</span> and can be taken as a
+measure of the error in the Forward Euler formula.</p>
 </div>
-<div class="section" id="memory-saving-implementation">
-<h2>Memory-saving implementation<a class="headerlink" href="#memory-saving-implementation" title="Permalink to this headline">¶</a></h2>
-<p>The computer memory requirements of our implementations so far consist
-mainly of the <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">t</span></code> arrays, both of length <span class="math">\(N_t+1\)</span>.  Also, for
-the programs that involve array arithmetics, Python needs memory space
-for storing temporary arrays. For example, computing <code class="docutils literal"><span class="pre">I*exp(-a*t)</span></code>
-requires storing the intermediate result <code class="docutils literal"><span class="pre">a*t</span></code> before the preceding
-minus sign can be applied. The resulting array is temporarily stored
-and provided as input to the <code class="docutils literal"><span class="pre">exp</span></code> function.  Regardless of how we
-implement simple ODE problems, storage requirements are very modest
-and put no restrictions on how we choose our data structures and
-algorithms.  Nevertheless, when the presented methods are applied to
-three-dimensional PDE problems, memory storage requirements suddenly
-become a challenging issue.</p>
-<p>Let us briefly elaborate on how large the storage requirements can
-quickly be in three-dimensional problems.  The PDE counterpart to our
-model problem <span class="math">\(u'=-a\)</span> is a diffusion equation <span class="math">\(u_t = a\nabla^2 u\)</span>
-posed on a space-time domain. The discrete representation of this
-domain may in 3D be a spatial mesh of <span class="math">\(M^3\)</span> points and a time mesh of
-<span class="math">\(N_t\)</span> points.  In many applications, it is quite typical that <span class="math">\(M\)</span> is
-at least 100, or even 1000.  Storing all the computed <span class="math">\(u\)</span> values, like
-we have done in the programs so far, would demand storing arrays of
-size up to <span class="math">\(M^3N_t\)</span>. This would give a factor of <span class="math">\(M^3\)</span> larger storage
-demands compared to what was required by our ODE programs. Each real
-number in the <code class="docutils literal"><span class="pre">u</span></code> array requires 8 bytes (b) of storage. With <span class="math">\(M=100\)</span>
-and <span class="math">\(N_t=1000\)</span>, there is a storage demand of <span class="math">\((10^3)^3\cdot 1000\cdot
-8 = 8\)</span> Gb for the solution array.  Fortunately, we can usually get rid
-of the <span class="math">\(N_t\)</span> factor, resulting in 8 Mb of storage.  Below we explain
-how this is done (the technique is almost always applied in
-implementations of PDE problems).</p>
-<p>Let us critically evaluate how much we really need to store in the
-computer&#8217;s memory for our implementation of the <span class="math">\(\theta\)</span> method. To
-compute a new <span class="math">\(u^{n+1}\)</span>, all we need is <span class="math">\(u^n\)</span>. This implies that the
-previous <span class="math">\(u^{n-1},u^{n-2},\dots,u^0\)</span> values do not need to be stored,
-although this is convenient for plotting and data analysis in the
-program.  Instead of the <code class="docutils literal"><span class="pre">u</span></code> array we can work with two variables for
-real numbers, <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">u_1</span></code>, representing <span class="math">\(u^{n+1}\)</span> and <span class="math">\(u^n\)</span> in the
-algorithm, respectively.  At each time level, we update <code class="docutils literal"><span class="pre">u</span></code> from <code class="docutils literal"><span class="pre">u_1</span></code>
-and then set <code class="docutils literal"><span class="pre">u_1</span> <span class="pre">=</span> <span class="pre">u</span></code>, so that the computed <span class="math">\(u^{n+1}\)</span> value becomes
-the &#8220;previous&#8221; value <span class="math">\(u^n\)</span> at the next time level. The downside is
-that we cannot plot the solution after the simulation is done since
-only the last two numbers are available.  The remedy is to store
-computed values in a file and use the file for visualizing the
-solution later.</p>
-<p>We have implemented this memory saving idea in the file
-<a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_memsave.py">decay_memsave.py</a>, which is a
-slight modification of <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_plot_mpl.py">decay_plot_mpl.py</a> program.</p>
-<p>The following function demonstrates how we work with the two most
-recent values of the unknown:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">solver_memsave</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">&#39;sol.dat&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.</span>
-<span class="sd">    Minimum use of memory. The solution is stored in a file</span>
-<span class="sd">    (with name filename) for later plotting.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>         <span class="c"># avoid integer division</span>
-    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>  <span class="c"># no of intervals</span>
-
-    <span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-    <span class="c"># u: time level n+1, u_1: time level n</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">u_1</span> <span class="o">=</span> <span class="n">I</span>
-    <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%.16E</span><span class="s">  </span><span class="si">%.16E</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u_1</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">u_1</span>
-        <span class="n">u_1</span> <span class="o">=</span> <span class="n">u</span>
-        <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
-        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%.16E</span><span class="s">  </span><span class="si">%.16E</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">))</span>
-    <span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span>
-</pre></div>
+<div class="section" id="the-backward-difference">
+<h4>The backward difference<a class="headerlink" href="#the-backward-difference" title="Permalink to this headline">¶</a></h4>
+<p>To derive the backward difference, we use the Taylor polynomial
+approximation at <span class="math">\(f(t_n-\Delta t)\)</span>:</p>
+<div class="math">
+\[f(t_n-\Delta t) \approx f(t_n) - f'(t_n)\Delta t + \frac{1}{2}f''(t_n)
+\Delta t^2 -
+\frac{1}{6}f'''(t_n)\Delta t^3+ \cdots\nonumber\]</div>
+<div class="math" id="equation-decay:taylor:BE1">
+<span id="eq-decay-taylor-be1"></span><span class="eqno">(26)</span>\[     \quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^m\tp\]</div>
+<p>Solving with respect to <span class="math">\(f'(t_n)\)</span> gives</p>
+<div class="math">
+\[f'(t_n) \approx \frac{f(t_n) - f(t_n-\Delta t)}{\Delta t}
++ \frac{1}{2}f''(t_n)\Delta t -
+\frac{1}{6}f'''(t_n)\Delta t^2+ \cdots\nonumber\]</div>
+<div class="math" id="equation-decay:taylor:BE2">
+<span id="eq-decay-taylor-be2"></span><span class="eqno">(27)</span>\[     \quad - \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^{m-1}\tp\]</div>
+<p>The term <span class="math">\(\frac{1}{2}f''(t_n)\Delta t\)</span> can be taken as a simple measure of
+the approximation error since it will dominate over the other terms
+as <span class="math">\(\Delta t\rightarrow 0\)</span>.</p>
 </div>
-<p>This code snippet also serves as a quick introduction to file writing in Python.
-Reading the data in the file into arrays <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">u</span></code> are done by the
-function</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;sol.dat&#39;</span><span class="p">):</span>
-    <span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="p">[];</span>  <span class="n">t</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">infile</span><span class="p">:</span>
-        <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&#39;Found more than two numbers on a line!&#39;</span><span class="p">,</span> <span class="n">words</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c"># abort</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-        <span class="n">u</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-</pre></div>
+<div class="section" id="the-centered-difference">
+<h4>The centered difference<a class="headerlink" href="#the-centered-difference" title="Permalink to this headline">¶</a></h4>
+<p>The centered difference approximates the derivative at
+<span class="math">\(t_n+\frac{1}{2}\Delta t\)</span>. Let us write up the Taylor polynomial
+approximations to <span class="math">\(f(t_n)\)</span> and <span class="math">\(f(t_{n+1})\)</span> around <span class="math">\(t_n+\frac{1}{2}\Delta t\)</span>:</p>
+<div class="math">
+\[f(t_n) \approx f(t_n+\frac{1}{2}\Delta t) -
+f'(t_n+\frac{1}{2}\Delta t)\frac{1}{2}\Delta t +
+f''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^2 -\nonumber\]</div>
+<div class="math">
+\[\quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots\]</div>
+<div class="math">
+\[f(t_{n+1})  \approx f(t_n+\frac{1}{2}\Delta t) +
+f'(t_n+\frac{1}{2}\Delta t)\frac{1}{2}\Delta t +
+f''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^2 +\nonumber\]</div>
+<div class="math">
+\[\quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots\]</div>
+<p>Subtracting the first from the second gives</p>
+<div class="math" id="equation-decay:taylor:CN2">
+<span id="eq-decay-taylor-cn2"></span><span class="eqno">(28)</span>\[     f(t_{n+1}) - f(t_n) = f'(t_n+\frac{1}{2}\Delta t)\Delta t
+     + 2f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots\]</div>
+<p>Solving with respect to <span class="math">\(f'(t_n+\frac{1}{2}\Delta t)\)</span> results
+in</p>
+<div class="math" id="equation-decay:taylor:CN3">
+<span id="eq-decay-taylor-cn3"></span><span class="eqno">(29)</span>\[     f'(t_n+\frac{1}{2}\Delta t) \approx \frac{f(t_{n+1}) - f(t_n)}{\Delta t}
+     - \frac{1}{4}f'''(t_n+\frac{1}{2}\Delta t)\Delta t^2 + c
+     \cdots\]</div>
+<p>This time the error measure goes like <span class="math">\(\frac{1}{4}f'''\Delta t^2\)</span>, i.e.,
+it is proportional to <span class="math">\(\Delta t^2\)</span> and not only <span class="math">\(\Delta t\)</span>, which means
+that the error goes faster to zero as <span class="math">\(\Delta t\)</span> is reduced.
+This means that the centered difference formula</p>
+<div class="math" id="equation-decay:taylor:CN4">
+<span id="eq-decay-taylor-cn4"></span><span class="eqno">(30)</span>\[     f'(t_n+\frac{1}{2}\Delta t) \approx \frac{f(t_{n+1}) - f(t_n)}{\Delta t}\]</div>
+<p>is more accurate than the forward and backward differences for small
+<span class="math">\(\Delta t\)</span>.</p>
 </div>
-<p>This type of file with numbers in rows and columns is very common, and
-<code class="docutils literal"><span class="pre">numpy</span></code> has a function <code class="docutils literal"><span class="pre">loadtxt</span></code> which loads such tabular data into a
-two-dimensional array named by the user. Say the name is <code class="docutils literal"><span class="pre">data</span></code>, the
-number in row <code class="docutils literal"><span class="pre">i</span></code> and column <code class="docutils literal"><span class="pre">j</span></code> is then <code class="docutils literal"><span class="pre">data[i,j]</span></code>.  The whole
-column number <code class="docutils literal"><span class="pre">j</span></code> can be extracted by <code class="docutils literal"><span class="pre">data[:,j]</span></code>.  A version of
-<code class="docutils literal"><span class="pre">read_file</span></code> using <code class="docutils literal"><span class="pre">np.loadtxt</span></code> reads</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">read_file_numpy</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;sol.dat&#39;</span><span class="p">):</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span>
-</pre></div>
 </div>
-<p>The present counterpart to the <code class="docutils literal"><span class="pre">explore</span></code> function from
-<a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_plot_mpl.py">decay_plot_mpl.py</a> must run
-<code class="docutils literal"><span class="pre">solver_memsave</span></code> and then load data from file before we can compute
-the error measure and make the plot:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">explore</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">makeplot</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;u.dat&#39;</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver_memsave</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-
-    <span class="n">t</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-    <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
-    <span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">makeplot</span><span class="p">:</span>
-        <span class="n">figure</span><span class="p">()</span>
-        <span class="o">...</span>
-</pre></div>
+<div class="section" id="compact-operator-notation-for-finite-differences">
+<span id="decay-fd-op"></span><h3>Compact operator notation for finite differences<a class="headerlink" href="#compact-operator-notation-for-finite-differences" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-25"></span><p id="index-26">Finite difference formulas can be tedious to write and read,
+especially for differential equations with many terms and many
+derivatives. To save space and help the reader spot
+the nature of the difference approximations, we introduce a
+compact notation. For a function <span class="math">\(u(t)\)</span>,
+a forward difference approximation is denoted
+by the <span class="math">\(D_t^+\)</span> operator and written as</p>
+<div class="math" id="equation-fd:D:f">
+<span id="eq-fd-d-f"></span><span class="eqno">(31)</span>\[     [D_t^+u]^n = \frac{u^{n+1} - u^{n}}{\Delta t}
+     \ \left( \approx \frac{d}{dt} u(t_n)\right)
+     \tp\]</div>
+<p>The notation consists of an operator that approximates
+differentiation with respect to an independent variable, here <span class="math">\(t\)</span>.
+The operator is built of the symbol <span class="math">\(D\)</span>, with the
+independent variable as subscript
+and a superscript denoting the type of difference. The superscript <span class="math">\(\,{}^+\)</span>
+indicates a forward difference.
+We place square brackets around the operator and the function it operates
+on and specify the mesh point, where the operator is acting, by
+a superscript after the closing bracket.</p>
+<p>The corresponding operator notation for a centered difference and
+a backward difference reads</p>
+<div class="math" id="equation-fd:D:c">
+<span id="eq-fd-d-c"></span><span class="eqno">(32)</span>\[     [D_tu]^n = \frac{u^{n+\half} - u^{n-\half}}{\Delta t}
+     \approx \frac{d}{dt} u(t_n),\]</div>
+<p>and</p>
+<div class="math" id="equation-fd:D:b">
+<span id="eq-fd-d-b"></span><span class="eqno">(33)</span>\[     [D_t^-u]^n = \frac{u^{n} - u^{n-1}}{\Delta t}
+     \approx \frac{d}{dt} u(t_n)
+     \tp\]</div>
+<p>Note that the superscript <span class="math">\(\,{}^-\)</span> denotes the backward
+difference, while no superscript implies a central difference.</p>
+<p>An averaging operator is also convenient to have:</p>
+<div class="math" id="equation-fd:mean:a">
+<span id="eq-fd-mean-a"></span><span class="eqno">(34)</span>\[     [\overline{u}^{t}]^n = \half (u^{n-\half} + u^{n+\half} )
+     \approx u(t_n)\]</div>
+<p>The superscript <span class="math">\(t\)</span> indicates that the average is taken along the time
+coordinate. The common average <span class="math">\((u^n + u^{n+1})/2\)</span> can now be
+expressed as <span class="math">\([\overline{u}^{t}]^{n+\half}\)</span>. (When also spatial coordinates
+enter the problem, we need the explicit specification of the coordinate
+after the bar.)</p>
+<p>With our compact notation, the Backward Euler finite difference approximation to <span class="math">\(u^{\prime}=-au\)</span> can be written
+as</p>
+<div class="math">
+\[[D_t^-u]^n = -au^n \tp\]</div>
+<p>In difference equations we often place the square brackets around
+the whole equation, to indicate at which mesh point the equation applies,
+since each term must be approximated at the same point:</p>
+<div class="math">
+\[[D_t^- u  = -au]^n \tp\]</div>
+<p>Similarly, the Forward Euler scheme takes the form</p>
+<div class="math">
+\[[D_t^+ u  = -au]^n,\]</div>
+<p>while the Crank-Nicolson scheme is written as</p>
+<div class="math" id="equation-fd:compact:ex:CN">
+<span id="eq-fd-compact-ex-cn"></span><span class="eqno">(35)</span>\[     [D_t u = -a\overline{u}^t]^{n+\half}\tp\]</div>
+<div class="admonition-question admonition">
+<p class="first admonition-title">Question</p>
+<p class="last">By use of <a href="#equation-fd:D:c">(32)</a> and <a href="#equation-fd:mean:a">(34)</a>, are you able to
+write out the expressions in <a href="#equation-fd:compact:ex:CN">(35)</a> to verify that
+it is indeed the Crank-Nicolson scheme?</p>
 </div>
-<p>Apart from the internal implementation, where <span class="math">\(u^n\)</span> values are stored
-in a file rather than in an array, <code class="docutils literal"><span class="pre">decay_memsave.py</span></code> file works
-exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.py</span></code> file.</p>
+<p>The <span class="math">\(\theta\)</span>-rule can be specified in operator notation by</p>
+<div class="math" id="equation-decay:fd1:op:theta">
+<span id="eq-decay-fd1-op-theta"></span><span class="eqno">(36)</span>\[     [\bar D_t u = -a\overline{u}^{t,\theta}]^{n+\theta},\tp\]</div>
+<p>We define a new time difference</p>
+<div class="math" id="equation-decay:fd1:Du:theta">
+<span id="eq-decay-fd1-du-theta"></span><span class="eqno">(37)</span>\[     \lbrack\bar D_t u\rbrack^{n+\theta} = \frac{u^{n+1}-u^n}{t^{n+1}-t^n},\]</div>
+<p>to be applied at the time point <span class="math">\(t_{n+\theta}\approx\theta t_n + (1-\theta)t_{n+1}\)</span>. This weighted average gives rise to the
+<em>weighted averaging operator</em></p>
+<div class="math" id="equation-decay:fd1:wmean:a">
+<span id="eq-decay-fd1-wmean-a"></span><span class="eqno">(38)</span>\[     \lbrack\overline{u}^{t,\theta}\rbrack^{n+\theta} = (1-\theta)u^{n} + \theta u^{n+1}
+     \approx u(t_{n+\theta}),\]</div>
+<p>where <span class="math">\(\theta\in [0,1]\)</span> as usual. Note that for <span class="math">\(\theta =\half\)</span> we recover
+the standard centered difference and the standard arithmetic mean.
+The idea in <a href="#equation-decay:fd1:op:theta">(36)</a> is to sample the equation at
+<span class="math">\(t_{n+\theta}\)</span>, use a non-symmetric difference at that
+point <span class="math">\([\bar D_t u]^{n+\theta}\)</span>, and a weighted (non-symmetric) mean value.</p>
+<p>An alternative and perhaps clearer notation is</p>
+<div class="math">
+\[[D_t u]^{n+\half} = \theta [-au]^{n+1} + (1-\theta)[-au]^{n}\tp\]</div>
+<p>Looking at the various examples above and comparing them with the
+underlying differential equations, we see immediately which difference
+approximations that have been used and at which point they
+apply. Therefore, the compact notation effectively communicates the
+reasoning behind turning a differential equation into a difference
+equation.</p>
+</div>
 </div>
 </div>
 
@@ -1080,39 +772,45 @@ exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.p
             </center>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Implementation  (1)</a><ul>
-<li><a class="reference internal" href="#computer-language-python">Computer language: Python</a></li>
-<li><a class="reference internal" href="#making-a-solver-function">Making a solver function</a></li>
-<li><a class="reference internal" href="#integer-division">Integer division</a></li>
-<li><a class="reference internal" href="#doc-strings">Doc strings</a></li>
-<li><a class="reference internal" href="#formatting-numbers">Formatting numbers</a></li>
-<li><a class="reference internal" href="#running-the-program">Running the program</a></li>
-<li><a class="reference internal" href="#plotting-the-solution">Plotting the solution</a></li>
-<li><a class="reference internal" href="#verifying-the-implementation">Verifying the implementation</a><ul>
-<li><a class="reference internal" href="#running-a-few-algorithmic-steps-by-hand">Running a few algorithmic steps by hand</a></li>
+<li><a class="reference internal" href="#">Algorithms and implementations</a><ul>
+<li><a class="reference internal" href="#finite-difference-methods">Finite difference methods</a><ul>
+<li><a class="reference internal" href="#a-basic-model-for-exponential-decay">A basic model for exponential decay</a><ul>
+<li><a class="reference internal" href="#the-exact-solution">The exact solution</a></li>
+<li><a class="reference internal" href="#a-complete-problem-formulation">A complete problem formulation</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#computing-the-numerical-error-as-a-mesh-function">Computing the numerical error as a mesh function</a></li>
-<li><a class="reference internal" href="#computing-the-norm-of-the-error-mesh-function">Computing the norm of the error mesh function</a><ul>
-<li><a class="reference internal" href="#scalar-computing">Scalar computing</a></li>
+<li><a class="reference internal" href="#the-forward-euler-scheme">The Forward Euler scheme</a><ul>
+<li><a class="reference internal" href="#step-1-discretizing-the-domain">Step 1: Discretizing the domain</a></li>
+<li><a class="reference internal" href="#step-2-fulfilling-the-equation-at-discrete-time-points">Step 2: Fulfilling the equation at discrete time points</a></li>
+<li><a class="reference internal" href="#step-3-replacing-derivatives-by-finite-differences">Step 3: Replacing derivatives by finite differences</a></li>
+<li><a class="reference internal" href="#step-4-formulating-a-recursive-algorithm">Step 4: Formulating a recursive algorithm</a></li>
+<li><a class="reference internal" href="#interpretation">Interpretation</a></li>
+<li><a class="reference internal" href="#computing-with-the-recursive-formula">Computing with the recursive formula</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#experiments-with-computing-and-plotting">Experiments with computing and plotting</a><ul>
-<li><a class="reference internal" href="#combining-plot-files-1">Combining plot files  (1)</a></li>
-<li><a class="reference internal" href="#plotting-with-scitools">Plotting with SciTools</a></li>
+<li><a class="reference internal" href="#the-backward-euler-scheme">The Backward Euler scheme</a></li>
+<li><a class="reference internal" href="#the-crank-nicolson-scheme">The Crank-Nicolson scheme</a></li>
+<li><a class="reference internal" href="#the-unifying-rule">The unifying <span class="math">\(\theta\)</span>-rule</a></li>
+<li><a class="reference internal" href="#constant-time-step">Constant time step</a></li>
+<li><a class="reference internal" href="#mathematical-derivation-of-finite-difference-formulas">Mathematical derivation of finite difference formulas</a><ul>
+<li><a class="reference internal" href="#the-forward-difference">The forward difference</a></li>
+<li><a class="reference internal" href="#the-backward-difference">The backward difference</a></li>
+<li><a class="reference internal" href="#the-centered-difference">The centered difference</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#memory-saving-implementation">Memory-saving implementation</a></li>
+<li><a class="reference internal" href="#compact-operator-notation-for-finite-differences">Compact operator notation for finite differences</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="._book002.html"
-                        title="previous chapter">Algorithms and implementations</a></p>
+                        title="previous chapter">&lt;no title&gt;</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._book004.html"
-                        title="next chapter">Exercises  (1)</a></p>
+                        title="next chapter">Implementation  (1)</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/._book003.txt"
@@ -1142,10 +840,10 @@ exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.p
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="._book004.html" title="Exercises (1)"
+          <a href="._book004.html" title="Implementation (1)"
              >next</a> |</li>
         <li class="right" >
-          <a href="._book002.html" title="Algorithms and implementations"
+          <a href="._book002.html" title="&lt;no title&gt;"
              >previous</a> |</li>
         <li><a href="index.html">Finite Difference Computing with Exponential Decay Models</a> &raquo;</li> 
       </ul>
