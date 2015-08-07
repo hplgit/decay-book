@@ -89,37 +89,42 @@ computational science topics turned out to be more and more
 heterogeneous with respect to the students&#8217; undergraduate backgrounds,
 we frequently got students who could be strong in mathematics, but
 weak in programming, and vice versa. This situation called for some
-documentation of the expected scientific platform on which our
-graduate courses could build on.</p>
-<p>I decided to write a set of example-driven notes that illustrated the basic
+documentation of the expected basic competence in modern computing
+that graduate courses could build on.</p>
+<p>I decided to write a set of example-driven notes that illustrated the
 components in the scientific computing pipeline using the simple
 differential equation for exponential decay:
 <span class="math">\(u^{\prime}(t)=-au(t)\)</span>, where
-<span class="math">\(a&gt;0\)</span> is a perameter. The plan was to go through the ideas of finite
+<span class="math">\(a&gt;0\)</span> is a parameter. Such models arise in a wide range througout
+the sciences.
+The plan was to go through the ideas of finite
 differences, how such methods are programmed and tested, why such
 methods may fail, and how mathematical models of this kind arises
-throughtout the sciences. Many students lack knowledge about useful software
+from physics and biology. Many students lack knowledge about useful software
 engineering topics such as modules, user interfaces, testing
 frameworks, and class programming, so I added basic introductions to
 these themes as well. Our courses are multi-disciplinary and
 emphasizes how to turn theory into practice, so computer
 implementations are key.  As students requested generalizations and
-expanded explainations, the notes quickly grew in size and into the
+expanded explanations, the notes quickly grew in size and into the
 present booklet.</p>
 <p>The writing style is gentle and aims at a broad audience.
 Prerequisite knowlege is basic one-dimensional calculus and preferably
-some experience with computer programming.  The material features
+some experience with computer programming in Python or MATLAB.
+The material features
 comprehensive explanations since it was intended for self study. For
 some students it may act as an overview and refresher of traditional
 mathematical topics and likely a first introduction to some of the
 many software topics. The text can also be used in an undergraduate
 course setting as a case-based introduction to modern
 multi-disciplinary problem solving with computers, using the wide
-range of applications as motivation and then treating the details of
-the mathematical and computer science aspects.  Another upcoming
+range of applications in the chapter <a class="reference internal" href="._book008.html#decay-app"><span class="std std-ref">Models</span></a>
+as motivation and then treating the details of
+the mathematical and computer science aspects from the other
+chapters.  Another upcoming
 audience is students and scientists with little mathematics and
 computing background, who need a foundation for entering into
-computer-based modeling.</p>
+computer-based differential equation modeling.</p>
 <p>The choice of topics in this book are motivated from what is needed in
 more advanced courses on finite difference methods for partial
 differential equations (PDEs).  It turns out that a range of concepts
@@ -128,65 +133,62 @@ simple ordinary differential equation (ODE) examples. The goal of the
 text is therefore to lay a foundation for understanding numerical
 methods for PDEs by first meeting the fundamental ideas in a simpler
 ODE setting. Compared to other books, the present one has a much
-stronger focus on how to turn mathematics into working code.</p>
-<p>There is a companion book in the works that treat finite difference
-methods for PDEs using the same writing style and having the same
-focus on turning mathematical algorithms into reliable software.</p>
+stronger focus on how to turn mathematics into working code.
+It also explains the mathematics and programming in more detail.</p>
+<p>There is a more advanced companion book in the works that treat finite
+difference methods for PDEs using the same writing style and having
+the same focus on turning mathematical algorithms into reliable
+software.</p>
 <p>Although the main example in the present book is
 <span class="math">\(u^{\prime}=-au\)</span>,
 we also address the more general model problem <span class="math">\(u'=-a(t)u + b(t)\)</span>
 and the completely general, nonlinear problem <span class="math">\(u'=f(u,t)\)</span>, both for
 scalar and vector <span class="math">\(u(t)\)</span>.
-The following more refined list of topics will be elaborated on.</p>
+The following list of topics will be elaborated on.</p>
 <blockquote>
 <div><ul class="simple">
 <li>How to think when constructing finite difference methods, with special focus
 on the Forward Euler, Backward Euler, and Crank-Nicolson (midpoint)
-schemes</li>
+schemes.</li>
 <li>How to formulate a computational algorithm and translate it into
-Python code</li>
-<li>How to make curve plots of the solutions</li>
-<li>How to compute numerical errors</li>
-<li>How to compute convergence rates</li>
+Python code.</li>
+<li>How to make curve plots of the solutions.</li>
+<li>How to compute numerical errors.</li>
+<li>How to compute convergence rates.</li>
 <li>How to test that an implementation is correct (verification) and how
-to automate tests through <em>test functions</em> and <em>unit testing</em></li>
+to automate tests through <em>test functions</em> and <em>unit testing</em>.</li>
 <li>How to work with Python concepts such as arrays, lists, dictionaries,
-lambda functions, functions in functions (closures)</li>
+lambda functions, functions in functions (closures).</li>
 <li>How to perform array computing and understand the difference from
-scalar computing</li>
-<li>How to uncover numerical artifacts in the computed solution</li>
+scalar computing.</li>
+<li>How to uncover numerical artifacts in the computed solution.</li>
 <li>How to analyze the numerical schemes mathematically to understand
-why artifacts occur</li>
+why artifacts occur.</li>
 <li>How to derive mathematical expressions for various measures of
 the error in numerical methods, frequently by using the <code class="docutils literal"><span class="pre">sympy</span></code> software
-for symbolic computations</li>
+for symbolic computations.</li>
 <li>How to understand concepts such as finite difference operators,
 mesh (grid), mesh functions,
-stability, truncation error, consistency, and convergence</li>
+stability, truncation error, consistency, and convergence.</li>
 <li>How to solve the general nonlinear ODE <span class="math">\(u'=f(u,t)\)</span>,
 which is either a scalar ODE or a system of ODEs (i.e., <span class="math">\(u\)</span> and <span class="math">\(f\)</span>
-can either be a function or a vector of functions)</li>
-<li>How to access professional packages for solving ODEs</li>
+can either be a function or a vector of functions).</li>
+<li>How to access professional packages for solving ODEs.</li>
 <li>How the model equation <span class="math">\(u'=-au\)</span> arises in a wide range
-of phenomena in physics, biology, and finance</li>
-</ul>
-</div></blockquote>
-<p>Among the software engineering topics we address</p>
-<blockquote>
-<div><ul class="simple">
-<li>How to structure a code in terms of functions</li>
-<li>How to make reusable modules</li>
-<li>How to read input data flexibly from the command line</li>
-<li>How to create graphical/web user interfaces</li>
-<li>How to use test frameworks for automatic unit testing</li>
-<li>How to refactor code in terms of classes (instead of functions)</li>
-<li>How to conduct and automate large-scale numerical experiments</li>
-<li>How to write scientific reports in various formats (LaTeX, HTML)</li>
+of phenomena in physics, biology, chemistry, and finance.</li>
+<li>How to structure a code in terms of functions.</li>
+<li>How to make reusable modules.</li>
+<li>How to read input data flexibly from the command line.</li>
+<li>How to create graphical/web user interfaces.</li>
+<li>How to use test frameworks for automatic unit testing.</li>
+<li>How to refactor code in terms of classes (instead of functions).</li>
+<li>How to conduct and automate large-scale numerical experiments.</li>
+<li>How to write scientific reports in various formats (LaTeX, HTML).</li>
 </ul>
 </div></blockquote>
 <p>The book contains a set of exercises in most of the chapters.
 The exercises are divided into three categories: <em>exercises</em>
-refers to the text (usually variations or extensions of examples
+refer to the text (usually variations or extensions of examples
 in the text), <em>problems</em> are stand-alone exercises without
 references to the text, and <em>projects</em> are larger problems.
 Exercises, problems, and projects share the same numbering to
@@ -215,6 +217,7 @@ physics, mathematics, numerical methods, and computer science.</p>
 on this text, and all his efforts are highly appreciated. I also want to thank a
 number of students who have pointed out weaknesses and
 found errors.</p>
+<p>[<strong>hpl 1</strong>: The present version features solutions to a subset of the exercises. These solutions are likely to be removed, or solutions to all exercises are to be included.]</p>
 </div>
 </div>
 
