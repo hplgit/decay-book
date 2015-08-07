@@ -14,5 +14,5 @@ Finite Difference Computing with Exponential Decay Models
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Hans Petter Langtangen
-:Date: Aug 5, 2015
+:Date: Aug 7, 2015
 

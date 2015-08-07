@@ -3437,7 +3437,7 @@ Exercises  (5)
 
 .. _softeng1:exer:derivative:
 
-Problem 37: Make a tool for differentiating curves
+Problem 38: Make a tool for differentiating curves
 --------------------------------------------------
 
 Suppose we have a curve specified through a set
@@ -3503,7 +3503,7 @@ Filename: ``curvediff``.
 
 .. _softeng1:exer:integral:flat:
 
-Problem 38: Make solid software for the Trapezoidal rule
+Problem 39: Make solid software for the Trapezoidal rule
 --------------------------------------------------------
 
 An integral
@@ -3643,7 +3643,7 @@ Filename: ``trapezoidal``.
 
 .. _softeng1:exer:integral:flat2:
 
-Problem 39: Implement classes for the Trapezoidal rule
+Problem 40: Implement classes for the Trapezoidal rule
 ------------------------------------------------------
 
 We consider the same problem setting as in :ref:`softeng1:exer:integral:flat`. Make a module with a class ``Problem``
@@ -3659,7 +3659,7 @@ Filename: ``trapezoidal_class``.
 
 .. _softeng1:exer:doctest1:
 
-Problem 40: Write a doctest and a test function
+Problem 41: Write a doctest and a test function
 -----------------------------------------------
 
 Type in the following program:
@@ -3703,7 +3703,7 @@ Filename: ``test_roots``.
 
 .. _softeng1:exer:tol:
 
-Problem 41: Experiment with tolerances in comparisons
+Problem 42: Experiment with tolerances in comparisons
 -----------------------------------------------------
 
 When we replace a comparison ``a == b``, where ``a`` and/or ``b`` are
@@ -3729,7 +3729,7 @@ have ``tol`` of size :math:`10^{-15}`.
 
 .. _softeng1:exer:class:dts:
 
-Exercise 42: Make use of a class implementation
+Exercise 43: Make use of a class implementation
 -----------------------------------------------
 
 Implement the ``experiment_compare_dt`` function from ``decay.py``
@@ -3745,7 +3745,7 @@ Filename: ``experiment_compare_dt_class``.
 
 .. _softeng1:exer:logistic:
 
-Exercise 43: Make solid software for a difference equation
+Exercise 44: Make solid software for a difference equation
 ----------------------------------------------------------
 
 We have the following evolutionary difference equation for the number

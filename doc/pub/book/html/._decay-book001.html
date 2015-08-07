@@ -7,12 +7,12 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,terminal velocity,geometric mean,averaging geometric,scaling,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
-<!-- Bootstrap style: bootswatch_journal -->
-<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -352,11 +352,15 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:drag:scaling',
                'decay:app:drag:scaling'),
+              ('Viscoelastic materials',
+               1,
+               'decay:app:viscoelasticity',
+               'decay:app:viscoelasticity'),
               ('Decay ODEs from solving a PDE by Fourier expansions',
                1,
                'decay:app:diffusion:Fourier',
                'decay:app:diffusion:Fourier'),
-              ('Exercises', 1, None, '___sec140'),
+              ('Exercises', 1, None, '___sec141'),
               ('Exercise 16: Radioactive decay of Carbon-14',
                2,
                'decay:app:exer:radio:C14',
@@ -372,20 +376,20 @@ code { color: inherit; background-color: transparent; }
               ('Bug 1: Wrong time level in the $T_s$ function',
                3,
                None,
-               '___sec144'),
+               '___sec145'),
               ('Bug 2: Wrong time level in the $T$ function',
                3,
                None,
-               '___sec145'),
-              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec146'),
+               '___sec146'),
+              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec147'),
               ('Bug 4: Missing `k` in the updating formula',
                3,
                None,
-               '___sec147'),
+               '___sec148'),
               ('Bug 5: Using `1-theta` instead of `theta`',
                3,
                None,
-               '___sec148'),
+               '___sec149'),
               ('Exercise 19: Find time of murder from body temperature',
                2,
                'decay:app:exer:cooling:murder',
@@ -458,6 +462,10 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:exer:interest:derive',
                'decay:app:exer:interest:derive'),
+              ('Exercise 37: Simulate the deformation of a viscoelastic material',
+               2,
+               'decay:app:exer:viscoelasticity1',
+               'decay:app:exer:viscoelasticity1'),
               ('Scientific software engineering', 0, 'decay:se', 'decay:se'),
               ('Basic implementations',
                1,
@@ -475,9 +483,9 @@ code { color: inherit; background-color: transparent; }
                2,
                'softeng1:basic:impl2',
                'softeng1:basic:impl2'),
-              ('Comments in a program', 3, None, '___sec172'),
-              ('Refactoring into functions', 3, None, '___sec173'),
-              ('Program file vs IDE vs notebook', 3, None, '___sec174'),
+              ('Comments in a program', 3, None, '___sec174'),
+              ('Refactoring into functions', 3, None, '___sec175'),
+              ('Program file vs IDE vs notebook', 3, None, '___sec176'),
               ('Prefixing imported functions by the module name',
                2,
                'softeng1:basic:modprefix',
@@ -489,7 +497,7 @@ code { color: inherit; background-color: transparent; }
               ('Do not have several versions of a code',
                2,
                None,
-               '___sec177'),
+               '___sec179'),
               ('Making a module',
                2,
                'softeng1:basic:module',
@@ -506,42 +514,42 @@ code { color: inherit; background-color: transparent; }
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec182'),
-              ('Positional command-line arguments', 2, None, '___sec183'),
+              ('Command-line arguments', 2, None, '___sec184'),
+              ('Positional command-line arguments', 2, None, '___sec185'),
               ('Option-value pairs on the command line',
                2,
                None,
-               '___sec184'),
+               '___sec186'),
               ('Creating a graphical web user interface',
                2,
                None,
-               '___sec185'),
-              ('Making a compute function', 3, None, '___sec186'),
-              ('Generating the user interface', 3, None, '___sec187'),
-              ('Running the web application', 3, None, '___sec188'),
-              ('Tests for verifying implementations', 1, None, '___sec189'),
-              ('Doctests', 2, None, '___sec190'),
-              ('Unit tests and test functions', 2, None, '___sec191'),
+               '___sec187'),
+              ('Making a compute function', 3, None, '___sec188'),
+              ('Generating the user interface', 3, None, '___sec189'),
+              ('Running the web application', 3, None, '___sec190'),
+              ('Tests for verifying implementations', 1, None, '___sec191'),
+              ('Doctests', 2, None, '___sec192'),
+              ('Unit tests and test functions', 2, None, '___sec193'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
-               '___sec192'),
-              ('Test function requirements', 3, None, '___sec193'),
-              ('Comparison of real numbers', 3, None, '___sec194'),
-              ('Special assert functions from nose', 3, None, '___sec195'),
-              ('Locating test functions', 3, None, '___sec196'),
-              ('Running tests', 3, None, '___sec197'),
-              ('Embedding doctests in a test function', 3, None, '___sec198'),
-              ('Installing nose and pytest', 3, None, '___sec199'),
-              ('Test function for the solver', 2, None, '___sec200'),
+               '___sec194'),
+              ('Test function requirements', 3, None, '___sec195'),
+              ('Comparison of real numbers', 3, None, '___sec196'),
+              ('Special assert functions from nose', 3, None, '___sec197'),
+              ('Locating test functions', 3, None, '___sec198'),
+              ('Running tests', 3, None, '___sec199'),
+              ('Embedding doctests in a test function', 3, None, '___sec200'),
+              ('Installing nose and pytest', 3, None, '___sec201'),
+              ('Test function for the solver', 2, None, '___sec202'),
               ('Test function for reading positional command-line arguments',
                2,
                None,
-               '___sec201'),
+               '___sec203'),
               ('Test function for reading option-value pairs',
                2,
                None,
-               '___sec202'),
+               '___sec204'),
               ('Classical class-based unit testing',
                2,
                'softeng1:basic:unittest',
@@ -553,84 +561,84 @@ code { color: inherit; background-color: transparent; }
               ('Organizing the software directory tree',
                2,
                None,
-               '___sec205'),
-              ('Distributing just a module file', 3, None, '___sec206'),
-              ('Distributing a package', 3, None, '___sec207'),
-              ('Publishing the software at GitHub', 2, None, '___sec208'),
+               '___sec207'),
+              ('Distributing just a module file', 3, None, '___sec208'),
+              ('Distributing a package', 3, None, '___sec209'),
+              ('Publishing the software at GitHub', 2, None, '___sec210'),
               ('Downloading and installing the software',
                2,
                None,
-               '___sec209'),
-              ('Installing just a module file', 3, None, '___sec210'),
-              ('Installing a package', 3, None, '___sec211'),
+               '___sec211'),
+              ('Installing just a module file', 3, None, '___sec212'),
+              ('Installing a package', 3, None, '___sec213'),
               ('Classes for problem and solution method',
                1,
                'softeng1:prog:se:class',
                'softeng1:prog:se:class'),
-              ('The problem class', 2, None, '___sec213'),
-              ('The solver class', 2, None, '___sec214'),
-              ('Combining the objects', 3, None, '___sec215'),
+              ('The problem class', 2, None, '___sec215'),
+              ('The solver class', 2, None, '___sec216'),
+              ('Combining the objects', 3, None, '___sec217'),
               ('Improving the problem and solver classes',
                2,
                'softeng1:prog:se:class2',
                'softeng1:prog:se:class2'),
-              ('A generic class for parameters', 3, None, '___sec217'),
+              ('A generic class for parameters', 3, None, '___sec219'),
               ('Automating scientific experiments',
                1,
                'softeng1:experiments',
                'softeng1:experiments'),
-              ('Available software', 2, None, '___sec219'),
-              ('The results we want to produce', 2, None, '___sec220'),
-              ('Combining plot files', 2, None, '___sec221'),
-              ('Running a program from Python', 2, None, '___sec222'),
-              ('The automating script', 2, None, '___sec223'),
+              ('Available software', 2, None, '___sec221'),
+              ('The results we want to produce', 2, None, '___sec222'),
+              ('Combining plot files', 2, None, '___sec223'),
+              ('Running a program from Python', 2, None, '___sec224'),
+              ('The automating script', 2, None, '___sec225'),
               ('Making a report',
                2,
                'softeng1:exper:report',
                'softeng1:exper:report'),
-              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec225'),
-              ('HTML with MathJax', 3, None, '___sec226'),
-              ('LaTeX', 3, None, '___sec227'),
-              ('Sphinx', 3, None, '___sec228'),
-              ('Markdown', 3, None, '___sec229'),
-              ('IPython/Jupyter notebooks', 3, None, '___sec230'),
-              ('Wiki formats', 3, None, '___sec231'),
-              ('DocOnce', 3, None, '___sec232'),
+              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec227'),
+              ('HTML with MathJax', 3, None, '___sec228'),
+              ('LaTeX', 3, None, '___sec229'),
+              ('Sphinx', 3, None, '___sec230'),
+              ('Markdown', 3, None, '___sec231'),
+              ('IPython/Jupyter notebooks', 3, None, '___sec232'),
+              ('Wiki formats', 3, None, '___sec233'),
+              ('DocOnce', 3, None, '___sec234'),
               ('Publishing a complete project',
                2,
                'softeng1:exper:github',
                'softeng1:exper:github'),
-              ('Exercises', 1, None, '___sec234'),
-              ('Problem 37: Make a tool for differentiating curves',
+              ('Exercises', 1, None, '___sec236'),
+              ('Problem 38: Make a tool for differentiating curves',
                2,
                'softeng1:exer:derivative',
                'softeng1:exer:derivative'),
-              ('Problem 38: Make solid software for the Trapezoidal rule',
+              ('Problem 39: Make solid software for the Trapezoidal rule',
                2,
                'softeng1:exer:integral:flat',
                'softeng1:exer:integral:flat'),
-              ('Problem 39: Implement classes for the Trapezoidal rule',
+              ('Problem 40: Implement classes for the Trapezoidal rule',
                2,
                'softeng1:exer:integral:flat2',
                'softeng1:exer:integral:flat2'),
-              ('Problem 40: Write a doctest and a test function',
+              ('Problem 41: Write a doctest and a test function',
                2,
                'softeng1:exer:doctest1',
                'softeng1:exer:doctest1'),
-              ('Problem 41: Experiment with tolerances in comparisons',
+              ('Problem 42: Experiment with tolerances in comparisons',
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
-              ('Remarks', 3, None, '___sec240'),
-              ('Exercise 42: Make use of a class implementation',
+              ('Remarks', 3, None, '___sec242'),
+              ('Exercise 43: Make use of a class implementation',
                2,
                'softeng1:exer:class:dts',
                'softeng1:exer:class:dts'),
-              ('Exercise 43: Make solid software for a difference equation',
+              ('Exercise 44: Make solid software for a difference equation',
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('References', 1, None, '___sec243')]}
+              ('References', 1, None, '___sec245')]}
 end of tocinfo -->
 
 <body>
@@ -699,41 +707,46 @@ computational science topics turned out to be more and more
 heterogeneous with respect to the students' undergraduate backgrounds,
 we frequently got students who could be strong in mathematics, but
 weak in programming, and vice versa. This situation called for some
-documentation of the expected scientific platform on which our
-graduate courses could build on.
+documentation of the expected basic competence in modern computing
+that graduate courses could build on.
 
 <p>
-I decided to write a set of example-driven notes that illustrated the basic
+I decided to write a set of example-driven notes that illustrated the
 components in the scientific computing pipeline using the simple
 differential equation for exponential decay:
 \( u^{\prime}(t)=-au(t) \), where
-\( a>0 \) is a perameter. The plan was to go through the ideas of finite
+\( a>0 \) is a parameter. Such models arise in a wide range througout
+the sciences.
+The plan was to go through the ideas of finite
 differences, how such methods are programmed and tested, why such
 methods may fail, and how mathematical models of this kind arises
-throughtout the sciences. Many students lack knowledge about useful software
+from physics and biology. Many students lack knowledge about useful software
 engineering topics such as modules, user interfaces, testing
 frameworks, and class programming, so I added basic introductions to
 these themes as well. Our courses are multi-disciplinary and
 emphasizes how to turn theory into practice, so computer
 implementations are key.  As students requested generalizations and
-expanded explainations, the notes quickly grew in size and into the
+expanded explanations, the notes quickly grew in size and into the
 present booklet.
 
 <p>
 The writing style is gentle and aims at a broad audience.
 Prerequisite knowlege is basic one-dimensional calculus and preferably
-some experience with computer programming.  The material features
+some experience with computer programming in Python or MATLAB.
+The material features
 comprehensive explanations since it was intended for self study. For
 some students it may act as an overview and refresher of traditional
 mathematical topics and likely a first introduction to some of the
 many software topics. The text can also be used in an undergraduate
 course setting as a case-based introduction to modern
 multi-disciplinary problem solving with computers, using the wide
-range of applications as motivation and then treating the details of
-the mathematical and computer science aspects.  Another upcoming
+range of applications in the chapter <a href="._decay-book008.html#decay:app">Models</a>
+as motivation and then treating the details of
+the mathematical and computer science aspects from the other
+chapters.  Another upcoming
 audience is students and scientists with little mathematics and
 computing background, who need a foundation for entering into
-computer-based modeling.
+computer-based differential equation modeling.
 
 <p>
 The choice of topics in this book are motivated from what is needed in
@@ -745,11 +758,13 @@ text is therefore to lay a foundation for understanding numerical
 methods for PDEs by first meeting the fundamental ideas in a simpler
 ODE setting. Compared to other books, the present one has a much
 stronger focus on how to turn mathematics into working code.
+It also explains the mathematics and programming in more detail.
 
 <p>
-There is a companion book in the works that treat finite difference
-methods for PDEs using the same writing style and having the same
-focus on turning mathematical algorithms into reliable software.
+There is a more advanced companion book in the works that treat finite
+difference methods for PDEs using the same writing style and having
+the same focus on turning mathematical algorithms into reliable
+software.
 
 <p>
 Although the main example in the present book is
@@ -757,56 +772,51 @@ Although the main example in the present book is
 we also address the more general model problem \( u'=-a(t)u + b(t) \)
 and the completely general, nonlinear problem \( u'=f(u,t) \), both for
 scalar and vector \( u(t) \).
-The following more refined list of topics will be elaborated on.
+The following list of topics will be elaborated on.
 
 <ul>
  <li> How to think when constructing finite difference methods, with special focus
    on the Forward Euler, Backward Euler, and Crank-Nicolson (midpoint)
-   schemes</li>
+   schemes.</li>
  <li> How to formulate a computational algorithm and translate it into
-   Python code</li>
- <li> How to make curve plots of the solutions</li>
- <li> How to compute numerical errors</li>
- <li> How to compute convergence rates</li>
+   Python code.</li>
+ <li> How to make curve plots of the solutions.</li>
+ <li> How to compute numerical errors.</li>
+ <li> How to compute convergence rates.</li>
  <li> How to test that an implementation is correct (verification) and how
-   to automate tests through <em>test functions</em> and <em>unit testing</em></li>
+   to automate tests through <em>test functions</em> and <em>unit testing</em>.</li>
  <li> How to work with Python concepts such as arrays, lists, dictionaries,
-   lambda functions, functions in functions (closures)</li>
+   lambda functions, functions in functions (closures).</li>
  <li> How to perform array computing and understand the difference from
-   scalar computing</li>
- <li> How to uncover numerical artifacts in the computed solution</li>
+   scalar computing.</li>
+ <li> How to uncover numerical artifacts in the computed solution.</li>
  <li> How to analyze the numerical schemes mathematically to understand
-   why artifacts occur</li>
+   why artifacts occur.</li>
  <li> How to derive mathematical expressions for various measures of
    the error in numerical methods, frequently by using the <code>sympy</code> software
-   for symbolic computations</li>
+   for symbolic computations.</li>
  <li> How to understand concepts such as finite difference operators,
    mesh (grid), mesh functions,
-   stability, truncation error, consistency, and convergence</li>
+   stability, truncation error, consistency, and convergence.</li>
  <li> How to solve the general nonlinear ODE \( u'=f(u,t) \),
    which is either a scalar ODE or a system of ODEs (i.e., \( u \) and \( f \)
-   can either be a function or a vector of functions)</li>
- <li> How to access professional packages for solving ODEs</li>
+   can either be a function or a vector of functions).</li>
+ <li> How to access professional packages for solving ODEs.</li>
  <li> How the model equation \( u'=-au \) arises in a wide range
-   of phenomena in physics, biology, and finance</li>
-</ul>
-
-Among the software engineering topics we address
-
-<ul>
- <li> How to structure a code in terms of functions</li>
- <li> How to make reusable modules</li>
- <li> How to read input data flexibly from the command line</li>
- <li> How to create graphical/web user interfaces</li>
- <li> How to use test frameworks for automatic unit testing</li>
- <li> How to refactor code in terms of classes (instead of functions)</li>
- <li> How to conduct and automate large-scale numerical experiments</li>
- <li> How to write scientific reports in various formats (LaTeX, HTML)</li>
+   of phenomena in physics, biology, chemistry, and finance.</li>
+ <li> How to structure a code in terms of functions.</li>
+ <li> How to make reusable modules.</li>
+ <li> How to read input data flexibly from the command line.</li>
+ <li> How to create graphical/web user interfaces.</li>
+ <li> How to use test frameworks for automatic unit testing.</li>
+ <li> How to refactor code in terms of classes (instead of functions).</li>
+ <li> How to conduct and automate large-scale numerical experiments.</li>
+ <li> How to write scientific reports in various formats (LaTeX, HTML).</li>
 </ul>
 
 The book contains a set of exercises in most of the chapters.
 The exercises are divided into three categories: <em>exercises</em>
-refers to the text (usually variations or extensions of examples
+refer to the text (usually variations or extensions of examples
 in the text), <em>problems</em> are stand-alone exercises without
 references to the text, and <em>projects</em> are larger problems.
 Exercises, problems, and projects share the same numbering to
@@ -839,6 +849,12 @@ Professor Svein Linge has provided very detailed and constructive feedback
 on this text, and all his efforts are highly appreciated. I also want to thank a
 number of students who have pointed out weaknesses and
 found errors.
+
+<p>
+
+<!-- begin inline comment -->
+<font color="red">(<b>hpl 1</b>: The present version features solutions to a subset of the exercises. These solutions are likely to be removed, or solutions to all exercises are to be included.)</font>
+<!-- end inline comment -->
 
 <p>
 <p>

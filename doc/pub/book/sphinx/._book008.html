@@ -474,7 +474,7 @@ The variance is <span class="math">\(\lambda^{-2}\)</span>.</p>
 undergone the transition (on average), and <span class="math">\(N(t)\)</span> is governed by the ODE</p>
 <div class="math">
 \[N^{\prime} = -\lambda N(t),\quad N(0)=N_0\tp\]</div>
-<p>[<strong>hpl 1</strong>: make sure transition is correctly interpreted: it is decay, while no transition is survival.]</p>
+<p>[<strong>hpl 2</strong>: make sure transition is correctly interpreted: it is decay, while no transition is survival.]</p>
 </div>
 </div>
 <div class="section" id="chemical-kinetics">
@@ -665,7 +665,7 @@ the SIR model in epidemiology. The model can easily be extended to
 incorporate vaccination programs, loss immunity after some time, etc.
 Typical diseases that can be simulated by the SIR model and its variants
 are measles, smallpox, flu, plague, and HIV.</p>
-<p>[<strong>hpl 2</strong>: Should include predator-pray too, at least in an exercise.]</p>
+<p>[<strong>hpl 3</strong>: Should include predator-pray too, at least in an exercise.]</p>
 </div>
 <div class="section" id="decay-of-atmospheric-pressure-with-altitude">
 <span id="decay-app-atm"></span><h2>Decay of atmospheric pressure with altitude<a class="headerlink" href="#decay-of-atmospheric-pressure-with-altitude" title="Permalink to this headline">¶</a></h2>
@@ -1044,6 +1044,42 @@ axis in this dimensionless solution. More precisely, the physical velocity
 \frac{\varrho_bgV\left(\frac{\varrho}{\varrho_b} -1\right)}{3\pi d\mu}(1 -
 e^{t/(g(\varrho/\varrho_b -1))})\tp\]</div>
 </div>
+</div>
+<div class="section" id="viscoelastic-materials">
+<span id="decay-app-viscoelasticity"></span><h2>Viscoelastic materials<a class="headerlink" href="#viscoelastic-materials" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-9"></span><p id="index-10">When stretching a rod made of a perfectly elastic material, the
+elongation (change in the rod&#8217;s
+length) is proportional to the magnitude of the applied force.
+Mathematical models for material behavior under application of
+external forces use <em>strain</em> <span class="math">\(\varepsilon\)</span>
+and <em>stress</em> <span class="math">\(\sigma\)</span> instead of elongation and
+forces. Strain is relative change in elongation and stress is force
+per unit area. An elastic material has a linear relation between
+stress and strain:  <span class="math">\(\sigma = E\varepsilon\)</span>. This is a good model
+for many materials, but frequently the velocity of the deformation
+(or more precisely, the strain rate <span class="math">\(\varepsilon^{\prime}\)</span>)
+also influences the stress. This is particularly the case for
+materials like organic polymers, rubber, and wood. When the stress
+depends on both the strain and the strain rate, the material is
+said to be viscoelastic. A common model relating forces to deformation
+is the <a class="reference external" href="https://en.wikipedia.org/wiki/Kelvin-Voigt_material">Kelvin-Vogt model</a>:</p>
+<div class="math" id="equation-decay:app:viscoelasticity:se">
+<span id="eq-decay-app-viscoelasticity-se"></span><span class="eqno">(24)</span>\[     \sigma(t) = E\varepsilon(t) + \eta\varepsilon^{\prime}(t)\tp\]</div>
+<p>Compared to a perfectly elastic material, which deforms instantaneously
+when a force is acting, a Kelvin-Vogt material will spend some time
+to elongate. For example, when an elastic rod is subject to a constant
+force <span class="math">\(\stress\)</span> at <span class="math">\(t=0\)</span>, the strain immediately adjusts to <span class="math">\(\varepsilon
+=\sigma/E\)</span>. A Kelvin-Vogt material, however, has a response
+<span class="math">\(\varepsilon(t) = \frac{sigma}{E}(1-e^{Et/\eta})\)</span>. Removing the force
+when the strain is <span class="math">\(\varepsilon(t_1) = I\)</span> will for an elastic material
+immediately bring the strain back to zero, while a Kelvin-Vogt
+material will decay: <span class="math">\(\varepsilon = Ie^{-(t-t_1)E/\eta)}\)</span>.</p>
+<p>Introducing <span class="math">\(u\)</span> for <span class="math">\(\varepsilon\)</span> and treating <span class="math">\(\stress(t)\)</span> as a
+given function, we can write the Kelvin-Vogt model in our standard form</p>
+<div class="math">
+\[u^{\prime}(t) = -au(t) + b(t),\]</div>
+<p>with <span class="math">\(a = E/\eta\)</span> and <span class="math">\(b(t)=\stress(t)/\eta\)</span>. An initial condition,
+usually <span class="math">\(u(0)=0\)</span>, is needed.</p>
 </div>
 <div class="section" id="decay-odes-from-solving-a-pde-by-fourier-expansions">
 <span id="decay-app-diffusion-fourier"></span><h2>Decay ODEs from solving a PDE by Fourier expansions<a class="headerlink" href="#decay-odes-from-solving-a-pde-by-fourier-expansions" title="Permalink to this headline">¶</a></h2>
@@ -1938,11 +1974,11 @@ is difficult so it can be handy to scale the equations. Use
 the population size <span class="math">\(N=S(0)+I(0)+R(0)\)</span>. Show that the resulting dimensionless
 model becomes</p>
 <div class="math" id="equation-decay:app:SIR:S2">
-<span id="eq-decay-app-sir-s2"></span><span class="eqno">(24)</span>\[     \frac{d\bar S}{d\bar t} = - R_0\bar S\bar I,\]</div>
+<span id="eq-decay-app-sir-s2"></span><span class="eqno">(25)</span>\[     \frac{d\bar S}{d\bar t} = - R_0\bar S\bar I,\]</div>
 <div class="math" id="equation-decay:app:SIR:I2">
-<span id="eq-decay-app-sir-i2"></span><span class="eqno">(25)</span>\[     \frac{d\bar I}{d\bar t} = R_0 \bar S\bar I - \bar I,\]</div>
+<span id="eq-decay-app-sir-i2"></span><span class="eqno">(26)</span>\[     \frac{d\bar I}{d\bar t} = R_0 \bar S\bar I - \bar I,\]</div>
 <div class="math" id="equation-decay:SIR:R2">
-<span id="eq-decay-sir-r2"></span><span class="eqno">(26)</span>\[     \frac{d\bar R}{d\bar t} = I,\]</div>
+<span id="eq-decay-sir-r2"></span><span class="eqno">(27)</span>\[     \frac{d\bar R}{d\bar t} = I,\]</div>
 <div class="math">
 \[\bar S(0) = 1-\alpha,\]</div>
 <div class="math">
@@ -2005,15 +2041,15 @@ Introduce</p>
 <p>with <span class="math">\(K=(k_v+k_-)/k_+\)</span> is the Michaelis constant. Show that the scale
 system becomes</p>
 <div class="math" id="equation-decay:app:MMK:Q2">
-<span id="eq-decay-app-mmk-q2"></span><span class="eqno">(27)</span>\[     \frac{d\bar Q}{d\bar t} = \alpha (\bar E\bar S
+<span id="eq-decay-app-mmk-q2"></span><span class="eqno">(28)</span>\[     \frac{d\bar Q}{d\bar t} = \alpha (\bar E\bar S
      - \bar Q),\]</div>
 <div class="math" id="equation-decay:app:MMK:P2">
-<span id="eq-decay-app-mmk-p2"></span><span class="eqno">(28)</span>\[     \frac{d\bar P}{d\bar t} = \beta\bar Q,\]</div>
+<span id="eq-decay-app-mmk-p2"></span><span class="eqno">(29)</span>\[     \frac{d\bar P}{d\bar t} = \beta\bar Q,\]</div>
 <div class="math" id="equation-decay:app:MMK:S2">
-<span id="eq-decay-app-mmk-s2"></span><span class="eqno">(29)</span>\[     \frac{d\bar S}{d\bar t} = -\bar E\bar S
+<span id="eq-decay-app-mmk-s2"></span><span class="eqno">(30)</span>\[     \frac{d\bar S}{d\bar t} = -\bar E\bar S
      + (1 - \beta\alpha^{-1})\bar Q,\]</div>
 <div class="math" id="equation-decay:app:MMK:E2">
-<span id="eq-decay-app-mmk-e2"></span><span class="eqno">(30)</span>\[     \epsilon\frac{d\bar E}{d\bar t} = -\bar E\bar S + \bar Q,\]</div>
+<span id="eq-decay-app-mmk-e2"></span><span class="eqno">(31)</span>\[     \epsilon\frac{d\bar E}{d\bar t} = -\bar E\bar S + \bar Q,\]</div>
 <p>where we have three dimensionless parameters</p>
 <div class="math">
 \[\alpha = \frac{K}{E_0},\quad \beta = \frac{k_v}{k_+ E_0},\quad
@@ -2035,7 +2071,7 @@ quite some algebra and identifying coefficients in terms of the
 provided dimensionless numbers.</p>
 <p><strong>b)</strong>
 Implement a function for
-solving <a href="#equation-decay:app:MMK:Q2">(27)</a>-<a href="#equation-decay:app:MMK:E2">(30)</a>.</p>
+solving <a href="#equation-decay:app:MMK:Q2">(28)</a>-<a href="#equation-decay:app:MMK:E2">(31)</a>.</p>
 <p><strong>Solution.</strong>
 Let us use Odespy to solve the differential equations, although a plain
 Forward Euler scheme will be fine.</p>
@@ -2468,6 +2504,55 @@ at a constant level <span class="math">\(I\)</span> percent per year and the int
 Compare solutions for <span class="math">\(r_0=I, 3I/2, 2I\)</span>.
 Filename: <code class="docutils literal"><span class="pre">interest_modeling</span></code>.</p>
 </div>
+<div class="section" id="exercise-37-simulate-the-deformation-of-a-viscoelastic-material">
+<span id="decay-app-exer-viscoelasticity1"></span><h3>Exercise 37: Simulate the deformation of a viscoelastic material<a class="headerlink" href="#exercise-37-simulate-the-deformation-of-a-viscoelastic-material" title="Permalink to this headline">¶</a></h3>
+<p>Stretching a rod made of polymer will cause deformations that are
+well described with a Kelvin-Vogt material model
+<a href="#equation-decay:app:viscoelasticity:se">(24)</a>. At <span class="math">\(t=0\)</span> we apply a constant
+force <span class="math">\(\sigma = \sigma_0\)</span>, but at <span class="math">\(t=t_1\)</span>, we remove the force
+so <span class="math">\(\sigma=0\)</span>. Compute numerically the corresponding strain
+(elongation divided by the rod&#8217;s length) and visualize how it
+responds in time.</p>
+<p><strong>Hint.</strong>
+To avoid finding proper values of the <span class="math">\(E\)</span> and <span class="math">\(\eta\)</span> parameters for
+a polymer, one can scale the problem. A common dimensionless
+time is <span class="math">\(\bar t= tE/\eta\)</span>. Note that <span class="math">\(\varepsilon\)</span> is already
+dimensionless by definition, but it takes on small values, say up to 0.1,
+so we introduce a scaling: <span class="math">\(\bar u=10\varepsilon\)</span> such that <span class="math">\(\bar u\)</span>
+takes on values up to about unity.</p>
+<p>Show that the material model then
+takes the form <span class="math">\(\bar u^{\prime} = -\bar u + 10\sigma(t)/E\)</span>.
+Work with the dimensionless force <span class="math">\(F=10\sigma(t)/E\)</span>, and let
+<span class="math">\(F=1\)</span> for <span class="math">\(\bar t\in (0,\bar t_1)\)</span> and <span class="math">\(F=0\)</span> for <span class="math">\(\bar t\geq \bar t_1\)</span>.
+A possible choice of <span class="math">\(t_1\)</span> is the characteristic time <span class="math">\(\eta/E\)</span>, which
+means that <span class="math">\(\bar t_1 = 1\)</span>.</p>
+<p><strong>Solution.</strong>
+Inserting the scaling <span class="math">\(\bar u=10\varepsilon\)</span> and <span class="math">\(\bar t = tE/\eta\)</span>
+in the ODE for <span class="math">\(\varepsilon\)</span> results in</p>
+<div class="math">
+\[\frac{E}{10 \eta}\frac{d\bar u}{d\bar t} = -\frac{E}{\eta 10}\bar u
++ \frac{\sigma(t)}{\eta}\tp\]</div>
+<p>This reduces to</p>
+<div class="math">
+\[\frac{d\bar u}{d\bar t} = -\bar u + \frac{10\sigma}{E}\tp\]</div>
+<p>We can use the module <code class="docutils literal"><span class="pre">decay_vc</span></code> for solving <span class="math">\(u^{\prime}=-a(t)u+b(t)\)</span>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Scaled model: u&#39; = -u + b(t), b=1 for t &lt; 1 else 0</span>
+<span class="n">eps</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">b</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="n">T</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Dimensionless time&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;10*strain&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp.pdf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/KelvinVogt.png"><img alt="_images/KelvinVogt.png" src="_images/KelvinVogt.png" style="width: 600px;" /></a>
+</div>
+<p>Filename: <code class="docutils literal"><span class="pre">KelvinVogt</span></code>.</p>
+</div>
 </div>
 </div>
 
@@ -2534,6 +2619,7 @@ Filename: <code class="docutils literal"><span class="pre">interest_modeling</sp
 <li><a class="reference internal" href="#scaling-2">Scaling  (2)</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#viscoelastic-materials">Viscoelastic materials</a></li>
 <li><a class="reference internal" href="#decay-odes-from-solving-a-pde-by-fourier-expansions">Decay ODEs from solving a PDE by Fourier expansions</a></li>
 <li><a class="reference internal" href="#exercises-4">Exercises  (4)</a><ul>
 <li><a class="reference internal" href="#exercise-16-radioactive-decay-of-carbon-14">Exercise 16: Radioactive decay of Carbon-14</a></li>
@@ -2564,6 +2650,7 @@ Filename: <code class="docutils literal"><span class="pre">interest_modeling</sp
 <li><a class="reference internal" href="#exercise-34-simulate-a-population-in-a-changing-environment">Exercise 34: Simulate a population in a changing environment</a></li>
 <li><a class="reference internal" href="#exercise-35-simulate-logistic-growth">Exercise 35: Simulate logistic growth</a></li>
 <li><a class="reference internal" href="#exercise-36-rederive-the-equation-for-continuous-compound-interest">Exercise 36: Rederive the equation for continuous compound interest</a></li>
+<li><a class="reference internal" href="#exercise-37-simulate-the-deformation-of-a-viscoelastic-material">Exercise 37: Simulate the deformation of a viscoelastic material</a></li>
 </ul>
 </li>
 </ul>

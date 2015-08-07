@@ -560,7 +560,7 @@ undergone the transition (on average), and :math:`N(t)` is governed by the ODE
 .. math::
          N^{\prime} = -\lambda N(t),\quad N(0)=N_0\tp
 
-[**hpl 1**: make sure transition is correctly interpreted: it is decay, while no transition is survival.]
+[**hpl 2**: make sure transition is correctly interpreted: it is decay, while no transition is survival.]
 
 .. _decay:app:kinetics:
 
@@ -901,7 +901,7 @@ incorporate vaccination programs, loss immunity after some time, etc.
 Typical diseases that can be simulated by the SIR model and its variants
 are measles, smallpox, flu, plague, and HIV.
 
-[**hpl 2**: Should include predator-pray too, at least in an exercise.]
+[**hpl 3**: Should include predator-pray too, at least in an exercise.]
 
 .. _decay:app:atm:
 
@@ -1426,6 +1426,62 @@ axis in this dimensionless solution. More precisely, the physical velocity
          u = \frac{\varrho_bgV\left(\frac{\varrho}{\varrho_b} -1\right)}{3\pi d\mu}\bar u(t/(g(\varrho/\varrho_b -1))) =
         \frac{\varrho_bgV\left(\frac{\varrho}{\varrho_b} -1\right)}{3\pi d\mu}(1 -
         e^{t/(g(\varrho/\varrho_b -1))})\tp
+
+.. _decay:app:viscoelasticity:
+
+Viscoelastic materials
+======================
+
+.. index:: Kelvin-Vogt material model
+
+.. index:: viscoelasticity
+
+When stretching a rod made of a perfectly elastic material, the
+elongation (change in the rod's
+length) is proportional to the magnitude of the applied force.
+Mathematical models for material behavior under application of
+external forces use *strain* :math:`\varepsilon`
+and *stress* :math:`\sigma` instead of elongation and
+forces. Strain is relative change in elongation and stress is force
+per unit area. An elastic material has a linear relation between
+stress and strain:  :math:`\sigma = E\varepsilon`. This is a good model
+for many materials, but frequently the velocity of the deformation
+(or more precisely, the strain rate :math:`\varepsilon^{\prime}`)
+also influences the stress. This is particularly the case for
+materials like organic polymers, rubber, and wood. When the stress
+depends on both the strain and the strain rate, the material is
+said to be viscoelastic. A common model relating forces to deformation
+is the `Kelvin-Vogt model <https://en.wikipedia.org/wiki/Kelvin-Voigt_material>`__:
+
+.. _Eq:decay:app:viscoelasticity:se:
+
+.. math::
+   :label: decay:app:viscoelasticity:se
+        
+        \sigma(t) = E\varepsilon(t) + \eta\varepsilon^{\prime}(t)\tp
+        
+        
+
+Compared to a perfectly elastic material, which deforms instantaneously
+when a force is acting, a Kelvin-Vogt material will spend some time
+to elongate. For example, when an elastic rod is subject to a constant
+force :math:`\stress` at :math:`t=0`, the strain immediately adjusts to :math:`\varepsilon
+=\sigma/E`. A Kelvin-Vogt material, however, has a response
+:math:`\varepsilon(t) = \frac{sigma}{E}(1-e^{Et/\eta})`. Removing the force
+when the strain is :math:`\varepsilon(t_1) = I` will for an elastic material
+immediately bring the strain back to zero, while a Kelvin-Vogt
+material will decay: :math:`\varepsilon = Ie^{-(t-t_1)E/\eta)}`.
+
+Introducing :math:`u` for :math:`\varepsilon` and treating :math:`\stress(t)` as a
+given function, we can write the Kelvin-Vogt model in our standard form
+
+.. math::
+        
+        u^{\prime}(t) = -au(t) + b(t),
+        
+
+with :math:`a = E/\eta` and :math:`b(t)=\stress(t)/\eta`. An initial condition,
+usually :math:`u(0)=0`, is needed.
 
 .. _decay:app:diffusion:Fourier:
 
@@ -3485,6 +3541,79 @@ at a constant level :math:`I` percent per year and the interest rate oscillates:
 :math:`r=-I/2 + r_0\sin(2\pi t)`.
 Compare solutions for :math:`r_0=I, 3I/2, 2I`.
 Filename: ``interest_modeling``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _decay:app:exer:viscoelasticity1:
+
+Exercise 37: Simulate the deformation of a viscoelastic material
+----------------------------------------------------------------
+
+Stretching a rod made of polymer will cause deformations that are
+well described with a Kelvin-Vogt material model
+:eq:`decay:app:viscoelasticity:se`. At :math:`t=0` we apply a constant
+force :math:`\sigma = \sigma_0`, but at :math:`t=t_1`, we remove the force
+so :math:`\sigma=0`. Compute numerically the corresponding strain
+(elongation divided by the rod's length) and visualize how it
+responds in time.
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+To avoid finding proper values of the :math:`E` and :math:`\eta` parameters for
+a polymer, one can scale the problem. A common dimensionless
+time is :math:`\bar t= tE/\eta`. Note that :math:`\varepsilon` is already
+dimensionless by definition, but it takes on small values, say up to 0.1,
+so we introduce a scaling: :math:`\bar u=10\varepsilon` such that :math:`\bar u`
+takes on values up to about unity.
+
+Show that the material model then
+takes the form :math:`\bar u^{\prime} = -\bar u + 10\sigma(t)/E`.
+Work with the dimensionless force :math:`F=10\sigma(t)/E`, and let
+:math:`F=1` for :math:`\bar t\in (0,\bar t_1)` and :math:`F=0` for :math:`\bar t\geq \bar t_1`.
+A possible choice of :math:`t_1` is the characteristic time :math:`\eta/E`, which
+means that :math:`\bar t_1 = 1`.
+
+.. --- end hint in exercise ---
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Inserting the scaling :math:`\bar u=10\varepsilon` and :math:`\bar t = tE/\eta`
+in the ODE for :math:`\varepsilon` results in
+
+.. math::
+         \frac{E}{10 \eta}\frac{d\bar u}{d\bar t} = -\frac{E}{\eta 10}\bar u
+        + \frac{\sigma(t)}{\eta}\tp
+
+This reduces to
+
+.. math::
+         \frac{d\bar u}{d\bar t} = -\bar u + \frac{10\sigma}{E}\tp
+
+We can use the module ``decay_vc`` for solving :math:`u^{\prime}=-a(t)u+b(t)`:
+
+.. code-block:: python
+
+        # Scaled model: u' = -u + b(t), b=1 for t < 1 else 0
+        eps, t = solver(I=0, a=lambda t: 1,
+                        b=lambda t: 1 if t < 1 else 0,
+                        T=4, dt=0.01, theta=0.5)
+        
+        import matplotlib.pyplot as plt
+        plt.plot(t, eps)
+        plt.xlabel('Dimensionless time'); plt.ylabel('10*strain')
+        plt.savefig('tmp.png');  plt.savefig('tmp.pdf')
+        plt.show()
+
+.. figure:: KelvinVogt.png
+   :width: 600
+
+.. --- end solution of exercise ---
+
+Filename: ``KelvinVogt``.
 
 .. --- end exercise ---
 

@@ -13,39 +13,44 @@ computational science topics turned out to be more and more
 heterogeneous with respect to the students' undergraduate backgrounds,
 we frequently got students who could be strong in mathematics, but
 weak in programming, and vice versa. This situation called for some
-documentation of the expected scientific platform on which our
-graduate courses could build on.
+documentation of the expected basic competence in modern computing
+that graduate courses could build on.
 
-I decided to write a set of example-driven notes that illustrated the basic
+I decided to write a set of example-driven notes that illustrated the
 components in the scientific computing pipeline using the simple
 differential equation for exponential decay:
 :math:`u^{\prime}(t)=-au(t)`, where
-:math:`a>0` is a perameter. The plan was to go through the ideas of finite
+:math:`a>0` is a parameter. Such models arise in a wide range througout
+the sciences.
+The plan was to go through the ideas of finite
 differences, how such methods are programmed and tested, why such
 methods may fail, and how mathematical models of this kind arises
-throughtout the sciences. Many students lack knowledge about useful software
+from physics and biology. Many students lack knowledge about useful software
 engineering topics such as modules, user interfaces, testing
 frameworks, and class programming, so I added basic introductions to
 these themes as well. Our courses are multi-disciplinary and
 emphasizes how to turn theory into practice, so computer
 implementations are key.  As students requested generalizations and
-expanded explainations, the notes quickly grew in size and into the
+expanded explanations, the notes quickly grew in size and into the
 present booklet.
 
 The writing style is gentle and aims at a broad audience.
 Prerequisite knowlege is basic one-dimensional calculus and preferably
-some experience with computer programming.  The material features
+some experience with computer programming in Python or MATLAB.
+The material features
 comprehensive explanations since it was intended for self study. For
 some students it may act as an overview and refresher of traditional
 mathematical topics and likely a first introduction to some of the
 many software topics. The text can also be used in an undergraduate
 course setting as a case-based introduction to modern
 multi-disciplinary problem solving with computers, using the wide
-range of applications as motivation and then treating the details of
-the mathematical and computer science aspects.  Another upcoming
+range of applications in the chapter :ref:`decay:app`
+as motivation and then treating the details of
+the mathematical and computer science aspects from the other
+chapters.  Another upcoming
 audience is students and scientists with little mathematics and
 computing background, who need a foundation for entering into
-computer-based modeling.
+computer-based differential equation modeling.
 
 The choice of topics in this book are motivated from what is needed in
 more advanced courses on finite difference methods for partial
@@ -56,83 +61,83 @@ text is therefore to lay a foundation for understanding numerical
 methods for PDEs by first meeting the fundamental ideas in a simpler
 ODE setting. Compared to other books, the present one has a much
 stronger focus on how to turn mathematics into working code.
+It also explains the mathematics and programming in more detail.
 
-There is a companion book in the works that treat finite difference
-methods for PDEs using the same writing style and having the same
-focus on turning mathematical algorithms into reliable software.
+There is a more advanced companion book in the works that treat finite
+difference methods for PDEs using the same writing style and having
+the same focus on turning mathematical algorithms into reliable
+software.
 
 Although the main example in the present book is
 :math:`u^{\prime}=-au`,
 we also address the more general model problem :math:`u'=-a(t)u + b(t)`
 and the completely general, nonlinear problem :math:`u'=f(u,t)`, both for
 scalar and vector :math:`u(t)`.
-The following more refined list of topics will be elaborated on.
+The following list of topics will be elaborated on.
 
  * How to think when constructing finite difference methods, with special focus
    on the Forward Euler, Backward Euler, and Crank-Nicolson (midpoint)
-   schemes
+   schemes.
 
  * How to formulate a computational algorithm and translate it into
-   Python code
+   Python code.
 
- * How to make curve plots of the solutions
+ * How to make curve plots of the solutions.
 
- * How to compute numerical errors
+ * How to compute numerical errors.
 
- * How to compute convergence rates
+ * How to compute convergence rates.
 
  * How to test that an implementation is correct (verification) and how
-   to automate tests through *test functions* and *unit testing*
+   to automate tests through *test functions* and *unit testing*.
 
  * How to work with Python concepts such as arrays, lists, dictionaries,
-   lambda functions, functions in functions (closures)
+   lambda functions, functions in functions (closures).
 
  * How to perform array computing and understand the difference from
-   scalar computing
+   scalar computing.
 
- * How to uncover numerical artifacts in the computed solution
+ * How to uncover numerical artifacts in the computed solution.
 
  * How to analyze the numerical schemes mathematically to understand
-   why artifacts occur
+   why artifacts occur.
 
  * How to derive mathematical expressions for various measures of
    the error in numerical methods, frequently by using the ``sympy`` software
-   for symbolic computations
+   for symbolic computations.
 
  * How to understand concepts such as finite difference operators,
    mesh (grid), mesh functions,
-   stability, truncation error, consistency, and convergence
+   stability, truncation error, consistency, and convergence.
 
  * How to solve the general nonlinear ODE :math:`u'=f(u,t)`,
    which is either a scalar ODE or a system of ODEs (i.e., :math:`u` and :math:`f`
-   can either be a function or a vector of functions)
+   can either be a function or a vector of functions).
 
- * How to access professional packages for solving ODEs
+ * How to access professional packages for solving ODEs.
 
  * How the model equation :math:`u'=-au` arises in a wide range
-   of phenomena in physics, biology, and finance
+   of phenomena in physics, biology, chemistry, and finance.
 
-Among the software engineering topics we address
+ * How to structure a code in terms of functions.
 
- * How to structure a code in terms of functions
+ * How to make reusable modules.
 
- * How to make reusable modules
+ * How to read input data flexibly from the command line.
 
- * How to read input data flexibly from the command line
+ * How to create graphical/web user interfaces.
 
- * How to create graphical/web user interfaces
+ * How to use test frameworks for automatic unit testing.
 
- * How to use test frameworks for automatic unit testing
+ * How to refactor code in terms of classes (instead of functions).
 
- * How to refactor code in terms of classes (instead of functions)
+ * How to conduct and automate large-scale numerical experiments.
 
- * How to conduct and automate large-scale numerical experiments
-
- * How to write scientific reports in various formats (LaTeX, HTML)
+ * How to write scientific reports in various formats (LaTeX, HTML).
 
 The book contains a set of exercises in most of the chapters.
 The exercises are divided into three categories: *exercises*
-refers to the text (usually variations or extensions of examples
+refer to the text (usually variations or extensions of examples
 in the text), *problems* are stand-alone exercises without
 references to the text, and *projects* are larger problems.
 Exercises, problems, and projects share the same numbering to
@@ -166,4 +171,6 @@ Professor Svein Linge has provided very detailed and constructive feedback
 on this text, and all his efforts are highly appreciated. I also want to thank a
 number of students who have pointed out weaknesses and
 found errors.
+
+[**hpl 1**: The present version features solutions to a subset of the exercises. These solutions are likely to be removed, or solutions to all exercises are to be included.]
 
