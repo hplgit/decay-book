@@ -81,10 +81,28 @@
             
   <div class="section" id="algorithms-and-implementations">
 <h1>Algorithms and implementations<a class="headerlink" href="#algorithms-and-implementations" title="Permalink to this headline">¶</a></h1>
+<p>Throughout industry and science it is common today to study nature or
+technological devices through models on a computer. With such models
+the computer acts as a virtual lab where experiments can be done
+in a fast, reliable, and safe way. In some fields, e.g., areospace
+engineering, the computer models are now so sophisticated that they
+can replace physical experiments to a large extent.</p>
+<p>A vast amount of computer models are based on ordinary and partial
+differential equations. This book is an introduction to the
+various scientific ingredients we need for reliable computing with such
+type of models. A key theme is to solve differential equations
+<em>numerically</em> on a computer. Many methods are available for this purpose,
+but the focus here is on <em>finite difference methods</em>, because these
+are simple, yet versatile, for solving a wide range of ordinary and
+partial differential equations. The present chapter first presents the
+mathematical ideas of finite difference methods and derives algorithms,
+i.e., formulations of the methods ready for computer programming.
+Then we create programs and learn how we can be sure that the program
+is correct.</p>
 <div class="section" id="finite-difference-methods">
 <span id="decay-basics"></span><h2>Finite difference methods<a class="headerlink" href="#finite-difference-methods" title="Permalink to this headline">¶</a></h2>
-<p>We explain the basic ideas of finite difference methods
-primarily via the simple ordinary differential equation <span class="math">\(u^{\prime}=-au\)</span>.
+<p>This section explains the basic ideas of finite difference methods
+via the simple ordinary differential equation <span class="math">\(u^{\prime}=-au\)</span>.
 Emphasis is put on the reasoning behind problem discretizing and
 introduction of key concepts such as mesh, mesh function,
 finite difference approximations, averaging in a mesh,
