@@ -1204,47 +1204,6 @@ Simulate until the first mesh point <span class="math">\(t_m\)</span> such that 
 <p><strong>Hint 2.</strong>
 Use simulations with <span class="math">\(5,730\pm 40\)</span> y as input
 and find the corresponding uncertainty interval for the result.</p>
-<p><strong>Solution.</strong>
-We need a tailored solver function for this exercise:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-
-<span class="k">def</span> <span class="nf">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">u_crit</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Solve u&#39;=-a*u, u(0)=I, for t in (0,t_m] until u &lt;= u_crit</span>
-<span class="sd">    with steps of dt. Return t_m.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># Use list for u and t since we do not know how many points</span>
-    <span class="c"># that are needed</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>               <span class="c"># avoid integer division</span>
-    <span class="n">u</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="n">u</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>                  <span class="c"># assign initial condition</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">while</span> <span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">u_crit</span><span class="p">:</span>
-        <span class="n">u_new</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">u</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u_new</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-
-<span class="n">half_life</span> <span class="o">=</span> <span class="mi">5730</span>
-<span class="n">a</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">half_life</span>
-<span class="k">print</span> <span class="s">&#39;Age:&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">u_crit</span><span class="o">=</span><span class="mf">0.084</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Running this code gives an age of 20,480 years.</p>
-<p>The uncertainty can be estimated by the following code:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">half_life_min</span> <span class="o">=</span> <span class="mi">5730</span> <span class="o">-</span> <span class="mi">40</span>
-<span class="n">half_life_max</span> <span class="o">=</span> <span class="mi">5730</span> <span class="o">+</span> <span class="mi">40</span>
-<span class="n">a_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">half_life_min</span>
-<span class="n">a_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">half_life_max</span>
-<span class="n">age_min</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a_max</span><span class="p">,</span> <span class="n">u_crit</span><span class="o">=</span><span class="mf">0.084</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">age_max</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a_min</span><span class="p">,</span> <span class="n">u_crit</span><span class="o">=</span><span class="mf">0.084</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="k">print</span> <span class="s">&#39;Uncertainty: [</span><span class="si">%g</span><span class="s">, </span><span class="si">%g</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">age_min</span><span class="p">,</span> <span class="n">age_max</span><span class="p">)</span>
-</pre></div>
-</div>
 <p>Filename: <code class="docutils literal"><span class="pre">carbon14</span></code>.</p>
 </div>
 <div class="section" id="exercise-17-derive-schemes-for-newton-s-law-of-cooling">
@@ -1262,29 +1221,6 @@ coefficient, and <span class="math">\(T_0\)</span> is the initial temperature of
 Summarize the discretizations in a <span class="math">\(\theta\)</span>-rule
 such that you can get the three
 schemes from a single formula by varying the <span class="math">\(\theta\)</span> parameter.</p>
-<p><strong>Solution.</strong>
-The idea of the Forward Euler scheme is to sample the ODE at <span class="math">\(t=t_n\)</span>
-and apply a forward difference approximation to the derivative:</p>
-<div class="math">
-\[\frac{T^{n+1}-T^n}{\Delta t} = -k(T^n - T_s(t_n)){\thinspace .}\]</div>
-<p>The Backward Euler applies a backward difference instead:</p>
-<div class="math">
-\[\frac{T^{n}-T^{n-1}}{\Delta t} = -k(T^n - T_s(t_n)){\thinspace .}\]</div>
-<p>The Crank-Nicolson scheme samples the ODE at <span class="math">\(t_{n+\frac{1}{2}}\)</span>, applies
-a centered difference approximation, and an arithmetic mean approximation
-to <span class="math">\(T^{n+\frac{1}{2}}\)</span>:</p>
-<div class="math">
-\[\frac{T^{n+1}-T^n}{\Delta t} = -k(T^{n+\frac{1}{2}} - T_s(t_{n+\frac{1}{2}}))
-\approx -k(\frac{1}{2}(T^n + T^{n+1}) - T_s(t_{n+\frac{1}{2}})){\thinspace .}\]</div>
-<p>For each scheme we solve with respect to the unknown <span class="math">\(T^{n+1}\)</span> (note
-that we switch index from <span class="math">\(n\)</span> to <span class="math">\(n+1\)</span> in the Backward Euler scheme):</p>
-<div class="math">
-\[\begin{split}T^{n+1} &amp;= T^n - k\Delta t(T^n - T_s(t_n)),\\
-T^{n+1} &amp;= \frac{T^n + k\Delta t T_s(t_{n+1})}{1 + k\Delta t},\\
-T^{n+1} &amp;= \frac{T^n - \frac{1}{2} k\Delta t T^n + k\Delta t T_s(t_{n+\frac{1}{2}})}{1 + \frac{1}{2} k\Delta t}{\thinspace .}\end{split}\]</div>
-<p>A <span class="math">\(\theta\)</span> scheme can be formulated as</p>
-<div class="math">
-\[T^{n+1} = \frac{T^n - (1-\theta) k\Delta t T^n + k\Delta t T_s((1-\theta) t_n+ \theta t_{n+1})}{1 + \theta k\Delta t}\]</div>
 <p>Filename: <code class="docutils literal"><span class="pre">schemes_cooling</span></code>.</p>
 </div>
 <div class="section" id="exercise-18-implement-schemes-for-newton-s-law-of-cooling">
@@ -1305,85 +1241,12 @@ surroundings, <code class="docutils literal"><span class="pre">t_end</span></cod
 time step, and <code class="docutils literal"><span class="pre">theta</span></code> corresponds to <span class="math">\(\theta\)</span>.  The <code class="docutils literal"><span class="pre">cooling</span></code>
 function should return the temperature as an array <code class="docutils literal"><span class="pre">T</span></code> of values at
 the mesh points and the time mesh <code class="docutils literal"><span class="pre">t</span></code>.</p>
-<p><strong>Solution.</strong>
-Here is an appropriate function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-
-<span class="k">def</span> <span class="nf">cooling</span><span class="p">(</span><span class="n">T0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T_s</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Solve T&#39;=-k(T-T_s(t)), T(0)=T0,</span>
-<span class="sd">    for t in (0,t_end] with steps of dt.</span>
-<span class="sd">    T_s(t) is a Python function of t.</span>
-<span class="sd">    theta=0.5 means Crank-Nicolson, 1 is Backward</span>
-<span class="sd">    Euler, and 0 is Forward Euler scheme.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>                  <span class="c"># avoid integer division</span>
-    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">t_end</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>       <span class="c"># no of time intervals</span>
-    <span class="n">t_end</span> <span class="o">=</span> <span class="n">Nt</span><span class="o">*</span><span class="n">dt</span>                   <span class="c"># adjust to fit time step dt</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>              <span class="c"># array of T[n] values</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c"># time mesh</span>
-    <span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">T0</span>                       <span class="c"># set initial condition</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="p">):</span>          <span class="c"># n=0,1,...,Nt-1</span>
-        <span class="n">T</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> \
-        <span class="n">dt</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">theta</span><span class="o">*</span><span class="n">T_s</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">T_s</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">])))</span><span class="o">/</span> \
-        <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">theta</span><span class="o">*</span><span class="n">k</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">T</span><span class="p">,</span> <span class="n">t</span>
-</pre></div>
-</div>
 <p><strong>b)</strong>
 In the case <span class="math">\(\lim_{t\rightarrow\infty}T_s(t)=C=\mbox{const}\)</span>,
 explain why <span class="math">\(T(t)\rightarrow C\)</span>. Construct an example where you
 can illustrate this property in a plot. Implement a corresponding
 test function that checks the correctness of the asymptotic
 value of the solution.</p>
-<p><strong>Solution.</strong>
-Apply the limit to the ODE:</p>
-<div class="math">
-\[\lim_{t\rightarrow\infty}\frac{dT}{dt} = -k(\lim_{t\rightarrow\infty} T
-- \lim_{t\rightarrow\infty} T_s){\thinspace .}\]</div>
-<p>Assuming steady state behavior, <span class="math">\(dT/dt\rightarrow\infty\)</span> as
-<span class="math">\(t\rightarrow\infty\)</span>. Then we get</p>
-<div class="math">
-\[0 = -k(\lim_{t\rightarrow\infty} T
-- C),\]</div>
-<p>which means</p>
-<div class="math">
-\[\lim_{t\rightarrow\infty} T = C{\thinspace .}\]</div>
-<p>A corresponding test function takes the form</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_asymptotic</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Test that ``any&#39;&#39; initial condition leads to</span>
-<span class="sd">    the same asymptotic behavior when T_s=constant.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-    <span class="n">T_s</span> <span class="o">=</span> <span class="mf">5.</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="mf">1.2</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
-    <span class="n">tol</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c"># tolerance for testing asymptotic value</span>
-    <span class="n">t_end</span> <span class="o">=</span> <span class="mi">7</span>    <span class="c"># make sure t_end is large enough for tol</span>
-    <span class="n">T0_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> <span class="c"># test many cases</span>
-
-    <span class="k">for</span> <span class="n">T0</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]:</span>
-        <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">cooling</span><span class="p">(</span><span class="n">T0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">T_s</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
-
-        <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">T_s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> != </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">T_s</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">&#39;T0=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">T0</span> <span class="k">for</span> <span class="n">T0</span> <span class="ow">in</span> <span class="n">T0_values</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Testing asymptotic behavior T_s=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">T_s</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp1.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp1.pdf&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Note that we have added a plot in the test function for convenience.
-Letting test functions perform plotting is, however, not a good idea
-if you want to run a large set of tests.</p>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/cooling_asymptotic.png"><img alt="_images/cooling_asymptotic.png" src="_images/cooling_asymptotic.png" style="width: 600px;" /></a>
-</div>
 <p><strong>c)</strong>
 A piecewise constant surrounding temperature,</p>
 <div class="math">
@@ -1393,101 +1256,6 @@ C_1, &amp; t&gt;t^*,\end{array}\right.\end{split}\]</div>
 at <span class="math">\(t=t^*\)</span>. Choose <span class="math">\(C_0=2T_0\)</span>, <span class="math">\(C_1=\frac{1}{2}T_0\)</span>, and
 <span class="math">\(t^*=3/k\)</span>. Plot the solution <span class="math">\(T(t)\)</span> and explain why it seems physically
 reasonable.</p>
-<p><strong>Solution.</strong>
-First we implement a general tool for piecewise constant functions:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Piecewise</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class for holding a piecewise constant function.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">t_star</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">C0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">C1</span> <span class="o">=</span> <span class="n">C0</span><span class="p">,</span> <span class="n">C1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">t_star</span> <span class="o">=</span> <span class="n">t_star</span>
-
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return value of piecewise constant function.</span>
-<span class="sd">        t can be float or numpy array.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span><span class="nb">int</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_star</span><span class="p">:</span>
-                <span class="n">T_s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C0</span>
-            <span class="k">elif</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_star</span><span class="p">:</span>
-                <span class="n">T_s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c"># assume numpy array</span>
-            <span class="n">T_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">piecewise</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>
-                               <span class="p">[</span><span class="n">t</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_star</span><span class="p">,</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_star</span><span class="p">],</span>
-                               <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">C0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">C1</span><span class="p">])</span>
-            <span class="c"># Alternative</span>
-            <span class="c"># T_s = np.where(t &lt;= self.t_star, C0, C1)</span>
-        <span class="k">return</span> <span class="n">T_s</span>
-</pre></div>
-</div>
-<p>It is convenient to scale the problem such that we do not need to find
-physically relevant values for <span class="math">\(k\)</span>. A common scaling of <span class="math">\(T\)</span> is</p>
-<div class="math">
-\[\bar T = \frac{T-T_0}{T_s-T_0},\]</div>
-<p>when <span class="math">\(T_s\)</span> is constant since then <span class="math">\(\bar T\in [0,1]\)</span>. Here, we may choose
-the long-term value of <span class="math">\(T_s\)</span> in the denominator such that <span class="math">\(\lim_{t\rightarrow\infty}\bar T=1\)</span>, i.e.,</p>
-<div class="math">
-\[\bar T = \frac{T-T_0}{0.5T_0-T_0}= -2\frac{T-T_0}{T_0},\]</div>
-<p>but it leads to a shift in the sign of the temperature on the
-right-hand side of the ODE, and we cannot reuse the code for the
-original problem in the dimensionless case. We therefore avoid the negative
-sign and use a temperature scale <span class="math">\(2T_0-T_0\)</span>,</p>
-<div class="math">
-\[\bar T = \frac{T-T_0}{2T_0-T_0}= \frac{T-T_0}{T_0},\]</div>
-<p>which gives <span class="math">\(\bar T\)</span> varying from <span class="math">\(0\)</span> initially to a maximum of
-<span class="math">\(1\)</span> and finally to a minimum of <span class="math">\(-\frac{1}{2}\)</span>.
-We scale <span class="math">\(T_s\)</span> by its maximum value <span class="math">\(2T_0\)</span> so <span class="math">\(\bar T_s\in [0,1]\)</span>:</p>
-<div class="math">
-\[\begin{split}\bar T_s(\bar t) = \frac{T_s(t)}{\max_t T_s(t)} = \frac{T_s(t_c\bar t)}{2T_0} = \left\lbrace\begin{array}{ll}
-1, &amp; \bar t &lt; t^*/t_c,\\
-\frac{1}{4},&amp; \bar t \geq t^*/t_c
-\end{array}\right.\end{split}\]</div>
-<p>where <span class="math">\(t_c\)</span> is the time scale. Inserted in the ODE we get</p>
-<div class="math">
-\[\frac{T_0}{t_c}\frac{d\bar T}{d\bar t} = -k(T_0\bar T + T_0 -
-2T_0\bar T_s,\]</div>
-<p>leading to</p>
-<div class="math">
-\[\frac{d\bar T}{d\bar t} = -kt_c(\bar T + 1 - 2\bar T_s){\thinspace .}\]</div>
-<p>A natural choice is <span class="math">\(t_c=1/k\)</span> so we get the scaled problem</p>
-<div class="math">
-\[\frac{d\bar T}{d\bar t} = -(\bar T + 1 - 2\bar T_s) =
--(\bar T -(2\bar T_s - 1)),\quad \bar T(0)=0{\thinspace .}\]</div>
-<p>We can simulate this problem using the code for the original
-problem by choosing <span class="math">\(k=1\)</span>, <span class="math">\(T_0=0\)</span>, and
-<span class="math">\(T_s= (2-1)=1\)</span> for <span class="math">\(t &lt; 3\)</span> and <span class="math">\(T_s=(2\frac{1}{4}-1)=-\frac{1}{2}\)</span>
-for <span class="math">\(t &gt; 3\)</span>.</p>
-<p>The appropriate code becomes</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">simulate_piecewise_constant_Ts</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Simulate scaled problem: T&#39; = -(T - (2T_s-1)), T(0)=0,</span>
-<span class="sd">    where T_s=1 for t &lt; 3 and -0.5 for t &gt; 3.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">T0</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">t_star</span> <span class="o">=</span> <span class="mf">3.0</span>
-    <span class="n">C0</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">C1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span>
-    <span class="n">T_s</span> <span class="o">=</span> <span class="n">Piecewise</span><span class="p">(</span><span class="n">C0</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">t_star</span><span class="p">)</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">t_star</span><span class="o">/</span><span class="mf">100.0</span>
-    <span class="n">T</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">cooling</span><span class="p">(</span><span class="n">T0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T_s</span><span class="p">,</span> <span class="n">t_end</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="n">t_star</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;u&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp2.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp2.pdf&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>The plot looks like this:</p>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/cooling_piecewise.png"><img alt="_images/cooling_piecewise.png" src="_images/cooling_piecewise.png" style="width: 600px;" /></a>
-</div>
-<p>The result is reasonable because first <span class="math">\(T_s=1\)</span> and the body&#8217;s temperature
-will try to rise from <span class="math">\(0\)</span> to <span class="math">\(1\)</span>, and it almost gets there in
-the time <span class="math">\([0,3]\)</span>, before <span class="math">\(T_s=-0.5\)</span> and then the body is cooled down
-to <span class="math">\(-0.5\)</span> as <span class="math">\(t\)</span> increases, and this is also the asymptotic value.</p>
 <p><strong>d)</strong>
 We know from the ODE <span class="math">\(u^\prime =-au\)</span> that the Crank-Nicolson scheme
 can give non-physical oscillations for <span class="math">\(\Delta t &gt; 2/a\)</span>.
@@ -1495,16 +1263,6 @@ In the present problem, this results indicates
 that the Crank-Nicolson scheme give undesired
 oscillations for <span class="math">\(\Delta t &gt; 2/k\)</span>.
 Discuss if this a potential problem in the physical case from c).</p>
-<p><strong>Solution.</strong>
-In the unscaled problem, the first stage of the simulation is
-covers time interval <span class="math">\([0,t^*]=[0, 3/k]\)</span>. It makes sense to
-choose <span class="math">\(\Delta t\)</span> significantly smaller than <span class="math">\(3/k\)</span>, and the
-stability limit <span class="math">\(2/k\)</span> is a too large step. The next time level
-is then <span class="math">\(4/k\)</span>, and it sounds reasonable to include the point <span class="math">\(t^*=3/k\)</span>
-as a mesh point. Oscillations would then occur if we choose
-<span class="math">\(\Delta t = 3/k\)</span>, but this means only one step through the first
-interval <span class="math">\([0,t^*]\)</span>, which is a very coarse mesh. Halving <span class="math">\(\Delta t\)</span>
-is still a coarse mesh, but then there cannot be oscillations.</p>
 <p><strong>e)</strong>
 Find an expression for the exact solution of
 <span class="math">\(T^{\prime} = -k(T-T_s(t))\)</span>, <span class="math">\(T(0)=T_0\)</span>.
@@ -1519,202 +1277,6 @@ there still may be errors in the code.  Can you introduce bugs in the
 <p><strong>Hint.</strong>
 The exact solution can be derived by multiplying <a href="#equation-decay:Newton:cooling">(5)</a>
 by the integrating factor <span class="math">\(e^{kt}\)</span>.</p>
-<p><strong>Solution.</strong>
-Multiplication of <span class="math">\(e^{kt}\)</span>, using the product rule for differentiation
-&#8220;backwards&#8221;, and integrating from 0 to <span class="math">\(t\)</span>, results in</p>
-<div class="math">
-\[\int_0^t (e^{kt}T)^{\prime}dt = k\int_0^t e^{kt}T_sdt{\thinspace .}\]</div>
-<p>The left-hand side becomes <span class="math">\(e^{kt}T(t)-T_0\)</span>. Multiplying by <span class="math">\(e^{-kt}\)</span>
-then gives</p>
-<div class="math">
-\[T(t) = T_0e^{-kt} + ke^{-kt}\int_0^t e^{k\tau}T_s(\tau)d\tau,\]</div>
-<p>which is the general expression for the exact solution.</p>
-<p>As a check, we consider the case where <span class="math">\(T_s\)</span> is constant.
-That problem can easily be solved by introducing <span class="math">\(u=T-T_s\)</span>, resulting in
-<span class="math">\(u^{\prime}=-ku\)</span>, <span class="math">\(u(0)=T_0-T_s\)</span>, with solution <span class="math">\(u(t)=(T_0-T_s)e^{-kt}\)</span>,
-and consequently <span class="math">\(T=T_s + (T_0-T_s)e^{-kt}\)</span>. With a constant <span class="math">\(T_s\)</span> in
-the general solution above, the solution becomes</p>
-<div class="math">
-\[\begin{split}T(t) &amp;= T_0e^{-kt} + ke^{-kt}\int_0^t e^{kt}T_sdt\\
-&amp; = T_0e^{-kt} + ke^{-kt}T_sk^{-1}(e^{kt} - 1)\\
-&amp; = T_0e^{-kt} + T_s - T_se^{-kt}\\
-&amp; = T_s + (T_0-T_s)e^{-kt},\end{split}\]</div>
-<p>as desired.</p>
-<p>We choose the same test problem as in c) and use SymPy to do the
-integration. A function doing the integration and returning
-Python functions for the formulas for <span class="math">\(t &lt; t^*\)</span> and <span class="math">\(t\geq t^*\)</span>
-is convenient:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">symbolic_exact_solution</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute the exact solution formula via sympy.&quot;&quot;&quot;</span>
-    <span class="c"># sol1: solution for t &lt; t_star,</span>
-    <span class="c"># sol2: solution for t &gt; t_star</span>
-    <span class="kn">import</span> <span class="nn">sympy</span> <span class="kn">as</span> <span class="nn">sym</span>
-    <span class="n">T0</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s">&#39;T0&#39;</span><span class="p">)</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s">&#39;k&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="c"># Piecewise linear T_sunction</span>
-    <span class="n">t</span><span class="p">,</span> <span class="n">t_star</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">C1</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s">&#39;t t_star C0 C1&#39;</span><span class="p">)</span>
-    <span class="n">T_s</span> <span class="o">=</span> <span class="n">C0</span>
-    <span class="n">I</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">T_s</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
-    <span class="n">sol1</span> <span class="o">=</span> <span class="n">T0</span><span class="o">*</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">I</span>
-    <span class="n">sol1</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">sol1</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="c"># Some debugging print</span>
-        <span class="k">print</span> <span class="s">&#39;solution t &lt; t_star:&#39;</span><span class="p">,</span> <span class="n">sol1</span>
-        <span class="c">#print sym.latex(sol1)</span>
-    <span class="n">T_s</span> <span class="o">=</span> <span class="n">C1</span>
-    <span class="n">I</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">C0</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">t_star</span><span class="p">))</span> <span class="o">+</span> \
-        <span class="n">sym</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">C1</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_star</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
-    <span class="n">sol2</span> <span class="o">=</span> <span class="n">T0</span><span class="o">*</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">I</span>
-    <span class="n">sol2</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">sol2</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">&#39;solution t &gt; t_star:&#39;</span><span class="p">,</span> <span class="n">sol2</span>
-        <span class="c">#print sym.latex(sol2)</span>
-
-    <span class="c"># Convert to numerical functions</span>
-    <span class="n">exact0</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T0</span><span class="p">],</span>
-                          <span class="n">sol1</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
-    <span class="n">exact1</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">t_star</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T0</span><span class="p">],</span>
-                          <span class="n">sol2</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">exact0</span><span class="p">,</span> <span class="n">exact1</span>
-</pre></div>
-</div>
-<p>Then we need a function that can evaluate the exact solution as
-a mesh function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">evaluate_exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T0</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">t_star</span><span class="p">,</span>
-                            <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return exact (analytical) solution of the problem.</span>
-<span class="sd">    Exact solution is produced by sympy.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">exact0</span><span class="p">,</span> <span class="n">exact1</span> <span class="o">=</span> <span class="n">symbolic_exact_solution</span><span class="p">()</span>
-    <span class="c"># exact0/1 works with t as numpy array</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span><span class="nb">int</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">t_star</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">exact0</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T0</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">exact1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">t_star</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T0</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c"># assume numpy array</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
-            <span class="n">t</span> <span class="o">&lt;</span> <span class="n">t_star</span><span class="p">,</span>
-            <span class="n">exact0</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T0</span><span class="p">),</span>
-            <span class="n">exact1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">t_star</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T0</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Finally we can run the comparison:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">compare_numerical_and_exact_solution</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compare exact and numerical solution with piecewise</span>
-<span class="sd">    constant surrounding temperature. Use scaled problem</span>
-<span class="sd">    from function simulate_piecewise_constant_Ts.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">T0</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">C0</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">C1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span>
-    <span class="n">t_star</span> <span class="o">=</span> <span class="mi">3</span>
-    <span class="n">t_end</span> <span class="o">=</span> <span class="mi">7</span>
-
-    <span class="n">T_s</span> <span class="o">=</span> <span class="n">Piecewise</span><span class="p">(</span><span class="n">C0</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">t_star</span><span class="p">)</span>
-
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-    <span class="n">dt_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.025</span><span class="p">]</span>
-    <span class="c">#dt_values = [0.025]</span>
-    <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">:</span>
-        <span class="n">T</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">cooling</span><span class="p">(</span><span class="n">T0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T_s</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
-
-    <span class="n">t_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>  <span class="c"># find mesh for T_e</span>
-    <span class="c"># Could use sym.Rational(1,2) instead of 0.5, but not necessary</span>
-    <span class="c"># when we are not interested in symbolic formulas</span>
-    <span class="n">T_e</span> <span class="o">=</span> <span class="n">evaluate_exact_solution</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T0</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">t_star</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">T_e</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">&#39;CN, dt=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">dt</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s">&#39;exact&#39;</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;T(t) for piecewise constant $T_s(t)$&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp3.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp3.pdf&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>The <span class="math">\(\Delta t\)</span> values were found after some trial and error, but they
-illustrate crude approximations and one with the biggest possible
-<span class="math">\(\Delta t\)</span> such that the exact solution and the numerical solution cannot
-be visually distinguished:</p>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/cooling_piecewise_compare.png"><img alt="_images/cooling_piecewise_compare.png" src="_images/cooling_piecewise_compare.png" style="width: 600px;" /></a>
-</div>
-<p>We can now start to introduce bugs in the <code class="docutils literal"><span class="pre">cooling</span></code> function to
-see if it is possible to have some <span class="math">\(\Delta t\)</span> and still find
-coinciding curves.</p>
-<div class="section" id="bug-1-wrong-time-level-in-the-function">
-<h4>Bug 1: Wrong time level in the <span class="math">\(T_s\)</span> function<a class="headerlink" href="#bug-1-wrong-time-level-in-the-function" title="Permalink to this headline">¶</a></h4>
-<p>We replace <code class="docutils literal"><span class="pre">T_s[n]</span></code> by <code class="docutils literal"><span class="pre">T_s[n+1]</span></code> in the implementation of the scheme
-and rerun the case. Now the lowest <span class="math">\(\Delta t\)</span> is still on top of
-the exact solution, but the numerical solution on the two coarser
-meshes are more accurate! This is because we lower the surrounding
-temperature somewhat earlier in the buggy scheme and this reduces
-the &#8220;overshoot&#8221; on the coarsest meshes in the figure above.</p>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/cooling_piecewise_bug1.png"><img alt="_images/cooling_piecewise_bug1.png" src="_images/cooling_piecewise_bug1.png" style="width: 600px;" /></a>
-</div>
-</div>
-<div class="section" id="bug-2-wrong-time-level-in-the-function">
-<h4>Bug 2: Wrong time level in the <span class="math">\(T\)</span> function<a class="headerlink" href="#bug-2-wrong-time-level-in-the-function" title="Permalink to this headline">¶</a></h4>
-<p>We can replace <code class="docutils literal"><span class="pre">T[n]</span></code> by <code class="docutils literal"><span class="pre">T[n+1]</span></code> on the right-hand side of the scheme.
-This is a serious error since <code class="docutils literal"><span class="pre">T[n+1]</span></code> is not yet computed and therefore
-equal to zero when <code class="docutils literal"><span class="pre">T</span></code> was made by calling <code class="docutils literal"><span class="pre">np.zeros</span></code>. The results
-are also nonsense, and one would immediately look for a bug.</p>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/cooling_piecewise_bug2.png"><img alt="_images/cooling_piecewise_bug2.png" src="_images/cooling_piecewise_bug2.png" style="width: 600px;" /></a>
-</div>
-</div>
-<div class="section" id="bug-3-missing-in-a-term">
-<h4>Bug 3: Missing <span class="math">\(\theta\)</span> in a term<a class="headerlink" href="#bug-3-missing-in-a-term" title="Permalink to this headline">¶</a></h4>
-<p>Let us forget to multiply by <code class="docutils literal"><span class="pre">theta</span></code> in the nominator of the scheme, i.e.,
-we replace</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">T</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> \
-         <span class="n">dt</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">theta</span><span class="o">*</span><span class="n">T_s</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">T_s</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">])))</span><span class="o">/</span> \
-         <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">theta</span><span class="o">*</span><span class="n">k</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>by</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">T</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> \
-         <span class="n">dt</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">T_s</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">T_s</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">])))</span><span class="o">/</span> \
-         <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">theta</span><span class="o">*</span><span class="n">k</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>This error leads to convergence towards a wrong solution:</p>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/cooling_piecewise_bug3.png"><img alt="_images/cooling_piecewise_bug3.png" src="_images/cooling_piecewise_bug3.png" style="width: 600px;" /></a>
-</div>
-<p>If we did not have the exact solution, one could be led to think
-that the solution was correct, but it is non-physical since we
-do not expect the temperature to rise from <span class="math">\(T_0\)</span> to a level
-<em>above</em> the surrounding temperature. The plot shows that <span class="math">\(\bar T&gt;1\)</span>,
-the value of the (scaled) surrounding temperature.
-Note that if we used the Backward Euler scheme instead of the
-Crank-Nicolson scheme, this bug would have no effect!</p>
-</div>
-<div class="section" id="bug-4-missing-k-in-the-updating-formula">
-<h4>Bug 4: Missing <code class="docutils literal"><span class="pre">k</span></code> in the updating formula<a class="headerlink" href="#bug-4-missing-k-in-the-updating-formula" title="Permalink to this headline">¶</a></h4>
-<p>Obviously, when we solve the scaled problem where <span class="math">\(k=1\)</span> by definition,
-such a programming mistake has no effect. Otherwise, <span class="math">\(k\)</span> influences
-the time scale, so there will be a stretch of the time axis in the
-numerical solution and this should be easily detected in a plot.</p>
-</div>
-<div class="section" id="bug-5-using-1-theta-instead-of-theta">
-<h4>Bug 5: Using <code class="docutils literal"><span class="pre">1-theta</span></code> instead of <code class="docutils literal"><span class="pre">theta</span></code><a class="headerlink" href="#bug-5-using-1-theta-instead-of-theta" title="Permalink to this headline">¶</a></h4>
-<p>Such an error is not detectable in the Crank-Nicolson scheme, but
-will have a significant effect in the other schemes.
-As a test, we replace <code class="docutils literal"><span class="pre">1-theta</span></code> in the nominator by <code class="docutils literal"><span class="pre">theta</span></code>.
-This leads to <span class="math">\(T=0\)</span> in the Forward Euler scheme, but a reasonable shape
-in the Backward Euler scheme, although the solution becomes larger
-than the surrounding temperature (1 in the scaled problem).</p>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/cooling_piecewise_bug5.png"><img alt="_images/cooling_piecewise_bug5.png" src="_images/cooling_piecewise_bug5.png" style="width: 600px;" /></a>
-</div>
 <p><strong>f)</strong>
 Implement a test function for checking that the solution returned by
 the <code class="docutils literal"><span class="pre">cooling</span></code> function is identical to the exact numerical
@@ -1761,7 +1323,6 @@ as maximum so a tolerance of <span class="math">\(10^{-14}\)</span> is appropria
 This is a good test that the <code class="docutils literal"><span class="pre">cooling</span></code> function works!</p>
 <p>Filename: <code class="docutils literal"><span class="pre">cooling</span></code>.</p>
 </div>
-</div>
 <div class="section" id="exercise-19-find-time-of-murder-from-body-temperature">
 <span id="decay-app-exer-cooling-murder"></span><h3>Exercise 19: Find time of murder from body temperature<a class="headerlink" href="#exercise-19-find-time-of-murder-from-body-temperature" title="Permalink to this headline">¶</a></h3>
 <p>A detective measures the temperature of a dead body to be 26.7 C at 2
@@ -1776,49 +1337,6 @@ finding <span class="math">\(k\)</span>. Assume the temperature in the air to be
 simulate the temperature evolution from the time of murder, taken as
 <span class="math">\(t=0\)</span>, when <span class="math">\(T=37\hbox{ C}\)</span>, until the temperature reaches 25.8 C. The
 corresponding time allows for answering when death occurred.</p>
-<p><strong>Solution.</strong>
-A Forward Euler step from <span class="math">\(T^0\)</span> to <span class="math">\(T^1\)</span> reads</p>
-<div class="math">
-\[T^1 = T_0 + -k\Delta t (T^0 - T_s),\]</div>
-<p>and solving with respect to <span class="math">\(k\)</span> results in</p>
-<div class="math">
-\[k = \frac{T^1 - T^0}{\Delta t(T_s - T_0)}{\thinspace .}\]</div>
-<p>We implement this formula in a function,</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">estimate_k</span><span class="p">(</span><span class="n">T0</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span> <span class="n">Ts</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">T1</span> <span class="o">-</span> <span class="n">T0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">T0</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>We have <span class="math">\(T_0=26.7\)</span> C, <span class="math">\(T_1=25.8\)</span> C, <span class="math">\(T_s=20\)</span> C, and <span class="math">\(\Delta t = 1\)</span> h,
-i.e., <span class="math">\(\Delta t = 3600\)</span> s. The proper call is therefore</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">k</span> <span class="o">=</span> <span class="n">estimate_k</span><span class="p">(</span><span class="mf">26.7</span><span class="p">,</span> <span class="mf">25.8</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">3600</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>For the simulation we use the Forward Euler method,</p>
-<div class="math">
-\[T^{n+1} = T^n - k\Delta t(T^n - T_s),\]</div>
-<p>and simulate as long as <span class="math">\(T &gt; 25.8\)</span> C:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">T</span> <span class="o">=</span> <span class="mi">37</span>
-<span class="n">Ts</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="kn">from</span> <span class="nn">cooling</span> <span class="kn">import</span> <span class="n">cooling</span>
-<span class="k">while</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="mf">25.8</span><span class="p">:</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="n">T</span> <span class="o">-</span> <span class="n">k</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">Ts</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">+=</span> <span class="n">dt</span>
-
-<span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
-<span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">minutes</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
-<span class="k">print</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">The death occurred </span><span class="si">%d</span><span class="s"> hours, </span><span class="si">%d</span><span class="s"> minutes,</span>
-<span class="s">and </span><span class="si">%g</span><span class="s"> seconds before 3am.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The result of running the code becomes</p>
-<div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python detective.py
-k=3.73134e-05
-
-The death occurred 8 hours, 0 minutes,
-and 19 seconds before 3am.
-</pre></div>
-</div>
 <p>Filename: <code class="docutils literal"><span class="pre">detective</span></code>.</p>
 </div>
 <div class="section" id="exercise-20-simulate-an-oscillating-cooling-process">
@@ -1833,82 +1351,6 @@ a constant mean temperature <span class="math">\(T_m\)</span>:</p>
 <p>Simulate a process with the following data: <span class="math">\(k=0.05 \hbox{ min}^{-1}\)</span>,
 <span class="math">\(T(0)=5\)</span> C, <span class="math">\(T_m=25\)</span> C, <span class="math">\(a=2.5\)</span> C, and <span class="math">\(P=1\)</span> h, <span class="math">\(P=10\)</span> min, and <span class="math">\(P=6\)</span> h.
 Plot the <span class="math">\(T\)</span> solutions and <span class="math">\(T_s\)</span> in the same plot.</p>
-<p><strong>Solution.</strong>
-We can reuse the <code class="docutils literal"><span class="pre">cooling</span></code> function from <a class="reference internal" href="#decay-app-exer-cooling-py"><span class="std std-ref">Exercise 18: Implement schemes for Newton&#8217;s law of cooling</span></a>
-to do the simulations:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-
-<span class="k">def</span> <span class="nf">cooling</span><span class="p">(</span><span class="n">T0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T_s</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Solve T&#39;=-k(T-T_s(t)), T(0)=T0,</span>
-<span class="sd">    for t in (0,t_end] with steps of dt.</span>
-<span class="sd">    T_s(t) is a Python function of t.</span>
-<span class="sd">    theta=0.5 means Crank-Nicolson, 1 is Backward</span>
-<span class="sd">    Euler, and 0 is Forward Euler scheme.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>                  <span class="c"># avoid integer division</span>
-    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">t_end</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>       <span class="c"># no of time intervals</span>
-    <span class="n">t_end</span> <span class="o">=</span> <span class="n">Nt</span><span class="o">*</span><span class="n">dt</span>                   <span class="c"># adjust to fit time step dt</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>              <span class="c"># array of T[n] values</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c"># time mesh</span>
-    <span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">T0</span>                       <span class="c"># set initial condition</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="p">):</span>          <span class="c"># n=0,1,...,Nt-1</span>
-        <span class="n">T</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> \
-        <span class="n">dt</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">theta</span><span class="o">*</span><span class="n">T_s</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">T_s</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">])))</span><span class="o">/</span> \
-        <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">theta</span><span class="o">*</span><span class="n">k</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">T</span><span class="p">,</span> <span class="n">t</span>
-</pre></div>
-</div>
-<p>The challenge is to use the right units
-for the input data. We can use Celsius for temperature since it has
-the same increments as Kelvin. Time quantities should be measured
-in seconds:</p>
-<div class="math">
-\[\begin{split}k &amp;= 20 \hbox{ min}^{-1} = \frac{20}{60}\hbox{ s}^{-1},\\
-P &amp;= (1 \hbox{ h} = 3600\hbox{ s}, 10\hbox{ min} = 600\hbox{ s},
-6\hbox{ h}=6\cdot 3600\hbox{ s}){\thinspace .}\end{split}\]</div>
-<p>To achieve reasonable accuracy,
-we choose <span class="math">\(\Delta t\)</span> as 40 steps per the
-shortest period of the <span class="math">\(T_s\)</span> oscillations:
-<span class="math">\(\Delta t = 600/40\)</span>. With some trials we find
-an appropriate simulation interval for all three cases to be
-<span class="math">\([0,8]\)</span> h.</p>
-<p>The code becomes</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">cooling</span> <span class="kn">import</span> <span class="n">cooling</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sin</span>
-
-<span class="k">def</span> <span class="nf">T_s</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">Tm</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">sin</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="n">P</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-
-<span class="n">Tm</span> <span class="o">=</span> <span class="mi">25</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mf">2.5</span>
-<span class="n">P_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3600</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">3600</span><span class="o">*</span><span class="mi">6</span><span class="p">]</span>
-<span class="n">k</span> <span class="o">=</span> <span class="mf">0.05</span><span class="o">/</span><span class="mi">60</span>
-<span class="n">T0</span> <span class="o">=</span> <span class="mi">5</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">P_values</span><span class="p">:</span>
-    <span class="n">T</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">cooling</span><span class="p">(</span><span class="n">T0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T_s</span><span class="p">,</span> <span class="n">t_end</span><span class="o">=</span><span class="mi">8</span><span class="o">*</span><span class="mi">3600</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">600</span><span class="o">/</span><span class="mi">40</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">T_s</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="s">&#39;k--&#39;</span><span class="p">)</span>
-<span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;P=1 h&#39;</span><span class="p">,</span> <span class="s">&#39;P=10 min&#39;</span><span class="p">,</span> <span class="s">&#39;P=6 h&#39;</span><span class="p">,</span> <span class="s">&#39;$T_s$&#39;</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legends</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">&#39;lower right&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp.pdf&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/osc_cooling.png"><img alt="_images/osc_cooling.png" src="_images/osc_cooling.png" style="width: 700px;" /></a>
-</div>
-<p><strong>Discussion of the results.</strong>
-We see that it takes some time to increase the temperature from <span class="math">\(T_0\)</span>
-to oscillations around <span class="math">\(T_m\)</span>. When <span class="math">\(T_s\)</span> oscillates fast (<span class="math">\(P=10\)</span> min),
-<span class="math">\(k\)</span> is not large enough so that <span class="math">\(T\)</span> can reach the surrounding temperature
-in the time available before the surrounding temperature decreases.
-However, for large <span class="math">\(P\)</span> (6 h), there is almost enough time to heat
-and cool the object to reach the maximum and minimum temperatures
-of the surroundings.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">osc_cooling</span></code>.</p>
 </div>
 <div class="section" id="exercise-21-simulate-stochastic-radioactive-decay">
@@ -2037,30 +1479,11 @@ model becomes</p>
 <p>where <span class="math">\(R_0\)</span> and <span class="math">\(\alpha\)</span> are the only parameters in the problem:</p>
 <div class="math">
 \[R_0 = \frac{N\beta}{\nu}, \quad \alpha = \frac{I(0)}{N}{\thinspace .}\]</div>
-<p><strong>Solution.</strong>
-We introduce</p>
-<div class="math">
-\[\bar t = \frac{t}{\nu^{-1}},\quad \bar S = \frac{S}{N},\quad
-\bar I = \frac{I}{N},\quad \bar R = \frac{R}{N}{\thinspace .}\]</div>
-<p>Inserting these expressions in the governing equations and dividing by
-<span class="math">\(\nu N\)</span> gives the listed dimensionless ODEs. The scaled initial condition
-for <span class="math">\(\bar S(0)\)</span> follows from
-<span class="math">\(\bar S(0) = S(0)/N = (N-I(0))/N = 1 - \alpha\)</span>, since initially,
-<span class="math">\(R(0)=0\)</span> and therefore <span class="math">\(N=S(0) + I(0)\)</span>.</p>
 <p><strong>b)</strong>
 Show that the <span class="math">\(R_0\)</span> parameter governs whether the disease will spread
 or not at <span class="math">\(t=0\)</span>.</p>
 <p><strong>Hint.</strong>
 Spreading means <span class="math">\(dI/dt&gt;0\)</span>.</p>
-<p><strong>Solution.</strong>
-For <span class="math">\(dI/dt\)</span> to be positive, we must have <span class="math">\((R_0 \bar S - 1)\bar I &gt; 0\)</span>, i.e.,
-<span class="math">\(R_0 \bar S - 1 &gt; 0\)</span> since <span class="math">\(\bar I\geq 0\)</span>. At <span class="math">\(t=0\)</span>, we get
-<span class="math">\(R_0 \bar S(0) &gt; 1\)</span> as the criterion, or</p>
-<div class="math">
-\[\begin{split}\tilde R_0\bar S(0) = \frac{N\beta}{\nu}\frac{S(0)}{N} = \frac{S(0)\beta}{\nu} &gt;1
-{\thinspace .}\end{split}\]</div>
-<p>The dimensionless parameter <span class="math">\(S(0)\beta /\nu\)</span> is denoted by <span class="math">\(R_0\)</span> in
-the epidemiology literature and known as the <em>basic reproductive number</em>.</p>
 <p><strong>c)</strong>
 Implement the scaled SIR model. Check at every time step,
 as a verification, that
@@ -2068,8 +1491,6 @@ as a verification, that
 <p><strong>d)</strong>
 Simulate the spreading of a disease where <span class="math">\(R_0=1.1\)</span> and 1 percent of
 the population is infected at time <span class="math">\(t=0\)</span>.</p>
-<p><strong>Solution.</strong>
-The given data means that <span class="math">\(\bar I(0)=\alpha = 0.01\)</span> and <span class="math">\(\bar S(0)=0.99\)</span>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">SIR</span></code>.</p>
 </div>
 <div class="section" id="exercise-26-simulate-a-biochemical-process">
@@ -2104,54 +1525,9 @@ system becomes</p>
 \[\alpha = \frac{K}{E_0},\quad \beta = \frac{k_v}{k_+ E_0},\quad
 \epsilon = \frac{E_0}{S_0}{\thinspace .}\]\[The corresponding initial conditions are $\bar Q=\bar P=0$ and
 $\bar S=\bar E=1$.\]</div>
-<p><strong>Solution.</strong>
-Replacing the unknowns and <span class="math">\(t\)</span> by their dimensionless equivalents
-leads to</p>
-<div class="math">
-\[\begin{split}\frac{d\bar Q}{d\bar t} &amp;= t_ck_+\frac{E_0S_0}{Q_c}\bar E\bar S
-- t_c(k_v + k_-)\bar Q,\\
-\frac{d\bar P}{d\bar t} &amp;= t_ck_v\frac{Q_c}{P_c}\bar Q,\\
-\frac{d\bar S}{d\bar t} &amp;= -t_ck_+E_0\bar E\bar S
-+ t_ck_-\frac{Q_c}{S_0}\bar Q,\\
-\frac{d\bar E}{d\bar t} &amp;= -t_ck_+S_0\bar E\bar S
-+ t_c(k_- + k_v)\frac{Q_c}{E_0}\bar Q{\thinspace .}\end{split}\]</div>
-<p>Inserting the choice of scales brings us to the given equations, after
-quite some algebra and identifying coefficients in terms of the
-provided dimensionless numbers.</p>
 <p><strong>b)</strong>
 Implement a function for
 solving <a href="#equation-decay:app:MMK:Q2">(30)</a>-<a href="#equation-decay:app:MMK:E2">(33)</a>.</p>
-<p><strong>Solution.</strong>
-Let us use Odespy to solve the differential equations, although a plain
-Forward Euler scheme will be fine.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">odespy</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="k">def</span> <span class="nf">solver</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="n">u</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="n">alpha</span><span class="o">*</span><span class="p">(</span><span class="n">E</span><span class="o">*</span><span class="n">S</span> <span class="o">-</span> <span class="n">Q</span><span class="p">),</span>
-            <span class="n">beta</span><span class="o">*</span><span class="n">Q</span><span class="p">,</span>
-            <span class="o">-</span><span class="n">E</span><span class="o">*</span><span class="n">S</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="o">/</span><span class="n">alpha</span><span class="p">)</span><span class="o">*</span><span class="n">Q</span><span class="p">,</span>
-            <span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">*</span><span class="n">S</span> <span class="o">+</span> <span class="n">Q</span><span class="p">)</span><span class="o">/</span><span class="n">epsilon</span><span class="p">,</span>
-            <span class="p">]</span>
-
-    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>
-    <span class="n">t_mesh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">solver</span> <span class="o">=</span> <span class="n">odespy</span><span class="o">.</span><span class="n">RK4</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="n">solver</span><span class="o">.</span><span class="n">set_initial_condition</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">t_mesh</span><span class="p">)</span>
-    <span class="n">Q</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">S</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
-    <span class="n">E</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">E</span>
-</pre></div>
-</div>
 <p><strong>c)</strong>
 There are two conservation equations implied by
 <a href="#equation-decay:app:MMK:ES1">(7)</a>-<a href="#equation-decay:app:MMK:E1">(10)</a>:</p>
@@ -2161,67 +1537,9 @@ There are two conservation equations implied by
 \[[ES] + [S] + [P] = S_0{\thinspace .}\]</div>
 <p>Derive these two equations. Use these properties in the function
 in b) to do a partial verification of the solution at each time step.</p>
-<p><strong>Solution.</strong>
-Adding
-<a href="#equation-decay:app:MMK:ES1">(7)</a> and <a href="#equation-decay:app:MMK:E1">(10)</a> shows that</p>
-<div class="math">
-\[\frac{d[ES]}{dt} + \frac{d[E]}{dt} = 0,\]</div>
-<p>and therefore <span class="math">\([ES] + [E]=\hbox{const}\)</span>. Since <span class="math">\([ES](0)=0\)</span> and
-<span class="math">\([E](0)=E_0\)</span>, the constant is <span class="math">\(E_0\)</span> at <span class="math">\(t=0\)</span> and will remain so.
-Similarly, adding <a href="#equation-decay:app:MMK:ES1">(7)</a>,
-<a href="#equation-decay:app:MMK:S1">(9)</a>, and <a href="#equation-decay:app:MMK:P1">(8)</a>
-shows that their time derivatives sum up to zero, and therefore
-<span class="math">\([ES] + [S] + [P] =\hbox{const}\)</span>. Since <span class="math">\([P](0)=0\)</span>, the constant
-must be <span class="math">\(0+S_0+0=S_0\)</span>.</p>
-<p>To use the conservation as a consistency check in the software, we need
-to find the equivalent dimensionless versions:</p>
-<div class="math">
-\[[ES] + [E] = E_0\quad\Rightarrow\quad Q_c\bar Q + E_0\bar E = E_0,\]</div>
-<p>and from this we get, after a little algebra,</p>
-<div class="math">
-\[\alpha^{-1}\epsilon^{-1}\bar Q + \bar E = 1{\thinspace .}\]</div>
-<p>The other conservation equation becomes</p>
-<div class="math">
-\[\bar Q + \alpha\bar S + \bar P  = \alpha{\thinspace .}\]</div>
-<p>The implementation may go like</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">computed</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="n">epsilon</span><span class="p">)</span> <span class="o">+</span> <span class="n">E</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">expected</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">diff1</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">computed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span>
-
-<span class="n">computed</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">alpha</span><span class="o">*</span><span class="n">S</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">P</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">expected</span> <span class="o">=</span> <span class="n">alpha</span>
-<span class="n">diff2</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">computed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span>
-
-<span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
-<span class="k">if</span> <span class="n">diff1</span> <span class="o">&lt;</span> <span class="n">tol</span> <span class="ow">or</span> <span class="n">diff2</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&#39;*** Consistency check failed:&#39;</span><span class="p">,</span> <span class="n">diff1</span><span class="p">,</span> <span class="n">diff2</span>
-</pre></div>
-</div>
 <p><strong>d)</strong>
 Simulate a case with <span class="math">\(T=8\)</span>, <span class="math">\(\alpha = 1\)</span>, <span class="math">\(\beta=4\)</span>, and two
 <span class="math">\(\epsilon\)</span> values: 0.9 and 0.1.</p>
-<p><strong>Solution.</strong></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">demo</span><span class="p">():</span>
-    <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">beta</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.1</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="mi">8</span>
-    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">else</span> <span class="mf">0.1</span>
-    <span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">&#39;complex&#39;</span><span class="p">,</span> <span class="s">&#39;product&#39;</span><span class="p">,</span> <span class="s">&#39;substrate&#39;</span><span class="p">,</span> <span class="s">&#39;enzyme&#39;</span><span class="p">],</span>
-               <span class="n">loc</span><span class="o">=</span><span class="s">&#39;upper right&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;alpha=</span><span class="si">%g</span><span class="s">, beta=</span><span class="si">%g</span><span class="s">, epsilon=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp.pdf&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">demo</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/biochem.png"><img alt="_images/biochem.png" src="_images/biochem.png" style="width: 700px;" /></a>
-</div>
 <p>Filename: <code class="docutils literal"><span class="pre">biochem</span></code>.</p>
 </div>
 <div class="section" id="exercise-27-simulate-predator-pray-interaction">
@@ -2232,95 +1550,9 @@ interaction of predator and pray populations, such as lynx and hares.</p>
 Scale the equations <a href="#equation-decay:app:predpray:eqH">(14)</a>-<a href="#equation-decay:app:predpray:eqL">(15)</a>.
 Use the initial population <span class="math">\(H(0)=H_0\)</span> of <span class="math">\(H\)</span> has scale for <span class="math">\(H\)</span> and <span class="math">\(L\)</span>, and
 let the time scale be <span class="math">\(1/(bH_0)\)</span>.</p>
-<p><strong>Solution.</strong>
-We introduce dimensionless time <span class="math">\(\bar t=t/t_c\)</span>, where <span class="math">\(t_c^{-1}=bH_0\)</span>,
-and scale <span class="math">\(H\)</span> and <span class="math">\(L\)</span>
-as <span class="math">\(\bar H = H/H_0\)</span> and <span class="math">\(\bar L = L/H_0\)</span>. Inserted in the equations, we
-arrive at</p>
-<div class="math">
-\[\begin{split}\frac{H_0}{t_c}\frac{d\bar H}{d\bar t} &amp;= H_0\bar H(a - bH_0\bar L),
-\\
-\frac{H_0}{t_c}\frac{d\bar L}{d\bar t} &amp;= H_0\bar L(dH_0\bar H - c){\thinspace .}\end{split}\]</div>
-<p>Inserting <span class="math">\(t_c^{-1}=bH_0\)</span> and rearranging simplify the equations to</p>
-<div class="math">
-\[\begin{split}\frac{d\bar H}{d\bar t} &amp;= \frac{a}{bH_0}\bar H  - \bar L\bar H,
-\\
-\frac{d\bar L}{d\bar t} &amp;= \frac{d}{b}\bar L \bar H - \frac{c}{bH_0}\bar L){\thinspace .}\end{split}\]</div>
-<p>The initial conditions become <span class="math">\(\bar H(0)=1\)</span>, <span class="math">\(\bar L(0)=L_0/H_0\)</span>.
-With the dimensionless parameters</p>
-<div class="math">
-\[\alpha = \frac{a}{bH_0},\quad\beta = \frac{d}{b},\quad\gamma =
-\frac{c}{bH_0},\quad \delta = \frac{H_0}{L_0},\]</div>
-<p>we can write the dimensionless problem as</p>
-<div class="math">
-\[\begin{split}\frac{d\bar H}{d\bar t} &amp;= \alpha\bar H  - \bar L\bar H,\\
-\frac{d\bar L}{d\bar t} &amp;= \beta\bar L \bar H - \gamma\bar L),\\
-\bar H(0) &amp;= 1,\\
-\bar L(0) &amp;= \delta {\thinspace .}\end{split}\]</div>
-<p>The quantity <span class="math">\(bH_0\)</span> is the number of eaten prays per predator.
-Then <span class="math">\(\alpha\)</span> measures the ratio of natural population growth of
-the pray, due to nutritioon, and the number of eaten prays per predator.
-The <span class="math">\(\beta\)</span> parameter measures the fraction of the eaten prays and
-the amount of this that actually
-leads to population growth of the predator.
-The number <span class="math">\(\gamma\)</span> reflects the ratio of
-predator deaths and the eaten prays per predator, and <span class="math">\(\delta\)</span> is
-the initial fraction of preys and predators.</p>
 <p><strong>b)</strong>
 Implement the scaled model from a). Run illustrating cases how the
 two populations develop.</p>
-<p><strong>Solution.</strong>
-Here are two functions:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">odespy</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="c">#import scitools.std as plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="n">fig_counter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c"># used in plot file names</span>
-
-<span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
-        <span class="n">H</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">u</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">alpha</span><span class="o">*</span><span class="n">H</span> <span class="o">-</span> <span class="n">L</span><span class="o">*</span><span class="n">H</span><span class="p">,</span> <span class="n">beta</span><span class="o">*</span><span class="n">L</span><span class="o">*</span><span class="n">H</span> <span class="o">-</span> <span class="n">gamma</span><span class="o">*</span><span class="n">L</span><span class="p">]</span>
-
-
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1501</span><span class="p">)</span>
-    <span class="n">solver</span> <span class="o">=</span> <span class="n">odespy</span><span class="o">.</span><span class="n">RK4</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f_args</span><span class="o">=</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
-    <span class="n">solver</span><span class="o">.</span><span class="n">set_initial_condition</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">delta</span><span class="p">])</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="n">H</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-    <span class="k">global</span> <span class="n">fig_counter</span>
-    <span class="n">fig_counter</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">&#39;H&#39;</span><span class="p">,</span> <span class="s">&#39;L&#39;</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">r&#39;$\alpha=</span><span class="si">%g</span><span class="s">$, $\beta=</span><span class="si">%g</span><span class="s">$, $\gamma=</span><span class="si">%g</span><span class="s">$, $\delta=</span><span class="si">%g</span><span class="s">$&#39;</span>
-              <span class="o">%</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp</span><span class="si">%d</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="n">fig_counter</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp</span><span class="si">%d</span><span class="s">.pdf&#39;</span> <span class="o">%</span> <span class="n">fig_counter</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">H</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">t</span>
-
-<span class="k">def</span> <span class="nf">demo</span><span class="p">():</span>
-    <span class="n">simulate</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-    <span class="n">simulate</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>We must call <code class="docutils literal"><span class="pre">demo()</span></code> from the main program.</p>
-<p>Here are two examples. The one to the left has a good birth-death rate
-compared to how many that are eaten by predators (<span class="math">\(\alpha=1.5\)</span>),
-half of the eaten prays contribute to growth of the predator population
-(<span class="math">\(\beta = 0.5\)</span>), the death rate of predators is slightly smaller than how many
-prays they eat (per predator) (<span class="math">\(\gamma=0.8\)</span>), and we start out with
-twice as many prays as predators.</p>
-<p>The figure to the right features less nutrition for the prays
-compared to being eaten
-by predators (<span class="math">\(\alpha =0.5\)</span>), and a lower death rate in the predator
-population. Naturally, this makes the predator population larger compared to the
-left case.</p>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/predator_pray.png"><img alt="_images/predator_pray.png" src="_images/predator_pray.png" style="width: 800px;" /></a>
-</div>
 <p><strong>c)</strong>
 The scaling in a) used a scale for <span class="math">\(H\)</span> and <span class="math">\(L\)</span> based on on the
 initial condition <span class="math">\(H(0)=H_0\)</span>. An alternative scaling is to make
@@ -2330,90 +1562,9 @@ the ODEs as simple as possible by introducing separate scales
 dimensionless parameters as possible in the ODEs. Scale the initial
 conditions. Compare the number and type of dimensionless parameters
 with a).</p>
-<p><strong>Solution.</strong>
-Inserting</p>
-<div class="math">
-\[\bar t = \frac{t}{c_c},\quad \bar H=\frac{H}{H_c},\quad \bar L
-= \frac{L}{L_c},\]</div>
-<p>in the ODEs <a href="#equation-decay:app:predpray:eqH">(14)</a>-<a href="#equation-decay:app:predpray:eqL">(15)</a>,
-we arrive at</p>
-<div class="math">
-\[\begin{split}\frac{H_c}{t_c}\frac{d\bar H}{d\bar t} &amp;= H_c\bar H(a - bL_c\bar L),\\
-\frac{L_c}{t_c}\frac{d\bar L}{d\bar t} &amp;= L_c\bar L(dH_c\bar H - c){\thinspace .}\end{split}\]</div>
-<p>Now we divide by <span class="math">\(H_c\)</span> and <span class="math">\(L_c\)</span> in the <span class="math">\(H\)</span> and <span class="math">\(L\)</span> equations, respectively,
-and multiply by <span class="math">\(t_c\)</span>:</p>
-<div class="math">
-\[\begin{split}\frac{d\bar H}{d\bar t} &amp;= t_c\bar H(a - bL_c\bar L),\\
-\frac{d\bar L}{d\bar t} &amp;= t_c\bar L(dH_c\bar H - c){\thinspace .}\end{split}\]</div>
-<p>Choosing <span class="math">\(t_c=1/a\)</span> and <span class="math">\(t_caL_c=1\)</span>, i.e., <span class="math">\(L_c=a/b\)</span>, makes the
-first equation free of parameters: <span class="math">\(\bar H^{\prime}=\bar H(1-\bar L)\)</span>.
-Factoring out <span class="math">\(c\)</span> in the equation for <span class="math">\(L\)</span> and choosing
-<span class="math">\(H_c d/c=1\)</span>, i.e., <span class="math">\(H_c=c/d\)</span>, leaves us with the <span class="math">\(L\)</span> equation
-as <span class="math">\(\bar L^{\prime}=(c/a)\bar L(\bar H-1)\)</span>. The ratio <span class="math">\(c/a\)</span> equals
-<span class="math">\(\gamma/\alpha\)</span> from a) and is here called <span class="math">\(\mu\)</span>.</p>
-<p>The initial conditions become <span class="math">\(\bar H(0) = H_0/H_c=H_0d/c =\beta/\gamma = \nu\)</span>,
-and <span class="math">\(\bar L(0)=L_0/L_c = L_0b/a = \delta/\alpha = \omega\)</span>.</p>
-<p>The resulting dimensionless problem becomes</p>
-<div class="math">
-\[\frac{d\bar H}{d\bar t} = bar H(1 - \bar L),\]</div>
-<div class="math">
-\[\frac{d\bar L}{d\bar t} = \mu bar L(\bar H - 1) = \gamma\alpha^{-1} bar L(\bar H - 1),\]</div>
-<div class="math">
-\[\bar H(0) = \nu = \beta/gamma,\]</div>
-<div class="math">
-\[\bar L(0) = \omega = \delta/\alpha,\]</div>
-<p>with</p>
-<div class="math">
-\[\mu = \frac{c}{a},\quad \nu = H_0\frac{d}{c},\quad \omega = L_0\frac{b}{a}
-{\thinspace .}\]</div>
-<p>The unknowns <span class="math">\(\bar H\)</span> and <span class="math">\(\bar L\)</span> now has less intuitive scalings,</p>
-<div class="math">
-\[\bar H = \frac{Hd}{c},\quad \bar L = \frac{Lb}{a},\]</div>
-<p>while time is measured in the units based on the exponential growth
-due to births and deaths of prays (<span class="math">\(a\)</span>). The number of dimensionless parameters
-is one less since we have one more scale (for <span class="math">\(L_c\)</span>) at our
-disposal. Simplicity in one initial conditions in a) is
-exchanged with more simplicity in the ODEs, which now have
-only one dimensionless parameter. Note that <span class="math">\(\nu\)</span> and <span class="math">\(\omega\)</span> must be
-different from unity to avoid <span class="math">\(\bar H\neq 0\)</span> and <span class="math">\(\bar L\neq 0\)</span> because
-of the factors <span class="math">\(1-L\)</span> and <span class="math">\(H-1\)</span> in the equations that can make
-<span class="math">\(\bar H^{\prime}=0\)</span> and <span class="math">\(\bar L^{\prime}=0\)</span>.</p>
 <p><strong>d)</strong>
 Compute with the scaled model from c) and create plots to illustrate
 the typical solutions.</p>
-<p><strong>Solution.</strong>
-Modified <code class="docutils literal"><span class="pre">simulate</span></code> and <code class="docutils literal"><span class="pre">demo</span></code> go as follows.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">simulate2</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
-        <span class="n">H</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">u</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">H</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">L</span><span class="p">),</span> <span class="n">mu</span><span class="o">*</span><span class="n">L</span><span class="o">*</span><span class="p">(</span><span class="n">H</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
-
-
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1501</span><span class="p">)</span>
-    <span class="n">solver</span> <span class="o">=</span> <span class="n">odespy</span><span class="o">.</span><span class="n">RK4</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">f_args</span><span class="o">=</span><span class="p">(</span><span class="n">mu</span><span class="p">,))</span>
-    <span class="n">solver</span><span class="o">.</span><span class="n">set_initial_condition</span><span class="p">([</span><span class="n">nu</span><span class="p">,</span> <span class="n">omega</span><span class="p">])</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="n">H</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-    <span class="k">global</span> <span class="n">fig_counter</span>
-    <span class="n">fig_counter</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">&#39;H&#39;</span><span class="p">,</span> <span class="s">&#39;L&#39;</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">r&#39;$\mu=</span><span class="si">%g</span><span class="s">$, $\nu=</span><span class="si">%g</span><span class="s">$, $\omega=</span><span class="si">%g</span><span class="s">$&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">omega</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp</span><span class="si">%d</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="n">fig_counter</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp</span><span class="si">%d</span><span class="s">.pdf&#39;</span> <span class="o">%</span> <span class="n">fig_counter</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">H</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">t</span>
-
-<span class="k">def</span> <span class="nf">demo2</span><span class="p">():</span>
-    <span class="n">simulate2</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-    <span class="n">simulate2</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/predator_pray2.png"><img alt="_images/predator_pray2.png" src="_images/predator_pray2.png" style="width: 800px;" /></a>
-</div>
 <p>Filename: <code class="docutils literal"><span class="pre">predator_pray</span></code>.</p>
 </div>
 <div class="section" id="exercise-28-simulate-the-pressure-drop-in-the-atmosphere">
@@ -2767,31 +1918,6 @@ Work with the dimensionless force <span class="math">\(F=10\sigma(t)/E\)</span>,
 <span class="math">\(F=1\)</span> for <span class="math">\(\bar t\in (0,\bar t_1)\)</span> and <span class="math">\(F=0\)</span> for <span class="math">\(\bar t\geq \bar t_1\)</span>.
 A possible choice of <span class="math">\(t_1\)</span> is the characteristic time <span class="math">\(\eta/E\)</span>, which
 means that <span class="math">\(\bar t_1 = 1\)</span>.</p>
-<p><strong>Solution.</strong>
-Inserting the scaling <span class="math">\(\bar u=10\varepsilon\)</span> and <span class="math">\(\bar t = tE/\eta\)</span>
-in the ODE for <span class="math">\(\varepsilon\)</span> results in</p>
-<div class="math">
-\[\frac{E}{10 \eta}\frac{d\bar u}{d\bar t} = -\frac{E}{\eta 10}\bar u
-+ \frac{\sigma(t)}{\eta}{\thinspace .}\]</div>
-<p>This reduces to</p>
-<div class="math">
-\[\frac{d\bar u}{d\bar t} = -\bar u + \frac{10\sigma}{E}{\thinspace .}\]</div>
-<p>We can use the module <code class="docutils literal"><span class="pre">decay_vc</span></code> for solving <span class="math">\(u^{\prime}=-a(t)u+b(t)\)</span>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># Scaled model: u&#39; = -u + b(t), b=1 for t &lt; 1 else 0</span>
-<span class="n">eps</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="n">b</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="n">T</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Dimensionless time&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;10*strain&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp.pdf&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="figure">
-<a class="reference internal image-reference" href="_images/KelvinVogt.png"><img alt="_images/KelvinVogt.png" src="_images/KelvinVogt.png" style="width: 600px;" /></a>
-</div>
 <p>Filename: <code class="docutils literal"><span class="pre">KelvinVogt</span></code>.</p>
 </div>
 </div>
@@ -2866,14 +1992,7 @@ in the ODE for <span class="math">\(\varepsilon\)</span> results in</p>
 <li><a class="reference internal" href="#exercises-4">Exercises  (4)</a><ul>
 <li><a class="reference internal" href="#exercise-16-radioactive-decay-of-carbon-14">Exercise 16: Radioactive decay of Carbon-14</a></li>
 <li><a class="reference internal" href="#exercise-17-derive-schemes-for-newton-s-law-of-cooling">Exercise 17: Derive schemes for Newton&#8217;s law of cooling</a></li>
-<li><a class="reference internal" href="#exercise-18-implement-schemes-for-newton-s-law-of-cooling">Exercise 18: Implement schemes for Newton&#8217;s law of cooling</a><ul>
-<li><a class="reference internal" href="#bug-1-wrong-time-level-in-the-function">Bug 1: Wrong time level in the <span class="math">\(T_s\)</span> function</a></li>
-<li><a class="reference internal" href="#bug-2-wrong-time-level-in-the-function">Bug 2: Wrong time level in the <span class="math">\(T\)</span> function</a></li>
-<li><a class="reference internal" href="#bug-3-missing-in-a-term">Bug 3: Missing <span class="math">\(\theta\)</span> in a term</a></li>
-<li><a class="reference internal" href="#bug-4-missing-k-in-the-updating-formula">Bug 4: Missing <code class="docutils literal"><span class="pre">k</span></code> in the updating formula</a></li>
-<li><a class="reference internal" href="#bug-5-using-1-theta-instead-of-theta">Bug 5: Using <code class="docutils literal"><span class="pre">1-theta</span></code> instead of <code class="docutils literal"><span class="pre">theta</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#exercise-18-implement-schemes-for-newton-s-law-of-cooling">Exercise 18: Implement schemes for Newton&#8217;s law of cooling</a></li>
 <li><a class="reference internal" href="#exercise-19-find-time-of-murder-from-body-temperature">Exercise 19: Find time of murder from body temperature</a></li>
 <li><a class="reference internal" href="#exercise-20-simulate-an-oscillating-cooling-process">Exercise 20: Simulate an oscillating cooling process</a></li>
 <li><a class="reference internal" href="#exercise-21-simulate-stochastic-radioactive-decay">Exercise 21: Simulate stochastic radioactive decay</a></li>

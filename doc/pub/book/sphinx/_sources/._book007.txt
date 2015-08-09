@@ -1684,55 +1684,7 @@ and find the corresponding uncertainty interval for the result.
 
 .. --- end hint in exercise ---
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-We need a tailored solver function for this exercise:
-
-.. code-block:: python
-
-        import numpy as np
-        import matplotlib.pyplot as plt
-        
-        def solver(I, a, u_crit, dt, theta):
-            """
-            Solve u'=-a*u, u(0)=I, for t in (0,t_m] until u <= u_crit
-            with steps of dt. Return t_m.
-            """
-            # Use list for u and t since we do not know how many points
-            # that are needed
-            dt = float(dt)               # avoid integer division
-            u = []
-            t = []
-        
-            u.append(I)                  # assign initial condition
-            t.append(0)
-            while u[-1] > u_crit:
-                u_new = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[-1]
-                u.append(u_new)
-                t.append(t[-1] + dt)
-            return t[-1]
-        
-        
-        half_life = 5730
-        a  = np.log(2)/half_life
-        print 'Age:', solver(I=1, a=a, u_crit=0.084, dt=10, theta=0.5)
-
-Running this code gives an age of 20,480 years.
-
-The uncertainty can be estimated by the following code:
-
-.. code-block:: python
-
-        half_life_min = 5730 - 40
-        half_life_max = 5730 + 40
-        a_min = np.log(2)/half_life_min
-        a_max = np.log(2)/half_life_max
-        age_min = solver(I=1, a=a_max, u_crit=0.084, dt=10, theta=0.5)
-        age_max = solver(I=1, a=a_min, u_crit=0.084, dt=10, theta=0.5)
-        print 'Uncertainty: [%g, %g]' % (age_min, age_max)
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``carbon14``.
 
@@ -1763,45 +1715,7 @@ Summarize the discretizations in a :math:`\theta`-rule
 such that you can get the three
 schemes from a single formula by varying the :math:`\theta` parameter.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-The idea of the Forward Euler scheme is to sample the ODE at :math:`t=t_n`
-and apply a forward difference approximation to the derivative:
-
-.. math::
-         \frac{T^{n+1}-T^n}{\Delta t} = -k(T^n - T_s(t_n)){\thinspace .}
-
-The Backward Euler applies a backward difference instead:
-
-.. math::
-         \frac{T^{n}-T^{n-1}}{\Delta t} = -k(T^n - T_s(t_n)){\thinspace .}
-
-The Crank-Nicolson scheme samples the ODE at :math:`t_{n+\frac{1}{2}}`, applies
-a centered difference approximation, and an arithmetic mean approximation
-to :math:`T^{n+\frac{1}{2}}`:
-
-.. math::
-         \frac{T^{n+1}-T^n}{\Delta t} = -k(T^{n+\frac{1}{2}} - T_s(t_{n+\frac{1}{2}}))
-        \approx -k(\frac{1}{2}(T^n + T^{n+1}) - T_s(t_{n+\frac{1}{2}})){\thinspace .}
-
-For each scheme we solve with respect to the unknown :math:`T^{n+1}` (note
-that we switch index from :math:`n` to :math:`n+1` in the Backward Euler scheme):
-
-.. math::
-        
-        T^{n+1} &= T^n - k\Delta t(T^n - T_s(t_n)),\\ 
-        T^{n+1} &= \frac{T^n + k\Delta t T_s(t_{n+1})}{1 + k\Delta t},\\ 
-        T^{n+1} &= \frac{T^n - \frac{1}{2} k\Delta t T^n + k\Delta t T_s(t_{n+\frac{1}{2}})}{1 + \frac{1}{2} k\Delta t}{\thinspace .}
-        
-
-A :math:`\theta` scheme can be formulated as
-
-.. math::
-         T^{n+1} = \frac{T^n - (1-\theta) k\Delta t T^n + k\Delta t T_s((1-\theta) t_n+ \theta t_{n+1})}{1 + \theta k\Delta t}
-        
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``schemes_cooling``.
 
@@ -1834,36 +1748,7 @@ time step, and ``theta`` corresponds to :math:`\theta`.  The ``cooling``
 function should return the temperature as an array ``T`` of values at
 the mesh points and the time mesh ``t``.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-Here is an appropriate function:
-
-.. code-block:: python
-
-        import numpy as np
-        
-        def cooling(T0, k, T_s, t_end, dt, theta=0.5):
-            """
-            Solve T'=-k(T-T_s(t)), T(0)=T0,
-            for t in (0,t_end] with steps of dt.
-            T_s(t) is a Python function of t.
-            theta=0.5 means Crank-Nicolson, 1 is Backward
-            Euler, and 0 is Forward Euler scheme.
-            """
-            dt = float(dt)                  # avoid integer division
-            Nt = int(round(t_end/dt))       # no of time intervals
-            t_end = Nt*dt                   # adjust to fit time step dt
-            T = np.zeros(Nt+1)              # array of T[n] values
-            t = np.linspace(0, t_end, Nt+1) # time mesh
-            T[0] = T0                       # set initial condition
-            for n in range(0, Nt):          # n=0,1,...,Nt-1
-                T[n+1] = ((1 - dt*(1 - theta)*k)*T[n] + \ 
-                dt*k*(theta*T_s(t[n+1]) + (1 - theta)*T_s(t[n])))/ \ 
-                (1 + dt*theta*k)
-            return T, t
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **b)**
 In the case :math:`\lim_{t\rightarrow\infty}T_s(t)=C=\mbox{const}`,
@@ -1872,68 +1757,7 @@ can illustrate this property in a plot. Implement a corresponding
 test function that checks the correctness of the asymptotic
 value of the solution.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-Apply the limit to the ODE:
-
-.. math::
-         \lim_{t\rightarrow\infty}\frac{dT}{dt} = -k(\lim_{t\rightarrow\infty} T
-        - \lim_{t\rightarrow\infty} T_s){\thinspace .}
-        
-
-Assuming steady state behavior, :math:`dT/dt\rightarrow\infty` as
-:math:`t\rightarrow\infty`. Then we get
-
-.. math::
-         0 = -k(\lim_{t\rightarrow\infty} T
-        - C),
-        
-
-which means
-
-.. math::
-         \lim_{t\rightarrow\infty} T = C{\thinspace .}
-
-A corresponding test function takes the form
-
-.. code-block:: python
-
-        def test_asymptotic():
-            """
-            Test that ``any'' initial condition leads to
-            the same asymptotic behavior when T_s=constant.
-            """
-            import matplotlib.pyplot as plt
-            plt.figure()
-            T_s = 5.
-            k = 1.2
-            dt = 0.1
-            tol = 0.01  # tolerance for testing asymptotic value
-            t_end = 7    # make sure t_end is large enough for tol
-            T0_values = [0, 2, 4, 5, 6, 8, 10] # test many cases
-        
-            for T0 in [0, 2, 4, 5, 6, 8, 10]:
-                u, t = cooling(T0, k, lambda t: T_s, t_end, dt)
-                plt.plot(t, u)
-        
-                assert abs(u[-1] - T_s) < tol, '%s != %s' % (u[-1], T_s)
-        
-            plt.legend(['T0=%g' % T0 for T0 in T0_values])
-            plt.title('Testing asymptotic behavior T_s=%g' % T_s)
-            plt.xlabel('t')
-            plt.ylabel('T')
-            plt.savefig('tmp1.png');  plt.savefig('tmp1.pdf')
-            plt.show()
-
-Note that we have added a plot in the test function for convenience.
-Letting test functions perform plotting is, however, not a good idea
-if you want to run a large set of tests.
-
-.. figure:: cooling_asymptotic.png
-   :width: 600
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **c)**
 A piecewise constant surrounding temperature,
@@ -1948,132 +1772,7 @@ at :math:`t=t^*`. Choose :math:`C_0=2T_0`, :math:`C_1=\frac{1}{2}T_0`, and
 :math:`t^*=3/k`. Plot the solution :math:`T(t)` and explain why it seems physically
 reasonable.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-First we implement a general tool for piecewise constant functions:
-
-.. code-block:: python
-
-        class Piecewise(object):
-            """Class for holding a piecewise constant function."""
-            def __init__(self, C0, C1, t_star):
-                self.C0, self.C1 = C0, C1
-                self.t_star = t_star
-        
-            def __call__(self, t):
-                """
-                Return value of piecewise constant function.
-                t can be float or numpy array.
-                """
-                if isinstance(t, (float,int)):
-                    if t <= self.t_star:
-                        T_s = self.C0
-                    elif t > self.t_star:
-                        T_s = self.C1
-                else:
-                    # assume numpy array
-                    T_s = np.piecewise(t,
-                                       [t <= self.t_star, t > self.t_star],
-                                       [self.C0, self.C1])
-                    # Alternative
-                    # T_s = np.where(t <= self.t_star, C0, C1)
-                return T_s
-
-It is convenient to scale the problem such that we do not need to find
-physically relevant values for :math:`k`. A common scaling of :math:`T` is
-
-.. math::
-         \bar T = \frac{T-T_0}{T_s-T_0},
-
-when :math:`T_s` is constant since then :math:`\bar T\in [0,1]`. Here, we may choose
-the long-term value of :math:`T_s` in the denominator such that :math:`\lim_{t\rightarrow\infty}\bar T=1`, i.e.,
-
-.. math::
-         \bar T = \frac{T-T_0}{0.5T_0-T_0}= -2\frac{T-T_0}{T_0},
-
-but it leads to a shift in the sign of the temperature on the
-right-hand side of the ODE, and we cannot reuse the code for the
-original problem in the dimensionless case. We therefore avoid the negative
-sign and use a temperature scale :math:`2T_0-T_0`,
-
-.. math::
-         \bar T = \frac{T-T_0}{2T_0-T_0}= \frac{T-T_0}{T_0},
-
-which gives :math:`\bar T` varying from :math:`0` initially to a maximum of
-:math:`1` and finally to a minimum of :math:`-\frac{1}{2}`.
-We scale :math:`T_s` by its maximum value :math:`2T_0` so :math:`\bar T_s\in [0,1]`:
-
-.. math::
-         \bar T_s(\bar t) = \frac{T_s(t)}{\max_t T_s(t)} = \frac{T_s(t_c\bar t)}{2T_0} = \left\lbrace\begin{array}{ll}
-        1, & \bar t < t^*/t_c,\\ 
-        \frac{1}{4},& \bar t \geq t^*/t_c
-        \end{array}\right.
-        
-
-where :math:`t_c` is the time scale. Inserted in the ODE we get
-
-.. math::
-        
-        \frac{T_0}{t_c}\frac{d\bar T}{d\bar t} = -k(T_0\bar T + T_0 -
-        2T_0\bar T_s,
-        
-
-leading to
-
-.. math::
-        
-        \frac{d\bar T}{d\bar t} = -kt_c(\bar T + 1 - 2\bar T_s){\thinspace .}
-        
-
-A natural choice is :math:`t_c=1/k` so we get the scaled problem
-
-.. math::
-        
-        \frac{d\bar T}{d\bar t} = -(\bar T + 1 - 2\bar T_s) =
-        -(\bar T -(2\bar T_s - 1)),\quad \bar T(0)=0{\thinspace .}
-        
-
-We can simulate this problem using the code for the original
-problem by choosing :math:`k=1`, :math:`T_0=0`, and
-:math:`T_s= (2-1)=1` for :math:`t < 3` and :math:`T_s=(2\frac{1}{4}-1)=-\frac{1}{2}`
-for :math:`t > 3`.
-
-The appropriate code becomes
-
-.. code-block:: python
-
-        def simulate_piecewise_constant_Ts():
-            """
-            Simulate scaled problem: T' = -(T - (2T_s-1)), T(0)=0,
-            where T_s=1 for t < 3 and -0.5 for t > 3.
-            """
-            k = 1
-            T0 = 0
-            t_star = 3.0
-            C0 = 1
-            C1 = -0.5
-            T_s = Piecewise(C0, C1, t_star)
-            dt = t_star/100.0
-            T, t = cooling(T0, k, T_s, t_end=3*t_star, dt=dt, theta=0.5)
-            import matplotlib.pyplot as plt
-            plt.figure()
-            plt.plot(t, T)
-            plt.xlabel('t');  plt.ylabel('u')
-            plt.savefig('tmp2.png');  plt.savefig('tmp2.pdf')
-            plt.show()
-
-The plot looks like this:
-
-.. figure:: cooling_piecewise.png
-   :width: 600
-
-The result is reasonable because first :math:`T_s=1` and the body's temperature
-will try to rise from :math:`0` to :math:`1`, and it almost gets there in
-the time :math:`[0,3]`, before :math:`T_s=-0.5` and then the body is cooled down
-to :math:`-0.5` as :math:`t` increases, and this is also the asymptotic value.
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **d)**
 We know from the ODE :math:`u^\prime =-au` that the Crank-Nicolson scheme
@@ -2083,20 +1782,7 @@ that the Crank-Nicolson scheme give undesired
 oscillations for :math:`\Delta t > 2/k`.
 Discuss if this a potential problem in the physical case from c).
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-In the unscaled problem, the first stage of the simulation is
-covers time interval :math:`[0,t^*]=[0, 3/k]`. It makes sense to
-choose :math:`\Delta t` significantly smaller than :math:`3/k`, and the
-stability limit :math:`2/k` is a too large step. The next time level
-is then :math:`4/k`, and it sounds reasonable to include the point :math:`t^*=3/k`
-as a mesh point. Oscillations would then occur if we choose
-:math:`\Delta t = 3/k`, but this means only one step through the first
-interval :math:`[0,t^*]`, which is a very coarse mesh. Halving :math:`\Delta t`
-is still a coarse mesh, but then there cannot be oscillations.
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **e)**
 Find an expression for the exact solution of
@@ -2119,234 +1805,7 @@ by the integrating factor :math:`e^{kt}`.
 
 .. --- end hint in exercise ---
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-Multiplication of :math:`e^{kt}`, using the product rule for differentiation
-"backwards", and integrating from 0 to :math:`t`, results in
-
-.. math::
-         \int_0^t (e^{kt}T)^{\prime}dt = k\int_0^t e^{kt}T_sdt{\thinspace .}
-
-The left-hand side becomes :math:`e^{kt}T(t)-T_0`. Multiplying by :math:`e^{-kt}`
-then gives
-
-.. math::
-         T(t) = T_0e^{-kt} + ke^{-kt}\int_0^t e^{k\tau}T_s(\tau)d\tau,
-
-which is the general expression for the exact solution.
-
-As a check, we consider the case where :math:`T_s` is constant.
-That problem can easily be solved by introducing :math:`u=T-T_s`, resulting in
-:math:`u^{\prime}=-ku`, :math:`u(0)=T_0-T_s`, with solution :math:`u(t)=(T_0-T_s)e^{-kt}`,
-and consequently :math:`T=T_s + (T_0-T_s)e^{-kt}`. With a constant :math:`T_s` in
-the general solution above, the solution becomes
-
-.. math::
-        
-        T(t) &= T_0e^{-kt} + ke^{-kt}\int_0^t e^{kt}T_sdt\\ 
-        & = T_0e^{-kt} + ke^{-kt}T_sk^{-1}(e^{kt} - 1)\\ 
-        & = T_0e^{-kt} + T_s - T_se^{-kt}\\ 
-        & = T_s + (T_0-T_s)e^{-kt},
-        
-
-as desired.
-
-We choose the same test problem as in c) and use SymPy to do the
-integration. A function doing the integration and returning
-Python functions for the formulas for :math:`t < t^*` and :math:`t\geq t^*`
-is convenient:
-
-.. code-block:: python
-
-        def symbolic_exact_solution(verbose=False):
-            """Compute the exact solution formula via sympy."""
-            # sol1: solution for t < t_star,
-            # sol2: solution for t > t_star
-            import sympy as sym
-            T0 = sym.symbols('T0')
-            k = sym.symbols('k', positive=True)
-            # Piecewise linear T_sunction
-            t, t_star, C0, C1 = sym.symbols('t t_star C0 C1')
-            T_s = C0
-            I = sym.integrate(sym.exp(k*t)*T_s, (t, 0, t))
-            sol1 = T0*sym.exp(-k*t) + k*sym.exp(-k*t)*I
-            sol1 = sym.simplify(sym.expand(sol1))
-            if verbose:
-                # Some debugging print
-                print 'solution t < t_star:', sol1
-                #print sym.latex(sol1)
-            T_s = C1
-            I = sym.integrate(sym.exp(k*t)*C0, (t, 0, t_star)) + \ 
-                sym.integrate(sym.exp(k*t)*C1, (t, t_star, t))
-            sol2 = T0*sym.exp(-k*t) + k*sym.exp(-k*t)*I
-            sol2 = sym.simplify(sym.expand(sol2))
-            if verbose:
-                print 'solution t > t_star:', sol2
-                #print sym.latex(sol2)
-        
-            # Convert to numerical functions
-            exact0 = sym.lambdify([t, C0, k, T0],
-                                  sol1, modules='numpy')
-            exact1 = sym.lambdify([t, C0, C1, t_star, k, T0],
-                                  sol2, modules='numpy')
-            return exact0, exact1
-
-Then we need a function that can evaluate the exact solution as
-a mesh function:
-
-.. code-block:: python
-
-        def evaluate_exact_solution(t, k, T0, C0, C1, t_star,
-                                    verbose=False):
-            """
-            Return exact (analytical) solution of the problem.
-            Exact solution is produced by sympy.
-            """
-            exact0, exact1 = symbolic_exact_solution()
-            # exact0/1 works with t as numpy array
-            if isinstance(t, (float,int)):
-                if t < t_star:
-                    return exact0(t, C0, k, T0)
-                else:
-                    return exact1(t, C0, C1, t_star, k, T0)
-            else:
-                # assume numpy array
-                return np.where(
-                    t < t_star,
-                    exact0(t, C0, k, T0),
-                    exact1(t, C0, C1, t_star, k, T0))
-
-Finally we can run the comparison:
-
-.. code-block:: python
-
-        def compare_numerical_and_exact_solution():
-            """
-            Compare exact and numerical solution with piecewise
-            constant surrounding temperature. Use scaled problem
-            from function simulate_piecewise_constant_Ts.
-            """
-            T0 = 0
-            k = 1
-            C0 = 1
-            C1 = -0.5
-            t_star = 3
-            t_end = 7
-        
-            T_s = Piecewise(C0, C1, t_star)
-        
-            import matplotlib.pyplot as plt
-            plt.figure()
-            dt_values = [1, 0.5, 0.025]
-            #dt_values = [0.025]
-            for dt in dt_values:
-                T, t = cooling(T0, k, T_s, t_end, dt, theta=0.5)
-                plt.plot(t, T)
-        
-            t_e = np.linspace(0, t_end, 1001)  # find mesh for T_e
-            # Could use sym.Rational(1,2) instead of 0.5, but not necessary
-            # when we are not interested in symbolic formulas
-            T_e = evaluate_exact_solution(t_e, k, T0, C0, C1, t_star)
-            plt.plot(t_e, T_e)
-            plt.legend(['CN, dt=%g' % dt for dt in dt_values] + ['exact'])
-            plt.title('T(t) for piecewise constant $T_s(t)$')
-            plt.xlabel('t')
-            plt.ylabel('T')
-            plt.savefig('tmp3.png');  plt.savefig('tmp3.pdf')
-            plt.show()
-
-The :math:`\Delta t` values were found after some trial and error, but they
-illustrate crude approximations and one with the biggest possible
-:math:`\Delta t` such that the exact solution and the numerical solution cannot
-be visually distinguished:
-
-.. figure:: cooling_piecewise_compare.png
-   :width: 600
-
-We can now start to introduce bugs in the ``cooling`` function to
-see if it is possible to have some :math:`\Delta t` and still find
-coinciding curves.
-
-Bug 1: Wrong time level in the :math:`T_s` function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-We replace ``T_s[n]`` by ``T_s[n+1]`` in the implementation of the scheme
-and rerun the case. Now the lowest :math:`\Delta t` is still on top of
-the exact solution, but the numerical solution on the two coarser
-meshes are more accurate! This is because we lower the surrounding
-temperature somewhat earlier in the buggy scheme and this reduces
-the "overshoot" on the coarsest meshes in the figure above.
-
-.. figure:: cooling_piecewise_bug1.png
-   :width: 600
-
-Bug 2: Wrong time level in the :math:`T` function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-We can replace ``T[n]`` by ``T[n+1]`` on the right-hand side of the scheme.
-This is a serious error since ``T[n+1]`` is not yet computed and therefore
-equal to zero when ``T`` was made by calling ``np.zeros``. The results
-are also nonsense, and one would immediately look for a bug.
-
-.. figure:: cooling_piecewise_bug2.png
-   :width: 600
-
-Bug 3: Missing :math:`\theta` in a term
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Let us forget to multiply by ``theta`` in the nominator of the scheme, i.e.,
-we replace
-
-.. code-block:: python
-
-        T[n+1] = ((1 - dt*(1 - theta)*k)*T[n] + \ 
-                 dt*k*(theta*T_s(t[n+1]) + (1 - theta)*T_s(t[n])))/ \ 
-                 (1 + dt*theta*k)
-
-by
-
-.. code-block:: python
-
-        T[n+1] = ((1 - dt*(1 - theta)*k)*T[n] + \ 
-                 dt*k*(T_s(t[n+1]) + (1 - theta)*T_s(t[n])))/ \ 
-                 (1 + dt*theta*k)
-
-This error leads to convergence towards a wrong solution:
-
-.. figure:: cooling_piecewise_bug3.png
-   :width: 600
-
-If we did not have the exact solution, one could be led to think
-that the solution was correct, but it is non-physical since we
-do not expect the temperature to rise from :math:`T_0` to a level
-*above* the surrounding temperature. The plot shows that :math:`\bar T>1`,
-the value of the (scaled) surrounding temperature.
-Note that if we used the Backward Euler scheme instead of the
-Crank-Nicolson scheme, this bug would have no effect!
-
-Bug 4: Missing ``k`` in the updating formula
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Obviously, when we solve the scaled problem where :math:`k=1` by definition,
-such a programming mistake has no effect. Otherwise, :math:`k` influences
-the time scale, so there will be a stretch of the time axis in the
-numerical solution and this should be easily detected in a plot.
-
-Bug 5: Using ``1-theta`` instead of ``theta``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Such an error is not detectable in the Crank-Nicolson scheme, but
-will have a significant effect in the other schemes.
-As a test, we replace ``1-theta`` in the nominator by ``theta``.
-This leads to :math:`T=0` in the Forward Euler scheme, but a reasonable shape
-in the Backward Euler scheme, although the solution becomes larger
-than the surrounding temperature (1 in the scaled problem).
-
-.. figure:: cooling_piecewise_bug5.png
-   :width: 600
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **f)**
 Implement a test function for checking that the solution returned by
@@ -2429,66 +1888,7 @@ simulate the temperature evolution from the time of murder, taken as
 :math:`t=0`, when :math:`T=37\hbox{ C}`, until the temperature reaches 25.8 C. The
 corresponding time allows for answering when death occurred.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-A Forward Euler step from :math:`T^0` to :math:`T^1` reads
-
-.. math::
-         T^1 = T_0 + -k\Delta t (T^0 - T_s),
-
-and solving with respect to :math:`k` results in
-
-.. math::
-         k = \frac{T^1 - T^0}{\Delta t(T_s - T_0)}{\thinspace .}
-
-We implement this formula in a function,
-
-.. code-block:: python
-
-        def estimate_k(T0, T1, Ts, dt):
-            return float(T1 - T0)/(dt*(Ts - T0))
-
-We have :math:`T_0=26.7` C, :math:`T_1=25.8` C, :math:`T_s=20` C, and :math:`\Delta t = 1` h,
-i.e., :math:`\Delta t = 3600` s. The proper call is therefore
-
-.. code-block:: python
-
-        k = estimate_k(26.7, 25.8, 20, 3600)
-
-For the simulation we use the Forward Euler method,
-
-.. math::
-         T^{n+1} = T^n - k\Delta t(T^n - T_s),
-
-and simulate as long as :math:`T > 25.8` C:
-
-.. code-block:: python
-
-        T = 37
-        Ts = 20
-        from cooling import cooling
-        while T > 25.8:
-            T = T - k*dt*(T - Ts)
-            t+= dt
-        
-        minutes, seconds = divmod(t, 60)
-        hours, minutes = divmod(minutes, 60)
-        print """
-        The death occurred %d hours, %d minutes,
-        and %g seconds before 3am.""" % (hours, minutes, seconds)
-
-The result of running the code becomes
-
-.. code-block:: text
-
-        Terminal> python detective.py
-        k=3.73134e-05
-        
-        The death occurred 8 hours, 0 minutes,
-        and 19 seconds before 3am.
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``detective``.
 
@@ -2516,95 +1916,7 @@ Simulate a process with the following data: :math:`k=0.05 \hbox{ min}^{-1}`,
 :math:`T(0)=5` C, :math:`T_m=25` C, :math:`a=2.5` C, and :math:`P=1` h, :math:`P=10` min, and :math:`P=6` h.
 Plot the :math:`T` solutions and :math:`T_s` in the same plot.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-We can reuse the ``cooling`` function from :ref:`decay:app:exer:cooling:py`
-to do the simulations:
-
-.. code-block:: python
-
-        import numpy as np
-        
-        def cooling(T0, k, T_s, t_end, dt, theta=0.5):
-            """
-            Solve T'=-k(T-T_s(t)), T(0)=T0,
-            for t in (0,t_end] with steps of dt.
-            T_s(t) is a Python function of t.
-            theta=0.5 means Crank-Nicolson, 1 is Backward
-            Euler, and 0 is Forward Euler scheme.
-            """
-            dt = float(dt)                  # avoid integer division
-            Nt = int(round(t_end/dt))       # no of time intervals
-            t_end = Nt*dt                   # adjust to fit time step dt
-            T = np.zeros(Nt+1)              # array of T[n] values
-            t = np.linspace(0, t_end, Nt+1) # time mesh
-            T[0] = T0                       # set initial condition
-            for n in range(0, Nt):          # n=0,1,...,Nt-1
-                T[n+1] = ((1 - dt*(1 - theta)*k)*T[n] + \ 
-                dt*k*(theta*T_s(t[n+1]) + (1 - theta)*T_s(t[n])))/ \ 
-                (1 + dt*theta*k)
-            return T, t
-
-The challenge is to use the right units
-for the input data. We can use Celsius for temperature since it has
-the same increments as Kelvin. Time quantities should be measured
-in seconds:
-
-.. math::
-        
-        k &= 20 \hbox{ min}^{-1} = \frac{20}{60}\hbox{ s}^{-1},\\ 
-        P &= (1 \hbox{ h} = 3600\hbox{ s}, 10\hbox{ min} = 600\hbox{ s},
-        6\hbox{ h}=6\cdot 3600\hbox{ s}){\thinspace .}
-        
-
-To achieve reasonable accuracy,
-we choose :math:`\Delta t` as 40 steps per the
-shortest period of the :math:`T_s` oscillations:
-:math:`\Delta t = 600/40`. With some trials we find
-an appropriate simulation interval for all three cases to be
-:math:`[0,8]` h.
-
-The code becomes
-
-.. code-block:: python
-
-        from cooling import cooling
-        from numpy import pi, sin
-        
-        def T_s(t):
-            return Tm + a*sin((2*pi/P)*t)
-        
-        Tm = 25
-        a = 2.5
-        P_values = [3600, 600, 3600*6]
-        k = 0.05/60
-        T0 = 5
-        
-        import matplotlib.pyplot as plt
-        for P in P_values:
-            T, t = cooling(T0, k, T_s, t_end=8*3600, dt=600/40)
-            plt.plot(t, T)
-        plt.plot(t, T_s(t), 'k--')
-        legends = ['P=1 h', 'P=10 min', 'P=6 h', '$T_s$']
-        plt.legend(legends, loc='lower right')
-        plt.xlabel('t'); plt.ylabel('T')
-        plt.savefig('tmp.png');  plt.savefig('tmp.pdf')
-        plt.show()
-
-.. figure:: osc_cooling.png
-   :width: 700
-
-**Discussion of the results.**
-We see that it takes some time to increase the temperature from :math:`T_0`
-to oscillations around :math:`T_m`. When :math:`T_s` oscillates fast (:math:`P=10` min),
-:math:`k` is not large enough so that :math:`T` can reach the surrounding temperature
-in the time available before the surrounding temperature decreases.
-However, for large :math:`P` (6 h), there is almost enough time to heat
-and cool the object to reach the maximum and minimum temperatures
-of the surroundings.
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``osc_cooling``.
 
@@ -2834,22 +2146,7 @@ where :math:`R_0` and :math:`\alpha` are the only parameters in the problem:
 .. math::
          R_0 = \frac{N\beta}{\nu}, \quad \alpha = \frac{I(0)}{N}{\thinspace .}
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-We introduce
-
-.. math::
-         \bar t = \frac{t}{\nu^{-1}},\quad \bar S = \frac{S}{N},\quad
-        \bar I = \frac{I}{N},\quad \bar R = \frac{R}{N}{\thinspace .}
-
-Inserting these expressions in the governing equations and dividing by
-:math:`\nu N` gives the listed dimensionless ODEs. The scaled initial condition
-for :math:`\bar S(0)` follows from
-:math:`\bar S(0) = S(0)/N = (N-I(0))/N = 1 - \alpha`, since initially,
-:math:`R(0)=0` and therefore :math:`N=S(0) + I(0)`.
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **b)**
 Show that the :math:`R_0` parameter governs whether the disease will spread
@@ -2862,22 +2159,7 @@ Spreading means :math:`dI/dt>0`.
 
 .. --- end hint in exercise ---
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-For :math:`dI/dt` to be positive, we must have :math:`(R_0 \bar S - 1)\bar I > 0`, i.e.,
-:math:`R_0 \bar S - 1 > 0` since :math:`\bar I\geq 0`. At :math:`t=0`, we get
-:math:`R_0 \bar S(0) > 1` as the criterion, or
-
-.. math::
-        
-        \tilde R_0\bar S(0) = \frac{N\beta}{\nu}\frac{S(0)}{N} = \frac{S(0)\beta}{\nu} >1
-        {\thinspace .}
-
-The dimensionless parameter :math:`S(0)\beta /\nu` is denoted by :math:`R_0` in
-the epidemiology literature and known as the *basic reproductive number*.
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **c)**
 Implement the scaled SIR model. Check at every time step,
@@ -2888,12 +2170,7 @@ as a verification, that
 Simulate the spreading of a disease where :math:`R_0=1.1` and 1 percent of
 the population is infected at time :math:`t=0`.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-The given data means that :math:`\bar I(0)=\alpha = 0.01` and :math:`\bar S(0)=0.99`.
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``SIR``.
 
@@ -2974,69 +2251,13 @@ where we have three dimensionless parameters
         The corresponding initial conditions are $\bar Q=\bar P=0$ and
         $\bar S=\bar E=1$.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-Replacing the unknowns and :math:`t` by their dimensionless equivalents
-leads to
-
-.. math::
-        
-        \frac{d\bar Q}{d\bar t} &= t_ck_+\frac{E_0S_0}{Q_c}\bar E\bar S
-        - t_c(k_v + k_-)\bar Q,\\ 
-        \frac{d\bar P}{d\bar t} &= t_ck_v\frac{Q_c}{P_c}\bar Q,\\ 
-        \frac{d\bar S}{d\bar t} &= -t_ck_+E_0\bar E\bar S
-        + t_ck_-\frac{Q_c}{S_0}\bar Q,\\ 
-        \frac{d\bar E}{d\bar t} &= -t_ck_+S_0\bar E\bar S
-        + t_c(k_- + k_v)\frac{Q_c}{E_0}\bar Q{\thinspace .}
-        
-
-Inserting the choice of scales brings us to the given equations, after
-quite some algebra and identifying coefficients in terms of the
-provided dimensionless numbers.
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **b)**
 Implement a function for
 solving :eq:`decay:app:MMK:Q2`-:eq:`decay:app:MMK:E2`.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-Let us use Odespy to solve the differential equations, although a plain
-Forward Euler scheme will be fine.
-
-.. code-block:: python
-
-        import odespy
-        import numpy as np
-        import matplotlib.pyplot as plt
-        import sys
-        
-        def solver(f, alpha, beta, epsilon, T, dt=0.1):
-            def f(u, t):
-                Q, P, S, E = u
-                return [
-                    alpha*(E*S - Q),
-                    beta*Q,
-                    -E*S + (1-beta/alpha)*Q,
-                    (-E*S + Q)/epsilon,
-                    ]
-        
-            Nt = int(round(T/dt))
-            t_mesh = np.linspace(0, Nt*dt, Nt+1)
-        
-            solver = odespy.RK4(f)
-            solver.set_initial_condition([0, 0, 1, 1])
-            u, t = solver.solve(t_mesh)
-            Q = u[:,0]
-            P = u[:,1]
-            S = u[:,2]
-            E = u[:,3]
-            return Q, P, S, E
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **c)**
 There are two conservation equations implied by
@@ -3055,88 +2276,13 @@ There are two conservation equations implied by
 Derive these two equations. Use these properties in the function
 in b) to do a partial verification of the solution at each time step.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-Adding
-:eq:`decay:app:MMK:ES1` and :eq:`decay:app:MMK:E1` shows that
-
-.. math::
-         \frac{d[ES]}{dt} + \frac{d[E]}{dt} = 0,
-
-and therefore :math:`[ES] + [E]=\hbox{const}`. Since :math:`[ES](0)=0` and
-:math:`[E](0)=E_0`, the constant is :math:`E_0` at :math:`t=0` and will remain so.
-Similarly, adding :eq:`decay:app:MMK:ES1`,
-:eq:`decay:app:MMK:S1`, and :eq:`decay:app:MMK:P1`
-shows that their time derivatives sum up to zero, and therefore
-:math:`[ES] + [S] + [P] =\hbox{const}`. Since :math:`[P](0)=0`, the constant
-must be :math:`0+S_0+0=S_0`.
-
-To use the conservation as a consistency check in the software, we need
-to find the equivalent dimensionless versions:
-
-.. math::
-         [ES] + [E] = E_0\quad\Rightarrow\quad Q_c\bar Q + E_0\bar E = E_0,
-
-and from this we get, after a little algebra,
-
-.. math::
-         \alpha^{-1}\epsilon^{-1}\bar Q + \bar E = 1{\thinspace .}
-
-The other conservation equation becomes
-
-.. math::
-         \bar Q + \alpha\bar S + \bar P  = \alpha{\thinspace .}
-
-The implementation may go like
-
-.. code-block:: python
-
-        computed = Q[n+1]/(alpha*epsilon) + E[n+1]
-        expected = 1
-        diff1 = abs(computed - expected)
-        
-        computed = Q[n+1] + alpha*S[n+1] + P[n+1]
-        expected = alpha
-        diff2 = abs(computed - expected)
-        
-        tol = 1E-14
-        if diff1 < tol or diff2 < tol:
-            print '*** Consistency check failed:', diff1, diff2
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **d)**
 Simulate a case with :math:`T=8`, :math:`\alpha = 1`, :math:`\beta=4`, and two
 :math:`\epsilon` values: 0.9 and 0.1.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-
-.. code-block:: python
-
-        def demo():
-            alpha = 1
-            beta = 4
-            epsilon = 0.1
-            T = 8
-            dt = float(sys.argv[1]) if len(sys.argv) >= 2 else 0.1
-            Q, P, S, E = solver(alpha, beta, epsilon, T, dt)
-            plt.plot(t, Q, t, P, t, S, t, E)
-            plt.legend(['complex', 'product', 'substrate', 'enzyme'],
-                       loc='upper right')
-            plt.title('alpha=%g, beta=%g, epsilon=%g' % (alpha, beta, epsilon))
-            plt.savefig('tmp.png');  plt.savefig('tmp.pdf')
-            plt.show()
-        
-        if __name__ == '__main__':
-            demo()
-
-.. figure:: biochem.png
-   :width: 700
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``biochem``.
 
@@ -3157,123 +2303,13 @@ Scale the equations :eq:`decay:app:predpray:eqH`-:eq:`decay:app:predpray:eqL`.
 Use the initial population :math:`H(0)=H_0` of :math:`H` has scale for :math:`H` and :math:`L`, and
 let the time scale be :math:`1/(bH_0)`.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-We introduce dimensionless time :math:`\bar t=t/t_c`, where :math:`t_c^{-1}=bH_0`,
-and scale :math:`H` and :math:`L`
-as :math:`\bar H = H/H_0` and :math:`\bar L = L/H_0`. Inserted in the equations, we
-arrive at
-
-.. math::
-        
-        \frac{H_0}{t_c}\frac{d\bar H}{d\bar t} &= H_0\bar H(a - bH_0\bar L),
-        \\ 
-        \frac{H_0}{t_c}\frac{d\bar L}{d\bar t} &= H_0\bar L(dH_0\bar H - c){\thinspace .}
-        
-
-Inserting :math:`t_c^{-1}=bH_0` and rearranging simplify the equations to
-
-.. math::
-        
-        \frac{d\bar H}{d\bar t} &= \frac{a}{bH_0}\bar H  - \bar L\bar H,
-        \\ 
-        \frac{d\bar L}{d\bar t} &= \frac{d}{b}\bar L \bar H - \frac{c}{bH_0}\bar L){\thinspace .}
-        
-
-The initial conditions become :math:`\bar H(0)=1`, :math:`\bar L(0)=L_0/H_0`.
-With the dimensionless parameters
-
-.. math::
-         \alpha = \frac{a}{bH_0},\quad\beta = \frac{d}{b},\quad\gamma =
-        \frac{c}{bH_0},\quad \delta = \frac{H_0}{L_0},
-
-we can write the dimensionless problem as
-
-.. math::
-        
-        \frac{d\bar H}{d\bar t} &= \alpha\bar H  - \bar L\bar H,\\ 
-        \frac{d\bar L}{d\bar t} &= \beta\bar L \bar H - \gamma\bar L),\\ 
-        \bar H(0) &= 1,\\ 
-        \bar L(0) &= \delta {\thinspace .}
-        
-
-The quantity :math:`bH_0` is the number of eaten prays per predator.
-Then :math:`\alpha` measures the ratio of natural population growth of
-the pray, due to nutritioon, and the number of eaten prays per predator.
-The :math:`\beta` parameter measures the fraction of the eaten prays and
-the amount of this that actually
-leads to population growth of the predator.
-The number :math:`\gamma` reflects the ratio of
-predator deaths and the eaten prays per predator, and :math:`\delta` is
-the initial fraction of preys and predators.
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **b)**
 Implement the scaled model from a). Run illustrating cases how the
 two populations develop.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-Here are two functions:
-
-.. code-block:: python
-
-        import odespy
-        import numpy as np
-        #import scitools.std as plt
-        import matplotlib.pyplot as plt
-        fig_counter = 0  # used in plot file names
-        
-        def simulate(alpha, beta, gamma, delta, T=20):
-            def f(u, t, alpha, beta, gamma):
-                H, L = u
-                return [alpha*H - L*H, beta*L*H - gamma*L]
-        
-        
-            t = np.linspace(0, T, 1501)
-            solver = odespy.RK4(f, f_args=(alpha, beta, gamma))
-            solver.set_initial_condition([1, delta])
-            u, t = solver.solve(t)
-            H = u[:,0]
-            L = u[:,1]
-        
-            plt.figure()
-            global fig_counter
-            fig_counter += 1
-            plt.plot(t, H, t, L)
-            plt.legend(['H', 'L'])
-            plt.title(r'$\alpha=%g$, $\beta=%g$, $\gamma=%g$, $\delta=%g$'
-                      % (alpha, beta, gamma, delta))
-            plt.savefig('tmp%d.png' % fig_counter)
-            plt.savefig('tmp%d.pdf' % fig_counter)
-            return H, L, t
-        
-        def demo():
-            simulate(alpha=1.5, beta=0.5, gamma=0.8, delta=0.5, T=20)
-            simulate(alpha=0.5, beta=0.5, gamma=0.2, delta=0.5, T=50)
-
-We must call ``demo()`` from the main program.
-
-Here are two examples. The one to the left has a good birth-death rate
-compared to how many that are eaten by predators (:math:`\alpha=1.5`),
-half of the eaten prays contribute to growth of the predator population
-(:math:`\beta = 0.5`), the death rate of predators is slightly smaller than how many
-prays they eat (per predator) (:math:`\gamma=0.8`), and we start out with
-twice as many prays as predators.
-
-The figure to the right features less nutrition for the prays
-compared to being eaten
-by predators (:math:`\alpha =0.5`), and a lower death rate in the predator
-population. Naturally, this makes the predator population larger compared to the
-left case.
-
-.. figure:: predator_pray.png
-   :width: 800
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **c)**
 The scaling in a) used a scale for :math:`H` and :math:`L` based on on the
@@ -3285,130 +2321,13 @@ dimensionless parameters as possible in the ODEs. Scale the initial
 conditions. Compare the number and type of dimensionless parameters
 with a).
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-Inserting
-
-.. math::
-         \bar t = \frac{t}{c_c},\quad \bar H=\frac{H}{H_c},\quad \bar L
-        = \frac{L}{L_c},
-
-in the ODEs :eq:`decay:app:predpray:eqH`-:eq:`decay:app:predpray:eqL`,
-we arrive at
-
-.. math::
-        
-        \frac{H_c}{t_c}\frac{d\bar H}{d\bar t} &= H_c\bar H(a - bL_c\bar L),\\ 
-        \frac{L_c}{t_c}\frac{d\bar L}{d\bar t} &= L_c\bar L(dH_c\bar H - c){\thinspace .}
-        
-
-Now we divide by :math:`H_c` and :math:`L_c` in the :math:`H` and :math:`L` equations, respectively,
-and multiply by :math:`t_c`:
-
-.. math::
-        
-        \frac{d\bar H}{d\bar t} &= t_c\bar H(a - bL_c\bar L),\\ 
-        \frac{d\bar L}{d\bar t} &= t_c\bar L(dH_c\bar H - c){\thinspace .}
-        
-
-Choosing :math:`t_c=1/a` and :math:`t_caL_c=1`, i.e., :math:`L_c=a/b`, makes the
-first equation free of parameters: :math:`\bar H^{\prime}=\bar H(1-\bar L)`.
-Factoring out :math:`c` in the equation for :math:`L` and choosing
-:math:`H_c d/c=1`, i.e., :math:`H_c=c/d`, leaves us with the :math:`L` equation
-as :math:`\bar L^{\prime}=(c/a)\bar L(\bar H-1)`. The ratio :math:`c/a` equals
-:math:`\gamma/\alpha` from a) and is here called :math:`\mu`.
-
-The initial conditions become :math:`\bar H(0) = H_0/H_c=H_0d/c =\beta/\gamma = \nu`,
-and :math:`\bar L(0)=L_0/L_c = L_0b/a = \delta/\alpha = \omega`.
-
-The resulting dimensionless problem becomes
-
-.. math::
-        
-        \frac{d\bar H}{d\bar t} = bar H(1 - \bar L),
-        
-
-.. math::
-          
-        \frac{d\bar L}{d\bar t} = \mu bar L(\bar H - 1) = \gamma\alpha^{-1} bar L(\bar H - 1),
-        
-
-.. math::
-          
-        \bar H(0) = \nu = \beta/gamma,
-        
-
-.. math::
-          
-        \bar L(0) = \omega = \delta/\alpha,
-        
-
-with
-
-.. math::
-         \mu = \frac{c}{a},\quad \nu = H_0\frac{d}{c},\quad \omega = L_0\frac{b}{a}
-        {\thinspace .}
-
-The unknowns :math:`\bar H` and :math:`\bar L` now has less intuitive scalings,
-
-.. math::
-         \bar H = \frac{Hd}{c},\quad \bar L = \frac{Lb}{a},
-
-while time is measured in the units based on the exponential growth
-due to births and deaths of prays (:math:`a`). The number of dimensionless parameters
-is one less since we have one more scale (for :math:`L_c`) at our
-disposal. Simplicity in one initial conditions in a) is
-exchanged with more simplicity in the ODEs, which now have
-only one dimensionless parameter. Note that :math:`\nu` and :math:`\omega` must be
-different from unity to avoid :math:`\bar H\neq 0` and :math:`\bar L\neq 0` because
-of the factors :math:`1-L` and :math:`H-1` in the equations that can make
-:math:`\bar H^{\prime}=0` and :math:`\bar L^{\prime}=0`.
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **d)**
 Compute with the scaled model from c) and create plots to illustrate
 the typical solutions.
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-Modified ``simulate`` and ``demo`` go as follows.
-
-.. code-block:: python
-
-        def simulate2(mu, nu, omega, T=20):
-            def f(u, t, mu):
-                H, L = u
-                return [H*(1-L), mu*L*(H-1)]
-        
-        
-            t = np.linspace(0, T, 1501)
-            solver = odespy.RK4(f, f_args=(mu,))
-            solver.set_initial_condition([nu, omega])
-            u, t = solver.solve(t)
-            H = u[:,0]
-            L = u[:,1]
-        
-            plt.figure()
-            global fig_counter
-            fig_counter += 1
-            plt.plot(t, H, t, L)
-            plt.legend(['H', 'L'])
-            plt.title(r'$\mu=%g$, $\nu=%g$, $\omega=%g$' % (mu, nu, omega))
-            plt.savefig('tmp%d.png' % fig_counter)
-            plt.savefig('tmp%d.pdf' % fig_counter)
-            return H, L, t
-        
-        def demo2():
-            simulate2(mu=0.5, nu=0.5, omega=1.5, T=20)
-            simulate2(mu=2, nu=0.5, omega=1.5, T=20)
-
-.. figure:: predator_pray2.png
-   :width: 800
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``predator_pray``.
 
@@ -3935,40 +2854,7 @@ means that :math:`\bar t_1 = 1`.
 
 .. --- end hint in exercise ---
 
-.. --- begin solution of exercise ---
-
-**Solution.**
-Inserting the scaling :math:`\bar u=10\varepsilon` and :math:`\bar t = tE/\eta`
-in the ODE for :math:`\varepsilon` results in
-
-.. math::
-         \frac{E}{10 \eta}\frac{d\bar u}{d\bar t} = -\frac{E}{\eta 10}\bar u
-        + \frac{\sigma(t)}{\eta}{\thinspace .}
-
-This reduces to
-
-.. math::
-         \frac{d\bar u}{d\bar t} = -\bar u + \frac{10\sigma}{E}{\thinspace .}
-
-We can use the module ``decay_vc`` for solving :math:`u^{\prime}=-a(t)u+b(t)`:
-
-.. code-block:: python
-
-        # Scaled model: u' = -u + b(t), b=1 for t < 1 else 0
-        eps, t = solver(I=0, a=lambda t: 1,
-                        b=lambda t: 1 if t < 1 else 0,
-                        T=4, dt=0.01, theta=0.5)
-        
-        import matplotlib.pyplot as plt
-        plt.plot(t, eps)
-        plt.xlabel('Dimensionless time'); plt.ylabel('10*strain')
-        plt.savefig('tmp.png');  plt.savefig('tmp.pdf')
-        plt.show()
-
-.. figure:: KelvinVogt.png
-   :width: 600
-
-.. --- end solution of exercise ---
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``KelvinVogt``.
 
