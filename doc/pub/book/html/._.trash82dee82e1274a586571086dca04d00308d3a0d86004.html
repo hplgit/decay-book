@@ -20,6 +20,11 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/*
+in.collapse+a.btn.showdetails:before { content:'Hide details'; }
+.collapse+a.btn.showdetails:before { content:'Show details'; }
+*/
 </style>
 
 
@@ -424,14 +429,14 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:exer:kinetics:ABn',
                'decay:app:exer:kinetics:ABn'),
-              ('Exercise 25: Simulate spreading of a disease',
-               2,
-               'decay:app:exer:SIR',
-               'decay:app:exer:SIR'),
-              ('Exercise 26: Simulate a biochemical process',
+              ('Exercise 25: Simulate a biochemical process',
                2,
                'decay:app:exer:MMK',
                'decay:app:exer:MMK'),
+              ('Exercise 26: Simulate spreading of a disease',
+               2,
+               'decay:app:exer:SIR',
+               'decay:app:exer:SIR'),
               ('Exercise 27: Simulate predator-pray interaction',
                2,
                'decay:app:exer:predpray',
@@ -456,11 +461,11 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:exer:drag:atm2',
                'decay:app:exer:drag:atm2'),
-              ('Exercise 33: Compute $y=|x|$ by solving an ODE',
+              ('Problem 33: Compute $y=|x|$ by solving an ODE',
                2,
                'decay:app:exer:signum',
                'decay:app:exer:signum'),
-              ('Exercise 34: Simulate fortune growth with random interest rate',
+              ('Problem 34: Simulate fortune growth with random interest rate',
                2,
                'decay:app:exer:interest',
                'decay:app:exer:interest'),
@@ -652,7 +657,73 @@ code { color: inherit; background-color: transparent; }
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('References', 1, None, '___sec247')]}
+              ('Summarizing multiple-choice questions', 0, None, '___sec247'),
+              ('Summarizing multiple-choice questions', 1, None, '___sec248'),
+              ('Exercise 46: Characterize a finite difference',
+               2,
+               'decay:quiz:fd:FE',
+               'decay:quiz:fd:FE'),
+              ('Exercise 47: Characterize a finite difference',
+               2,
+               'decay:quiz:fd:CN',
+               'decay:quiz:fd:CN'),
+              ('Exercise 48: What is the problem with this program?',
+               2,
+               'decay:quiz:program',
+               'decay:quiz:program'),
+              ('Exercise 49: Is the solution correct?',
+               2,
+               'decay:quiz:stability',
+               'decay:quiz:stability'),
+              ('Exercise 50: Is this a proper test function?',
+               2,
+               'decay:quiz:testfunc',
+               'decay:quiz:testfunc'),
+              ('Exercise 51: Rewrite an expression with array arithmetics',
+               2,
+               'decay:quiz:arrayarithm',
+               'decay:quiz:arrayarithm'),
+              ('Exercise 52: What is the truncation error?',
+               2,
+               'decay:quiz:trunc',
+               'decay:quiz:trunc'),
+              ('Exercise 53: Recognize a programming language',
+               2,
+               'decay:quiz:prog:m',
+               'decay:quiz:prog:m'),
+              ('Exercise 54: Recognize a programming language',
+               2,
+               'decay:quiz:prog:py',
+               'decay:quiz:prog:py'),
+              ('Exercise 55: Recognize a programming language',
+               2,
+               'decay:quiz:prog:f77',
+               'decay:quiz:prog:f77'),
+              ('Exercise 56: Recognize a programming language',
+               2,
+               'decay:quiz:prog:c',
+               'decay:quiz:prog:c'),
+              ('Exercise 57: What is SymPy?',
+               2,
+               'decay:quiz:sympy1',
+               'decay:quiz:sympy1'),
+              ('Exercise 58: Testing of code',
+               2,
+               'decay:quiz:testing1',
+               'decay:quiz:testing1'),
+              ('Exercise 59: What kind of scheme is this?',
+               2,
+               'decay:quiz:scheme:CN_error',
+               'decay:quiz:scheme:CN_error'),
+              ('Exercise 60: What kind of scheme is this?',
+               2,
+               'decay:quiz:scheme:BE',
+               'decay:quiz:scheme:BE'),
+              ('Exercise 61: What kind of scheme is this?',
+               2,
+               'decay:quiz:scheme:leapfrog',
+               'decay:quiz:scheme:leapfrog'),
+              ('References', 1, None, '___sec265')]}
 end of tocinfo -->
 
 <body>
@@ -709,6 +780,7 @@ $$
      <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec66" style="font-size: 80%;">Generalizations</a></li>
      <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app" style="font-size: 80%;">Models</a></li>
      <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86009.html#decay:se" style="font-size: 80%;">Scientific software engineering</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#___sec247" style="font-size: 80%;">Summarizing multiple-choice questions</a></li>
 
         </ul>
       </li>
@@ -810,7 +882,7 @@ benefit from reading a tutorial, e.g.,
   <li> <a href="http://en.wikibooks.org/wiki/A_Beginner's_Python_Tutorial" target="_self">A Beginner's Python Tutorial</a></li>
 </ul>
 
-The author also has a comprehensive book <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#Langtangen_2012">[1]</a> that teaches
+The author also has a comprehensive book <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86011.html#Langtangen_2012">[1]</a> that teaches
 scientific programming with Python from the ground up.
 
 <p>
@@ -1842,8 +1914,8 @@ files.
 
 <p>
 For more detailed information on syntax and plotting capabilities,
-we refer to the Matplotlib <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#Matplotlib:doc">[2]</a>
-and SciTools <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#SciTools:doc">[3]</a> documentation.
+we refer to the Matplotlib <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86011.html#Matplotlib:doc">[2]</a>
+and SciTools <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86011.html#SciTools:doc">[3]</a> documentation.
 The hope is that
 the programming syntax explained so far suffices for understanding the
 basic plotting functionality and being able to look up
@@ -2034,4 +2106,3 @@ exactly as the <code>decay_plot_mpl.py</code> file.
 </body>
 </html>
     
-

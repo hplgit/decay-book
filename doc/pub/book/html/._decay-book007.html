@@ -20,6 +20,11 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/*
+in.collapse+a.btn.showdetails:before { content:'Hide details'; }
+.collapse+a.btn.showdetails:before { content:'Show details'; }
+*/
 </style>
 
 
@@ -424,14 +429,14 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:exer:kinetics:ABn',
                'decay:app:exer:kinetics:ABn'),
-              ('Exercise 25: Simulate spreading of a disease',
-               2,
-               'decay:app:exer:SIR',
-               'decay:app:exer:SIR'),
-              ('Exercise 26: Simulate a biochemical process',
+              ('Exercise 25: Simulate a biochemical process',
                2,
                'decay:app:exer:MMK',
                'decay:app:exer:MMK'),
+              ('Exercise 26: Simulate spreading of a disease',
+               2,
+               'decay:app:exer:SIR',
+               'decay:app:exer:SIR'),
               ('Exercise 27: Simulate predator-pray interaction',
                2,
                'decay:app:exer:predpray',
@@ -456,11 +461,11 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:exer:drag:atm2',
                'decay:app:exer:drag:atm2'),
-              ('Exercise 33: Compute $y=|x|$ by solving an ODE',
+              ('Problem 33: Compute $y=|x|$ by solving an ODE',
                2,
                'decay:app:exer:signum',
                'decay:app:exer:signum'),
-              ('Exercise 34: Simulate fortune growth with random interest rate',
+              ('Problem 34: Simulate fortune growth with random interest rate',
                2,
                'decay:app:exer:interest',
                'decay:app:exer:interest'),
@@ -652,7 +657,73 @@ code { color: inherit; background-color: transparent; }
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('References', 1, None, '___sec247')]}
+              ('Summarizing multiple-choice questions', 0, None, '___sec247'),
+              ('Summarizing multiple-choice questions', 1, None, '___sec248'),
+              ('Exercise 46: Characterize a finite difference',
+               2,
+               'decay:quiz:fd:FE',
+               'decay:quiz:fd:FE'),
+              ('Exercise 47: Characterize a finite difference',
+               2,
+               'decay:quiz:fd:CN',
+               'decay:quiz:fd:CN'),
+              ('Exercise 48: What is the problem with this program?',
+               2,
+               'decay:quiz:program',
+               'decay:quiz:program'),
+              ('Exercise 49: Is the solution correct?',
+               2,
+               'decay:quiz:stability',
+               'decay:quiz:stability'),
+              ('Exercise 50: Is this a proper test function?',
+               2,
+               'decay:quiz:testfunc',
+               'decay:quiz:testfunc'),
+              ('Exercise 51: Rewrite an expression with array arithmetics',
+               2,
+               'decay:quiz:arrayarithm',
+               'decay:quiz:arrayarithm'),
+              ('Exercise 52: What is the truncation error?',
+               2,
+               'decay:quiz:trunc',
+               'decay:quiz:trunc'),
+              ('Exercise 53: Recognize a programming language',
+               2,
+               'decay:quiz:prog:m',
+               'decay:quiz:prog:m'),
+              ('Exercise 54: Recognize a programming language',
+               2,
+               'decay:quiz:prog:py',
+               'decay:quiz:prog:py'),
+              ('Exercise 55: Recognize a programming language',
+               2,
+               'decay:quiz:prog:f77',
+               'decay:quiz:prog:f77'),
+              ('Exercise 56: Recognize a programming language',
+               2,
+               'decay:quiz:prog:c',
+               'decay:quiz:prog:c'),
+              ('Exercise 57: What is SymPy?',
+               2,
+               'decay:quiz:sympy1',
+               'decay:quiz:sympy1'),
+              ('Exercise 58: Testing of code',
+               2,
+               'decay:quiz:testing1',
+               'decay:quiz:testing1'),
+              ('Exercise 59: What kind of scheme is this?',
+               2,
+               'decay:quiz:scheme:CN_error',
+               'decay:quiz:scheme:CN_error'),
+              ('Exercise 60: What kind of scheme is this?',
+               2,
+               'decay:quiz:scheme:BE',
+               'decay:quiz:scheme:BE'),
+              ('Exercise 61: What kind of scheme is this?',
+               2,
+               'decay:quiz:scheme:leapfrog',
+               'decay:quiz:scheme:leapfrog'),
+              ('References', 1, None, '___sec265')]}
 end of tocinfo -->
 
 <body>
@@ -709,6 +780,7 @@ $$
      <!-- navigation toc: --> <li><a href="#___sec66" style="font-size: 80%;">Generalizations</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app" style="font-size: 80%;">Models</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book009.html#decay:se" style="font-size: 80%;">Scientific software engineering</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#___sec247" style="font-size: 80%;">Summarizing multiple-choice questions</a></li>
 
         </ul>
       </li>
@@ -1459,7 +1531,7 @@ such ODEs.  Our focus is on numerical methods that can be readily
 reused for time-discretization of PDEs, and diffusion PDEs in particular.
 The methods are just briefly listed, and we refer to the rich literature
 for more detailed descriptions and analysis - the books
-<a href="._decay-book010.html#Petzold_Ascher_1998">[4]</a> <a href="._decay-book010.html#Griffiths_et_al_2010">[5]</a> <a href="._decay-book010.html#Hairer_Wanner_Norsett_bookI">[6]</a> <a href="._decay-book010.html#Hairer_Wanner_bookII">[7]</a> are all excellent resources on numerical methods for ODEs.
+<a href="._decay-book011.html#Petzold_Ascher_1998">[4]</a> <a href="._decay-book011.html#Griffiths_et_al_2010">[5]</a> <a href="._decay-book011.html#Hairer_Wanner_Norsett_bookI">[6]</a> <a href="._decay-book011.html#Hairer_Wanner_bookII">[7]</a> are all excellent resources on numerical methods for ODEs.
 We also demonstrate the Odespy Python interface to a range
 of different software for general first-order ODE systems.
 
@@ -1844,7 +1916,7 @@ next section explains.
 <p>
 A wide range of methods and software exist for solving <a href="#mjx-eqn-68">(68)</a>.
 Many of the methods are accessible through a unified Python interface offered
-by the <a href="https://github.com/hplgit/odespy" target="_self">Odespy</a> <a href="._decay-book010.html#odespy">[8]</a> package.
+by the <a href="https://github.com/hplgit/odespy" target="_self">Odespy</a> <a href="._decay-book011.html#odespy">[8]</a> package.
 Odespy features simple Python implementations of the most fundamental
 schemes as well as Python interfaces to several famous packages for
 solving ODEs: <a href="https://computation.llnl.gov/casc/odepack/odepack_home.html" target="_self">ODEPACK</a>, <a href="https://computation.llnl.gov/casc/odepack/odepack_home.html" target="_self">Vode</a>,
@@ -2425,4 +2497,3 @@ Filename: <code>decay_schemes_unified</code>.
 </body>
 </html>
     
-

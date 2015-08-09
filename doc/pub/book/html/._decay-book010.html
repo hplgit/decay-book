@@ -20,6 +20,11 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/*
+in.collapse+a.btn.showdetails:before { content:'Hide details'; }
+.collapse+a.btn.showdetails:before { content:'Show details'; }
+*/
 </style>
 
 
@@ -424,14 +429,14 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:exer:kinetics:ABn',
                'decay:app:exer:kinetics:ABn'),
-              ('Exercise 25: Simulate spreading of a disease',
-               2,
-               'decay:app:exer:SIR',
-               'decay:app:exer:SIR'),
-              ('Exercise 26: Simulate a biochemical process',
+              ('Exercise 25: Simulate a biochemical process',
                2,
                'decay:app:exer:MMK',
                'decay:app:exer:MMK'),
+              ('Exercise 26: Simulate spreading of a disease',
+               2,
+               'decay:app:exer:SIR',
+               'decay:app:exer:SIR'),
               ('Exercise 27: Simulate predator-pray interaction',
                2,
                'decay:app:exer:predpray',
@@ -456,11 +461,11 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:exer:drag:atm2',
                'decay:app:exer:drag:atm2'),
-              ('Exercise 33: Compute $y=|x|$ by solving an ODE',
+              ('Problem 33: Compute $y=|x|$ by solving an ODE',
                2,
                'decay:app:exer:signum',
                'decay:app:exer:signum'),
-              ('Exercise 34: Simulate fortune growth with random interest rate',
+              ('Problem 34: Simulate fortune growth with random interest rate',
                2,
                'decay:app:exer:interest',
                'decay:app:exer:interest'),
@@ -652,7 +657,73 @@ code { color: inherit; background-color: transparent; }
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('References', 1, None, '___sec247')]}
+              ('Summarizing multiple-choice questions', 0, None, '___sec247'),
+              ('Summarizing multiple-choice questions', 1, None, '___sec248'),
+              ('Exercise 46: Characterize a finite difference',
+               2,
+               'decay:quiz:fd:FE',
+               'decay:quiz:fd:FE'),
+              ('Exercise 47: Characterize a finite difference',
+               2,
+               'decay:quiz:fd:CN',
+               'decay:quiz:fd:CN'),
+              ('Exercise 48: What is the problem with this program?',
+               2,
+               'decay:quiz:program',
+               'decay:quiz:program'),
+              ('Exercise 49: Is the solution correct?',
+               2,
+               'decay:quiz:stability',
+               'decay:quiz:stability'),
+              ('Exercise 50: Is this a proper test function?',
+               2,
+               'decay:quiz:testfunc',
+               'decay:quiz:testfunc'),
+              ('Exercise 51: Rewrite an expression with array arithmetics',
+               2,
+               'decay:quiz:arrayarithm',
+               'decay:quiz:arrayarithm'),
+              ('Exercise 52: What is the truncation error?',
+               2,
+               'decay:quiz:trunc',
+               'decay:quiz:trunc'),
+              ('Exercise 53: Recognize a programming language',
+               2,
+               'decay:quiz:prog:m',
+               'decay:quiz:prog:m'),
+              ('Exercise 54: Recognize a programming language',
+               2,
+               'decay:quiz:prog:py',
+               'decay:quiz:prog:py'),
+              ('Exercise 55: Recognize a programming language',
+               2,
+               'decay:quiz:prog:f77',
+               'decay:quiz:prog:f77'),
+              ('Exercise 56: Recognize a programming language',
+               2,
+               'decay:quiz:prog:c',
+               'decay:quiz:prog:c'),
+              ('Exercise 57: What is SymPy?',
+               2,
+               'decay:quiz:sympy1',
+               'decay:quiz:sympy1'),
+              ('Exercise 58: Testing of code',
+               2,
+               'decay:quiz:testing1',
+               'decay:quiz:testing1'),
+              ('Exercise 59: What kind of scheme is this?',
+               2,
+               'decay:quiz:scheme:CN_error',
+               'decay:quiz:scheme:CN_error'),
+              ('Exercise 60: What kind of scheme is this?',
+               2,
+               'decay:quiz:scheme:BE',
+               'decay:quiz:scheme:BE'),
+              ('Exercise 61: What kind of scheme is this?',
+               2,
+               'decay:quiz:scheme:leapfrog',
+               'decay:quiz:scheme:leapfrog'),
+              ('References', 1, None, '___sec265')]}
 end of tocinfo -->
 
 <body>
@@ -709,6 +780,7 @@ $$
      <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec66" style="font-size: 80%;">Generalizations</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app" style="font-size: 80%;">Models</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book009.html#decay:se" style="font-size: 80%;">Scientific software engineering</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec247" style="font-size: 80%;">Summarizing multiple-choice questions</a></li>
 
         </ul>
       </li>
@@ -724,66 +796,1339 @@ $$
 <a name="part0010"></a>
 <!-- !split -->
 
-<h1 id="___sec247">References </h1>
+<center><h1 id="___sec247">Summarizing multiple-choice questions </h1></center> <!-- chapter heading -->
+
+<h1 id="___sec248">Summarizing multiple-choice questions </h1>
 
 <p>
-<!-- begin bibliography -->
+<!-- --- begin exercise --- -->
 
-<ol>
- <li> <div id="Langtangen_2012"></div> <b>H. P. Langtangen</b>. 
-    <em>A Primer on Scientific Programming with Python</em>,
-    fourth edition,
-    <em>Texts in Computational Science and Engineering</em>,
-    Springer,
-    2014.</li>
- <li> <div id="Matplotlib:doc"></div> <b>J. D. Hunter, D. Dale, E. Firing and M. Droettboom</b>. 
-    Matplotlib documentation,
-    <a href="http://matplotlib.org/users/" target="_self"><tt>http://matplotlib.org/users/</tt></a>,
-    2012.</li>
- <li> <div id="SciTools:doc"></div> <b>H. P. Langtangen</b>. 
-    SciTools documentation,
-    <a href="http://hplgit.github.io/scitools/doc/web/index.html" target="_self"><tt>http://hplgit.github.io/scitools/doc/web/index.html</tt></a>.</li>
- <li> <div id="Petzold_Ascher_1998"></div> <b>L. Petzold and U. M. Ascher</b>. 
-    <em>Computer Methods for Ordinary Differential Equations and Differential-Algebraic Equations</em>,
-    SIAM,
-    1998.</li>
- <li> <div id="Griffiths_et_al_2010"></div> <b>D. Griffiths, F. David and D. J. Higham</b>. 
-    <em>Numerical Methods for Ordinary Differential Equations: Initial Value Problems</em>,
-    Springer,
-    2010.</li>
- <li> <div id="Hairer_Wanner_Norsett_bookI"></div> <b>E. Hairer, S. P. N\orsett and G. Wanner</b>. 
-    <em>Solving Ordinary Differential Equations I. Nonstiff Problems</em>,
-    Springer,
-    1993.</li>
- <li> <div id="Hairer_Wanner_bookII"></div> <b>G. Hairer and E. Wanner</b>. 
-    <em>Solving Ordinary Differential Equations II</em>,
-    Springer,
-    2010.</li>
- <li> <div id="odespy"></div> <b>H. P. Langtangen and L. Wang</b>. 
-    Odespy Software Package,
-    <a href="https://github.com/hplgit/odespy" target="_self"><tt>https://github.com/hplgit/odespy</tt></a>.</li>
- <li> <div id="Langtangen_deqbook_scale"></div> <b>H. P. Langtangen</b>. 
-    Scaling,
-    <a href="http://tinyurl.com/k3sdbuv/pub/scale" target="_self"><tt>http://tinyurl.com/k3sdbuv/pub/scale</tt></a>.</li>
-<li> <div id="parachute_1999"></div> <b>D. B. Meade and A. A. Struthers</b>. 
-    Differential Equations in the New Millenium: the Parachute Problem,
-    <em>International Journal of Engineering Education</em>,
-    15(6),
-    pp. 417-424,
-    1999,
-    <a href="http://www.matematicas.unam.mx/gfgf/ode/ode_files/parachute.pdf" target="_self"><tt>http://www.matematicas.unam.mx/gfgf/ode/ode_files/parachute.pdf</tt></a>.</li>
-<li> <div id="Langtangen_bitgit"></div> <b>H. P. Langtangen</b>. 
-    Quick Intro to Version Control Systems and Project Hosting Sites,
-    <a href="http://hplgit.github.io/teamods/bitgit/html/" target="_self"><tt>http://hplgit.github.io/teamods/bitgit/html/</tt></a>.</li>
-</ol>
+<h2 id="decay:quiz:fd:FE">Exercise 46: Characterize a finite difference</h2>
 
-<!-- end bibliography -->
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> We can approximate the derivative at a point using two function values:
 
+<p>
+<center><p><img src="fig-quiz/fd_forward2.png" align="bottom" width=400></p></center>
+
+<p>
+What is this type of difference called and how large is the error?</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_1_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+This is a centered difference with error proportional to \( \Delta t^2 \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_1_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+No, a centered difference would have the two function values equally displaced to either side of the target point \( t_n \).
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_1_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+This is a forward difference with error proportional to \( \Delta t \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_1_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+The name is forward difference, or Forward Euler difference in the context of differential equations. In such contexts the formula is also known as Euler's method or formula.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_1_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+This is a Forward Euler difference with error proportional to \( \Delta t^3 \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_1_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+One may well call this a Forward Euler difference, but the error is not as &quot;good&quot; as \( \Delta t^3 \).
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_1_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+This is a Backward Euler finite difference with error proportional to \( \Delta t \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_1_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Since we use the points \( t_{n+1} \) and \( t_n \) when constructing the difference, we go <em>forward</em> in time, not backward. Therefore, this is a forward difference.
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:fd:CN">Exercise 47: Characterize a finite difference</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> We can approximate the derivative at a point using two function values:
+
+<p>
+<center><p><img src="fig-quiz/fd_centered2.png" align="bottom" width=400></p></center>
+
+<p>
+What is this type of difference called and how large is the error?</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_2_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+This is a centered difference with error proportional to \( \Delta t^2 \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_2_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+Correct!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_2_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+This is a forward difference with error proportional to \( \Delta t^2 \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_2_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+A forward difference makes use of the point itself, \( t_n \), and a point <em>forward</em> in time, \( t_{n+1} \). This is not the case here: we use points to the left and right, and the derivative is approximated in the center point. Also, a forward difference would not have an error \( \mathcal{O}(\Delta t^2) \).
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_2_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+This is a centered difference with error proportional to \( \Delta t^4 \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_2_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+It is centered, but the error is only \( \mathcal{O}(\Delta t^2) \).
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_2_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+This is a Backward Euler finite difference with error proportional to \( \Delta t \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_2_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Since we use the points \( t_{n+1} \) and \( t_n \) when constructing the difference at \( t_{n+1/2} \), the derivative is in the <em>center</em> of the two points, and the difference is therefore a <em>centered</em> difference. A backward difference, or Backward Euler difference, would use \( t_{n+1/2} \) in this case and some point \( t_{n-1/2} \) <em>backward</em> in time.
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:program">Exercise 48: What is the problem with this program?</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> We want to solve
+
+$$ u ' = -au, \quad u(0)=1, $$
+
+by a Forward Euler scheme,
+
+$$ u^{n+1} = u^n - a\Delta t\, u^n,$$
+
+and the following program
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+u <span style="color: #666666">=</span> zeros(<span style="color: #666666">10</span>)
+u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+dt <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>):
+    u[i<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> u[i] <span style="color: #666666">-</span> dt<span style="color: #666666">*</span>a<span style="color: #666666">*</span>u[n]
+</pre></div>
+<p>
+What is the major problem with this program?</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_3_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+<code>from numpy import *</code> is not recommended; one should import explicitly the functions needed or do <code>import numpy as np</code>.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_3_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+True, these are recommended rules, but it is not a problem to do the &quot;star import&quot;: it is legal and convenient.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_3_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+The program aborts with a <code>NameError</code>.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_3_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+True, <code>a</code> is not defined. This is the only reason why one cannot execute the program.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_3_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+The program is &quot;flat&quot;. It should be wrapped in a function <code>solver(U0, dt, N, a)</code>.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_3_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+That is definitely a good idea, but it is not a major problem for computing the solution of the differential equation.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_3_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+The scheme is unstable!
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_3_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Actually, this can be true. Since <code>a</code> is not defined, it may happen that <code>dt=0.1</code> is a too long time step for the stability restrictions of the Forward Euler method for this differential equation. We need \( \Delta t\leq 1/a \). However, the answer is wrong in the sense that this <em>potential</em> instability is not the major problem with the program - it is a bigger problem that <code>a</code> is not defined.
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:stability">Exercise 49: Is the solution correct?</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> You have solved \( u'=-au \) by the Crank-Nicolson scheme and tested
+your program thoroughly. Suddenly you run the program with \( I=1 \), \( a=10 \), \( T=1 \), and \( \Delta t=0.225 \). You get somewhat unexpected results:
+
+<p>
+<center><p><img src="fig-quiz/CN_osc.png" align="bottom" width=500></p></center>
+
+<p>
+The results are unexpected because we know the exact solution should be
+monotone and decreasing, while this numerical solution also shows an
+increasing stage. What is the problem?</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_4_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+The program is not tested well enough - yet another bug is there.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_4_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+No, this computation is in fact correct - numerically.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_4_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+The numerical solution method is more general than the analytical one,
+and this is an example where the solution can increase, but the analytical
+solution technique is not capable of dealing with this situation.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_4_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+The analytical solution \( u(t)=Ie^{-at} \) covers all possible cases.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_4_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+The time step is too large and cause an instability in the form of non-physical oscillations.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_4_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+True. One needs \( \Delta t \leq 2/a = 0.2 \) in this case to avoid oscillations.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_4_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+The Crank-Nicolson scheme is unconditionally stable and can be used with all time-step sizes, but the problem here is that round-off errors due to a &quot;too large&quot; \( a \) (10, not around 1) accumulate to the effect seen in the plot.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_4_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+1: The first part is true if unconditionally stable means that the solution is bounded and decays with time, but one may also argue that oscillations, which are non-physical, are a kind of instability, and these occur if \( \Delta t >2/a \).
+2: Round-off errors are <em>very</em> small in this problem, compared to the discretization errors, and cannot cause an oscillating solution.
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:testfunc">Exercise 50: Is this a proper test function?</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> Suppose we have some function <code>compute</code> that we want to test. We construct
+a unit test and implement an associated test function (according to the
+rules for test functions in the nose or pytest test frameworks):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_compute</span>(n):
+    expected <span style="color: #666666">=</span> (n<span style="color: #666666">**2</span>)<span style="color: #666666">/4.5</span> <span style="color: #666666">-</span> <span style="color: #666666">1</span>
+    computed <span style="color: #666666">=</span> compute(n)
+    <span style="color: #008000; font-weight: bold">assert</span> expected <span style="color: #666666">!=</span> computed
+</pre></div>
+<p>
+The question is if this test function can be used as is or if improvements
+must be implemented.</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_5_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+One should use special assert functions from <code>nose.tools</code>, here the choice is <code>nose.tools.assert_almost_equal</code>.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_5_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+It is true that an &quot;almost equal&quot; type of assert function is appropriate, but there is nothing in the rules that requires use of special assert functions. The requirement is that an <code>AssertionError</code> is raised if the test fails. That is done by a plain <code>assert</code> as used here.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_5_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+One cannot test <code>compute(n)</code> for only one <code>n</code> value. Many are required for good evidence that the function works.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_5_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+This depends on what is inside <code>compute</code>. If it has several branches depending on the value of <code>n</code>, one must test for a visit to each branch, which requires multiple <code>n</code> values, but if it is a formula (the test might indicate so), one value can be sufficient.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_5_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+The test function does not test <code>expected != computed</code> with a tolerance
+and the <code>n</code> parameter cannot be an argument.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_5_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+The formula for <code>expected</code> indicates that this is a real number that is subject to potential round-off errors, so one should use a tolerance: <code>abs(expected - computed) &lt; 1E-14</code>. Also, test functions should never take arguments.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_5_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+The <code>assert</code> statement also needs a message explaining what is wrong when the test fails.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_5_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+This is always a good idea, but not a requirement.
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:arrayarithm">Exercise 51: Rewrite an expression with array arithmetics</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> A mesh function is initialized with the code segment
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> exp
+N_t <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+T <span style="color: #666666">=</span> <span style="color: #666666">3.0</span>
+dt <span style="color: #666666">=</span> T<span style="color: #666666">/</span>N_t
+t <span style="color: #666666">=</span> []
+u <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(t)):
+    t<span style="color: #666666">.</span>append(i<span style="color: #666666">*</span>dt)
+    u<span style="color: #666666">.</span>append(<span style="color: #666666">1</span> <span style="color: #666666">-</span> exp(<span style="color: #666666">-</span>t[<span style="color: #666666">-1</span>]))
+</pre></div>
+<p>
+Rewrite this code such that there is no loop and <code>u</code> is computed by
+array arithmetics.</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_6_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> exp
+N_t <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, N_t<span style="color: #666666">+1</span>)
+u <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">-</span> exp(<span style="color: #666666">-</span>t)
+</pre></div>
+<p>
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_6_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+The <code>exp</code> function is imported from <code>math</code> (since <code>from math import exp</code>
+reimports the <code>exp</code> name that was imported by <code>from numpy import *</code>)
+and cannot be used with array argument <code>t</code>.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_6_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+N_t <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, N_t<span style="color: #666666">+1</span>)
+u <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">-</span> np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>t)
+</pre></div>
+<p>
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_6_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+Correct!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_6_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">N_t <span style="color: #666666">=</span> <span style="color: #666666">100</span>
+dt <span style="color: #666666">=</span> <span style="color: #666666">3.0/</span>N_t
+t <span style="color: #666666">=</span> [i<span style="color: #666666">*</span>dt <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N_t<span style="color: #666666">+1</span>)]
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> exp
+u <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">-</span> exp(<span style="color: #666666">-</span>t)
+</pre></div>
+<p>
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_6_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+The computation of <code>u</code> applies array arithmetics, but the list
+comprehension for <code>t</code> involves a standard (slow) Python loop.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_6_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span>
+t <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>mesh([<span style="color: #666666">0</span>, <span style="color: #666666">3</span>], <span style="color: #666666">100</span>)
+u <span style="color: #666666">=</span> numpy<span style="color: #666666">.</span>func(numpy<span style="color: #666666">.</span>exp, t)
+</pre></div>
+<p>
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_6_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+There are no functions <code>numpy.mesh</code> and <code>numpy.func</code>.
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:trunc">Exercise 52: What is the truncation error?</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> What is the truncation error?</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_7_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+The difference between the exact solution and the numerical solution
+at a mesh point.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_7_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+This is the global error.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_7_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+The error in the factor that takes <code>u[i]</code> to <code>u[i+1]</code>.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_7_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+This is the amplification factor error or the local error.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_7_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+The difference between the exact solution and the numerical
+solution truncated to one decimal.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_7_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Nobody applies this error measure.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_7_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+The error in the scheme when the exact solution is inserted in the
+scheme's difference equation.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_7_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+Correct!
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:prog:m">Exercise 53: Recognize a programming language</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> What kind of programming language is this?
+
+<p>
+
+<!-- code=matlab (!bc mcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">function</span><span style="color: #bbbbbb"> </span>integral =<span style="color: #bbbbbb"> </span><span style="color: #0000FF">trapezoidal</span>(f, a, b, n)<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #408080; font-style: italic">%% Integrate f from a to b with n intervals</span>
+    h = (b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span>n;
+    result = <span style="color: #666666">0.5*</span>f(a) <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>f(b);
+    <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">i</span> = <span style="color: #666666">1</span>:(n<span style="color: #666666">-1</span>)
+        result = result <span style="color: #666666">+</span> f(a <span style="color: #666666">+</span> <span style="color: #008000">i</span><span style="color: #666666">*</span>h);
+    <span style="color: #008000; font-weight: bold">end</span>
+    integral = h<span style="color: #666666">*</span>result;
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p></p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_8_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+Python
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_8_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_8_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+MATLAB or Octave
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_8_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+Correct!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_8_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+Cython
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_8_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_8_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+FORTRAN 77
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_8_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:prog:py">Exercise 54: Recognize a programming language</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> What kind of programming language is this?
+
+<p>
+
+<!-- code=matlab (!bc mcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">def trapezoidal(f, a, b, n):
+    # Integrate f from a to b with n intervals
+    h = (b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span>float(n)
+    result = <span style="color: #666666">0.5*</span>f(a) <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>f(b)
+    <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">i</span> in range(<span style="color: #666666">1</span>, n):
+        result <span style="color: #666666">+</span>= f(a <span style="color: #666666">+</span> <span style="color: #008000">i</span><span style="color: #666666">*</span>h)
+    <span style="color: #008000; font-weight: bold">return</span> h<span style="color: #666666">*</span>result
+</pre></div>
+<p></p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_9_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+Python
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_9_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+Correct!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_9_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+MATLAB or Octave
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_9_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_9_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+Cython
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_9_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_9_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+FORTRAN 77
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_9_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:prog:f77">Exercise 55: Recognize a programming language</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> What kind of programming language is this?
+
+<p>
+
+<!-- code=fortran (!bc fcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">      <span style="color: #B00040">real</span><span style="color: #666666">*8</span> <span style="color: #008000; font-weight: bold">function </span>trapezoidal(f, a, b, n)
+C     Integrate f from a to b with n intervals
+      <span style="color: #B00040">real</span><span style="color: #666666">*8</span> h, <span style="color: #008000; font-weight: bold">result</span>, f
+      <span style="color: #008000; font-weight: bold">external </span>f
+      h <span style="color: #666666">=</span> (b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span>n
+      <span style="color: #008000; font-weight: bold">result</span> <span style="color: #666666">=</span> <span style="color: #666666">0.5*</span>f(a) <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>f(b)
+      <span style="color: #008000; font-weight: bold">do </span>i <span style="color: #666666">=</span> <span style="color: #666666">1</span>, n<span style="color: #666666">-1</span>
+        <span style="color: #008000; font-weight: bold">result</span> <span style="color: #666666">=</span> <span style="color: #008000; font-weight: bold">result</span> <span style="color: #666666">+</span> f(a <span style="color: #666666">+</span> i<span style="color: #666666">*</span>h)
+      <span style="color: #008000; font-weight: bold">end do</span>
+<span style="color: #008000; font-weight: bold">      </span>trapezoidal <span style="color: #666666">=</span> h<span style="color: #666666">*</span><span style="color: #008000; font-weight: bold">result</span>
+<span style="color: #008000; font-weight: bold">      return</span>
+<span style="color: #008000; font-weight: bold">      end</span>
+</pre></div>
+<p></p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_10_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+Python
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_10_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_10_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+MATLAB or Octave
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_10_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_10_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+Cython
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_10_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_10_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+FORTRAN 77
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_10_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+Correct!
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:prog:c">Exercise 56: Recognize a programming language</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> What kind of programming language is this?
+
+<p>
+
+<!-- code=matlab (!bc mcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">double trapezoidal(
+    double (<span style="color: #666666">*</span>f)(double), double a, double b, int n)
+{
+    double h, result;
+    h = (b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span>n;
+    result = <span style="color: #666666">0.5*</span>f(a) <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>f(b);
+    <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #008000">i</span>=<span style="color: #666666">1</span>; <span style="color: #008000">i</span><span style="color: #666666">++</span>; <span style="color: #008000">i</span> <span style="color: #666666">&lt;</span>= n<span style="color: #666666">-1</span>) {
+        result <span style="color: #666666">+</span>= f(a <span style="color: #666666">+</span> <span style="color: #008000">i</span><span style="color: #666666">*</span>h);
+    }
+    <span style="color: #008000; font-weight: bold">return</span> h<span style="color: #666666">*</span>result;
+}
+</pre></div>
+<p></p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_11_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+C
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_11_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+Correct!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_11_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+C++
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_11_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_11_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+Cython
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_11_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_11_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+Octave dialect
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_11_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:sympy1">Exercise 57: What is SymPy?</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> What is SymPy?</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_12_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+A Python module for computing with symmetric matrices.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_12_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+SymPy can compute with symmetric matrices, so that is true, but it can do very much more.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_12_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+A Python package for doing symbolic computations (exact/analytical differentiation, integration, equation solves, etc.).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_12_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+Correct!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_12_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+A Python package for numerical approximations to differentiation, integration, equation solving, etc.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_12_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+It's the opposite: analytical, not numerical.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_12_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+A free, open source version of Mathematica.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_12_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Could be viewed as such, but Mathematica is a much more advanced tool for symbolic computing.
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:testing1">Exercise 58: Testing of code</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> What is an appropriate test for computing the solution of some ODE?</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_13_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+We compare the numerical solution with the analytical solution
+in a plot. The curves are quite close, showing that the computations
+are correct (here using 31 mesh points).
+
+<p>
+<center><p><img src="fig-quiz/comparison_num_vs_exact_quiz.png" align="bottom" width=500></p></center>
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_13_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+This comparison says nothing if the discrepancy is the unavoidable
+numerical error or if it also contains the effect of bugs in the program.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_13_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+The maximum error between the numerical and exact solution at
+the mesh points is \( 1.886\cdot 10^{-5} \), which is small. Therefore, the
+program works.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_13_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Nobody knows if this is the numerical approximation error or if it
+also contains programming errors.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_13_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+The scheme is \( \Oof{\Delta t^2} \). With 31 points we get a maximum
+point-wise error of \( 1.243\cdot 10^{-4} \). With 61 points (halving \( \Delta t \))
+the corresponding error is \( 3.108\cdot 10^{-5} \). This is a reduction of
+approximately a factor 4, which is what we expect for such a scheme when
+halving \( \Delta t \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_13_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+This test involves checking of the convergence rate, which is a good
+test. The only knowledge we have of the numerical error is its rate!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_13_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+The numerical solution and the exact solutions get closer and closer
+in a plot as we reduce \( \Delta t \). Therefore, the program works.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_13_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+This test points to convergence of the method, but the error can
+still contain the effect of bugs. One needs to measure <em>how fast</em>
+the curves get closer and closer.
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:scheme:CN_error">Exercise 59: What kind of scheme is this?</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> Given \( u^{\prime}=-au + b \), where \( a \) and \( b \) are functions of time.
+Is the following scheme correct?
+
+$$ \frac{u^{n}-u^{n-1}}{\Delta t} = -a(t_n)\frac{1}{2}(u^n + u^{n-1})
++ b(t_n)\tp$$</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_14_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+Yes, it is a Crank-Nicolson type of scheme.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_14_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+No, then \( a \) and \( b \) should have been evaluated at \( t_{n-1/2} \).
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_14_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+Yes, if \( a(t_n) \) and \( b(t_n) \) are evaluated at the previous time
+step, \( a(t_{n-1}) \) and \( a(t_{n-1}) \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_14_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+No, this will be wrong since the arithmetic mean on the right-hand
+side points sampling the ODE at \( t_{n-1/2} \). Then \( a \) and \( b \) must
+be evaluated at this point.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_14_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+No, the coefficients \( a \) and \( b \) are not evaluated correctly.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_14_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+That is right: they should be evaluated at \( t_{n-1/2} \).
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_14_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+No, the right-hand side should be \( a(t_n)u^n + b(t_n) \).
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_14_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+That is right if the scheme should be a Backward Euler scheme, but
+the arithmetic mean on the right-hand side points to a Crank-Nicolson
+scheme, though with wrong sampling of \( a \) and \( b \).
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:scheme:BE">Exercise 60: What kind of scheme is this?</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> We want to solve \( y'=g(x, y) \) for \( y(x) \) and have the scheme
+
+$$ y^{i+1} = y^i + \Delta t\, g(x_{i+1}, y^{i+1})\tp$$
+
+<p>
+What is this scheme called?</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_15_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+The implicit midpoint scheme.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_15_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+There is no midpoint \( i+1/2 \) involved here.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_15_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+The Backward Euler scheme or just the backward scheme.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_15_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+Correct!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_15_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+The Forward Euler scheme, Euler's method, or just the forward scheme.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_15_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+This is true if we had \( g(x_i, y^{i}) \).
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_15_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+The implicit Adams scheme of order one.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_15_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:quiz:scheme:leapfrog">Exercise 61: What kind of scheme is this?</h2>
+
+<p>
+<!-- --- previous heading type: exercise -->
+<!-- begin quiz -->
+<hr>
+<p>
+<b>Question:</b> We want to solve \( y'=g(x, y) \) for \( y(x) \) and have the scheme
+
+$$ y^{i+1} = y^{i-1} + 2\Delta t\, g(x_{i}, y^{i})\tp$$
+
+<p>
+What is this scheme called?</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_16_A" style="font-size: 80%;"></a>
+&nbsp;<b>Choice A:</b>
+The implicit midpoint scheme.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_16_A">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+It is a midpoint scheme, but it is explicit rather than implicit.
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_16_B" style="font-size: 80%;"></a>
+&nbsp;<b>Choice B:</b>
+The two-step backward scheme.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_16_B">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+Wrong!
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_16_C" style="font-size: 80%;"></a>
+&nbsp;<b>Choice C:</b>
+The Crank-Nicolson scheme.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_16_C">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/incorrect.gif">
+No, that looks quite different and is based on a centered difference
+over \( [x_i,x_{i+1}] \), not \( [x_{i-1},x_{i+1}] \).
+</div></p>
+</div>
+</p>
+
+<p>
+<a class="glyphicon glyphicon-pencil showdetails" data-toggle="collapse"
+ data-target="#quiz_id_16_D" style="font-size: 80%;"></a>
+&nbsp;<b>Choice D:</b>
+The leapfrog scheme.
+<div class="collapse-group">
+<p><div class="collapse" id="quiz_id_16_D">
+<img src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/correct.gif">
+Correct!
+</div></p>
+</div>
+</p>
+<!-- end quiz -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
   <li class="previous">
     <a href="._decay-book009.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._decay-book011.html">Next &rarr;</a>
   </li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
@@ -803,4 +2148,3 @@ $$
 </body>
 </html>
     
-
