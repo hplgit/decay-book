@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -286,8 +286,14 @@ code { color: inherit; background-color: transparent; }
                1,
                'decay:app:pop',
                'decay:app:pop'),
-              ('Exponential growth', 2, None, '___sec109'),
-              ('Logistic growth', 2, None, '___sec110'),
+              ('Exponential growth',
+               2,
+               'decay:app:pop:exp',
+               'decay:app:pop:exp'),
+              ('Logistic growth',
+               2,
+               'decay:app:pop:log',
+               'decay:app:pop:log'),
               ('Compound interest and inflation',
                1,
                'decay:app:interest',
@@ -325,15 +331,19 @@ code { color: inherit; background-color: transparent; }
                '___sec121'),
               ('A biochemical reaction', 2, None, '___sec122'),
               ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
+              ('Predator-pray models in ecology',
+               1,
+               'decay:app:predpray',
+               'decay:app:predpray'),
               ('Decay of atmospheric pressure with altitude',
                1,
                'decay:app:atm',
                'decay:app:atm'),
-              ('The general model', 2, None, '___sec125'),
-              ('Multiple atmospheric layers', 2, None, '___sec126'),
-              ('Simplifications', 2, None, '___sec127'),
-              ('Constant layer temperature', 3, None, '___sec128'),
-              ('One-layer model', 3, None, '___sec129'),
+              ('The general model', 2, None, '___sec126'),
+              ('Multiple atmospheric layers', 2, None, '___sec127'),
+              ('Simplifications', 2, None, '___sec128'),
+              ('Constant layer temperature', 3, None, '___sec129'),
+              ('One-layer model', 3, None, '___sec130'),
               ('Compaction of sediments',
                1,
                'decay:app:sediment',
@@ -342,12 +352,12 @@ code { color: inherit; background-color: transparent; }
                1,
                'decay:app:drag',
                'decay:app:drag'),
-              ('Overview of forces', 2, None, '___sec132'),
-              ('Equation of motion', 2, None, '___sec133'),
-              ('Terminal velocity', 2, None, '___sec134'),
-              ('A Crank-Nicolson scheme', 2, None, '___sec135'),
-              ('Physical data', 2, None, '___sec136'),
-              ('Verification', 2, None, '___sec137'),
+              ('Overview of forces', 2, None, '___sec133'),
+              ('Equation of motion', 2, None, '___sec134'),
+              ('Terminal velocity', 2, None, '___sec135'),
+              ('A Crank-Nicolson scheme', 2, None, '___sec136'),
+              ('Physical data', 2, None, '___sec137'),
+              ('Verification', 2, None, '___sec138'),
               ('Scaling',
                2,
                'decay:app:drag:scaling',
@@ -360,7 +370,7 @@ code { color: inherit; background-color: transparent; }
                1,
                'decay:app:diffusion:Fourier',
                'decay:app:diffusion:Fourier'),
-              ('Exercises', 1, None, '___sec141'),
+              ('Exercises', 1, None, '___sec142'),
               ('Exercise 16: Radioactive decay of Carbon-14',
                2,
                'decay:app:exer:radio:C14',
@@ -376,20 +386,20 @@ code { color: inherit; background-color: transparent; }
               ('Bug 1: Wrong time level in the $T_s$ function',
                3,
                None,
-               '___sec145'),
+               '___sec146'),
               ('Bug 2: Wrong time level in the $T$ function',
                3,
                None,
-               '___sec146'),
-              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec147'),
+               '___sec147'),
+              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec148'),
               ('Bug 4: Missing `k` in the updating formula',
                3,
                None,
-               '___sec148'),
+               '___sec149'),
               ('Bug 5: Using `1-theta` instead of `theta`',
                3,
                None,
-               '___sec149'),
+               '___sec150'),
               ('Exercise 19: Find time of murder from body temperature',
                2,
                'decay:app:exer:cooling:murder',
@@ -422,47 +432,51 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:exer:MMK',
                'decay:app:exer:MMK'),
-              ('Exercise 27: Simulate the pressure drop in the atmosphere',
+              ('Exercise 27: Simulate predator-pray interaction',
+               2,
+               'decay:app:exer:predpray',
+               'decay:app:exer:predpray'),
+              ('Exercise 28: Simulate the pressure drop in the atmosphere',
                2,
                'decay:app:exer:atm1',
                'decay:app:exer:atm1'),
-              ('Exercise 28: Make a program for vertical motion in a fluid',
+              ('Exercise 29: Make a program for vertical motion in a fluid',
                2,
                'decay:app:exer:drag:prog',
                'decay:app:exer:drag:prog'),
-              ('Project 29: Simulate parachuting',
+              ('Project 30: Simulate parachuting',
                2,
                'decay:app:exer:parachute',
                'decay:app:exer:parachute'),
-              ('Exercise 30: Formulate vertical motion in the atmosphere',
+              ('Exercise 31: Formulate vertical motion in the atmosphere',
                2,
                'decay:app:exer:drag:atm1',
                'decay:app:exer:drag:atm1'),
-              ('Exercise 31: Simulate vertical motion in the atmosphere',
+              ('Exercise 32: Simulate vertical motion in the atmosphere',
                2,
                'decay:app:exer:drag:atm2',
                'decay:app:exer:drag:atm2'),
-              ('Exercise 32: Compute $y=|x|$ by solving an ODE',
+              ('Exercise 33: Compute $y=|x|$ by solving an ODE',
                2,
                'decay:app:exer:signum',
                'decay:app:exer:signum'),
-              ('Exercise 33: Simulate fortune growth with random interest rate',
+              ('Exercise 34: Simulate fortune growth with random interest rate',
                2,
                'decay:app:exer:interest',
                'decay:app:exer:interest'),
-              ('Exercise 34: Simulate a population in a changing environment',
+              ('Exercise 35: Simulate a population in a changing environment',
                2,
                'decay:app:exer:pop:at',
                'decay:app:exer:pop:at'),
-              ('Exercise 35: Simulate logistic growth',
+              ('Exercise 36: Simulate logistic growth',
                2,
                'decay:app:exer:pop:logistic1',
                'decay:app:exer:pop:logistic1'),
-              ('Exercise 36: Rederive the equation for continuous compound interest',
+              ('Exercise 37: Rederive the equation for continuous compound interest',
                2,
                'decay:app:exer:interest:derive',
                'decay:app:exer:interest:derive'),
-              ('Exercise 37: Simulate the deformation of a viscoelastic material',
+              ('Exercise 38: Simulate the deformation of a viscoelastic material',
                2,
                'decay:app:exer:viscoelasticity1',
                'decay:app:exer:viscoelasticity1'),
@@ -483,9 +497,9 @@ code { color: inherit; background-color: transparent; }
                2,
                'softeng1:basic:impl2',
                'softeng1:basic:impl2'),
-              ('Comments in a program', 3, None, '___sec174'),
-              ('Refactoring into functions', 3, None, '___sec175'),
-              ('Program file vs IDE vs notebook', 3, None, '___sec176'),
+              ('Comments in a program', 3, None, '___sec176'),
+              ('Refactoring into functions', 3, None, '___sec177'),
+              ('Program file vs IDE vs notebook', 3, None, '___sec178'),
               ('Prefixing imported functions by the module name',
                2,
                'softeng1:basic:modprefix',
@@ -497,7 +511,7 @@ code { color: inherit; background-color: transparent; }
               ('Do not have several versions of a code',
                2,
                None,
-               '___sec179'),
+               '___sec181'),
               ('Making a module',
                2,
                'softeng1:basic:module',
@@ -514,42 +528,42 @@ code { color: inherit; background-color: transparent; }
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec184'),
-              ('Positional command-line arguments', 2, None, '___sec185'),
+              ('Command-line arguments', 2, None, '___sec186'),
+              ('Positional command-line arguments', 2, None, '___sec187'),
               ('Option-value pairs on the command line',
                2,
                None,
-               '___sec186'),
+               '___sec188'),
               ('Creating a graphical web user interface',
                2,
                None,
-               '___sec187'),
-              ('Making a compute function', 3, None, '___sec188'),
-              ('Generating the user interface', 3, None, '___sec189'),
-              ('Running the web application', 3, None, '___sec190'),
-              ('Tests for verifying implementations', 1, None, '___sec191'),
-              ('Doctests', 2, None, '___sec192'),
-              ('Unit tests and test functions', 2, None, '___sec193'),
+               '___sec189'),
+              ('Making a compute function', 3, None, '___sec190'),
+              ('Generating the user interface', 3, None, '___sec191'),
+              ('Running the web application', 3, None, '___sec192'),
+              ('Tests for verifying implementations', 1, None, '___sec193'),
+              ('Doctests', 2, None, '___sec194'),
+              ('Unit tests and test functions', 2, None, '___sec195'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
-               '___sec194'),
-              ('Test function requirements', 3, None, '___sec195'),
-              ('Comparison of real numbers', 3, None, '___sec196'),
-              ('Special assert functions from nose', 3, None, '___sec197'),
-              ('Locating test functions', 3, None, '___sec198'),
-              ('Running tests', 3, None, '___sec199'),
-              ('Embedding doctests in a test function', 3, None, '___sec200'),
-              ('Installing nose and pytest', 3, None, '___sec201'),
-              ('Test function for the solver', 2, None, '___sec202'),
+               '___sec196'),
+              ('Test function requirements', 3, None, '___sec197'),
+              ('Comparison of real numbers', 3, None, '___sec198'),
+              ('Special assert functions from nose', 3, None, '___sec199'),
+              ('Locating test functions', 3, None, '___sec200'),
+              ('Running tests', 3, None, '___sec201'),
+              ('Embedding doctests in a test function', 3, None, '___sec202'),
+              ('Installing nose and pytest', 3, None, '___sec203'),
+              ('Test function for the solver', 2, None, '___sec204'),
               ('Test function for reading positional command-line arguments',
                2,
                None,
-               '___sec203'),
+               '___sec205'),
               ('Test function for reading option-value pairs',
                2,
                None,
-               '___sec204'),
+               '___sec206'),
               ('Classical class-based unit testing',
                2,
                'softeng1:basic:unittest',
@@ -561,84 +575,84 @@ code { color: inherit; background-color: transparent; }
               ('Organizing the software directory tree',
                2,
                None,
-               '___sec207'),
-              ('Distributing just a module file', 3, None, '___sec208'),
-              ('Distributing a package', 3, None, '___sec209'),
-              ('Publishing the software at GitHub', 2, None, '___sec210'),
+               '___sec209'),
+              ('Distributing just a module file', 3, None, '___sec210'),
+              ('Distributing a package', 3, None, '___sec211'),
+              ('Publishing the software at GitHub', 2, None, '___sec212'),
               ('Downloading and installing the software',
                2,
                None,
-               '___sec211'),
-              ('Installing just a module file', 3, None, '___sec212'),
-              ('Installing a package', 3, None, '___sec213'),
+               '___sec213'),
+              ('Installing just a module file', 3, None, '___sec214'),
+              ('Installing a package', 3, None, '___sec215'),
               ('Classes for problem and solution method',
                1,
                'softeng1:prog:se:class',
                'softeng1:prog:se:class'),
-              ('The problem class', 2, None, '___sec215'),
-              ('The solver class', 2, None, '___sec216'),
-              ('Combining the objects', 3, None, '___sec217'),
+              ('The problem class', 2, None, '___sec217'),
+              ('The solver class', 2, None, '___sec218'),
+              ('Combining the objects', 3, None, '___sec219'),
               ('Improving the problem and solver classes',
                2,
                'softeng1:prog:se:class2',
                'softeng1:prog:se:class2'),
-              ('A generic class for parameters', 3, None, '___sec219'),
+              ('A generic class for parameters', 3, None, '___sec221'),
               ('Automating scientific experiments',
                1,
                'softeng1:experiments',
                'softeng1:experiments'),
-              ('Available software', 2, None, '___sec221'),
-              ('The results we want to produce', 2, None, '___sec222'),
-              ('Combining plot files', 2, None, '___sec223'),
-              ('Running a program from Python', 2, None, '___sec224'),
-              ('The automating script', 2, None, '___sec225'),
+              ('Available software', 2, None, '___sec223'),
+              ('The results we want to produce', 2, None, '___sec224'),
+              ('Combining plot files', 2, None, '___sec225'),
+              ('Running a program from Python', 2, None, '___sec226'),
+              ('The automating script', 2, None, '___sec227'),
               ('Making a report',
                2,
                'softeng1:exper:report',
                'softeng1:exper:report'),
-              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec227'),
-              ('HTML with MathJax', 3, None, '___sec228'),
-              ('LaTeX', 3, None, '___sec229'),
-              ('Sphinx', 3, None, '___sec230'),
-              ('Markdown', 3, None, '___sec231'),
-              ('IPython/Jupyter notebooks', 3, None, '___sec232'),
-              ('Wiki formats', 3, None, '___sec233'),
-              ('DocOnce', 3, None, '___sec234'),
+              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec229'),
+              ('HTML with MathJax', 3, None, '___sec230'),
+              ('LaTeX', 3, None, '___sec231'),
+              ('Sphinx', 3, None, '___sec232'),
+              ('Markdown', 3, None, '___sec233'),
+              ('IPython/Jupyter notebooks', 3, None, '___sec234'),
+              ('Wiki formats', 3, None, '___sec235'),
+              ('DocOnce', 3, None, '___sec236'),
               ('Publishing a complete project',
                2,
                'softeng1:exper:github',
                'softeng1:exper:github'),
-              ('Exercises', 1, None, '___sec236'),
-              ('Problem 38: Make a tool for differentiating curves',
+              ('Exercises', 1, None, '___sec238'),
+              ('Problem 39: Make a tool for differentiating curves',
                2,
                'softeng1:exer:derivative',
                'softeng1:exer:derivative'),
-              ('Problem 39: Make solid software for the Trapezoidal rule',
+              ('Problem 40: Make solid software for the Trapezoidal rule',
                2,
                'softeng1:exer:integral:flat',
                'softeng1:exer:integral:flat'),
-              ('Problem 40: Implement classes for the Trapezoidal rule',
+              ('Problem 41: Implement classes for the Trapezoidal rule',
                2,
                'softeng1:exer:integral:flat2',
                'softeng1:exer:integral:flat2'),
-              ('Problem 41: Write a doctest and a test function',
+              ('Problem 42: Write a doctest and a test function',
                2,
                'softeng1:exer:doctest1',
                'softeng1:exer:doctest1'),
-              ('Problem 42: Experiment with tolerances in comparisons',
+              ('Problem 43: Experiment with tolerances in comparisons',
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
-              ('Remarks', 3, None, '___sec242'),
-              ('Exercise 43: Make use of a class implementation',
+              ('Remarks', 3, None, '___sec244'),
+              ('Exercise 44: Make use of a class implementation',
                2,
                'softeng1:exer:class:dts',
                'softeng1:exer:class:dts'),
-              ('Exercise 44: Make solid software for a difference equation',
+              ('Exercise 45: Make solid software for a difference equation',
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('References', 1, None, '___sec245')]}
+              ('References', 1, None, '___sec247')]}
 end of tocinfo -->
 
 <body>
@@ -656,6 +670,20 @@ MathJax.Hub.Config({
 <script type="text/javascript"
  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\tp}{\thinspace .}
+\newcommand{\uex}{{u_{\small\mbox{e}}}}
+\newcommand{\Aex}{{A_{\small\mbox{e}}}}
+\newcommand{\E}[1]{\hbox{E}\lbrack #1 \rbrack}
+\newcommand{\Var}[1]{\hbox{Var}\lbrack #1 \rbrack}
+\newcommand{\Std}[1]{\hbox{Std}\lbrack #1 \rbrack}
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\stress}{\boldsymbol{\sigma}}
+$$
+
 
 
 
@@ -783,8 +811,8 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec106"> Dimensionless numbers </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec107"> A scaling for vanishing initial condition </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:pop"> Evolution of a population </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec109"> Exponential growth </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec110"> Logistic growth </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:pop:exp"> Exponential growth </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:pop:log"> Logistic growth </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:interest"> Compound interest and inflation </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:Newton:cooling"> Newton's law of cooling </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:nuclear"> Radioactive decay </a><br>
@@ -798,22 +826,23 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec121"> Irreversible reaction of two substances into a third </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec122"> A biochemical reaction </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:SIR"> Spreading of diseases </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:predpray"> Predator-pray models in ecology </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:atm"> Decay of atmospheric pressure with altitude </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec125"> The general model </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec126"> Multiple atmospheric layers </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec127"> Simplifications </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec126"> The general model </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec127"> Multiple atmospheric layers </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec128"> Simplifications </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:sediment"> Compaction of sediments </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:drag"> Vertical motion of a body in a viscous fluid </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec132"> Overview of forces </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec133"> Equation of motion </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec134"> Terminal velocity </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec135"> A Crank-Nicolson scheme </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec136"> Physical data </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec137"> Verification </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec133"> Overview of forces </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec134"> Equation of motion </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec135"> Terminal velocity </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec136"> A Crank-Nicolson scheme </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec137"> Physical data </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec138"> Verification </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:drag:scaling"> Scaling </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:viscoelasticity"> Viscoelastic materials </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:diffusion:Fourier"> Decay ODEs from solving a PDE by Fourier expansions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec141"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec142"> Exercises </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:radio:C14"> Exercise 16: Radioactive decay of Carbon-14 </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:cooling:schemes"> Exercise 17: Derive schemes for Newton's law of cooling </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:cooling:py"> Exercise 18: Implement schemes for Newton's law of cooling </a><br>
@@ -825,17 +854,18 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:kinetics:ABn"> Exercise 24: Simulate an \( n \)-th order chemical reaction </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:SIR"> Exercise 25: Simulate spreading of a disease </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:MMK"> Exercise 26: Simulate a biochemical process </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:atm1"> Exercise 27: Simulate the pressure drop in the atmosphere </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:prog"> Exercise 28: Make a program for vertical motion in a fluid </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:parachute"> Project 29: Simulate parachuting </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:atm1"> Exercise 30: Formulate vertical motion in the atmosphere </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:atm2"> Exercise 31: Simulate vertical motion in the atmosphere </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:signum"> Exercise 32: Compute \( y=|x| \) by solving an ODE </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:interest"> Exercise 33: Simulate fortune growth with random interest rate </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:pop:at"> Exercise 34: Simulate a population in a changing environment </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:pop:logistic1"> Exercise 35: Simulate logistic growth </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:interest:derive"> Exercise 36: Rederive the equation for continuous compound interest </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:viscoelasticity1"> Exercise 37: Simulate the deformation of a viscoelastic material </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:predpray"> Exercise 27: Simulate predator-pray interaction </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:atm1"> Exercise 28: Simulate the pressure drop in the atmosphere </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:prog"> Exercise 29: Make a program for vertical motion in a fluid </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:parachute"> Project 30: Simulate parachuting </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:atm1"> Exercise 31: Formulate vertical motion in the atmosphere </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:atm2"> Exercise 32: Simulate vertical motion in the atmosphere </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:signum"> Exercise 33: Compute \( y=|x| \) by solving an ODE </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:interest"> Exercise 34: Simulate fortune growth with random interest rate </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:pop:at"> Exercise 35: Simulate a population in a changing environment </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:pop:logistic1"> Exercise 36: Simulate logistic growth </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:interest:derive"> Exercise 37: Rederive the equation for continuous compound interest </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:viscoelasticity1"> Exercise 38: Simulate the deformation of a viscoelastic material </a><br>
 <a href="._decay-book009.html#decay:se"> Scientific software engineering </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic"> Basic implementations </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic:math"> Mathematical problem and solution technique </a><br>
@@ -843,47 +873,47 @@ MathJax.Hub.Config({
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic:impl2"> A more decent program </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic:modprefix"> Prefixing imported functions by the module name </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic:func"> Implementing the numerical algorithm in a function </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec179"> Do not have several versions of a code </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec181"> Do not have several versions of a code </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic:module"> Making a module </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic:experiment2"> Example on extending the module code </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic:docstring"> Documenting functions and modules </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic:UI"> User interfaces </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec184"> Command-line arguments </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec185"> Positional command-line arguments </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec186"> Option-value pairs on the command line </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec187"> Creating a graphical web user interface </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec191"> Tests for verifying implementations </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec192"> Doctests </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec193"> Unit tests and test functions </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec202"> Test function for the solver </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec203"> Test function for reading positional command-line arguments </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec204"> Test function for reading option-value pairs </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec186"> Command-line arguments </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec187"> Positional command-line arguments </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec188"> Option-value pairs on the command line </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec189"> Creating a graphical web user interface </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec193"> Tests for verifying implementations </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec194"> Doctests </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec195"> Unit tests and test functions </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec204"> Test function for the solver </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec205"> Test function for reading positional command-line arguments </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec206"> Test function for reading option-value pairs </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic:unittest"> Classical class-based unit testing </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:prog:se:git"> Sharing the software with other users </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec207"> Organizing the software directory tree </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec210"> Publishing the software at GitHub </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec211"> Downloading and installing the software </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec209"> Organizing the software directory tree </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec212"> Publishing the software at GitHub </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec213"> Downloading and installing the software </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:prog:se:class"> Classes for problem and solution method </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec215"> The problem class </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec216"> The solver class </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec217"> The problem class </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec218"> The solver class </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:prog:se:class2"> Improving the problem and solver classes </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:experiments"> Automating scientific experiments </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec221"> Available software </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec222"> The results we want to produce </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec223"> Combining plot files </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec224"> Running a program from Python </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec225"> The automating script </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec223"> Available software </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec224"> The results we want to produce </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec225"> Combining plot files </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec226"> Running a program from Python </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec227"> The automating script </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exper:report"> Making a report </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exper:github"> Publishing a complete project </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec236"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:derivative"> Problem 38: Make a tool for differentiating curves </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:integral:flat"> Problem 39: Make solid software for the Trapezoidal rule </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:integral:flat2"> Problem 40: Implement classes for the Trapezoidal rule </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:doctest1"> Problem 41: Write a doctest and a test function </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:tol"> Problem 42: Experiment with tolerances in comparisons </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:class:dts"> Exercise 43: Make use of a class implementation </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:logistic"> Exercise 44: Make solid software for a difference equation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#___sec245"> References </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec238"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:derivative"> Problem 39: Make a tool for differentiating curves </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:integral:flat"> Problem 40: Make solid software for the Trapezoidal rule </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:integral:flat2"> Problem 41: Implement classes for the Trapezoidal rule </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:doctest1"> Problem 42: Write a doctest and a test function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:tol"> Problem 43: Experiment with tolerances in comparisons </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:class:dts"> Exercise 44: Make use of a class implementation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:logistic"> Exercise 45: Make solid software for a difference equation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#___sec247"> References </a><br>
 </p>
 <p>
 <p>

@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -286,8 +286,14 @@ code { color: inherit; background-color: transparent; }
                1,
                'decay:app:pop',
                'decay:app:pop'),
-              ('Exponential growth', 2, None, '___sec109'),
-              ('Logistic growth', 2, None, '___sec110'),
+              ('Exponential growth',
+               2,
+               'decay:app:pop:exp',
+               'decay:app:pop:exp'),
+              ('Logistic growth',
+               2,
+               'decay:app:pop:log',
+               'decay:app:pop:log'),
               ('Compound interest and inflation',
                1,
                'decay:app:interest',
@@ -325,15 +331,19 @@ code { color: inherit; background-color: transparent; }
                '___sec121'),
               ('A biochemical reaction', 2, None, '___sec122'),
               ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
+              ('Predator-pray models in ecology',
+               1,
+               'decay:app:predpray',
+               'decay:app:predpray'),
               ('Decay of atmospheric pressure with altitude',
                1,
                'decay:app:atm',
                'decay:app:atm'),
-              ('The general model', 2, None, '___sec125'),
-              ('Multiple atmospheric layers', 2, None, '___sec126'),
-              ('Simplifications', 2, None, '___sec127'),
-              ('Constant layer temperature', 3, None, '___sec128'),
-              ('One-layer model', 3, None, '___sec129'),
+              ('The general model', 2, None, '___sec126'),
+              ('Multiple atmospheric layers', 2, None, '___sec127'),
+              ('Simplifications', 2, None, '___sec128'),
+              ('Constant layer temperature', 3, None, '___sec129'),
+              ('One-layer model', 3, None, '___sec130'),
               ('Compaction of sediments',
                1,
                'decay:app:sediment',
@@ -342,12 +352,12 @@ code { color: inherit; background-color: transparent; }
                1,
                'decay:app:drag',
                'decay:app:drag'),
-              ('Overview of forces', 2, None, '___sec132'),
-              ('Equation of motion', 2, None, '___sec133'),
-              ('Terminal velocity', 2, None, '___sec134'),
-              ('A Crank-Nicolson scheme', 2, None, '___sec135'),
-              ('Physical data', 2, None, '___sec136'),
-              ('Verification', 2, None, '___sec137'),
+              ('Overview of forces', 2, None, '___sec133'),
+              ('Equation of motion', 2, None, '___sec134'),
+              ('Terminal velocity', 2, None, '___sec135'),
+              ('A Crank-Nicolson scheme', 2, None, '___sec136'),
+              ('Physical data', 2, None, '___sec137'),
+              ('Verification', 2, None, '___sec138'),
               ('Scaling',
                2,
                'decay:app:drag:scaling',
@@ -360,7 +370,7 @@ code { color: inherit; background-color: transparent; }
                1,
                'decay:app:diffusion:Fourier',
                'decay:app:diffusion:Fourier'),
-              ('Exercises', 1, None, '___sec141'),
+              ('Exercises', 1, None, '___sec142'),
               ('Exercise 16: Radioactive decay of Carbon-14',
                2,
                'decay:app:exer:radio:C14',
@@ -376,20 +386,20 @@ code { color: inherit; background-color: transparent; }
               ('Bug 1: Wrong time level in the $T_s$ function',
                3,
                None,
-               '___sec145'),
+               '___sec146'),
               ('Bug 2: Wrong time level in the $T$ function',
                3,
                None,
-               '___sec146'),
-              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec147'),
+               '___sec147'),
+              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec148'),
               ('Bug 4: Missing `k` in the updating formula',
                3,
                None,
-               '___sec148'),
+               '___sec149'),
               ('Bug 5: Using `1-theta` instead of `theta`',
                3,
                None,
-               '___sec149'),
+               '___sec150'),
               ('Exercise 19: Find time of murder from body temperature',
                2,
                'decay:app:exer:cooling:murder',
@@ -422,47 +432,51 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:exer:MMK',
                'decay:app:exer:MMK'),
-              ('Exercise 27: Simulate the pressure drop in the atmosphere',
+              ('Exercise 27: Simulate predator-pray interaction',
+               2,
+               'decay:app:exer:predpray',
+               'decay:app:exer:predpray'),
+              ('Exercise 28: Simulate the pressure drop in the atmosphere',
                2,
                'decay:app:exer:atm1',
                'decay:app:exer:atm1'),
-              ('Exercise 28: Make a program for vertical motion in a fluid',
+              ('Exercise 29: Make a program for vertical motion in a fluid',
                2,
                'decay:app:exer:drag:prog',
                'decay:app:exer:drag:prog'),
-              ('Project 29: Simulate parachuting',
+              ('Project 30: Simulate parachuting',
                2,
                'decay:app:exer:parachute',
                'decay:app:exer:parachute'),
-              ('Exercise 30: Formulate vertical motion in the atmosphere',
+              ('Exercise 31: Formulate vertical motion in the atmosphere',
                2,
                'decay:app:exer:drag:atm1',
                'decay:app:exer:drag:atm1'),
-              ('Exercise 31: Simulate vertical motion in the atmosphere',
+              ('Exercise 32: Simulate vertical motion in the atmosphere',
                2,
                'decay:app:exer:drag:atm2',
                'decay:app:exer:drag:atm2'),
-              ('Exercise 32: Compute $y=|x|$ by solving an ODE',
+              ('Exercise 33: Compute $y=|x|$ by solving an ODE',
                2,
                'decay:app:exer:signum',
                'decay:app:exer:signum'),
-              ('Exercise 33: Simulate fortune growth with random interest rate',
+              ('Exercise 34: Simulate fortune growth with random interest rate',
                2,
                'decay:app:exer:interest',
                'decay:app:exer:interest'),
-              ('Exercise 34: Simulate a population in a changing environment',
+              ('Exercise 35: Simulate a population in a changing environment',
                2,
                'decay:app:exer:pop:at',
                'decay:app:exer:pop:at'),
-              ('Exercise 35: Simulate logistic growth',
+              ('Exercise 36: Simulate logistic growth',
                2,
                'decay:app:exer:pop:logistic1',
                'decay:app:exer:pop:logistic1'),
-              ('Exercise 36: Rederive the equation for continuous compound interest',
+              ('Exercise 37: Rederive the equation for continuous compound interest',
                2,
                'decay:app:exer:interest:derive',
                'decay:app:exer:interest:derive'),
-              ('Exercise 37: Simulate the deformation of a viscoelastic material',
+              ('Exercise 38: Simulate the deformation of a viscoelastic material',
                2,
                'decay:app:exer:viscoelasticity1',
                'decay:app:exer:viscoelasticity1'),
@@ -483,9 +497,9 @@ code { color: inherit; background-color: transparent; }
                2,
                'softeng1:basic:impl2',
                'softeng1:basic:impl2'),
-              ('Comments in a program', 3, None, '___sec174'),
-              ('Refactoring into functions', 3, None, '___sec175'),
-              ('Program file vs IDE vs notebook', 3, None, '___sec176'),
+              ('Comments in a program', 3, None, '___sec176'),
+              ('Refactoring into functions', 3, None, '___sec177'),
+              ('Program file vs IDE vs notebook', 3, None, '___sec178'),
               ('Prefixing imported functions by the module name',
                2,
                'softeng1:basic:modprefix',
@@ -497,7 +511,7 @@ code { color: inherit; background-color: transparent; }
               ('Do not have several versions of a code',
                2,
                None,
-               '___sec179'),
+               '___sec181'),
               ('Making a module',
                2,
                'softeng1:basic:module',
@@ -514,42 +528,42 @@ code { color: inherit; background-color: transparent; }
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec184'),
-              ('Positional command-line arguments', 2, None, '___sec185'),
+              ('Command-line arguments', 2, None, '___sec186'),
+              ('Positional command-line arguments', 2, None, '___sec187'),
               ('Option-value pairs on the command line',
                2,
                None,
-               '___sec186'),
+               '___sec188'),
               ('Creating a graphical web user interface',
                2,
                None,
-               '___sec187'),
-              ('Making a compute function', 3, None, '___sec188'),
-              ('Generating the user interface', 3, None, '___sec189'),
-              ('Running the web application', 3, None, '___sec190'),
-              ('Tests for verifying implementations', 1, None, '___sec191'),
-              ('Doctests', 2, None, '___sec192'),
-              ('Unit tests and test functions', 2, None, '___sec193'),
+               '___sec189'),
+              ('Making a compute function', 3, None, '___sec190'),
+              ('Generating the user interface', 3, None, '___sec191'),
+              ('Running the web application', 3, None, '___sec192'),
+              ('Tests for verifying implementations', 1, None, '___sec193'),
+              ('Doctests', 2, None, '___sec194'),
+              ('Unit tests and test functions', 2, None, '___sec195'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
-               '___sec194'),
-              ('Test function requirements', 3, None, '___sec195'),
-              ('Comparison of real numbers', 3, None, '___sec196'),
-              ('Special assert functions from nose', 3, None, '___sec197'),
-              ('Locating test functions', 3, None, '___sec198'),
-              ('Running tests', 3, None, '___sec199'),
-              ('Embedding doctests in a test function', 3, None, '___sec200'),
-              ('Installing nose and pytest', 3, None, '___sec201'),
-              ('Test function for the solver', 2, None, '___sec202'),
+               '___sec196'),
+              ('Test function requirements', 3, None, '___sec197'),
+              ('Comparison of real numbers', 3, None, '___sec198'),
+              ('Special assert functions from nose', 3, None, '___sec199'),
+              ('Locating test functions', 3, None, '___sec200'),
+              ('Running tests', 3, None, '___sec201'),
+              ('Embedding doctests in a test function', 3, None, '___sec202'),
+              ('Installing nose and pytest', 3, None, '___sec203'),
+              ('Test function for the solver', 2, None, '___sec204'),
               ('Test function for reading positional command-line arguments',
                2,
                None,
-               '___sec203'),
+               '___sec205'),
               ('Test function for reading option-value pairs',
                2,
                None,
-               '___sec204'),
+               '___sec206'),
               ('Classical class-based unit testing',
                2,
                'softeng1:basic:unittest',
@@ -561,84 +575,84 @@ code { color: inherit; background-color: transparent; }
               ('Organizing the software directory tree',
                2,
                None,
-               '___sec207'),
-              ('Distributing just a module file', 3, None, '___sec208'),
-              ('Distributing a package', 3, None, '___sec209'),
-              ('Publishing the software at GitHub', 2, None, '___sec210'),
+               '___sec209'),
+              ('Distributing just a module file', 3, None, '___sec210'),
+              ('Distributing a package', 3, None, '___sec211'),
+              ('Publishing the software at GitHub', 2, None, '___sec212'),
               ('Downloading and installing the software',
                2,
                None,
-               '___sec211'),
-              ('Installing just a module file', 3, None, '___sec212'),
-              ('Installing a package', 3, None, '___sec213'),
+               '___sec213'),
+              ('Installing just a module file', 3, None, '___sec214'),
+              ('Installing a package', 3, None, '___sec215'),
               ('Classes for problem and solution method',
                1,
                'softeng1:prog:se:class',
                'softeng1:prog:se:class'),
-              ('The problem class', 2, None, '___sec215'),
-              ('The solver class', 2, None, '___sec216'),
-              ('Combining the objects', 3, None, '___sec217'),
+              ('The problem class', 2, None, '___sec217'),
+              ('The solver class', 2, None, '___sec218'),
+              ('Combining the objects', 3, None, '___sec219'),
               ('Improving the problem and solver classes',
                2,
                'softeng1:prog:se:class2',
                'softeng1:prog:se:class2'),
-              ('A generic class for parameters', 3, None, '___sec219'),
+              ('A generic class for parameters', 3, None, '___sec221'),
               ('Automating scientific experiments',
                1,
                'softeng1:experiments',
                'softeng1:experiments'),
-              ('Available software', 2, None, '___sec221'),
-              ('The results we want to produce', 2, None, '___sec222'),
-              ('Combining plot files', 2, None, '___sec223'),
-              ('Running a program from Python', 2, None, '___sec224'),
-              ('The automating script', 2, None, '___sec225'),
+              ('Available software', 2, None, '___sec223'),
+              ('The results we want to produce', 2, None, '___sec224'),
+              ('Combining plot files', 2, None, '___sec225'),
+              ('Running a program from Python', 2, None, '___sec226'),
+              ('The automating script', 2, None, '___sec227'),
               ('Making a report',
                2,
                'softeng1:exper:report',
                'softeng1:exper:report'),
-              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec227'),
-              ('HTML with MathJax', 3, None, '___sec228'),
-              ('LaTeX', 3, None, '___sec229'),
-              ('Sphinx', 3, None, '___sec230'),
-              ('Markdown', 3, None, '___sec231'),
-              ('IPython/Jupyter notebooks', 3, None, '___sec232'),
-              ('Wiki formats', 3, None, '___sec233'),
-              ('DocOnce', 3, None, '___sec234'),
+              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec229'),
+              ('HTML with MathJax', 3, None, '___sec230'),
+              ('LaTeX', 3, None, '___sec231'),
+              ('Sphinx', 3, None, '___sec232'),
+              ('Markdown', 3, None, '___sec233'),
+              ('IPython/Jupyter notebooks', 3, None, '___sec234'),
+              ('Wiki formats', 3, None, '___sec235'),
+              ('DocOnce', 3, None, '___sec236'),
               ('Publishing a complete project',
                2,
                'softeng1:exper:github',
                'softeng1:exper:github'),
-              ('Exercises', 1, None, '___sec236'),
-              ('Problem 38: Make a tool for differentiating curves',
+              ('Exercises', 1, None, '___sec238'),
+              ('Problem 39: Make a tool for differentiating curves',
                2,
                'softeng1:exer:derivative',
                'softeng1:exer:derivative'),
-              ('Problem 39: Make solid software for the Trapezoidal rule',
+              ('Problem 40: Make solid software for the Trapezoidal rule',
                2,
                'softeng1:exer:integral:flat',
                'softeng1:exer:integral:flat'),
-              ('Problem 40: Implement classes for the Trapezoidal rule',
+              ('Problem 41: Implement classes for the Trapezoidal rule',
                2,
                'softeng1:exer:integral:flat2',
                'softeng1:exer:integral:flat2'),
-              ('Problem 41: Write a doctest and a test function',
+              ('Problem 42: Write a doctest and a test function',
                2,
                'softeng1:exer:doctest1',
                'softeng1:exer:doctest1'),
-              ('Problem 42: Experiment with tolerances in comparisons',
+              ('Problem 43: Experiment with tolerances in comparisons',
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
-              ('Remarks', 3, None, '___sec242'),
-              ('Exercise 43: Make use of a class implementation',
+              ('Remarks', 3, None, '___sec244'),
+              ('Exercise 44: Make use of a class implementation',
                2,
                'softeng1:exer:class:dts',
                'softeng1:exer:class:dts'),
-              ('Exercise 44: Make solid software for a difference equation',
+              ('Exercise 45: Make solid software for a difference equation',
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('References', 1, None, '___sec245')]}
+              ('References', 1, None, '___sec247')]}
 end of tocinfo -->
 
 <body>
@@ -656,6 +670,20 @@ MathJax.Hub.Config({
 <script type="text/javascript"
  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\tp}{\thinspace .}
+\newcommand{\uex}{{u_{\small\mbox{e}}}}
+\newcommand{\Aex}{{A_{\small\mbox{e}}}}
+\newcommand{\E}[1]{\hbox{E}\lbrack #1 \rbrack}
+\newcommand{\Var}[1]{\hbox{Var}\lbrack #1 \rbrack}
+\newcommand{\Std}[1]{\hbox{Std}\lbrack #1 \rbrack}
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\stress}{\boldsymbol{\sigma}}
+$$
+
 
 
 
@@ -2103,102 +2131,8 @@ and the exact solution. What is the relevant value of the tolerance
 in the float comparison in each case?
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_9_1" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_9_1">
-
-<p>
-We modify the <code>decay_vc.py</code> program to
-
-<p>
-
-<!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver</span>(I, a, b, T, dt, theta):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Solve u&#39;=-a(t)*u + b(t), u(0)=I,</span>
-<span style="color: #BA2121; font-style: italic">    for t in (0,T] with steps of dt.</span>
-<span style="color: #BA2121; font-style: italic">    a and b are Python functions of t.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt)            <span style="color: #408080; font-style: italic"># avoid integer division</span>
-    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span>dt))     <span style="color: #408080; font-style: italic"># no of time intervals</span>
-    T <span style="color: #666666">=</span> Nt<span style="color: #666666">*</span>dt                 <span style="color: #408080; font-style: italic"># adjust T to fit time step dt</span>
-    u <span style="color: #666666">=</span> zeros(Nt<span style="color: #666666">+1</span>)           <span style="color: #408080; font-style: italic"># array of u[n] values</span>
-    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, Nt<span style="color: #666666">+1</span>)  <span style="color: #408080; font-style: italic"># time mesh</span>
-
-    u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> I                  <span style="color: #408080; font-style: italic"># assign initial condition</span>
-    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Nt):    <span style="color: #408080; font-style: italic"># n=0,1,...,Nt-1</span>
-        u[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> ((<span style="color: #666666">1</span> <span style="color: #666666">-</span> dt<span style="color: #666666">*</span>(<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a(t[n]))<span style="color: #666666">*</span>u[n] <span style="color: #666666">+</span> \
-                  dt<span style="color: #666666">*</span>(theta<span style="color: #666666">*</span>b(t[n<span style="color: #666666">+1</span>]) <span style="color: #666666">+</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>b(t[n])))<span style="color: #666666">/</span>\
-                  (<span style="color: #666666">1</span> <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>theta<span style="color: #666666">*</span>a(t[n<span style="color: #666666">+1</span>]))
-    <span style="color: #008000; font-weight: bold">return</span> u, t
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_linear_solution</span>():
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Test problem where u=c*t+I is the exact solution, to be</span>
-<span style="color: #BA2121; font-style: italic">    reproduced (to machine precision) by any relevant method.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t):
-        <span style="color: #008000; font-weight: bold">return</span> c<span style="color: #666666">*</span>t <span style="color: #666666">+</span> I
-
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">a</span>(t):
-        <span style="color: #008000; font-weight: bold">return</span> t<span style="color: #666666">**0.5</span>  <span style="color: #408080; font-style: italic"># can be arbitrary</span>
-
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">b</span>(t):
-        <span style="color: #008000; font-weight: bold">return</span> c <span style="color: #666666">+</span> a(t)<span style="color: #666666">*</span>exact_solution(t)
-
-    theta <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>; I <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>; dt <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
-    T <span style="color: #666666">=</span> <span style="color: #666666">4</span>
-    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(T<span style="color: #666666">/</span>dt)  <span style="color: #408080; font-style: italic"># no of steps</span>
-
-    c_values <span style="color: #666666">=</span> [<span style="color: #666666">1E-5</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">1</span>, <span style="color: #666666">10</span>, <span style="color: #666666">100</span>, <span style="color: #666666">1000</span>, <span style="color: #666666">10000</span>,
-                <span style="color: #666666">1E+7</span>, <span style="color: #666666">1E+10</span>, <span style="color: #666666">1E+20</span>]
-    <span style="color: #008000; font-weight: bold">for</span> c <span style="color: #AA22FF; font-weight: bold">in</span> c_values:
-        u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, b<span style="color: #666666">=</span>b, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
-        u_e <span style="color: #666666">=</span> exact_solution(t)
-        difference <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(u_e <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()  <span style="color: #408080; font-style: italic"># max deviation</span>
-        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;c=</span><span style="color: #BB6688; font-weight: bold">%6g</span><span style="color: #BA2121">, difference=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (c, difference)
-
-test_linear_solution()
-</pre></div>
-<p>
-Running this program gives the output
-
-<p>
-
-<!-- code=text typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">c= 1e-05, difference=2.77556e-17
-c=   0.1, difference=1.11022e-16
-c=     1, difference=8.88178e-16
-c=    10, difference=7.10543e-15
-c=   100, difference=1.13687e-13
-c=  1000, difference=9.09495e-13
-c= 10000, difference=1.09139e-11
-c= 1e+07, difference=7.45058e-09
-c= 1e+10, difference=1.14441e-05
-c= 1e+20, difference=131072
-</pre></div>
-<p>
-The tolerance must in each case be chosen less than the size of
-<code>difference</code>. It is an essential point to avoid parameters in
-ODEs that are very large. Scaling the problem is then a good
-idea (see the section <a href="._decay-book008.html#decay:app:scaling">Scaling</a>).
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-Filename: <code>test_precision</code>.
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>test_precision</code>.
 
 <p>
 <!-- --- end exercise --- -->

@@ -5,54 +5,42 @@
 Preface
 %%%%%%%
 
-This book grew out of a need to ensure that students in graduate level
-courses had some knowledge of the basic components in the scientific
+This book teaches the basic components in the scientific
 computing pipeline: modeling, differential equations, numerical
-algorithms, programming, and software testing. As our classes in
-computational science topics turned out to be more and more
-heterogeneous with respect to the students' undergraduate backgrounds,
-we frequently got students who could be strong in mathematics, but
-weak in programming, and vice versa. This situation called for some
-documentation of the expected basic competence in modern computing
-that graduate courses could build on.
-
-I decided to write a set of example-driven notes that illustrated the
-components in the scientific computing pipeline using the simple
-differential equation for exponential decay:
-:math:`u^{\prime}(t)=-au(t)`, where
-:math:`a>0` is a parameter. Such models arise in a wide range througout
-the sciences.
-The plan was to go through the ideas of finite
-differences, how such methods are programmed and tested, why such
-methods may fail, and how mathematical models of this kind arises
-from physics and biology. Many students lack knowledge about useful software
-engineering topics such as modules, user interfaces, testing
-frameworks, and class programming, so I added basic introductions to
-these themes as well. Our courses are multi-disciplinary and
-emphasizes how to turn theory into practice, so computer
-implementations are key.  As students requested generalizations and
-expanded explanations, the notes quickly grew in size and into the
-present booklet.
+algorithms, programming, plotting, and software testing. The pedagogical idea
+is treat these topics in the context of a very simple
+mathematical model, the
+differential equation for exponential decay, :math:`u^{\prime}(t)=-au(t)`,
+where :math:`u` is unknown and :math:`a` is a given parameter. By keeping the
+mathematical problem simple, the text can go deep into all details
+about how one must combine mathematics and computer science to
+create well-tested, reliable, and flexible software for such a
+mathematical model.
 
 The writing style is gentle and aims at a broad audience.
 Prerequisite knowlege is basic one-dimensional calculus and preferably
 some experience with computer programming in Python or MATLAB.
-The material features
-comprehensive explanations since it was intended for self study. For
-some students it may act as an overview and refresher of traditional
-mathematical topics and likely a first introduction to some of the
-many software topics. The text can also be used in an undergraduate
-course setting as a case-based introduction to modern
-multi-disciplinary problem solving with computers, using the wide
+The material was initially written for self study and therefore features
+comprehensive and easy-to-understand explanations. For
+some readers it may act as an overview and refresher of traditional
+mathematical topics and likely a first introduction to many of the
+software topics. The text can also be used
+as a case-based and mathematically simple introduction to modern
+multi-disciplinary problem solving with computers, using the
 range of applications in the chapter :ref:`decay:app`
 as motivation and then treating the details of
-the mathematical and computer science aspects from the other
-chapters.  Another upcoming
-audience is students and scientists with little mathematics and
-computing background, who need a foundation for entering into
-computer-based differential equation modeling.
+the mathematical and computer science subjects from the other
+chapters.
 
-The choice of topics in this book are motivated from what is needed in
+.. Nowadays, many people need to enter the world of
+
+.. computer-based differential equation modeling, and this book
+
+.. should be useful for readers with minor background in mathematics and
+
+.. programming.
+
+The choice of topics in this book is motivated from what is needed in
 more advanced courses on finite difference methods for partial
 differential equations (PDEs).  It turns out that a range of concepts
 and tools needed for PDEs can be introduced and illustrated by very
@@ -61,18 +49,24 @@ text is therefore to lay a foundation for understanding numerical
 methods for PDEs by first meeting the fundamental ideas in a simpler
 ODE setting. Compared to other books, the present one has a much
 stronger focus on how to turn mathematics into working code.
-It also explains the mathematics and programming in more detail.
+It also explains the mathematics and programming in more detail
+that what is common in the literature.
 
 There is a more advanced companion book in the works that treat finite
 difference methods for PDEs using the same writing style and having
 the same focus on turning mathematical algorithms into reliable
 software.
 
-Although the main example in the present book is
-:math:`u^{\prime}=-au`,
-we also address the more general model problem :math:`u'=-a(t)u + b(t)`
-and the completely general, nonlinear problem :math:`u'=f(u,t)`, both for
-scalar and vector :math:`u(t)`.
+Although the main example in the present book is :math:`u^{\prime}=-au`, we
+also address the more general model problem :math:`u'=-a(t)u + b(t)`, and
+the completely general, nonlinear problem :math:`u'=f(u,t)`, both for scalar
+and vector :math:`u(t)`. The author believes in the principle *simplify,
+understand, and then generalize*. That is why we start out with the
+simple model :math:`u^{\prime}=-au` and try to understand how methods are
+constructed, how they work, how they are implemented, and how they may
+fail for this problem, before we generalize what we have learned from
+:math:`u^{\prime}=-au` to more complicated models.
+
 The following list of topics will be elaborated on.
 
  * How to think when constructing finite difference methods, with special focus
@@ -92,7 +86,7 @@ The following list of topics will be elaborated on.
    to automate tests through *test functions* and *unit testing*.
 
  * How to work with Python concepts such as arrays, lists, dictionaries,
-   lambda functions, functions in functions (closures).
+   lambda functions, and functions in functions (closures).
 
  * How to perform array computing and understand the difference from
    scalar computing.
@@ -100,7 +94,7 @@ The following list of topics will be elaborated on.
  * How to uncover numerical artifacts in the computed solution.
 
  * How to analyze the numerical schemes mathematically to understand
-   why artifacts occur.
+   why artifacts may occur.
 
  * How to derive mathematical expressions for various measures of
    the error in numerical methods, frequently by using the ``sympy`` software
@@ -135,14 +129,6 @@ The following list of topics will be elaborated on.
 
  * How to write scientific reports in various formats (LaTeX, HTML).
 
-The book contains a set of exercises in most of the chapters.
-The exercises are divided into three categories: *exercises*
-refer to the text (usually variations or extensions of examples
-in the text), *problems* are stand-alone exercises without
-references to the text, and *projects* are larger problems.
-Exercises, problems, and projects share the same numbering to
-avoid confusion between Exercise 4.3 and Problem 4.3.
-
 
 .. admonition:: The exposition in a nutshell
 
@@ -163,6 +149,14 @@ avoid confusion between Exercise 4.3 and Problem 4.3.
 
 
 
+
+The book contains a set of exercises in most of the chapters.
+The exercises are divided into three categories: *exercises*
+refer to the text (usually variations or extensions of examples
+in the text), *problems* are stand-alone exercises without
+references to the text, and *projects* are larger problems.
+Exercises, problems, and projects share the same numbering to
+avoid confusion between Exercise 4.3 and Problem 4.3.
 
 Acknowledgments
 ~~~~~~~~~~~~~~~
