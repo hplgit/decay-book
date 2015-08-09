@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -286,8 +286,14 @@ code { color: inherit; background-color: transparent; }
                1,
                'decay:app:pop',
                'decay:app:pop'),
-              ('Exponential growth', 2, None, '___sec109'),
-              ('Logistic growth', 2, None, '___sec110'),
+              ('Exponential growth',
+               2,
+               'decay:app:pop:exp',
+               'decay:app:pop:exp'),
+              ('Logistic growth',
+               2,
+               'decay:app:pop:log',
+               'decay:app:pop:log'),
               ('Compound interest and inflation',
                1,
                'decay:app:interest',
@@ -325,15 +331,19 @@ code { color: inherit; background-color: transparent; }
                '___sec121'),
               ('A biochemical reaction', 2, None, '___sec122'),
               ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
+              ('Predator-pray models in ecology',
+               1,
+               'decay:app:predpray',
+               'decay:app:predpray'),
               ('Decay of atmospheric pressure with altitude',
                1,
                'decay:app:atm',
                'decay:app:atm'),
-              ('The general model', 2, None, '___sec125'),
-              ('Multiple atmospheric layers', 2, None, '___sec126'),
-              ('Simplifications', 2, None, '___sec127'),
-              ('Constant layer temperature', 3, None, '___sec128'),
-              ('One-layer model', 3, None, '___sec129'),
+              ('The general model', 2, None, '___sec126'),
+              ('Multiple atmospheric layers', 2, None, '___sec127'),
+              ('Simplifications', 2, None, '___sec128'),
+              ('Constant layer temperature', 3, None, '___sec129'),
+              ('One-layer model', 3, None, '___sec130'),
               ('Compaction of sediments',
                1,
                'decay:app:sediment',
@@ -342,12 +352,12 @@ code { color: inherit; background-color: transparent; }
                1,
                'decay:app:drag',
                'decay:app:drag'),
-              ('Overview of forces', 2, None, '___sec132'),
-              ('Equation of motion', 2, None, '___sec133'),
-              ('Terminal velocity', 2, None, '___sec134'),
-              ('A Crank-Nicolson scheme', 2, None, '___sec135'),
-              ('Physical data', 2, None, '___sec136'),
-              ('Verification', 2, None, '___sec137'),
+              ('Overview of forces', 2, None, '___sec133'),
+              ('Equation of motion', 2, None, '___sec134'),
+              ('Terminal velocity', 2, None, '___sec135'),
+              ('A Crank-Nicolson scheme', 2, None, '___sec136'),
+              ('Physical data', 2, None, '___sec137'),
+              ('Verification', 2, None, '___sec138'),
               ('Scaling',
                2,
                'decay:app:drag:scaling',
@@ -360,7 +370,7 @@ code { color: inherit; background-color: transparent; }
                1,
                'decay:app:diffusion:Fourier',
                'decay:app:diffusion:Fourier'),
-              ('Exercises', 1, None, '___sec141'),
+              ('Exercises', 1, None, '___sec142'),
               ('Exercise 16: Radioactive decay of Carbon-14',
                2,
                'decay:app:exer:radio:C14',
@@ -376,20 +386,20 @@ code { color: inherit; background-color: transparent; }
               ('Bug 1: Wrong time level in the $T_s$ function',
                3,
                None,
-               '___sec145'),
+               '___sec146'),
               ('Bug 2: Wrong time level in the $T$ function',
                3,
                None,
-               '___sec146'),
-              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec147'),
+               '___sec147'),
+              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec148'),
               ('Bug 4: Missing `k` in the updating formula',
                3,
                None,
-               '___sec148'),
+               '___sec149'),
               ('Bug 5: Using `1-theta` instead of `theta`',
                3,
                None,
-               '___sec149'),
+               '___sec150'),
               ('Exercise 19: Find time of murder from body temperature',
                2,
                'decay:app:exer:cooling:murder',
@@ -422,47 +432,51 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:app:exer:MMK',
                'decay:app:exer:MMK'),
-              ('Exercise 27: Simulate the pressure drop in the atmosphere',
+              ('Exercise 27: Simulate predator-pray interaction',
+               2,
+               'decay:app:exer:predpray',
+               'decay:app:exer:predpray'),
+              ('Exercise 28: Simulate the pressure drop in the atmosphere',
                2,
                'decay:app:exer:atm1',
                'decay:app:exer:atm1'),
-              ('Exercise 28: Make a program for vertical motion in a fluid',
+              ('Exercise 29: Make a program for vertical motion in a fluid',
                2,
                'decay:app:exer:drag:prog',
                'decay:app:exer:drag:prog'),
-              ('Project 29: Simulate parachuting',
+              ('Project 30: Simulate parachuting',
                2,
                'decay:app:exer:parachute',
                'decay:app:exer:parachute'),
-              ('Exercise 30: Formulate vertical motion in the atmosphere',
+              ('Exercise 31: Formulate vertical motion in the atmosphere',
                2,
                'decay:app:exer:drag:atm1',
                'decay:app:exer:drag:atm1'),
-              ('Exercise 31: Simulate vertical motion in the atmosphere',
+              ('Exercise 32: Simulate vertical motion in the atmosphere',
                2,
                'decay:app:exer:drag:atm2',
                'decay:app:exer:drag:atm2'),
-              ('Exercise 32: Compute $y=|x|$ by solving an ODE',
+              ('Exercise 33: Compute $y=|x|$ by solving an ODE',
                2,
                'decay:app:exer:signum',
                'decay:app:exer:signum'),
-              ('Exercise 33: Simulate fortune growth with random interest rate',
+              ('Exercise 34: Simulate fortune growth with random interest rate',
                2,
                'decay:app:exer:interest',
                'decay:app:exer:interest'),
-              ('Exercise 34: Simulate a population in a changing environment',
+              ('Exercise 35: Simulate a population in a changing environment',
                2,
                'decay:app:exer:pop:at',
                'decay:app:exer:pop:at'),
-              ('Exercise 35: Simulate logistic growth',
+              ('Exercise 36: Simulate logistic growth',
                2,
                'decay:app:exer:pop:logistic1',
                'decay:app:exer:pop:logistic1'),
-              ('Exercise 36: Rederive the equation for continuous compound interest',
+              ('Exercise 37: Rederive the equation for continuous compound interest',
                2,
                'decay:app:exer:interest:derive',
                'decay:app:exer:interest:derive'),
-              ('Exercise 37: Simulate the deformation of a viscoelastic material',
+              ('Exercise 38: Simulate the deformation of a viscoelastic material',
                2,
                'decay:app:exer:viscoelasticity1',
                'decay:app:exer:viscoelasticity1'),
@@ -483,9 +497,9 @@ code { color: inherit; background-color: transparent; }
                2,
                'softeng1:basic:impl2',
                'softeng1:basic:impl2'),
-              ('Comments in a program', 3, None, '___sec174'),
-              ('Refactoring into functions', 3, None, '___sec175'),
-              ('Program file vs IDE vs notebook', 3, None, '___sec176'),
+              ('Comments in a program', 3, None, '___sec176'),
+              ('Refactoring into functions', 3, None, '___sec177'),
+              ('Program file vs IDE vs notebook', 3, None, '___sec178'),
               ('Prefixing imported functions by the module name',
                2,
                'softeng1:basic:modprefix',
@@ -497,7 +511,7 @@ code { color: inherit; background-color: transparent; }
               ('Do not have several versions of a code',
                2,
                None,
-               '___sec179'),
+               '___sec181'),
               ('Making a module',
                2,
                'softeng1:basic:module',
@@ -514,42 +528,42 @@ code { color: inherit; background-color: transparent; }
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec184'),
-              ('Positional command-line arguments', 2, None, '___sec185'),
+              ('Command-line arguments', 2, None, '___sec186'),
+              ('Positional command-line arguments', 2, None, '___sec187'),
               ('Option-value pairs on the command line',
                2,
                None,
-               '___sec186'),
+               '___sec188'),
               ('Creating a graphical web user interface',
                2,
                None,
-               '___sec187'),
-              ('Making a compute function', 3, None, '___sec188'),
-              ('Generating the user interface', 3, None, '___sec189'),
-              ('Running the web application', 3, None, '___sec190'),
-              ('Tests for verifying implementations', 1, None, '___sec191'),
-              ('Doctests', 2, None, '___sec192'),
-              ('Unit tests and test functions', 2, None, '___sec193'),
+               '___sec189'),
+              ('Making a compute function', 3, None, '___sec190'),
+              ('Generating the user interface', 3, None, '___sec191'),
+              ('Running the web application', 3, None, '___sec192'),
+              ('Tests for verifying implementations', 1, None, '___sec193'),
+              ('Doctests', 2, None, '___sec194'),
+              ('Unit tests and test functions', 2, None, '___sec195'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
-               '___sec194'),
-              ('Test function requirements', 3, None, '___sec195'),
-              ('Comparison of real numbers', 3, None, '___sec196'),
-              ('Special assert functions from nose', 3, None, '___sec197'),
-              ('Locating test functions', 3, None, '___sec198'),
-              ('Running tests', 3, None, '___sec199'),
-              ('Embedding doctests in a test function', 3, None, '___sec200'),
-              ('Installing nose and pytest', 3, None, '___sec201'),
-              ('Test function for the solver', 2, None, '___sec202'),
+               '___sec196'),
+              ('Test function requirements', 3, None, '___sec197'),
+              ('Comparison of real numbers', 3, None, '___sec198'),
+              ('Special assert functions from nose', 3, None, '___sec199'),
+              ('Locating test functions', 3, None, '___sec200'),
+              ('Running tests', 3, None, '___sec201'),
+              ('Embedding doctests in a test function', 3, None, '___sec202'),
+              ('Installing nose and pytest', 3, None, '___sec203'),
+              ('Test function for the solver', 2, None, '___sec204'),
               ('Test function for reading positional command-line arguments',
                2,
                None,
-               '___sec203'),
+               '___sec205'),
               ('Test function for reading option-value pairs',
                2,
                None,
-               '___sec204'),
+               '___sec206'),
               ('Classical class-based unit testing',
                2,
                'softeng1:basic:unittest',
@@ -561,84 +575,84 @@ code { color: inherit; background-color: transparent; }
               ('Organizing the software directory tree',
                2,
                None,
-               '___sec207'),
-              ('Distributing just a module file', 3, None, '___sec208'),
-              ('Distributing a package', 3, None, '___sec209'),
-              ('Publishing the software at GitHub', 2, None, '___sec210'),
+               '___sec209'),
+              ('Distributing just a module file', 3, None, '___sec210'),
+              ('Distributing a package', 3, None, '___sec211'),
+              ('Publishing the software at GitHub', 2, None, '___sec212'),
               ('Downloading and installing the software',
                2,
                None,
-               '___sec211'),
-              ('Installing just a module file', 3, None, '___sec212'),
-              ('Installing a package', 3, None, '___sec213'),
+               '___sec213'),
+              ('Installing just a module file', 3, None, '___sec214'),
+              ('Installing a package', 3, None, '___sec215'),
               ('Classes for problem and solution method',
                1,
                'softeng1:prog:se:class',
                'softeng1:prog:se:class'),
-              ('The problem class', 2, None, '___sec215'),
-              ('The solver class', 2, None, '___sec216'),
-              ('Combining the objects', 3, None, '___sec217'),
+              ('The problem class', 2, None, '___sec217'),
+              ('The solver class', 2, None, '___sec218'),
+              ('Combining the objects', 3, None, '___sec219'),
               ('Improving the problem and solver classes',
                2,
                'softeng1:prog:se:class2',
                'softeng1:prog:se:class2'),
-              ('A generic class for parameters', 3, None, '___sec219'),
+              ('A generic class for parameters', 3, None, '___sec221'),
               ('Automating scientific experiments',
                1,
                'softeng1:experiments',
                'softeng1:experiments'),
-              ('Available software', 2, None, '___sec221'),
-              ('The results we want to produce', 2, None, '___sec222'),
-              ('Combining plot files', 2, None, '___sec223'),
-              ('Running a program from Python', 2, None, '___sec224'),
-              ('The automating script', 2, None, '___sec225'),
+              ('Available software', 2, None, '___sec223'),
+              ('The results we want to produce', 2, None, '___sec224'),
+              ('Combining plot files', 2, None, '___sec225'),
+              ('Running a program from Python', 2, None, '___sec226'),
+              ('The automating script', 2, None, '___sec227'),
               ('Making a report',
                2,
                'softeng1:exper:report',
                'softeng1:exper:report'),
-              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec227'),
-              ('HTML with MathJax', 3, None, '___sec228'),
-              ('LaTeX', 3, None, '___sec229'),
-              ('Sphinx', 3, None, '___sec230'),
-              ('Markdown', 3, None, '___sec231'),
-              ('IPython/Jupyter notebooks', 3, None, '___sec232'),
-              ('Wiki formats', 3, None, '___sec233'),
-              ('DocOnce', 3, None, '___sec234'),
+              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec229'),
+              ('HTML with MathJax', 3, None, '___sec230'),
+              ('LaTeX', 3, None, '___sec231'),
+              ('Sphinx', 3, None, '___sec232'),
+              ('Markdown', 3, None, '___sec233'),
+              ('IPython/Jupyter notebooks', 3, None, '___sec234'),
+              ('Wiki formats', 3, None, '___sec235'),
+              ('DocOnce', 3, None, '___sec236'),
               ('Publishing a complete project',
                2,
                'softeng1:exper:github',
                'softeng1:exper:github'),
-              ('Exercises', 1, None, '___sec236'),
-              ('Problem 38: Make a tool for differentiating curves',
+              ('Exercises', 1, None, '___sec238'),
+              ('Problem 39: Make a tool for differentiating curves',
                2,
                'softeng1:exer:derivative',
                'softeng1:exer:derivative'),
-              ('Problem 39: Make solid software for the Trapezoidal rule',
+              ('Problem 40: Make solid software for the Trapezoidal rule',
                2,
                'softeng1:exer:integral:flat',
                'softeng1:exer:integral:flat'),
-              ('Problem 40: Implement classes for the Trapezoidal rule',
+              ('Problem 41: Implement classes for the Trapezoidal rule',
                2,
                'softeng1:exer:integral:flat2',
                'softeng1:exer:integral:flat2'),
-              ('Problem 41: Write a doctest and a test function',
+              ('Problem 42: Write a doctest and a test function',
                2,
                'softeng1:exer:doctest1',
                'softeng1:exer:doctest1'),
-              ('Problem 42: Experiment with tolerances in comparisons',
+              ('Problem 43: Experiment with tolerances in comparisons',
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
-              ('Remarks', 3, None, '___sec242'),
-              ('Exercise 43: Make use of a class implementation',
+              ('Remarks', 3, None, '___sec244'),
+              ('Exercise 44: Make use of a class implementation',
                2,
                'softeng1:exer:class:dts',
                'softeng1:exer:class:dts'),
-              ('Exercise 44: Make solid software for a difference equation',
+              ('Exercise 45: Make solid software for a difference equation',
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('References', 1, None, '___sec245')]}
+              ('References', 1, None, '___sec247')]}
 end of tocinfo -->
 
 <body>
@@ -656,6 +670,20 @@ MathJax.Hub.Config({
 <script type="text/javascript"
  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\tp}{\thinspace .}
+\newcommand{\uex}{{u_{\small\mbox{e}}}}
+\newcommand{\Aex}{{A_{\small\mbox{e}}}}
+\newcommand{\E}[1]{\hbox{E}\lbrack #1 \rbrack}
+\newcommand{\Var}[1]{\hbox{Var}\lbrack #1 \rbrack}
+\newcommand{\Std}[1]{\hbox{Std}\lbrack #1 \rbrack}
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+\newcommand{\stress}{\boldsymbol{\sigma}}
+$$
+
 
 
 
@@ -699,14 +727,14 @@ MathJax.Hub.Config({
 <center><h1 id="decay:app">Models</h1></center> <!-- chapter heading -->
 
 <p>
-This chapter presents many mathematical models that all
-end up with ODEs of the type \( u^{\prime}=-au+b \).
-The applications are taken from biology,
-finance, and physics, and cover population growth or decay, compound
-interest and inflation, radioactive decay, cooling of objects,
-compaction of geological media, pressure
-variations in the atmosphere, and air resistance on falling or rising
-bodies.
+This chapter presents many mathematical models that all end up with
+ODEs of the type \( u^{\prime}=-au+b \).  The applications are taken from
+biology, finance, and physics, and cover population growth or decay,
+interacting predator-pray populations, compound interest and
+inflation, radioactive decay, chemical and biochemical reaction,
+spreading of diseases, cooling of objects, compaction of geological
+media, pressure variations in the atmosphere, viscoelastic response in
+materials, and air resistance on falling or rising bodies.
 
 <p>
 Before we turn to the applications, however, we take a brief look at
@@ -811,7 +839,7 @@ Many more details about scaling is presented in
 
 <h1 id="decay:app:pop">Evolution of a population</h1>
 
-<h2 id="___sec109">Exponential growth </h2>
+<h2 id="decay:app:pop:exp">Exponential growth</h2>
 
 <p>
 Let \( N \) be the number of individuals in a population occupying some
@@ -884,7 +912,7 @@ where \( f=I/N_0 \) measures the net immigration per time unit as
 the fraction of the initial population. Very often, \( r \) is approximately
 constant, but \( f \) is usually a function of time.
 
-<h2 id="___sec110">Logistic growth </h2>
+<h2 id="decay:app:pop:log">Logistic growth</h2>
 
 <p>
 The growth rate \( r \) of a population decreases if the environment
@@ -1217,12 +1245,6 @@ undergone the transition (on average), and \( N(t) \) is governed by the ODE
 
 $$ N^{\prime} = -\lambda N(t),\quad N(0)=N_0\tp$$
 
-<p>
-
-<!-- begin inline comment -->
-<font color="red">(<b>hpl 2</b>: make sure transition is correctly interpreted: it is decay, while no transition is survival.)</font>
-<!-- end inline comment -->
-
 <h1 id="decay:app:kinetics">Chemical kinetics</h1>
 
 <h2 id="___sec119">Irreversible reaction of two substances </h2>
@@ -1497,11 +1519,76 @@ incorporate vaccination programs, loss immunity after some time, etc.
 Typical diseases that can be simulated by the SIR model and its variants
 are measles, smallpox, flu, plague, and HIV.
 
-<p>
+<h1 id="decay:app:predpray">Predator-pray models in ecology</h1>
 
-<!-- begin inline comment -->
-<font color="red">(<b>hpl 3</b>: Should include predator-pray too, at least in an exercise.)</font>
-<!-- end inline comment -->
+<p>
+A model for the interaction of predator and pray species can be based
+on reasoning from population dynamics and the SIR model.
+Let \( H(t) \) be the number of prays in a region, and let \( L(t) \)
+be the number of predators. For example, \( H \) may be hares and \( L \) lynx,
+or rabbits and foxes.
+
+<p>
+The population of the pray evolvoes due to births and deaths, exactly
+as in a population dynamics model from Section
+reff{decay:app:pop:exp}.
+During a time interval \( \Delta t \)
+the increase in the population is therefore
+
+$$ H(t+\Delta t) - H(t) =  a\Delta t H(t),$$
+
+where \( a \) is a parameter to be measured.
+The increase is proportional to \( H \), and the proportionality constant
+\( a\Delta t \) is proportional to \( \Delta t \), because doubling the
+interval will double the increase.
+
+<p>
+However, the pray population have an additional loss because they
+are eaten by predators. All the pray and predator animals can form
+\( LH \) pairs in total (if everybody can meet everybody at random).
+A small fraction \( b\Delta t \)
+of such meetings, during a time interval \( \Delta t \),
+end up with the predator eating the pray. The increase in the pray
+population is therefore adjusted to
+
+$$ H(t+\Delta t) - H(t) =  a\Delta t H(t) - b\Delta t H(t)L(t)\tp$$
+
+<p>
+The predator population increases as a result of eating prays.
+The amount of eaten prays is \( b\Delta t LH \), but only a fraction
+\( d\Delta t LH \) of this amount contributes to increasing the
+predator population. In addition, predators die and this loss
+is set to \( c\Delta t L \). To summarize, the increase in the predator
+population is given by
+
+$$ L(t + \Delta t) - L(t) = d\Delta t L(t)H(t) - c\Delta t L(t)\tp$$
+
+Dividing by \( \Delta t \) in the equations for \( H \) and \( L \) and letting
+\( t\rightarrow 0 \) results in
+
+$$
+\begin{align*}
+\lim_{\Delta t\rightarrow 0}\frac{H(t+\Delta t)-H(t)}{\Delta t}
+= H^{\prime}(t) &= aH(t) - bL(t)H(t),\\ 
+\lim_{\Delta t\rightarrow 0}\frac{L(t+\Delta t)-L(t)}{\Delta t}
+= L^{\prime}(t) &= dL(t)H(t) - cL(t)\tp
+\end{align*}
+$$
+
+We can simplify the notation to the following two ODEs:
+
+$$
+\begin{align}
+H^{\prime} &= H(a - bL),
+\tag{95}\\ 
+L^{\prime} &= L(dH - c)\tp
+\tag{96}
+\end{align}
+$$
+
+This is a so-called Lokta-Volterra model. It contains four parameters
+that must be estimated: \( a \), \( b \), \( c \), and \( d \). In addition, two
+initial conditions are needed for \( H(0) \) and \( L(0) \).
 
 <h1 id="decay:app:atm">Decay of atmospheric pressure with altitude</h1>
 
@@ -1509,7 +1596,7 @@ are measles, smallpox, flu, plague, and HIV.
 <!-- The Barometric Formula -->
 <!-- <a href="http://en.wikipedia.org/wiki/Barometric_formula" target="_self"><tt>http://en.wikipedia.org/wiki/Barometric_formula</tt></a> -->
 
-<h2 id="___sec125">The general model </h2>
+<h2 id="___sec126">The general model </h2>
 
 <p>
 Vertical equilibrium of air in the atmosphere is governed by
@@ -1519,14 +1606,14 @@ $$
 \begin{equation}
 \frac{dp}{dz} = -\varrho g
 \tp
-\tag{95}
+\tag{97}
 \end{equation}
 $$
 
 Here, \( p(z) \) is the air pressure, \( \varrho \) is the density of
 air, and \( g=9.807\hbox{ m/s}^2 \) is a standard value of
 the acceleration of gravity.
-(Equation <a href="#mjx-eqn-95">(95)</a> follows directly from the general
+(Equation <a href="#mjx-eqn-97">(97)</a> follows directly from the general
 Navier-Stokes equations for fluid motion, with
 the assumption that the air does not move.)
 
@@ -1535,7 +1622,7 @@ The pressure is related to density and temperature through the ideal gas law
 
 $$
 \begin{equation}
-\varrho = \frac{Mp}{R^*T}, \tag{96}
+\varrho = \frac{Mp}{R^*T}, \tag{98}
 \end{equation}
 $$
 
@@ -1543,22 +1630,22 @@ where \( M \) is the molar mass of the Earth's air (0.029 kg/mol),
 \( R^* \) is the universal
 gas constant (\( 8.314 \) Nm/(mol K)), and \( T \) is the temperature in Kelvin.
 All variables \( p \), \( \varrho \), and \( T \) vary with the height \( z \).
-Inserting <a href="#mjx-eqn-96">(96)</a> in <a href="#mjx-eqn-95">(95)</a> results
+Inserting <a href="#mjx-eqn-98">(98)</a> in <a href="#mjx-eqn-97">(97)</a> results
 in an ODE with a variable coefficient:
 
 $$
 \begin{equation}
 \frac{dp}{dz} = -\frac{Mg}{R^*T(z)} p
-\tag{97}
+\tag{99}
 \thinspace  .
 \end{equation}
 $$
 
-<h2 id="___sec126">Multiple atmospheric layers </h2>
+<h2 id="___sec127">Multiple atmospheric layers </h2>
 
 <p>
 The atmosphere can be approximately modeled by seven layers.
-In each layer, <a href="#mjx-eqn-97">(97)</a> is applied with
+In each layer, <a href="#mjx-eqn-99">(99)</a> is applied with
 a linear temperature of the form
 
 $$ T(z) = \bar T_i + L_i(z-h_i),$$
@@ -1590,7 +1677,7 @@ lists \( h_i \) (m), \( \bar T_i \) (K), and \( L_i \) (K/m) for the layers
   </div>
 </div> <!-- col-xs-4 -->
 <p>
-For implementation it might be convenient to write <a href="#mjx-eqn-97">(97)</a>
+For implementation it might be convenient to write <a href="#mjx-eqn-99">(99)</a>
 on the form
 $$
 \begin{equation}
@@ -1602,15 +1689,15 @@ where \( \bar T(z) \), \( L(z) \), and \( h(z) \) are piecewise constant
 functions with values given in the table.
 The value of the pressure at the sea level \( z=0 \), \( p_0=p(0) \), is \( 101325 \) Pa.
 
-<h2 id="___sec127">Simplifications </h2>
+<h2 id="___sec128">Simplifications </h2>
 
-<h3 id="___sec128">Constant layer temperature </h3>
+<h3 id="___sec129">Constant layer temperature </h3>
 
 <p>
 One common simplification is to assume that the temperature is
 constant within each layer. This means that \( L=0 \).
 
-<h3 id="___sec129">One-layer model </h3>
+<h3 id="___sec130">One-layer model </h3>
 
 <p>
 Another commonly used approximation is to work with one layer instead of
@@ -1638,7 +1725,7 @@ the differential equation problem
 $$
 \begin{equation}
 \frac{d\phi}{dz} = -c\phi,\quad \phi(0)=\phi_0,
-\tag{98}
+\tag{100}
 \end{equation}
 $$
 
@@ -1649,11 +1736,11 @@ porosity, and \( c>0 \) is a constant.
 The upper part of the Earth's crust consists of many geological layers
 stacked on top of each other, as indicated in Figure
 <a href="#decay:app:sediment:fig:layers">19</a>.  The model
-<a href="#mjx-eqn-98">(98)</a> can be applied for each layer. In
+<a href="#mjx-eqn-100">(100)</a> can be applied for each layer. In
 layer number \( i \), we have the unknown porosity function \( \phi_i(z) \)
 fulfilling \( \phi_i^{\prime}(z)=-c_iz \), since the constant \( c \) in the model
-<a href="#mjx-eqn-98">(98)</a> depends on the type of sediment in
-the layer. Alternatively, we can use <a href="#mjx-eqn-98">(98)</a>
+<a href="#mjx-eqn-100">(100)</a> depends on the type of sediment in
+the layer. Alternatively, we can use <a href="#mjx-eqn-100">(100)</a>
 to describe the porosity through all layers if \( c \) is taken as a
 piecewise constant function of \( z \), equal to \( c_i \) in layer \( i \).
 From the figure we see that new layers of sediments are
@@ -1693,7 +1780,7 @@ A body moving vertically through a fluid (liquid or gas) is subject to
 three different types of forces: the gravity force, <a href="http://en.wikipedia.org/wiki/Drag_(physics)" target="_self">the drag force</a>,
 and the buoyancy force.
 
-<h2 id="___sec132">Overview of forces </h2>
+<h2 id="___sec133">Overview of forces </h2>
 
 <p>
 Taking the upward direction as positive,
@@ -1745,7 +1832,7 @@ part of the body. The superscripts \( \,{}^q \) and \( \,{}^S \) in
 \( F_d^{(S)} \) and \( F_d^{(q)} \) indicate Stokes drag and quadratic drag,
 respectively.
 
-<h2 id="___sec133">Equation of motion </h2>
+<h2 id="___sec134">Equation of motion </h2>
 
 <p>
 All the mentioned forces act in the vertical direction.
@@ -1781,7 +1868,7 @@ the mass to get
 $$
 \begin{equation}
 v^{\prime}(t) = - \frac{3\pi d\mu}{\varrho_b V} v + g\left(\frac{\varrho}{\varrho_b} -1\right)
-\tag{99}
+\tag{101}
 \tp
 \end{equation}
 $$
@@ -1799,7 +1886,7 @@ so that the structure of the differential equation becomes obvious:
 $$
 \begin{equation}
 v^{\prime}(t) = -av(t) + b
-\tag{100}
+\tag{102}
 \tp
 \end{equation}
 $$
@@ -1817,7 +1904,7 @@ v^{\prime}(t) =
 -{1\over2}C_D{\varrho A\over\varrho_b V}|v|v +
 g\left({\varrho\over\varrho_b} - 1\right)
 \tp
-\tag{101}
+\tag{103}
 \end{equation}
 $$
 
@@ -1829,20 +1916,20 @@ a = {1\over2}C_D{\varrho A\over\varrho_b V},
 \end{equation}
 $$
 
-and \( b \) as above, we can write <a href="#mjx-eqn-101">(101)</a> as
+and \( b \) as above, we can write <a href="#mjx-eqn-103">(103)</a> as
 $$
 \begin{equation}
 v^{\prime}(t) = -a|v|v + b
 \tp
-\tag{102}
+\tag{104}
 \end{equation}
 $$
 
-<h2 id="___sec134">Terminal velocity </h2>
+<h2 id="___sec135">Terminal velocity </h2>
 
 <p>
-An interesting aspect of <a href="#mjx-eqn-100">(100)</a> and
-<a href="#mjx-eqn-102">(102)</a> is whether \( v \) will approach
+An interesting aspect of <a href="#mjx-eqn-102">(102)</a> and
+<a href="#mjx-eqn-104">(104)</a> is whether \( v \) will approach
 a final constant value,
 the so-called <em>terminal velocity</em> \( v_T \), as \( t\rightarrow\infty \).
 A constant \( v \) means that
@@ -1858,28 +1945,28 @@ The former equation implies \( v_T = b/a \), while the latter has solutions
 \( v_T =-\sqrt{|b|/a} \) for a falling body (\( v_T < 0 \)) and
 \( v_T = \sqrt{b/a} \) for a rising body (\( v_T>0 \)).
 
-<h2 id="___sec135">A Crank-Nicolson scheme </h2>
+<h2 id="___sec136">A Crank-Nicolson scheme </h2>
 
 <p>
 Both governing equations, the Stokes' drag model
-<a href="#mjx-eqn-100">(100)</a> and the quadratic drag model
-<a href="#mjx-eqn-102">(102)</a>, can be readily solved
+<a href="#mjx-eqn-102">(102)</a> and the quadratic drag model
+<a href="#mjx-eqn-104">(104)</a>, can be readily solved
 by the Forward Euler scheme. For higher accuracy one can use
 the Crank-Nicolson method, but a straightforward application
 of this method gives
 a nonlinear equation in the new unknown value \( v^{n+1} \) when applied to
-<a href="#mjx-eqn-102">(102)</a>:
+<a href="#mjx-eqn-104">(104)</a>:
 
 $$
 \begin{equation}
 \frac{v^{n+1}-v^n}{\Delta t}
 = -a\half(|v^{n+1}|v^{n+1} + |v^n|v^n) + b
-\tag{103}
+\tag{105}
 \tp
 \end{equation}
 $$
 
-The first term on the right-hand side of <a href="#mjx-eqn-103">(103)</a>
+The first term on the right-hand side of <a href="#mjx-eqn-105">(105)</a>
 is the arithmetic average of \( -|v|v \) evaluated at time levels \( n \) and \( n+1 \).
 
 <p>
@@ -1895,7 +1982,7 @@ $$
 
 The error is of second order in \( \Delta t \), just as for the arithmetic
 average and the centered finite difference approximation in
-<a href="#mjx-eqn-103">(103)</a>. With the geometric mean,
+<a href="#mjx-eqn-105">(105)</a>. With the geometric mean,
 the resulting discrete equation
 
 $$
@@ -1908,7 +1995,7 @@ therefore easily solve for \( v^{n+1} \):
 $$
 \begin{equation}
 v^{n+1} = \frac{v_n + \Delta t b^{n+\half}}{1 + \Delta t a^{n+\half}|v^{n}|}\tp
-\tag{104}
+\tag{106}
 \end{equation}
 $$
 
@@ -1920,7 +2007,7 @@ equation when discretizing a nonlinear ODE.
 <p>
 <!-- Is the error actually of second order for an arbitrary a(u)u term? -->
 
-<h2 id="___sec136">Physical data </h2>
+<h2 id="___sec137">Physical data </h2>
 
 <p>
 Suitable values of \( \mu \) are \( 1.8\cdot 10^{-5}\hbox{ Pa}\, \hbox{s} \) for air
@@ -1934,7 +2021,7 @@ in the mentioned section.
 
 <p>
 Any density variation makes \( b \) time dependent and we need
-\( b^{n+\half} \) in <a href="#mjx-eqn-104">(104)</a>.
+\( b^{n+\half} \) in <a href="#mjx-eqn-106">(106)</a>.
 To compute the density that enters
 \( b^{n+\half} \) we must also compute the vertical
 position \( z(t) \) of the body. Since \( v=dz/dt \), we can use a centered
@@ -1955,7 +2042,7 @@ center axis is in the vertical direction), 0.75 for a rocket,
 to the flow, and
 0.04 for a streamlined, droplet-like body.
 
-<h2 id="___sec137">Verification </h2>
+<h2 id="___sec138">Verification </h2>
 
 <p>
 To verify the program, one may assume a heavy body in air such that the \( F_b \)
@@ -2025,7 +2112,7 @@ is the <a href="https://en.wikipedia.org/wiki/Kelvin-Voigt_material" target="_se
 $$
 \begin{equation}
 \sigma(t) = E\varepsilon(t) + \eta\varepsilon^{\prime}(t)\tp
-\tag{105}
+\tag{107}
 \end{equation}
 $$
 
@@ -2119,7 +2206,7 @@ t \) without any growth in the solutions, are more popular choices when
 creating time-stepping algorithms for partial differential equations
 of the type considered in this example.
 
-<h1 id="___sec141">Exercises </h1>
+<h1 id="___sec142">Exercises </h1>
 
 <p>
 <!-- --- begin exercise --- -->
@@ -2184,73 +2271,8 @@ and find the corresponding uncertainty interval for the result.
 <!-- --- end hint in exercise --- -->
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_16_3" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_16_3">
-
-<p>
-We need a tailored solver function for this exercise:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver</span>(I, a, u_crit, dt, theta):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Solve u&#39;=-a*u, u(0)=I, for t in (0,t_m] until u &lt;= u_crit</span>
-<span style="color: #BA2121; font-style: italic">    with steps of dt. Return t_m.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    <span style="color: #408080; font-style: italic"># Use list for u and t since we do not know how many points</span>
-    <span style="color: #408080; font-style: italic"># that are needed</span>
-    dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt)               <span style="color: #408080; font-style: italic"># avoid integer division</span>
-    u <span style="color: #666666">=</span> []
-    t <span style="color: #666666">=</span> []
-
-    u<span style="color: #666666">.</span>append(I)                  <span style="color: #408080; font-style: italic"># assign initial condition</span>
-    t<span style="color: #666666">.</span>append(<span style="color: #666666">0</span>)
-    <span style="color: #008000; font-weight: bold">while</span> u[<span style="color: #666666">-1</span>] <span style="color: #666666">&gt;</span> u_crit:
-        u_new <span style="color: #666666">=</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)<span style="color: #666666">*</span>u[<span style="color: #666666">-1</span>]
-        u<span style="color: #666666">.</span>append(u_new)
-        t<span style="color: #666666">.</span>append(t[<span style="color: #666666">-1</span>] <span style="color: #666666">+</span> dt)
-    <span style="color: #008000; font-weight: bold">return</span> t[<span style="color: #666666">-1</span>]
-
-
-half_life <span style="color: #666666">=</span> <span style="color: #666666">5730</span>
-a  <span style="color: #666666">=</span> np<span style="color: #666666">.</span>log(<span style="color: #666666">2</span>)<span style="color: #666666">/</span>half_life
-<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Age:&#39;</span>, solver(I<span style="color: #666666">=1</span>, a<span style="color: #666666">=</span>a, u_crit<span style="color: #666666">=0.084</span>, dt<span style="color: #666666">=10</span>, theta<span style="color: #666666">=0.5</span>)
-</pre></div>
-<p>
-Running this code gives an age of 20,480 years.
-
-<p>
-The uncertainty can be estimated by the following code:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">half_life_min <span style="color: #666666">=</span> <span style="color: #666666">5730</span> <span style="color: #666666">-</span> <span style="color: #666666">40</span>
-half_life_max <span style="color: #666666">=</span> <span style="color: #666666">5730</span> <span style="color: #666666">+</span> <span style="color: #666666">40</span>
-a_min <span style="color: #666666">=</span> np<span style="color: #666666">.</span>log(<span style="color: #666666">2</span>)<span style="color: #666666">/</span>half_life_min
-a_max <span style="color: #666666">=</span> np<span style="color: #666666">.</span>log(<span style="color: #666666">2</span>)<span style="color: #666666">/</span>half_life_max
-age_min <span style="color: #666666">=</span> solver(I<span style="color: #666666">=1</span>, a<span style="color: #666666">=</span>a_max, u_crit<span style="color: #666666">=0.084</span>, dt<span style="color: #666666">=10</span>, theta<span style="color: #666666">=0.5</span>)
-age_max <span style="color: #666666">=</span> solver(I<span style="color: #666666">=1</span>, a<span style="color: #666666">=</span>a_min, u_crit<span style="color: #666666">=0.084</span>, dt<span style="color: #666666">=10</span>, theta<span style="color: #666666">=0.5</span>)
-<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Uncertainty: [</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">]&#39;</span> <span style="color: #666666">%</span> (age_min, age_max)
-</pre></div>
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-Filename: <code>carbon14</code>.
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>carbon14</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -2279,56 +2301,8 @@ such that you can get the three
 schemes from a single formula by varying the \( \theta \) parameter.
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_17_1" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_17_1">
-
-<p>
-The idea of the Forward Euler scheme is to sample the ODE at \( t=t_n \)
-and apply a forward difference approximation to the derivative:
-
-$$ \frac{T^{n+1}-T^n}{\Delta t} = -k(T^n - T_s(t_n))\tp$$
-
-The Backward Euler applies a backward difference instead:
-
-$$ \frac{T^{n}-T^{n-1}}{\Delta t} = -k(T^n - T_s(t_n))\tp$$
-
-The Crank-Nicolson scheme samples the ODE at \( t_{n+\half} \), applies
-a centered difference approximation, and an arithmetic mean approximation
-to \( T^{n+\half} \):
-
-$$ \frac{T^{n+1}-T^n}{\Delta t} = -k(T^{n+\half} - T_s(t_{n+\half}))
-\approx -k(\half(T^n + T^{n+1}) - T_s(t_{n+\half}))\tp$$
-
-For each scheme we solve with respect to the unknown \( T^{n+1} \) (note
-that we switch index from \( n \) to \( n+1 \) in the Backward Euler scheme):
-
-$$
-\begin{align*}
-T^{n+1} &= T^n - k\Delta t(T^n - T_s(t_n)),\\ 
-T^{n+1} &= \frac{T^n + k\Delta t T_s(t_{n+1})}{1 + k\Delta t},\\ 
-T^{n+1} &= \frac{T^n - \half k\Delta t T^n + k\Delta t T_s(t_{n+\half})}{1 + \half k\Delta t}\tp
-\end{align*}
-$$
-
-A \( \theta \) scheme can be formulated as
-
-$$ T^{n+1} = \frac{T^n - (1-\theta) k\Delta t T^n + k\Delta t T_s((1-\theta) t_n+ \theta t_{n+1})}{1 + \theta k\Delta t}
-$$
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-Filename: <code>schemes_cooling</code>.
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>schemes_cooling</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -2363,51 +2337,8 @@ function should return the temperature as an array <code>T</code> of values at
 the mesh points and the time mesh <code>t</code>.
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_18_3" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_18_3">
-
-<p>
-Here is an appropriate function:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cooling</span>(T0, k, T_s, t_end, dt, theta<span style="color: #666666">=0.5</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Solve T&#39;=-k(T-T_s(t)), T(0)=T0,</span>
-<span style="color: #BA2121; font-style: italic">    for t in (0,t_end] with steps of dt.</span>
-<span style="color: #BA2121; font-style: italic">    T_s(t) is a Python function of t.</span>
-<span style="color: #BA2121; font-style: italic">    theta=0.5 means Crank-Nicolson, 1 is Backward</span>
-<span style="color: #BA2121; font-style: italic">    Euler, and 0 is Forward Euler scheme.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt)                  <span style="color: #408080; font-style: italic"># avoid integer division</span>
-    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(t_end<span style="color: #666666">/</span>dt))       <span style="color: #408080; font-style: italic"># no of time intervals</span>
-    t_end <span style="color: #666666">=</span> Nt<span style="color: #666666">*</span>dt                   <span style="color: #408080; font-style: italic"># adjust to fit time step dt</span>
-    T <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(Nt<span style="color: #666666">+1</span>)              <span style="color: #408080; font-style: italic"># array of T[n] values</span>
-    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, t_end, Nt<span style="color: #666666">+1</span>) <span style="color: #408080; font-style: italic"># time mesh</span>
-    T[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> T0                       <span style="color: #408080; font-style: italic"># set initial condition</span>
-    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Nt):          <span style="color: #408080; font-style: italic"># n=0,1,...,Nt-1</span>
-        T[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> ((<span style="color: #666666">1</span> <span style="color: #666666">-</span> dt<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> theta)<span style="color: #666666">*</span>k)<span style="color: #666666">*</span>T[n] <span style="color: #666666">+</span> \ 
-        dt<span style="color: #666666">*</span>k<span style="color: #666666">*</span>(theta<span style="color: #666666">*</span>T_s(t[n<span style="color: #666666">+1</span>]) <span style="color: #666666">+</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> theta)<span style="color: #666666">*</span>T_s(t[n])))<span style="color: #666666">/</span> \ 
-        (<span style="color: #666666">1</span> <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>theta<span style="color: #666666">*</span>k)
-    <span style="color: #008000; font-weight: bold">return</span> T, t
-</pre></div>
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 <b>b)</b>
 In the case \( \lim_{t\rightarrow\infty}T_s(t)=C=\mbox{const} \),
@@ -2417,82 +2348,8 @@ test function that checks the correctness of the asymptotic
 value of the solution.
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_18_4" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_18_4">
-
-<p>
-Apply the limit to the ODE:
-
-$$ \lim_{t\rightarrow\infty}\frac{dT}{dt} = -k(\lim_{t\rightarrow\infty} T
-- \lim_{t\rightarrow\infty} T_s)\tp
-$$
-
-Assuming steady state behavior, \( dT/dt\rightarrow\infty \) as
-\( t\rightarrow\infty \). Then we get
-
-$$ 0 = -k(\lim_{t\rightarrow\infty} T
-- C),
-$$
-
-which means
-
-$$ \lim_{t\rightarrow\infty} T = C\tp$$
-
-<p>
-A corresponding test function takes the form
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_asymptotic</span>():
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Test that ``any&#39;&#39; initial condition leads to</span>
-<span style="color: #BA2121; font-style: italic">    the same asymptotic behavior when T_s=constant.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
-    plt<span style="color: #666666">.</span>figure()
-    T_s <span style="color: #666666">=</span> <span style="color: #666666">5.</span>
-    k <span style="color: #666666">=</span> <span style="color: #666666">1.2</span>
-    dt <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
-    tol <span style="color: #666666">=</span> <span style="color: #666666">0.01</span>  <span style="color: #408080; font-style: italic"># tolerance for testing asymptotic value</span>
-    t_end <span style="color: #666666">=</span> <span style="color: #666666">7</span>    <span style="color: #408080; font-style: italic"># make sure t_end is large enough for tol</span>
-    T0_values <span style="color: #666666">=</span> [<span style="color: #666666">0</span>, <span style="color: #666666">2</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">8</span>, <span style="color: #666666">10</span>] <span style="color: #408080; font-style: italic"># test many cases</span>
-
-    <span style="color: #008000; font-weight: bold">for</span> T0 <span style="color: #AA22FF; font-weight: bold">in</span> [<span style="color: #666666">0</span>, <span style="color: #666666">2</span>, <span style="color: #666666">4</span>, <span style="color: #666666">5</span>, <span style="color: #666666">6</span>, <span style="color: #666666">8</span>, <span style="color: #666666">10</span>]:
-        u, t <span style="color: #666666">=</span> cooling(T0, k, <span style="color: #008000; font-weight: bold">lambda</span> t: T_s, t_end, dt)
-        plt<span style="color: #666666">.</span>plot(t, u)
-
-        <span style="color: #008000; font-weight: bold">assert</span> <span style="color: #008000">abs</span>(u[<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> T_s) <span style="color: #666666">&lt;</span> tol, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> != </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (u[<span style="color: #666666">-1</span>], T_s)
-
-    plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;T0=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> T0 <span style="color: #008000; font-weight: bold">for</span> T0 <span style="color: #AA22FF; font-weight: bold">in</span> T0_values])
-    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;Testing asymptotic behavior T_s=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> T_s)
-    plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;t&#39;</span>)
-    plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;T&#39;</span>)
-    plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp1.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp1.pdf&#39;</span>)
-    plt<span style="color: #666666">.</span>show()
-</pre></div>
-<p>
-Note that we have added a plot in the test function for convenience.
-Letting test functions perform plotting is, however, not a good idea
-if you want to run a large set of tests.
-
-<p>
-<center><p><img src="fig-models/cooling_asymptotic.png" align="bottom" width=600></p></center>
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 <b>c)</b>
 A piecewise constant surrounding temperature,
@@ -2507,145 +2364,8 @@ at \( t=t^* \). Choose \( C_0=2T_0 \), \( C_1=\frac{1}{2}T_0 \), and
 reasonable.
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_18_5" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_18_5">
-
-<p>
-First we implement a general tool for piecewise constant functions:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Piecewise</span>(<span style="color: #008000">object</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Class for holding a piecewise constant function.&quot;&quot;&quot;</span>
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, C0, C1, t_star):
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>C0, <span style="color: #008000">self</span><span style="color: #666666">.</span>C1 <span style="color: #666666">=</span> C0, C1
-        <span style="color: #008000">self</span><span style="color: #666666">.</span>t_star <span style="color: #666666">=</span> t_star
-
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__call__</span>(<span style="color: #008000">self</span>, t):
-        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">        Return value of piecewise constant function.</span>
-<span style="color: #BA2121; font-style: italic">        t can be float or numpy array.</span>
-<span style="color: #BA2121; font-style: italic">        &quot;&quot;&quot;</span>
-        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(t, (<span style="color: #008000">float</span>,<span style="color: #008000">int</span>)):
-            <span style="color: #008000; font-weight: bold">if</span> t <span style="color: #666666">&lt;=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>t_star:
-                T_s <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>C0
-            <span style="color: #008000; font-weight: bold">elif</span> t <span style="color: #666666">&gt;</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>t_star:
-                T_s <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>C1
-        <span style="color: #008000; font-weight: bold">else</span>:
-            <span style="color: #408080; font-style: italic"># assume numpy array</span>
-            T_s <span style="color: #666666">=</span> np<span style="color: #666666">.</span>piecewise(t,
-                               [t <span style="color: #666666">&lt;=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>t_star, t <span style="color: #666666">&gt;</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>t_star],
-                               [<span style="color: #008000">self</span><span style="color: #666666">.</span>C0, <span style="color: #008000">self</span><span style="color: #666666">.</span>C1])
-            <span style="color: #408080; font-style: italic"># Alternative</span>
-            <span style="color: #408080; font-style: italic"># T_s = np.where(t &lt;= self.t_star, C0, C1)</span>
-        <span style="color: #008000; font-weight: bold">return</span> T_s
-</pre></div>
-<p>
-It is convenient to scale the problem such that we do not need to find
-physically relevant values for \( k \). A common scaling of \( T \) is
-
-$$ \bar T = \frac{T-T_0}{T_s-T_0},$$
-
-when \( T_s \) is constant since then \( \bar T\in [0,1] \). Here, we may choose
-the long-term value of \( T_s \) in the denominator such that \( \lim_{t\rightarrow\infty}\bar T=1 \), i.e.,
-
-$$ \bar T = \frac{T-T_0}{0.5T_0-T_0}= -2\frac{T-T_0}{T_0},$$
-
-but it leads to a shift in the sign of the temperature on the
-right-hand side of the ODE, and we cannot reuse the code for the
-original problem in the dimensionless case. We therefore avoid the negative
-sign and use a temperature scale \( 2T_0-T_0 \),
-
-$$ \bar T = \frac{T-T_0}{2T_0-T_0}= \frac{T-T_0}{T_0},$$
-
-which gives \( \bar T \) varying from \( 0 \) initially to a maximum of
-\( 1 \) and finally to a minimum of \( -\half \).
-We scale \( T_s \) by its maximum value \( 2T_0 \) so \( \bar T_s\in [0,1] \):
-
-$$ \bar T_s(\bar t) = \frac{T_s(t)}{\max_t T_s(t)} = \frac{T_s(t_c\bar t)}{2T_0} = \left\lbrace\begin{array}{ll}
-1, & \bar t < t^*/t_c,\\ 
-\frac{1}{4},& \bar t \geq t^*/t_c
-\end{array}\right.
-$$
-
-where \( t_c \) is the time scale. Inserted in the ODE we get
-
-$$
-\frac{T_0}{t_c}\frac{d\bar T}{d\bar t} = -k(T_0\bar T + T_0 -
-2T_0\bar T_s,
-$$
-
-leading to
-
-$$
-\frac{d\bar T}{d\bar t} = -kt_c(\bar T + 1 - 2\bar T_s)\tp
-$$
-
-A natural choice is \( t_c=1/k \) so we get the scaled problem
-
-$$
-\frac{d\bar T}{d\bar t} = -(\bar T + 1 - 2\bar T_s) =
--(\bar T -(2\bar T_s - 1)),\quad \bar T(0)=0\tp
-$$
-
-We can simulate this problem using the code for the original
-problem by choosing \( k=1 \), \( T_0=0 \), and
-\( T_s= (2-1)=1 \) for \( t < 3 \) and \( T_s=(2\frac{1}{4}-1)=-\half \)
-for \( t > 3 \).
-
-<p>
-The appropriate code becomes
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">simulate_piecewise_constant_Ts</span>():
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Simulate scaled problem: T&#39; = -(T - (2T_s-1)), T(0)=0,</span>
-<span style="color: #BA2121; font-style: italic">    where T_s=1 for t &lt; 3 and -0.5 for t &gt; 3.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    k <span style="color: #666666">=</span> <span style="color: #666666">1</span>
-    T0 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-    t_star <span style="color: #666666">=</span> <span style="color: #666666">3.0</span>
-    C0 <span style="color: #666666">=</span> <span style="color: #666666">1</span>
-    C1 <span style="color: #666666">=</span> <span style="color: #666666">-0.5</span>
-    T_s <span style="color: #666666">=</span> Piecewise(C0, C1, t_star)
-    dt <span style="color: #666666">=</span> t_star<span style="color: #666666">/100.0</span>
-    T, t <span style="color: #666666">=</span> cooling(T0, k, T_s, t_end<span style="color: #666666">=3*</span>t_star, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=0.5</span>)
-    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
-    plt<span style="color: #666666">.</span>figure()
-    plt<span style="color: #666666">.</span>plot(t, T)
-    plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;t&#39;</span>);  plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;u&#39;</span>)
-    plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp2.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp2.pdf&#39;</span>)
-    plt<span style="color: #666666">.</span>show()
-</pre></div>
-<p>
-The plot looks like this:
-
-<p>
-<center><p><img src="fig-models/cooling_piecewise.png" align="bottom" width=600></p></center>
-
-<p>
-The result is reasonable because first \( T_s=1 \) and the body's temperature
-will try to rise from \( 0 \) to \( 1 \), and it almost gets there in
-the time \( [0,3] \), before \( T_s=-0.5 \) and then the body is cooled down
-to \( -0.5 \) as \( t \) increases, and this is also the asymptotic value.
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 <b>d)</b>
 We know from the ODE \( u^\prime =-au \) that the Crank-Nicolson scheme
@@ -2656,34 +2376,8 @@ oscillations for \( \Delta t > 2/k \).
 Discuss if this a potential problem in the physical case from c).
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_18_6" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_18_6">
-
-<p>
-In the unscaled problem, the first stage of the simulation is
-covers time interval \( [0,t^*]=[0, 3/k] \). It makes sense to
-choose \( \Delta t \) significantly smaller than \( 3/k \), and the
-stability limit \( 2/k \) is a too large step. The next time level
-is then \( 4/k \), and it sounds reasonable to include the point \( t^*=3/k \)
-as a mesh point. Oscillations would then occur if we choose
-\( \Delta t = 3/k \), but this means only one step through the first
-interval \( [0,t^*] \), which is a very coarse mesh. Halving \( \Delta t \)
-is still a coarse mesh, but then there cannot be oscillations.
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 <b>e)</b>
 Find an expression for the exact solution of
@@ -2722,261 +2416,8 @@ by the integrating factor \( e^{kt} \).
 <!-- --- end hint in exercise --- -->
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_18_7" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_18_7">
-
-<p>
-Multiplication of \( e^{kt} \), using the product rule for differentiation
-&quot;backwards&quot;, and integrating from 0 to \( t \), results in
-
-$$ \int_0^t (e^{kt}T)^{\prime}dt = k\int_0^t e^{kt}T_sdt\tp$$
-
-The left-hand side becomes \( e^{kt}T(t)-T_0 \). Multiplying by \( e^{-kt} \)
-then gives
-
-$$ T(t) = T_0e^{-kt} + ke^{-kt}\int_0^t e^{k\tau}T_s(\tau)d\tau,$$
-
-which is the general expression for the exact solution.
-
-<p>
-As a check, we consider the case where \( T_s \) is constant.
-That problem can easily be solved by introducing \( u=T-T_s \), resulting in
-\( u^{\prime}=-ku \), \( u(0)=T_0-T_s \), with solution \( u(t)=(T_0-T_s)e^{-kt} \),
-and consequently \( T=T_s + (T_0-T_s)e^{-kt} \). With a constant \( T_s \) in
-the general solution above, the solution becomes
-
-$$
-\begin{align*}
-T(t) &= T_0e^{-kt} + ke^{-kt}\int_0^t e^{kt}T_sdt\\ 
-& = T_0e^{-kt} + ke^{-kt}T_sk^{-1}(e^{kt} - 1)\\ 
-& = T_0e^{-kt} + T_s - T_se^{-kt}\\ 
-& = T_s + (T_0-T_s)e^{-kt},
-\end{align*}
-$$
-
-as desired.
-
-<p>
-We choose the same test problem as in c) and use SymPy to do the
-integration. A function doing the integration and returning
-Python functions for the formulas for \( t < t^* \) and \( t\geq t^* \)
-is convenient:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">symbolic_exact_solution</span>(verbose<span style="color: #666666">=</span><span style="color: #008000">False</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Compute the exact solution formula via sympy.&quot;&quot;&quot;</span>
-    <span style="color: #408080; font-style: italic"># sol1: solution for t &lt; t_star,</span>
-    <span style="color: #408080; font-style: italic"># sol2: solution for t &gt; t_star</span>
-    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sym</span>
-    T0 <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;T0&#39;</span>)
-    k <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;k&#39;</span>, positive<span style="color: #666666">=</span><span style="color: #008000">True</span>)
-    <span style="color: #408080; font-style: italic"># Piecewise linear T_sunction</span>
-    t, t_star, C0, C1 <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;t t_star C0 C1&#39;</span>)
-    T_s <span style="color: #666666">=</span> C0
-    I <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>integrate(sym<span style="color: #666666">.</span>exp(k<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>T_s, (t, <span style="color: #666666">0</span>, t))
-    sol1 <span style="color: #666666">=</span> T0<span style="color: #666666">*</span>sym<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>k<span style="color: #666666">*</span>t) <span style="color: #666666">+</span> k<span style="color: #666666">*</span>sym<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>k<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>I
-    sol1 <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>simplify(sym<span style="color: #666666">.</span>expand(sol1))
-    <span style="color: #008000; font-weight: bold">if</span> verbose:
-        <span style="color: #408080; font-style: italic"># Some debugging print</span>
-        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;solution t &lt; t_star:&#39;</span>, sol1
-        <span style="color: #408080; font-style: italic">#print sym.latex(sol1)</span>
-    T_s <span style="color: #666666">=</span> C1
-    I <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>integrate(sym<span style="color: #666666">.</span>exp(k<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>C0, (t, <span style="color: #666666">0</span>, t_star)) <span style="color: #666666">+</span> \ 
-        sym<span style="color: #666666">.</span>integrate(sym<span style="color: #666666">.</span>exp(k<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>C1, (t, t_star, t))
-    sol2 <span style="color: #666666">=</span> T0<span style="color: #666666">*</span>sym<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>k<span style="color: #666666">*</span>t) <span style="color: #666666">+</span> k<span style="color: #666666">*</span>sym<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>k<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>I
-    sol2 <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>simplify(sym<span style="color: #666666">.</span>expand(sol2))
-    <span style="color: #008000; font-weight: bold">if</span> verbose:
-        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;solution t &gt; t_star:&#39;</span>, sol2
-        <span style="color: #408080; font-style: italic">#print sym.latex(sol2)</span>
-
-    <span style="color: #408080; font-style: italic"># Convert to numerical functions</span>
-    exact0 <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t, C0, k, T0],
-                          sol1, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
-    exact1 <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t, C0, C1, t_star, k, T0],
-                          sol2, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
-    <span style="color: #008000; font-weight: bold">return</span> exact0, exact1
-</pre></div>
-<p>
-Then we need a function that can evaluate the exact solution as
-a mesh function:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">evaluate_exact_solution</span>(t, k, T0, C0, C1, t_star,
-                            verbose<span style="color: #666666">=</span><span style="color: #008000">False</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Return exact (analytical) solution of the problem.</span>
-<span style="color: #BA2121; font-style: italic">    Exact solution is produced by sympy.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    exact0, exact1 <span style="color: #666666">=</span> symbolic_exact_solution()
-    <span style="color: #408080; font-style: italic"># exact0/1 works with t as numpy array</span>
-    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(t, (<span style="color: #008000">float</span>,<span style="color: #008000">int</span>)):
-        <span style="color: #008000; font-weight: bold">if</span> t <span style="color: #666666">&lt;</span> t_star:
-            <span style="color: #008000; font-weight: bold">return</span> exact0(t, C0, k, T0)
-        <span style="color: #008000; font-weight: bold">else</span>:
-            <span style="color: #008000; font-weight: bold">return</span> exact1(t, C0, C1, t_star, k, T0)
-    <span style="color: #008000; font-weight: bold">else</span>:
-        <span style="color: #408080; font-style: italic"># assume numpy array</span>
-        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>where(
-            t <span style="color: #666666">&lt;</span> t_star,
-            exact0(t, C0, k, T0),
-            exact1(t, C0, C1, t_star, k, T0))
-</pre></div>
-<p>
-Finally we can run the comparison:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compare_numerical_and_exact_solution</span>():
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Compare exact and numerical solution with piecewise</span>
-<span style="color: #BA2121; font-style: italic">    constant surrounding temperature. Use scaled problem</span>
-<span style="color: #BA2121; font-style: italic">    from function simulate_piecewise_constant_Ts.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    T0 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-    k <span style="color: #666666">=</span> <span style="color: #666666">1</span>
-    C0 <span style="color: #666666">=</span> <span style="color: #666666">1</span>
-    C1 <span style="color: #666666">=</span> <span style="color: #666666">-0.5</span>
-    t_star <span style="color: #666666">=</span> <span style="color: #666666">3</span>
-    t_end <span style="color: #666666">=</span> <span style="color: #666666">7</span>
-
-    T_s <span style="color: #666666">=</span> Piecewise(C0, C1, t_star)
-
-    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
-    plt<span style="color: #666666">.</span>figure()
-    dt_values <span style="color: #666666">=</span> [<span style="color: #666666">1</span>, <span style="color: #666666">0.5</span>, <span style="color: #666666">0.025</span>]
-    <span style="color: #408080; font-style: italic">#dt_values = [0.025]</span>
-    <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values:
-        T, t <span style="color: #666666">=</span> cooling(T0, k, T_s, t_end, dt, theta<span style="color: #666666">=0.5</span>)
-        plt<span style="color: #666666">.</span>plot(t, T)
-
-    t_e <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, t_end, <span style="color: #666666">1001</span>)  <span style="color: #408080; font-style: italic"># find mesh for T_e</span>
-    <span style="color: #408080; font-style: italic"># Could use sym.Rational(1,2) instead of 0.5, but not necessary</span>
-    <span style="color: #408080; font-style: italic"># when we are not interested in symbolic formulas</span>
-    T_e <span style="color: #666666">=</span> evaluate_exact_solution(t_e, k, T0, C0, C1, t_star)
-    plt<span style="color: #666666">.</span>plot(t_e, T_e)
-    plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;CN, dt=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> dt <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values] <span style="color: #666666">+</span> [<span style="color: #BA2121">&#39;exact&#39;</span>])
-    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;T(t) for piecewise constant $T_s(t)$&#39;</span>)
-    plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;t&#39;</span>)
-    plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;T&#39;</span>)
-    plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp3.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp3.pdf&#39;</span>)
-    plt<span style="color: #666666">.</span>show()
-</pre></div>
-<p>
-The \( \Delta t \) values were found after some trial and error, but they
-illustrate crude approximations and one with the biggest possible
-\( \Delta t \) such that the exact solution and the numerical solution cannot
-be visually distinguished:
-
-<p>
-<center><p><img src="fig-models/cooling_piecewise_compare.png" align="bottom" width=600></p></center>
-
-<p>
-We can now start to introduce bugs in the <code>cooling</code> function to
-see if it is possible to have some \( \Delta t \) and still find
-coinciding curves.
-
-<h3 id="___sec145">Bug 1: Wrong time level in the \( T_s \) function </h3>
-
-<p>
-We replace <code>T_s[n]</code> by <code>T_s[n+1]</code> in the implementation of the scheme
-and rerun the case. Now the lowest \( \Delta t \) is still on top of
-the exact solution, but the numerical solution on the two coarser
-meshes are more accurate! This is because we lower the surrounding
-temperature somewhat earlier in the buggy scheme and this reduces
-the &quot;overshoot&quot; on the coarsest meshes in the figure above.
-
-<p>
-<center><p><img src="fig-models/cooling_piecewise_bug1.png" align="bottom" width=600></p></center>
-
-<h3 id="___sec146">Bug 2: Wrong time level in the \( T \) function </h3>
-
-<p>
-We can replace <code>T[n]</code> by <code>T[n+1]</code> on the right-hand side of the scheme.
-This is a serious error since <code>T[n+1]</code> is not yet computed and therefore
-equal to zero when <code>T</code> was made by calling <code>np.zeros</code>. The results
-are also nonsense, and one would immediately look for a bug.
-
-<p>
-<center><p><img src="fig-models/cooling_piecewise_bug2.png" align="bottom" width=600></p></center>
-
-<h3 id="___sec147">Bug 3: Missing \( \theta \) in a term </h3>
-
-<p>
-Let us forget to multiply by <code>theta</code> in the nominator of the scheme, i.e.,
-we replace
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">T[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> ((<span style="color: #666666">1</span> <span style="color: #666666">-</span> dt<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> theta)<span style="color: #666666">*</span>k)<span style="color: #666666">*</span>T[n] <span style="color: #666666">+</span> \ 
-         dt<span style="color: #666666">*</span>k<span style="color: #666666">*</span>(theta<span style="color: #666666">*</span>T_s(t[n<span style="color: #666666">+1</span>]) <span style="color: #666666">+</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> theta)<span style="color: #666666">*</span>T_s(t[n])))<span style="color: #666666">/</span> \ 
-         (<span style="color: #666666">1</span> <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>theta<span style="color: #666666">*</span>k)
-</pre></div>
-<p>
-by
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">T[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> ((<span style="color: #666666">1</span> <span style="color: #666666">-</span> dt<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> theta)<span style="color: #666666">*</span>k)<span style="color: #666666">*</span>T[n] <span style="color: #666666">+</span> \ 
-         dt<span style="color: #666666">*</span>k<span style="color: #666666">*</span>(T_s(t[n<span style="color: #666666">+1</span>]) <span style="color: #666666">+</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> theta)<span style="color: #666666">*</span>T_s(t[n])))<span style="color: #666666">/</span> \ 
-         (<span style="color: #666666">1</span> <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>theta<span style="color: #666666">*</span>k)
-</pre></div>
-<p>
-This error leads to convergence towards a wrong solution:
-
-<p>
-<center><p><img src="fig-models/cooling_piecewise_bug3.png" align="bottom" width=600></p></center>
-
-<p>
-If we did not have the exact solution, one could be led to think
-that the solution was correct, but it is non-physical since we
-do not expect the temperature to rise from \( T_0 \) to a level
-<em>above</em> the surrounding temperature. The plot shows that \( \bar T>1 \),
-the value of the (scaled) surrounding temperature.
-Note that if we used the Backward Euler scheme instead of the
-Crank-Nicolson scheme, this bug would have no effect!
-
-<h3 id="___sec148">Bug 4: Missing <code>k</code> in the updating formula </h3>
-
-<p>
-Obviously, when we solve the scaled problem where \( k=1 \) by definition,
-such a programming mistake has no effect. Otherwise, \( k \) influences
-the time scale, so there will be a stretch of the time axis in the
-numerical solution and this should be easily detected in a plot.
-
-<h3 id="___sec149">Bug 5: Using <code>1-theta</code> instead of <code>theta</code> </h3>
-
-<p>
-Such an error is not detectable in the Crank-Nicolson scheme, but
-will have a significant effect in the other schemes.
-As a test, we replace <code>1-theta</code> in the nominator by <code>theta</code>.
-This leads to \( T=0 \) in the Forward Euler scheme, but a reasonable shape
-in the Backward Euler scheme, although the solution becomes larger
-than the surrounding temperature (1 in the scaled problem).
-
-<p>
-<center><p><img src="fig-models/cooling_piecewise_bug5.png" align="bottom" width=600></p></center>
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 <b>f)</b>
 Implement a test function for checking that the solution returned by
@@ -3078,84 +2519,8 @@ simulate the temperature evolution from the time of murder, taken as
 corresponding time allows for answering when death occurred.
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_19_1" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_19_1">
-
-<p>
-A Forward Euler step from \( T^0 \) to \( T^1 \) reads
-
-$$ T^1 = T_0 + -k\Delta t (T^0 - T_s),$$
-
-and solving with respect to \( k \) results in
-
-$$ k = \frac{T^1 - T^0}{\Delta t(T_s - T_0)}\tp$$
-
-We implement this formula in a function,
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">estimate_k</span>(T0, T1, Ts, dt):
-    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">float</span>(T1 <span style="color: #666666">-</span> T0)<span style="color: #666666">/</span>(dt<span style="color: #666666">*</span>(Ts <span style="color: #666666">-</span> T0))
-</pre></div>
-<p>
-We have \( T_0=26.7 \) C, \( T_1=25.8 \) C, \( T_s=20 \) C, and \( \Delta t = 1 \) h,
-i.e., \( \Delta t = 3600 \) s. The proper call is therefore
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">k <span style="color: #666666">=</span> estimate_k(<span style="color: #666666">26.7</span>, <span style="color: #666666">25.8</span>, <span style="color: #666666">20</span>, <span style="color: #666666">3600</span>)
-</pre></div>
-<p>
-For the simulation we use the Forward Euler method,
-
-$$ T^{n+1} = T^n - k\Delta t(T^n - T_s),$$
-
-and simulate as long as \( T > 25.8 \) C:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">T <span style="color: #666666">=</span> <span style="color: #666666">37</span>
-Ts <span style="color: #666666">=</span> <span style="color: #666666">20</span>
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">cooling</span> <span style="color: #008000; font-weight: bold">import</span> cooling
-<span style="color: #008000; font-weight: bold">while</span> T <span style="color: #666666">&gt;</span> <span style="color: #666666">25.8</span>:
-    T <span style="color: #666666">=</span> T <span style="color: #666666">-</span> k<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>(T <span style="color: #666666">-</span> Ts)
-    t<span style="color: #666666">+=</span> dt
-
-minutes, seconds <span style="color: #666666">=</span> <span style="color: #008000">divmod</span>(t, <span style="color: #666666">60</span>)
-hours, minutes <span style="color: #666666">=</span> <span style="color: #008000">divmod</span>(minutes, <span style="color: #666666">60</span>)
-<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;&quot;&quot;</span>
-<span style="color: #BA2121">The death occurred </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> hours, </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> minutes,</span>
-<span style="color: #BA2121">and </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> seconds before 3am.&quot;&quot;&quot;</span> <span style="color: #666666">%</span> (hours, minutes, seconds)
-</pre></div>
-<p>
-The result of running the code becomes
-
-<p>
-
-<!-- code=text (!bc sys) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Terminal&gt; python detective.py
-k=3.73134e-05
-
-The death occurred 8 hours, 0 minutes,
-and 19 seconds before 3am.
-</pre></div>
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-Filename: <code>detective</code>.
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>detective</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -3183,116 +2548,8 @@ Simulate a process with the following data: \( k=0.05 \hbox{ min}^{-1} \),
 Plot the \( T \) solutions and \( T_s \) in the same plot.
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_20_1" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_20_1">
-
-<p>
-We can reuse the <code>cooling</code> function from <a href="#decay:app:exer:cooling:py">Exercise 18: Implement schemes for Newton's law of cooling</a>
-to do the simulations:
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cooling</span>(T0, k, T_s, t_end, dt, theta<span style="color: #666666">=0.5</span>):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
-<span style="color: #BA2121; font-style: italic">    Solve T&#39;=-k(T-T_s(t)), T(0)=T0,</span>
-<span style="color: #BA2121; font-style: italic">    for t in (0,t_end] with steps of dt.</span>
-<span style="color: #BA2121; font-style: italic">    T_s(t) is a Python function of t.</span>
-<span style="color: #BA2121; font-style: italic">    theta=0.5 means Crank-Nicolson, 1 is Backward</span>
-<span style="color: #BA2121; font-style: italic">    Euler, and 0 is Forward Euler scheme.</span>
-<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt)                  <span style="color: #408080; font-style: italic"># avoid integer division</span>
-    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(t_end<span style="color: #666666">/</span>dt))       <span style="color: #408080; font-style: italic"># no of time intervals</span>
-    t_end <span style="color: #666666">=</span> Nt<span style="color: #666666">*</span>dt                   <span style="color: #408080; font-style: italic"># adjust to fit time step dt</span>
-    T <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(Nt<span style="color: #666666">+1</span>)              <span style="color: #408080; font-style: italic"># array of T[n] values</span>
-    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, t_end, Nt<span style="color: #666666">+1</span>) <span style="color: #408080; font-style: italic"># time mesh</span>
-    T[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> T0                       <span style="color: #408080; font-style: italic"># set initial condition</span>
-    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Nt):          <span style="color: #408080; font-style: italic"># n=0,1,...,Nt-1</span>
-        T[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> ((<span style="color: #666666">1</span> <span style="color: #666666">-</span> dt<span style="color: #666666">*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> theta)<span style="color: #666666">*</span>k)<span style="color: #666666">*</span>T[n] <span style="color: #666666">+</span> \ 
-        dt<span style="color: #666666">*</span>k<span style="color: #666666">*</span>(theta<span style="color: #666666">*</span>T_s(t[n<span style="color: #666666">+1</span>]) <span style="color: #666666">+</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> theta)<span style="color: #666666">*</span>T_s(t[n])))<span style="color: #666666">/</span> \ 
-        (<span style="color: #666666">1</span> <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>theta<span style="color: #666666">*</span>k)
-    <span style="color: #008000; font-weight: bold">return</span> T, t
-</pre></div>
-<p>
-The challenge is to use the right units
-for the input data. We can use Celsius for temperature since it has
-the same increments as Kelvin. Time quantities should be measured
-in seconds:
-
-$$
-\begin{align*}
-k &= 20 \hbox{ min}^{-1} = \frac{20}{60}\hbox{ s}^{-1},\\ 
-P &= (1 \hbox{ h} = 3600\hbox{ s}, 10\hbox{ min} = 600\hbox{ s},
-6\hbox{ h}=6\cdot 3600\hbox{ s})\tp
-\end{align*}
-$$
-
-<p>
-To achieve reasonable accuracy,
-we choose \( \Delta t \) as 40 steps per the
-shortest period of the \( T_s \) oscillations:
-\( \Delta t = 600/40 \). With some trials we find
-an appropriate simulation interval for all three cases to be
-\( [0,8] \) h.
-
-<p>
-The code becomes
-
-<p>
-
-<!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">cooling</span> <span style="color: #008000; font-weight: bold">import</span> cooling
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> pi, sin
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">T_s</span>(t):
-    <span style="color: #008000; font-weight: bold">return</span> Tm <span style="color: #666666">+</span> a<span style="color: #666666">*</span>sin((<span style="color: #666666">2*</span>pi<span style="color: #666666">/</span>P)<span style="color: #666666">*</span>t)
-
-Tm <span style="color: #666666">=</span> <span style="color: #666666">25</span>
-a <span style="color: #666666">=</span> <span style="color: #666666">2.5</span>
-P_values <span style="color: #666666">=</span> [<span style="color: #666666">3600</span>, <span style="color: #666666">600</span>, <span style="color: #666666">3600*6</span>]
-k <span style="color: #666666">=</span> <span style="color: #666666">0.05/60</span>
-T0 <span style="color: #666666">=</span> <span style="color: #666666">5</span>
-
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
-<span style="color: #008000; font-weight: bold">for</span> P <span style="color: #AA22FF; font-weight: bold">in</span> P_values:
-    T, t <span style="color: #666666">=</span> cooling(T0, k, T_s, t_end<span style="color: #666666">=8*3600</span>, dt<span style="color: #666666">=600/40</span>)
-    plt<span style="color: #666666">.</span>plot(t, T)
-plt<span style="color: #666666">.</span>plot(t, T_s(t), <span style="color: #BA2121">&#39;k--&#39;</span>)
-legends <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;P=1 h&#39;</span>, <span style="color: #BA2121">&#39;P=10 min&#39;</span>, <span style="color: #BA2121">&#39;P=6 h&#39;</span>, <span style="color: #BA2121">&#39;$T_s$&#39;</span>]
-plt<span style="color: #666666">.</span>legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;lower right&#39;</span>)
-plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;t&#39;</span>); plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;T&#39;</span>)
-plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
-plt<span style="color: #666666">.</span>show()
-</pre></div>
-<p>
-<center><p><img src="fig-models/osc_cooling.png" align="bottom" width=700></p></center>
-
-<p>
-<b>Discussion of the results.</b>
-We see that it takes some time to increase the temperature from \( T_0 \)
-to oscillations around \( T_m \). When \( T_s \) oscillates fast (\( P=10 \) min),
-\( k \) is not large enough so that \( T \) can reach the surrounding temperature
-in the time available before the surrounding temperature decreases.
-However, for large \( P \) (6 h), there is almost enough time to heat
-and cool the object to reach the maximum and minimum temperatures
-of the surroundings.
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-Filename: <code>osc_cooling</code>.
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>osc_cooling</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -3485,11 +2742,11 @@ model becomes
 $$
 \begin{align}
 \frac{d\bar S}{d\bar t} &= - R_0\bar S\bar I,
-\tag{106}\\ 
-\frac{d\bar I}{d\bar t} &= R_0 \bar S\bar I - \bar I,
-\tag{107}\\ 
-\frac{d\bar R}{d\bar t} &= I,
 \tag{108}\\ 
+\frac{d\bar I}{d\bar t} &= R_0 \bar S\bar I - \bar I,
+\tag{109}\\ 
+\frac{d\bar R}{d\bar t} &= I,
+\tag{110}\\ 
 \bar S(0) &= 1-\alpha,\\ 
 \bar I(0) &= \alpha,\\ 
 \bar R(0) &= 0,
@@ -3501,35 +2758,8 @@ where \( R_0 \) and \( \alpha \) are the only parameters in the problem:
 $$ R_0 = \frac{N\beta}{\nu}, \quad \alpha = \frac{I(0)}{N}\tp$$
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_25_2" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_25_2">
-
-<p>
-We introduce
-
-$$ \bar t = \frac{t}{\nu^{-1}},\quad \bar S = \frac{S}{N},\quad
-\bar I = \frac{I}{N},\quad \bar R = \frac{R}{N}\tp$$
-
-Inserting these expressions in the governing equations and dividing by
-\( \nu N \) gives the listed dimensionless ODEs. The scaled initial condition
-for \( \bar S(0) \) follows from
-\( \bar S(0) = S(0)/N = (N-I(0))/N = 1 - \alpha \), since initially,
-\( R(0)=0 \) and therefore \( N=S(0) + I(0) \).
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 <b>b)</b>
 Show that the \( R_0 \) parameter governs whether the disease will spread
@@ -3557,35 +2787,8 @@ Spreading means \( dI/dt>0 \).
 <!-- --- end hint in exercise --- -->
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_25_3" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_25_3">
-
-<p>
-For \( dI/dt \) to be positive, we must have \( (R_0 \bar S - 1)\bar I > 0 \), i.e.,
-\( R_0 \bar S - 1 > 0 \) since \( \bar I\geq 0 \). At \( t=0 \), we get
-\( R_0 \bar S(0) > 1 \) as the criterion, or
-
-$$
-\tilde R_0\bar S(0) = \frac{N\beta}{\nu}\frac{S(0)}{N} = \frac{S(0)\beta}{\nu} >1
-\tp$$
-
-The dimensionless parameter \( S(0)\beta /\nu \) is denoted by \( R_0 \) in
-the epidemiology literature and known as the <em>basic reproductive number</em>.
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 <b>c)</b>
 Implement the scaled SIR model. Check at every time step,
@@ -3598,26 +2801,8 @@ Simulate the spreading of a disease where \( R_0=1.1 \) and 1 percent of
 the population is infected at time \( t=0 \).
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_25_4" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_25_4">
-
-<p>
-The given data means that \( \bar I(0)=\alpha = 0.01 \) and \( \bar S(0)=0.99 \).
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 Filename: <code>SIR</code>.
 
@@ -3654,14 +2839,14 @@ $$
 \begin{align}
 \frac{d\bar Q}{d\bar t} &= \alpha (\bar E\bar S
 - \bar Q),
-\tag{109}\\ 
+\tag{111}\\ 
 \frac{d\bar P}{d\bar t} &= \beta\bar Q,
-\tag{110}\\ 
+\tag{112}\\ 
 \frac{d\bar S}{d\bar t} &= -\bar E\bar S
 + (1 - \beta\alpha^{-1})\bar Q,
-\tag{111}\\ 
+\tag{113}\\ 
 \epsilon\frac{d\bar E}{d\bar t} &= -\bar E\bar S + \bar Q,
-\tag{112}
+\tag{114}
 \end{align}
 $$
 
@@ -3675,100 +2860,16 @@ $\bar S=\bar E=1$.
 $$
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_26_1" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_26_1">
-
-<p>
-Replacing the unknowns and \( t \) by their dimensionless equivalents
-leads to
-
-$$
-\begin{align*}
-\frac{d\bar Q}{d\bar t} &= t_ck_+\frac{E_0S_0}{Q_c}\bar E\bar S
-- t_c(k_v + k_-)\bar Q,\\ 
-\frac{d\bar P}{d\bar t} &= t_ck_v\frac{Q_c}{P_c}\bar Q,\\ 
-\frac{d\bar S}{d\bar t} &= -t_ck_+E_0\bar E\bar S
-+ t_ck_-\frac{Q_c}{S_0}\bar Q,\\ 
-\frac{d\bar E}{d\bar t} &= -t_ck_+S_0\bar E\bar S
-+ t_c(k_- + k_v)\frac{Q_c}{E_0}\bar Q\tp
-\end{align*}
-$$
-
-Inserting the choice of scales brings us to the given equations, after
-quite some algebra and identifying coefficients in terms of the
-provided dimensionless numbers.
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 <b>b)</b>
 Implement a function for
-solving <a href="#mjx-eqn-109">(109)</a>-<a href="#mjx-eqn-112">(112)</a>.
+solving <a href="#mjx-eqn-111">(111)</a>-<a href="#mjx-eqn-114">(114)</a>.
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_26_2" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_26_2">
-
-<p>
-Let us use Odespy to solve the differential equations, although a plain
-Forward Euler scheme will be fine.
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">odespy</span>
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver</span>(f, alpha, beta, epsilon, T, dt<span style="color: #666666">=0.1</span>):
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(u, t):
-        Q, P, S, E <span style="color: #666666">=</span> u
-        <span style="color: #008000; font-weight: bold">return</span> [
-            alpha<span style="color: #666666">*</span>(E<span style="color: #666666">*</span>S <span style="color: #666666">-</span> Q),
-            beta<span style="color: #666666">*</span>Q,
-            <span style="color: #666666">-</span>E<span style="color: #666666">*</span>S <span style="color: #666666">+</span> (<span style="color: #666666">1-</span>beta<span style="color: #666666">/</span>alpha)<span style="color: #666666">*</span>Q,
-            (<span style="color: #666666">-</span>E<span style="color: #666666">*</span>S <span style="color: #666666">+</span> Q)<span style="color: #666666">/</span>epsilon,
-            ]
-
-    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span>dt))
-    t_mesh <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, Nt<span style="color: #666666">*</span>dt, Nt<span style="color: #666666">+1</span>)
-
-    solver <span style="color: #666666">=</span> odespy<span style="color: #666666">.</span>RK4(f)
-    solver<span style="color: #666666">.</span>set_initial_condition([<span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">1</span>])
-    u, t <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>solve(t_mesh)
-    Q <span style="color: #666666">=</span> u[:,<span style="color: #666666">0</span>]
-    P <span style="color: #666666">=</span> u[:,<span style="color: #666666">1</span>]
-    S <span style="color: #666666">=</span> u[:,<span style="color: #666666">2</span>]
-    E <span style="color: #666666">=</span> u[:,<span style="color: #666666">3</span>]
-    <span style="color: #008000; font-weight: bold">return</span> Q, P, S, E
-</pre></div>
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 <b>c)</b>
 There are two conservation equations implied by
@@ -3785,115 +2886,16 @@ Derive these two equations. Use these properties in the function
 in b) to do a partial verification of the solution at each time step.
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_26_3" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_26_3">
-
-<p>
-Adding
-<a href="#mjx-eqn-88">(88)</a> and <a href="#mjx-eqn-91">(91)</a> shows that
-
-$$ \frac{d[ES]}{dt} + \frac{d[E]}{dt} = 0,$$
-
-and therefore \( [ES] + [E]=\hbox{const} \). Since \( [ES](0)=0 \) and
-\( [E](0)=E_0 \), the constant is \( E_0 \) at \( t=0 \) and will remain so.
-Similarly, adding <a href="#mjx-eqn-88">(88)</a>,
-<a href="#mjx-eqn-90">(90)</a>, and <a href="#mjx-eqn-89">(89)</a>
-shows that their time derivatives sum up to zero, and therefore
-\( [ES] + [S] + [P] =\hbox{const} \). Since \( [P](0)=0 \), the constant
-must be \( 0+S_0+0=S_0 \).
-
-<p>
-To use the conservation as a consistency check in the software, we need
-to find the equivalent dimensionless versions:
-
-$$ [ES] + [E] = E_0\quad\Rightarrow\quad Q_c\bar Q + E_0\bar E = E_0,$$
-
-and from this we get, after a little algebra,
-
-$$ \alpha^{-1}\epsilon^{-1}\bar Q + \bar E = 1\tp$$
-
-The other conservation equation becomes
-
-$$ \bar Q + \alpha\bar S + \bar P  = \alpha\tp$$
-
-<p>
-The implementation may go like
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">computed <span style="color: #666666">=</span> Q[n<span style="color: #666666">+1</span>]<span style="color: #666666">/</span>(alpha<span style="color: #666666">*</span>epsilon) <span style="color: #666666">+</span> E[n<span style="color: #666666">+1</span>]
-expected <span style="color: #666666">=</span> <span style="color: #666666">1</span>
-diff1 <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(computed <span style="color: #666666">-</span> expected)
-
-computed <span style="color: #666666">=</span> Q[n<span style="color: #666666">+1</span>] <span style="color: #666666">+</span> alpha<span style="color: #666666">*</span>S[n<span style="color: #666666">+1</span>] <span style="color: #666666">+</span> P[n<span style="color: #666666">+1</span>]
-expected <span style="color: #666666">=</span> alpha
-diff2 <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(computed <span style="color: #666666">-</span> expected)
-
-tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
-<span style="color: #008000; font-weight: bold">if</span> diff1 <span style="color: #666666">&lt;</span> tol <span style="color: #AA22FF; font-weight: bold">or</span> diff2 <span style="color: #666666">&lt;</span> tol:
-    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;*** Consistency check failed:&#39;</span>, diff1, diff2
-</pre></div>
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 <b>d)</b>
 Simulate a case with \( T=8 \), \( \alpha = 1 \), \( \beta=4 \), and two
 \( \epsilon \) values: 0.9 and 0.1.
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_26_4" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_26_4">
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">demo</span>():
-    alpha <span style="color: #666666">=</span> <span style="color: #666666">1</span>
-    beta <span style="color: #666666">=</span> <span style="color: #666666">4</span>
-    epsilon <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
-    T <span style="color: #666666">=</span> <span style="color: #666666">8</span>
-    dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]) <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">&gt;=</span> <span style="color: #666666">2</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #666666">0.1</span>
-    Q, P, S, E <span style="color: #666666">=</span> solver(alpha, beta, epsilon, T, dt)
-    plt<span style="color: #666666">.</span>plot(t, Q, t, P, t, S, t, E)
-    plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;complex&#39;</span>, <span style="color: #BA2121">&#39;product&#39;</span>, <span style="color: #BA2121">&#39;substrate&#39;</span>, <span style="color: #BA2121">&#39;enzyme&#39;</span>],
-               loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;upper right&#39;</span>)
-    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;alpha=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, beta=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, epsilon=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (alpha, beta, epsilon))
-    plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
-    plt<span style="color: #666666">.</span>show()
-
-<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
-    demo()
-</pre></div>
-<p>
-<center><p><img src="fig-models/biochem.png" align="bottom" width=700></p></center>
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 Filename: <code>biochem</code>.
 
@@ -3903,7 +2905,61 @@ Filename: <code>biochem</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:atm1">Exercise 27: Simulate the pressure drop in the atmosphere</h2>
+<h2 id="decay:app:exer:predpray">Exercise 27: Simulate predator-pray interaction</h2>
+
+<p>
+The section <a href="#decay:app:predpray">Predator-pray models in ecology</a> describes a model for the
+interaction of predator and pray populations, such as lynx and hares.
+
+<p>
+<b>a)</b>
+Scale the equations <a href="#mjx-eqn-95">(95)</a>-<a href="#mjx-eqn-96">(96)</a>.
+Use the initial population \( H(0)=H_0 \) of \( H \) has scale for \( H \) and \( L \), and
+let the time scale be \( 1/(bH_0) \).
+
+<p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
+<p>
+<b>b)</b>
+Implement the scaled model from a). Run illustrating cases how the
+two populations develop.
+
+<p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
+<p>
+<b>c)</b>
+The scaling in a) used a scale for \( H \) and \( L \) based on on the
+initial condition \( H(0)=H_0 \). An alternative scaling is to make
+the ODEs as simple as possible by introducing separate scales
+\( H_c \) and \( L_c \) for \( H \) and \( L \), respectively. Fit \( H_c \),
+\( L_c \), and the time scale \( t_c \) such that there are as few
+dimensionless parameters as possible in the ODEs. Scale the initial
+conditions. Compare the number and type of dimensionless parameters
+with a).
+
+<p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
+<p>
+<b>d)</b>
+Compute with the scaled model from c) and create plots to illustrate
+the typical solutions.
+
+<p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
+<p>
+Filename: <code>predator_pray</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="decay:app:exer:atm1">Exercise 28: Simulate the pressure drop in the atmosphere</h2>
 
 <p>
 We consider the models for atmospheric pressure in
@@ -3930,11 +2986,11 @@ Filename: <code>atmospheric_pressure</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:drag:prog">Exercise 28: Make a program for vertical motion in a fluid</h2>
+<h2 id="decay:app:exer:drag:prog">Exercise 29: Make a program for vertical motion in a fluid</h2>
 
 <p>
-Implement the Stokes' drag model <a href="#mjx-eqn-99">(99)</a>
-and the quadratic drag model <a href="#mjx-eqn-101">(101)</a> from
+Implement the Stokes' drag model <a href="#mjx-eqn-101">(101)</a>
+and the quadratic drag model <a href="#mjx-eqn-103">(103)</a> from
 the section <a href="#decay:app:drag">Vertical motion of a body in a viscous fluid</a>, using the Crank-Nicolson
 scheme and a geometric mean for \( |v|v \) as explained, and assume
 constant fluid density.
@@ -3992,7 +3048,7 @@ Filename: <code>vertical_motion</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:parachute">Project 29: Simulate parachuting</h2>
+<h2 id="decay:app:exer:parachute">Project 30: Simulate parachuting</h2>
 
 <p>
 The aim of this project is to develop a general solver for the
@@ -4024,10 +3080,10 @@ Also equip the module with functionality for plotting the velocity.
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_29_1" style="font-size: 80%;"></a>
+ data-target="#exer_30_1" style="font-size: 80%;"></a>
 <b>Hint 1.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_29_1">
+<p><div class="collapse" id="exer_30_1">
 
 <p>
 Use the Crank-Nicolson scheme with a geometric mean of \( |v|v \) in time to
@@ -4046,10 +3102,10 @@ linearize the equation of motion with quadratic drag.
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_29_2" style="font-size: 80%;"></a>
+ data-target="#exer_30_2" style="font-size: 80%;"></a>
 <b>Hint 2.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_29_2">
+<p><div class="collapse" id="exer_30_2">
 
 <p>
 You can either use functions or classes for implementation.
@@ -4103,10 +3159,10 @@ a plot with these three forces.
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_29_3" style="font-size: 80%;"></a>
+ data-target="#exer_30_3" style="font-size: 80%;"></a>
 <b>Hint.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_29_3">
+<p><div class="collapse" id="exer_30_3">
 
 <p>
 You can either make a function <code>forces(v, t, plot=None)</code>
@@ -4135,10 +3191,10 @@ a skydiver in free fall before the parachute opens.
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_29_4" style="font-size: 80%;"></a>
+ data-target="#exer_30_4" style="font-size: 80%;"></a>
 <b>Hint.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_29_4">
+<p><div class="collapse" id="exer_30_4">
 
 <p>
 Meade and Struthers <a href="._decay-book010.html#parachute_1999">[10]</a> provide some data relevant
@@ -4179,10 +3235,10 @@ experienced by the jumper?
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_29_5" style="font-size: 80%;"></a>
+ data-target="#exer_30_5" style="font-size: 80%;"></a>
 <b>Hint.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_29_5">
+<p><div class="collapse" id="exer_30_5">
 
 <p>
 Following Meade and Struthers <a href="._decay-book010.html#parachute_1999">[10]</a>, one can set the
@@ -4214,7 +3270,7 @@ Filename: <code>parachuting</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:drag:atm1">Exercise 30: Formulate vertical motion in the atmosphere</h2>
+<h2 id="decay:app:exer:drag:atm1">Exercise 31: Formulate vertical motion in the atmosphere</h2>
 
 <p>
 Vertical motion of a body in the atmosphere needs to take into
@@ -4258,11 +3314,11 @@ Filename: <code>falling_in_variable_density</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:drag:atm2">Exercise 31: Simulate vertical motion in the atmosphere</h2>
+<h2 id="decay:app:exer:drag:atm2">Exercise 32: Simulate vertical motion in the atmosphere</h2>
 
 <p>
 Implement the Forward Euler or the Crank-Nicolson scheme
-derived in <a href="#decay:app:exer:drag:atm1">Exercise 30: Formulate vertical motion in the atmosphere</a>.
+derived in <a href="#decay:app:exer:drag:atm1">Exercise 31: Formulate vertical motion in the atmosphere</a>.
 Demonstrate the effect of air density variation on a falling
 human, e.g., the famous fall of <a href="http://en.wikipedia.org/wiki/Felix_Baumgartner" target="_self">Felix Baumgartner</a>. The drag coefficient can be set to 1.2.
 Filename: <code>falling_in_variable_density</code>.
@@ -4273,7 +3329,7 @@ Filename: <code>falling_in_variable_density</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:signum">Exercise 32: Compute \( y=|x| \) by solving an ODE</h2>
+<h2 id="decay:app:exer:signum">Exercise 33: Compute \( y=|x| \) by solving an ODE</h2>
 
 <p>
 Consider the ODE problem
@@ -4300,7 +3356,7 @@ Filename: <code>signum</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:interest">Exercise 33: Simulate fortune growth with random interest rate</h2>
+<h2 id="decay:app:exer:interest">Exercise 34: Simulate fortune growth with random interest rate</h2>
 
 <p>
 The goal of this exercise is to compute the value of a fortune subject
@@ -4325,10 +3381,10 @@ illustrate the uncertainty in the mean curve.
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_33_1" style="font-size: 80%;"></a>
+ data-target="#exer_34_1" style="font-size: 80%;"></a>
 <b>Hint 1.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_33_1">
+<p><div class="collapse" id="exer_34_1">
 
 <p>
 The following code snippet computes \( p^{n+1} \):
@@ -4360,10 +3416,10 @@ The following code snippet computes \( p^{n+1} \):
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_33_2" style="font-size: 80%;"></a>
+ data-target="#exer_34_2" style="font-size: 80%;"></a>
 <b>Hint 2.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_33_2">
+<p><div class="collapse" id="exer_34_2">
 
 <p>
 If \( u_i(t) \) is the value of the fortune in experiment number \( i \),
@@ -4401,7 +3457,7 @@ Filename: <code>random_interest</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:pop:at">Exercise 34: Simulate a population in a changing environment</h2>
+<h2 id="decay:app:exer:pop:at">Exercise 35: Simulate a population in a changing environment</h2>
 
 <p>
 We shall study a population modeled by <a href="#mjx-eqn-82">(82)</a> where
@@ -4450,7 +3506,7 @@ Filename: <code>population.py</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:pop:logistic1">Exercise 35: Simulate logistic growth</h2>
+<h2 id="decay:app:exer:pop:logistic1">Exercise 36: Simulate logistic growth</h2>
 
 <p>
 Solve the logistic ODE
@@ -4469,7 +3525,7 @@ Filename: <code>logistic_CN</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:interest:derive">Exercise 36: Rederive the equation for continuous compound interest</h2>
+<h2 id="decay:app:exer:interest:derive">Exercise 37: Rederive the equation for continuous compound interest</h2>
 
 <p>
 The ODE model <a href="#mjx-eqn-85">(85)</a> was derived under the assumption
@@ -4489,12 +3545,12 @@ Filename: <code>interest_modeling</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:viscoelasticity1">Exercise 37: Simulate the deformation of a viscoelastic material</h2>
+<h2 id="decay:app:exer:viscoelasticity1">Exercise 38: Simulate the deformation of a viscoelastic material</h2>
 
 <p>
 Stretching a rod made of polymer will cause deformations that are
 well described with a Kelvin-Vogt material model
-<a href="#mjx-eqn-105">(105)</a>. At \( t=0 \) we apply a constant
+<a href="#mjx-eqn-107">(107)</a>. At \( t=0 \) we apply a constant
 force \( \sigma = \sigma_0 \), but at \( t=t_1 \), we remove the force
 so \( \sigma=0 \). Compute numerically the corresponding strain
 (elongation divided by the rod's length) and visualize how it
@@ -4505,10 +3561,10 @@ responds in time.
 
 <p>
 <a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_37_1" style="font-size: 80%;"></a>
+ data-target="#exer_38_1" style="font-size: 80%;"></a>
 <b>Hint.</b>
 <div class="collapse-group">
-<p><div class="collapse" id="exer_37_1">
+<p><div class="collapse" id="exer_38_1">
 
 <p>
 To avoid finding proper values of the \( E \) and \( \eta \) parameters for
@@ -4535,54 +3591,8 @@ means that \( \bar t_1 = 1 \).
 <!-- --- end hint in exercise --- -->
 
 <p>
-<!-- --- begin solution of exercise --- -->
-
-<p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_37_2" style="font-size: 80%;"></a>
-<b>Solution.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_37_2">
-
-<p>
-Inserting the scaling \( \bar u=10\varepsilon \) and \( \bar t = tE/\eta \)
-in the ODE for \( \varepsilon \) results in
-
-$$ \frac{E}{10 \eta}\frac{d\bar u}{d\bar t} = -\frac{E}{\eta 10}\bar u
-+ \frac{\sigma(t)}{\eta}\tp$$
-
-This reduces to
-
-$$ \frac{d\bar u}{d\bar t} = -\bar u + \frac{10\sigma}{E}\tp$$
-
-<p>
-We can use the module <code>decay_vc</code> for solving \( u^{\prime}=-a(t)u+b(t) \):
-
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># Scaled model: u&#39; = -u + b(t), b=1 for t &lt; 1 else 0</span>
-eps, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=0</span>, a<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">lambda</span> t: <span style="color: #666666">1</span>,
-                b<span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">lambda</span> t: <span style="color: #666666">1</span> <span style="color: #008000; font-weight: bold">if</span> t <span style="color: #666666">&lt;</span> <span style="color: #666666">1</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #666666">0</span>,
-                T<span style="color: #666666">=4</span>, dt<span style="color: #666666">=0.01</span>, theta<span style="color: #666666">=0.5</span>)
-
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
-plt<span style="color: #666666">.</span>plot(t, eps)
-plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;Dimensionless time&#39;</span>); plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;10*strain&#39;</span>)
-plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
-plt<span style="color: #666666">.</span>show()
-</pre></div>
-<p>
-<center><p><img src="fig-models/KelvinVogt.png" align="bottom" width=600></p></center>
-
-<p>
-</div></p>
-</div>
-</p>
-
-<p>
-<!-- --- end solution of exercise --- -->
-Filename: <code>KelvinVogt</code>.
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>KelvinVogt</code>.
 
 <p>
 <!-- --- end exercise --- -->
