@@ -1297,19 +1297,7 @@ Fortunately, the numerical solution approaches the exact one as
 <p>
 It is easy to make mistakes while deriving and implementing numerical
 algorithms, so we should never believe in the solution before it has
-been thoroughly verified.  The most obvious idea for verification
-of the
-computations is to compare the numerical solution with the exact
-solution, when that exists. However, note that there will always
-be a discrepancy
-between these two solutions because of the numerical
-approximations. We cannot precisely quantify the approximation
-errors. The challenging question is therefore whether we have the
-mathematically correct discrepancy or if we have another, maybe small,
-discrepancy due to both an approximation error <em>and</em> an error in the
-implementation. It is thus
-impossible to judge whether the program is correct or not by
-just looking at the graphs in Figure <a href="#decay:fig:v2">6</a>.
+been thoroughly verified.
 
 <p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Verification and validation.</b>
@@ -1325,6 +1313,22 @@ it is meaningful to believe in the computations and perform validation
 (which compares the program results with physical experiments or observations).
 </div>
 
+
+<p>
+The most obvious idea for verification
+in our case is to compare the numerical solution with the exact
+solution, when that exists. This is, however, not a particularly good
+method. The reason is that there will always
+be a discrepancy
+between these two solutions, due to numerical
+approximations, and we cannot precisely quantify the approximation
+errors. The open question is therefore whether we have the
+mathematically correct
+discrepancy or if we have another, maybe small,
+discrepancy due to both an approximation error <em>and</em> an error in the
+implementation. It is thus
+impossible to judge whether the program is correct or not by
+just looking at the graphs in Figure <a href="#decay:fig:v2">6</a>.
 
 <p>
 To avoid

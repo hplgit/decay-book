@@ -118,8 +118,8 @@ Falling bodies in fluids, as described in the section :ref:`decay:app:drag`,
 involves :math:`u^{\prime}=-au+b` with seven physical parameters. All these vanish
 in the scaled version of the problem if we start the motion from rest!
 
-Many more details about scaling is presented in
-[Ref09]_.
+Many more details about scaling is presented in the author's book
+*Scaling of Differential Equations* [Ref09]_.
 
 .. _decay:app:pop:
 
