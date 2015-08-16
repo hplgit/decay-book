@@ -153,7 +153,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'decay:exer:dudt',
                'decay:exer:dudt'),
-              ('Exercise 3: Experiment with integer division',
+              ('Exercise 3: Experiment with divisions',
                2,
                'decay:exer:intdiv',
                'decay:exer:intdiv'),
@@ -212,27 +212,44 @@ $$
 
 <p>
 <!-- !split -->
+Throughout industry and science it is common today to study nature or
+technological devices through models on a computer. With such models
+the computer acts as a virtual lab where experiments can be done
+in a fast, reliable, safe, and cheap way. In some fields, e.g., aerospace
+engineering, the computer models are now so sophisticated that they
+can replace physical experiments to a large extent.
+
+<p>
+<!-- Computational science is a widely used term for doing scientific discoveries -->
+<!-- using computer models. Similarly, computational engineering is about -->
+<!-- engineering based on heavy use of computer models. The present book does -->
+<!-- not cover how to do scientific discoveries or engineering, but -->
+<!-- targets how to create reliable computer models. This task is often -->
+<!-- called scientific computing -->
+
+<p>
+A vast amount of computer models are based on ordinary and partial
+differential equations. This book is an introduction to the
+various scientific ingredients we need for reliable computing with such
+type of models. A key theme is to solve differential equations
+<em>numerically</em> on a computer. Many methods are available for this purpose,
+but the focus here is on <em>finite difference methods</em>, because these
+are simple, yet versatile, for solving a wide range of ordinary and
+partial differential equations. The present chapter first presents the
+mathematical ideas of finite difference methods and derives algorithms,
+i.e., formulations of the methods ready for computer programming.
+Then we create programs and learn how we can be sure that the programs
+really work correctly.
 
 <h1 id="decay:basics">Finite difference methods</h1>
 
 <p>
-
-<!-- begin inline comment -->
-<font color="red">(<b>hpl 1</b>: Standardize how we use boxes in the beginning of sections!)</font>
-<!-- end inline comment -->
-
-<p>
-<div class="alert alert-block alert-notice alert-text-normal">
-<b>Contents of this section.</b>
-<p>
-We explain the basic ideas of finite difference methods
-primarily via the simple ordinary differential equation \( u^{\prime}=-au \).
+This section explains the basic ideas of finite difference methods
+via the simple ordinary differential equation \( u^{\prime}=-au \).
 Emphasis is put on the reasoning behind problem discretizing and
 introduction of key concepts such as mesh, mesh function,
 finite difference approximations, averaging in a mesh,
 derivation of algorithms, and discrete operator notation.
-</div>
-
 
 <h2 id="decay:model">A basic model for exponential decay</h2>
 

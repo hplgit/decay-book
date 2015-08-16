@@ -164,11 +164,13 @@ u^- &amp;= (u^0,u^1,\ldots,u^{N_t-2}){\thinspace .}\end{split}\]</div>
 with index 1 and going all indices up to, but not including, the last one
 (<code class="docutils literal"><span class="pre">-1</span></code>).</p>
 <p>Use the ideas above to implement a vectorized version of the
-<code class="docutils literal"><span class="pre">differentiate</span></code> function without loops.</p>
+<code class="docutils literal"><span class="pre">differentiate</span></code> function without loops. Make a corresponding
+test function that compares the result with that of
+<code class="docutils literal"><span class="pre">differentiate</span></code>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">differentiate</span></code>.</p>
 </div>
-<div class="section" id="exercise-3-experiment-with-integer-division">
-<span id="decay-exer-intdiv"></span><h2>Exercise 3: Experiment with integer division<a class="headerlink" href="#exercise-3-experiment-with-integer-division" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exercise-3-experiment-with-divisions">
+<span id="decay-exer-intdiv"></span><h2>Exercise 3: Experiment with divisions<a class="headerlink" href="#exercise-3-experiment-with-divisions" title="Permalink to this headline">¶</a></h2>
 <p>Explain what happens in the following computations, where
 some are mathematically unexpected:</p>
 <div class="highlight-ipy"><div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">dt</span> <span class="o">=</span> <span class="mi">3</span>
@@ -181,7 +183,7 @@ some are mathematically unexpected:</p>
 <span class="mi">0</span>
 </pre></div>
 </div>
-<p>Filename: <code class="docutils literal"><span class="pre">pyproblems.txt</span></code>.</p>
+<p>Filename: <code class="docutils literal"><span class="pre">pyproblems</span></code>.</p>
 </div>
 <div class="section" id="exercise-4-experiment-with-wrong-computations">
 <span id="decay-exer-decay1err"></span><h2>Exercise 4: Experiment with wrong computations<a class="headerlink" href="#exercise-4-experiment-with-wrong-computations" title="Permalink to this headline">¶</a></h2>
@@ -198,11 +200,11 @@ t= 6.000 u=0
 </pre></div>
 </div>
 <p>Print out the result of all intermediate computations and use
-<code class="docutils literal"><span class="pre">type(v)</span></code> to see the object type of the result stored in <code class="docutils literal"><span class="pre">v</span></code>.
+<code class="docutils literal"><span class="pre">type(v)</span></code> to see the object type of the result stored in some variable <code class="docutils literal"><span class="pre">v</span></code>.
 Examine the intermediate calculations and explain
 why <code class="docutils literal"><span class="pre">u</span></code> is wrong and why we compute up to <span class="math">\(t=6\)</span> only even though we
-specified <span class="math">\(T=7\)</span>.
-Filename: <code class="docutils literal"><span class="pre">decay_v1_err</span></code>.</p>
+specified <span class="math">\(T=7\)</span>.</p>
+<p>Filename: <code class="docutils literal"><span class="pre">decay_v1_err</span></code>.</p>
 </div>
 <div class="section" id="exercise-5-plot-the-error-function">
 <span id="decay-exer-plot-error"></span><h2>Exercise 5: Plot the error function<a class="headerlink" href="#exercise-5-plot-the-error-function" title="Permalink to this headline">¶</a></h2>
@@ -210,8 +212,10 @@ Filename: <code class="docutils literal"><span class="pre">decay_v1_err</span></
 Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
 function <span class="math">\(e^n = {u_{\small\mbox{e}}}(t_n)-u^n\)</span> for <span class="math">\(\Delta t\)</span>, <span class="math">\(\frac{1}{4}\Delta t\)</span>, and
 <span class="math">\(\frac{1}{8}\Delta t\)</span>, where <span class="math">\({u_{\small\mbox{e}}}\)</span> is the exact solution of the ODE and
-<span class="math">\(u^n\)</span> is the numerical solution at mesh point <span class="math">\(t_n\)</span>.
-Filename: <code class="docutils literal"><span class="pre">decay_plot_error</span></code>.</p>
+<span class="math">\(u^n\)</span> is the numerical solution at mesh point <span class="math">\(t_n\)</span>.</p>
+<p><strong>Hint.</strong>
+Modify the <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_plot_mpl.py">decay_plot_mpl.py</a> code.</p>
+<p>Filename: <code class="docutils literal"><span class="pre">decay_plot_error</span></code>.</p>
 </div>
 <div class="section" id="exercise-6-change-formatting-of-numbers-and-debug">
 <span id="decay-exer-inexact-output"></span><h2>Exercise 6: Change formatting of numbers and debug<a class="headerlink" href="#exercise-6-change-formatting-of-numbers-and-debug" title="Permalink to this headline">¶</a></h2>
@@ -270,7 +274,7 @@ terminal window. Why?</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#exercise-2-differentiate-a-function">Exercise 2: Differentiate a function</a></li>
-<li><a class="reference internal" href="#exercise-3-experiment-with-integer-division">Exercise 3: Experiment with integer division</a></li>
+<li><a class="reference internal" href="#exercise-3-experiment-with-divisions">Exercise 3: Experiment with divisions</a></li>
 <li><a class="reference internal" href="#exercise-4-experiment-with-wrong-computations">Exercise 4: Experiment with wrong computations</a></li>
 <li><a class="reference internal" href="#exercise-5-plot-the-error-function">Exercise 5: Plot the error function</a></li>
 <li><a class="reference internal" href="#exercise-6-change-formatting-of-numbers-and-debug">Exercise 6: Change formatting of numbers and debug</a></li>
