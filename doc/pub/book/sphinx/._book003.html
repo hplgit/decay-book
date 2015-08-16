@@ -473,19 +473,7 @@ Fortunately, the numerical solution approaches the exact one as
 <h2>Verifying the implementation<a class="headerlink" href="#verifying-the-implementation" title="Permalink to this headline">¶</a></h2>
 <p>It is easy to make mistakes while deriving and implementing numerical
 algorithms, so we should never believe in the solution before it has
-been thoroughly verified.  The most obvious idea for verification
-of the
-computations is to compare the numerical solution with the exact
-solution, when that exists. However, note that there will always
-be a discrepancy
-between these two solutions because of the numerical
-approximations. We cannot precisely quantify the approximation
-errors. The challenging question is therefore whether we have the
-mathematically correct discrepancy or if we have another, maybe small,
-discrepancy due to both an approximation error <em>and</em> an error in the
-implementation. It is thus
-impossible to judge whether the program is correct or not by
-just looking at the graphs in Figure <a class="reference internal" href="#decay-fig-v2"><span class="std std-ref">Comparison of numerical and exact solution</span></a>.</p>
+been thoroughly verified.</p>
 <div class="admonition-verification-and-validation admonition">
 <p class="first admonition-title">Verification and validation</p>
 <p class="last">The purpose of <em>verifying</em> a program is to bring evidence for the
@@ -499,6 +487,20 @@ the right equations</em>. We must always perform a verification before
 it is meaningful to believe in the computations and perform validation
 (which compares the program results with physical experiments or observations).</p>
 </div>
+<p>The most obvious idea for verification
+in our case is to compare the numerical solution with the exact
+solution, when that exists. This is, however, not a particularly good
+method. The reason is that there will always
+be a discrepancy
+between these two solutions, due to numerical
+approximations, and we cannot precisely quantify the approximation
+errors. The open question is therefore whether we have the
+mathematically correct
+discrepancy or if we have another, maybe small,
+discrepancy due to both an approximation error <em>and</em> an error in the
+implementation. It is thus
+impossible to judge whether the program is correct or not by
+just looking at the graphs in Figure <a class="reference internal" href="#decay-fig-v2"><span class="std std-ref">Comparison of numerical and exact solution</span></a>.</p>
 <p>To avoid
 mixing the unavoidable numerical approximation errors and the
 undesired implementation errors, we should try to make tests where

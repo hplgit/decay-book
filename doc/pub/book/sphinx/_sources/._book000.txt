@@ -15,7 +15,7 @@ Finite Difference Computing with Exponential Decay Models
 
 :Authors: Hans Petter Langtangen
 
-*Summary.* This easy-to-read tutorial uses a specific case, exponential decay
+*Preface.* This easy-to-read tutorial uses a specific case, exponential decay
 models, to introduce the basic ingredients of mathematical modeling on
 computers: model derivation, finite difference methods, computational
 algorithms, implementation in Python, software testing, visualization,
@@ -26,5 +26,5 @@ scientific computing are covered in addition to software topics like
 user interfaces, unit testing frameworks, class programming, and
 automating computer experiments.
 
-:Date: Aug 9, 2015
+:Date: Aug 16, 2015
 
