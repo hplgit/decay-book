@@ -153,7 +153,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'decay:exer:dudt',
                'decay:exer:dudt'),
-              ('Exercise 3: Experiment with integer division',
+              ('Exercise 3: Experiment with divisions',
                2,
                'decay:exer:intdiv',
                'decay:exer:intdiv'),
@@ -216,9 +216,6 @@ $$
 <h1 id="decay:impl1">Implementation</h1>
 
 <p>
-<div class="alert alert-block alert-notice alert-text-normal">
-<b>Contents of this section.</b>
-<p>
 We want to make a computer program for solving
 $$
 u^{\prime}(t) = -au(t),\quad t\in (0,T], \quad u(0)=I,
@@ -228,12 +225,10 @@ by finite difference methods. The program should also display
 the numerical solution as a curve on the
 screen, preferably together with the
 exact solution.
-</div>
-
 
 <p>
 All programs referred to in this section are found in the
-<a href="http://tinyurl.com/ofkw6kc/alg" target="_self"><tt>src/decay</tt></a> directory (we use the classical
+<a href="http://tinyurl.com/ofkw6kc/alg" target="_self"><tt>src/alg</tt></a> directory (we use the classical
 Unix term <em>directory</em> for what many others nowadays call <em>folder</em>).
 
 <p>
@@ -387,7 +382,7 @@ last is then <code>len(u)-1</code> (the length of an array <code>u</code> is obt
 <p>
 The shown implementation of the <code>solver</code> may face problems and
 wrong results if <code>T</code>, <code>a</code>, <code>dt</code>, and <code>theta</code> are given as integers
-(see <a href="._alg-solarized003.html#decay:exer:intdiv">Exercise 3: Experiment with integer division</a> and <a href="._alg-solarized003.html#decay:exer:decay1err">Exercise 4: Experiment with wrong computations</a>).
+(see <a href="._alg-solarized003.html#decay:exer:intdiv">Exercise 3: Experiment with divisions</a> and <a href="._alg-solarized003.html#decay:exer:decay1err">Exercise 4: Experiment with wrong computations</a>).
 The problem is related to <em>integer division</em> in Python (as
 in Fortran, C, C++, and many other computer languages!): <code>1/2</code> becomes <code>0</code>,
 while <code>1.0/2</code>, <code>1/2.0</code>, or <code>1.0/2.0</code> all become <code>0.5</code>. So, it is enough
@@ -719,19 +714,7 @@ Fortunately, the numerical solution approaches the exact one as
 <p>
 It is easy to make mistakes while deriving and implementing numerical
 algorithms, so we should never believe in the solution before it has
-been thoroughly verified.  The most obvious idea for verification
-of the
-computations is to compare the numerical solution with the exact
-solution, when that exists. However, note that there will always
-be a discrepancy
-between these two solutions because of the numerical
-approximations. We cannot precisely quantify the approximation
-errors. The challenging question is therefore whether we have the
-mathematically correct discrepancy or if we have another, maybe small,
-discrepancy due to both an approximation error <em>and</em> an error in the
-implementation. It is thus
-impossible to judge whether the program is correct or not by
-just looking at the graphs in Figure <a href="#decay:fig:v2">6</a>.
+been thoroughly verified.
 
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
@@ -749,6 +732,22 @@ it is meaningful to believe in the computations and perform validation
 (which compares the program results with physical experiments or observations).
 </div>
 
+
+<p>
+The most obvious idea for verification
+in our case is to compare the numerical solution with the exact
+solution, when that exists. This is, however, not a particularly good
+method. The reason is that there will always
+be a discrepancy
+between these two solutions, due to numerical
+approximations, and we cannot precisely quantify the approximation
+errors. The open question is therefore whether we have the
+mathematically correct
+discrepancy or if we have another, maybe small,
+discrepancy due to both an approximation error <em>and</em> an error in the
+implementation. It is thus
+impossible to judge whether the program is correct or not by
+just looking at the graphs in Figure <a href="#decay:fig:v2">6</a>.
 
 <p>
 To avoid

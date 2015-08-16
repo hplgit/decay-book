@@ -153,7 +153,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'decay:exer:dudt',
                'decay:exer:dudt'),
-              ('Exercise 3: Experiment with integer division',
+              ('Exercise 3: Experiment with divisions',
                2,
                'decay:exer:intdiv',
                'decay:exer:intdiv'),
@@ -229,6 +229,9 @@ are mesh points stored in the array <code>t</code>. Use a loop over the mesh
 points and compute one mesh function value at the time.
 
 <p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
+<p>
 <b>b)</b>
 Use <code>mesh_function</code> to compute the mesh function corresponding to
 
@@ -243,6 +246,9 @@ $$
 Choose a mesh \( t_n=n\Delta t \) with \( \Delta t=0.1 \).
 Plot the mesh function.
 
+<p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 Filename: <code>mesh_function</code>.
 
@@ -317,6 +323,9 @@ exact for quadratic polynomials. Use this property to verify the program.
 <!-- --- end hint in exercise --- -->
 
 <p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
+<p>
 <b>b)</b>
 A standard implementation of the formula <a href="#mjx-eqn-49">(49)</a> is to
 have a loop over \( i \). For large \( N_t \), such loop may run slowly in
@@ -353,8 +362,13 @@ with index 1 and going all indices up to, but not including, the last one
 
 <p>
 Use the ideas above to implement a vectorized version of the
-<code>differentiate</code> function without loops.
+<code>differentiate</code> function without loops. Make a corresponding
+test function that compares the result with that of
+<code>differentiate</code>.
 
+<p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->
 <p>
 Filename: <code>differentiate</code>.
 
@@ -364,7 +378,7 @@ Filename: <code>differentiate</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:exer:intdiv">Exercise 3: Experiment with integer division</h2>
+<h2 id="decay:exer:intdiv">Exercise 3: Experiment with divisions</h2>
 
 <p>
 Explain what happens in the following computations, where
@@ -383,7 +397,8 @@ some are mathematically unexpected:
 <span style="color: #B452CD">0</span>
 </pre></div>
 <p>
-Filename: <code>pyproblems.txt</code>.
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>pyproblems</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -396,6 +411,7 @@ Filename: <code>pyproblems.txt</code>.
 <p>
 Consider the <code>solver</code> function in the <a href="http://tinyurl.com/ofkw6kc/alg/decay_v1.py" target="_self"><tt>decay_v1.py</tt></a> file
 and the following call:
+
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
@@ -403,6 +419,7 @@ and the following call:
 </pre></div>
 <p>
 The output becomes
+
 <p>
 
 <!-- code=text (!bc dat) typeset with pygments style "perldoc" -->
@@ -413,11 +430,14 @@ t= 6.000 u=0
 </pre></div>
 <p>
 Print out the result of all intermediate computations and use
-<code>type(v)</code> to see the object type of the result stored in <code>v</code>.
+<code>type(v)</code> to see the object type of the result stored in some variable <code>v</code>.
 Examine the intermediate calculations and explain
 why <code>u</code> is wrong and why we compute up to \( t=6 \) only even though we
 specified \( T=7 \).
-Filename: <code>decay_v1_err</code>.
+
+<p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>decay_v1_err</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -433,7 +453,20 @@ Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
 function \( e^n = \uex(t_n)-u^n \) for \( \Delta t \), \( \frac{1}{4}\Delta t \), and
 \( \frac{1}{8}\Delta t \), where \( \uex \) is the exact solution of the ODE and
 \( u^n \) is the numerical solution at mesh point \( t_n \).
-Filename: <code>decay_plot_error</code>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Modify the <a href="http://tinyurl.com/ofkw6kc/alg/decay_plot_mpl.py" target="_self"><tt>decay_plot_mpl.py</tt></a> code.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>decay_plot_error</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -487,7 +520,7 @@ leads to printing of the message <code>Bug in the implementation!</code> in the
 terminal window. Why?
 
 <p>
-<!-- removed !bans ... !eans environment (because of the command-line option --without_answers)
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
  -->Filename: <code>decay_memsave_v2</code>.
 
 <p>

@@ -50,4 +50,3 @@ def main(I, a, T, dt_values, theta_values=(0, 0.5, 1)):
             print '%4.1f %6.2f: %12.3E' % (theta, dt, E)
 
 main(I=1, a=2, T=5, dt_values=[0.4, 0.04])
-

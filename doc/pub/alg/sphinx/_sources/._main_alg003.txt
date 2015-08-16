@@ -17,6 +17,8 @@ function implementing a mathematical function ``f(t)`` and :math:`t_0,\ldots,t_{
 are mesh points stored in the array ``t``. Use a loop over the mesh
 points and compute one mesh function value at the time.
 
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
 **b)**
 Use ``mesh_function`` to compute the mesh function corresponding to
 
@@ -31,6 +33,8 @@ Use ``mesh_function`` to compute the mesh function corresponding to
 
 Choose a mesh :math:`t_n=n\Delta t` with :math:`\Delta t=0.1`.
 Plot the mesh function.
+
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``mesh_function``.
 
@@ -108,6 +112,8 @@ exact for quadratic polynomials. Use this property to verify the program.
 
 .. --- end hint in exercise ---
 
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
 **b)**
 A standard implementation of the formula :eq:`decay:exer:dudt:D2t` is to
 have a loop over :math:`i`. For large :math:`N_t`, such loop may run slowly in
@@ -141,7 +147,11 @@ with index 1 and going all indices up to, but not including, the last one
 (``-1``).
 
 Use the ideas above to implement a vectorized version of the
-``differentiate`` function without loops.
+``differentiate`` function without loops. Make a corresponding
+test function that compares the result with that of
+``differentiate``.
+
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``differentiate``.
 
@@ -151,8 +161,8 @@ Filename: ``differentiate``.
 
 .. _decay:exer:intdiv:
 
-Exercise 3: Experiment with integer division
---------------------------------------------
+Exercise 3: Experiment with divisions
+-------------------------------------
 
 Explain what happens in the following computations, where
 some are mathematically unexpected:
@@ -168,7 +178,9 @@ some are mathematically unexpected:
         >>> (1 - (1-theta)*a*dt)/(1 + theta*dt*a)
         0
 
-Filename: ``pyproblems.txt``.
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
+Filename: ``pyproblems``.
 
 .. --- end exercise ---
 
@@ -196,10 +208,13 @@ The output becomes
         t= 6.000 u=0
 
 Print out the result of all intermediate computations and use
-``type(v)`` to see the object type of the result stored in ``v``.
+``type(v)`` to see the object type of the result stored in some variable ``v``.
 Examine the intermediate calculations and explain
 why ``u`` is wrong and why we compute up to :math:`t=6` only even though we
 specified :math:`T=7`.
+
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
 Filename: ``decay_v1_err``.
 
 .. --- end exercise ---
@@ -216,6 +231,16 @@ Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
 function :math:`e^n = {u_{\small\mbox{e}}}(t_n)-u^n` for :math:`\Delta t`, :math:`\frac{1}{4}\Delta t`, and
 :math:`\frac{1}{8}\Delta t`, where :math:`{u_{\small\mbox{e}}}` is the exact solution of the ODE and
 :math:`u^n` is the numerical solution at mesh point :math:`t_n`.
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+Modify the `decay_plot_mpl.py <http://tinyurl.com/ofkw6kc/alg/decay_plot_mpl.py>`__ code.
+
+.. --- end hint in exercise ---
+
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
 Filename: ``decay_plot_error``.
 
 .. --- end exercise ---
@@ -266,7 +291,7 @@ running the modified program
 leads to printing of the message ``Bug in the implementation!`` in the
 terminal window. Why?
 
-.. removed !bans ... !eans environment (because of the command-line option --without_answers)
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``decay_memsave_v2``.
 
