@@ -1201,7 +1201,7 @@ need to make a Python function for computing the exact solution:
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>def exact_solution(t, I, a):
+<pre><code>def u_exact(t, I, a):
     return I*exp(-a*t)
 </code></pre>
 <!-- end verbatim block -->
@@ -1209,7 +1209,7 @@ It is tempting to just do
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>u_e = exact_solution(t, I, a)
+<pre><code>u_e = u_exact(t, I, a)
 plot(t, u, t, u_e)
 </code></pre>
 <!-- end verbatim block -->
@@ -1222,7 +1222,7 @@ the mesh points is to introduce a very fine mesh for \( \uex(t) \):
 <p>
 <!-- begin verbatim block  pycod-->
 <pre><code>t_e = linspace(0, T, 1001)      # fine mesh
-u_e = exact_solution(t_e, I, a)
+u_e = u_exact(t_e, I, a)
 </code></pre>
 <!-- end verbatim block -->
 We can also plot the curves with different colors and styles, e.g.,
@@ -1252,7 +1252,7 @@ def plot_numerical_and_exact(theta, I, a, T, dt):
     u, t = solver(I=I, a=a, T=T, dt=dt, theta=theta)
 
     t_e = linspace(0, T, 1001)        # fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
 
     plot(t,   u,   'r--o',            # red dashes w/circles
          t_e, u_e, 'b-')              # blue line for exact sol.
@@ -1444,7 +1444,7 @@ The error mesh function \( e^n \) can be computed by
 <p>
 <!-- begin verbatim block  pycod-->
 <pre><code>u, t = solver(I, a, T, dt, theta)  # Numerical sol.
-u_e = exact_solution(t, I, a)      # Representative of exact sol.
+u_e = u_exact(t, I, a)             # Representative of exact sol.
 e = u_e - u
 </code></pre>
 <!-- end verbatim block -->
@@ -1459,19 +1459,19 @@ The last statements
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>u_e = exact_solution(t, I, a)
+<pre><code>u_e = u_exact(t, I, a)
 e = u_e - u
 </code></pre>
 <!-- end verbatim block -->
 demonstrate some standard examples of array arithmetics: <code>t</code> is an
-array of mesh points that we pass to <code>exact_solution</code>. This function
+array of mesh points that we pass to <code>u_exact</code>. This function
 evaluates <code>-a*t</code>, which is a scalar times an array, meaning that
 the scalar is multiplied with each array element.
 The result is an array, let us call it <code>tmp1</code>. Then
 <code>exp(tmp1)</code> means applying the exponential function to each element in
 <code>tmp1</code>, giving an array, say <code>tmp2</code>. Finally, <code>I*tmp2</code> is computed
 (scalar times array) and <code>u_e</code> refers to this array returned from
-<code>exact_solution</code>. The expression <code>u_e - u</code> is the difference between
+<code>u_exact</code>. The expression <code>u_e - u</code> is the difference between
 two arrays, resulting in a new array referred to by <code>e</code>.
 
 <p>
@@ -1640,7 +1640,7 @@ one element at a time:
 u_e = zeros(m)
 t = 0
 for i in range(m):
-    u_e[i] = exact_solution(t, a, I)
+    u_e[i] = u_exact(t, a, I)
     t = t + dt
 e = zeros(m)
 for i in range(m):
@@ -1672,13 +1672,13 @@ resolution.
     and plot the numerical and exact solutions (if makeplot=True).
     &quot;&quot;&quot;
     u, t = solver(I, a, T, dt, theta)    # Numerical solution
-    u_e = exact_solution(t, I, a)
+    u_e = u_exact(t, I, a)
     e = u_e - u
     E = sqrt(dt*sum(e**2))
     if makeplot:
         figure()                         # create new plot
         t_e = linspace(0, T, 1001)       # fine mesh for u_e
-        u_e = exact_solution(t_e, I, a)
+        u_e = u_exact(t_e, I, a)
         plot(t,   u,   'r--o')           # red dashes w/circles
         plot(t_e, u_e, 'b-')             # blue line for exact sol.
         legend(['numerical', 'exact'])
@@ -2058,7 +2058,7 @@ the error measure and make the plot:
     u, t = solver_memsave(I, a, T, dt, theta, filename)
 
     t, u = read_file(filename)
-    u_e = exact_solution(t, I, a)
+    u_e = u_exact(t, I, a)
     e = u_e - u
     E = sqrt(dt*np.sum(e**2))
     if makeplot:

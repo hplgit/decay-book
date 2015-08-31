@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -57,8 +56,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -70,14 +69,14 @@
         <li class="right" >
           <a href="._book002.html" title="Algorithms and implementations"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Finite Difference Computing with Exponential Decay Models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Finite Difference Computing with Exponential Decay Models</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="implementation-1">
 <span id="decay-impl1"></span><h1>Implementation  (1)<a class="headerlink" href="#implementation-1" title="Permalink to this headline">¶</a></h1>
@@ -404,12 +403,12 @@ by the intuitive command <code class="docutils literal"><span class="pre">plot(t
 <p>It will be illustrative to also plot the exact solution
 <span class="math">\({u_{\small\mbox{e}}}(t)=Ie^{-at}\)</span> for comparison. We first
 need to make a Python function for computing the exact solution:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">I</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>It is tempting to just do</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u_e</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -419,7 +418,7 @@ straight lines between the discrete points <code class="docutils literal"><span 
 The technique for showing the &#8220;exact&#8221; variation of <span class="math">\({u_{\small\mbox{e}}}(t)\)</span> between
 the mesh points is to introduce a very fine mesh for <span class="math">\({u_{\small\mbox{e}}}(t)\)</span>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">t_e</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>      <span class="c"># fine mesh</span>
-<span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We can also plot the curves with different colors and styles, e.g.,</p>
@@ -441,7 +440,7 @@ the comparison plot becomes</p>
     <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
 
     <span class="n">t_e</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>        <span class="c"># fine mesh for u_e</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 
     <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">,</span>            <span class="c"># red dashes w/circles</span>
          <span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>              <span class="c"># blue line for exact sol.</span>
@@ -591,7 +590,7 @@ defined for all <span class="math">\(t\in [0,T]\)</span>. In fact,
 the difference of two mesh functions.</p>
 <p>The error mesh function <span class="math">\(e^n\)</span> can be computed by</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>  <span class="c"># Numerical sol.</span>
-<span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>      <span class="c"># Representative of exact sol.</span>
+<span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>             <span class="c"># Representative of exact sol.</span>
 <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
 </pre></div>
 </div>
@@ -600,19 +599,19 @@ and associated with the points in the array <code class="docutils literal"><span
 <span class="target" id="index-8"></span><span class="target" id="index-9"></span><div class="admonition-array-arithmetics admonition" id="index-10">
 <p class="first admonition-title">Array arithmetics</p>
 <p>The last statements</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
 </pre></div>
 </div>
 <p>demonstrate some standard examples of array arithmetics: <code class="docutils literal"><span class="pre">t</span></code> is an
-array of mesh points that we pass to <code class="docutils literal"><span class="pre">exact_solution</span></code>. This function
+array of mesh points that we pass to <code class="docutils literal"><span class="pre">u_exact</span></code>. This function
 evaluates <code class="docutils literal"><span class="pre">-a*t</span></code>, which is a scalar times an array, meaning that
 the scalar is multiplied with each array element.
 The result is an array, let us call it <code class="docutils literal"><span class="pre">tmp1</span></code>. Then
 <code class="docutils literal"><span class="pre">exp(tmp1)</span></code> means applying the exponential function to each element in
 <code class="docutils literal"><span class="pre">tmp1</span></code>, giving an array, say <code class="docutils literal"><span class="pre">tmp2</span></code>. Finally, <code class="docutils literal"><span class="pre">I*tmp2</span></code> is computed
 (scalar times array) and <code class="docutils literal"><span class="pre">u_e</span></code> refers to this array returned from
-<code class="docutils literal"><span class="pre">exact_solution</span></code>. The expression <code class="docutils literal"><span class="pre">u_e</span> <span class="pre">-</span> <span class="pre">u</span></code> is the difference between
+<code class="docutils literal"><span class="pre">u_exact</span></code>. The expression <code class="docutils literal"><span class="pre">u_e</span> <span class="pre">-</span> <span class="pre">u</span></code> is the difference between
 two arrays, resulting in a new array referred to by <code class="docutils literal"><span class="pre">e</span></code>.</p>
 <p class="last">Replacement of array element computations inside a loop by array
 arithmetics is known as <em>vectorization</em>.</p>
@@ -729,7 +728,7 @@ one element at a time:</p>
 <span class="n">u_e</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="n">u_e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+    <span class="n">u_e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">dt</span>
 <span class="n">e</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
@@ -758,13 +757,13 @@ resolution.</p>
 <span class="sd">    and plot the numerical and exact solutions (if makeplot=True).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>    <span class="c"># Numerical solution</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
     <span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">makeplot</span><span class="p">:</span>
         <span class="n">figure</span><span class="p">()</span>                         <span class="c"># create new plot</span>
         <span class="n">t_e</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>       <span class="c"># fine mesh for u_e</span>
-        <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
         <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">)</span>           <span class="c"># red dashes w/circles</span>
         <span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>             <span class="c"># blue line for exact sol.</span>
         <span class="n">legend</span><span class="p">([</span><span class="s">&#39;numerical&#39;</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">])</span>
@@ -1055,7 +1054,7 @@ the error measure and make the plot:</p>
     <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver_memsave</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
     <span class="n">t</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
     <span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">makeplot</span><span class="p">:</span>
@@ -1073,7 +1072,7 @@ exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.p
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <center>
             <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
@@ -1115,15 +1114,17 @@ exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.p
   <h4>Next topic</h4>
   <p class="topless"><a href="._book004.html"
                         title="next chapter">Exercises  (1)</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/._book003.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._book003.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -1137,7 +1138,7 @@ exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.p
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1149,12 +1150,15 @@ exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.p
         <li class="right" >
           <a href="._book002.html" title="Algorithms and implementations"
              >previous</a> |</li>
-        <li><a href="index.html">Finite Difference Computing with Exponential Decay Models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Finite Difference Computing with Exponential Decay Models</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">
   <div class="footer">
-  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;2015, Hans Petter Langtangen.
   </div>
 </div>
 

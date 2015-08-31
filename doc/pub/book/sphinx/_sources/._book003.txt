@@ -404,14 +404,14 @@ need to make a Python function for computing the exact solution:
 
 .. code-block:: python
 
-        def exact_solution(t, I, a):
+        def u_exact(t, I, a):
             return I*exp(-a*t)
 
 It is tempting to just do
 
 .. code-block:: python
 
-        u_e = exact_solution(t, I, a)
+        u_e = u_exact(t, I, a)
         plot(t, u, t, u_e)
 
 However, this is not exactly what we want: the ``plot`` function draws
@@ -423,7 +423,7 @@ the mesh points is to introduce a very fine mesh for :math:`{u_{\small\mbox{e}}}
 .. code-block:: python
 
         t_e = linspace(0, T, 1001)      # fine mesh
-        u_e = exact_solution(t_e, I, a)
+        u_e = u_exact(t_e, I, a)
 
 We can also plot the curves with different colors and styles, e.g.,
 
@@ -449,7 +449,7 @@ the comparison plot becomes
             u, t = solver(I=I, a=a, T=T, dt=dt, theta=theta)
         
             t_e = linspace(0, T, 1001)        # fine mesh for u_e
-            u_e = exact_solution(t_e, I, a)
+            u_e = u_exact(t_e, I, a)
         
             plot(t,   u,   'r--o',            # red dashes w/circles
                  t_e, u_e, 'b-')              # blue line for exact sol.
@@ -634,7 +634,7 @@ The error mesh function :math:`e^n` can be computed by
 .. code-block:: python
 
         u, t = solver(I, a, T, dt, theta)  # Numerical sol.
-        u_e = exact_solution(t, I, a)      # Representative of exact sol.
+        u_e = u_exact(t, I, a)             # Representative of exact sol.
         e = u_e - u
 
 Note that the mesh functions ``u`` and ``u_e`` are represented by arrays
@@ -653,18 +653,18 @@ and associated with the points in the array ``t``.
    
    .. code-block:: python
    
-           u_e = exact_solution(t, I, a)
+           u_e = u_exact(t, I, a)
            e = u_e - u
    
    demonstrate some standard examples of array arithmetics: ``t`` is an
-   array of mesh points that we pass to ``exact_solution``. This function
+   array of mesh points that we pass to ``u_exact``. This function
    evaluates ``-a*t``, which is a scalar times an array, meaning that
    the scalar is multiplied with each array element.
    The result is an array, let us call it ``tmp1``. Then
    ``exp(tmp1)`` means applying the exponential function to each element in
    ``tmp1``, giving an array, say ``tmp2``. Finally, ``I*tmp2`` is computed
    (scalar times array) and ``u_e`` refers to this array returned from
-   ``exact_solution``. The expression ``u_e - u`` is the difference between
+   ``u_exact``. The expression ``u_e - u`` is the difference between
    two arrays, resulting in a new array referred to by ``e``.
    
    Replacement of array element computations inside a loop by array
@@ -898,7 +898,7 @@ one element at a time:
         u_e = zeros(m)
         t = 0
         for i in range(m):
-            u_e[i] = exact_solution(t, a, I)
+            u_e[i] = u_exact(t, a, I)
             t = t + dt
         e = zeros(m)
         for i in range(m):
@@ -929,13 +929,13 @@ resolution.
             and plot the numerical and exact solutions (if makeplot=True).
             """
             u, t = solver(I, a, T, dt, theta)    # Numerical solution
-            u_e = exact_solution(t, I, a)
+            u_e = u_exact(t, I, a)
             e = u_e - u
             E = sqrt(dt*sum(e**2))
             if makeplot:
                 figure()                         # create new plot
                 t_e = linspace(0, T, 1001)       # fine mesh for u_e
-                u_e = exact_solution(t_e, I, a)
+                u_e = u_exact(t_e, I, a)
                 plot(t,   u,   'r--o')           # red dashes w/circles
                 plot(t_e, u_e, 'b-')             # blue line for exact sol.
                 legend(['numerical', 'exact'])
@@ -1298,7 +1298,7 @@ the error measure and make the plot:
             u, t = solver_memsave(I, a, T, dt, theta, filename)
         
             t, u = read_file(filename)
-            u_e = exact_solution(t, I, a)
+            u_e = u_exact(t, I, a)
             e = u_e - u
             E = sqrt(dt*np.sum(e**2))
             if makeplot:

@@ -1206,7 +1206,7 @@ need to make a Python function for computing the exact solution:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t, I, a):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(t, I, a):
     <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)
 </pre></div>
 <p>
@@ -1215,7 +1215,7 @@ It is tempting to just do
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u_e <span style="color: #666666">=</span> u_exact(t, I, a)
 plot(t, u, t, u_e)
 </pre></div>
 <p>
@@ -1229,7 +1229,7 @@ the mesh points is to introduce a very fine mesh for \( \uex(t) \):
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">t_e <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)      <span style="color: #408080; font-style: italic"># fine mesh</span>
-u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
 </pre></div>
 <p>
 We can also plot the curves with different colors and styles, e.g.,
@@ -1259,7 +1259,7 @@ the comparison plot becomes
     u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>T, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
 
     t_e <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)        <span style="color: #408080; font-style: italic"># fine mesh for u_e</span>
-    u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
 
     plot(t,   u,   <span style="color: #BA2121">&#39;r--o&#39;</span>,            <span style="color: #408080; font-style: italic"># red dashes w/circles</span>
          t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>)              <span style="color: #408080; font-style: italic"># blue line for exact sol.</span>
@@ -1452,7 +1452,7 @@ The error mesh function \( e^n \) can be computed by
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)  <span style="color: #408080; font-style: italic"># Numerical sol.</span>
-u_e <span style="color: #666666">=</span> exact_solution(t, I, a)      <span style="color: #408080; font-style: italic"># Representative of exact sol.</span>
+u_e <span style="color: #666666">=</span> u_exact(t, I, a)             <span style="color: #408080; font-style: italic"># Representative of exact sol.</span>
 e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
 </pre></div>
 <p>
@@ -1466,19 +1466,19 @@ The last statements
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">u_e <span style="color: #666666">=</span> u_exact(t, I, a)
 e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
 </pre></div>
 <p>
 demonstrate some standard examples of array arithmetics: <code>t</code> is an
-array of mesh points that we pass to <code>exact_solution</code>. This function
+array of mesh points that we pass to <code>u_exact</code>. This function
 evaluates <code>-a*t</code>, which is a scalar times an array, meaning that
 the scalar is multiplied with each array element.
 The result is an array, let us call it <code>tmp1</code>. Then
 <code>exp(tmp1)</code> means applying the exponential function to each element in
 <code>tmp1</code>, giving an array, say <code>tmp2</code>. Finally, <code>I*tmp2</code> is computed
 (scalar times array) and <code>u_e</code> refers to this array returned from
-<code>exact_solution</code>. The expression <code>u_e - u</code> is the difference between
+<code>u_exact</code>. The expression <code>u_e - u</code> is the difference between
 two arrays, resulting in a new array referred to by <code>e</code>.
 
 <p>
@@ -1650,7 +1650,7 @@ one element at a time:
 u_e <span style="color: #666666">=</span> zeros(m)
 t <span style="color: #666666">=</span> <span style="color: #666666">0</span>
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(m):
-    u_e[i] <span style="color: #666666">=</span> exact_solution(t, a, I)
+    u_e[i] <span style="color: #666666">=</span> u_exact(t, a, I)
     t <span style="color: #666666">=</span> t <span style="color: #666666">+</span> dt
 e <span style="color: #666666">=</span> zeros(m)
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(m):
@@ -1683,13 +1683,13 @@ resolution.
 <span style="color: #BA2121; font-style: italic">    and plot the numerical and exact solutions (if makeplot=True).</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
     u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)    <span style="color: #408080; font-style: italic"># Numerical solution</span>
-    u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t, I, a)
     e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
     E <span style="color: #666666">=</span> sqrt(dt<span style="color: #666666">*</span><span style="color: #008000">sum</span>(e<span style="color: #666666">**2</span>))
     <span style="color: #008000; font-weight: bold">if</span> makeplot:
         figure()                         <span style="color: #408080; font-style: italic"># create new plot</span>
         t_e <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)       <span style="color: #408080; font-style: italic"># fine mesh for u_e</span>
-        u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+        u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
         plot(t,   u,   <span style="color: #BA2121">&#39;r--o&#39;</span>)           <span style="color: #408080; font-style: italic"># red dashes w/circles</span>
         plot(t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>)             <span style="color: #408080; font-style: italic"># blue line for exact sol.</span>
         legend([<span style="color: #BA2121">&#39;numerical&#39;</span>, <span style="color: #BA2121">&#39;exact&#39;</span>])
@@ -2070,7 +2070,7 @@ the error measure and make the plot:
     u, t <span style="color: #666666">=</span> solver_memsave(I, a, T, dt, theta, filename)
 
     t, u <span style="color: #666666">=</span> read_file(filename)
-    u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t, I, a)
     e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
     E <span style="color: #666666">=</span> sqrt(dt<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sum(e<span style="color: #666666">**2</span>))
     <span style="color: #008000; font-weight: bold">if</span> makeplot:
