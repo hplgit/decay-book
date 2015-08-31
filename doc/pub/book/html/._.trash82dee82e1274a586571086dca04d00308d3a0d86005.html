@@ -1149,7 +1149,7 @@ some are mathematically unexpected:
 <p><div class="collapse" id="exer_3_1">
 
 <p>
-We add some more investiations of the types and values involved
+We add some more investigations of the types and values involved
 in the computations:
 
 <p>
@@ -1363,7 +1363,7 @@ edited to
     <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values:
         <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;dt&#39;</span>, dt
         u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)    <span style="color: #408080; font-style: italic"># Numerical solution</span>
-        u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+        u_e <span style="color: #666666">=</span> u_exact(t, I, a)
         e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
         plot(t, e)
         hold(<span style="color: #BA2121">&#39;on&#39;</span>)

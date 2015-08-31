@@ -1141,10 +1141,10 @@ needed functions:
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> exp, <span style="color: #008000">sum</span>, sqrt
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t, I, a):
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(t, I, a):
     <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)
 
-error <span style="color: #666666">=</span> exact_solution(t, I, a) <span style="color: #666666">-</span> u
+error <span style="color: #666666">=</span> u_exact(t, I, a) <span style="color: #666666">-</span> u
 E <span style="color: #666666">=</span> sqrt(dt<span style="color: #666666">*</span><span style="color: #008000">sum</span>(error<span style="color: #666666">**2</span>))
 </pre></div>
 <p>
@@ -1362,7 +1362,7 @@ this:
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver</span>(I, a, T, dt, theta):
     <span style="color: #666666">...</span>
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t, I, a):
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(t, I, a):
     <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">experiment_compare_numerical_and_exact</span>():
@@ -1370,7 +1370,7 @@ this:
     u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)
 
     t_e <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)       <span style="color: #408080; font-style: italic"># very fine mesh for u_e</span>
-    u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
 
     plt<span style="color: #666666">.</span>plot(t,   u,   <span style="color: #BA2121">&#39;r--o&#39;</span>)       <span style="color: #408080; font-style: italic"># dashed red line with circles</span>
     plt<span style="color: #666666">.</span>plot(t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>)         <span style="color: #408080; font-style: italic"># blue line for u_e</span>
@@ -1380,7 +1380,7 @@ this:
     plotfile <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;tmp&#39;</span>
     plt<span style="color: #666666">.</span>savefig(plotfile <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(plotfile <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.pdf&#39;</span>)
 
-    error <span style="color: #666666">=</span> exact_solution(t, I, a) <span style="color: #666666">-</span> u
+    error <span style="color: #666666">=</span> u_exact(t, I, a) <span style="color: #666666">-</span> u
     E <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(dt<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sum(error<span style="color: #666666">**2</span>))
     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Error norm:&#39;</span>, E
 
@@ -1445,7 +1445,7 @@ with a loop over <code>theta</code> values and add the necessary plot statements
         plt<span style="color: #666666">.</span>plot(t, u, <span style="color: #BA2121">&#39;--o&#39;</span>)
         legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;theta=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> theta)
     t_e <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)        <span style="color: #408080; font-style: italic"># very fine mesh for u_e</span>
-    u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
     plt<span style="color: #666666">.</span>plot(t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>)
     legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;exact&#39;</span>)
     plt<span style="color: #666666">.</span>legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;upper right&#39;</span>)
@@ -2021,7 +2021,7 @@ the command line as positional arguments or option-value pairs:
         plt<span style="color: #666666">.</span>plot(t, u)
         legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;dt=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> dt)
     t_e <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)       <span style="color: #408080; font-style: italic"># very fine mesh for u_e</span>
-    u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
     plt<span style="color: #666666">.</span>plot(t_e, u_e, <span style="color: #BA2121">&#39;--&#39;</span>)
     legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;exact&#39;</span>)
     plt<span style="color: #666666">.</span>legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;upper right&#39;</span>)
@@ -2128,13 +2128,13 @@ relevant HTML code in the string <code>html_text</code>. The function looks like
 <span style="color: #BA2121; font-style: italic">    plot whose data are embedded in an HTML image tag.</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
     u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)
-    u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t, I, a)
     e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
     E <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(dt<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sum(e<span style="color: #666666">**2</span>))
 
     plt<span style="color: #666666">.</span>figure()
     t_e <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)    <span style="color: #408080; font-style: italic"># fine mesh for u_e</span>
-    u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
     plt<span style="color: #666666">.</span>plot(t,   u,   <span style="color: #BA2121">&#39;r--o&#39;</span>)
     plt<span style="color: #666666">.</span>plot(t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>)
     plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;numerical&#39;</span>, <span style="color: #BA2121">&#39;exact&#39;</span>])
@@ -2639,7 +2639,7 @@ problem and can be coded as
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_discrete_solution</span>(n, I, a, theta, dt):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_discrete_exact</span>(n, I, a, theta, dt):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return exact discrete solution of the numerical schemes.&quot;&quot;&quot;</span>
     dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt)  <span style="color: #408080; font-style: italic"># avoid integer division</span>
     A <span style="color: #666666">=</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)
@@ -2653,14 +2653,14 @@ do not deviate with more than a small tolerance:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_exact_discrete_solution</span>():
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_u_discrete_exact</span>():
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Check that solver reproduces the exact discr. sol.&quot;&quot;&quot;</span>
     theta <span style="color: #666666">=</span> <span style="color: #666666">0.8</span>; a <span style="color: #666666">=</span> <span style="color: #666666">2</span>; I <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>; dt <span style="color: #666666">=</span> <span style="color: #666666">0.8</span>
     Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #666666">8/</span>dt)  <span style="color: #408080; font-style: italic"># no of steps</span>
     u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
 
     <span style="color: #408080; font-style: italic"># Evaluate exact discrete solution on the mesh</span>
-    u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([exact_discrete_solution(n, I, a, theta, dt)
+    u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([u_discrete_exact(n, I, a, theta, dt)
                      <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nt<span style="color: #666666">+1</span>)])
 
     <span style="color: #408080; font-style: italic"># Find largest deviation</span>
@@ -2685,7 +2685,7 @@ function does not fall into this potential trap:
     theta <span style="color: #666666">=</span> <span style="color: #666666">1</span>; a <span style="color: #666666">=</span> <span style="color: #666666">1</span>; I <span style="color: #666666">=</span> <span style="color: #666666">1</span>; dt <span style="color: #666666">=</span> <span style="color: #666666">2</span>
     Nt <span style="color: #666666">=</span> <span style="color: #666666">4</span>
     u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
-    u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([exact_discrete_solution(n, I, a, theta, dt)
+    u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([u_discrete_exact(n, I, a, theta, dt)
                      <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nt<span style="color: #666666">+1</span>)])
     diff <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(u_de <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
     <span style="color: #008000; font-weight: bold">assert</span> diff <span style="color: #666666">&lt;</span> <span style="color: #666666">1E-14</span>
@@ -2903,7 +2903,7 @@ nose/pytest now become methods in this class.
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">decay</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_discrete_solution</span>(n, I, a, theta, dt):
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_discrete_exact</span>(n, I, a, theta, dt):
     <span style="color: #666666">...</span>
 
 <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">TestDecay</span>(unittest<span style="color: #666666">.</span>TestCase):
@@ -2913,7 +2913,7 @@ nose/pytest now become methods in this class.
         Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #666666">8/</span>dt)  <span style="color: #408080; font-style: italic"># no of steps</span>
         u, t <span style="color: #666666">=</span> decay<span style="color: #666666">.</span>solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
         <span style="color: #408080; font-style: italic"># Evaluate exact discrete solution on the mesh</span>
-        u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([exact_discrete_solution(n, I, a, theta, dt)
+        u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([u_discrete_exact(n, I, a, theta, dt)
                          <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nt<span style="color: #666666">+1</span>)])
         diff <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(u_de <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()  <span style="color: #408080; font-style: italic"># largest deviation</span>
         <span style="color: #008000">self</span><span style="color: #666666">.</span>assertAlmostEqual(diff, <span style="color: #666666">0</span>, delta<span style="color: #666666">=1E-14</span>)

@@ -2941,7 +2941,7 @@ is convenient:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">symbolic_exact_solution</span>(verbose<span style="color: #666666">=</span><span style="color: #008000">False</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">T_exact_symbolic</span>(verbose<span style="color: #666666">=</span><span style="color: #008000">False</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Compute the exact solution formula via sympy.&quot;&quot;&quot;</span>
     <span style="color: #408080; font-style: italic"># sol1: solution for t &lt; t_star,</span>
     <span style="color: #408080; font-style: italic"># sol2: solution for t &gt; t_star</span>
@@ -2981,13 +2981,12 @@ a mesh function:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">evaluate_exact_solution</span>(t, k, T0, C0, C1, t_star,
-                            verbose<span style="color: #666666">=</span><span style="color: #008000">False</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">evaluate_T_exact</span>(t, k, T0, C0, C1, t_star, verbose<span style="color: #666666">=</span><span style="color: #008000">False</span>):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
 <span style="color: #BA2121; font-style: italic">    Return exact (analytical) solution of the problem.</span>
 <span style="color: #BA2121; font-style: italic">    Exact solution is produced by sympy.</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    exact0, exact1 <span style="color: #666666">=</span> symbolic_exact_solution()
+    exact0, exact1 <span style="color: #666666">=</span> T_exact_symbolic()
     <span style="color: #408080; font-style: italic"># exact0/1 works with t as numpy array</span>
     <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">isinstance</span>(t, (<span style="color: #008000">float</span>,<span style="color: #008000">int</span>)):
         <span style="color: #008000; font-weight: bold">if</span> t <span style="color: #666666">&lt;</span> t_star:
@@ -3033,7 +3032,7 @@ Finally we can run the comparison:
     t_e <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, t_end, <span style="color: #666666">1001</span>)  <span style="color: #408080; font-style: italic"># find mesh for T_e</span>
     <span style="color: #408080; font-style: italic"># Could use sym.Rational(1,2) instead of 0.5, but not necessary</span>
     <span style="color: #408080; font-style: italic"># when we are not interested in symbolic formulas</span>
-    T_e <span style="color: #666666">=</span> evaluate_exact_solution(t_e, k, T0, C0, C1, t_star)
+    T_e <span style="color: #666666">=</span> evaluate_T_exact(t_e, k, T0, C0, C1, t_star)
     plt<span style="color: #666666">.</span>plot(t_e, T_e)
     plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;CN, dt=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> dt <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values] <span style="color: #666666">+</span> [<span style="color: #BA2121">&#39;exact&#39;</span>])
     plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;T(t) for piecewise constant $T_s(t)$&#39;</span>)
@@ -4297,11 +4296,17 @@ as \( \bar L^{\prime}=(c/a)\bar L(\bar H-1) \). The ratio \( c/a \) equals
 \( \gamma/\alpha \) from a) and is here called \( \mu \).
 
 <p>
+We remark that \( L_c=a/b \) and \( H_c=c/d \) could also be found by from
+the <em>stationary points</em> of the ODE system, where
+\( H^{\prime}=L^{\prime}=0 \). The stationary points are in our case \( H=L=0 \) and
+\( H=c/d \) and \( L=a/b \).
+
+<p>
 The initial conditions become \( \bar H(0) = H_0/H_c=H_0d/c =\beta/\gamma = \nu \),
 and \( \bar L(0)=L_0/L_c = L_0b/a = \delta/\alpha = \omega \).
 
 <p>
-The resulting dimensionless problem becomes
+The resulting dimensionless problem takes the form
 
 $$
 \begin{align}
@@ -4317,7 +4322,8 @@ with
 $$ \mu = \frac{c}{a},\quad \nu = H_0\frac{d}{c},\quad \omega = L_0\frac{b}{a}
 \tp$$
 
-The unknowns \( \bar H \) and \( \bar L \) now has less intuitive scalings,
+<p>
+The unknowns \( \bar H \) and \( \bar L \) now have less intuitive scalings,
 
 $$ \bar H = \frac{Hd}{c},\quad \bar L = \frac{Lb}{a},$$
 

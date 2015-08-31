@@ -351,7 +351,7 @@ set :math:`b=a(t)C` and :math:`I=C`. An appropriate test function is
             Test problem where u=u_const is the exact solution, to be
             reproduced (to machine precision) by any relevant method.
             """
-            def exact_solution(t):
+            def u_exact(t):
                 return u_const
         
             def a(t):
@@ -365,7 +365,7 @@ set :math:`b=a(t)C` and :math:`I=C`. An appropriate test function is
             Nt = 4  # enough with a few steps
             u, t = solver(I=I, a=a, b=b, T=Nt*dt, dt=dt, theta=theta)
             print u
-            u_e = exact_solution(t)
+            u_e = u_exact(t)
             difference = abs(u_e - u).max()  # max deviation
             tol = 1E-14
             assert difference < tol
@@ -488,20 +488,20 @@ test based on a linear exact solution:
             Test problem where u=c*t+I is the exact solution, to be
             reproduced (to machine precision) by any relevant method.
             """
-            def exact_solution(t):
+            def u_exact(t):
                 return c*t + I
         
             def a(t):
                 return t**0.5  # can be arbitrary
         
             def b(t):
-                return c + a(t)*exact_solution(t)
+                return c + a(t)*u_exact(t)
         
             theta = 0.4; I = 0.1; dt = 0.1; c = -0.5
             T = 4
             Nt = int(T/dt)  # no of steps
             u, t = solver(I=I, a=a, b=b, T=Nt*dt, dt=dt, theta=theta)
-            u_e = exact_solution(t)
+            u_e = u_exact(t)
             difference = abs(u_e - u).max()  # max deviation
             print difference
             tol = 1E-14  # depends on c!
@@ -511,12 +511,12 @@ test based on a linear exact solution:
             # Create a manufactured solution with sympy
             import sympy as sym
             t = sym.symbols('t')
-            u_exact = sym.sin(t)*sym.exp(-2*t)
+            u_e = sym.sin(t)*sym.exp(-2*t)
             a = t**2
-            b = sym.diff(u_exact, t) + a*u_exact
+            b = sym.diff(u_e, t) + a*u_exact
         
             # Turn sympy expressions into Python function
-            u_exact = sym.lambdify([t], u_exact, modules='numpy')
+            u_exact = sym.lambdify([t], u_e, modules='numpy')
             a = sym.lambdify([t], a, modules='numpy')
             b = sym.lambdify([t], b, modules='numpy')
         
@@ -689,12 +689,12 @@ can use in the subsequent numerical computing:
         # Create a manufactured solution with sympy
         import sympy as sym
         t = sym.symbols('t')
-        u_exact = sym.sin(t)*sym.exp(-2*t)
+        u_e = sym.sin(t)*sym.exp(-2*t)
         a = t**2
-        b = sym.diff(u_exact, t) + a*u_exact
+        b = sym.diff(u_e, t) + a*u_exact
         
         # Turn sympy expressions into Python function
-        u_exact = sym.lambdify([t], u_exact, modules='numpy')
+        u_exact = sym.lambdify([t], u_e, modules='numpy')
         a = sym.lambdify([t], a, modules='numpy')
         b = sym.lambdify([t], b, modules='numpy')
 
@@ -1492,7 +1492,7 @@ error tolerance. The code goes like
         def f(u, t):
             return -a*u
         
-        def exact_solution(t):
+        def u_exact(t):
             return I*np.exp(-a*t)
         
         I = 1; a = 2; T = 5
@@ -1510,7 +1510,7 @@ error tolerance. The code goes like
         # solver.u_all and solver.t_all contains all computed points
         plt.plot(solver.t_all, solver.u_all, 'ko')
         plt.hold('on')
-        plt.plot(t_fine, exact_solution(t_fine), 'b-')
+        plt.plot(t_fine, u_exact(t_fine), 'b-')
         plt.legend(['tol=%.0E' % tol, 'exact'])
         plt.savefig('tmp_odespy_adaptive.png')
         plt.show()

@@ -1115,7 +1115,7 @@ set \( b=a(t)C \) and \( I=C \). An appropriate test function is
 <span style="color: #BA2121; font-style: italic">    Test problem where u=u_const is the exact solution, to be</span>
 <span style="color: #BA2121; font-style: italic">    reproduced (to machine precision) by any relevant method.</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(t):
         <span style="color: #008000; font-weight: bold">return</span> u_const
 
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">a</span>(t):
@@ -1129,7 +1129,7 @@ set \( b=a(t)C \) and \( I=C \). An appropriate test function is
     Nt <span style="color: #666666">=</span> <span style="color: #666666">4</span>  <span style="color: #408080; font-style: italic"># enough with a few steps</span>
     u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, b<span style="color: #666666">=</span>b, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
     <span style="color: #008000; font-weight: bold">print</span> u
-    u_e <span style="color: #666666">=</span> exact_solution(t)
+    u_e <span style="color: #666666">=</span> u_exact(t)
     difference <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(u_e <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()  <span style="color: #408080; font-style: italic"># max deviation</span>
     tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
     <span style="color: #008000; font-weight: bold">assert</span> difference <span style="color: #666666">&lt;</span> tol
@@ -1231,20 +1231,20 @@ test based on a linear exact solution:
 <span style="color: #BA2121; font-style: italic">    Test problem where u=c*t+I is the exact solution, to be</span>
 <span style="color: #BA2121; font-style: italic">    reproduced (to machine precision) by any relevant method.</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(t):
         <span style="color: #008000; font-weight: bold">return</span> c<span style="color: #666666">*</span>t <span style="color: #666666">+</span> I
 
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">a</span>(t):
         <span style="color: #008000; font-weight: bold">return</span> t<span style="color: #666666">**0.5</span>  <span style="color: #408080; font-style: italic"># can be arbitrary</span>
 
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">b</span>(t):
-        <span style="color: #008000; font-weight: bold">return</span> c <span style="color: #666666">+</span> a(t)<span style="color: #666666">*</span>exact_solution(t)
+        <span style="color: #008000; font-weight: bold">return</span> c <span style="color: #666666">+</span> a(t)<span style="color: #666666">*</span>u_exact(t)
 
     theta <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>; I <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>; dt <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>; c <span style="color: #666666">=</span> <span style="color: #666666">-0.5</span>
     T <span style="color: #666666">=</span> <span style="color: #666666">4</span>
     Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(T<span style="color: #666666">/</span>dt)  <span style="color: #408080; font-style: italic"># no of steps</span>
     u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, b<span style="color: #666666">=</span>b, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
-    u_e <span style="color: #666666">=</span> exact_solution(t)
+    u_e <span style="color: #666666">=</span> u_exact(t)
     difference <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(u_e <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()  <span style="color: #408080; font-style: italic"># max deviation</span>
     <span style="color: #008000; font-weight: bold">print</span> difference
     tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>  <span style="color: #408080; font-style: italic"># depends on c!</span>
@@ -1254,12 +1254,12 @@ test based on a linear exact solution:
     <span style="color: #408080; font-style: italic"># Create a manufactured solution with sympy</span>
     <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sym</span>
     t <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;t&#39;</span>)
-    u_exact <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>sin(t)<span style="color: #666666">*</span>sym<span style="color: #666666">.</span>exp(<span style="color: #666666">-2*</span>t)
+    u_e <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>sin(t)<span style="color: #666666">*</span>sym<span style="color: #666666">.</span>exp(<span style="color: #666666">-2*</span>t)
     a <span style="color: #666666">=</span> t<span style="color: #666666">**2</span>
-    b <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>diff(u_exact, t) <span style="color: #666666">+</span> a<span style="color: #666666">*</span>u_exact
+    b <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>diff(u_e, t) <span style="color: #666666">+</span> a<span style="color: #666666">*</span>u_exact
 
     <span style="color: #408080; font-style: italic"># Turn sympy expressions into Python function</span>
-    u_exact <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], u_exact, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
+    u_exact <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], u_e, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
     a <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], a, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
     b <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], b, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
 
@@ -1434,12 +1434,12 @@ can use in the subsequent numerical computing:
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># Create a manufactured solution with sympy</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sym</span>
 t <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;t&#39;</span>)
-u_exact <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>sin(t)<span style="color: #666666">*</span>sym<span style="color: #666666">.</span>exp(<span style="color: #666666">-2*</span>t)
+u_e <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>sin(t)<span style="color: #666666">*</span>sym<span style="color: #666666">.</span>exp(<span style="color: #666666">-2*</span>t)
 a <span style="color: #666666">=</span> t<span style="color: #666666">**2</span>
-b <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>diff(u_exact, t) <span style="color: #666666">+</span> a<span style="color: #666666">*</span>u_exact
+b <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>diff(u_e, t) <span style="color: #666666">+</span> a<span style="color: #666666">*</span>u_exact
 
 <span style="color: #408080; font-style: italic"># Turn sympy expressions into Python function</span>
-u_exact <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], u_exact, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
+u_exact <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], u_e, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
 a <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], a, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
 b <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], b, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
 </pre></div>
@@ -2149,7 +2149,7 @@ error tolerance. The code goes like
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(u, t):
     <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">-</span>a<span style="color: #666666">*</span>u
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t):
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(t):
     <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>np<span style="color: #666666">.</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)
 
 I <span style="color: #666666">=</span> <span style="color: #666666">1</span>; a <span style="color: #666666">=</span> <span style="color: #666666">2</span>; T <span style="color: #666666">=</span> <span style="color: #666666">5</span>
@@ -2167,7 +2167,7 @@ u, t <span style="color: #666666">=</span> solver<span style="color: #666666">.<
 <span style="color: #408080; font-style: italic"># solver.u_all and solver.t_all contains all computed points</span>
 plt<span style="color: #666666">.</span>plot(solver<span style="color: #666666">.</span>t_all, solver<span style="color: #666666">.</span>u_all, <span style="color: #BA2121">&#39;ko&#39;</span>)
 plt<span style="color: #666666">.</span>hold(<span style="color: #BA2121">&#39;on&#39;</span>)
-plt<span style="color: #666666">.</span>plot(t_fine, exact_solution(t_fine), <span style="color: #BA2121">&#39;b-&#39;</span>)
+plt<span style="color: #666666">.</span>plot(t_fine, u_exact(t_fine), <span style="color: #BA2121">&#39;b-&#39;</span>)
 plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;tol=</span><span style="color: #BB6688; font-weight: bold">%.0E</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> tol, <span style="color: #BA2121">&#39;exact&#39;</span>])
 plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp_odespy_adaptive.png&#39;</span>)
 plt<span style="color: #666666">.</span>show()

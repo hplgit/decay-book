@@ -1146,10 +1146,10 @@ needed functions:
 <!-- begin verbatim block  pycod-->
 <pre><code>from numpy import exp, sum, sqrt
 
-def exact_solution(t, I, a):
+def u_exact(t, I, a):
     return I*exp(-a*t)
 
-error = exact_solution(t, I, a) - u
+error = u_exact(t, I, a) - u
 E = sqrt(dt*sum(error**2))
 </code></pre>
 <!-- end verbatim block -->
@@ -1376,7 +1376,7 @@ import matplotlib.pyplot as plt
 def solver(I, a, T, dt, theta):
     ...
 
-def exact_solution(t, I, a):
+def u_exact(t, I, a):
     return I*np.exp(-a*t)
 
 def experiment_compare_numerical_and_exact():
@@ -1384,7 +1384,7 @@ def experiment_compare_numerical_and_exact():
     u, t = solver(I, a, T, dt, theta)
 
     t_e = np.linspace(0, T, 1001)       # very fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
 
     plt.plot(t,   u,   'r--o')       # dashed red line with circles
     plt.plot(t_e, u_e, 'b-')         # blue line for u_e
@@ -1394,7 +1394,7 @@ def experiment_compare_numerical_and_exact():
     plotfile = 'tmp'
     plt.savefig(plotfile + '.png');  plt.savefig(plotfile + '.pdf')
 
-    error = exact_solution(t, I, a) - u
+    error = u_exact(t, I, a) - u
     E = np.sqrt(dt*np.sum(error**2))
     print 'Error norm:', E
 
@@ -1460,7 +1460,7 @@ with a loop over <code>theta</code> values and add the necessary plot statements
         plt.plot(t, u, '--o')
         legends.append('theta=%g' % theta)
     t_e = np.linspace(0, T, 1001)        # very fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
     plt.plot(t_e, u_e, 'b-')
     legends.append('exact')
     plt.legend(legends, loc='upper right')
@@ -2027,7 +2027,7 @@ the command line as positional arguments or option-value pairs:
         plt.plot(t, u)
         legends.append('dt=%g' % dt)
     t_e = np.linspace(0, T, 1001)       # very fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
     plt.plot(t_e, u_e, '--')
     legends.append('exact')
     plt.legend(legends, loc='upper right')
@@ -2136,13 +2136,13 @@ relevant HTML code in the string <code>html_text</code>. The function looks like
     plot whose data are embedded in an HTML image tag.
     &quot;&quot;&quot;
     u, t = solver(I, a, T, dt, theta)
-    u_e = exact_solution(t, I, a)
+    u_e = u_exact(t, I, a)
     e = u_e - u
     E = np.sqrt(dt*np.sum(e**2))
 
     plt.figure()
     t_e = np.linspace(0, T, 1001)    # fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
     plt.plot(t,   u,   'r--o')
     plt.plot(t_e, u_e, 'b-')
     plt.legend(['numerical', 'exact'])
@@ -2643,7 +2643,7 @@ problem and can be coded as
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>def exact_discrete_solution(n, I, a, theta, dt):
+<pre><code>def u_discrete_exact(n, I, a, theta, dt):
     &quot;&quot;&quot;Return exact discrete solution of the numerical schemes.&quot;&quot;&quot;
     dt = float(dt)  # avoid integer division
     A = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)
@@ -2656,14 +2656,14 @@ do not deviate with more than a small tolerance:
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>def test_exact_discrete_solution():
+<pre><code>def test_u_discrete_exact():
     &quot;&quot;&quot;Check that solver reproduces the exact discr. sol.&quot;&quot;&quot;
     theta = 0.8; a = 2; I = 0.1; dt = 0.8
     Nt = int(8/dt)  # no of steps
     u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
 
     # Evaluate exact discrete solution on the mesh
-    u_de = np.array([exact_discrete_solution(n, I, a, theta, dt)
+    u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
                      for n in range(Nt+1)])
 
     # Find largest deviation
@@ -2689,7 +2689,7 @@ function does not fall into this potential trap:
     theta = 1; a = 1; I = 1; dt = 2
     Nt = 4
     u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
-    u_de = np.array([exact_discrete_solution(n, I, a, theta, dt)
+    u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
                      for n in range(Nt+1)])
     diff = np.abs(u_de - u).max()
     assert diff &lt; 1E-14
@@ -2905,7 +2905,7 @@ nose/pytest now become methods in this class.
 import decay
 import numpy as np
 
-def exact_discrete_solution(n, I, a, theta, dt):
+def u_discrete_exact(n, I, a, theta, dt):
     ...
 
 class TestDecay(unittest.TestCase):
@@ -2915,7 +2915,7 @@ class TestDecay(unittest.TestCase):
         Nt = int(8/dt)  # no of steps
         u, t = decay.solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
         # Evaluate exact discrete solution on the mesh
-        u_de = np.array([exact_discrete_solution(n, I, a, theta, dt)
+        u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
                          for n in range(Nt+1)])
         diff = np.abs(u_de - u).max()  # largest deviation
         self.assertAlmostEqual(diff, 0, delta=1E-14)
