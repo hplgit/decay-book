@@ -1664,8 +1664,8 @@ Exercises  (4)
 
 .. _decay:app:exer:radio:C14:
 
-Exercise 16: Radioactive decay of Carbon-14
--------------------------------------------
+Problem 16: Radioactive decay of Carbon-14
+------------------------------------------
 
 The `Carbon-14 <http://en.wikipedia.org/wiki/Carbon-14>`__ isotope,
 whose radioactive decay is used extensively in dating organic material
@@ -1980,8 +1980,8 @@ Filename: ``stochastic_decay``.
 
 .. _decay:app:exer:radio:twosubst:
 
-Exercise 22: Radioactive decay of two substances
-------------------------------------------------
+Problem 22: Radioactive decay of two substances
+-----------------------------------------------
 
 Consider two radioactive substances A and B. The nuclei in substance A
 decay to form nuclei of type B with a half-life :math:`A_{1/2}`, while
