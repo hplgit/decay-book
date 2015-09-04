@@ -41,8 +41,8 @@ many good habits:
 
 .. _softeng1:basic:
 
-Basic implementations
-=====================
+Implementations with functions and modules
+==========================================
 
 All previous examples in this book have implemented numerical
 algorithms as Python functions. This is a good style that readers
@@ -3745,8 +3745,8 @@ Filename: ``experiment_compare_dt_class``.
 
 .. _softeng1:exer:logistic:
 
-Exercise 45: Make solid software for a difference equation
-----------------------------------------------------------
+Problem 45: Make solid software for a difference equation
+---------------------------------------------------------
 
 We have the following evolutionary difference equation for the number
 of individuals :math:`u^n` of a certain specie at time :math:`n\Delta t`:

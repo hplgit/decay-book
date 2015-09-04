@@ -161,8 +161,8 @@ Filename: ``differentiate``.
 
 .. _decay:exer:intdiv:
 
-Exercise 3: Experiment with divisions
--------------------------------------
+Problem 3: Experiment with divisions
+------------------------------------
 
 Explain what happens in the following computations, where
 some are mathematically unexpected:
@@ -188,8 +188,8 @@ Filename: ``pyproblems``.
 
 .. _decay:exer:decay1err:
 
-Exercise 4: Experiment with wrong computations
-----------------------------------------------
+Problem 4: Experiment with wrong computations
+---------------------------------------------
 
 Consider the ``solver`` function in the `decay_v1.py <http://tinyurl.com/ofkw6kc/alg/decay_v1.py>`__ file
 and the following call:
@@ -223,8 +223,8 @@ Filename: ``decay_v1_err``.
 
 .. _decay:exer:plot:error:
 
-Exercise 5: Plot the error function
------------------------------------
+Problem 5: Plot the error function
+----------------------------------
 
 Solve the problem :math:`u'=-au`, :math:`u(0)=I`, using the Forward Euler, Backward
 Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
@@ -249,8 +249,8 @@ Filename: ``decay_plot_error``.
 
 .. _decay:exer:inexact:output:
 
-Exercise 6: Change formatting of numbers and debug
---------------------------------------------------
+Problem 6: Change formatting of numbers and debug
+-------------------------------------------------
 
 The `decay_memsave.py <http://tinyurl.com/ofkw6kc/alg/decay_memsave.py>`__ program
 writes the time values and solution values to a file which looks

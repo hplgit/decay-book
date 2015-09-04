@@ -8,7 +8,7 @@ Preface
 This book teaches the basic components in the scientific
 computing pipeline: modeling, differential equations, numerical
 algorithms, programming, plotting, and software testing. The pedagogical idea
-is treat these topics in the context of a very simple
+is to treat these topics in the context of a very simple
 mathematical model, the
 differential equation for exponential decay, :math:`u^{\prime}(t)=-au(t)`,
 where :math:`u` is unknown and :math:`a` is a given parameter. By keeping the
@@ -165,6 +165,4 @@ Professor Svein Linge has provided very detailed and constructive feedback
 on this text, and all his efforts are highly appreciated. I also want to thank a
 number of students who have pointed out weaknesses and
 found errors.
-
-[**hpl 1**: The present version features solutions to a subset of the exercises. These solutions are likely to be removed, or solutions to all exercises are to be included.]
 
