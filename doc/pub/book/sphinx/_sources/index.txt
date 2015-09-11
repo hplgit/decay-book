@@ -21,9 +21,7 @@ Contents:
    ._book009
 
 
-Indices and tables
-==================
+Index
+=====
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
