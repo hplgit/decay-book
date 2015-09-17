@@ -154,9 +154,13 @@ Step 1: Discretizing the domain
 The time domain :math:`[0,T]` is represented by a finite number of
 :math:`N_t+1` points
 
+.. _Eq:_auto1:
+
 .. math::
+   :label: _auto1
         
         0 = t_0 < t_1 < t_2 < \cdots < t_{N_t-1} < t_{N_t} = T{\thinspace .}
+        
         
 
 The collection of points :math:`t_0,t_1,\ldots,t_{N_t}` constitutes a *mesh*
@@ -197,9 +201,13 @@ the mesh function values, see Figure :ref:`decay:fdu:e`, suffices.
 To compute the solution for some :math:`t\in [t_n, t_{n+1}]`, we use the
 linear interpolation formula
 
+.. _Eq:_auto2:
+
 .. math::
+   :label: _auto2
         
         u(t) \approx u^n + \frac{u^{n+1}-u^n}{t_{n+1}-t_n}(t - t_n){\thinspace .}
+        
         
 
 .. _decay:fdu:ei:
@@ -846,15 +854,23 @@ value of the function :math:`f(x)` if we know the values of :math:`f` and its
 first :math:`m` derivatives at some other point :math:`x=a`. The formula for the
 Taylor polynomial reads
 
+.. _Eq:_auto3:
+
 .. math::
+   :label: _auto3
         
         f(x)  \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2 +
         \frac{1}{6}f'''(a)(x-a)^3 + \cdots \nonumber
         
+        
+
+.. _Eq:_auto4:
 
 .. math::
+   :label: _auto4
           
          \quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(a)(x-a)^m{\thinspace .}
+        
         
 
 For a function of time, :math:`f(t)`, related to a mesh with spacing :math:`\Delta t`,
@@ -862,11 +878,15 @@ we often need the Taylor polynomial approximation at :math:`f(t_n\pm\Delta t)`
 given :math:`f` and its derivatives at :math:`t=t_n`. Replacing :math:`x` by :math:`t_n+\Delta t` and
 :math:`a` by :math:`t_n` gives
 
+.. _Eq:_auto5:
+
 .. math::
+   :label: _auto5
         
         f(t_n+\Delta t)  \approx f(t_n) + f'(t_n)\Delta t + \frac{1}{2}f''(t_n)
         \Delta t^2 +
         \frac{1}{6}f'''(t_n)\Delta t^3 + \cdots\nonumber
+        
         
 
 .. _Eq:decay:taylor:FE1:
@@ -884,11 +904,15 @@ The forward difference
 We can use :eq:`decay:taylor:FE1` to find an approximation for
 :math:`f'(t_n)` simply by solving with respect to this quantity:
 
+.. _Eq:_auto6:
+
 .. math::
+   :label: _auto6
         
         f'(t_n)  \approx  \frac{f(t_n+\Delta t) - f(t_n)}{\Delta t}
         - \frac{1}{2}f''(t_n)\Delta t -
         \frac{1}{6}f'''(t_n)\Delta t^2 + \cdots\nonumber
+        
         
 
 .. _Eq:decay:taylor:FE2:
@@ -932,11 +956,15 @@ The backward difference
 To derive the backward difference, we use the Taylor polynomial
 approximation at :math:`f(t_n-\Delta t)`:
 
+.. _Eq:_auto7:
+
 .. math::
+   :label: _auto7
         
         f(t_n-\Delta t) \approx f(t_n) - f'(t_n)\Delta t + \frac{1}{2}f''(t_n)
         \Delta t^2 -
         \frac{1}{6}f'''(t_n)\Delta t^3+ \cdots\nonumber
+        
         
 
 .. _Eq:decay:taylor:BE1:
@@ -950,11 +978,15 @@ approximation at :math:`f(t_n-\Delta t)`:
 
 Solving with respect to :math:`f'(t_n)` gives
 
+.. _Eq:_auto8:
+
 .. math::
+   :label: _auto8
         
         f'(t_n) \approx \frac{f(t_n) - f(t_n-\Delta t)}{\Delta t}
         + \frac{1}{2}f''(t_n)\Delta t -
         \frac{1}{6}f'''(t_n)\Delta t^2+ \cdots\nonumber
+        
         
 
 .. _Eq:decay:taylor:BE2:
@@ -977,28 +1009,44 @@ The centered difference approximates the derivative at
 :math:`t_n+\frac{1}{2}\Delta t`. Let us write up the Taylor polynomial
 approximations to :math:`f(t_n)` and :math:`f(t_{n+1})` around :math:`t_n+\frac{1}{2}\Delta t`:
 
+.. _Eq:_auto9:
+
 .. math::
+   :label: _auto9
         
         f(t_n) \approx f(t_n+\frac{1}{2}\Delta t) -
         f'(t_n+\frac{1}{2}\Delta t)\frac{1}{2}\Delta t +
         f''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^2 -\nonumber
         
+        
+
+.. _Eq:_auto10:
 
 .. math::
+   :label: _auto10
           
          \quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots
         
+        
+
+.. _Eq:_auto11:
 
 .. math::
+   :label: _auto11
           
         f(t_{n+1})  \approx f(t_n+\frac{1}{2}\Delta t) +
         f'(t_n+\frac{1}{2}\Delta t)\frac{1}{2}\Delta t +
         f''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^2 +\nonumber
         
+        
+
+.. _Eq:_auto12:
 
 .. math::
+   :label: _auto12
           
         \quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots
+        
         
 
 Subtracting the first from the second gives
@@ -1138,16 +1186,24 @@ In difference equations we often place the square brackets around
 the whole equation, to indicate at which mesh point the equation applies,
 since each term must be approximated at the same point:
 
+.. _Eq:_auto13:
+
 .. math::
+   :label: _auto13
         
         [D_t^- u  = -au]^n {\thinspace .}
+        
         
 
 Similarly, the Forward Euler scheme takes the form
 
+.. _Eq:_auto14:
+
 .. math::
+   :label: _auto14
         
         [D_t^+ u  = -au]^n,
+        
         
 
 while the Crank-Nicolson scheme is written as

@@ -81,13 +81,13 @@
   <div class="section" id="analysis">
 <span id="decay-analysis"></span><h1>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h1>
 <p>We address the ODE for exponential decay,</p>
-<div class="math">
-\[u'(t) = -au(t),\quad u(0)=I,\]</div>
+<div class="math" id="equation-_auto17">
+<span id="eq-auto17"></span><span class="eqno">(1)</span>\[     u'(t) = -au(t),\quad u(0)=I,\]</div>
 <p>where <span class="math">\(a\)</span> and <span class="math">\(I\)</span> are given constants. This problem is solved
 by the <span class="math">\(\theta\)</span>-rule finite difference scheme, resulting in
 the recursive equations</p>
 <div class="math" id="equation-decay:analysis:scheme">
-<span id="eq-decay-analysis-scheme"></span><span class="eqno">(1)</span>\[     u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n\]</div>
+<span id="eq-decay-analysis-scheme"></span><span class="eqno">(2)</span>\[     u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n\]</div>
 <p>for the numerical solution <span class="math">\(u^{n+1}\)</span>, which approximates the exact
 solution <span class="math">\({u_{\small\mbox{e}}}\)</span> at time point <span class="math">\(t_{n+1}\)</span>. For constant mesh spacing,
 which we assume here, <span class="math">\(t_{n+1}=(n+1)\Delta t\)</span>.</p>
@@ -254,10 +254,10 @@ formula for the solution of the equations arising from the finite
 difference methods.</p>
 <div class="section" id="exact-numerical-solution">
 <h3>Exact numerical solution<a class="headerlink" href="#exact-numerical-solution" title="Permalink to this headline">¶</a></h3>
-<p>Starting with <span class="math">\(u^0=I\)</span>, the simple recursion <a href="#equation-decay:analysis:scheme">(1)</a>
+<p>Starting with <span class="math">\(u^0=I\)</span>, the simple recursion <a href="#equation-decay:analysis:scheme">(2)</a>
 can be applied repeatedly <span class="math">\(n\)</span> times, with the result that</p>
 <div class="math" id="equation-decay:analysis:unex">
-<span id="eq-decay-analysis-unex"></span><span class="eqno">(2)</span>\[     u^{n} = IA^n,\quad A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}{\thinspace .}\]</div>
+<span id="eq-decay-analysis-unex"></span><span class="eqno">(3)</span>\[     u^{n} = IA^n,\quad A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}{\thinspace .}\]</div>
 <div class="admonition-solving-difference-equations admonition">
 <p class="first admonition-title">Solving difference equations</p>
 <p>Difference equations where all terms are linear in
@@ -270,7 +270,7 @@ a polynomial equation in <span class="math">\(A\)</span>. In the present case we
 <div class="math">
 \[A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}{\thinspace .}\]</div>
 <p class="last">This is a solution technique of wider applicability than repeated use of
-the recursion <a href="#equation-decay:analysis:scheme">(1)</a>.</p>
+the recursion <a href="#equation-decay:analysis:scheme">(2)</a>.</p>
 </div>
 <p>Regardless of the solution approach, we have obtained a formula for
 <span class="math">\(u^n\)</span>.  This formula can explain everything we see in the figures
@@ -282,13 +282,13 @@ will imply <span class="math">\(u^n &lt; 0\)</span> for odd <span class="math">\
 That is, the solution oscillates between the mesh points.
 We have oscillations due to <span class="math">\(A &lt; 0\)</span> when</p>
 <div class="math" id="equation-decay:th:stability">
-<span id="eq-decay-th-stability"></span><span class="eqno">(3)</span>\[\begin{split}     (1-\theta)a\Delta t &gt; 1 {\thinspace .}\end{split}\]</div>
+<span id="eq-decay-th-stability"></span><span class="eqno">(4)</span>\[\begin{split}     (1-\theta)a\Delta t &gt; 1 {\thinspace .}\end{split}\]</div>
 <p>Since <span class="math">\(A&gt;0\)</span> is a requirement for having a numerical solution with the
 same basic property (monotonicity) as the exact solution, we may say
 that <span class="math">\(A&gt;0\)</span> is a <em>stability criterion</em>. Expressed in terms of <span class="math">\(\Delta t\)</span>
 the stability criterion reads</p>
-<div class="math">
-\[\begin{split}\Delta t &lt; \frac{1}{(1-\theta)a}{\thinspace .}\end{split}\]</div>
+<div class="math" id="equation-_auto18">
+<span id="eq-auto18"></span><span class="eqno">(5)</span>\[\begin{split}     \Delta t &lt; \frac{1}{(1-\theta)a}{\thinspace .}\end{split}\]</div>
 <p>The Backward
 Euler scheme is always stable since <span class="math">\(A &lt; 0\)</span> is impossible for <span class="math">\(\theta=1\)</span>, while
 non-oscillating solutions for Forward Euler and Crank-Nicolson
@@ -319,8 +319,8 @@ large values of <span class="math">\(u\)</span> can be generated when <span clas
 enough. The numerical solution is in such cases totally irrelevant to
 an ODE modeling decay processes! To avoid this situation, we must
 demand <span class="math">\(|A|\leq 1\)</span> also for <span class="math">\(\theta &lt; 1/2\)</span>, which implies</p>
-<div class="math">
-\[\Delta t \leq \frac{2}{(1-2\theta)a},\]</div>
+<div class="math" id="equation-_auto19">
+<span id="eq-auto19"></span><span class="eqno">(6)</span>\[     \Delta t \leq \frac{2}{(1-2\theta)a},\]</div>
 <p>For example, <span class="math">\(\Delta t\)</span> must not exceed  <span class="math">\(2/a\)</span> when computing with
 the Forward Euler scheme.</p>
 <span class="target" id="index-2"></span><div class="admonition-stability-properties admonition" id="index-3">
@@ -353,11 +353,11 @@ see exactly how large the numerical errors are.</p>
 solution, we shall now look more into how well the numerical amplification
 factor approximates the exact one. The exact solution reads
 <span class="math">\(u(t)=Ie^{-at}\)</span>, which can be rewritten as</p>
-<div class="math">
-\[{{u_{\small\mbox{e}}}}(t_n) = Ie^{-a n\Delta t} = I(e^{-a\Delta t})^n {\thinspace .}\]</div>
+<div class="math" id="equation-_auto20">
+<span id="eq-auto20"></span><span class="eqno">(7)</span>\[     {{u_{\small\mbox{e}}}}(t_n) = Ie^{-a n\Delta t} = I(e^{-a\Delta t})^n {\thinspace .}\]</div>
 <p>From this formula we see that the exact amplification factor is</p>
-<div class="math">
-\[{A_{\small\mbox{e}}} = e^{-a\Delta t} {\thinspace .}\]</div>
+<div class="math" id="equation-_auto21">
+<span id="eq-auto21"></span><span class="eqno">(8)</span>\[     {A_{\small\mbox{e}}} = e^{-a\Delta t} {\thinspace .}\]</div>
 <p>We see from all of our analysis
 that the exact and numerical amplification factors depend
 on <span class="math">\(a\)</span> and <span class="math">\(\Delta t\)</span> through the dimensionless
@@ -485,11 +485,11 @@ clearly dominates over the higher-order terms (think of <span class="math">\(p=0
 <p>Now, <span class="math">\(a\)</span> is a given parameter in the problem, while <span class="math">\(\Delta t\)</span> is
 what we can vary. Not surprisingly, the error expressions are usually
 written in terms <span class="math">\(\Delta t\)</span>. When then have</p>
-<div class="math">
-\[\begin{split}A-{A_{\small\mbox{e}}} = \left\lbrace\begin{array}{ll}
-{\mathcal{O}(\Delta t^2)}, &amp; \hbox{Forward and Backward Euler},\\
-{\mathcal{O}(\Delta t^3)}, &amp; \hbox{Crank-Nicolson}
-\end{array}\right.\end{split}\]</div>
+<div class="math" id="equation-_auto22">
+<span id="eq-auto22"></span><span class="eqno">(9)</span>\[\begin{split}     A-{A_{\small\mbox{e}}} = \left\lbrace\begin{array}{ll}
+     {\mathcal{O}(\Delta t^2)}, &amp; \hbox{Forward and Backward Euler},\\
+     {\mathcal{O}(\Delta t^3)}, &amp; \hbox{Crank-Nicolson}
+     \end{array}\right.\end{split}\]</div>
 <p>We say that the Crank-Nicolson scheme has an error in the amplification
 factor of order <span class="math">\(\Delta t^3\)</span>, while the two other schemes are
 of order <span class="math">\(\Delta t^2\)</span> in the same quantity.</p>
@@ -551,11 +551,11 @@ as <span class="math">\(p\rightarrow 0\)</span> since <span class="math">\(t=n\D
 <span class="math">\(t/\Delta t\)</span> in
 the leading-order error terms, these become</p>
 <div class="math" id="equation-decay:analysis:gobal:error:FE">
-<span id="eq-decay-analysis-gobal-error-fe"></span><span class="eqno">(4)</span>\[     e^n = \frac{1}{2} n p^2 = {\frac{1}{2}}ta^2\Delta t, \hbox{Forward Euler}\]</div>
+<span id="eq-decay-analysis-gobal-error-fe"></span><span class="eqno">(10)</span>\[     e^n = \frac{1}{2} n p^2 = {\frac{1}{2}}ta^2\Delta t, \hbox{Forward Euler}\]</div>
 <div class="math" id="equation-decay:analysis:gobal:error:BE">
-<span id="eq-decay-analysis-gobal-error-be"></span><span class="eqno">(5)</span>\[     e^n = -\frac{1}{2} n p^2 = -{\frac{1}{2}}ta^2\Delta t, \hbox{Backward Euler}\]</div>
+<span id="eq-decay-analysis-gobal-error-be"></span><span class="eqno">(11)</span>\[     e^n = -\frac{1}{2} n p^2 = -{\frac{1}{2}}ta^2\Delta t, \hbox{Backward Euler}\]</div>
 <div class="math" id="equation-decay:analysis:gobal:error:CN">
-<span id="eq-decay-analysis-gobal-error-cn"></span><span class="eqno">(6)</span>\[     e^n = \frac{1}{12}np^3 = \frac{1}{12}ta^3\Delta t^2, \hbox{Crank-Nicolson}\]</div>
+<span id="eq-decay-analysis-gobal-error-cn"></span><span class="eqno">(12)</span>\[     e^n = \frac{1}{12}np^3 = \frac{1}{12}ta^3\Delta t^2, \hbox{Crank-Nicolson}\]</div>
 <p>The global error is therefore of
 second order (in <span class="math">\(\Delta t\)</span>) for the Crank-Nicolson scheme and of
 first order for the other two schemes.</p>
@@ -610,15 +610,15 @@ we have</p>
 <p>Now, <span class="math">\(\sum_{n=0}^{N_t} n^2\approx \frac{1}{3}N_t^3\)</span>. Using this approximation,
 setting <span class="math">\(N_t =T/\Delta t\)</span>, and taking the square root gives the expression</p>
 <div class="math" id="equation-decay:analysis:gobal:error_int:FE">
-<span id="eq-decay-analysis-gobal-error-int-fe"></span><span class="eqno">(7)</span>\[     ||e^n||_{\ell^2} = \frac{1}{2}\sqrt{\frac{T^3}{3}} a^2\Delta t{\thinspace .}\]</div>
+<span id="eq-decay-analysis-gobal-error-int-fe"></span><span class="eqno">(13)</span>\[     ||e^n||_{\ell^2} = \frac{1}{2}\sqrt{\frac{T^3}{3}} a^2\Delta t{\thinspace .}\]</div>
 <p>Calculations for the Backward Euler scheme are very similar and provide
 the same result, while the Crank-Nicolson scheme leads to</p>
 <div class="math" id="equation-decay:analysis:gobal:error_int:CN">
-<span id="eq-decay-analysis-gobal-error-int-cn"></span><span class="eqno">(8)</span>\[     ||e^n||_{\ell^2} = \frac{1}{12}\sqrt{\frac{T^3}{3}}a^3\Delta t^2{\thinspace .}\]</div>
+<span id="eq-decay-analysis-gobal-error-int-cn"></span><span class="eqno">(14)</span>\[     ||e^n||_{\ell^2} = \frac{1}{12}\sqrt{\frac{T^3}{3}}a^3\Delta t^2{\thinspace .}\]</div>
 <div class="admonition-summary-of-errors admonition">
 <p class="first admonition-title">Summary of errors</p>
-<p>Both the global point-wise errors <a href="#equation-decay:analysis:gobal:error:FE">(4)</a>-<a href="#equation-decay:analysis:gobal:error:CN">(6)</a>
-and their time-integrated versions <a href="#equation-decay:analysis:gobal:error_int:FE">(7)</a> and <a href="#equation-decay:analysis:gobal:error_int:CN">(8)</a> show that</p>
+<p>Both the global point-wise errors <a href="#equation-decay:analysis:gobal:error:FE">(10)</a>-<a href="#equation-decay:analysis:gobal:error:CN">(12)</a>
+and their time-integrated versions <a href="#equation-decay:analysis:gobal:error_int:FE">(13)</a> and <a href="#equation-decay:analysis:gobal:error_int:CN">(14)</a> show that</p>
 <blockquote class="last">
 <div><ul class="simple">
 <li>the Crank-Nicolson scheme is of second order in <span class="math">\(\Delta t\)</span>, and</li>
@@ -658,7 +658,7 @@ discrete equation, we get an error in the discrete equation. This
 error is called
 a <em>residual</em>, denoted here by <span class="math">\(R^n\)</span>:</p>
 <div class="math" id="equation-decay:analysis:trunc:Req">
-<span id="eq-decay-analysis-trunc-req"></span><span class="eqno">(9)</span>\[     R^n = \frac{{u_{\small\mbox{e}}}(t_{n+1})-{u_{\small\mbox{e}}}(t_n)}{\Delta t} + a{u_{\small\mbox{e}}}(t_n)
+<span id="eq-decay-analysis-trunc-req"></span><span class="eqno">(15)</span>\[     R^n = \frac{{u_{\small\mbox{e}}}(t_{n+1})-{u_{\small\mbox{e}}}(t_n)}{\Delta t} + a{u_{\small\mbox{e}}}(t_n)
      {\thinspace .}\]</div>
 <p>The residual is defined at each mesh point and is therefore a mesh
 function with a superscript <span class="math">\(n\)</span>.</p>
@@ -672,7 +672,7 @@ We have that</p>
 \[{u_{\small\mbox{e}}}(t_{n+1}) = {u_{\small\mbox{e}}}(t_n) + {u_{\small\mbox{e}}}'(t_n)\Delta t + \frac{1}{2}{u_{\small\mbox{e}}}''(t_n)
 \Delta t^2 + \cdots,\]</div>
 <p>which may be used to reformulate the fraction in
-<a href="#equation-decay:analysis:trunc:Req">(9)</a> so that</p>
+<a href="#equation-decay:analysis:trunc:Req">(15)</a> so that</p>
 <div class="math">
 \[R^n = {u_{\small\mbox{e}}}'(t_n) + \frac{1}{2}{u_{\small\mbox{e}}}''(t_n)\Delta t + \ldots + a{u_{\small\mbox{e}}}(t_n){\thinspace .}\]</div>
 <p>Now, <span class="math">\({u_{\small\mbox{e}}}\)</span> fulfills the ODE <span class="math">\({u_{\small\mbox{e}}}'=-a{u_{\small\mbox{e}}}\)</span>, which means that the first and last

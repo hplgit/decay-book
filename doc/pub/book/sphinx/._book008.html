@@ -2891,12 +2891,12 @@ of discrete coordinates <span class="math">\((x_i,y_i)\)</span>, <span class="ma
 values are uniformly distributed with spacing <span class="math">\(\Delta x\)</span>: <span class="math">\(x_i=\Delta x\)</span>.
 The derivative of this curve, defined as a new curve with points
 <span class="math">\((x_i, d_i)\)</span>, can be computed via finite differences:</p>
-<div class="math">
-\[d_0 = \frac{y_1-y_0}{\Delta x},\]</div>
-<div class="math">
-\[d_i = \frac{y_{i+1}-y_{i-1}}{2\Delta x},\quad i=1,\ldots,n-1,\]</div>
-<div class="math">
-\[d_n = \frac{y_n-y_{n-1}}{\Delta x}{\thinspace .}\]</div>
+<div class="math" id="equation-_auto92">
+<span id="eq-auto92"></span><span class="eqno">(6)</span>\[     d_0 = \frac{y_1-y_0}{\Delta x},\]</div>
+<div class="math" id="equation-_auto93">
+<span id="eq-auto93"></span><span class="eqno">(7)</span>\[     d_i = \frac{y_{i+1}-y_{i-1}}{2\Delta x},\quad i=1,\ldots,n-1,\]</div>
+<div class="math" id="equation-_auto94">
+<span id="eq-auto94"></span><span class="eqno">(8)</span>\[     d_n = \frac{y_n-y_{n-1}}{\Delta x}{\thinspace .}\]</div>
 <p><strong>a)</strong>
 Write a function
 <code class="docutils literal"><span class="pre">differentiate(x,</span> <span class="pre">y)</span></code> for differentiating a curve
@@ -3095,7 +3095,7 @@ Filename: <code class="docutils literal"><span class="pre">experiment_compare_dt
 <p>We have the following evolutionary difference equation for the number
 of individuals <span class="math">\(u^n\)</span> of a certain specie at time <span class="math">\(n\Delta t\)</span>:</p>
 <div class="math" id="equation-softeng1:exer:logistic:eq">
-<span id="eq-softeng1-exer-logistic-eq"></span><span class="eqno">(6)</span>\[     u^{n+1} = u^n + \Delta t r u^n\left(1 - \frac{u^n}{M^n}\right),
+<span id="eq-softeng1-exer-logistic-eq"></span><span class="eqno">(9)</span>\[     u^{n+1} = u^n + \Delta t r u^n\left(1 - \frac{u^n}{M^n}\right),
      \quad u^0=U_0{\thinspace .}
      \\]</div>
 <p>Here, <span class="math">\(n\)</span> is a counter in time, <span class="math">\(\Delta t\)</span> is time between time levels

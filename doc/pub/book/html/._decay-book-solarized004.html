@@ -1428,6 +1428,7 @@ calculate their difference as a mesh function for the error:
 $$
 \begin{equation}
 e^n = \uex(t_n) - u^n,\quad n=0,1,\ldots,N_t \tp
+\tag{46}
 \end{equation}
 $$
 
@@ -1495,15 +1496,15 @@ Three common norms are
 $$
 \begin{align}
 ||f||_{L^2} &= \left( \int_0^T f(t)^2 dt\right)^{1/2},
-\tag{39}\\ 
+\tag{47}\\ 
 ||f||_{L^1} &= \int_0^T |f(t)| dt,
-\tag{40}\\ 
+\tag{48}\\ 
 ||f||_{L^\infty} &= \max_{t\in [0,T]}|f(t)|\tp
-\tag{41}
+\tag{49}
 \end{align}
 $$
 
-The \( L^2 \) norm <a href="#mjx-eqn-39">(39)</a> (&quot;L-two norm&quot;)
+The \( L^2 \) norm <a href="#mjx-eqn-47">(47)</a> (&quot;L-two norm&quot;)
 has nice mathematical properties and
 is the most popular norm. It is a generalization
 of the well-known Eucledian norm of vectors to functions.
@@ -1521,6 +1522,7 @@ In fact, there is a whole family of norms,
 $$
 \begin{equation}
 ||f||_{L^p} = \left(\int_0^T f(t)^pdt\right)^{1/p},
+\tag{50}
 \end{equation}
 $$
 
@@ -1566,11 +1568,11 @@ defined by
 $$
 \begin{align}
 ||f^n||_{\ell^2} &= \left( \Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2},
-\tag{42}\\ 
+\tag{51}\\ 
 ||f^n||_{\ell^1} &= \Delta t\sum_{n=0}^{N_t} |f^n|
-\tag{43}\\ 
+\tag{52}\\ 
 ||f^n||_{\ell^\infty} &= \max_{0\leq n\leq N_t}|f^n|\tp
-\tag{44}
+\tag{53}
 \end{align}
 $$
 
@@ -1591,20 +1593,20 @@ This reasoning gives rise to the <em>vector norms</em> for a vector
 $$
 \begin{align}
 ||f||_2 &= \left( \frac{1}{N+1}\sum_{n=0}^{N} (f_n)^2\right)^{1/2},
-\tag{45}\\ 
+\tag{54}\\ 
 ||f||_1 &= \frac{1}{N+1}\sum_{n=0}^{N} |f_n|
-\tag{46}\\ 
+\tag{55}\\ 
 ||f||_{\ell^\infty} &= \max_{0\leq n\leq N}|f_n|\tp
-\tag{47}
+\tag{56}
 \end{align}
 $$
 
 Here we have used the common vector component notation with subscripts
 (\( f_n \)) and \( N \) as length. We will mostly work with mesh functions
 and use the discrete \( \ell^2 \)
-norm <a href="#mjx-eqn-42">(42)</a> or the max norm \( \ell^\infty \)
-<a href="#mjx-eqn-44">(44)</a>, but the corresponding vector norms
-<a href="#mjx-eqn-45">(45)</a>-<a href="#mjx-eqn-47">(47)</a> are also much used
+norm <a href="#mjx-eqn-51">(51)</a> or the max norm \( \ell^\infty \)
+<a href="#mjx-eqn-53">(53)</a>, but the corresponding vector norms
+<a href="#mjx-eqn-54">(54)</a>-<a href="#mjx-eqn-56">(56)</a> are also much used
 in numerical computations, so it is important to know the different
 norms and the relations between them.
 
@@ -1615,7 +1617,7 @@ will be taken as \( ||e^n||_{\ell^2} \) and called \( E \):
 $$
 \begin{equation}
 E = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}
-\tag{48}
+\tag{57}
 \end{equation}
 $$
 

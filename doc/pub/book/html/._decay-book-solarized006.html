@@ -809,6 +809,7 @@ We address the ODE for exponential decay,
 $$
 \begin{equation}
 u'(t) = -au(t),\quad u(0)=I,
+\tag{59}
 \end{equation}
 $$
 
@@ -818,7 +819,7 @@ the recursive equations
 $$
 \begin{equation}
 u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n
-\tag{50}
+\tag{60}
 \end{equation}
 $$
 
@@ -1028,12 +1029,12 @@ difference methods.
 <h2 id="___sec53">Exact numerical solution </h2>
 
 <p>
-Starting with \( u^0=I \), the simple recursion <a href="#mjx-eqn-50">(50)</a>
+Starting with \( u^0=I \), the simple recursion <a href="#mjx-eqn-60">(60)</a>
 can be applied repeatedly \( n \) times, with the result that
 $$
 \begin{equation}
 u^{n} = IA^n,\quad A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}\tp
-\tag{51}
+\tag{61}
 \end{equation}
 $$
 
@@ -1052,7 +1053,7 @@ a polynomial equation in \( A \). In the present case we get
 $$ A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}\tp $$
 
 This is a solution technique of wider applicability than repeated use of
-the recursion <a href="#mjx-eqn-50">(50)</a>.
+the recursion <a href="#mjx-eqn-60">(60)</a>.
 </div>
 
 
@@ -1072,7 +1073,7 @@ We have oscillations due to \( A < 0 \) when
 $$
 \begin{equation}
 (1-\theta)a\Delta t > 1 \tp
-\tag{52}
+\tag{62}
 \end{equation}
 $$
 
@@ -1084,6 +1085,7 @@ the stability criterion reads
 $$
 \begin{equation}
 \Delta t < \frac{1}{(1-\theta)a}\tp
+\tag{63}
 \end{equation}
 $$
 
@@ -1125,6 +1127,7 @@ demand \( |A|\leq 1 \) also for \( \theta < 1/2 \), which implies
 $$
 \begin{equation}
 \Delta t \leq \frac{2}{(1-2\theta)a},
+\tag{64}
 \end{equation}
 $$
 
@@ -1171,6 +1174,7 @@ factor approximates the exact one. The exact solution reads
 $$
 \begin{equation}
 {\uex}(t_n) = Ie^{-a n\Delta t} = I(e^{-a\Delta t})^n \tp
+\tag{65}
 \end{equation}
 $$
 
@@ -1178,6 +1182,7 @@ From this formula we see that the exact amplification factor is
 $$
 \begin{equation}
 \Aex = e^{-a\Delta t} \tp
+\tag{66}
 \end{equation}
 $$
 
@@ -1356,6 +1361,7 @@ A-\Aex = \left\lbrace\begin{array}{ll}
 \Oof{\Delta t^2}, & \hbox{Forward and Backward Euler},\\ 
 \Oof{\Delta t^3}, & \hbox{Crank-Nicolson}
 \end{array}\right.
+\tag{67}
 \end{equation}
 $$
 
@@ -1436,11 +1442,11 @@ the leading-order error terms, these become
 $$
 \begin{align}
 e^n &= \half n p^2 = {\half}ta^2\Delta t, &\hbox{Forward Euler}
-\tag{53}\\ 
+\tag{68}\\ 
 e^n &= -\half n p^2 = -{\half}ta^2\Delta t, &\hbox{Backward Euler}
-\tag{54}\\ 
+\tag{69}\\ 
 e^n &= \frac{1}{12}np^3 = \frac{1}{12}ta^3\Delta t^2, &\hbox{Crank-Nicolson}
-\tag{55}
+\tag{70}
 \end{align}
 $$
 
@@ -1518,7 +1524,7 @@ setting \( N_t =T/\Delta t \), and taking the square root gives the expression
 $$
 \begin{equation}
 ||e^n||_{\ell^2} = \half\sqrt{\frac{T^3}{3}} a^2\Delta t\tp
-\tag{56}
+\tag{71}
 \end{equation}
 $$
 
@@ -1528,7 +1534,7 @@ the same result, while the Crank-Nicolson scheme leads to
 $$
 \begin{equation}
 ||e^n||_{\ell^2} = \frac{1}{12}\sqrt{\frac{T^3}{3}}a^3\Delta t^2\tp
-\tag{57}
+\tag{72}
 \end{equation}
 $$
 
@@ -1536,8 +1542,8 @@ $$
 <div class="alert alert-block alert-summary alert-text-normal">
 <b>Summary of errors.</b>
 <p>
-Both the global point-wise errors <a href="#mjx-eqn-53">(53)</a>-<a href="#mjx-eqn-55">(55)</a>
-and their time-integrated versions <a href="#mjx-eqn-56">(56)</a> and <a href="#mjx-eqn-57">(57)</a> show that
+Both the global point-wise errors <a href="#mjx-eqn-68">(68)</a>-<a href="#mjx-eqn-70">(70)</a>
+and their time-integrated versions <a href="#mjx-eqn-71">(71)</a> and <a href="#mjx-eqn-72">(72)</a> show that
 
 <ul>
  <li> the Crank-Nicolson scheme is of second order in \( \Delta t \), and</li>
@@ -1588,7 +1594,7 @@ $$
 \begin{equation}
 R^n = \frac{\uex(t_{n+1})-\uex(t_n)}{\Delta t} + a\uex(t_n)
 \tp
-\tag{58}
+\tag{73}
 \end{equation}
 $$
 
@@ -1607,7 +1613,7 @@ $$ \uex(t_{n+1}) = \uex(t_n) + \uex'(t_n)\Delta t + \half\uex''(t_n)
 \Delta t^2 + \cdots, $$
 
 which may be used to reformulate the fraction in
-<a href="#mjx-eqn-58">(58)</a> so that
+<a href="#mjx-eqn-73">(73)</a> so that
 
 $$ R^n = \uex'(t_n) + \half\uex''(t_n)\Delta t + \ldots + a\uex(t_n)\tp$$
 
