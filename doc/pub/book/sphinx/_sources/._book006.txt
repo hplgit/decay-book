@@ -48,18 +48,26 @@ A Forward Euler scheme consist of evaluating :eq:`decay:problem:a`
 at :math:`t=t_n` and approximating the derivative with a forward
 difference :math:`[D^+_t u]^n`:
 
+.. _Eq:_auto24:
+
 .. math::
+   :label: _auto24
         
         \frac{u^{n+1} - u^n}{\Delta t} = -a(t_n)u^n
         {\thinspace .}
         
+        
 
 The Backward Euler scheme becomes
 
+.. _Eq:_auto25:
+
 .. math::
+   :label: _auto25
         
         \frac{u^{n} - u^{n-1}}{\Delta t} = -a(t_n)u^n
         {\thinspace .}
+        
         
 
 The Crank-Nicolson method builds on sampling the ODE at
@@ -67,75 +75,115 @@ The Crank-Nicolson method builds on sampling the ODE at
 and use an average for :math:`u` at
 times :math:`t_n` and :math:`t_{n+1}`:
 
+.. _Eq:_auto26:
+
 .. math::
+   :label: _auto26
         
         \frac{u^{n+1} - u^{n}}{\Delta t} = -a(t_{n+\frac{1}{2}})\frac{1}{2}(u^n + u^{n+1})
         {\thinspace .}
         
+        
 
 Alternatively, we can use an average for the product :math:`au`:
 
+.. _Eq:_auto27:
+
 .. math::
+   :label: _auto27
         
         \frac{u^{n+1} - u^{n}}{\Delta t} = -\frac{1}{2}(a(t_n)u^n + a(t_{n+1})u^{n+1})
         {\thinspace .}
+        
         
 
 The :math:`\theta`-rule unifies the three mentioned schemes. One version is to
 have :math:`a` evaluated at the weighted time point :math:`(1-\theta)t_n + \theta t_{n+1}`,
 
+.. _Eq:_auto28:
+
 .. math::
+   :label: _auto28
         
         \frac{u^{n+1} - u^{n}}{\Delta t} = -a((1-\theta)t_n + \theta t_{n+1})((1-\theta) u^n + \theta u^{n+1})
         {\thinspace .}
         
+        
 
 Another possibility is to apply a weighted average for the product :math:`au`,
 
+.. _Eq:_auto29:
+
 .. math::
+   :label: _auto29
         
         \frac{u^{n+1} - u^{n}}{\Delta t} = -(1-\theta) a(t_n)u^n - \theta
         a(t_{n+1})u^{n+1}
         {\thinspace .}
         
+        
 
 With the finite difference operator notation the Forward Euler and Backward
 Euler schemes can be summarized as
 
+.. _Eq:_auto30:
+
 .. math::
+   :label: _auto30
         
         \lbrack D^+_t u = -au\rbrack^n,
         
+        
+
+.. _Eq:_auto31:
 
 .. math::
+   :label: _auto31
           
         \lbrack D^-_t u = -au\rbrack^n
         {\thinspace .}
+        
         
 
 The Crank-Nicolson and :math:`\theta` schemes depend on whether we evaluate
 :math:`a` at the sample point for the ODE or if we use an average. The
 various versions are written as
 
+.. _Eq:_auto32:
+
 .. math::
+   :label: _auto32
         
         \lbrack D_t u = -a\overline{u}^t\rbrack^{n+\frac{1}{2}},
         
+        
+
+.. _Eq:_auto33:
 
 .. math::
+   :label: _auto33
           
         \lbrack D_t u = -\overline{au}^t\rbrack^{n+\frac{1}{2}},
         
+        
+
+.. _Eq:_auto34:
 
 .. math::
+   :label: _auto34
           
         \lbrack D_t u = -a\overline{u}^{t,\theta}\rbrack^{n+\theta},
         
+        
+
+.. _Eq:_auto35:
 
 .. math::
+   :label: _auto35
           
         \lbrack D_t u = -\overline{au}^{t,\theta}\rbrack^{n+\theta}
         {\thinspace .}
+        
         
 
 .. _decay:source:
@@ -161,29 +209,49 @@ have a choice of whether to evaluate :math:`a(t)` and :math:`b(t)` at the
 correct point or use an average. The chosen strategy becomes
 particularly clear if we write up the schemes in the operator notation:
 
+.. _Eq:_auto36:
+
 .. math::
+   :label: _auto36
         
         \lbrack D^+_t u = -au + b\rbrack^n,
         
+        
+
+.. _Eq:_auto37:
 
 .. math::
+   :label: _auto37
           
         \lbrack D^-_t u = -au + b\rbrack^n,
         
+        
+
+.. _Eq:_auto38:
 
 .. math::
+   :label: _auto38
           
         \lbrack D_t u   = -a\overline{u}^t + b\rbrack^{n+\frac{1}{2}},
         
+        
+
+.. _Eq:_auto39:
 
 .. math::
+   :label: _auto39
           
         \lbrack D_t u   = \overline{-au+b}^t\rbrack^{n+\frac{1}{2}},
         
+        
+
+.. _Eq:_auto40:
 
 .. math::
+   :label: _auto40
           
         \lbrack D_t u   = -a\overline{u}^{t,\theta} + b\rbrack^{n+\theta},
+        
         
 
 .. _Eq:decay:problem:ab:theta:avg:all:op:
@@ -205,8 +273,8 @@ Deriving the :math:`\theta`-rule formula
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Writing out the :math:`\theta`-rule in :eq:`decay:problem:ab:theta:avg:all:op`,
-using :ref:`(3.37) <Eq:decay:fd1:Du:theta>`
-and :ref:`(3.38) <Eq:decay:fd1:wmean:a>`, we get
+using :ref:`(3.51) <Eq:decay:fd1:Du:theta>`
+and :ref:`(3.52) <Eq:decay:fd1:wmean:a>`, we get
 
 .. _Eq:decay:problem:ab:theta:avg:all:
 
@@ -222,11 +290,15 @@ where :math:`a^n` means evaluating :math:`a` at :math:`t=t_n` and similar for
 :math:`a^{n+1}`, :math:`b^n`, and :math:`b^{n+1}`.
 We solve for :math:`u^{n+1}`:
 
+.. _Eq:_auto41:
+
 .. math::
+   :label: _auto41
         
         u^{n+1} = ((1 - \Delta t(1-\theta)a^n)u^n
         + \Delta t(\theta b^{n+1} + (1-\theta)b^n))(1 + \Delta t\theta a^{n+1})^{-1}
         {\thinspace .}
+        
         
 
 Python code
@@ -732,55 +804,87 @@ Many ODE models involve more than one unknown function and more
 than one equation. Here is an example of two unknown functions :math:`u(t)`
 and :math:`v(t)`:
 
+.. _Eq:_auto42:
+
 .. math::
+   :label: _auto42
         
         u^{\prime} = a u + bv,
         
+        
+
+.. _Eq:_auto43:
 
 .. math::
+   :label: _auto43
           
         v^{\prime} = cu +  dv,
+        
         
 
 for constants :math:`a,b,c,d`.
 Applying the Forward Euler method to each equation results in a simple
 updating formula:
 
+.. _Eq:_auto44:
+
 .. math::
+   :label: _auto44
         
         u^{n+1} = u^n + \Delta t (a u^n + b v^n),
         
+        
+
+.. _Eq:_auto45:
 
 .. math::
+   :label: _auto45
           
         v^{n+1} = u^n + \Delta t (cu^n + dv^n)
         {\thinspace .}
+        
         
 
 On the other hand, the Crank-Nicolson or Backward Euler schemes result in a
 :math:`2\times 2` linear system for the new unknowns. The latter scheme becomes
 
+.. _Eq:_auto46:
+
 .. math::
+   :label: _auto46
         
         u^{n+1} = u^n + \Delta t (a u^{n+1} + b v^{n+1}),
         
+        
+
+.. _Eq:_auto47:
 
 .. math::
+   :label: _auto47
           
         v^{n+1} = v^n + \Delta t (c u^{n+1} + d v^{n+1}){\thinspace .}
+        
         
 
 Collecting :math:`u^{n+1}` as well as :math:`v^{n+1}` on the left-hand side results
 in
 
+.. _Eq:_auto48:
+
 .. math::
+   :label: _auto48
         
         (1 - \Delta t a)u^{n+1} + bv^{n+1} = u^n ,
         
+        
+
+.. _Eq:_auto49:
 
 .. math::
+   :label: _auto49
           
         c u^{n+1} + (1 - \Delta t d) v^{n+1} = v^n ,
+        
         
 
 which is a system of two coupled, linear, algebraic equations in two
@@ -875,10 +979,14 @@ on the right-hand side gives
 
 .. index:: theta-rule
 
+.. _Eq:_auto50:
+
 .. math::
+   :label: _auto50
         
         u^{n+1} - \Delta t \theta f(u^{n+1},t_{n+1}) =
         u^n + \Delta t(1-\theta)f(u^n, t_n){\thinspace .}
+        
         
 
 For a general :math:`f` (not linear in :math:`u`), this equation is *nonlinear* in
@@ -941,9 +1049,13 @@ The ordinary Leapfrog scheme
 The derivative of :math:`u` at some point :math:`t_n` can be approximated by
 a central difference over two time steps,
 
+.. _Eq:_auto51:
+
 .. math::
+   :label: _auto51
         
         u^{\prime}(t_n)\approx \frac{u^{n+1}-u^{n-1}}{2\Delta t} = [D_{2t}u]^n
+        
         
 
 which is an approximation of second order in :math:`\Delta t`. The scheme
@@ -1232,11 +1344,15 @@ This is indeed true: the overall accuracy is :math:`{\mathcal{O}(\Delta t^4)}`!
 
 To summarize, the 4th-order Runge-Kutta method becomes
 
+.. _Eq:_auto52:
+
 .. math::
+   :label: _auto52
         
         u^{n+1} = u^n +
         \frac{\Delta t}{6}\left( f^n + 2\hat{f}^{n+\frac{1}{2}}
         + 2\tilde{f}^{n+\frac{1}{2}} + \bar{f}^{n+1}\right),
+        
         
 
 where the quantities on the right-hand side are computed from

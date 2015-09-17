@@ -161,9 +161,13 @@ the population evolves according to
 Dividing by :math:`\Delta t` and letting :math:`\Delta t \rightarrow 0`,
 we get the ODE
 
+.. _Eq:_auto53:
+
 .. math::
+   :label: _auto53
         
         N^{\prime} = (b-d)N,\quad N(0)=N_0{\thinspace .}
+        
         
 
 In a population where the death rate (:math:`d`) is larger than
@@ -179,10 +183,14 @@ the equation for the population change becomes
 
 The corresponding ODE reads
 
+.. _Eq:_auto54:
+
 .. math::
+   :label: _auto54
         
         N^{\prime} = (b-d)N + I,\quad N(0)=N_0
         {\thinspace .}
+        
         
 
 Emigration is also modeled by this :math:`I` term if we just change its sign: :math:`I < 0`.
@@ -293,9 +301,13 @@ The second step is to assume *continuous compounding*, meaning that the
 interest is added continuously. This implies :math:`m\rightarrow\infty`, and
 in the limit one gets the formula
 
+.. _Eq:_auto55:
+
 .. math::
+   :label: _auto55
         
         u(t) = u_0e^{rt/100},
+        
         
 
 which is nothing but the solution of the ODE problem
@@ -415,10 +427,14 @@ We can introduce :math:`u=N(t)/N(0)`, divide by
 The left-hand side is the derivative of :math:`u`. Dividing by the :math:`N_0` gives
 the following ODE for :math:`u`:
 
+.. _Eq:_auto56:
+
 .. math::
+   :label: _auto56
         
         u^{\prime} = -au,\quad u(0)=1
         {\thinspace .}
+        
         
 
 The parameter :math:`a` can for a given nucleus be expressed through the
@@ -471,9 +487,13 @@ Bernoulli trials in a row and therefore
 
 The expected number of atoms of the original type at time :math:`t` is
 
+.. _Eq:_auto57:
+
 .. math::
+   :label: _auto57
         
         {\hbox{E}\lbrack P \rbrack} = N_0p = N_0(1-\lambda\Delta t)^m,\quad m=t/\Delta t{\thinspace .}
+        
         
 
 To see the relation between the two types of Bernoulli trials and the
@@ -625,24 +645,40 @@ of :math:`[B]` grows by the loss of :math:`[A]`:
 The mathematical model can either be :eq:`decay:app:kinetics:irrev:A` or
 the system
 
+.. _Eq:_auto58:
+
 .. math::
+   :label: _auto58
         
         \frac{d[A]}{dt} = -k[A], t\in (0,T]
         
+        
+
+.. _Eq:_auto59:
 
 .. math::
+   :label: _auto59
           
         \frac{d[B]}{dt} = k[A], t\in (0,T]
         
+        
+
+.. _Eq:_auto60:
 
 .. math::
+   :label: _auto60
           
         [A](0) = 1,
         
+        
+
+.. _Eq:_auto61:
 
 .. math::
+   :label: _auto61
           
         [B](0) = 0{\thinspace .}
+        
         
 
 This reaction is known as a *first-order reaction*, where each molecule of
@@ -651,14 +687,22 @@ i.e., independent of what happens to any other molecule.
 
 An :math:`n`-th order reaction is modeled by
 
+.. _Eq:_auto62:
+
 .. math::
+   :label: _auto62
         
         \frac{d[A]}{dt} = -k[A]^n,
         
+        
+
+.. _Eq:_auto63:
 
 .. math::
+   :label: _auto63
           
         \frac{d[B]}{dt} = k[A]^n,
+        
         
 
 for :math:`t\in (0,T]` with initial conditions :math:`[A](0) = 1` and
@@ -680,16 +724,24 @@ Let the chemical reaction turn substance A into B and substance B into A.
 The rate of change of :math:`[A]` has then two contributions: a loss :math:`k_A[A]`
 and a gain :math:`k_B[B]`:
 
+.. _Eq:_auto64:
+
 .. math::
+   :label: _auto64
         
         \frac{d[A]}{dt} = -k_A[A] + k_B[B], \quad t\in (0,T],\ [A](0)=A_0{\thinspace .}
+        
         
 
 Similarly for substance B,
 
+.. _Eq:_auto65:
+
 .. math::
+   :label: _auto65
         
         \frac{d[B]}{dt} = k_A[A] - k_B[B], \quad t\in (0,T],\ [B](0)=B_0{\thinspace .}
+        
         
 
 This time we have allowed for arbitrary initial concentrations.
@@ -741,22 +793,34 @@ experiments.)
 Working with concentrations instead, we introduce :math:`[C](t)=N_C(t)/N_C(0)`,
 with similar definitions for :math:`[A]` and :math:`[B]` we get
 
+.. _Eq:_auto66:
+
 .. math::
+   :label: _auto66
         
         \frac{d[C]}{dt} = k [A][B]{\thinspace .}
+        
         
 
 The constant :math:`k` is related to :math:`\hat k` by :math:`k = \hat k N_A(0)N_B(0)/N_C(0)`.
 The gain in C is a loss of A and B:
 
+.. _Eq:_auto67:
+
 .. math::
+   :label: _auto67
         
         \frac{d[A]}{dt} = -k[A][B],
         
+        
+
+.. _Eq:_auto68:
 
 .. math::
+   :label: _auto68
           
         \frac{d[B]}{dt} = -k[A][B]{\thinspace .}
+        
         
 
 A biochemical reaction
@@ -1089,9 +1153,13 @@ lists :math:`h_i` (m), :math:`\bar T_i` (K), and :math:`L_i` (K/m) for the layer
 For implementation it might be convenient to write :eq:`decay:app:atm:ode`
 on the form
 
+.. _Eq:_auto69:
+
 .. math::
+   :label: _auto69
         
         \frac{dp}{dz} = -\frac{Mg}{R^*(\bar T(z) + L(z)(z-h(z)))} p,
+        
         
 
 where :math:`\bar T(z)`, :math:`L(z)`, and :math:`h(z)` are piecewise constant
@@ -1206,9 +1274,13 @@ where :math:`\varrho` is the density of the fluid and
 
 The drag force is of two types, depending on the Reynolds number
 
+.. _Eq:_auto70:
+
 .. math::
+   :label: _auto70
         
         \hbox{Re} = \frac{\varrho d|v|}{\mu},
+        
         
 
 where :math:`d` is the diameter of the body in
@@ -1218,10 +1290,14 @@ When :math:`\hbox{Re} < 1`, the drag force is fairly well modeled by
 the so-called Stokes' drag,
 which for a spherical body of diameter :math:`d` reads
 
+.. _Eq:_auto71:
+
 .. math::
+   :label: _auto71
         
         F_d^{(S)} = - 3\pi d\mu v
         {\thinspace .}
+        
         
 
 Quantities are taken as positive in the upwards vertical direction, so
@@ -1232,9 +1308,13 @@ become negative, in accordance with the minus sign in expression for
 For large Re, typically :math:`\hbox{Re} > 10^3`, the drag force is quadratic
 in the velocity:
 
+.. _Eq:_auto72:
+
 .. math::
+   :label: _auto72
         
         F_d^{(q)} = -{1\over2}C_D\varrho A|v|v,
+        
         
 
 where :math:`C_D` is a dimensionless drag coefficient depending on the body's shape,
@@ -1290,10 +1370,14 @@ the mass to get
 
 We may introduce the constants
 
+.. _Eq:_auto73:
+
 .. math::
+   :label: _auto73
         
         a = \frac{3\pi d\mu}{\varrho_b V},\quad
         b = g\left(\frac{\varrho}{\varrho_b} -1\right),
+        
         
 
 so that the structure of the differential equation becomes obvious:
@@ -1328,9 +1412,13 @@ This derivation can be repeated with the quadratic drag force
 
 Defining
 
+.. _Eq:_auto74:
+
 .. math::
+   :label: _auto74
         
         a = {1\over2}C_D{\varrho A\over\varrho_b V},
+        
         
 
 and :math:`b` as above, we can write :eq:`decay:app:fallingbody:model:q` as
@@ -1404,10 +1492,14 @@ average, we can use a *geometric mean*:
 .. index::
    single: averaging; geometric
 
+.. _Eq:_auto75:
+
 .. math::
+   :label: _auto75
         
         (|v|v)^{n+\frac{1}{2}} \approx |v^n|v^{n+1}
         {\thinspace .}
+        
         
 
 The error is of second order in :math:`\Delta t`, just as for the arithmetic
@@ -1571,9 +1663,13 @@ material will decay: :math:`\varepsilon = Ie^{-(t-t_1)E/\eta)}`.
 Introducing :math:`u` for :math:`\varepsilon` and treating :math:`\boldsymbol{\sigma}(t)` as a
 given function, we can write the Kelvin-Vogt model in our standard form
 
+.. _Eq:_auto76:
+
 .. math::
+   :label: _auto76
         
         u^{\prime}(t) = -au(t) + b(t),
+        
         
 
 with :math:`a = E/\eta` and :math:`b(t)=\boldsymbol{\sigma}(t)/\eta`. An initial condition,
@@ -1917,10 +2013,14 @@ The surrounding temperature :math:`T_s` in Newton's law of cooling
 variations are periodic with period :math:`P` and amplitude :math:`a` around
 a constant mean temperature :math:`T_m`:
 
+.. _Eq:_auto77:
+
 .. math::
+   :label: _auto77
         
         T_s(t) = T_m + a\sin\left(\frac{2\pi}{P}t\right)
         {\thinspace .}
+        
         
 
 Simulate a process with the following data: :math:`k=0.05 \hbox{ min}^{-1}`,
@@ -1990,14 +2090,22 @@ Letting :math:`u_A` and :math:`u_B` be the fractions of the initial amount of
 material in substance A and B, respectively, the following system of
 ODEs governs the evolution of :math:`u_A(t)` and :math:`u_B(t)`:
 
+.. _Eq:_auto78:
+
 .. math::
+   :label: _auto78
         
         \frac{1}{\ln 2} u_A^{\prime} = u_B/B_{1/2} - u_A/A_{1/2},
         
+        
+
+.. _Eq:_auto79:
 
 .. math::
+   :label: _auto79
           
         \frac{1}{\ln 2} u_B^{\prime} = u_A/A_{1/2} - u_B/B_{1/2},
+        
         
 
 with :math:`u_A(0)=u_B(0)=1`.
@@ -2180,14 +2288,22 @@ solving :eq:`decay:app:MMK:Q2`-:eq:`decay:app:MMK:E2`.
 There are two conservation equations implied by
 :eq:`decay:app:MMK:ES1`-:eq:`decay:app:MMK:E1`:
 
+.. _Eq:_auto80:
+
 .. math::
+   :label: _auto80
         
         [ES] + [E] = E_0,
         
+        
+
+.. _Eq:_auto81:
 
 .. math::
+   :label: _auto81
           
         [ES] + [S] + [P] = S_0{\thinspace .}
+        
         
 
 Derive these two equations. Use these properties in the function
@@ -2249,19 +2365,31 @@ model becomes
         
         
 
+.. _Eq:_auto82:
+
 .. math::
+   :label: _auto82
           
         \bar S(0) = 1-\alpha,
         
+        
+
+.. _Eq:_auto83:
 
 .. math::
+   :label: _auto83
           
         \bar I(0) = \alpha,
         
+        
+
+.. _Eq:_auto84:
 
 .. math::
+   :label: _auto84
           
         \bar R(0) = 0,
+        
         
 
 where :math:`R_0` and :math:`\alpha` are the only parameters in the problem:
@@ -2591,23 +2719,35 @@ A differential equation problem for the air density, based on
 the information for the one-layer atmospheric model in
 the section :ref:`decay:app:atm`, can be set up as
 
+.. _Eq:_auto89:
+
 .. math::
+   :label: _auto89
         
         p^{\prime}(z) = -\frac{Mg}{R^*(T_0+Lz)} p,
         
+        
+
+.. _Eq:_auto90:
 
 .. math::
+   :label: _auto90
           
         \varrho = p \frac{M}{R^*T}
         {\thinspace .}
+        
         
 
 To evaluate :math:`p(z)` we need the altitude :math:`z`. From the principle that the
 velocity is the derivative of the position we have that
 
+.. _Eq:_auto91:
+
 .. math::
+   :label: _auto91
         
         z^{\prime}(t) = v(t),
+        
         
 
 where :math:`v` is the velocity of the body.

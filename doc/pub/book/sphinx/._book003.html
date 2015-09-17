@@ -580,8 +580,8 @@ the exact <span class="math">\(u\)</span> values at the mesh points, in order to
 in the numerical solution.</p>
 <p id="index-7">A natural way to compare the exact and discrete solutions is to
 calculate their difference as a mesh function for the error:</p>
-<div class="math">
-\[e^n = {u_{\small\mbox{e}}}(t_n) - u^n,\quad n=0,1,\ldots,N_t {\thinspace .}\]</div>
+<div class="math" id="equation-_auto15">
+<span id="eq-auto15"></span><span class="eqno">(1)</span>\[     e^n = {u_{\small\mbox{e}}}(t_n) - u^n,\quad n=0,1,\ldots,N_t {\thinspace .}\]</div>
 <p>We may view the mesh function
 <span class="math">\({u_{\small\mbox{e}}}^n = {u_{\small\mbox{e}}}(t_n)\)</span> as a representation of the continuous function <span class="math">\({u_{\small\mbox{e}}}(t)\)</span>
 defined for all <span class="math">\(t\in [0,T]\)</span>. In fact,
@@ -626,12 +626,12 @@ This is obtained by taking the norm of the error function.</p>
 defined for all <span class="math">\(t\in [0,T]\)</span>.
 Three common norms are</p>
 <div class="math" id="equation-decay:norms:L2">
-<span id="eq-decay-norms-l2"></span><span class="eqno">(1)</span>\[     ||f||_{L^2} = \left( \int_0^T f(t)^2 dt\right)^{1/2},\]</div>
+<span id="eq-decay-norms-l2"></span><span class="eqno">(2)</span>\[     ||f||_{L^2} = \left( \int_0^T f(t)^2 dt\right)^{1/2},\]</div>
 <div class="math" id="equation-decay:norms:L1">
-<span id="eq-decay-norms-l1"></span><span class="eqno">(2)</span>\[     ||f||_{L^1} = \int_0^T |f(t)| dt,\]</div>
+<span id="eq-decay-norms-l1"></span><span class="eqno">(3)</span>\[     ||f||_{L^1} = \int_0^T |f(t)| dt,\]</div>
 <div class="math" id="equation-decay:norms:Linf">
-<span id="eq-decay-norms-linf"></span><span class="eqno">(3)</span>\[     ||f||_{L^\infty} = \max_{t\in [0,T]}|f(t)|{\thinspace .}\]</div>
-<p>The <span class="math">\(L^2\)</span> norm <a href="#equation-decay:norms:L2">(1)</a> (&#8220;L-two norm&#8221;)
+<span id="eq-decay-norms-linf"></span><span class="eqno">(4)</span>\[     ||f||_{L^\infty} = \max_{t\in [0,T]}|f(t)|{\thinspace .}\]</div>
+<p>The <span class="math">\(L^2\)</span> norm <a href="#equation-decay:norms:L2">(2)</a> (&#8220;L-two norm&#8221;)
 has nice mathematical properties and
 is the most popular norm. It is a generalization
 of the well-known Eucledian norm of vectors to functions.
@@ -643,8 +643,8 @@ and is widely used. It focuses on a single point with the largest
 value of <span class="math">\(|f|\)</span>, while the other norms measure average behavior of
 the function.</p>
 <p>In fact, there is a whole family of norms,</p>
-<div class="math">
-\[||f||_{L^p} = \left(\int_0^T f(t)^pdt\right)^{1/p},\]</div>
+<div class="math" id="equation-_auto16">
+<span id="eq-auto16"></span><span class="eqno">(5)</span>\[     ||f||_{L^p} = \left(\int_0^T f(t)^pdt\right)^{1/p},\]</div>
 <p>with <span class="math">\(p\)</span> real. In particular,
 <span class="math">\(p=1\)</span> corresponds to the <span class="math">\(L^1\)</span> norm above while <span class="math">\(p=\infty\)</span> is the
 <span class="math">\(L^\infty\)</span> norm.</p>
@@ -678,11 +678,11 @@ rule is of no concern.</p>
 the <span class="math">\(L^2\)</span>, <span class="math">\(L^1\)</span>, and <span class="math">\(L^\infty\)</span> norms of <span class="math">\(f(t)\)</span> defined above, are
 defined by</p>
 <div class="math" id="equation-decay:norms:l2">
-<span id="id2"></span><span class="eqno">(4)</span>\[     ||f^n||_{\ell^2} = \left( \Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2},\]</div>
+<span id="id2"></span><span class="eqno">(6)</span>\[     ||f^n||_{\ell^2} = \left( \Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2},\]</div>
 <div class="math" id="equation-decay:norms:l1">
-<span id="id3"></span><span class="eqno">(5)</span>\[     ||f^n||_{\ell^1} = \Delta t\sum_{n=0}^{N_t} |f^n|\]</div>
+<span id="id3"></span><span class="eqno">(7)</span>\[     ||f^n||_{\ell^1} = \Delta t\sum_{n=0}^{N_t} |f^n|\]</div>
 <div class="math" id="equation-decay:norms:linf">
-<span id="id4"></span><span class="eqno">(6)</span>\[     ||f^n||_{\ell^\infty} = \max_{0\leq n\leq N_t}|f^n|{\thinspace .}\]</div>
+<span id="id4"></span><span class="eqno">(8)</span>\[     ||f^n||_{\ell^\infty} = \max_{0\leq n\leq N_t}|f^n|{\thinspace .}\]</div>
 <p>Note that the <span class="math">\(L^2\)</span>, <span class="math">\(L^1\)</span>, <span class="math">\(\ell^2\)</span>, and <span class="math">\(\ell^1\)</span> norms depend on the
 length of the interval of interest (think of <span class="math">\(f=1\)</span>, then the
 norms are proportional to <span class="math">\(\sqrt{T}\)</span> or <span class="math">\(T\)</span>). In some applications it
@@ -696,23 +696,23 @@ to divide by the total length of the vector, <span class="math">\(N_t+1\)</span>
 This reasoning gives rise to the <em>vector norms</em> for a vector
 <span class="math">\(f=(f_0,\ldots,f_{N})\)</span>:</p>
 <div class="math" id="equation-decay:norms:vl2">
-<span id="eq-decay-norms-vl2"></span><span class="eqno">(7)</span>\[     ||f||_2 = \left( \frac{1}{N+1}\sum_{n=0}^{N} (f_n)^2\right)^{1/2},\]</div>
+<span id="eq-decay-norms-vl2"></span><span class="eqno">(9)</span>\[     ||f||_2 = \left( \frac{1}{N+1}\sum_{n=0}^{N} (f_n)^2\right)^{1/2},\]</div>
 <div class="math" id="equation-decay:norms:vl1">
-<span id="eq-decay-norms-vl1"></span><span class="eqno">(8)</span>\[     ||f||_1 = \frac{1}{N+1}\sum_{n=0}^{N} |f_n|\]</div>
+<span id="eq-decay-norms-vl1"></span><span class="eqno">(10)</span>\[     ||f||_1 = \frac{1}{N+1}\sum_{n=0}^{N} |f_n|\]</div>
 <div class="math" id="equation-decay:norms:vlinf">
-<span id="eq-decay-norms-vlinf"></span><span class="eqno">(9)</span>\[     ||f||_{\ell^\infty} = \max_{0\leq n\leq N}|f_n|{\thinspace .}\]</div>
+<span id="eq-decay-norms-vlinf"></span><span class="eqno">(11)</span>\[     ||f||_{\ell^\infty} = \max_{0\leq n\leq N}|f_n|{\thinspace .}\]</div>
 <p>Here we have used the common vector component notation with subscripts
 (<span class="math">\(f_n\)</span>) and <span class="math">\(N\)</span> as length. We will mostly work with mesh functions
 and use the discrete <span class="math">\(\ell^2\)</span>
-norm <a href="#equation-decay:norms:l2">(4)</a> or the max norm <span class="math">\(\ell^\infty\)</span>
-<a href="#equation-decay:norms:linf">(6)</a>, but the corresponding vector norms
-<a href="#equation-decay:norms:vl2">(7)</a>-<a href="#equation-decay:norms:vlinf">(9)</a> are also much used
+norm <a href="#equation-decay:norms:l2">(6)</a> or the max norm <span class="math">\(\ell^\infty\)</span>
+<a href="#equation-decay:norms:linf">(8)</a>, but the corresponding vector norms
+<a href="#equation-decay:norms:vl2">(9)</a>-<a href="#equation-decay:norms:vlinf">(11)</a> are also much used
 in numerical computations, so it is important to know the different
 norms and the relations between them.</p>
 <p id="index-16">A single number that expresses the size of the numerical error
 will be taken as <span class="math">\(||e^n||_{\ell^2}\)</span> and called <span class="math">\(E\)</span>:</p>
 <div class="math" id="equation-decay:E">
-<span id="eq-decay-e"></span><span class="eqno">(10)</span>\[     E = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}\]</div>
+<span id="eq-decay-e"></span><span class="eqno">(12)</span>\[     E = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}\]</div>
 <p>The corresponding Python code, using array arithmetics, reads</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>

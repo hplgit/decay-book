@@ -7,9 +7,13 @@ Analysis
 
 We address the ODE for exponential decay,
 
+.. _Eq:_auto17:
+
 .. math::
+   :label: _auto17
         
         u'(t) = -au(t),\quad u(0)=I,
+        
         
 
 where :math:`a` and :math:`I` are given constants. This problem is solved
@@ -283,9 +287,13 @@ same basic property (monotonicity) as the exact solution, we may say
 that :math:`A>0` is a *stability criterion*. Expressed in terms of :math:`\Delta t`
 the stability criterion reads
 
+.. _Eq:_auto18:
+
 .. math::
+   :label: _auto18
         
         \Delta t < \frac{1}{(1-\theta)a}{\thinspace .}
+        
         
 
 The Backward
@@ -323,9 +331,13 @@ enough. The numerical solution is in such cases totally irrelevant to
 an ODE modeling decay processes! To avoid this situation, we must
 demand :math:`|A|\leq 1` also for :math:`\theta < 1/2`, which implies
 
+.. _Eq:_auto19:
+
 .. math::
+   :label: _auto19
         
         \Delta t \leq \frac{2}{(1-2\theta)a},
+        
         
 
 For example, :math:`\Delta t` must not exceed  :math:`2/a` when computing with
@@ -373,16 +385,24 @@ solution, we shall now look more into how well the numerical amplification
 factor approximates the exact one. The exact solution reads
 :math:`u(t)=Ie^{-at}`, which can be rewritten as
 
+.. _Eq:_auto20:
+
 .. math::
+   :label: _auto20
         
         {{u_{\small\mbox{e}}}}(t_n) = Ie^{-a n\Delta t} = I(e^{-a\Delta t})^n {\thinspace .}
+        
         
 
 From this formula we see that the exact amplification factor is
 
+.. _Eq:_auto21:
+
 .. math::
+   :label: _auto21
         
         {A_{\small\mbox{e}}} = e^{-a\Delta t} {\thinspace .}
+        
         
 
 We see from all of our analysis
@@ -546,12 +566,16 @@ Now, :math:`a` is a given parameter in the problem, while :math:`\Delta t` is
 what we can vary. Not surprisingly, the error expressions are usually
 written in terms :math:`\Delta t`. When then have
 
+.. _Eq:_auto22:
+
 .. math::
+   :label: _auto22
         
         A-{A_{\small\mbox{e}}} = \left\lbrace\begin{array}{ll}
         {\mathcal{O}(\Delta t^2)}, & \hbox{Forward and Backward Euler},\\ 
         {\mathcal{O}(\Delta t^3)}, & \hbox{Crank-Nicolson}
         \end{array}\right.
+        
         
 
 We say that the Crank-Nicolson scheme has an error in the amplification

@@ -617,9 +617,13 @@ in the numerical solution.
 A natural way to compare the exact and discrete solutions is to
 calculate their difference as a mesh function for the error:
 
+.. _Eq:_auto15:
+
 .. math::
+   :label: _auto15
         
         e^n = {u_{\small\mbox{e}}}(t_n) - u^n,\quad n=0,1,\ldots,N_t {\thinspace .}
+        
         
 
 We may view the mesh function
@@ -732,9 +736,13 @@ the function.
 
 In fact, there is a whole family of norms,
 
+.. _Eq:_auto16:
+
 .. math::
+   :label: _auto16
         
         ||f||_{L^p} = \left(\int_0^T f(t)^pdt\right)^{1/p},
+        
         
 
 with :math:`p` real. In particular,

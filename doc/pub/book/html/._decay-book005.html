@@ -874,7 +874,7 @@ $$
 \begin{equation}
 d^n = [D_{2t}u]^n =
 \frac{u^{n+1}-u^{n-1}}{2\Delta t},\quad n=1,\ldots,N_t-1\tp
-\tag{49}
+\tag{58}
 \end{equation}
 $$
 
@@ -921,7 +921,7 @@ exact for quadratic polynomials. Use this property to verify the program.
  -->
 <p>
 <b>b)</b>
-A standard implementation of the formula <a href="#mjx-eqn-49">(49)</a> is to
+A standard implementation of the formula <a href="#mjx-eqn-58">(58)</a> is to
 have a loop over \( i \). For large \( N_t \), such loop may run slowly in
 Python. A technique for speeding up the computations, called vectorization
 or array computing,
@@ -936,7 +936,7 @@ u^- &= (u^0,u^1,\ldots,u^{N_t-2})\tp
 \end{align*}
 $$
 
-The formula <a href="#mjx-eqn-49">(49)</a> can now be expressed as
+The formula <a href="#mjx-eqn-58">(58)</a> can now be expressed as
 
 $$ (d^1,d^2,\ldots,d^{N_t-1}) = \frac{1}{2\Delta t}(u^+ - u^-)\tp$$
 
