@@ -513,7 +513,7 @@ That is, those time steps lie outside the asymptotic range of
 <span class="math">\(\Delta t\)</span> values where the error behaves like <a href="#equation-decay:E:dt">(26)</a>.</p>
 </div>
 <div class="section" id="implementation-2">
-<h4>Implementation  (2)<a class="headerlink" href="#implementation-2" title="Permalink to this headline">¶</a></h4>
+<h4>Implementation<a class="headerlink" href="#implementation-2" title="Permalink to this headline">¶</a></h4>
 <p>We can compute <span class="math">\(r_0, r_1, \ldots, r_{m-2}\)</span> from <span class="math">\(E_i\)</span> and <span class="math">\(\Delta t_i\)</span>
 by the following functionL</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">compute_rates</span><span class="p">(</span><span class="n">dt_values</span><span class="p">,</span> <span class="n">E_values</span><span class="p">):</span>
@@ -890,9 +890,9 @@ schemes as well as Python interfaces to several famous packages for
 solving ODEs: <a class="reference external" href="https://computation.llnl.gov/casc/odepack/odepack_home.html">ODEPACK</a>, <a class="reference external" href="https://computation.llnl.gov/casc/odepack/odepack_home.html">Vode</a>,
 <a class="reference external" href="http://www.netlib.org/ode/rkc.f">rkc.f</a>, <a class="reference external" href="http://www.netlib.org/ode/rkf45.f">rkf45.f</a>, as well
 as the ODE solvers in <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html">SciPy</a>, <a class="reference external" href="http://docs.sympy.org/dev/modules/mpmath/calculus/odes.html">SymPy</a>, and <a class="reference external" href="http://olivierverdier.github.com/odelab/">odelab</a>.</p>
-<p>The usage of Odespy follows this setup for the ODE <span class="math">\(u^{\prime}=-au\)</span>,
-<span class="math">\(u(0)=I\)</span>, <span class="math">\(t\in (0,T]\)</span>, here solved
-by the famous 4th-order Runge-Kutta method with <span class="math">\(\Delta t=1\)</span>
+<p>The code below illustrates the usage of Odespy the solving <span class="math">\(u^{\prime}=-au\)</span>,
+<span class="math">\(u(0)=I\)</span>, <span class="math">\(t\in (0,T]\)</span>,
+by the famous 4th-order Runge-Kutta method, using <span class="math">\(\Delta t=1\)</span>
 and <span class="math">\(N_t=6\)</span> steps:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">u</span>
@@ -1119,7 +1119,7 @@ the decay and larger time steps when the solution flattens out.</p>
 </div>
 </div>
 <div class="section" id="exercises-3">
-<h2>Exercises  (3)<a class="headerlink" href="#exercises-3" title="Permalink to this headline">¶</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises-3" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="exercise-9-experiment-with-precision-in-tests-and-the-size-of">
 <span id="decay-fd2-exer-precision"></span><h3>Exercise 9: Experiment with precision in tests and the size of <span class="math">\(u\)</span><a class="headerlink" href="#exercise-9-experiment-with-precision-in-tests-and-the-size-of" title="Permalink to this headline">¶</a></h3>
 <p>It is claimed in the section <a class="reference internal" href="#decay-mms"><span class="std std-ref">Verification via manufactured solutions</span></a> that most numerical methods will
@@ -1328,7 +1328,7 @@ Filename: <code class="docutils literal"><span class="pre">decay_schemes_unified
 <li><a class="reference internal" href="#verification-via-manufactured-solutions">Verification via manufactured solutions</a></li>
 <li><a class="reference internal" href="#computing-convergence-rates">Computing convergence rates</a><ul>
 <li><a class="reference internal" href="#estimating">Estimating <span class="math">\(r\)</span></a></li>
-<li><a class="reference internal" href="#implementation-2">Implementation  (2)</a></li>
+<li><a class="reference internal" href="#implementation-2">Implementation</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#extension-to-systems-of-odes">Extension to systems of ODEs</a></li>
@@ -1355,7 +1355,7 @@ Filename: <code class="docutils literal"><span class="pre">decay_schemes_unified
 <li><a class="reference internal" href="#example-adaptive-runge-kutta-methods">Example: Adaptive Runge-Kutta methods</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#exercises-3">Exercises  (3)</a><ul>
+<li><a class="reference internal" href="#exercises-3">Exercises</a><ul>
 <li><a class="reference internal" href="#exercise-9-experiment-with-precision-in-tests-and-the-size-of">Exercise 9: Experiment with precision in tests and the size of <span class="math">\(u\)</span></a></li>
 <li><a class="reference internal" href="#exercise-10-implement-the-2-step-backward-scheme">Exercise 10: Implement the 2-step backward scheme</a></li>
 <li><a class="reference internal" href="#exercise-11-implement-the-2nd-order-adams-bashforth-scheme">Exercise 11: Implement the 2nd-order Adams-Bashforth scheme</a></li>

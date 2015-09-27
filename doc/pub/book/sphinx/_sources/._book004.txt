@@ -1,7 +1,7 @@
 .. !split
 
-Exercises  (1)
-==============
+Exercises          (1)
+======================
 
 .. --- begin exercise ---
 
@@ -40,8 +40,8 @@ Filename: ``mesh_function``.
 
 .. Closing remarks for this Exercise
 
-Remarks  (1)
-~~~~~~~~~~~~
+Remarks          (1)
+~~~~~~~~~~~~~~~~~~~~
 
 In the section :ref:`decay:computing:error` we show how easy it is to
 compute a mesh function by array arithmetics (or array computing).

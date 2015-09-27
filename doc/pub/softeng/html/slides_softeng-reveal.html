@@ -19,6 +19,7 @@
 
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="reveal.js/css/reveal.css">
 <link rel="stylesheet" href="reveal.js/css/theme/darkgray.css" id="theme">
@@ -36,14 +37,21 @@
 <link rel="stylesheet" href="reveal.js/css/theme/default.css" id="theme">
 <link rel="stylesheet" href="reveal.js/css/theme/cbc.css" id="theme">
 <link rel="stylesheet" href="reveal.js/css/theme/simula.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
 -->
 
 <!-- For syntax highlighting -->
 <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
 
-<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<!-- Printing and PDF exports -->
 <script>
-document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
 </script>
 
 <style type="text/css">
@@ -58,7 +66,7 @@ document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.l
              text-shadow:0 1px 0 rgba(255,255,255,0.5);
              border:5px solid #bababa;
              -webkit-border-radius: 14px; -moz-border-radius: 14px;
-             border-radius:14px
+             border-radius:14px;
              background-position: 10px 10px;
              background-repeat: no-repeat;
              background-size: 38px;
@@ -144,8 +152,10 @@ $$
 
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
 <p>&nbsp;<br>
-<center><h4>Aug 4, 2015</h4></center> <!-- date -->
+<center><h4>Sep 26, 2015</h4></center> <!-- date -->
+<br>
 </section>
 
 
@@ -403,7 +413,7 @@ otherwise, the file works as a program
 <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">solver</span><span style="color: #d0d0d0">(I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #d0d0d0">dt,</span> <span style="color: #d0d0d0">theta):</span>
     <span style="color: #d0d0d0">...</span>
 
-<span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">exact_solution</span><span style="color: #d0d0d0">(t,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a):</span>
+<span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">u_exact</span><span style="color: #d0d0d0">(t,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a):</span>
     <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">I*exp(-a*t)</span>
 
 <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">experiment_compare_numerical_and_exact</span><span style="color: #d0d0d0">():</span>
@@ -411,7 +421,7 @@ otherwise, the file works as a program
     <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">solver(I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #d0d0d0">dt,</span> <span style="color: #d0d0d0">theta)</span>
 
     <span style="color: #d0d0d0">t_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">linspace(</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #3677a9">1001</span><span style="color: #d0d0d0">)</span>       <span style="color: #999999; font-style: italic"># very fine mesh for u_e</span>
-    <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">exact_solution(t_e,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a)</span>
+    <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">u_exact(t_e,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a)</span>
 
     <span style="color: #d0d0d0">plot(t,</span>   <span style="color: #d0d0d0">u,</span>   <span style="color: #ed9d13">&#39;r--o&#39;</span><span style="color: #d0d0d0">)</span>           <span style="color: #999999; font-style: italic"># dashed red line with circles</span>
     <span style="color: #d0d0d0">plot(t_e,</span> <span style="color: #d0d0d0">u_e,</span> <span style="color: #ed9d13">&#39;b-&#39;</span><span style="color: #d0d0d0">)</span>             <span style="color: #999999; font-style: italic"># blue line for u_e</span>
@@ -421,7 +431,7 @@ otherwise, the file works as a program
     <span style="color: #d0d0d0">plotfile</span> <span style="color: #d0d0d0">=</span> <span style="color: #ed9d13">&#39;tmp&#39;</span>
     <span style="color: #d0d0d0">savefig(plotfile</span> <span style="color: #d0d0d0">+</span> <span style="color: #ed9d13">&#39;.png&#39;</span><span style="color: #d0d0d0">);</span>  <span style="color: #d0d0d0">savefig(plotfile</span> <span style="color: #d0d0d0">+</span> <span style="color: #ed9d13">&#39;.pdf&#39;</span><span style="color: #d0d0d0">)</span>
 
-    <span style="color: #d0d0d0">error</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">exact_solution(t,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a)</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">u</span>
+    <span style="color: #d0d0d0">error</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">u_exact(t,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a)</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">u</span>
     <span style="color: #d0d0d0">E</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">sqrt(dt*</span><span style="color: #24909d">sum</span><span style="color: #d0d0d0">(error**</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">))</span>
     <span style="color: #6ab825; font-weight: bold">print</span> <span style="color: #ed9d13">&#39;Error norm:&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">E</span>
 
@@ -445,7 +455,7 @@ Complete file: <a href="http://tinyurl.com/ofkw6kc/softeng/decay.py" target="_se
 <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">solver</span><span style="color: #d0d0d0">(I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #d0d0d0">dt,</span> <span style="color: #d0d0d0">theta):</span>
     <span style="color: #d0d0d0">...</span>
 
-<span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">exact_solution</span><span style="color: #d0d0d0">(t,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a):</span>
+<span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">u_exact</span><span style="color: #d0d0d0">(t,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a):</span>
     <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">I*np.exp(-a*t)</span>
 
 <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">experiment_compare_numerical_and_exact</span><span style="color: #d0d0d0">():</span>
@@ -453,7 +463,7 @@ Complete file: <a href="http://tinyurl.com/ofkw6kc/softeng/decay.py" target="_se
     <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">solver(I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #d0d0d0">dt,</span> <span style="color: #d0d0d0">theta)</span>
 
     <span style="color: #d0d0d0">t_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.linspace(</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #3677a9">1001</span><span style="color: #d0d0d0">)</span>       <span style="color: #999999; font-style: italic"># very fine mesh for u_e</span>
-    <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">exact_solution(t_e,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a)</span>
+    <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">u_exact(t_e,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a)</span>
 
     <span style="color: #d0d0d0">plt.plot(t,</span>   <span style="color: #d0d0d0">u,</span>   <span style="color: #ed9d13">&#39;r--o&#39;</span><span style="color: #d0d0d0">)</span>       <span style="color: #999999; font-style: italic"># dashed red line with circles</span>
     <span style="color: #d0d0d0">plt.plot(t_e,</span> <span style="color: #d0d0d0">u_e,</span> <span style="color: #ed9d13">&#39;b-&#39;</span><span style="color: #d0d0d0">)</span>         <span style="color: #999999; font-style: italic"># blue line for u_e</span>
@@ -463,7 +473,7 @@ Complete file: <a href="http://tinyurl.com/ofkw6kc/softeng/decay.py" target="_se
     <span style="color: #d0d0d0">plotfile</span> <span style="color: #d0d0d0">=</span> <span style="color: #ed9d13">&#39;tmp&#39;</span>
     <span style="color: #d0d0d0">plt.savefig(plotfile</span> <span style="color: #d0d0d0">+</span> <span style="color: #ed9d13">&#39;.png&#39;</span><span style="color: #d0d0d0">);</span>  <span style="color: #d0d0d0">plt.savefig(plotfile</span> <span style="color: #d0d0d0">+</span> <span style="color: #ed9d13">&#39;.pdf&#39;</span><span style="color: #d0d0d0">)</span>
 
-    <span style="color: #d0d0d0">error</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">exact_solution(t,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a)</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">u</span>
+    <span style="color: #d0d0d0">error</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">u_exact(t,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a)</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">u</span>
     <span style="color: #d0d0d0">E</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.sqrt(dt*np.sum(error**</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">))</span>
     <span style="color: #6ab825; font-weight: bold">print</span> <span style="color: #ed9d13">&#39;Error norm:&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">E</span>
 
@@ -499,12 +509,40 @@ Think of edits in the flat program that are required to produce this plot (!)
         <span style="color: #d0d0d0">plt.plot(t,</span> <span style="color: #d0d0d0">u,</span> <span style="color: #ed9d13">&#39;--o&#39;</span><span style="color: #d0d0d0">)</span>
         <span style="color: #d0d0d0">legends.append(</span><span style="color: #ed9d13">&#39;theta=%g&#39;</span> <span style="color: #d0d0d0">%</span> <span style="color: #d0d0d0">theta)</span>
     <span style="color: #d0d0d0">t_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.linspace(</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #3677a9">1001</span><span style="color: #d0d0d0">)</span>        <span style="color: #999999; font-style: italic"># very fine mesh for u_e</span>
-    <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">exact_solution(t_e,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a)</span>
+    <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">u_exact(t_e,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a)</span>
     <span style="color: #d0d0d0">plt.plot(t_e,</span> <span style="color: #d0d0d0">u_e,</span> <span style="color: #ed9d13">&#39;b-&#39;</span><span style="color: #d0d0d0">)</span>
     <span style="color: #d0d0d0">legends.append(</span><span style="color: #ed9d13">&#39;exact&#39;</span><span style="color: #d0d0d0">)</span>
     <span style="color: #d0d0d0">plt.legend(legends,</span> <span style="color: #d0d0d0">loc=</span><span style="color: #ed9d13">&#39;upper right&#39;</span><span style="color: #d0d0d0">)</span>
     <span style="color: #d0d0d0">plotfile</span> <span style="color: #d0d0d0">=</span> <span style="color: #ed9d13">&#39;tmp&#39;</span>
     <span style="color: #d0d0d0">plt.savefig(plotfile</span> <span style="color: #d0d0d0">+</span> <span style="color: #ed9d13">&#39;.png&#39;</span><span style="color: #d0d0d0">);</span>  <span style="color: #d0d0d0">plt.savefig(plotfile</span> <span style="color: #d0d0d0">+</span> <span style="color: #ed9d13">&#39;.pdf&#39;</span><span style="color: #d0d0d0">)</span>
+
+<span style="color: #6ab825; font-weight: bold">import</span> <span style="color: #447fcf; text-decoration: underline">logging</span>
+<span style="color: #d0d0d0">logging.basicConfig(</span>
+    <span style="color: #d0d0d0">filename=</span><span style="color: #ed9d13">&#39;decay.log&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">filemode=</span><span style="color: #ed9d13">&#39;w&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">level=logging.DEBUG,</span>
+    <span style="color: #d0d0d0">format=</span><span style="color: #ed9d13">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span><span style="color: #d0d0d0">,</span>
+    <span style="color: #d0d0d0">datefmt=</span><span style="color: #ed9d13">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span><span style="color: #d0d0d0">)</span>
+
+<span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">solver_with_logging</span><span style="color: #d0d0d0">(I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #d0d0d0">dt,</span> <span style="color: #d0d0d0">theta):</span>
+    <span style="color: #ed9d13">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
+    <span style="color: #d0d0d0">dt</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">float</span><span style="color: #d0d0d0">(dt)</span>               <span style="color: #999999; font-style: italic"># avoid integer division</span>
+    <span style="color: #d0d0d0">Nt</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">int</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">round</span><span style="color: #d0d0d0">(T/dt))</span>        <span style="color: #999999; font-style: italic"># no of time intervals</span>
+    <span style="color: #d0d0d0">T</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">Nt*dt</span>                    <span style="color: #999999; font-style: italic"># adjust T to fit time step dt</span>
+    <span style="color: #d0d0d0">u</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.zeros(Nt+</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">)</span>           <span style="color: #999999; font-style: italic"># array of u[n] values</span>
+    <span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.linspace(</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #d0d0d0">Nt+</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">)</span>  <span style="color: #999999; font-style: italic"># time mesh</span>
+    <span style="color: #d0d0d0">logging.debug(</span><span style="color: #ed9d13">&#39;solver: dt=%g, Nt=%g, T=%g&#39;</span> <span style="color: #d0d0d0">%</span> <span style="color: #d0d0d0">(dt,</span> <span style="color: #d0d0d0">Nt,</span> <span style="color: #d0d0d0">T))</span>
+
+    <span style="color: #d0d0d0">u[</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">]</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">I</span>                  <span style="color: #999999; font-style: italic"># assign initial condition</span>
+    <span style="color: #6ab825; font-weight: bold">for</span> <span style="color: #d0d0d0">n</span> <span style="color: #6ab825; font-weight: bold">in</span> <span style="color: #24909d">range</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">Nt):</span>    <span style="color: #999999; font-style: italic"># n=0,1,...,Nt-1</span>
+        <span style="color: #d0d0d0">u[n+</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">]</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-theta)*a*dt)/(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a)*u[n]</span>
+
+        <span style="color: #d0d0d0">logging.info(</span><span style="color: #ed9d13">&#39;u[%d]=%g&#39;</span> <span style="color: #d0d0d0">%</span> <span style="color: #d0d0d0">(n,</span> <span style="color: #d0d0d0">u[n]))</span>
+        <span style="color: #d0d0d0">logging.debug(</span><span style="color: #ed9d13">&#39;1 - (1-theta)*a*dt: %g, %s&#39;</span> <span style="color: #d0d0d0">%</span>
+                      <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-theta)*a*dt,</span>
+                       <span style="color: #24909d">str</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">type</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-theta)*a*dt))[</span><span style="color: #3677a9">7</span><span style="color: #d0d0d0">:-</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">]))</span>
+        <span style="color: #d0d0d0">logging.debug(</span><span style="color: #ed9d13">&#39;1 + theta*dt*a: %g, %s&#39;</span> <span style="color: #d0d0d0">%</span>
+                      <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a,</span>
+                       <span style="color: #24909d">str</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">type</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a))[</span><span style="color: #3677a9">7</span><span style="color: #d0d0d0">:-</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">]))</span>
+    <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span>
 </pre></div>
 </section>
 
@@ -610,6 +648,156 @@ Python community convention is to prefix with module name
 
 
 <section>
+<h2 id="softeng1:basic:logging">Logging intermediate results</h2>
+
+<ul>
+ <p><li> Simulation programs often have long CPU times</li>
+ <p><li> Desire 1: monitor intermediate results/progress</li>
+ <p><li> Desire 2: turn on more intermediate results for debugging or troubleshooting</li>
+</ul>
+<p>
+
+Most programming languages has a <em>logging</em> object for this purpose:
+
+<ul>
+ <p><li> Write messages to a log file</li>
+ <p><li> Classify messages as <em>critical</em>, <em>warning</em>, <em>info</em>, or <em>debug</em></li>
+ <p><li> Set logging level to one of the four types of messages</li>
+</ul>
+</section>
+
+
+<section>
+<h2 id="___sec20">Introductory example on using a logger </h2>
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #6ab825; font-weight: bold">import</span> <span style="color: #447fcf; text-decoration: underline">logging</span>
+<span style="color: #6ab825; font-weight: bold">import</span> <span style="color: #447fcf; text-decoration: underline">logging</span>
+<span style="color: #d0d0d0">logging.basicConfig(</span>
+    <span style="color: #d0d0d0">filename=</span><span style="color: #ed9d13">&#39;myprog.log&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">filemode=</span><span style="color: #ed9d13">&#39;w&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">level=logging.WARNING,</span>
+    <span style="color: #d0d0d0">format=</span><span style="color: #ed9d13">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span><span style="color: #d0d0d0">,</span>
+    <span style="color: #d0d0d0">datefmt=</span><span style="color: #ed9d13">&#39;%m/%d/%Y %I:%M:%S %p&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #d0d0d0">logging.info(</span><span style="color: #ed9d13">&#39;Here is some general info.&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #d0d0d0">logging.warning(</span><span style="color: #ed9d13">&#39;Here is a warning.&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #d0d0d0">logging.debug(</span><span style="color: #ed9d13">&#39;Here is some debugging info.&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #d0d0d0">logging.critical(</span><span style="color: #ed9d13">&#39;Dividing by zero!&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #d0d0d0">logging.error(</span><span style="color: #ed9d13">&#39;Encountered an error.&#39;</span><span style="color: #d0d0d0">)</span>
+</pre></div>
+<p>
+Output in <code>myprog.log</code>:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%">09/26/2015 09:25:10 AM - INFO - Here is some general info.
+09/26/2015 09:25:10 AM - WARNING - Here is a warning.
+09/26/2015 09:25:10 AM - CRITICAL - Dividing by zero!
+09/26/2015 09:25:10 AM - ERROR - Encountered an error.
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec21">A message is tied to a level, and one can specify one many levels that get printed </h2>
+
+<p>
+Levels: critical, error, warning, info, debug
+
+<ol>
+<p><li> <code>level=logging.CRITICAL</code>: print critical messages</li>
+<p><li> <code>level=logging.ERROR</code>: print critical and error messages</li>
+<p><li> <code>level=logging.WARNING</code>: print critical, error, and warning messages</li>
+<p><li> <code>level=logging.INFO</code>: print critical, error, warning, and info messages</li>
+<p><li> <code>level=logging.DEBUG</code>: print critical, error, warning, info, and debug messages</li>
+</ol>
+</section>
+
+
+<section>
+<h2 id="___sec22">Using a logger in our solver function </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #6ab825; font-weight: bold">import</span> <span style="color: #447fcf; text-decoration: underline">logging</span>
+<span style="color: #d0d0d0">logging.basicConfig(</span>
+    <span style="color: #d0d0d0">filename=</span><span style="color: #ed9d13">&#39;decay.log&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">filemode=</span><span style="color: #ed9d13">&#39;w&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">level=logging.DEBUG,</span>
+    <span style="color: #d0d0d0">format=</span><span style="color: #ed9d13">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span><span style="color: #d0d0d0">,</span>
+    <span style="color: #d0d0d0">datefmt=</span><span style="color: #ed9d13">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span><span style="color: #d0d0d0">)</span>
+
+<span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">solver_with_logging</span><span style="color: #d0d0d0">(I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #d0d0d0">dt,</span> <span style="color: #d0d0d0">theta):</span>
+    <span style="color: #ed9d13">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
+    <span style="color: #d0d0d0">dt</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">float</span><span style="color: #d0d0d0">(dt)</span>               <span style="color: #999999; font-style: italic"># avoid integer division</span>
+    <span style="color: #d0d0d0">Nt</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">int</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">round</span><span style="color: #d0d0d0">(T/dt))</span>        <span style="color: #999999; font-style: italic"># no of time intervals</span>
+    <span style="color: #d0d0d0">T</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">Nt*dt</span>                    <span style="color: #999999; font-style: italic"># adjust T to fit time step dt</span>
+    <span style="color: #d0d0d0">u</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.zeros(Nt+</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">)</span>           <span style="color: #999999; font-style: italic"># array of u[n] values</span>
+    <span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.linspace(</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #d0d0d0">Nt+</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">)</span>  <span style="color: #999999; font-style: italic"># time mesh</span>
+    <span style="color: #d0d0d0">logging.debug(</span><span style="color: #ed9d13">&#39;solver: dt=%g, Nt=%g, T=%g&#39;</span> <span style="color: #d0d0d0">%</span> <span style="color: #d0d0d0">(dt,</span> <span style="color: #d0d0d0">Nt,</span> <span style="color: #d0d0d0">T))</span>
+
+    <span style="color: #d0d0d0">u[</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">]</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">I</span>                  <span style="color: #999999; font-style: italic"># assign initial condition</span>
+    <span style="color: #6ab825; font-weight: bold">for</span> <span style="color: #d0d0d0">n</span> <span style="color: #6ab825; font-weight: bold">in</span> <span style="color: #24909d">range</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">Nt):</span>    <span style="color: #999999; font-style: italic"># n=0,1,...,Nt-1</span>
+        <span style="color: #d0d0d0">u[n+</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">]</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-theta)*a*dt)/(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a)*u[n]</span>
+
+        <span style="color: #d0d0d0">logging.info(</span><span style="color: #ed9d13">&#39;u[%d]=%g&#39;</span> <span style="color: #d0d0d0">%</span> <span style="color: #d0d0d0">(n,</span> <span style="color: #d0d0d0">u[n]))</span>
+        <span style="color: #d0d0d0">logging.debug(</span><span style="color: #ed9d13">&#39;1 - (1-theta)*a*dt: %g, %s&#39;</span> <span style="color: #d0d0d0">%</span>
+                      <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-theta)*a*dt,</span>
+                       <span style="color: #24909d">str</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">type</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-theta)*a*dt))[</span><span style="color: #3677a9">7</span><span style="color: #d0d0d0">:-</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">]))</span>
+        <span style="color: #d0d0d0">logging.debug(</span><span style="color: #ed9d13">&#39;1 + theta*dt*a: %g, %s&#39;</span> <span style="color: #d0d0d0">%</span>
+                      <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a,</span>
+                       <span style="color: #24909d">str</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">type</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a))[</span><span style="color: #3677a9">7</span><span style="color: #d0d0d0">:-</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">]))</span>
+    <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span>
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec23">Monitoring messages </h2>
+
+<p>
+One terminal window (1M steps!):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #d0d0d0">&gt;&gt;&gt;</span> <span style="color: #6ab825; font-weight: bold">import</span> <span style="color: #447fcf; text-decoration: underline">decay</span>
+<span style="color: #d0d0d0">&gt;&gt;&gt;</span> <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">decay.solver_with_logging(I=</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">a=</span><span style="color: #3677a9">0.5</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">T=</span><span style="color: #3677a9">10</span><span style="color: #d0d0d0">,</span> \ 
+           <span style="color: #d0d0d0">dt=</span><span style="color: #3677a9">0.5</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">theta=</span><span style="color: #3677a9">0.5</span><span style="color: #d0d0d0">)</span>
+</pre></div>
+<p>
+Another terminal window:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; tail -f decay.log
+2015.09.26 05:37:41 AM - INFO - u[0]=1
+2015.09.26 05:37:41 AM - INFO - u[1]=0.777778
+2015.09.26 05:37:41 AM - INFO - u[2]=0.604938
+2015.09.26 05:37:41 AM - INFO - u[3]=0.470508
+2015.09.26 05:37:41 AM - INFO - u[4]=0.36595
+2015.09.26 05:37:41 AM - INFO - u[5]=0.284628
+</pre></div>
+<p>
+Or if <code>level=logging.DEBUG</code>:
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; tail -f decay.log
+2015.09.26 05:40:01 AM - DEBUG - solver: dt=0.5, Nt=20, T=10
+2015.09.26 05:40:01 AM - INFO - u[0]=1
+2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+2015.09.26 05:40:01 AM - INFO - u[1]=0.777778
+2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+</pre></div>
+</section>
+
+
+<section>
 <h1 id="decay:GUI">User interfaces</h1>
 
 <ul>
@@ -621,7 +809,7 @@ Python community convention is to prefix with module name
 
 
 <section>
-<h2 id="___sec20">Accessing command-line arguments </h2>
+<h2 id="___sec25">Accessing command-line arguments </h2>
 
 <ul>
  <p><li> All command-line arguments are available in <code>sys.argv</code></li>
@@ -640,7 +828,7 @@ Terminal&gt; python myprog.py --I 1.5 --a 2 --dt 0.8 0.4
 
 
 <section>
-<h2 id="___sec21">Reading a sequence of command-line arguments </h2>
+<h2 id="___sec26">Reading a sequence of command-line arguments </h2>
 
 <p>
 Required input:
@@ -665,7 +853,7 @@ Give these on the command line in correct sequence
 
 
 <section>
-<h2 id="___sec22">Implementation </h2>
+<h2 id="___sec27">Implementation </h2>
 
 <p>
 
@@ -708,7 +896,7 @@ Note:
 
 
 <section>
-<h2 id="___sec23">Working with an argument parser </h2>
+<h2 id="___sec28">Working with an argument parser </h2>
 
 <p>
 Set option-value pairs on the command line if the default value is not
@@ -739,7 +927,7 @@ Code:
 
 
 <section>
-<h2 id="___sec24">A graphical user interface </h2>
+<h2 id="___sec29">A graphical user interface </h2>
 
 <p>
 <center><p><img src="fig-softeng/web_GUI.png" align="bottom" width=800></p></center>
@@ -754,7 +942,7 @@ Here: use a tool to automatically create it in a few minutes (!)
 
 
 <section>
-<h2 id="___sec25">The Parampool package </h2>
+<h2 id="___sec30">The Parampool package </h2>
 
 <ul>
  <p><li> <a href="https://github.com/hplgit/parampool" target="_self">Parampool</a> is a package
@@ -774,7 +962,7 @@ equipping their programs with a GUI - others can safely skip it.
 
 
 <section>
-<h2 id="___sec26">Making a compute function </h2>
+<h2 id="___sec31">Making a compute function </h2>
 
 <ul>
  <p><li> Key concept: a <em>compute function</em> that takes all input data as arguments
@@ -797,7 +985,7 @@ equipping their programs with a GUI - others can safely skip it.
 
 
 <section>
-<h2 id="___sec27">The compute function must return HTML code  </h2>
+<h2 id="___sec32">The compute function must return HTML code  </h2>
 
 <p>
 
@@ -827,7 +1015,7 @@ equipping their programs with a GUI - others can safely skip it.
 
 
 <section>
-<h2 id="___sec28">Generating the user interface </h2>
+<h2 id="___sec33">Generating the user interface </h2>
 
 <p>
 Make a file <code>decay_GUI_generate.py</code>:
@@ -859,7 +1047,7 @@ and there is no need to look into any of these files!
 
 
 <section>
-<h2 id="___sec29">Running the web application </h2>
+<h2 id="___sec34">Running the web application </h2>
 
 <p>
 Start the GUI
@@ -878,7 +1066,7 @@ Open a web browser at <code>127.0.0.1:5000</code>
 
 
 <section>
-<h2 id="___sec30">More advanced use </h2>
+<h2 id="___sec35">More advanced use </h2>
 
 <ul>
  <p><li> The compute function can have arguments of type float, int, string,
@@ -892,12 +1080,12 @@ Open a web browser at <code>127.0.0.1:5000</code>
 
 
 <section>
-<h1 id="___sec31">Tests for verifying implementations </h1>
+<h1 id="___sec36">Tests for verifying implementations </h1>
 </section>
 
 
 <section>
-<h2 id="___sec32">Doctests </h2>
+<h2 id="___sec37">Doctests </h2>
 
 <p>
 Doc strings can be equipped with interactive Python sessions for
@@ -926,7 +1114,7 @@ demonstrating usage and <em>automatic testing</em> of functions.
 
 
 <section>
-<h2 id="___sec33">Running doctests </h2>
+<h2 id="___sec38">Running doctests </h2>
 
 <p>
 Automatic check that the code reproduces the doctest output:
@@ -947,7 +1135,7 @@ round-off errors on a different machine may ruin the test.
 
 
 <section>
-<h2 id="___sec34">Unit testing with nose </h2>
+<h2 id="___sec39">Unit testing with nose </h2>
 
 <ul>
  <p><li> Nose and pytest are a very user-friendly testing frameworks</li>
@@ -962,7 +1150,7 @@ round-off errors on a different machine may ruin the test.
 
 
 <section>
-<h2 id="___sec35">Basic use of nose and pytest </h2>
+<h2 id="___sec40">Basic use of nose and pytest </h2>
 
 <ol>
  <p><li> Implement tests in <em>test functions</em> with names starting with <code>test_</code>.</li>
@@ -976,7 +1164,7 @@ round-off errors on a different machine may ruin the test.
 
 
 <section>
-<h2 id="___sec36">Example on a test function in the source code </h2>
+<h2 id="___sec41">Example on a test function in the source code </h2>
 
 <p>
 Very simple module <code>mymod</code> (in file <code>mymod.py</code>):
@@ -1017,7 +1205,7 @@ makes the framework run all <code>test_*()</code> functions in <code>mymod.py</c
 
 
 <section>
-<h2 id="___sec37">Example on test functions in a separate file </h2>
+<h2 id="___sec42">Example on test functions in a separate file </h2>
 
 <p>
 Write the test in a separate file, say <code>test_mymod.py</code>:
@@ -1059,7 +1247,7 @@ move tests to separate files.
 
 
 <section>
-<h2 id="___sec38">Test function for solver </h2>
+<h2 id="___sec43">Test function for solver </h2>
 
 <p>
 Use exact discrete solution of the \( \theta \) scheme as test:
@@ -1073,7 +1261,7 @@ $$ u^n = I\left(
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "native" -->
-<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">exact_discrete_solution</span><span style="color: #d0d0d0">(n,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">theta,</span> <span style="color: #d0d0d0">dt):</span>
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">u_discrete_exact</span><span style="color: #d0d0d0">(n,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">theta,</span> <span style="color: #d0d0d0">dt):</span>
     <span style="color: #ed9d13">&quot;&quot;&quot;Return exact discrete solution of the numerical schemes.&quot;&quot;&quot;</span>
     <span style="color: #d0d0d0">dt</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">float</span><span style="color: #d0d0d0">(dt)</span>  <span style="color: #999999; font-style: italic"># avoid integer division</span>
     <span style="color: #d0d0d0">A</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-theta)*a*dt)/(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a)</span>
@@ -1082,14 +1270,14 @@ $$ u^n = I\left(
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "native" -->
-<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">test_exact_discrete_solution</span><span style="color: #d0d0d0">():</span>
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">test_u_discrete_exact</span><span style="color: #d0d0d0">():</span>
     <span style="color: #ed9d13">&quot;&quot;&quot;Check that solver reproduces the exact discr. sol.&quot;&quot;&quot;</span>
     <span style="color: #d0d0d0">theta</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0.8</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">a</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">2</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">I</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0.1</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">dt</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0.8</span>
     <span style="color: #d0d0d0">Nt</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">int</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">8</span><span style="color: #d0d0d0">/dt)</span>  <span style="color: #999999; font-style: italic"># no of steps</span>
     <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">solver(I=I,</span> <span style="color: #d0d0d0">a=a,</span> <span style="color: #d0d0d0">T=Nt*dt,</span> <span style="color: #d0d0d0">dt=dt,</span> <span style="color: #d0d0d0">theta=theta)</span>
 
     <span style="color: #999999; font-style: italic"># Evaluate exact discrete solution on the mesh</span>
-    <span style="color: #d0d0d0">u_de</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.array([exact_discrete_solution(n,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">theta,</span> <span style="color: #d0d0d0">dt)</span>
+    <span style="color: #d0d0d0">u_de</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.array([u_discrete_exact(n,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">theta,</span> <span style="color: #d0d0d0">dt)</span>
                      <span style="color: #6ab825; font-weight: bold">for</span> <span style="color: #d0d0d0">n</span> <span style="color: #6ab825; font-weight: bold">in</span> <span style="color: #24909d">range</span><span style="color: #d0d0d0">(Nt+</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">)])</span>
 
     <span style="color: #999999; font-style: italic"># Find largest deviation</span>
@@ -1102,7 +1290,7 @@ $$ u^n = I\left(
 
 
 <section>
-<h2 id="___sec39">Can test that potential integer division is avoided too </h2>
+<h2 id="___sec44">Can test that potential integer division is avoided too </h2>
 
 <p>
 <div class="alert alert-block alert-warning alert-text-normal">
@@ -1121,7 +1309,7 @@ function may lead to 0 because of unintended integer division.
     <span style="color: #d0d0d0">theta</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">1</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">a</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">1</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">I</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">1</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">dt</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">2</span>
     <span style="color: #d0d0d0">Nt</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">4</span>
     <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">solver(I=I,</span> <span style="color: #d0d0d0">a=a,</span> <span style="color: #d0d0d0">T=Nt*dt,</span> <span style="color: #d0d0d0">dt=dt,</span> <span style="color: #d0d0d0">theta=theta)</span>
-    <span style="color: #d0d0d0">u_de</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.array([exact_discrete_solution(n,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">theta,</span> <span style="color: #d0d0d0">dt)</span>
+    <span style="color: #d0d0d0">u_de</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.array([u_discrete_exact(n,</span> <span style="color: #d0d0d0">I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">theta,</span> <span style="color: #d0d0d0">dt)</span>
                      <span style="color: #6ab825; font-weight: bold">for</span> <span style="color: #d0d0d0">n</span> <span style="color: #6ab825; font-weight: bold">in</span> <span style="color: #24909d">range</span><span style="color: #d0d0d0">(Nt+</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">)])</span>
     <span style="color: #d0d0d0">diff</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">np.abs(u_de</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">u).max()</span>
     <span style="color: #6ab825; font-weight: bold">assert</span> <span style="color: #d0d0d0">diff</span> <span style="color: #d0d0d0">&lt;</span> <span style="color: #3677a9">1E-14</span>
@@ -1130,9 +1318,9 @@ function may lead to 0 because of unintended integer division.
 
 
 <section>
-<h1 id="___sec40">Packaging the software for other users </h1>
+<h1 id="___sec45">Packaging the software for other users </h1>
 
-<h2 id="___sec41">Python convention: install your software with setup.py </h2>
+<h2 id="___sec46">Python convention: install your software with setup.py </h2>
 
 <p>
 Installation of a single module file <code>decay.py</code>:
@@ -1161,7 +1349,7 @@ Installation:
 
 
 <section>
-<h2 id="___sec42">split.py for several modules in a package </h2>
+<h2 id="___sec47">split.py for several modules in a package </h2>
 
 <ul>
  <p><li> Python package = several modules</li>
@@ -1191,7 +1379,7 @@ Installation:
 
 
 <section>
-<h2 id="___sec43">The <code>__init__.py</code> file can be empty </h2>
+<h2 id="___sec48">The <code>__init__.py</code> file can be empty </h2>
 
 <p>
 Empty <code>__init__.py</code>:
@@ -1227,7 +1415,7 @@ u, t = solver(...)
 
 
 <section>
-<h2 id="___sec44">Always develop software and write reports with Git </h2>
+<h2 id="___sec49">Always develop software and write reports with Git </h2>
 
 <ul>
  <p><li> Git keeps track of different versions of files</li>
@@ -1253,7 +1441,7 @@ git push origin master  # before end of day or a break
 
 
 <section>
-<h2 id="___sec45">More pro use with Git </h2>
+<h2 id="___sec50">More pro use with Git </h2>
 
 <p>
 See what others have done in the project:
@@ -1300,7 +1488,7 @@ git merge newstuff
 
 
 <section>
-<h2 id="___sec47">Collect physical problem and parameters in class Problem </h2>
+<h2 id="___sec52">Collect physical problem and parameters in class Problem </h2>
 
 <p>
 
@@ -1319,7 +1507,7 @@ git merge newstuff
 
 
 <section>
-<h2 id="___sec48">Collect numerical parameters and methods in class Solver </h2>
+<h2 id="___sec53">Collect numerical parameters and methods in class Solver </h2>
 
 <p>
 
@@ -1345,7 +1533,7 @@ git merge newstuff
 
 
 <section>
-<h2 id="___sec49">Get input from the command line; class Problem </h2>
+<h2 id="___sec54">Get input from the command line; class Problem </h2>
 
 <p>
 
@@ -1381,7 +1569,7 @@ git merge newstuff
 
 
 <section>
-<h2 id="___sec50">Get input from the command line; class Problem </h2>
+<h2 id="___sec55">Get input from the command line; class Problem </h2>
 
 <p>
 
@@ -1410,7 +1598,7 @@ git merge newstuff
 
 
 <section>
-<h2 id="___sec51">How to combine class Problem and class Solver </h2>
+<h2 id="___sec56">How to combine class Problem and class Solver </h2>
 
 <p>
 
@@ -1458,7 +1646,7 @@ Goals:
 
 
 <section>
-<h2 id="___sec53">Model problem and numerical solution method </h2>
+<h2 id="___sec58">Model problem and numerical solution method </h2>
 
 <p>
 Problem:
@@ -1485,7 +1673,7 @@ $$
 
 
 <section>
-<h2 id="___sec54">Plan for the experiments </h2>
+<h2 id="___sec59">Plan for the experiments </h2>
 
 <p>
 For fixed \( I \), \( a \), and \( T \), we run the three schemes for various
@@ -1501,7 +1689,7 @@ values of \( \Delta t \), and present in a report the following results:
 
 
 <section>
-<h2 id="___sec55">Available software </h2>
+<h2 id="___sec60">Available software </h2>
 
 <p>
 <a href="http://tinyurl.com/nc4upel/doconce_src/model.py" target="_self"><tt>model.py</tt></a>:
@@ -1529,7 +1717,7 @@ values of \( \Delta t \), and present in a report the following results:
 
 
 <section>
-<h2 id="___sec56">Required new results </h2>
+<h2 id="___sec61">Required new results </h2>
 
 <ul>
  <p><li> Put plots together in table of plots</li>
@@ -1552,7 +1740,7 @@ and generating these results
 
 
 <section>
-<h2 id="___sec57">Reproducible science is key! </h2>
+<h2 id="___sec62">Reproducible science is key! </h2>
 
 <p>
 Let your scientific investigations be automated by
@@ -1567,7 +1755,7 @@ scripts!
 
 
 <section>
-<h2 id="___sec58">What actions are needed in the script? </h2>
+<h2 id="___sec63">What actions are needed in the script? </h2>
 
 <ol>
 <p><li> Run <code>model.py</code> program with appropriate input</li>
@@ -1581,7 +1769,7 @@ Complete script: <a href="http://tinyurl.com/nc4upel/report_generation/exper1.py
 
 
 <section>
-<h2 id="___sec59">Run a program from a program with <code>subprocess</code> </h2>
+<h2 id="___sec64">Run a program from a program with <code>subprocess</code> </h2>
 
 <p>
 Command to be run:
@@ -1620,7 +1808,7 @@ Run under the operating system:
 
 
 <section>
-<h2 id="___sec60">Interpreting the output from an operating system command </h2>
+<h2 id="___sec65">Interpreting the output from an operating system command </h2>
 
 <p>
 The output if the previous command run by <code>subprocess</code> is in a string
@@ -1642,7 +1830,7 @@ The output if the previous command run by <code>subprocess</code> is in a string
 
 
 <section>
-<h2 id="___sec61">Combining plot files: PNG and PDF solutions </h2>
+<h2 id="___sec66">Combining plot files: PNG and PDF solutions </h2>
 
 <p>
 PNG:
@@ -1709,7 +1897,7 @@ or <code>os.system</code>: <code>os.system(cmd)</code>
 </div> <!-- class="reveal" -->
 
 <script src="reveal.js/lib/js/head.min.js"></script>
-<script src="reveal.js/js/reveal.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
 
 <script>
 // Full list of configuration options available here:

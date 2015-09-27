@@ -64,14 +64,16 @@ equation (ODE):
         
 
 In this equation, :math:`u(t)` is a scalar function of time :math:`t`,
-:math:`a` is a constant, and :math:`u^{\prime}(t)` means differentiation with
+:math:`a` is a constant (in this book we mostly work with :math:`a>0`),
+and :math:`u^{\prime}(t)` means differentiation with
 respect to :math:`t`. This type of equation arises in a number of
 widely different phenomena where some quantity :math:`u` undergoes
-exponential reduction. Examples include radioactive decay, population
+exponential reduction (provided :math:`a>0`).
+Examples include radioactive decay, population
 decay, investment decay, cooling of an object, pressure decay in the
-atmosphere, and retarded motion in fluids (for some of these models,
-:math:`a` can be negative as
-well), see the chapter :ref:`decay:app` for details and motivation.
+atmosphere, and retarded motion in fluids. Some models with growth,
+:math:`a<0`, are treated as
+well, see the chapter :ref:`decay:app` for details and motivation.
 We have chosen this particular ODE not only because
 its applications are relevant, but even more because studying
 numerical solution methods for this particular ODE gives important insight
@@ -81,9 +83,10 @@ when solving diffusion-type partial differential equations.
 The exact solution
 ~~~~~~~~~~~~~~~~~~
 
-Although our interest is in *approximate* numerical solutions of :math:`u^{\prime}=-au`, it is convenient to know the exact analytical solution of the problem so
-we can compute the error in numerical approximations.
-The analytical solution of this ODE is found by
+Although our interest is in *approximate* numerical solutions of
+:math:`u^{\prime}=-au`, it is convenient to know the exact analytical
+solution of the problem so we can compute the error in numerical
+approximations.  The analytical solution of this ODE is found by
 separation of variables, which results in
 
 .. math::

@@ -24,8 +24,8 @@ the technique of scaling, which is so useful in many applications.
 
 .. _decay:app:scaling:
 
-Scaling  (1)
-============
+Scaling          (1)
+====================
 
 Real applications of a model :math:`u^{\prime}=-au+b` will often involve a lot
 of parameters in the expressions for :math:`a` and :math:`b`. It can be quite
@@ -1590,8 +1590,8 @@ then the solution has no physical relevance in general.
 
 .. _decay:app:drag:scaling:
 
-Scaling  (2)
-------------
+Scaling          (2)
+--------------------
 
 Applying scaling, as described in the section :ref:`decay:app:scaling`,
 will for the linear case reduce the need to estimate values for
@@ -1753,8 +1753,8 @@ t` without any growth in the solutions, are more popular choices when
 creating time-stepping algorithms for partial differential equations
 of the type considered in this example.
 
-Exercises  (4)
-==============
+Exercises          (4)
+======================
 
 .. --- begin exercise ---
 

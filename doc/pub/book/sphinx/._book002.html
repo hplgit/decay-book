@@ -44,7 +44,7 @@
 
     
     <link rel="top" title="Finite Difference Computing with Exponential Decay Models" href="index.html" />
-    <link rel="next" title="Implementation (1)" href="._book003.html" />
+    <link rel="next" title="Implementation" href="._book003.html" />
     <link rel="prev" title="Preface" href="._book001.html" />
  
   
@@ -64,7 +64,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="._book003.html" title="Implementation (1)"
+          <a href="._book003.html" title="Implementation"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="._book001.html" title="Preface"
@@ -113,14 +113,16 @@ equation (ODE):</p>
 <div class="math">
 \[u^{\prime}(t) = -au(t){\thinspace .}\]</div>
 <p>In this equation, <span class="math">\(u(t)\)</span> is a scalar function of time <span class="math">\(t\)</span>,
-<span class="math">\(a\)</span> is a constant, and <span class="math">\(u^{\prime}(t)\)</span> means differentiation with
+<span class="math">\(a\)</span> is a constant (in this book we mostly work with <span class="math">\(a&gt;0\)</span>),
+and <span class="math">\(u^{\prime}(t)\)</span> means differentiation with
 respect to <span class="math">\(t\)</span>. This type of equation arises in a number of
 widely different phenomena where some quantity <span class="math">\(u\)</span> undergoes
-exponential reduction. Examples include radioactive decay, population
+exponential reduction (provided <span class="math">\(a&gt;0\)</span>).
+Examples include radioactive decay, population
 decay, investment decay, cooling of an object, pressure decay in the
-atmosphere, and retarded motion in fluids (for some of these models,
-<span class="math">\(a\)</span> can be negative as
-well), see the chapter <a class="reference internal" href="._book007.html#decay-app"><span class="std std-ref">Models</span></a> for details and motivation.
+atmosphere, and retarded motion in fluids. Some models with growth,
+<span class="math">\(a&lt;0\)</span>, are treated as
+well, see the chapter <a class="reference internal" href="._book007.html#decay-app"><span class="std std-ref">Models</span></a> for details and motivation.
 We have chosen this particular ODE not only because
 its applications are relevant, but even more because studying
 numerical solution methods for this particular ODE gives important insight
@@ -128,9 +130,10 @@ that can be reused in far more complicated settings, in particular
 when solving diffusion-type partial differential equations.</p>
 <div class="section" id="the-exact-solution">
 <h4>The exact solution<a class="headerlink" href="#the-exact-solution" title="Permalink to this headline">¶</a></h4>
-<p>Although our interest is in <em>approximate</em> numerical solutions of <span class="math">\(u^{\prime}=-au\)</span>, it is convenient to know the exact analytical solution of the problem so
-we can compute the error in numerical approximations.
-The analytical solution of this ODE is found by
+<p>Although our interest is in <em>approximate</em> numerical solutions of
+<span class="math">\(u^{\prime}=-au\)</span>, it is convenient to know the exact analytical
+solution of the problem so we can compute the error in numerical
+approximations.  The analytical solution of this ODE is found by
 separation of variables, which results in</p>
 <div class="math">
 \[u(t) = Ce^{-at},\]</div>
@@ -827,7 +830,7 @@ equation.</p>
                         title="previous chapter">Preface</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._book003.html"
-                        title="next chapter">Implementation  (1)</a></p>
+                        title="next chapter">Implementation</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -859,7 +862,7 @@ equation.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="._book003.html" title="Implementation (1)"
+          <a href="._book003.html" title="Implementation"
              >next</a> |</li>
         <li class="right" >
           <a href="._book001.html" title="Preface"

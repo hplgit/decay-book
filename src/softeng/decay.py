@@ -14,7 +14,7 @@ def solver(I, a, T, dt, theta):
         u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
     return u, t
 
-def exact_solution(t, I, a):
+def u_exact(t, I, a):
     return I*np.exp(-a*t)
 
 def experiment_print_error():
@@ -22,8 +22,8 @@ def experiment_print_error():
     u, t = solver(I, a, T, dt, theta)
 
     t_e = np.linspace(0, T, 1001)       # very fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
-    eror = exact_solution(t, I, a) - u
+    u_e = u_exact(t_e, I, a)
+    eror = u_exact(t, I, a) - u
     E = np.sqrt(dt*np.sum(eror**2))
     print 'Error:', E
 
@@ -32,7 +32,7 @@ def experiment_compare_numerical_and_exact():
     u, t = solver(I, a, T, dt, theta)
 
     t_e = np.linspace(0, T, 1001)       # very fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
 
     plt.plot(t,   u,   'r--o')
     plt.plot(t_e, u_e, 'b-')
@@ -42,7 +42,7 @@ def experiment_compare_numerical_and_exact():
     plotfile = 'tmp'
     plt.savefig(plotfile + '.png');  plt.savefig(plotfile + '.pdf')
 
-    error = exact_solution(t, I, a) - u
+    error = u_exact(t, I, a) - u
     E = np.sqrt(dt*np.sum(error**2))
     print 'Error:', E
 
@@ -55,12 +55,40 @@ def experiment_compare_schemes():
         plt.plot(t, u, '--o')
         legends.append('theta=%g' % theta)
     t_e = np.linspace(0, T, 1001)        # very fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
     plt.plot(t_e, u_e, 'b-')
     legends.append('exact')
     plt.legend(legends, loc='upper right')
     plotfile = 'tmp'
     plt.savefig(plotfile + '.png');  plt.savefig(plotfile + '.pdf')
+
+import logging
+logging.basicConfig(
+    filename='decay.log', filemode='w', level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y.%m.%d %I:%M:%S %p')
+
+def solver_with_logging(I, a, T, dt, theta):
+    """Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt."""
+    dt = float(dt)               # avoid integer division
+    Nt = int(round(T/dt))        # no of time intervals
+    T = Nt*dt                    # adjust T to fit time step dt
+    u = np.zeros(Nt+1)           # array of u[n] values
+    t = np.linspace(0, T, Nt+1)  # time mesh
+    logging.debug('solver: dt=%g, Nt=%g, T=%g' % (dt, Nt, T))
+
+    u[0] = I                  # assign initial condition
+    for n in range(0, Nt):    # n=0,1,...,Nt-1
+        u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
+
+        logging.info('u[%d]=%g' % (n, u[n]))
+        logging.debug('1 - (1-theta)*a*dt: %g, %s' %
+                      (1-(1-theta)*a*dt,
+                       str(type(1-(1-theta)*a*dt))[7:-2]))
+        logging.debug('1 + theta*dt*a: %g, %s' %
+                      (1 + theta*dt*a,
+                       str(type(1 + theta*dt*a))[7:-2]))
+    return u, t
 
 import sys
 
@@ -128,7 +156,7 @@ def experiment_compare_dt(option_value_pairs=False):
         plt.plot(t, u)
         legends.append('dt=%g' % dt)
     t_e = np.linspace(0, T, 1001)       # very fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
     plt.plot(t_e, u_e, '--')
     legends.append('exact')
     plt.legend(legends, loc='upper right')
@@ -143,13 +171,13 @@ def compute4web(I, a, T, dt, theta=0.5):
     plot whose data are embedded in an HTML image tag.
     """
     u, t = solver(I, a, T, dt, theta)
-    u_e = exact_solution(t, I, a)
+    u_e = u_exact(t, I, a)
     e = u_e - u
     E = np.sqrt(dt*np.sum(e**2))
 
     plt.figure()
     t_e = np.linspace(0, T, 1001)    # fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
     plt.plot(t,   u,   'r--o')
     plt.plot(t_e, u_e, 'b-')
     plt.legend(['numerical', 'exact'])
@@ -218,20 +246,20 @@ def test_third():
     success = abs(expected - computed) < tol
     assert success
 
-def exact_discrete_solution(n, I, a, theta, dt):
+def u_discrete_exact(n, I, a, theta, dt):
     """Return exact discrete solution of the numerical schemes."""
     dt = float(dt)  # avoid integer division
     A = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)
     return I*A**n
 
-def test_exact_discrete_solution():
+def test_u_discrete_exact():
     """Check that solver reproduces the exact discr. sol."""
     theta = 0.8; a = 2; I = 0.1; dt = 0.8
     Nt = int(8/dt)  # no of steps
     u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
 
     # Evaluate exact discrete solution on the mesh
-    u_de = np.array([exact_discrete_solution(n, I, a, theta, dt)
+    u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
                      for n in range(Nt+1)])
 
     # Find largest deviation
@@ -245,7 +273,7 @@ def test_potential_integer_division():
     theta = 1; a = 1; I = 1; dt = 2
     Nt = 4
     u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
-    u_de = np.array([exact_discrete_solution(n, I, a, theta, dt)
+    u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
                      for n in range(Nt+1)])
     diff = np.abs(u_de - u).max()
     assert diff < 1E-14

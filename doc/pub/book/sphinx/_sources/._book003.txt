@@ -2,8 +2,8 @@
 
 .. _decay:impl1:
 
-Implementation  (1)
-===================
+Implementation          (1)
+===========================
 
 We want to make a computer program for solving
 
@@ -1064,8 +1064,8 @@ scheme from this visual point of view.
 
 .. index:: montage program
 
-Combining plot files  (1)
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Combining plot files          (1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Mounting two PNG files beside each other, as done in Figures
 :ref:`decay:fig:FE1`-:ref:`decay:fig:CN1`, is easily carried out by the
