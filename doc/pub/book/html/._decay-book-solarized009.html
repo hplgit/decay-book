@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -558,46 +558,52 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'softeng1:basic:docstring',
                'softeng1:basic:docstring'),
+              ('Logging intermediate results',
+               2,
+               'softeng1:basic:logging',
+               'softeng1:basic:logging'),
+              ('Introductory example', 3, None, '___sec186'),
+              ('Using a logger in our solver function', 3, None, '___sec187'),
               ('User interfaces',
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec186'),
-              ('Positional command-line arguments', 2, None, '___sec187'),
+              ('Command-line arguments', 2, None, '___sec189'),
+              ('Positional command-line arguments', 2, None, '___sec190'),
               ('Option-value pairs on the command line',
                2,
                None,
-               '___sec188'),
+               '___sec191'),
               ('Creating a graphical web user interface',
                2,
                None,
-               '___sec189'),
-              ('Making a compute function', 3, None, '___sec190'),
-              ('Generating the user interface', 3, None, '___sec191'),
-              ('Running the web application', 3, None, '___sec192'),
-              ('Tests for verifying implementations', 1, None, '___sec193'),
-              ('Doctests', 2, None, '___sec194'),
-              ('Unit tests and test functions', 2, None, '___sec195'),
+               '___sec192'),
+              ('Making a compute function', 3, None, '___sec193'),
+              ('Generating the user interface', 3, None, '___sec194'),
+              ('Running the web application', 3, None, '___sec195'),
+              ('Tests for verifying implementations', 1, None, '___sec196'),
+              ('Doctests', 2, None, '___sec197'),
+              ('Unit tests and test functions', 2, None, '___sec198'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
-               '___sec196'),
-              ('Test function requirements', 3, None, '___sec197'),
-              ('Comparison of real numbers', 3, None, '___sec198'),
-              ('Special assert functions from nose', 3, None, '___sec199'),
-              ('Locating test functions', 3, None, '___sec200'),
-              ('Running tests', 3, None, '___sec201'),
-              ('Embedding doctests in a test function', 3, None, '___sec202'),
-              ('Installing nose and pytest', 3, None, '___sec203'),
-              ('Test function for the solver', 2, None, '___sec204'),
+               '___sec199'),
+              ('Test function requirements', 3, None, '___sec200'),
+              ('Comparison of real numbers', 3, None, '___sec201'),
+              ('Special assert functions from nose', 3, None, '___sec202'),
+              ('Locating test functions', 3, None, '___sec203'),
+              ('Running tests', 3, None, '___sec204'),
+              ('Embedding doctests in a test function', 3, None, '___sec205'),
+              ('Installing nose and pytest', 3, None, '___sec206'),
+              ('Test function for the solver', 2, None, '___sec207'),
               ('Test function for reading positional command-line arguments',
                2,
                None,
-               '___sec205'),
+               '___sec208'),
               ('Test function for reading option-value pairs',
                2,
                None,
-               '___sec206'),
+               '___sec209'),
               ('Classical class-based unit testing',
                2,
                'softeng1:basic:unittest',
@@ -609,54 +615,54 @@ div { text-align: justify; text-justify: inter-word; }
               ('Organizing the software directory tree',
                2,
                None,
-               '___sec209'),
-              ('Distributing just a module file', 3, None, '___sec210'),
-              ('Distributing a package', 3, None, '___sec211'),
-              ('Publishing the software at GitHub', 2, None, '___sec212'),
+               '___sec212'),
+              ('Distributing just a module file', 3, None, '___sec213'),
+              ('Distributing a package', 3, None, '___sec214'),
+              ('Publishing the software at GitHub', 2, None, '___sec215'),
               ('Downloading and installing the software',
                2,
                None,
-               '___sec213'),
-              ('Installing just a module file', 3, None, '___sec214'),
-              ('Installing a package', 3, None, '___sec215'),
+               '___sec216'),
+              ('Installing just a module file', 3, None, '___sec217'),
+              ('Installing a package', 3, None, '___sec218'),
               ('Classes for problem and solution method',
                1,
                'softeng1:prog:se:class',
                'softeng1:prog:se:class'),
-              ('The problem class', 2, None, '___sec217'),
-              ('The solver class', 2, None, '___sec218'),
-              ('Combining the objects', 3, None, '___sec219'),
+              ('The problem class', 2, None, '___sec220'),
+              ('The solver class', 2, None, '___sec221'),
+              ('Combining the objects', 3, None, '___sec222'),
               ('Improving the problem and solver classes',
                2,
                'softeng1:prog:se:class2',
                'softeng1:prog:se:class2'),
-              ('A generic class for parameters', 3, None, '___sec221'),
+              ('A generic class for parameters', 3, None, '___sec224'),
               ('Automating scientific experiments',
                1,
                'softeng1:experiments',
                'softeng1:experiments'),
-              ('Available software', 2, None, '___sec223'),
-              ('The results we want to produce', 2, None, '___sec224'),
-              ('Combining plot files', 2, None, '___sec225'),
-              ('Running a program from Python', 2, None, '___sec226'),
-              ('The automating script', 2, None, '___sec227'),
+              ('Available software', 2, None, '___sec226'),
+              ('The results we want to produce', 2, None, '___sec227'),
+              ('Combining plot files', 2, None, '___sec228'),
+              ('Running a program from Python', 2, None, '___sec229'),
+              ('The automating script', 2, None, '___sec230'),
               ('Making a report',
                2,
                'softeng1:exper:report',
                'softeng1:exper:report'),
-              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec229'),
-              ('HTML with MathJax', 3, None, '___sec230'),
-              ('LaTeX', 3, None, '___sec231'),
-              ('Sphinx', 3, None, '___sec232'),
-              ('Markdown', 3, None, '___sec233'),
-              ('IPython/Jupyter notebooks', 3, None, '___sec234'),
-              ('Wiki formats', 3, None, '___sec235'),
-              ('DocOnce', 3, None, '___sec236'),
+              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec232'),
+              ('HTML with MathJax', 3, None, '___sec233'),
+              ('LaTeX', 3, None, '___sec234'),
+              ('Sphinx', 3, None, '___sec235'),
+              ('Markdown', 3, None, '___sec236'),
+              ('IPython/Jupyter notebooks', 3, None, '___sec237'),
+              ('Wiki formats', 3, None, '___sec238'),
+              ('DocOnce', 3, None, '___sec239'),
               ('Publishing a complete project',
                2,
                'softeng1:exper:github',
                'softeng1:exper:github'),
-              ('Exercises', 1, None, '___sec238'),
+              ('Exercises', 1, None, '___sec241'),
               ('Problem 39: Make a tool for differentiating curves',
                2,
                'softeng1:exer:derivative',
@@ -677,7 +683,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
-              ('Remarks', 3, None, '___sec244'),
+              ('Remarks', 3, None, '___sec247'),
               ('Exercise 44: Make use of a class implementation',
                2,
                'softeng1:exer:class:dts',
@@ -686,8 +692,8 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('Summarizing multiple-choice questions', 0, None, '___sec247'),
-              ('Quiz', 1, None, '___sec248'),
+              ('Summarizing multiple-choice questions', 0, None, '___sec250'),
+              ('Quiz', 1, None, '___sec251'),
               ('Exercise 46: Characterize a finite difference',
                2,
                'decay:quiz:fd:FE',
@@ -752,7 +758,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'decay:quiz:scheme:leapfrog',
                'decay:quiz:scheme:leapfrog'),
-              ('References', 1, None, '___sec265')]}
+              ('References', 1, None, '___sec268')]}
 end of tocinfo -->
 
 <body>
@@ -1576,6 +1582,175 @@ the above doc strings look like when Sphinx has transformed them to HTML.
 <p><img src="fig-softeng/selfdoc_numpy.png" align="bottom" width=700></p>
 </center>
 
+<h2 id="softeng1:basic:logging">Logging intermediate results</h2>
+
+<p>
+Sometimes one may wish that a simulation program could write out
+intermediate results for inspection. This could be accomplished by
+a (global) <code>verbose</code> variable and code like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>if verbose &gt;= 2:
+    print 'u[%d]=%g' % (i, u[i])
+</code></pre>
+<!-- end verbatim block -->
+The professional way to do report intermediate results and problems is,
+however, to use a <em>logger</em>. This is an object that writes messages
+to a log file. The messages are classified as debug, info, and warning.
+
+<h3 id="___sec186">Introductory example </h3>
+
+<p>
+Here is a simple example using defining a logger, using Python's <code>logging</code>
+module:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>import logging
+import logging
+logging.basicConfig(
+    filename='myprog.log', filemode='w', level=logging.WARNING,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%m/%d/%Y %I:%M:%S %p')
+logging.info('Here is some general info.')
+logging.warning('Here is a warning.')
+logging.debug('Here is some debugging info.')
+logging.critical('Dividing by zero!')
+logging.error('Encountered an error.')
+</code></pre>
+<!-- end verbatim block -->
+Running this program gives the following output in the log file <code>myprog.log</code>:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>09/26/2015 09:25:10 AM - INFO - Here is some general info.
+09/26/2015 09:25:10 AM - WARNING - Here is a warning.
+09/26/2015 09:25:10 AM - CRITICAL - Dividing by zero!
+09/26/2015 09:25:10 AM - ERROR - Encountered an error.
+</code></pre>
+<!-- end verbatim block -->
+The logger has different <em>levels</em> of messages, ordered as
+<em>critical</em>, <em>error</em>, <em>warning</em>, <em>info</em>, and <em>debug</em>.
+The <code>level</code> argument to <code>logging.basicConfig</code> sets the level
+and thereby determines what the logger will print to the file:
+all messages at the specified <em>and lower</em> levels are printed.
+For example, in the above example we set the level to be
+<em>info</em>, and therefore the critical, error, warning, and info
+messages were printed, but not the debug message.
+Setting level to debug (<code>logging.DEBUG</code>) prints all messages,
+while level <em>critical</em> prints only the critical messages.
+
+<p>
+The <code>filemode</code> argument is set to <code>w</code> such that any existing
+log file is overwritten (the default is <code>a</code>, which means append
+new messages to an existing log file, but this is seldom what
+you want in mathematical computations).
+
+<p>
+The messages are preceded by the date and time and the level of
+the message. This output is governed by the <code>format</code> argument:
+<code>asctime</code> is the date and time, <code>levelname</code> is the name of
+the message level, and <code>message</code> is the message itself.
+Setting <code>format='%(message)s'</code> ensures that just the message and
+nothing more is printed on each line. The <code>datefmt</code> string
+specifies the formatting of the date and time, using the
+rules of the <a href="https://docs.python.org/2/library/time.html#time.strftime" target="_self"><tt>time.strftime</tt></a> function.
+
+<h3 id="___sec187">Using a logger in our solver function </h3>
+
+<p>
+Let us let a logger write out intermediate results and some debugging
+results in the <code>solver</code> function. Such messages are useful for
+monitoring the simulation and for debugging it, respectively.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import logging
+logging.basicConfig(
+    filename='decay.log', filemode='w', level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y.%m.%d %I:%M:%S %p')
+
+def solver_with_logging(I, a, T, dt, theta):
+    &quot;&quot;&quot;Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;
+    dt = float(dt)               # avoid integer division
+    Nt = int(round(T/dt))        # no of time intervals
+    T = Nt*dt                    # adjust T to fit time step dt
+    u = np.zeros(Nt+1)           # array of u[n] values
+    t = np.linspace(0, T, Nt+1)  # time mesh
+    logging.debug('solver: dt=%g, Nt=%g, T=%g' % (dt, Nt, T))
+
+    u[0] = I                  # assign initial condition
+    for n in range(0, Nt):    # n=0,1,...,Nt-1
+        u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
+
+        logging.info('u[%d]=%g' % (n, u[n]))
+        logging.debug('1 - (1-theta)*a*dt: %g, %s' %
+                      (1-(1-theta)*a*dt,
+                       str(type(1-(1-theta)*a*dt))[7:-2]))
+        logging.debug('1 + theta*dt*a: %g, %s' %
+                      (1 + theta*dt*a,
+                       str(type(1 + theta*dt*a))[7:-2]))
+    return u, t
+</code></pre>
+<!-- end verbatim block -->
+We can run this new solver function in a shell:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; import decay
+&gt;&gt;&gt; u, t = decay.solver_with_logging(I=1, a=0.5, T=10, \ 
+           dt=0.5, theta=0.5)
+</code></pre>
+<!-- end verbatim block -->
+During this execution, each logging message is appended to the log file.
+Suppose we add some pause (<code>time.sleep(2)</code>) at each time level such that
+the execution takes some time. In another terminal window we can then
+monitor the evolution of <code>decay.log</code> and the simulation
+by the <code>tail -f</code> Unix command:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>Terminal&gt; tail -f decay.log
+2015.09.26 05:37:41 AM - INFO - u[0]=1
+2015.09.26 05:37:41 AM - INFO - u[1]=0.777778
+2015.09.26 05:37:41 AM - INFO - u[2]=0.604938
+2015.09.26 05:37:41 AM - INFO - u[3]=0.470508
+2015.09.26 05:37:41 AM - INFO - u[4]=0.36595
+2015.09.26 05:37:41 AM - INFO - u[5]=0.284628
+</code></pre>
+<!-- end verbatim block -->
+Especially in simulation where each time step demands considerable
+CPU time (minutes, hours), it can be handy to monitor such a log file
+to see the evolution of the simulation.
+
+<p>
+If we want to look more closely into the numerator and denominator of
+the formula for \( u^{n+1} \), we can change the logging level to
+<code>level=logging.DEBUG</code> and get output in <code>decay.log</code> like
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>2015.09.26 05:40:01 AM - DEBUG - solver: dt=0.5, Nt=20, T=10
+2015.09.26 05:40:01 AM - INFO - u[0]=1
+2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+2015.09.26 05:40:01 AM - INFO - u[1]=0.777778
+2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+2015.09.26 05:40:01 AM - INFO - u[2]=0.604938
+2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+2015.09.26 05:40:01 AM - INFO - u[3]=0.470508
+2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+2015.09.26 05:40:01 AM - INFO - u[4]=0.36595
+2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+</code></pre>
+<!-- end verbatim block -->
+
 <h1 id="softeng1:basic:UI">User interfaces</h1>
 
 <p>
@@ -1623,7 +1798,7 @@ The essential content is that <code>prog.py</code> has two input parameters: <co
 and <code>p</code>. A user interface will replace the first two assignments to
 <code>delta</code> and <code>p</code>.
 
-<h2 id="___sec186">Command-line arguments </h2>
+<h2 id="___sec189">Command-line arguments </h2>
 
 <p>
 The command-line arguments are all the words that appear on the
@@ -1784,7 +1959,7 @@ the <code>args.delta</code> and <code>args.p</code> variable are automatically o
 Our next task is to use these basic code constructs to equip our
 <code>decay.py</code> module with command-line interfaces.
 
-<h2 id="___sec187">Positional command-line arguments </h2>
+<h2 id="___sec190">Positional command-line arguments </h2>
 
 <p>
 For our <code>decay.py</code> module file, we want include functionality such
@@ -1866,7 +2041,7 @@ Now we can do
 <!-- end verbatim block -->
 and get `theta=0.5`in the code.
 
-<h2 id="___sec188">Option-value pairs on the command line </h2>
+<h2 id="___sec191">Option-value pairs on the command line </h2>
 
 <p>
 Now we want to specify option-value pairs on the command line,
@@ -2037,7 +2212,7 @@ the command line as positional arguments or option-value pairs:
 </code></pre>
 <!-- end verbatim block -->
 
-<h2 id="___sec189">Creating a graphical web user interface </h2>
+<h2 id="___sec192">Creating a graphical web user interface </h2>
 
 <p>
 The Python package <a href="https://github.com/hplgit/parampool" target="_self">Parampool</a>
@@ -2048,7 +2223,7 @@ material on equipping our <code>decay</code> module with a GUI is quite technica
 and of significantly less importance than knowing how to make
 a command-line interface.
 
-<h3 id="___sec190">Making a compute function </h3>
+<h3 id="___sec193">Making a compute function </h3>
 
 <p>
 The first step is to identify a function
@@ -2157,7 +2332,7 @@ relevant HTML code in the string <code>html_text</code>. The function looks like
 </code></pre>
 <!-- end verbatim block -->
 
-<h3 id="___sec191">Generating the user interface </h3>
+<h3 id="___sec194">Generating the user interface </h3>
 
 <p>
 The web GUI is automatically generated by
@@ -2186,7 +2361,7 @@ files whose names are specified in the call to <code>generate</code>:
 We only need to run the last program, and there is no need to look into
 these files.
 
-<h3 id="___sec192">Running the web application </h3>
+<h3 id="___sec195">Running the web application </h3>
 
 <p>
 The web GUI is started by
@@ -2204,7 +2379,7 @@ With the techniques demonstrated here, one can
 easily create a tailored web GUI for a particular type of application
 and use it to interactively explore physical and numerical effects.
 
-<h1 id="___sec193">Tests for verifying implementations </h1>
+<h1 id="___sec196">Tests for verifying implementations </h1>
 
 <p>
 Any module with functions should have a set of tests that can
@@ -2220,7 +2395,7 @@ software testing techniques: <em>doctest</em> and <em>unit testing</em>.
 The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.
 
-<h2 id="___sec194">Doctests </h2>
+<h2 id="___sec197">Doctests </h2>
 
 <p>
 A doc string, the first string after the function header, is used to
@@ -2349,7 +2524,7 @@ hide software errors.
 Doctests are highly encouraged as they do two things: 1) demonstrate
 how a function is used and 2) test that the function works.
 
-<h2 id="___sec195">Unit tests and test functions </h2>
+<h2 id="___sec198">Unit tests and test functions </h2>
 
 <p>
 The unit testing technique consists of identifying smaller units
@@ -2365,14 +2540,14 @@ unit testing. The units are naturally larger than in non-scientific
 software. Very often the solution procedure of a mathematical problem
 identifies a unit, such as our <code>solver</code> function.
 
-<h3 id="___sec196">Two Python test frameworks: nose and pytest </h3>
+<h3 id="___sec199">Two Python test frameworks: nose and pytest </h3>
 
 <p>
 Python offers two very easy-to-use software frameworks for implementing
 unit tests: nose and pytest. These work (almost) in the same way,
 but our recommendation is to go for pytest.
 
-<h3 id="___sec197">Test function requirements </h3>
+<h3 id="___sec200">Test function requirements </h3>
 
 <p>
 For a test to qualify as a <em>test function</em> in nose or pytest, three
@@ -2426,7 +2601,7 @@ A better version of the test function is therefore
 </code></pre>
 <!-- end verbatim block -->
 
-<h3 id="___sec198">Comparison of real numbers </h3>
+<h3 id="___sec201">Comparison of real numbers </h3>
 
 <p>
 Because of the finite precision arithmetics on a computer, which gives
@@ -2499,7 +2674,7 @@ The suitable size of <code>tol</code> depends on the size of <code>a</code> and 
 </div>
 
 
-<h3 id="___sec199">Special assert functions from nose </h3>
+<h3 id="___sec202">Special assert functions from nose </h3>
 
 <p>
 Test frameworks often contain more tailored
@@ -2530,7 +2705,7 @@ depends on the programmer's preference. The examples used in the
 documentation of the pytest framework stick to the plain <code>assert</code>
 statement.
 
-<h3 id="___sec200">Locating test functions </h3>
+<h3 id="___sec203">Locating test functions </h3>
 
 <p>
 Test functions can reside in a module together with the functions they
@@ -2546,7 +2721,7 @@ test functions in the module, but we could equally well have made
 a subdirectory <code>tests</code> and put the test functions in
 <a href="http://tinyurl.com/ofkw6kc/softeng/tests/test_decay.py" target="_self"><tt>tests/test_decay.py</tt></a>.
 
-<h3 id="___sec201">Running tests </h3>
+<h3 id="___sec204">Running tests </h3>
 
 <p>
 To run all test functions in the file <code>decay.py</code> do
@@ -2584,7 +2759,7 @@ with <code>test</code> or end with <code>_test</code> or <code>_tests</code> (wh
 An example of a <code>tests</code> directory with a <code>test*.py</code>
 file is found in <a href="http://tinyurl.com/ofkw6kc/softeng/tests" target="_self"><tt>src/softeng/tests</tt></a>.
 
-<h3 id="___sec202">Embedding doctests in a test function </h3>
+<h3 id="___sec205">Embedding doctests in a test function </h3>
 
 <p>
 Doctests can also be executed from nose/pytest unit tests. Here is an
@@ -2616,13 +2791,13 @@ in the test block, while applying <code>py.test</code> or <code>nosetests</code>
 an import of the file and execution of the test function
 <code>test_decay_modue_with_doctest</code>.
 
-<h3 id="___sec203">Installing nose and pytest </h3>
+<h3 id="___sec206">Installing nose and pytest </h3>
 
 <p>
 With <code>pip</code> available, it is trivial to install nose and/or pytest:
 <code>sudo pip install nose</code> and <code>sudo pip install pytest</code>.
 
-<h2 id="___sec204">Test function for the solver </h2>
+<h2 id="___sec207">Test function for the solver </h2>
 
 <p>
 Finding good test problems for verifying the implementation of numerical
@@ -2705,7 +2880,7 @@ expected ones (from theory).
 This type of testing is fully explained in
 the section <a href="._decay-book-solarized007.html#decay:convergence:rate">Computing convergence rates</a>.
 
-<h2 id="___sec205">Test function for reading positional command-line arguments </h2>
+<h2 id="___sec208">Test function for reading positional command-line arguments </h2>
 
 <p>
 The function <code>read_command_line_positional</code> extracts numbers from the
@@ -2745,7 +2920,7 @@ can safely use <code>==</code> in tests. Note also that the last element in
 <code>expected</code> and <code>computed</code> is the list <code>dt_values</code>, and <code>==</code> works
 for comparing two lists as well.
 
-<h2 id="___sec206">Test function for reading option-value pairs </h2>
+<h2 id="___sec209">Test function for reading option-value pairs </h2>
 
 <p>
 The function <code>read_command_line_argparse</code> can be verified with a
@@ -2954,7 +3129,7 @@ subsections cover three steps in sharing software:
 <li> Downloading and installing the software.</li>
 </ol>
 
-<h2 id="___sec209">Organizing the software directory tree </h2>
+<h2 id="___sec212">Organizing the software directory tree </h2>
 
 <p>
 We start with organizing our software as a directory tree. Our
@@ -2976,7 +3151,7 @@ file executed by the <code>python</code> program (or more precisely, the first
 <code>python</code> program found in the directories in the <code>PATH</code> environment
 variable).
 
-<h3 id="___sec210">Distributing just a module file </h3>
+<h3 id="___sec213">Distributing just a module file </h3>
 
 <p>
 Let us start out with the minimum solution alternative: distributing
@@ -3004,7 +3179,7 @@ The <code>py_modules</code> argument specifies a list of modules to be installed
 either as a module or as an executable program, so we want users to
 have both possibilities.
 
-<h3 id="___sec211">Distributing a package </h3>
+<h3 id="___sec214">Distributing a package </h3>
 
 <p>
 If the software consists of more files than one or two modules, one
@@ -3081,7 +3256,7 @@ test_decay.py
 </code></pre>
 <!-- end verbatim block -->
 
-<h2 id="___sec212">Publishing the software at GitHub </h2>
+<h2 id="___sec215">Publishing the software at GitHub </h2>
 
 <p>
 The leading site today for publishing open source software projects is
@@ -3163,7 +3338,7 @@ up and going with this style of
 professional work. And you should put all your writings and programming
 projects in repositories in the cloud!
 
-<h2 id="___sec213">Downloading and installing the software </h2>
+<h2 id="___sec216">Downloading and installing the software </h2>
 
 <p>
 Users of your software go to the Git repo at <code>github.com</code> and
@@ -3177,7 +3352,7 @@ Most users will use the latter, typically
 <!-- end verbatim block -->
 The result is a directory <code>projname</code> with the files in the repo.
 
-<h3 id="___sec214">Installing just a module file </h3>
+<h3 id="___sec217">Installing just a module file </h3>
 
 <p>
 The software package is in the case above a directory <code>decay</code> with three files
@@ -3223,7 +3398,7 @@ directory on the computer system, e.g.,
 <code>/usr/local/lib/python2.7/dist-packages</code>, while executable programs go
 to <code>/usr/local/bin</code>.
 
-<h3 id="___sec215">Installing a package </h3>
+<h3 id="___sec218">Installing a package </h3>
 
 <p>
 When the software is organized as a Python package, the installation is
@@ -3304,7 +3479,7 @@ Other useful resources are
  <li> <code>tutorialspoint.com</code>: <a href="http://www.tutorialspoint.com/python/python_classes_objects.htm" target="_self"><tt>http://www.tutorialspoint.com/python/python_classes_objects.htm</tt></a></li>
 </ul>
 
-<h2 id="___sec217">The problem class </h2>
+<h2 id="___sec220">The problem class </h2>
 
 <p>
 The purpose of the problem class is to store all information about
@@ -3404,7 +3579,7 @@ supplied, but if she does not have any, class <code>Problem</code> makes one.
 Python's <code>None</code> object is used to indicate that a variable is not
 initialized with a proper value.
 
-<h2 id="___sec218">The solver class </h2>
+<h2 id="___sec221">The solver class </h2>
 
 <p>
 The solver class stores parameters related to the numerical solution method
@@ -3459,7 +3634,7 @@ of the stand-alone <code>solver</code> function. With a single object of class <
 we have all the physical and numerical data bundled together with the numerical
 solution method.
 
-<h3 id="___sec219">Combining the objects </h3>
+<h3 id="___sec222">Combining the objects </h3>
 
 <p>
 Eventually we need to show how the classes <code>Problem</code> and <code>Solver</code>
@@ -3582,7 +3757,7 @@ u, t = solver.u, solver.t
 </code></pre>
 <!-- end verbatim block -->
 
-<h3 id="___sec221">A generic class for parameters </h3>
+<h3 id="___sec224">A generic class for parameters </h3>
 
 <p>
 A simplified version of the parameter class looks as follows:
@@ -3698,7 +3873,7 @@ investigation.
 </div>
 
 
-<h2 id="___sec223">Available software </h2>
+<h2 id="___sec226">Available software </h2>
 
 <p>
 Appropriate software for implementing <a href="#mjx-eqn-198">(198)</a>
@@ -3741,7 +3916,7 @@ The first column is the \( \theta \) value, the next the \( \Delta t \) value,
 and the final column represents the numerical error \( E \) (the
 norm of discrete error function on the mesh).
 
-<h2 id="___sec224">The results we want to produce </h2>
+<h2 id="___sec227">The results we want to produce </h2>
 
 <p>
 The results we need for our investigations are slightly different than
@@ -3806,7 +3981,7 @@ This requires more than an automating script.
 </div>
 
 
-<h2 id="___sec225">Combining plot files </h2>
+<h2 id="___sec228">Combining plot files </h2>
 
 <p>
 The script for running experiments needs to combine multiple image
@@ -3861,7 +4036,7 @@ Terminal&gt; rm -f tmp.pdf
 </code></pre>
 <!-- end verbatim block -->
 
-<h2 id="___sec226">Running a program from Python </h2>
+<h2 id="___sec229">Running a program from Python </h2>
 
 <p>
 The script for automating experiments needs to run the <code>model.py</code> program
@@ -3947,7 +4122,7 @@ for line in output.splitlines():
 </code></pre>
 <!-- end verbatim block -->
 
-<h2 id="___sec227">The automating script </h2>
+<h2 id="___sec230">The automating script </h2>
 
 <p>
 We have now all the core elements in place to write the complete
@@ -4090,7 +4265,7 @@ plot, thereby ensuring that each figure is connected to the
 right data. Take a look at <a href="http://tinyurl.com/nc4upel/_static/sphinx-cloud/" target="_self">a sample report</a>  to see what we have in
 mind.
 
-<h3 id="___sec229">Word, OpenOffice, GoogleDocs </h3>
+<h3 id="___sec232">Word, OpenOffice, GoogleDocs </h3>
 
 <p>
 Microsoft Word, its open source counterparts OpenOffice and
@@ -4109,7 +4284,7 @@ collaborative writing, the merge functionality in Git leads to safer
 simultaneously editing that what is offered even by collaborative
 tools like GoogleDocs.
 
-<h3 id="___sec230">HTML with MathJax </h3>
+<h3 id="___sec233">HTML with MathJax </h3>
 
 <p>
 HTML is the markup language used for web pages.  Nicely typeset computer
@@ -4141,7 +4316,7 @@ statements for creating an <a href="http://tinyurl.com/nc4upel/_static/report_ma
 <p><img src="fig-softeng/report_mathjax.png" align="bottom" width=600></p>
 </center>
 
-<h3 id="___sec231">LaTeX </h3>
+<h3 id="___sec234">LaTeX </h3>
 
 <p>
 <!-- "http://en.wikibooks.org/wiki/LaTeX" -->
@@ -4171,7 +4346,7 @@ generate the LaTeX source from a program.
 <p><img src="fig-softeng/report_latexpdf.png" align="bottom" width=600></p>
 </center>
 
-<h3 id="___sec232">Sphinx </h3>
+<h3 id="___sec235">Sphinx </h3>
 
 <p>
 <!-- give pointers to source pages -->
@@ -4199,7 +4374,7 @@ contents, navigation, and search facilities, see Figure
 <p><img src="fig-softeng/report_sphinx.png" align="bottom" width=600></p>
 </center>
 
-<h3 id="___sec233">Markdown </h3>
+<h3 id="___sec236">Markdown </h3>
 
 <p>
 A recent, very popular format for easy writing of web pages is
@@ -4214,7 +4389,7 @@ OpenOffice/LibreOffice, MediaWiki, and Microsoft Word are some other
 possibilities. A Markdown version of our scientific
 report demo is available as an IPython/Jupyter notebook (described next).
 
-<h3 id="___sec234">IPython/Jupyter notebooks </h3>
+<h3 id="___sec237">IPython/Jupyter notebooks </h3>
 
 <p>
 The <a href="http://ipython.org/notebook.html" target="_self">IPython Notebook</a> is
@@ -4232,7 +4407,7 @@ printed out as PDF reports too.
 A notebook version of our scientific report can be <a href="http://tinyurl.com/p96acy2/_static/report.ipynb" target="_self">downloaded</a> and experimented with
 or <a href="http://nbviewer.ipython.org/url/hplgit.github.com/teamods/writing_reports/_static/report.ipynb" target="_self">just statically viewed</a> in a browser.
 
-<h3 id="___sec235">Wiki formats </h3>
+<h3 id="___sec238">Wiki formats </h3>
 
 <p>
 A range of wiki formats are popular for creating notes on the web,
@@ -4243,7 +4418,7 @@ and also limited tools for displaying computer code in nice ways.
 Wiki formats are therefore less suitable for scientific reports compared
 to the other formats mentioned here.
 
-<h3 id="___sec236">DocOnce </h3>
+<h3 id="___sec239">DocOnce </h3>
 
 <p>
 Since it is difficult to choose the right tool or format for writing a
@@ -4301,7 +4476,7 @@ the <code>report.html</code> file.
 <p>
 <!-- Point to DocOnce version -->
 
-<h1 id="___sec238">Exercises </h1>
+<h1 id="___sec241">Exercises </h1>
 
 <p>
 <!-- --- begin exercise --- -->
@@ -4607,7 +4782,7 @@ Filename: <code>tolerance</code>.
 <p>
 <!-- Closing remarks for this Problem -->
 
-<h3 id="___sec244">Remarks </h3>
+<h3 id="___sec247">Remarks </h3>
 
 <p>
 You will experience that if <code>a</code> and <code>b</code> are large, as they can be
@@ -4676,7 +4851,7 @@ Filename: <code>logistic</code>.
 
 
 <center style="font-size:80%">
-<!-- copyright --> &copy; 2015, Hans Petter Langtangen. Released under CC Attribution 4.0 license
+<!-- copyright only on the titlepage -->
 </center>
 
 

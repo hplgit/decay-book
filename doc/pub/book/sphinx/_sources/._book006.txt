@@ -705,8 +705,8 @@ time steps are probably too large for :eq:`decay:E:dt` to be valid.
 That is, those time steps lie outside the asymptotic range of
 :math:`\Delta t` values where the error behaves like :eq:`decay:E:dt`.
 
-Implementation  (2)
-~~~~~~~~~~~~~~~~~~~
+Implementation          (2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can compute :math:`r_0, r_1, \ldots, r_{m-2}` from :math:`E_i` and :math:`\Delta t_i`
 by the following functionL
@@ -1380,9 +1380,9 @@ solving ODEs: `ODEPACK <https://computation.llnl.gov/casc/odepack/odepack_home.h
 `rkc.f <http://www.netlib.org/ode/rkc.f>`__, `rkf45.f <http://www.netlib.org/ode/rkf45.f>`__, as well
 as the ODE solvers in `SciPy <http://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html>`__, `SymPy <http://docs.sympy.org/dev/modules/mpmath/calculus/odes.html>`__, and `odelab <http://olivierverdier.github.com/odelab/>`__.
 
-The usage of Odespy follows this setup for the ODE :math:`u^{\prime}=-au`,
-:math:`u(0)=I`, :math:`t\in (0,T]`, here solved
-by the famous 4th-order Runge-Kutta method with :math:`\Delta t=1`
+The code below illustrates the usage of Odespy the solving :math:`u^{\prime}=-au`,
+:math:`u(0)=I`, :math:`t\in (0,T]`,
+by the famous 4th-order Runge-Kutta method, using :math:`\Delta t=1`
 and :math:`N_t=6` steps:
 
 .. code-block:: python
@@ -1643,8 +1643,8 @@ the decay and larger time steps when the solution flattens out.
 
    *Choice of adaptive time mesh by the Dormand-Prince method for different tolerances*
 
-Exercises  (3)
-==============
+Exercises          (3)
+======================
 
 .. --- begin exercise ---
 

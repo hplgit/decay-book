@@ -7,23 +7,14 @@ Software engineering with exponential decay models
 Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    ._main_softeng000
    ._main_softeng001
    ._main_softeng002
-   ._main_softeng003
-   ._main_softeng004
-   ._main_softeng005
-   ._main_softeng006
-   ._main_softeng007
-   ._main_softeng008
-   ._main_softeng009
 
 
-Indices and tables
-==================
+Index
+=====
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

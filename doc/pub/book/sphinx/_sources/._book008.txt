@@ -764,6 +764,172 @@ the above doc strings look like when Sphinx has transformed them to HTML.
 
    *Example on Sphinx API manual in HTML*
 
+.. _softeng1:basic:logging:
+
+Logging intermediate results
+----------------------------
+
+.. index:: logging module
+
+.. index:: logger
+
+.. index:: debugging
+
+Sometimes one may wish that a simulation program could write out
+intermediate results for inspection. This could be accomplished by
+a (global) ``verbose`` variable and code like
+
+.. code-block:: python
+
+        if verbose >= 2:
+            print 'u[%d]=%g' % (i, u[i])
+
+The professional way to do report intermediate results and problems is,
+however, to use a *logger*. This is an object that writes messages
+to a log file. The messages are classified as debug, info, and warning.
+
+Introductory example
+~~~~~~~~~~~~~~~~~~~~
+
+Here is a simple example using defining a logger, using Python's ``logging``
+module:
+
+.. code-block:: python
+
+        import logging
+        import logging
+        logging.basicConfig(
+            filename='myprog.log', filemode='w', level=logging.WARNING,
+            format='%(asctime)s - %(levelname)s - %(message)s',
+            datefmt='%m/%d/%Y %I:%M:%S %p')
+        logging.info('Here is some general info.')
+        logging.warning('Here is a warning.')
+        logging.debug('Here is some debugging info.')
+        logging.critical('Dividing by zero!')
+        logging.error('Encountered an error.')
+
+Running this program gives the following output in the log file ``myprog.log``:
+
+.. code-block:: text
+
+        09/26/2015 09:25:10 AM - INFO - Here is some general info.
+        09/26/2015 09:25:10 AM - WARNING - Here is a warning.
+        09/26/2015 09:25:10 AM - CRITICAL - Dividing by zero!
+        09/26/2015 09:25:10 AM - ERROR - Encountered an error.
+
+The logger has different *levels* of messages, ordered as
+*critical*, *error*, *warning*, *info*, and *debug*.
+The ``level`` argument to ``logging.basicConfig`` sets the level
+and thereby determines what the logger will print to the file:
+all messages at the specified *and lower* levels are printed.
+For example, in the above example we set the level to be
+*info*, and therefore the critical, error, warning, and info
+messages were printed, but not the debug message.
+Setting level to debug (``logging.DEBUG``) prints all messages,
+while level *critical* prints only the critical messages.
+
+The ``filemode`` argument is set to ``w`` such that any existing
+log file is overwritten (the default is ``a``, which means append
+new messages to an existing log file, but this is seldom what
+you want in mathematical computations).
+
+The messages are preceded by the date and time and the level of
+the message. This output is governed by the ``format`` argument:
+``asctime`` is the date and time, ``levelname`` is the name of
+the message level, and ``message`` is the message itself.
+Setting ``format='%(message)s'`` ensures that just the message and
+nothing more is printed on each line. The ``datefmt`` string
+specifies the formatting of the date and time, using the
+rules of the `time.strftime <https://docs.python.org/2/library/time.html#time.strftime>`__ function.
+
+Using a logger in our solver function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Let us let a logger write out intermediate results and some debugging
+results in the ``solver`` function. Such messages are useful for
+monitoring the simulation and for debugging it, respectively.
+
+.. code-block:: python
+
+        import logging
+        logging.basicConfig(
+            filename='decay.log', filemode='w', level=logging.DEBUG,
+            format='%(asctime)s - %(levelname)s - %(message)s',
+            datefmt='%Y.%m.%d %I:%M:%S %p')
+        
+        def solver_with_logging(I, a, T, dt, theta):
+            """Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt."""
+            dt = float(dt)               # avoid integer division
+            Nt = int(round(T/dt))        # no of time intervals
+            T = Nt*dt                    # adjust T to fit time step dt
+            u = np.zeros(Nt+1)           # array of u[n] values
+            t = np.linspace(0, T, Nt+1)  # time mesh
+            logging.debug('solver: dt=%g, Nt=%g, T=%g' % (dt, Nt, T))
+        
+            u[0] = I                  # assign initial condition
+            for n in range(0, Nt):    # n=0,1,...,Nt-1
+                u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
+        
+                logging.info('u[%d]=%g' % (n, u[n]))
+                logging.debug('1 - (1-theta)*a*dt: %g, %s' %
+                              (1-(1-theta)*a*dt,
+                               str(type(1-(1-theta)*a*dt))[7:-2]))
+                logging.debug('1 + theta*dt*a: %g, %s' %
+                              (1 + theta*dt*a,
+                               str(type(1 + theta*dt*a))[7:-2]))
+            return u, t
+
+We can run this new solver function in a shell:
+
+.. code-block:: python
+
+        >>> import decay
+        >>> u, t = decay.solver_with_logging(I=1, a=0.5, T=10, \ 
+                   dt=0.5, theta=0.5)
+
+During this execution, each logging message is appended to the log file.
+Suppose we add some pause (``time.sleep(2)``) at each time level such that
+the execution takes some time. In another terminal window we can then
+monitor the evolution of ``decay.log`` and the simulation
+by the ``tail -f`` Unix command:
+
+.. code-block:: python
+
+        Terminal> tail -f decay.log
+        2015.09.26 05:37:41 AM - INFO - u[0]=1
+        2015.09.26 05:37:41 AM - INFO - u[1]=0.777778
+        2015.09.26 05:37:41 AM - INFO - u[2]=0.604938
+        2015.09.26 05:37:41 AM - INFO - u[3]=0.470508
+        2015.09.26 05:37:41 AM - INFO - u[4]=0.36595
+        2015.09.26 05:37:41 AM - INFO - u[5]=0.284628
+
+Especially in simulation where each time step demands considerable
+CPU time (minutes, hours), it can be handy to monitor such a log file
+to see the evolution of the simulation.
+
+If we want to look more closely into the numerator and denominator of
+the formula for :math:`u^{n+1}`, we can change the logging level to
+``level=logging.DEBUG`` and get output in ``decay.log`` like
+
+.. code-block:: text
+
+        2015.09.26 05:40:01 AM - DEBUG - solver: dt=0.5, Nt=20, T=10
+        2015.09.26 05:40:01 AM - INFO - u[0]=1
+        2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+        2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+        2015.09.26 05:40:01 AM - INFO - u[1]=0.777778
+        2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+        2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+        2015.09.26 05:40:01 AM - INFO - u[2]=0.604938
+        2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+        2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+        2015.09.26 05:40:01 AM - INFO - u[3]=0.470508
+        2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+        2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+        2015.09.26 05:40:01 AM - INFO - u[4]=0.36595
+        2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+        2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+
 .. _softeng1:basic:UI:
 
 User interfaces
@@ -2918,8 +3084,8 @@ file ``error.csv``.
 
 
 
-Combining plot files  (2)
--------------------------
+Combining plot files          (2)
+---------------------------------
 
 The script for running experiments needs to combine multiple image
 files into one. The
@@ -3430,8 +3596,8 @@ the ``report.html`` file.
 
 .. Point to DocOnce version
 
-Exercises  (5)
-==============
+Exercises          (5)
+======================
 
 .. --- begin exercise ---
 
@@ -3727,8 +3893,8 @@ Filename: ``tolerance``.
 
 .. Closing remarks for this Problem
 
-Remarks  (2)
-~~~~~~~~~~~~
+Remarks          (2)
+~~~~~~~~~~~~~~~~~~~~
 
 You will experience that if ``a`` and ``b`` are large, as they can be
 in geophysical applications where lengths measured in meters can be of size

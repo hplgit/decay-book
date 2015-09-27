@@ -965,8 +965,8 @@ the truncation error, and the stability criteria.
 
 .. Look in Asher and Petzold, p 40
 
-Exercises  (2)
-==============
+Exercises          (2)
+======================
 
 .. --- begin exercise ---
 

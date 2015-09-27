@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Software engineering with exponential decay models">
-<meta name="keywords" content="refactoring,importing modules,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Software engineering with exponential decay models</title>
 
@@ -61,7 +61,7 @@ div { text-align: justify; text-justify: inter-word; }
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [('Basic implementations',
+ 'sections': [('Implementations with functions and modules',
                1,
                'softeng1:basic',
                'softeng1:basic'),
@@ -101,43 +101,49 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'softeng1:basic:docstring',
                'softeng1:basic:docstring'),
+              ('Logging intermediate results',
+               2,
+               'softeng1:basic:logging',
+               'softeng1:basic:logging'),
+              ('Introductory example', 3, None, '___sec14'),
+              ('Using a logger in our solver function', 3, None, '___sec15'),
               ('User interfaces',
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec14'),
-              ('Positional command-line arguments', 2, None, '___sec15'),
-              ('Option-value pairs on the command line', 2, None, '___sec16'),
+              ('Command-line arguments', 2, None, '___sec17'),
+              ('Positional command-line arguments', 2, None, '___sec18'),
+              ('Option-value pairs on the command line', 2, None, '___sec19'),
               ('Creating a graphical web user interface',
                2,
                None,
-               '___sec17'),
-              ('Making a compute function', 3, None, '___sec18'),
-              ('Generating the user interface', 3, None, '___sec19'),
-              ('Running the web application', 3, None, '___sec20'),
-              ('Tests for verifying implementations', 1, None, '___sec21'),
-              ('Doctests', 2, None, '___sec22'),
-              ('Unit tests and test functions', 2, None, '___sec23'),
+               '___sec20'),
+              ('Making a compute function', 3, None, '___sec21'),
+              ('Generating the user interface', 3, None, '___sec22'),
+              ('Running the web application', 3, None, '___sec23'),
+              ('Tests for verifying implementations', 1, None, '___sec24'),
+              ('Doctests', 2, None, '___sec25'),
+              ('Unit tests and test functions', 2, None, '___sec26'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
-               '___sec24'),
-              ('Test function requirements', 3, None, '___sec25'),
-              ('Comparison of real numbers', 3, None, '___sec26'),
-              ('Special assert functions from nose', 3, None, '___sec27'),
-              ('Locating test functions', 3, None, '___sec28'),
-              ('Running tests', 3, None, '___sec29'),
-              ('Embedding doctests in a test function', 3, None, '___sec30'),
-              ('Installing nose and pytest', 3, None, '___sec31'),
-              ('Test function for the solver', 2, None, '___sec32'),
+               '___sec27'),
+              ('Test function requirements', 3, None, '___sec28'),
+              ('Comparison of real numbers', 3, None, '___sec29'),
+              ('Special assert functions from nose', 3, None, '___sec30'),
+              ('Locating test functions', 3, None, '___sec31'),
+              ('Running tests', 3, None, '___sec32'),
+              ('Embedding doctests in a test function', 3, None, '___sec33'),
+              ('Installing nose and pytest', 3, None, '___sec34'),
+              ('Test function for the solver', 2, None, '___sec35'),
               ('Test function for reading positional command-line arguments',
                2,
                None,
-               '___sec33'),
+               '___sec36'),
               ('Test function for reading option-value pairs',
                2,
                None,
-               '___sec34'),
+               '___sec37'),
               ('Classical class-based unit testing',
                2,
                'softeng1:basic:unittest',
@@ -146,54 +152,54 @@ div { text-align: justify; text-justify: inter-word; }
                1,
                'softeng1:prog:se:git',
                'softeng1:prog:se:git'),
-              ('Organizing the software directory tree', 2, None, '___sec37'),
-              ('Distributing just a module file', 3, None, '___sec38'),
-              ('Distributing a package', 3, None, '___sec39'),
-              ('Publishing the software at GitHub', 2, None, '___sec40'),
+              ('Organizing the software directory tree', 2, None, '___sec40'),
+              ('Distributing just a module file', 3, None, '___sec41'),
+              ('Distributing a package', 3, None, '___sec42'),
+              ('Publishing the software at GitHub', 2, None, '___sec43'),
               ('Downloading and installing the software',
                2,
                None,
-               '___sec41'),
-              ('Installing just a module file', 3, None, '___sec42'),
-              ('Installing a package', 3, None, '___sec43'),
+               '___sec44'),
+              ('Installing just a module file', 3, None, '___sec45'),
+              ('Installing a package', 3, None, '___sec46'),
               ('Classes for problem and solution method',
                1,
                'softeng1:prog:se:class',
                'softeng1:prog:se:class'),
-              ('The problem class', 2, None, '___sec45'),
-              ('The solver class', 2, None, '___sec46'),
-              ('Combining the objects', 3, None, '___sec47'),
+              ('The problem class', 2, None, '___sec48'),
+              ('The solver class', 2, None, '___sec49'),
+              ('Combining the objects', 3, None, '___sec50'),
               ('Improving the problem and solver classes',
                2,
                'softeng1:prog:se:class2',
                'softeng1:prog:se:class2'),
-              ('A generic class for parameters', 3, None, '___sec49'),
+              ('A generic class for parameters', 3, None, '___sec52'),
               ('Automating scientific experiments',
                1,
                'softeng1:experiments',
                'softeng1:experiments'),
-              ('Available software', 2, None, '___sec51'),
-              ('The results we want to produce', 2, None, '___sec52'),
-              ('Combining plot files', 2, None, '___sec53'),
-              ('Running a program from Python', 2, None, '___sec54'),
-              ('The automating script', 2, None, '___sec55'),
+              ('Available software', 2, None, '___sec54'),
+              ('The results we want to produce', 2, None, '___sec55'),
+              ('Combining plot files', 2, None, '___sec56'),
+              ('Running a program from Python', 2, None, '___sec57'),
+              ('The automating script', 2, None, '___sec58'),
               ('Making a report',
                2,
                'softeng1:exper:report',
                'softeng1:exper:report'),
-              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec57'),
-              ('HTML with MathJax', 3, None, '___sec58'),
-              ('LaTeX', 3, None, '___sec59'),
-              ('Sphinx', 3, None, '___sec60'),
-              ('Markdown', 3, None, '___sec61'),
-              ('IPython/Jupyter notebooks', 3, None, '___sec62'),
-              ('Wiki formats', 3, None, '___sec63'),
-              ('DocOnce', 3, None, '___sec64'),
+              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec60'),
+              ('HTML with MathJax', 3, None, '___sec61'),
+              ('LaTeX', 3, None, '___sec62'),
+              ('Sphinx', 3, None, '___sec63'),
+              ('Markdown', 3, None, '___sec64'),
+              ('IPython/Jupyter notebooks', 3, None, '___sec65'),
+              ('Wiki formats', 3, None, '___sec66'),
+              ('DocOnce', 3, None, '___sec67'),
               ('Publishing a complete project',
                2,
                'softeng1:exper:github',
                'softeng1:exper:github'),
-              ('Exercises', 1, None, '___sec66'),
+              ('Exercises', 1, None, '___sec69'),
               ('Problem 1: Make a tool for differentiating curves',
                2,
                'softeng1:exer:derivative',
@@ -214,16 +220,16 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
-              ('Remarks', 3, None, '___sec72'),
+              ('Remarks', 3, None, '___sec75'),
               ('Exercise 6: Make use of a class implementation',
                2,
                'softeng1:exer:class:dts',
                'softeng1:exer:class:dts'),
-              ('Exercise 7: Make solid software for a difference equation',
+              ('Problem 7: Make solid software for a difference equation',
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('Bibliography', 1, None, '___sec75')]}
+              ('Bibliography', 1, None, '___sec78')]}
 end of tocinfo -->
 
 <body>
@@ -280,59 +286,62 @@ $$
 
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
 <p>
-<center><h4>Aug 4, 2015</h4></center> <!-- date -->
+<center><h4>Sep 26, 2015</h4></center> <!-- date -->
+<br>
 
 <h2>Table of contents</h2>
 
 <p>
-<a href="._softeng-solarized002.html#softeng1:basic"> Basic implementations </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized002.html#softeng1:basic:math"> Mathematical problem and solution technique </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized002.html#softeng1:basic:impl1"> A first, quick implementation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized002.html#softeng1:basic:impl2"> A more decent program </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized002.html#softeng1:basic:modprefix"> Prefixing imported functions by the module name </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized002.html#softeng1:basic:func"> Implementing the numerical algorithm in a function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized002.html#___sec9"> Do not have several versions of a code </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized002.html#softeng1:basic:module"> Making a module </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized002.html#softeng1:basic:experiment2"> Example on extending the module code </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized002.html#softeng1:basic:docstring"> Documenting functions and modules </a><br>
-<a href="._softeng-solarized003.html#softeng1:basic:UI"> User interfaces </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized003.html#___sec14"> Command-line arguments </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized003.html#___sec15"> Positional command-line arguments </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized003.html#___sec16"> Option-value pairs on the command line </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized003.html#___sec17"> Creating a graphical web user interface </a><br>
-<a href="._softeng-solarized004.html#___sec21"> Tests for verifying implementations </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized004.html#___sec22"> Doctests </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized004.html#___sec23"> Unit tests and test functions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized004.html#___sec32"> Test function for the solver </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized004.html#___sec33"> Test function for reading positional command-line arguments </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized004.html#___sec34"> Test function for reading option-value pairs </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized004.html#softeng1:basic:unittest"> Classical class-based unit testing </a><br>
-<a href="._softeng-solarized005.html#softeng1:prog:se:git"> Sharing the software with other users </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized005.html#___sec37"> Organizing the software directory tree </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized005.html#___sec40"> Publishing the software at GitHub </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized005.html#___sec41"> Downloading and installing the software </a><br>
-<a href="._softeng-solarized006.html#softeng1:prog:se:class"> Classes for problem and solution method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized006.html#___sec45"> The problem class </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized006.html#___sec46"> The solver class </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized006.html#softeng1:prog:se:class2"> Improving the problem and solver classes </a><br>
-<a href="._softeng-solarized007.html#softeng1:experiments"> Automating scientific experiments </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized007.html#___sec51"> Available software </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized007.html#___sec52"> The results we want to produce </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized007.html#___sec53"> Combining plot files </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized007.html#___sec54"> Running a program from Python </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized007.html#___sec55"> The automating script </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized007.html#softeng1:exper:report"> Making a report </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized007.html#softeng1:exper:github"> Publishing a complete project </a><br>
-<a href="._softeng-solarized008.html#___sec66"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized008.html#softeng1:exer:derivative"> Problem 1: Make a tool for differentiating curves </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized008.html#softeng1:exer:integral:flat"> Problem 2: Make solid software for the Trapezoidal rule </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized008.html#softeng1:exer:integral:flat2"> Problem 3: Implement classes for the Trapezoidal rule </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized008.html#softeng1:exer:doctest1"> Problem 4: Write a doctest and a test function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized008.html#softeng1:exer:tol"> Problem 5: Experiment with tolerances in comparisons </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized008.html#softeng1:exer:class:dts"> Exercise 6: Make use of a class implementation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized008.html#softeng1:exer:logistic"> Exercise 7: Make solid software for a difference equation </a><br>
-<a href="._softeng-solarized009.html#___sec75"> Bibliography </a><br>
+<a href="._softeng-solarized001.html#softeng1:basic"> Implementations with functions and modules </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:basic:math"> Mathematical problem and solution technique </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:basic:impl1"> A first, quick implementation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:basic:impl2"> A more decent program </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:basic:modprefix"> Prefixing imported functions by the module name </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:basic:func"> Implementing the numerical algorithm in a function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec9"> Do not have several versions of a code </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:basic:module"> Making a module </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:basic:experiment2"> Example on extending the module code </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:basic:docstring"> Documenting functions and modules </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:basic:logging"> Logging intermediate results </a><br>
+<a href="._softeng-solarized001.html#softeng1:basic:UI"> User interfaces </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec17"> Command-line arguments </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec18"> Positional command-line arguments </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec19"> Option-value pairs on the command line </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec20"> Creating a graphical web user interface </a><br>
+<a href="._softeng-solarized001.html#___sec24"> Tests for verifying implementations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec25"> Doctests </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec26"> Unit tests and test functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec35"> Test function for the solver </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec36"> Test function for reading positional command-line arguments </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec37"> Test function for reading option-value pairs </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:basic:unittest"> Classical class-based unit testing </a><br>
+<a href="._softeng-solarized001.html#softeng1:prog:se:git"> Sharing the software with other users </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec40"> Organizing the software directory tree </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec43"> Publishing the software at GitHub </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec44"> Downloading and installing the software </a><br>
+<a href="._softeng-solarized001.html#softeng1:prog:se:class"> Classes for problem and solution method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec48"> The problem class </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec49"> The solver class </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:prog:se:class2"> Improving the problem and solver classes </a><br>
+<a href="._softeng-solarized001.html#softeng1:experiments"> Automating scientific experiments </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec54"> Available software </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec55"> The results we want to produce </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec56"> Combining plot files </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec57"> Running a program from Python </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#___sec58"> The automating script </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:exper:report"> Making a report </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:exper:github"> Publishing a complete project </a><br>
+<a href="._softeng-solarized001.html#___sec69"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:exer:derivative"> Problem 1: Make a tool for differentiating curves </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:exer:integral:flat"> Problem 2: Make solid software for the Trapezoidal rule </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:exer:integral:flat2"> Problem 3: Implement classes for the Trapezoidal rule </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:exer:doctest1"> Problem 4: Write a doctest and a test function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:exer:tol"> Problem 5: Experiment with tolerances in comparisons </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:exer:class:dts"> Exercise 6: Make use of a class implementation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._softeng-solarized001.html#softeng1:exer:logistic"> Problem 7: Make solid software for a difference equation </a><br>
+<a href="._softeng-solarized002.html#___sec78"> Bibliography </a><br>
 </p>
 <p>
 <p>
