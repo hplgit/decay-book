@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -336,10 +336,10 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                '___sec121'),
               ('A biochemical reaction', 2, None, '___sec122'),
               ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
-              ('Predator-pray models in ecology',
+              ('Predator-prey models in ecology',
                1,
-               'decay:app:predpray',
-               'decay:app:predpray'),
+               'decay:app:predprey',
+               'decay:app:predprey'),
               ('Decay of atmospheric pressure with altitude',
                1,
                'decay:app:atm',
@@ -437,10 +437,10 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'decay:app:exer:SIR',
                'decay:app:exer:SIR'),
-              ('Exercise 27: Simulate predator-pray interaction',
+              ('Exercise 27: Simulate predator-prey interaction',
                2,
-               'decay:app:exer:predpray',
-               'decay:app:exer:predpray'),
+               'decay:app:exer:predprey',
+               'decay:app:exer:predprey'),
               ('Exercise 28: Simulate the pressure drop in the atmosphere',
                2,
                'decay:app:exer:atm1',
@@ -808,7 +808,7 @@ $$
 This chapter presents many mathematical models that all end up with
 ODEs of the type \( u^{\prime}=-au+b \).  The applications are taken from
 biology, finance, and physics, and cover population growth or decay,
-interacting predator-pray populations, compound interest and
+interacting predator-prey populations, compound interest and
 inflation, radioactive decay, chemical and biochemical reaction,
 spreading of diseases, cooling of objects, compaction of geological
 media, pressure variations in the atmosphere, viscoelastic response in
@@ -912,7 +912,7 @@ involves \( u^{\prime}=-au+b \) with seven physical parameters. All these vanish
 in the scaled version of the problem if we start the motion from rest!
 
 <p>
-Many more details about scaling is presented in the author's book
+Many more details about scaling are presented in the author's book
 <em>Scaling of Differential Equations</em> <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86011.html#Langtangen_scaling">[9]</a>.
 
 <h1 id="decay:app:pop">Evolution of a population</h1>
@@ -1483,7 +1483,7 @@ All the constants \( \hat k \), \( \alpha \), and \( \beta \) must be determined
 experiments.)
 
 <p>
-Working with concentrations instead, we introduce \( [C](t)=N_C(t)/N_C(0) \),
+Working instead with concentrations, we introduce \( [C](t)=N_C(t)/N_C(0) \),
 with similar definitions for \( [A] \) and \( [B] \) we get
 
 $$
@@ -1565,9 +1565,9 @@ by the functions \( S(t) \), \( I(t) \), and \( R(t) \).
 <p>
 To model how many people that get infected in a small time interval
 \( \Delta t \), we reason as with reactions in the section <a href="#decay:app:kinetics">Chemical kinetics</a>.
-The possible number of parings (&quot;collisions&quot;) between susceptibles
+The possible number of pairings (&quot;collisions&quot;) between susceptibles
 and infected is \( SI \). A fraction of these, \( \beta\Delta t SI \),
-will actually meet and the infected succeeds of infecting the susceptible,
+will actually meet and the infected succeed in infecting the susceptible,
 where \( \beta \) is a parameter to be empirically estimated.
 This leads to a loss of susceptibles and a gain of infected:
 
@@ -1581,7 +1581,7 @@ $$
 In the same time interval, a fraction \( \nu\Delta t I \)
 of the infected is recovered.
 It follows from the section <a href="#decay:app:waitingtime">Generalization of the radioactive decay modeling</a>
-that the parameter \( \nu^{-1} \) has the interpretation as the average
+that the parameter \( \nu^{-1} \) is interpreted as the average
 waiting time to leave the I category, i.e., the
 average length of the disease.
 The \( \nu \Delta tI \) term is a loss for the I category, but a gain for the R
@@ -1620,21 +1620,21 @@ This property can be used as a partial verification during simulations.
 <p>
 Equations <a href="#mjx-eqn-153">(153)</a>-<a href="#mjx-eqn-155">(155)</a> are known as
 the SIR model in epidemiology. The model can easily be extended to
-incorporate vaccination programs, loss immunity after some time, etc.
+incorporate vaccination programs, immunity loss after some time, etc.
 Typical diseases that can be simulated by the SIR model and its variants
 are measles, smallpox, flu, plague, and HIV.
 
-<h1 id="decay:app:predpray">Predator-pray models in ecology</h1>
+<h1 id="decay:app:predprey">Predator-prey models in ecology</h1>
 
 <p>
-A model for the interaction of predator and pray species can be based
+A model for the interaction of predator and prey species can be based
 on reasoning from population dynamics and the SIR model.
-Let \( H(t) \) be the number of prays in a region, and let \( L(t) \)
+Let \( H(t) \) be the number of preys in a region, and let \( L(t) \)
 be the number of predators. For example, \( H \) may be hares and \( L \) lynx,
 or rabbits and foxes.
 
 <p>
-The population of the pray evolvoes due to births and deaths, exactly
+The population of the prey evolves due to births and deaths, exactly
 as in a population dynamics model from Section
 reff{decay:app:pop:exp}.
 During a time interval \( \Delta t \)
@@ -1642,25 +1642,25 @@ the increase in the population is therefore
 
 $$ H(t+\Delta t) - H(t) =  a\Delta t H(t),$$
 
-where \( a \) is a parameter to be measured.
+where \( a \) is a parameter to be measured from data.
 The increase is proportional to \( H \), and the proportionality constant
 \( a\Delta t \) is proportional to \( \Delta t \), because doubling the
 interval will double the increase.
 
 <p>
-However, the pray population have an additional loss because they
-are eaten by predators. All the pray and predator animals can form
-\( LH \) pairs in total (if everybody can meet everybody at random).
+However, the prey population has an additional loss because they
+are eaten by predators. All the prey and predator animals can form
+\( LH \) pairs in total (assuming all individuals meet randomly).
 A small fraction \( b\Delta t \)
 of such meetings, during a time interval \( \Delta t \),
-end up with the predator eating the pray. The increase in the pray
+ends up with the predator eating the prey. The increase in the prey
 population is therefore adjusted to
 
 $$ H(t+\Delta t) - H(t) =  a\Delta t H(t) - b\Delta t H(t)L(t)\tp$$
 
 <p>
-The predator population increases as a result of eating prays.
-The amount of eaten prays is \( b\Delta t LH \), but only a fraction
+The predator population increases as a result of eating preys.
+The amount of eaten preys is \( b\Delta t LH \), but only a fraction
 \( d\Delta t LH \) of this amount contributes to increasing the
 predator population. In addition, predators die and this loss
 is set to \( c\Delta t L \). To summarize, the increase in the predator
@@ -1692,7 +1692,7 @@ L^{\prime} &= L(dH - c)\tp
 $$
 
 This is a so-called Lokta-Volterra model. It contains four parameters
-that must be estimated: \( a \), \( b \), \( c \), and \( d \). In addition, two
+that must be estimated from data: \( a \), \( b \), \( c \), and \( d \). In addition, two
 initial conditions are needed for \( H(0) \) and \( L(0) \).
 
 <h1 id="decay:app:atm">Decay of atmospheric pressure with altitude</h1>
@@ -2188,7 +2188,11 @@ seven parameters down to choosing one value of a single dimensionless parameter
 $$ \beta = \frac{\varrho_b gV\left(\frac{\varrho}{\varrho_b} -1\right)}{3\pi d\mu I},$$
 
 provided \( I\neq 0 \). If the motion starts from rest, \( I=0 \), the scaled
-problem reads \( \bar u^{\prime}=1-\bar u \), \( \bar u(0)=0 \), and there is
+problem reads
+
+$$ \bar u^{\prime}=1-\bar u, \quad \bar u(0)=0,$$
+
+and there is
 no need for estimating physical parameters (!).
 This means that there is a single universal solution to the problem
 of a falling body starting from rest:
@@ -2219,7 +2223,7 @@ also influences the stress. This is particularly the case for
 materials like organic polymers, rubber, and wood. When the stress
 depends on both the strain and the strain rate, the material is
 said to be viscoelastic. A common model relating forces to deformation
-is the <a href="https://en.wikipedia.org/wiki/Kelvin-Voigt_material" target="_self">Kelvin-Vogt model</a>:
+is the <a href="https://en.wikipedia.org/wiki/Kelvin-Voigt_material" target="_self">Kelvin-Voigt model</a>:
 
 $$
 \begin{equation}
@@ -2229,18 +2233,18 @@ $$
 $$
 
 Compared to a perfectly elastic material, which deforms instantaneously
-when a force is acting, a Kelvin-Vogt material will spend some time
+when a force is acting, a Kelvin-Voigt material will spend some time
 to elongate. For example, when an elastic rod is subject to a constant
 force \( \stress \) at \( t=0 \), the strain immediately adjusts to \( \varepsilon
-=\sigma/E \). A Kelvin-Vogt material, however, has a response
-\( \varepsilon(t) = \frac{sigma}{E}(1-e^{Et/\eta}) \). Removing the force
+=\sigma/E \). A Kelvin-Voigt material, however, has a response
+\( \varepsilon(t) = \frac{\sigma}{E}(1-e^{Et/\eta}) \). Removing the force
 when the strain is \( \varepsilon(t_1) = I \) will for an elastic material
-immediately bring the strain back to zero, while a Kelvin-Vogt
+immediately bring the strain back to zero, while a Kelvin-Voigt
 material will decay: \( \varepsilon = Ie^{-(t-t_1)E/\eta)} \).
 
 <p>
 Introducing \( u \) for \( \varepsilon \) and treating \( \stress(t) \) as a
-given function, we can write the Kelvin-Vogt model in our standard form
+given function, we can write the Kelvin-Voigt model in our standard form
 
 $$
 \begin{equation}
@@ -2866,8 +2870,8 @@ Discuss if this a potential problem in the physical case from c).
 <p><div class="collapse" id="exer_18_6">
 
 <p>
-In the unscaled problem, the first stage of the simulation is
-covers time interval \( [0,t^*]=[0, 3/k] \). It makes sense to
+In the unscaled problem, the first stage of the simulation
+covers the time interval \( [0,t^*]=[0, 3/k] \). It makes sense to
 choose \( \Delta t \) significantly smaller than \( 3/k \), and the
 stability limit \( 2/k \) is a too large step. The next time level
 is then \( 4/k \), and it sounds reasonable to include the point \( t^*=3/k \)
@@ -3465,7 +3469,7 @@ T0 <span style="color: #666666">=</span> <span style="color: #666666">5</span>
 <span style="color: #008000; font-weight: bold">for</span> P <span style="color: #AA22FF; font-weight: bold">in</span> P_values:
     T, t <span style="color: #666666">=</span> cooling(T0, k, T_s, t_end<span style="color: #666666">=8*3600</span>, dt<span style="color: #666666">=600/40</span>)
     plt<span style="color: #666666">.</span>plot(t, T)
-plt<span style="color: #666666">.</span>plot(t, T_s(t), <span style="color: #BA2121">&#39;k--&#39;</span>)
+plt<span style="color: #666666">.</span>plot(t, T_s(t), <span style="color: #BA2121">&#39;k--&#39;</span>)  <span style="color: #408080; font-style: italic"># T_s for largest P to show amplitude</span>
 legends <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;P=1 h&#39;</span>, <span style="color: #BA2121">&#39;P=10 min&#39;</span>, <span style="color: #BA2121">&#39;P=6 h&#39;</span>, <span style="color: #BA2121">&#39;$T_s$&#39;</span>]
 plt<span style="color: #666666">.</span>legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;lower right&#39;</span>)
 plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;t&#39;</span>); plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;T&#39;</span>)
@@ -3782,7 +3786,7 @@ Forward Euler scheme will be fine.
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver</span>(f, alpha, beta, epsilon, T, dt<span style="color: #666666">=0.1</span>):
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver</span>(alpha, beta, epsilon, T, dt<span style="color: #666666">=0.1</span>):
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(u, t):
         Q, P, S, E <span style="color: #666666">=</span> u
         <span style="color: #008000; font-weight: bold">return</span> [
@@ -3921,7 +3925,8 @@ Simulate a case with \( T=8 \), \( \alpha = 1 \), \( \beta=4 \), and two
     plt<span style="color: #666666">.</span>plot(t, Q, t, P, t, S, t, E)
     plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;complex&#39;</span>, <span style="color: #BA2121">&#39;product&#39;</span>, <span style="color: #BA2121">&#39;substrate&#39;</span>, <span style="color: #BA2121">&#39;enzyme&#39;</span>],
                loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;upper right&#39;</span>)
-    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;alpha=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, beta=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, epsilon=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (alpha, beta, epsilon))
+    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;alpha=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, beta=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, epsilon=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span>
+              (alpha, beta, epsilon))
     plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
     plt<span style="color: #666666">.</span>show()
 
@@ -3983,8 +3988,8 @@ where \( R_0 \) and \( \alpha \) are the only parameters in the problem:
 
 $$ R_0 = \frac{N\beta}{\nu}, \quad \alpha = \frac{I(0)}{N}\tp$$
 
-A quantity with a bar denote a dimensionless version of that quantity, e.g,
-\( \bar t \) is dimensionless time \( t \), and \( \bar t = \nu t \).
+A quantity with a bar denotes a dimensionless version of that quantity, e.g,
+\( \bar t \) is dimensionless time, and \( \bar t = \nu t \).
 
 <p>
 <!-- --- begin solution of exercise --- -->
@@ -4079,11 +4084,6 @@ as a verification, that
 \( \bar S + \bar I + \bar R = 1 \).
 
 <p>
-<b>d)</b>
-Simulate the spreading of a disease where \( R_0=1.1 \) and 1 percent of
-the population is infected at time \( t=0 \).
-
-<p>
 <!-- --- begin solution of exercise --- -->
 
 <p>
@@ -4094,7 +4094,85 @@ the population is infected at time \( t=0 \).
 <p><div class="collapse" id="exer_26_4">
 
 <p>
-The given data means that \( \bar I(0)=\alpha = 0.01 \) and \( \bar S(0)=0.99 \).
+We may use Odespy and the RK4 method to solve the system:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">odespy</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver</span>(R0, alpha, T, dt<span style="color: #666666">=0.1</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(u, t):
+        S, I, R <span style="color: #666666">=</span> u
+        <span style="color: #008000; font-weight: bold">return</span> [
+            <span style="color: #666666">-</span>R0<span style="color: #666666">*</span>S<span style="color: #666666">*</span>I,
+            R0<span style="color: #666666">*</span>S<span style="color: #666666">*</span>I <span style="color: #666666">-</span> I,
+            I]
+
+    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span>dt))
+    t_mesh <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, Nt<span style="color: #666666">*</span>dt, Nt<span style="color: #666666">+1</span>)
+
+    solver <span style="color: #666666">=</span> odespy<span style="color: #666666">.</span>RK4(f)
+    solver<span style="color: #666666">.</span>set_initial_condition([<span style="color: #666666">1-</span>alpha, alpha, <span style="color: #666666">0</span>])
+    u, t <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>solve(t_mesh)
+    S <span style="color: #666666">=</span> u[:,<span style="color: #666666">0</span>]
+    I <span style="color: #666666">=</span> u[:,<span style="color: #666666">1</span>]
+    R <span style="color: #666666">=</span> u[:,<span style="color: #666666">2</span>]
+    <span style="color: #408080; font-style: italic"># Consistency check</span>
+    N <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-15</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(S)):
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">abs</span>(S[i] <span style="color: #666666">+</span> I[i] <span style="color: #666666">+</span> R[i] <span style="color: #666666">-</span> N) <span style="color: #666666">&gt;</span> tol:
+            <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Consistency error: S+I+R=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> != </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+                  (S[i] <span style="color: #666666">+</span> I[i] <span style="color: #666666">+</span> R[i], N)
+    <span style="color: #008000; font-weight: bold">return</span> S, I, R, t
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>d)</b>
+Simulate the spreading of a disease where \( R_0=2, 5 \) and 2 percent of
+the population is infected at time \( t=0 \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_26_5" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_26_5">
+
+<p>
+The given data means that \( \bar I(0)=\alpha = 0.02 \) and \( \bar S(0)=0.98 \).
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">demo</span>():
+    alpha <span style="color: #666666">=</span> <span style="color: #666666">0.02</span>
+    R0 <span style="color: #666666">=</span> <span style="color: #666666">5</span>
+    T <span style="color: #666666">=</span> <span style="color: #666666">8</span>
+    dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>]) <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">&gt;=</span> <span style="color: #666666">2</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #666666">0.1</span>
+    S, I, R, t <span style="color: #666666">=</span> solver(R0, alpha, T, dt)
+    plt<span style="color: #666666">.</span>plot(t, S, t, I, t, R)
+    plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;S&#39;</span>, <span style="color: #BA2121">&#39;I&#39;</span>, <span style="color: #BA2121">&#39;R&#39;</span>], loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;lower right&#39;</span>)
+    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;R0=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, alpha=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (R0, alpha))
+    plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;tmp.pdf&#39;</span>)
+    plt<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+<center><p><img src="fig-models/SIR1.png" align="bottom" width=800></p></center>
 
 <p>
 </div></p>
@@ -4113,11 +4191,11 @@ Filename: <code>SIR</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:app:exer:predpray">Exercise 27: Simulate predator-pray interaction</h2>
+<h2 id="decay:app:exer:predprey">Exercise 27: Simulate predator-prey interaction</h2>
 
 <p>
-The section <a href="#decay:app:predpray">Predator-pray models in ecology</a> describes a model for the
-interaction of predator and pray populations, such as lynx and hares.
+The section <a href="#decay:app:predprey">Predator-prey models in ecology</a> describes a model for the
+interaction of predator and prey populations, such as lynx and hares.
 
 <p>
 <b>a)</b>
@@ -4177,14 +4255,14 @@ $$
 $$
 
 <p>
-The quantity \( bH_0 \) is the number of eaten prays per predator.
+The quantity \( bH_0 \) is the number of eaten preys per predator.
 Then \( \alpha \) measures the ratio of natural population growth of
-the pray, due to nutritioon, and the number of eaten prays per predator.
-The \( \beta \) parameter measures the fraction of the eaten prays and
+the prey, due to nutritioon, and the number of eaten preys per predator.
+The \( \beta \) parameter measures the fraction of the eaten preys and
 the amount of this that actually
 leads to population growth of the predator.
 The number \( \gamma \) reflects the ratio of
-predator deaths and the eaten prays per predator, and \( \delta \) is
+predator deaths and the eaten preys per predator, and \( \delta \) is
 the initial fraction of preys and predators.
 
 <p>
@@ -4256,20 +4334,19 @@ We must call <code>demo()</code> from the main program.
 <p>
 Here are two examples. The one to the left has a good birth-death rate
 compared to how many that are eaten by predators (\( \alpha=1.5 \)),
-half of the eaten prays contribute to growth of the predator population
+half of the eaten preys contribute to growth of the predator population
 (\( \beta = 0.5 \)), the death rate of predators is slightly smaller than how many
-prays they eat (per predator) (\( \gamma=0.8 \)), and we start out with
-twice as many prays as predators.
+preys they eat (per predator) (\( \gamma=0.8 \)), and we start out with
+twice as many preys as predators.
 
 <p>
-The figure to the right features less nutrition for the prays
+The figure to the right features less nutrition for the preys
 compared to being eaten
 by predators (\( \alpha =0.5 \)), and a lower death rate in the predator
-population. Naturally, this makes the predator population larger compared to the
-left case.
+population. Note the different scales in the two plots.
 
 <p>
-<center><p><img src="fig-models/predator_pray.png" align="bottom" width=800></p></center>
+<center><p><img src="fig-models/predator_prey.png" align="bottom" width=800></p></center>
 
 <p>
 </div></p>
@@ -4334,7 +4411,7 @@ as \( \bar L^{\prime}=(c/a)\bar L(\bar H-1) \). The ratio \( c/a \) equals
 \( \gamma/\alpha \) from a) and is here called \( \mu \).
 
 <p>
-We remark that \( L_c=a/b \) and \( H_c=c/d \) could also be found by from
+We remark that \( L_c=a/b \) and \( H_c=c/d \) could also be found from
 the <em>stationary points</em> of the ODE system, where
 \( H^{\prime}=L^{\prime}=0 \). The stationary points are in our case \( H=L=0 \) and
 \( H=c/d \) and \( L=a/b \).
@@ -4348,11 +4425,11 @@ The resulting dimensionless problem takes the form
 
 $$
 \begin{align}
-\frac{d\bar H}{d\bar t} &= bar H(1 - \bar L),
+\frac{d\bar H}{d\bar t} &= \bar H(1 - \bar L),
 \tag{192}\\ 
-\frac{d\bar L}{d\bar t} &= \mu bar L(\bar H - 1) = \gamma\alpha^{-1} bar L(\bar H - 1),
+\frac{d\bar L}{d\bar t} &= \mu \bar L(\bar H - 1) = \gamma\alpha^{-1} \bar L(\bar H - 1),
 \tag{193}\\ 
-\bar H(0) &= \nu = \beta/gamma,
+\bar H(0) &= \nu = \beta/\gamma,
 \tag{194}\\ 
 \bar L(0) &= \omega = \delta/\alpha,
 \tag{195}
@@ -4370,7 +4447,7 @@ The unknowns \( \bar H \) and \( \bar L \) now have less intuitive scalings,
 $$ \bar H = \frac{Hd}{c},\quad \bar L = \frac{Lb}{a},$$
 
 while time is measured in the units based on the exponential growth
-due to births and deaths of prays (\( a \)). The number of dimensionless parameters
+due to births and deaths of preys (\( a \)). The number of dimensionless parameters
 is one less since we have one more scale (for \( L_c \)) at our
 disposal. Simplicity in one initial conditions in a) is
 exchanged with more simplicity in the ODEs, which now have
@@ -4436,7 +4513,7 @@ Modified <code>simulate</code> and <code>demo</code> go as follows.
     simulate2(mu<span style="color: #666666">=2</span>, nu<span style="color: #666666">=0.5</span>, omega<span style="color: #666666">=1.5</span>, T<span style="color: #666666">=20</span>)
 </pre></div>
 <p>
-<center><p><img src="fig-models/predator_pray2.png" align="bottom" width=800></p></center>
+<center><p><img src="fig-models/predator_prey2.png" align="bottom" width=800></p></center>
 
 <p>
 </div></p>
@@ -4447,7 +4524,7 @@ Modified <code>simulate</code> and <code>demo</code> go as follows.
 <!-- --- end solution of exercise --- -->
 
 <p>
-Filename: <code>predator_pray</code>.
+Filename: <code>predator_prey</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -4563,7 +4640,7 @@ Set up the differential equation problem that governs the velocity
 of the motion.
 The parachute jumper is subject to the gravity force and a quadratic
 drag force. Assume constant density.
-Add an extra source term be used for program verification.
+Add an extra source term to be used for program verification.
 Identify the input data to the problem.
 
 <p>
@@ -4699,7 +4776,7 @@ The mass of the human body and equipment
 can be set to \( 100 \) kg.
 A skydiver in spread-eagle formation has a cross-section of 0.5 \( \hbox{m}^2 \)
 in the horizontal plane.
-The density of air decreases varies altitude, but can be taken
+The density of air decreases with altitude, but can be taken
 as constant, 1 \( \hbox{kg/m}^3 \), for altitudes relevant to
 skydiving (0-4000 m).
 The drag coefficient for a man in upright position can be set to 1.2.
@@ -5048,7 +5125,7 @@ Filename: <code>interest_modeling</code>.
 
 <p>
 Stretching a rod made of polymer will cause deformations that are
-well described with a Kelvin-Vogt material model
+well described with a Kelvin-Voigt material model
 <a href="#mjx-eqn-175">(175)</a>. At \( t=0 \) we apply a constant
 force \( \sigma = \sigma_0 \), but at \( t=t_1 \), we remove the force
 so \( \sigma=0 \). Compute numerically the corresponding strain
@@ -5128,7 +5205,7 @@ plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#3
 plt<span style="color: #666666">.</span>show()
 </pre></div>
 <p>
-<center><p><img src="fig-models/KelvinVogt.png" align="bottom" width=600></p></center>
+<center><p><img src="fig-models/KelvinVoigt.png" align="bottom" width=600></p></center>
 
 <p>
 </div></p>
@@ -5137,7 +5214,7 @@ plt<span style="color: #666666">.</span>show()
 
 <p>
 <!-- --- end solution of exercise --- -->
-Filename: <code>KelvinVogt</code>.
+Filename: <code>KelvinVoigt</code>.
 
 <p>
 <!-- --- end exercise --- -->

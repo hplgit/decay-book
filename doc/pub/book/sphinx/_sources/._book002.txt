@@ -661,11 +661,11 @@ formulated as one scheme with a varying parameter :math:`\theta`:
         {\thinspace .}
         
 
-Observe:
+Observe that
 
  * :math:`\theta =0` gives the Forward Euler scheme
 
- * :math:`\theta =1` gives the Backward Euler scheme, and
+ * :math:`\theta =1` gives the Backward Euler scheme,
 
  * :math:`\theta =\frac{1}{2}` gives the Crank-Nicolson scheme.
 
@@ -819,7 +819,9 @@ Euler, and Crank-Nicolson schemes. They complement each other with their
 different pros and cons, thus providing a useful collection of
 solution methods for many differential equation problems.
 The unifying notation of the :math:`\theta`-rule makes it convenient to
-work with all three methods through just one formula.
+work with all three methods through just one formula. This is
+particularly advantageous in computer implementations since one avoids
+if-else tests with formulas that have repetitive elements.
 
 
 .. admonition:: Test your understanding

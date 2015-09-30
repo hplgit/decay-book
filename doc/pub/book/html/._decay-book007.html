@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -336,10 +336,10 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                '___sec121'),
               ('A biochemical reaction', 2, None, '___sec122'),
               ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
-              ('Predator-pray models in ecology',
+              ('Predator-prey models in ecology',
                1,
-               'decay:app:predpray',
-               'decay:app:predpray'),
+               'decay:app:predprey',
+               'decay:app:predprey'),
               ('Decay of atmospheric pressure with altitude',
                1,
                'decay:app:atm',
@@ -437,10 +437,10 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'decay:app:exer:SIR',
                'decay:app:exer:SIR'),
-              ('Exercise 27: Simulate predator-pray interaction',
+              ('Exercise 27: Simulate predator-prey interaction',
                2,
-               'decay:app:exer:predpray',
-               'decay:app:exer:predpray'),
+               'decay:app:exer:predprey',
+               'decay:app:exer:predprey'),
               ('Exercise 28: Simulate the pressure drop in the atmosphere',
                2,
                'decay:app:exer:atm1',
@@ -846,7 +846,7 @@ u^{\prime}(t) = -a(t)u(t),\quad t\in (0,T],\quad u(0)=I \tp
 $$
 
 <p>
-A Forward Euler scheme consist of evaluating <a href="#mjx-eqn-74">(74)</a>
+A Forward Euler scheme consists of evaluating <a href="#mjx-eqn-74">(74)</a>
 at \( t=t_n \) and approximating the derivative with a forward
 difference \( [D^+_t u]^n \):
 
@@ -1273,46 +1273,6 @@ test based on a linear exact solution:
     <span style="color: #008000; font-weight: bold">print</span> difference
     tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>  <span style="color: #408080; font-style: italic"># depends on c!</span>
     <span style="color: #008000; font-weight: bold">assert</span> difference <span style="color: #666666">&lt;</span> tol
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_convergence_rates</span>():
-    <span style="color: #408080; font-style: italic"># Create a manufactured solution with sympy</span>
-    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sym</span>
-    t <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;t&#39;</span>)
-    u_e <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>sin(t)<span style="color: #666666">*</span>sym<span style="color: #666666">.</span>exp(<span style="color: #666666">-2*</span>t)
-    a <span style="color: #666666">=</span> t<span style="color: #666666">**2</span>
-    b <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>diff(u_e, t) <span style="color: #666666">+</span> a<span style="color: #666666">*</span>u_exact
-
-    <span style="color: #408080; font-style: italic"># Turn sympy expressions into Python function</span>
-    u_exact <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], u_e, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
-    a <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], a, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
-    b <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t], b, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
-
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute_rates</span>(dt_values, E_values):
-        m <span style="color: #666666">=</span> <span style="color: #008000">len</span>(dt_values)
-        r <span style="color: #666666">=</span> [log(E_values[i<span style="color: #666666">-1</span>]<span style="color: #666666">/</span>E_values[i])<span style="color: #666666">/</span>
-             log(dt_values[i<span style="color: #666666">-1</span>]<span style="color: #666666">/</span>dt_values[i])
-             <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, m, <span style="color: #666666">1</span>)]
-        <span style="color: #408080; font-style: italic"># Round to two decimals</span>
-        r <span style="color: #666666">=</span> [<span style="color: #008000">round</span>(r_, <span style="color: #666666">2</span>) <span style="color: #008000; font-weight: bold">for</span> r_ <span style="color: #AA22FF; font-weight: bold">in</span> r]
-        <span style="color: #008000; font-weight: bold">return</span> r
-
-    dt_values <span style="color: #666666">=</span> [<span style="color: #666666">0.1*2**</span>(<span style="color: #666666">-</span>i) <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">7</span>)]
-    I <span style="color: #666666">=</span> u_exact(<span style="color: #666666">0</span>)
-
-    <span style="color: #008000; font-weight: bold">for</span> theta <span style="color: #AA22FF; font-weight: bold">in</span> (<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">0.5</span>):
-        E_values <span style="color: #666666">=</span> []
-        <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values:
-            u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, b<span style="color: #666666">=</span>b, T<span style="color: #666666">=6</span>, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
-            u_e <span style="color: #666666">=</span> u_exact(t)
-            e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
-            E <span style="color: #666666">=</span> sqrt(dt<span style="color: #666666">*</span><span style="color: #008000">sum</span>(e<span style="color: #666666">**2</span>))
-            E_values<span style="color: #666666">.</span>append(E)
-        r <span style="color: #666666">=</span> compute_rates(dt_values, E_values)
-        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;theta=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, r: </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (theta, r)
-        expected_rate <span style="color: #666666">=</span> <span style="color: #666666">2</span> <span style="color: #008000; font-weight: bold">if</span> theta <span style="color: #666666">==</span> <span style="color: #666666">0.5</span> <span style="color: #008000; font-weight: bold">else</span> <span style="color: #666666">1</span>
-        tol <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
-        diff <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(expected_rate <span style="color: #666666">-</span> r[<span style="color: #666666">-1</span>])
-        <span style="color: #008000; font-weight: bold">assert</span> diff <span style="color: #666666">&lt;</span> tol
 </pre></div>
 <p>
 Any error in the updating formula makes this test fail!
@@ -1401,7 +1361,7 @@ That is, those time steps lie outside the asymptotic range of
 
 <p>
 We can compute \( r_0, r_1, \ldots, r_{m-2} \) from \( E_i \) and \( \Delta t_i \)
-by the following functionL
+by the following function
 
 <p>
 
@@ -1482,7 +1442,7 @@ theta=1, r: [0.94, 0.97, 0.99, 0.99, 1.0, 1.0]
 theta=0.5, r: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0]
 </pre></div>
 <p>
-We clearly see how the convergence rates goes to the expected values.
+We clearly see how the convergence rates approach the expected values.
 
 <p>
 <div class="alert alert-block alert-success alert-text-normal"><b>Why convergence rates are important.</b>
@@ -1590,13 +1550,13 @@ a scalar function of time \( t \), or a vector valued function of \( t \) in
 case of a <em>system of ODEs</em> with \( m \) unknown components:
 $$ u(t) = (u^{(0)}(t),u^{(1)}(t),\ldots,u^{(m-1)}(t)) \tp  $$
 
-In that case, the right-hand side is vector-valued function with \( m \)
+In that case, the right-hand side is a vector-valued function with \( m \)
 components,
 $$
 \begin{align*}
 f(u, t) = ( & f^{(0)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\ 
             & f^{(1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\ 
-            & \vdots,\\ 
+            & \vdots\\ 
             & f^{(m-1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)))
 \tp
 \end{align*}
@@ -1904,7 +1864,7 @@ $$
 
 With \( \tilde{f}^{n+\half} \) as a hopefully good approximation to
 \( f^{n+\half} \), we can for the final term \( \bar{f}^{n+1} \) use
-a Crank-Nicolson method to approximate \( u^{n+1} \):
+a Crank-Nicolson method on \( [t_n, t_{n+1}] \) to approximate \( u^{n+1} \):
 
 $$
 \begin{equation}

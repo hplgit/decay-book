@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -336,10 +336,10 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                '___sec121'),
               ('A biochemical reaction', 2, None, '___sec122'),
               ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
-              ('Predator-pray models in ecology',
+              ('Predator-prey models in ecology',
                1,
-               'decay:app:predpray',
-               'decay:app:predpray'),
+               'decay:app:predprey',
+               'decay:app:predprey'),
               ('Decay of atmospheric pressure with altitude',
                1,
                'decay:app:atm',
@@ -437,10 +437,10 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'decay:app:exer:SIR',
                'decay:app:exer:SIR'),
-              ('Exercise 27: Simulate predator-pray interaction',
+              ('Exercise 27: Simulate predator-prey interaction',
                2,
-               'decay:app:exer:predpray',
-               'decay:app:exer:predpray'),
+               'decay:app:exer:predprey',
+               'decay:app:exer:predprey'),
               ('Exercise 28: Simulate the pressure drop in the atmosphere',
                2,
                'decay:app:exer:atm1',
@@ -1178,7 +1178,7 @@ in the computations:
 <span style="color: #666666">2</span>
 </pre></div>
 <p>
-From this we realize at the unexpected results are caused by
+From this we realize that the unexpected results are caused by
 integer division: <code>int</code> object divided by <code>int</code> object.
 For example,
 <code>Nt</code> is an integer, not a real as we want, because 8/3 according integer
@@ -1270,7 +1270,7 @@ u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">
     <span style="color: #408080; font-style: italic"># or print &#39;t={t:6.3f} u={u:g}&#39;.format(t=t[i], u=u[i])</span>
 </pre></div>
 <p>
-Running this code show
+Running this code shows
 
 <p>
 
@@ -1355,7 +1355,7 @@ some edits.
 <p>
 The <code>solver</code> and <code>exact_solution</code> functions are not altered.
 The <code>explore</code> and <code>main</code> functions as well as the call to <code>main</code> are
-edited to
+edited to:
 
 <p>
 

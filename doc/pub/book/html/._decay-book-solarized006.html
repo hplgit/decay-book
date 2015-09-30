@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -365,10 +365,10 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec121'),
               ('A biochemical reaction', 2, None, '___sec122'),
               ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
-              ('Predator-pray models in ecology',
+              ('Predator-prey models in ecology',
                1,
-               'decay:app:predpray',
-               'decay:app:predpray'),
+               'decay:app:predprey',
+               'decay:app:predprey'),
               ('Decay of atmospheric pressure with altitude',
                1,
                'decay:app:atm',
@@ -466,10 +466,10 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'decay:app:exer:SIR',
                'decay:app:exer:SIR'),
-              ('Exercise 27: Simulate predator-pray interaction',
+              ('Exercise 27: Simulate predator-prey interaction',
                2,
-               'decay:app:exer:predpray',
-               'decay:app:exer:predpray'),
+               'decay:app:exer:predprey',
+               'decay:app:exer:predprey'),
               ('Exercise 28: Simulate the pressure drop in the atmosphere',
                2,
                'decay:app:exer:atm1',
@@ -1249,7 +1249,7 @@ discretization parameter, here \( \Delta t \), becomes small. In the
 present case, we let \( p \) be our small discretization parameter, and it
 makes sense to simplify the expressions for \( A \) and \( \Aex \) by using
 Taylor polynomials around \( p=0 \).  The Taylor polynomials are accurate
-for small \( p \) and greatly simplifies the comparison of the analytical
+for small \( p \) and greatly simplify the comparison of the analytical
 expressions since we then can compare polynomials, term by term.
 
 <p>
@@ -1359,7 +1359,7 @@ clearly dominates over the higher-order terms (think of \( p=0.01 \):
 <p>
 Now, \( a \) is a given parameter in the problem, while \( \Delta t \) is
 what we can vary. Not surprisingly, the error expressions are usually
-written in terms \( \Delta t \). When then have
+written in terms \( \Delta t \). We then have
 
 $$
 \begin{equation}
@@ -1721,7 +1721,7 @@ consistency, stability, and convergence are much more complicated.
 <p>
 We have seen in the previous analysis that the Forward Euler,
 Backward Euler, and Crank-Nicolson schemes are convergent (\( e^n\rightarrow 0 \)),
-that they are consistent (\( R^n\rightarrow 0 \), and that they are
+that they are consistent (\( R^n\rightarrow 0 \)), and that they are
 stable under certain conditions on the size of \( \Delta t \).
 We have also derived explicit mathematical expressions for \( e^n \),
 the truncation error, and the stability criteria.

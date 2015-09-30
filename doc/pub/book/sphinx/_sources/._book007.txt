@@ -13,7 +13,7 @@ Models
 This chapter presents many mathematical models that all end up with
 ODEs of the type :math:`u^{\prime}=-au+b`.  The applications are taken from
 biology, finance, and physics, and cover population growth or decay,
-interacting predator-pray populations, compound interest and
+interacting predator-prey populations, compound interest and
 inflation, radioactive decay, chemical and biochemical reaction,
 spreading of diseases, cooling of objects, compaction of geological
 media, pressure variations in the atmosphere, viscoelastic response in
@@ -118,7 +118,7 @@ Falling bodies in fluids, as described in the section :ref:`decay:app:drag`,
 involves :math:`u^{\prime}=-au+b` with seven physical parameters. All these vanish
 in the scaled version of the problem if we start the motion from rest!
 
-Many more details about scaling is presented in the author's book
+Many more details about scaling are presented in the author's book
 *Scaling of Differential Equations* [Ref09]_.
 
 .. _decay:app:pop:
@@ -790,7 +790,7 @@ A more general form of the right-hand side is :math:`\hat kN_A^{\alpha}N_B^{\bet
 All the constants :math:`\hat k`, :math:`\alpha`, and :math:`\beta` must be determined from
 experiments.)
 
-Working with concentrations instead, we introduce :math:`[C](t)=N_C(t)/N_C(0)`,
+Working instead with concentrations, we introduce :math:`[C](t)=N_C(t)/N_C(0)`,
 with similar definitions for :math:`[A]` and :math:`[B]` we get
 
 .. _Eq:_auto66:
@@ -905,9 +905,9 @@ by the functions :math:`S(t)`, :math:`I(t)`, and :math:`R(t)`.
 
 To model how many people that get infected in a small time interval
 :math:`\Delta t`, we reason as with reactions in the section :ref:`decay:app:kinetics`.
-The possible number of parings ("collisions") between susceptibles
+The possible number of pairings ("collisions") between susceptibles
 and infected is :math:`SI`. A fraction of these, :math:`\beta\Delta t SI`,
-will actually meet and the infected succeeds of infecting the susceptible,
+will actually meet and the infected succeed in infecting the susceptible,
 where :math:`\beta` is a parameter to be empirically estimated.
 This leads to a loss of susceptibles and a gain of infected:
 
@@ -920,7 +920,7 @@ This leads to a loss of susceptibles and a gain of infected:
 In the same time interval, a fraction :math:`\nu\Delta t I`
 of the infected is recovered.
 It follows from the section :ref:`decay:app:waitingtime`
-that the parameter :math:`\nu^{-1}` has the interpretation as the average
+that the parameter :math:`\nu^{-1}` is interpreted as the average
 waiting time to leave the I category, i.e., the
 average length of the disease.
 The :math:`\nu \Delta tI` term is a loss for the I category, but a gain for the R
@@ -974,26 +974,26 @@ This property can be used as a partial verification during simulations.
 
 Equations :eq:`decay:app:SIR:S`-:eq:`decay:app:SIR:R` are known as
 the SIR model in epidemiology. The model can easily be extended to
-incorporate vaccination programs, loss immunity after some time, etc.
+incorporate vaccination programs, immunity loss after some time, etc.
 Typical diseases that can be simulated by the SIR model and its variants
 are measles, smallpox, flu, plague, and HIV.
 
-.. _decay:app:predpray:
+.. _decay:app:predprey:
 
-Predator-pray models in ecology
+Predator-prey models in ecology
 ===============================
 
 .. index:: Lotka-Volterra model
 
-.. index:: predator-pray model
+.. index:: predator-prey model
 
-A model for the interaction of predator and pray species can be based
+A model for the interaction of predator and prey species can be based
 on reasoning from population dynamics and the SIR model.
-Let :math:`H(t)` be the number of prays in a region, and let :math:`L(t)`
+Let :math:`H(t)` be the number of preys in a region, and let :math:`L(t)`
 be the number of predators. For example, :math:`H` may be hares and :math:`L` lynx,
 or rabbits and foxes.
 
-The population of the pray evolvoes due to births and deaths, exactly
+The population of the prey evolves due to births and deaths, exactly
 as in a population dynamics model from Section
 reff{decay:app:pop:exp}.
 During a time interval :math:`\Delta t`
@@ -1002,24 +1002,24 @@ the increase in the population is therefore
 .. math::
          H(t+\Delta t) - H(t) =  a\Delta t H(t),
 
-where :math:`a` is a parameter to be measured.
+where :math:`a` is a parameter to be measured from data.
 The increase is proportional to :math:`H`, and the proportionality constant
 :math:`a\Delta t` is proportional to :math:`\Delta t`, because doubling the
 interval will double the increase.
 
-However, the pray population have an additional loss because they
-are eaten by predators. All the pray and predator animals can form
-:math:`LH` pairs in total (if everybody can meet everybody at random).
+However, the prey population has an additional loss because they
+are eaten by predators. All the prey and predator animals can form
+:math:`LH` pairs in total (assuming all individuals meet randomly).
 A small fraction :math:`b\Delta t`
 of such meetings, during a time interval :math:`\Delta t`,
-end up with the predator eating the pray. The increase in the pray
+ends up with the predator eating the prey. The increase in the prey
 population is therefore adjusted to
 
 .. math::
          H(t+\Delta t) - H(t) =  a\Delta t H(t) - b\Delta t H(t)L(t){\thinspace .}
 
-The predator population increases as a result of eating prays.
-The amount of eaten prays is :math:`b\Delta t LH`, but only a fraction
+The predator population increases as a result of eating preys.
+The amount of eaten preys is :math:`b\Delta t LH`, but only a fraction
 :math:`d\Delta t LH` of this amount contributes to increasing the
 predator population. In addition, predators die and this loss
 is set to :math:`c\Delta t L`. To summarize, the increase in the predator
@@ -1041,26 +1041,26 @@ Dividing by :math:`\Delta t` in the equations for :math:`H` and :math:`L` and le
 
 We can simplify the notation to the following two ODEs:
 
-.. _Eq:decay:app:predpray:eqH:
+.. _Eq:decay:app:predprey:eqH:
 
 .. math::
-   :label: decay:app:predpray:eqH
+   :label: decay:app:predprey:eqH
         
         H^{\prime} = H(a - bL),
         
         
 
-.. _Eq:decay:app:predpray:eqL:
+.. _Eq:decay:app:predprey:eqL:
 
 .. math::
-   :label: decay:app:predpray:eqL
+   :label: decay:app:predprey:eqL
           
         L^{\prime} = L(dH - c){\thinspace .}
         
         
 
 This is a so-called Lokta-Volterra model. It contains four parameters
-that must be estimated: :math:`a`, :math:`b`, :math:`c`, and :math:`d`. In addition, two
+that must be estimated from data: :math:`a`, :math:`b`, :math:`c`, and :math:`d`. In addition, two
 initial conditions are needed for :math:`H(0)` and :math:`L(0)`.
 
 .. _decay:app:atm:
@@ -1601,7 +1601,12 @@ seven parameters down to choosing one value of a single dimensionless parameter
          \beta = \frac{\varrho_b gV\left(\frac{\varrho}{\varrho_b} -1\right)}{3\pi d\mu I},
 
 provided :math:`I\neq 0`. If the motion starts from rest, :math:`I=0`, the scaled
-problem reads :math:`\bar u^{\prime}=1-\bar u`, :math:`\bar u(0)=0`, and there is
+problem reads
+
+.. math::
+         \bar u^{\prime}=1-\bar u, \quad \bar u(0)=0,
+
+and there is
 no need for estimating physical parameters (!).
 This means that there is a single universal solution to the problem
 of a falling body starting from rest:
@@ -1620,7 +1625,7 @@ axis in this dimensionless solution. More precisely, the physical velocity
 Viscoelastic materials
 ======================
 
-.. index:: Kelvin-Vogt material model
+.. index:: Kelvin-Voigt material model
 
 .. index:: viscoelasticity
 
@@ -1639,7 +1644,7 @@ also influences the stress. This is particularly the case for
 materials like organic polymers, rubber, and wood. When the stress
 depends on both the strain and the strain rate, the material is
 said to be viscoelastic. A common model relating forces to deformation
-is the `Kelvin-Vogt model <https://en.wikipedia.org/wiki/Kelvin-Voigt_material>`__:
+is the `Kelvin-Voigt model <https://en.wikipedia.org/wiki/Kelvin-Voigt_material>`__:
 
 .. _Eq:decay:app:viscoelasticity:se:
 
@@ -1651,17 +1656,17 @@ is the `Kelvin-Vogt model <https://en.wikipedia.org/wiki/Kelvin-Voigt_material>`
         
 
 Compared to a perfectly elastic material, which deforms instantaneously
-when a force is acting, a Kelvin-Vogt material will spend some time
+when a force is acting, a Kelvin-Voigt material will spend some time
 to elongate. For example, when an elastic rod is subject to a constant
 force :math:`\boldsymbol{\sigma}` at :math:`t=0`, the strain immediately adjusts to :math:`\varepsilon
-=\sigma/E`. A Kelvin-Vogt material, however, has a response
-:math:`\varepsilon(t) = \frac{sigma}{E}(1-e^{Et/\eta})`. Removing the force
+=\sigma/E`. A Kelvin-Voigt material, however, has a response
+:math:`\varepsilon(t) = \frac{\sigma}{E}(1-e^{Et/\eta})`. Removing the force
 when the strain is :math:`\varepsilon(t_1) = I` will for an elastic material
-immediately bring the strain back to zero, while a Kelvin-Vogt
+immediately bring the strain back to zero, while a Kelvin-Voigt
 material will decay: :math:`\varepsilon = Ie^{-(t-t_1)E/\eta)}`.
 
 Introducing :math:`u` for :math:`\varepsilon` and treating :math:`\boldsymbol{\sigma}(t)` as a
-given function, we can write the Kelvin-Vogt model in our standard form
+given function, we can write the Kelvin-Voigt model in our standard form
 
 .. _Eq:_auto76:
 
@@ -2397,8 +2402,8 @@ where :math:`R_0` and :math:`\alpha` are the only parameters in the problem:
 .. math::
          R_0 = \frac{N\beta}{\nu}, \quad \alpha = \frac{I(0)}{N}{\thinspace .}
 
-A quantity with a bar denote a dimensionless version of that quantity, e.g,
-:math:`\bar t` is dimensionless time :math:`t`, and :math:`\bar t = \nu t`.
+A quantity with a bar denotes a dimensionless version of that quantity, e.g,
+:math:`\bar t` is dimensionless time, and :math:`\bar t = \nu t`.
 
 .. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
@@ -2420,8 +2425,10 @@ Implement the scaled SIR model. Check at every time step,
 as a verification, that
 :math:`\bar S + \bar I + \bar R = 1`.
 
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
 **d)**
-Simulate the spreading of a disease where :math:`R_0=1.1` and 1 percent of
+Simulate the spreading of a disease where :math:`R_0=2, 5` and 2 percent of
 the population is infected at time :math:`t=0`.
 
 .. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
@@ -2432,16 +2439,16 @@ Filename: ``SIR``.
 
 .. --- begin exercise ---
 
-.. _decay:app:exer:predpray:
+.. _decay:app:exer:predprey:
 
-Exercise 27: Simulate predator-pray interaction
+Exercise 27: Simulate predator-prey interaction
 -----------------------------------------------
 
-The section :ref:`decay:app:predpray` describes a model for the
-interaction of predator and pray populations, such as lynx and hares.
+The section :ref:`decay:app:predprey` describes a model for the
+interaction of predator and prey populations, such as lynx and hares.
 
 **a)**
-Scale the equations :eq:`decay:app:predpray:eqH`-:eq:`decay:app:predpray:eqL`.
+Scale the equations :eq:`decay:app:predprey:eqH`-:eq:`decay:app:predprey:eqL`.
 Use the initial population :math:`H(0)=H_0` of :math:`H` has scale for :math:`H` and :math:`L`, and
 let the time scale be :math:`1/(bH_0)`.
 
@@ -2471,7 +2478,7 @@ the typical solutions.
 
 .. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
-Filename: ``predator_pray``.
+Filename: ``predator_prey``.
 
 .. --- end exercise ---
 
@@ -2581,7 +2588,7 @@ Set up the differential equation problem that governs the velocity
 of the motion.
 The parachute jumper is subject to the gravity force and a quadratic
 drag force. Assume constant density.
-Add an extra source term be used for program verification.
+Add an extra source term to be used for program verification.
 Identify the input data to the problem.
 
 **b)**
@@ -2661,7 +2668,7 @@ The mass of the human body and equipment
 can be set to :math:`100` kg.
 A skydiver in spread-eagle formation has a cross-section of 0.5 :math:`\hbox{m}^2`
 in the horizontal plane.
-The density of air decreases varies altitude, but can be taken
+The density of air decreases with altitude, but can be taken
 as constant, 1 :math:`\hbox{kg/m}^3`, for altitudes relevant to
 skydiving (0-4000 m).
 The drag coefficient for a man in upright position can be set to 1.2.
@@ -2982,7 +2989,7 @@ Exercise 38: Simulate the deformation of a viscoelastic material
 ----------------------------------------------------------------
 
 Stretching a rod made of polymer will cause deformations that are
-well described with a Kelvin-Vogt material model
+well described with a Kelvin-Voigt material model
 :eq:`decay:app:viscoelasticity:se`. At :math:`t=0` we apply a constant
 force :math:`\sigma = \sigma_0`, but at :math:`t=t_1`, we remove the force
 so :math:`\sigma=0`. Compute numerically the corresponding strain
@@ -3010,7 +3017,7 @@ means that :math:`\bar t_1 = 1`.
 
 .. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
-Filename: ``KelvinVogt``.
+Filename: ``KelvinVoigt``.
 
 .. --- end exercise ---
 

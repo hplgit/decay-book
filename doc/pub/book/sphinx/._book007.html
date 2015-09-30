@@ -83,7 +83,7 @@
 <p>This chapter presents many mathematical models that all end up with
 ODEs of the type <span class="math">\(u^{\prime}=-au+b\)</span>.  The applications are taken from
 biology, finance, and physics, and cover population growth or decay,
-interacting predator-pray populations, compound interest and
+interacting predator-prey populations, compound interest and
 inflation, radioactive decay, chemical and biochemical reaction,
 spreading of diseases, cooling of objects, compaction of geological
 media, pressure variations in the atmosphere, viscoelastic response in
@@ -165,7 +165,7 @@ in the code, if <span class="math">\(I\neq 0\)</span>, or one sets
 Falling bodies in fluids, as described in the section <a class="reference internal" href="#decay-app-drag"><span class="std std-ref">Vertical motion of a body in a viscous fluid</span></a>,
 involves <span class="math">\(u^{\prime}=-au+b\)</span> with seven physical parameters. All these vanish
 in the scaled version of the problem if we start the motion from rest!</p>
-<p>Many more details about scaling is presented in the author&#8217;s book
+<p>Many more details about scaling are presented in the author&#8217;s book
 <em>Scaling of Differential Equations</em> <a class="reference internal" href="._book009.html#ref09" id="id1">[Ref09]</a>.</p>
 </div>
 </div>
@@ -583,7 +583,7 @@ the Norwegian scientists Cato M.&nbsp;Guldberg and Peter Waage.
 A more general form of the right-hand side is <span class="math">\(\hat kN_A^{\alpha}N_B^{\beta}\)</span>.
 All the constants <span class="math">\(\hat k\)</span>, <span class="math">\(\alpha\)</span>, and <span class="math">\(\beta\)</span> must be determined from
 experiments.)</p>
-<p>Working with concentrations instead, we introduce <span class="math">\([C](t)=N_C(t)/N_C(0)\)</span>,
+<p>Working instead with concentrations, we introduce <span class="math">\([C](t)=N_C(t)/N_C(0)\)</span>,
 with similar definitions for <span class="math">\([A]\)</span> and <span class="math">\([B]\)</span> we get</p>
 <div class="math" id="equation-_auto66">
 <span id="eq-auto66"></span><span class="eqno">(20)</span>\[     \frac{d[C]}{dt} = k [A][B]{\thinspace .}\]</div>
@@ -633,9 +633,9 @@ infectives, and R for recovered. The number in each category is tracked
 by the functions <span class="math">\(S(t)\)</span>, <span class="math">\(I(t)\)</span>, and <span class="math">\(R(t)\)</span>.</p>
 <p>To model how many people that get infected in a small time interval
 <span class="math">\(\Delta t\)</span>, we reason as with reactions in the section <a class="reference internal" href="#decay-app-kinetics"><span class="std std-ref">Chemical kinetics</span></a>.
-The possible number of parings (&#8220;collisions&#8221;) between susceptibles
+The possible number of pairings (&#8220;collisions&#8221;) between susceptibles
 and infected is <span class="math">\(SI\)</span>. A fraction of these, <span class="math">\(\beta\Delta t SI\)</span>,
-will actually meet and the infected succeeds of infecting the susceptible,
+will actually meet and the infected succeed in infecting the susceptible,
 where <span class="math">\(\beta\)</span> is a parameter to be empirically estimated.
 This leads to a loss of susceptibles and a gain of infected:</p>
 <div class="math">
@@ -644,7 +644,7 @@ I(t+\Delta t) &amp;= I(t) + \beta\Delta tSI{\thinspace .}\end{split}\]</div>
 <p>In the same time interval, a fraction <span class="math">\(\nu\Delta t I\)</span>
 of the infected is recovered.
 It follows from the section <a class="reference internal" href="#decay-app-waitingtime"><span class="std std-ref">Generalization of the radioactive decay modeling</span></a>
-that the parameter <span class="math">\(\nu^{-1}\)</span> has the interpretation as the average
+that the parameter <span class="math">\(\nu^{-1}\)</span> is interpreted as the average
 waiting time to leave the I category, i.e., the
 average length of the disease.
 The <span class="math">\(\nu \Delta tI\)</span> term is a loss for the I category, but a gain for the R
@@ -669,39 +669,39 @@ S+I+R=\hbox{const}=N,\]</div>
 This property can be used as a partial verification during simulations.</p>
 <p>Equations <a href="#equation-decay:app:SIR:S">(27)</a>-<a href="#equation-decay:app:SIR:R">(29)</a> are known as
 the SIR model in epidemiology. The model can easily be extended to
-incorporate vaccination programs, loss immunity after some time, etc.
+incorporate vaccination programs, immunity loss after some time, etc.
 Typical diseases that can be simulated by the SIR model and its variants
 are measles, smallpox, flu, plague, and HIV.</p>
 </div>
-<div class="section" id="predator-pray-models-in-ecology">
-<span id="decay-app-predpray"></span><h2>Predator-pray models in ecology<a class="headerlink" href="#predator-pray-models-in-ecology" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-5"></span><p id="index-6">A model for the interaction of predator and pray species can be based
+<div class="section" id="predator-prey-models-in-ecology">
+<span id="decay-app-predprey"></span><h2>Predator-prey models in ecology<a class="headerlink" href="#predator-prey-models-in-ecology" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-5"></span><p id="index-6">A model for the interaction of predator and prey species can be based
 on reasoning from population dynamics and the SIR model.
-Let <span class="math">\(H(t)\)</span> be the number of prays in a region, and let <span class="math">\(L(t)\)</span>
+Let <span class="math">\(H(t)\)</span> be the number of preys in a region, and let <span class="math">\(L(t)\)</span>
 be the number of predators. For example, <span class="math">\(H\)</span> may be hares and <span class="math">\(L\)</span> lynx,
 or rabbits and foxes.</p>
-<p>The population of the pray evolvoes due to births and deaths, exactly
+<p>The population of the prey evolves due to births and deaths, exactly
 as in a population dynamics model from Section
 reff{decay:app:pop:exp}.
 During a time interval <span class="math">\(\Delta t\)</span>
 the increase in the population is therefore</p>
 <div class="math">
 \[H(t+\Delta t) - H(t) =  a\Delta t H(t),\]</div>
-<p>where <span class="math">\(a\)</span> is a parameter to be measured.
+<p>where <span class="math">\(a\)</span> is a parameter to be measured from data.
 The increase is proportional to <span class="math">\(H\)</span>, and the proportionality constant
 <span class="math">\(a\Delta t\)</span> is proportional to <span class="math">\(\Delta t\)</span>, because doubling the
 interval will double the increase.</p>
-<p>However, the pray population have an additional loss because they
-are eaten by predators. All the pray and predator animals can form
-<span class="math">\(LH\)</span> pairs in total (if everybody can meet everybody at random).
+<p>However, the prey population has an additional loss because they
+are eaten by predators. All the prey and predator animals can form
+<span class="math">\(LH\)</span> pairs in total (assuming all individuals meet randomly).
 A small fraction <span class="math">\(b\Delta t\)</span>
 of such meetings, during a time interval <span class="math">\(\Delta t\)</span>,
-end up with the predator eating the pray. The increase in the pray
+ends up with the predator eating the prey. The increase in the prey
 population is therefore adjusted to</p>
 <div class="math">
 \[H(t+\Delta t) - H(t) =  a\Delta t H(t) - b\Delta t H(t)L(t){\thinspace .}\]</div>
-<p>The predator population increases as a result of eating prays.
-The amount of eaten prays is <span class="math">\(b\Delta t LH\)</span>, but only a fraction
+<p>The predator population increases as a result of eating preys.
+The amount of eaten preys is <span class="math">\(b\Delta t LH\)</span>, but only a fraction
 <span class="math">\(d\Delta t LH\)</span> of this amount contributes to increasing the
 predator population. In addition, predators die and this loss
 is set to <span class="math">\(c\Delta t L\)</span>. To summarize, the increase in the predator
@@ -716,12 +716,12 @@ population is given by</p>
 \lim_{\Delta t\rightarrow 0}\frac{L(t+\Delta t)-L(t)}{\Delta t}
 = L^{\prime}(t) &amp;= dL(t)H(t) - cL(t){\thinspace .}\end{split}\]</div>
 <p>We can simplify the notation to the following two ODEs:</p>
-<div class="math" id="equation-decay:app:predpray:eqH">
-<span id="eq-decay-app-predpray-eqh"></span><span class="eqno">(30)</span>\[     H^{\prime} = H(a - bL),\]</div>
-<div class="math" id="equation-decay:app:predpray:eqL">
-<span id="eq-decay-app-predpray-eql"></span><span class="eqno">(31)</span>\[     L^{\prime} = L(dH - c){\thinspace .}\]</div>
+<div class="math" id="equation-decay:app:predprey:eqH">
+<span id="eq-decay-app-predprey-eqh"></span><span class="eqno">(30)</span>\[     H^{\prime} = H(a - bL),\]</div>
+<div class="math" id="equation-decay:app:predprey:eqL">
+<span id="eq-decay-app-predprey-eql"></span><span class="eqno">(31)</span>\[     L^{\prime} = L(dH - c){\thinspace .}\]</div>
 <p>This is a so-called Lokta-Volterra model. It contains four parameters
-that must be estimated: <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, <span class="math">\(c\)</span>, and <span class="math">\(d\)</span>. In addition, two
+that must be estimated from data: <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, <span class="math">\(c\)</span>, and <span class="math">\(d\)</span>. In addition, two
 initial conditions are needed for <span class="math">\(H(0)\)</span> and <span class="math">\(L(0)\)</span>.</p>
 </div>
 <div class="section" id="decay-of-atmospheric-pressure-with-altitude">
@@ -1088,7 +1088,10 @@ seven parameters down to choosing one value of a single dimensionless parameter<
 <div class="math">
 \[\beta = \frac{\varrho_b gV\left(\frac{\varrho}{\varrho_b} -1\right)}{3\pi d\mu I},\]</div>
 <p>provided <span class="math">\(I\neq 0\)</span>. If the motion starts from rest, <span class="math">\(I=0\)</span>, the scaled
-problem reads <span class="math">\(\bar u^{\prime}=1-\bar u\)</span>, <span class="math">\(\bar u(0)=0\)</span>, and there is
+problem reads</p>
+<div class="math">
+\[\bar u^{\prime}=1-\bar u, \quad \bar u(0)=0,\]</div>
+<p>and there is
 no need for estimating physical parameters (!).
 This means that there is a single universal solution to the problem
 of a falling body starting from rest:
@@ -1119,20 +1122,20 @@ also influences the stress. This is particularly the case for
 materials like organic polymers, rubber, and wood. When the stress
 depends on both the strain and the strain rate, the material is
 said to be viscoelastic. A common model relating forces to deformation
-is the <a class="reference external" href="https://en.wikipedia.org/wiki/Kelvin-Voigt_material">Kelvin-Vogt model</a>:</p>
+is the <a class="reference external" href="https://en.wikipedia.org/wiki/Kelvin-Voigt_material">Kelvin-Voigt model</a>:</p>
 <div class="math" id="equation-decay:app:viscoelasticity:se">
 <span id="eq-decay-app-viscoelasticity-se"></span><span class="eqno">(49)</span>\[     \sigma(t) = E\varepsilon(t) + \eta\varepsilon^{\prime}(t){\thinspace .}\]</div>
 <p>Compared to a perfectly elastic material, which deforms instantaneously
-when a force is acting, a Kelvin-Vogt material will spend some time
+when a force is acting, a Kelvin-Voigt material will spend some time
 to elongate. For example, when an elastic rod is subject to a constant
 force <span class="math">\(\boldsymbol{\sigma}\)</span> at <span class="math">\(t=0\)</span>, the strain immediately adjusts to <span class="math">\(\varepsilon
-=\sigma/E\)</span>. A Kelvin-Vogt material, however, has a response
-<span class="math">\(\varepsilon(t) = \frac{sigma}{E}(1-e^{Et/\eta})\)</span>. Removing the force
+=\sigma/E\)</span>. A Kelvin-Voigt material, however, has a response
+<span class="math">\(\varepsilon(t) = \frac{\sigma}{E}(1-e^{Et/\eta})\)</span>. Removing the force
 when the strain is <span class="math">\(\varepsilon(t_1) = I\)</span> will for an elastic material
-immediately bring the strain back to zero, while a Kelvin-Vogt
+immediately bring the strain back to zero, while a Kelvin-Voigt
 material will decay: <span class="math">\(\varepsilon = Ie^{-(t-t_1)E/\eta)}\)</span>.</p>
 <p>Introducing <span class="math">\(u\)</span> for <span class="math">\(\varepsilon\)</span> and treating <span class="math">\(\boldsymbol{\sigma}(t)\)</span> as a
-given function, we can write the Kelvin-Vogt model in our standard form</p>
+given function, we can write the Kelvin-Voigt model in our standard form</p>
 <div class="math" id="equation-_auto76">
 <span id="eq-auto76"></span><span class="eqno">(50)</span>\[     u^{\prime}(t) = -au(t) + b(t),\]</div>
 <p>with <span class="math">\(a = E/\eta\)</span> and <span class="math">\(b(t)=\boldsymbol{\sigma}(t)/\eta\)</span>. An initial condition,
@@ -1536,8 +1539,8 @@ model becomes</p>
 <p>where <span class="math">\(R_0\)</span> and <span class="math">\(\alpha\)</span> are the only parameters in the problem:</p>
 <div class="math">
 \[R_0 = \frac{N\beta}{\nu}, \quad \alpha = \frac{I(0)}{N}{\thinspace .}\]</div>
-<p>A quantity with a bar denote a dimensionless version of that quantity, e.g,
-<span class="math">\(\bar t\)</span> is dimensionless time <span class="math">\(t\)</span>, and <span class="math">\(\bar t = \nu t\)</span>.</p>
+<p>A quantity with a bar denotes a dimensionless version of that quantity, e.g,
+<span class="math">\(\bar t\)</span> is dimensionless time, and <span class="math">\(\bar t = \nu t\)</span>.</p>
 <p><strong>b)</strong>
 Show that the <span class="math">\(R_0\)</span> parameter governs whether the disease will spread
 or not at <span class="math">\(t=0\)</span>.</p>
@@ -1548,16 +1551,16 @@ Implement the scaled SIR model. Check at every time step,
 as a verification, that
 <span class="math">\(\bar S + \bar I + \bar R = 1\)</span>.</p>
 <p><strong>d)</strong>
-Simulate the spreading of a disease where <span class="math">\(R_0=1.1\)</span> and 1 percent of
+Simulate the spreading of a disease where <span class="math">\(R_0=2, 5\)</span> and 2 percent of
 the population is infected at time <span class="math">\(t=0\)</span>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">SIR</span></code>.</p>
 </div>
-<div class="section" id="exercise-27-simulate-predator-pray-interaction">
-<span id="decay-app-exer-predpray"></span><h3>Exercise 27: Simulate predator-pray interaction<a class="headerlink" href="#exercise-27-simulate-predator-pray-interaction" title="Permalink to this headline">¶</a></h3>
-<p>The section <a class="reference internal" href="#decay-app-predpray"><span class="std std-ref">Predator-pray models in ecology</span></a> describes a model for the
-interaction of predator and pray populations, such as lynx and hares.</p>
+<div class="section" id="exercise-27-simulate-predator-prey-interaction">
+<span id="decay-app-exer-predprey"></span><h3>Exercise 27: Simulate predator-prey interaction<a class="headerlink" href="#exercise-27-simulate-predator-prey-interaction" title="Permalink to this headline">¶</a></h3>
+<p>The section <a class="reference internal" href="#decay-app-predprey"><span class="std std-ref">Predator-prey models in ecology</span></a> describes a model for the
+interaction of predator and prey populations, such as lynx and hares.</p>
 <p><strong>a)</strong>
-Scale the equations <a href="#equation-decay:app:predpray:eqH">(30)</a>-<a href="#equation-decay:app:predpray:eqL">(31)</a>.
+Scale the equations <a href="#equation-decay:app:predprey:eqH">(30)</a>-<a href="#equation-decay:app:predprey:eqL">(31)</a>.
 Use the initial population <span class="math">\(H(0)=H_0\)</span> of <span class="math">\(H\)</span> has scale for <span class="math">\(H\)</span> and <span class="math">\(L\)</span>, and
 let the time scale be <span class="math">\(1/(bH_0)\)</span>.</p>
 <p><strong>b)</strong>
@@ -1575,7 +1578,7 @@ with a).</p>
 <p><strong>d)</strong>
 Compute with the scaled model from c) and create plots to illustrate
 the typical solutions.</p>
-<p>Filename: <code class="docutils literal"><span class="pre">predator_pray</span></code>.</p>
+<p>Filename: <code class="docutils literal"><span class="pre">predator_prey</span></code>.</p>
 </div>
 <div class="section" id="exercise-28-simulate-the-pressure-drop-in-the-atmosphere">
 <span id="decay-app-exer-atm1"></span><h3>Exercise 28: Simulate the pressure drop in the atmosphere<a class="headerlink" href="#exercise-28-simulate-the-pressure-drop-in-the-atmosphere" title="Permalink to this headline">¶</a></h3>
@@ -1658,7 +1661,7 @@ Set up the differential equation problem that governs the velocity
 of the motion.
 The parachute jumper is subject to the gravity force and a quadratic
 drag force. Assume constant density.
-Add an extra source term be used for program verification.
+Add an extra source term to be used for program verification.
 Identify the input data to the problem.</p>
 <p><strong>b)</strong>
 Make a Python module for computing the velocity of the motion.
@@ -1714,7 +1717,7 @@ The mass of the human body and equipment
 can be set to <span class="math">\(100\)</span> kg.
 A skydiver in spread-eagle formation has a cross-section of 0.5 <span class="math">\(\hbox{m}^2\)</span>
 in the horizontal plane.
-The density of air decreases varies altitude, but can be taken
+The density of air decreases with altitude, but can be taken
 as constant, 1 <span class="math">\(\hbox{kg/m}^3\)</span>, for altitudes relevant to
 skydiving (0-4000 m).
 The drag coefficient for a man in upright position can be set to 1.2.
@@ -1909,7 +1912,7 @@ Filename: <code class="docutils literal"><span class="pre">interest_modeling</sp
 <div class="section" id="exercise-38-simulate-the-deformation-of-a-viscoelastic-material">
 <span id="decay-app-exer-viscoelasticity1"></span><h3>Exercise 38: Simulate the deformation of a viscoelastic material<a class="headerlink" href="#exercise-38-simulate-the-deformation-of-a-viscoelastic-material" title="Permalink to this headline">¶</a></h3>
 <p>Stretching a rod made of polymer will cause deformations that are
-well described with a Kelvin-Vogt material model
+well described with a Kelvin-Voigt material model
 <a href="#equation-decay:app:viscoelasticity:se">(49)</a>. At <span class="math">\(t=0\)</span> we apply a constant
 force <span class="math">\(\sigma = \sigma_0\)</span>, but at <span class="math">\(t=t_1\)</span>, we remove the force
 so <span class="math">\(\sigma=0\)</span>. Compute numerically the corresponding strain
@@ -1928,7 +1931,7 @@ Work with the dimensionless force <span class="math">\(F=10\sigma(t)/E\)</span>,
 <span class="math">\(F=1\)</span> for <span class="math">\(\bar t\in (0,\bar t_1)\)</span> and <span class="math">\(F=0\)</span> for <span class="math">\(\bar t\geq \bar t_1\)</span>.
 A possible choice of <span class="math">\(t_1\)</span> is the characteristic time <span class="math">\(\eta/E\)</span>, which
 means that <span class="math">\(\bar t_1 = 1\)</span>.</p>
-<p>Filename: <code class="docutils literal"><span class="pre">KelvinVogt</span></code>.</p>
+<p>Filename: <code class="docutils literal"><span class="pre">KelvinVoigt</span></code>.</p>
 </div>
 </div>
 </div>
@@ -1975,7 +1978,7 @@ means that <span class="math">\(\bar t_1 = 1\)</span>.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#spreading-of-diseases">Spreading of diseases</a></li>
-<li><a class="reference internal" href="#predator-pray-models-in-ecology">Predator-pray models in ecology</a></li>
+<li><a class="reference internal" href="#predator-prey-models-in-ecology">Predator-prey models in ecology</a></li>
 <li><a class="reference internal" href="#decay-of-atmospheric-pressure-with-altitude">Decay of atmospheric pressure with altitude</a><ul>
 <li><a class="reference internal" href="#the-general-model">The general model</a></li>
 <li><a class="reference internal" href="#multiple-atmospheric-layers">Multiple atmospheric layers</a></li>
@@ -2011,7 +2014,7 @@ means that <span class="math">\(\bar t_1 = 1\)</span>.</p>
 <li><a class="reference internal" href="#exercise-24-simulate-an-th-order-chemical-reaction">Exercise 24: Simulate an <span class="math">\(n\)</span>-th order chemical reaction</a></li>
 <li><a class="reference internal" href="#exercise-25-simulate-a-biochemical-process">Exercise 25: Simulate a biochemical process</a></li>
 <li><a class="reference internal" href="#exercise-26-simulate-spreading-of-a-disease">Exercise 26: Simulate spreading of a disease</a></li>
-<li><a class="reference internal" href="#exercise-27-simulate-predator-pray-interaction">Exercise 27: Simulate predator-pray interaction</a></li>
+<li><a class="reference internal" href="#exercise-27-simulate-predator-prey-interaction">Exercise 27: Simulate predator-prey interaction</a></li>
 <li><a class="reference internal" href="#exercise-28-simulate-the-pressure-drop-in-the-atmosphere">Exercise 28: Simulate the pressure drop in the atmosphere</a></li>
 <li><a class="reference internal" href="#exercise-29-make-a-program-for-vertical-motion-in-a-fluid">Exercise 29: Make a program for vertical motion in a fluid</a></li>
 <li><a class="reference internal" href="#project-30-simulate-parachuting">Project 30: Simulate parachuting</a></li>

@@ -44,7 +44,7 @@ depends on time:
         
         
 
-A Forward Euler scheme consist of evaluating :eq:`decay:problem:a`
+A Forward Euler scheme consists of evaluating :eq:`decay:problem:a`
 at :math:`t=t_n` and approximating the derivative with a forward
 difference :math:`[D^+_t u]^n`:
 
@@ -578,46 +578,6 @@ test based on a linear exact solution:
             print difference
             tol = 1E-14  # depends on c!
             assert difference < tol
-        
-        def test_convergence_rates():
-            # Create a manufactured solution with sympy
-            import sympy as sym
-            t = sym.symbols('t')
-            u_e = sym.sin(t)*sym.exp(-2*t)
-            a = t**2
-            b = sym.diff(u_e, t) + a*u_exact
-        
-            # Turn sympy expressions into Python function
-            u_exact = sym.lambdify([t], u_e, modules='numpy')
-            a = sym.lambdify([t], a, modules='numpy')
-            b = sym.lambdify([t], b, modules='numpy')
-        
-            def compute_rates(dt_values, E_values):
-                m = len(dt_values)
-                r = [log(E_values[i-1]/E_values[i])/
-                     log(dt_values[i-1]/dt_values[i])
-                     for i in range(1, m, 1)]
-                # Round to two decimals
-                r = [round(r_, 2) for r_ in r]
-                return r
-        
-            dt_values = [0.1*2**(-i) for i in range(7)]
-            I = u_exact(0)
-        
-            for theta in (0, 1, 0.5):
-                E_values = []
-                for dt in dt_values:
-                    u, t = solver(I=I, a=a, b=b, T=6, dt=dt, theta=theta)
-                    u_e = u_exact(t)
-                    e = u_e - u
-                    E = sqrt(dt*sum(e**2))
-                    E_values.append(E)
-                r = compute_rates(dt_values, E_values)
-                print 'theta=%g, r: %s' % (theta, r)
-                expected_rate = 2 if theta == 0.5 else 1
-                tol = 0.1
-                diff = abs(expected_rate - r[-1])
-                assert diff < tol
 
 Any error in the updating formula makes this test fail!
 
@@ -709,7 +669,7 @@ Implementation          (2)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We can compute :math:`r_0, r_1, \ldots, r_{m-2}` from :math:`E_i` and :math:`\Delta t_i`
-by the following functionL
+by the following function
 
 .. code-block:: python
 
@@ -781,7 +741,7 @@ Running this code gives the output
         theta=1, r: [0.94, 0.97, 0.99, 0.99, 1.0, 1.0]
         theta=0.5, r: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0]
 
-We clearly see how the convergence rates goes to the expected values.
+We clearly see how the convergence rates approach the expected values.
 
 .. index:: verification
 
@@ -933,14 +893,14 @@ case of a *system of ODEs* with :math:`m` unknown components:
 .. math::
          u(t) = (u^{(0)}(t),u^{(1)}(t),\ldots,u^{(m-1)}(t)) {\thinspace .}  
 
-In that case, the right-hand side is vector-valued function with :math:`m`
+In that case, the right-hand side is a vector-valued function with :math:`m`
 components,
 
 .. math::
         
         f(u, t) = ( & f^{(0)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\ 
                     & f^{(1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\ 
-                    & \vdots,\\ 
+                    & \vdots\\ 
                     & f^{(m-1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)))
         {\thinspace .}
         
@@ -1324,7 +1284,7 @@ Since this gives us a prediction of :math:`f^{n+\frac{1}{2}}`, we can for
 
 With :math:`\tilde{f}^{n+\frac{1}{2}}` as a hopefully good approximation to
 :math:`f^{n+\frac{1}{2}}`, we can for the final term :math:`\bar{f}^{n+1}` use
-a Crank-Nicolson method to approximate :math:`u^{n+1}`:
+a Crank-Nicolson method on :math:`[t_n, t_{n+1}]` to approximate :math:`u^{n+1}`:
 
 .. _Eq:decay:fd2:RK4:barf:
 

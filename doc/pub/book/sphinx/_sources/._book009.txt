@@ -45,6 +45,8 @@ References
 
 .. [Ref09]
    **H. P. Langtangen**. *Scaling of Differential Equations*,
+   *SimulaSpringerBrief*,
+   Springer,
    2015,
    `http://tinyurl.com/qfjgxmf/web <http://tinyurl.com/qfjgxmf/web>`_.
 
