@@ -97,7 +97,7 @@ From an implementational point of view, it is advantageous to
 implement the <span class="math">\(\theta\)</span>-rule</p>
 <div class="math">
 \[u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,\]</div>
-<p>since it can generate the three other schemes by various of
+<p>since it can generate the three other schemes by various
 choices of <span class="math">\(\theta\)</span>: <span class="math">\(\theta=0\)</span> for Forward Euler, <span class="math">\(\theta =1\)</span> for
 Backward Euler, and <span class="math">\(\theta =1/2\)</span> for Crank-Nicolson.
 Given <span class="math">\(a\)</span>, <span class="math">\(u^0=I\)</span>, <span class="math">\(T\)</span>, and <span class="math">\(\Delta t\)</span>,
@@ -108,7 +108,7 @@ compute <span class="math">\(u^1, u^2,\ldots,u^{N_t}\)</span>, where <span class
 <h2>Computer language: Python<a class="headerlink" href="#computer-language-python" title="Permalink to this headline">¶</a></h2>
 <p>Any programming language can be used to generate the <span class="math">\(u^{n+1}\)</span> values from
 the formula above. However, in this document we shall mainly make use of
-Python. There several good reasons for this choice:</p>
+Python. There are several good reasons for this choice:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Python has a very clean, readable syntax (often known as
@@ -260,7 +260,7 @@ mathematical rounding as known from school is obtained by</p>
 Python string enclosed in triple double quotes <code class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></code>.
 The purpose of this string object is to document what the function
 does and what the arguments are. In this case the necessary
-documentation do not span more than one line, but with triple double
+documentation does not span more than one line, but with triple double
 quoted strings the text may span several lines:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -301,7 +301,7 @@ the numbers:</p>
 because the <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">u</span></code> values are not aligned in nicely formatted columns.
 To fix this problem, we recommend to use the <em>printf format</em>, supported in most
 programming languages inherited from C. Another choice is
-Python&#8217;s recent <em>format string syntax</em>. Both kind of syntax is illustrated
+Python&#8217;s recent <em>format string syntax</em>. Both kinds of syntax are illustrated
 below.</p>
 <p id="index-3">Writing <code class="docutils literal"><span class="pre">t[i]</span></code> and <code class="docutils literal"><span class="pre">u[i]</span></code> in two nicely formatted columns is done like
 this with the printf format:</p>
@@ -680,7 +680,7 @@ defined by</p>
 <div class="math" id="equation-decay:norms:l2">
 <span id="id2"></span><span class="eqno">(6)</span>\[     ||f^n||_{\ell^2} = \left( \Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2},\]</div>
 <div class="math" id="equation-decay:norms:l1">
-<span id="id3"></span><span class="eqno">(7)</span>\[     ||f^n||_{\ell^1} = \Delta t\sum_{n=0}^{N_t} |f^n|\]</div>
+<span id="id3"></span><span class="eqno">(7)</span>\[     ||f^n||_{\ell^1} = \Delta t\sum_{n=0}^{N_t} |f^n|,\]</div>
 <div class="math" id="equation-decay:norms:linf">
 <span id="id4"></span><span class="eqno">(8)</span>\[     ||f^n||_{\ell^\infty} = \max_{0\leq n\leq N_t}|f^n|{\thinspace .}\]</div>
 <p>Note that the <span class="math">\(L^2\)</span>, <span class="math">\(L^1\)</span>, <span class="math">\(\ell^2\)</span>, and <span class="math">\(\ell^1\)</span> norms depend on the
@@ -698,7 +698,7 @@ This reasoning gives rise to the <em>vector norms</em> for a vector
 <div class="math" id="equation-decay:norms:vl2">
 <span id="eq-decay-norms-vl2"></span><span class="eqno">(9)</span>\[     ||f||_2 = \left( \frac{1}{N+1}\sum_{n=0}^{N} (f_n)^2\right)^{1/2},\]</div>
 <div class="math" id="equation-decay:norms:vl1">
-<span id="eq-decay-norms-vl1"></span><span class="eqno">(10)</span>\[     ||f||_1 = \frac{1}{N+1}\sum_{n=0}^{N} |f_n|\]</div>
+<span id="eq-decay-norms-vl1"></span><span class="eqno">(10)</span>\[     ||f||_1 = \frac{1}{N+1}\sum_{n=0}^{N} |f_n|,\]</div>
 <div class="math" id="equation-decay:norms:vlinf">
 <span id="eq-decay-norms-vlinf"></span><span class="eqno">(11)</span>\[     ||f||_{\ell^\infty} = \max_{0\leq n\leq N}|f_n|{\thinspace .}\]</div>
 <p>Here we have used the common vector component notation with subscripts
@@ -1017,7 +1017,7 @@ recent values of the unknown:</p>
 </pre></div>
 </div>
 <p>This code snippet also serves as a quick introduction to file writing in Python.
-Reading the data in the file into arrays <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">u</span></code> are done by the
+Reading the data in the file into arrays <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">u</span></code> is done by the
 function</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;sol.dat&#39;</span><span class="p">):</span>
     <span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>

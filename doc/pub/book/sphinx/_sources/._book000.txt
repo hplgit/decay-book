@@ -26,5 +26,5 @@ scientific computing are covered in addition to software topics like
 user interfaces, unit testing frameworks, class programming, and
 automating computer experiments.
 
-:Date: Sep 26, 2015
+:Date: Sep 30, 2015
 

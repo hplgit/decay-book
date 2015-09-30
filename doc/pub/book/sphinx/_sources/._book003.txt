@@ -36,7 +36,7 @@ implement the :math:`\theta`-rule
         u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
         
 
-since it can generate the three other schemes by various of
+since it can generate the three other schemes by various
 choices of :math:`\theta`: :math:`\theta=0` for Forward Euler, :math:`\theta =1` for
 Backward Euler, and :math:`\theta =1/2` for Crank-Nicolson.
 Given :math:`a`, :math:`u^0=I`, :math:`T`, and :math:`\Delta t`,
@@ -49,7 +49,7 @@ Computer language: Python
 
 Any programming language can be used to generate the :math:`u^{n+1}` values from
 the formula above. However, in this document we shall mainly make use of
-Python. There several good reasons for this choice:
+Python. There are several good reasons for this choice:
 
   * Python has a very clean, readable syntax (often known as
     "executable pseudo-code").
@@ -224,7 +224,7 @@ Right below the header line in the ``solver`` function there is a
 Python string enclosed in triple double quotes ``"""``.
 The purpose of this string object is to document what the function
 does and what the arguments are. In this case the necessary
-documentation do not span more than one line, but with triple double
+documentation does not span more than one line, but with triple double
 quoted strings the text may span several lines:
 
 .. code-block:: python
@@ -271,7 +271,7 @@ This compact ``print`` statement unfortunately gives less readable output
 because the ``t`` and ``u`` values are not aligned in nicely formatted columns.
 To fix this problem, we recommend to use the *printf format*, supported in most
 programming languages inherited from C. Another choice is
-Python's recent *format string syntax*. Both kind of syntax is illustrated
+Python's recent *format string syntax*. Both kinds of syntax are illustrated
 below.
 
 .. index:: printf format
@@ -805,7 +805,7 @@ defined by
 .. math::
    :label: decay:norms:l1
           
-        ||f^n||_{\ell^1} = \Delta t\sum_{n=0}^{N_t} |f^n|
+        ||f^n||_{\ell^1} = \Delta t\sum_{n=0}^{N_t} |f^n|,
         
         
 
@@ -845,7 +845,7 @@ This reasoning gives rise to the *vector norms* for a vector
 .. math::
    :label: decay:norms:vl1
           
-        ||f||_1 = \frac{1}{N+1}\sum_{n=0}^{N} |f_n|
+        ||f||_1 = \frac{1}{N+1}\sum_{n=0}^{N} |f_n|,
         
         
 
@@ -1262,7 +1262,7 @@ recent values of the unknown:
             return u, t
 
 This code snippet also serves as a quick introduction to file writing in Python.
-Reading the data in the file into arrays ``t`` and ``u`` are done by the
+Reading the data in the file into arrays ``t`` and ``u`` is done by the
 function
 
 .. code-block:: python

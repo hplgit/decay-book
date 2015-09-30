@@ -459,7 +459,7 @@ discretization parameter, here :math:`\Delta t`, becomes small. In the
 present case, we let :math:`p` be our small discretization parameter, and it
 makes sense to simplify the expressions for :math:`A` and :math:`{A_{\small\mbox{e}}}` by using
 Taylor polynomials around :math:`p=0`.  The Taylor polynomials are accurate
-for small :math:`p` and greatly simplifies the comparison of the analytical
+for small :math:`p` and greatly simplify the comparison of the analytical
 expressions since we then can compare polynomials, term by term.
 
 Calculating the Taylor series for :math:`{A_{\small\mbox{e}}}` is easily done by hand, but
@@ -564,7 +564,7 @@ clearly dominates over the higher-order terms (think of :math:`p=0.01`:
 
 Now, :math:`a` is a given parameter in the problem, while :math:`\Delta t` is
 what we can vary. Not surprisingly, the error expressions are usually
-written in terms :math:`\Delta t`. When then have
+written in terms :math:`\Delta t`. We then have
 
 .. _Eq:_auto22:
 
@@ -958,7 +958,7 @@ consistency, stability, and convergence are much more complicated.
 
 We have seen in the previous analysis that the Forward Euler,
 Backward Euler, and Crank-Nicolson schemes are convergent (:math:`e^n\rightarrow 0`),
-that they are consistent (:math:`R^n\rightarrow 0`, and that they are
+that they are consistent (:math:`R^n\rightarrow 0`), and that they are
 stable under certain conditions on the size of :math:`\Delta t`.
 We have also derived explicit mathematical expressions for :math:`e^n`,
 the truncation error, and the stability criteria.

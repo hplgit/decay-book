@@ -108,7 +108,7 @@ the directory <a class="reference external" href="http://tinyurl.com/ofkw6kc/gen
 depends on time:</p>
 <div class="math" id="equation-decay:problem:a">
 <span id="eq-decay-problem-a"></span><span class="eqno">(1)</span>\[     u^{\prime}(t) = -a(t)u(t),\quad t\in (0,T],\quad u(0)=I {\thinspace .}\]</div>
-<p>A Forward Euler scheme consist of evaluating <a href="#equation-decay:problem:a">(1)</a>
+<p>A Forward Euler scheme consists of evaluating <a href="#equation-decay:problem:a">(1)</a>
 at <span class="math">\(t=t_n\)</span> and approximating the derivative with a forward
 difference <span class="math">\([D^+_t u]^n\)</span>:</p>
 <div class="math" id="equation-_auto24">
@@ -408,46 +408,6 @@ test based on a linear exact solution:</p>
     <span class="k">print</span> <span class="n">difference</span>
     <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>  <span class="c"># depends on c!</span>
     <span class="k">assert</span> <span class="n">difference</span> <span class="o">&lt;</span> <span class="n">tol</span>
-
-<span class="k">def</span> <span class="nf">test_convergence_rates</span><span class="p">():</span>
-    <span class="c"># Create a manufactured solution with sympy</span>
-    <span class="kn">import</span> <span class="nn">sympy</span> <span class="kn">as</span> <span class="nn">sym</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">u_e</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">u_exact</span>
-
-    <span class="c"># Turn sympy expressions into Python function</span>
-    <span class="n">u_exact</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">],</span> <span class="n">u_e</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">compute_rates</span><span class="p">(</span><span class="n">dt_values</span><span class="p">,</span> <span class="n">E_values</span><span class="p">):</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dt_values</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="n">log</span><span class="p">(</span><span class="n">E_values</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">E_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span>
-             <span class="n">log</span><span class="p">(</span><span class="n">dt_values</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">dt_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
-        <span class="c"># Round to two decimals</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">r_</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">r_</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">r</span>
-
-    <span class="n">dt_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)]</span>
-    <span class="n">I</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">):</span>
-        <span class="n">E_values</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">:</span>
-            <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
-            <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-            <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
-            <span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-            <span class="n">E_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">compute_rates</span><span class="p">(</span><span class="n">dt_values</span><span class="p">,</span> <span class="n">E_values</span><span class="p">)</span>
-        <span class="k">print</span> <span class="s">&#39;theta=</span><span class="si">%g</span><span class="s">, r: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-        <span class="n">expected_rate</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">theta</span> <span class="o">==</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="mi">1</span>
-        <span class="n">tol</span> <span class="o">=</span> <span class="mf">0.1</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expected_rate</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">assert</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="n">tol</span>
 </pre></div>
 </div>
 <p>Any error in the updating formula makes this test fail!</p>
@@ -515,7 +475,7 @@ That is, those time steps lie outside the asymptotic range of
 <div class="section" id="implementation-2">
 <h4>Implementation<a class="headerlink" href="#implementation-2" title="Permalink to this headline">¶</a></h4>
 <p>We can compute <span class="math">\(r_0, r_1, \ldots, r_{m-2}\)</span> from <span class="math">\(E_i\)</span> and <span class="math">\(\Delta t_i\)</span>
-by the following functionL</p>
+by the following function</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">compute_rates</span><span class="p">(</span><span class="n">dt_values</span><span class="p">,</span> <span class="n">E_values</span><span class="p">):</span>
     <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dt_values</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="n">log</span><span class="p">(</span><span class="n">E_values</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">E_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span>
@@ -578,7 +538,7 @@ theta=1, r: [0.94, 0.97, 0.99, 0.99, 1.0, 1.0]
 theta=0.5, r: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0]
 </pre></div>
 </div>
-<p>We clearly see how the convergence rates goes to the expected values.</p>
+<p>We clearly see how the convergence rates approach the expected values.</p>
 <div class="admonition-why-convergence-rates-are-important admonition" id="index-4">
 <p class="first admonition-title">Why convergence rates are important</p>
 <p class="last">The strong practical application of computing convergence rates is for
@@ -651,12 +611,12 @@ a scalar function of time <span class="math">\(t\)</span>, or a vector valued fu
 case of a <em>system of ODEs</em> with <span class="math">\(m\)</span> unknown components:</p>
 <div class="math">
 \[u(t) = (u^{(0)}(t),u^{(1)}(t),\ldots,u^{(m-1)}(t)) {\thinspace .}\]</div>
-<p>In that case, the right-hand side is vector-valued function with <span class="math">\(m\)</span>
+<p>In that case, the right-hand side is a vector-valued function with <span class="math">\(m\)</span>
 components,</p>
 <div class="math">
 \[\begin{split}f(u, t) = ( &amp; f^{(0)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\
             &amp; f^{(1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\
-            &amp; \vdots,\\
+            &amp; \vdots\\
             &amp; f^{(m-1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)))
 {\thinspace .}\end{split}\]</div>
 <p>Actually, any system of ODEs can
@@ -854,7 +814,7 @@ method with step <span class="math">\(\frac{1}{2}\Delta t\)</span>:</p>
 <span id="eq-decay-fd2-rk4-tildef"></span><span class="eqno">(49)</span>\[     \tilde{f}^{n+\frac{1}{2}} = f(u^n + \frac{1}{2}\Delta t\hat{f}^{n+\frac{1}{2}}, t_{n+\frac{1}{2}}){\thinspace .}\]</div>
 <p>With <span class="math">\(\tilde{f}^{n+\frac{1}{2}}\)</span> as a hopefully good approximation to
 <span class="math">\(f^{n+\frac{1}{2}}\)</span>, we can for the final term <span class="math">\(\bar{f}^{n+1}\)</span> use
-a Crank-Nicolson method to approximate <span class="math">\(u^{n+1}\)</span>:</p>
+a Crank-Nicolson method on <span class="math">\([t_n, t_{n+1}]\)</span> to approximate <span class="math">\(u^{n+1}\)</span>:</p>
 <div class="math" id="equation-decay:fd2:RK4:barf">
 <span id="eq-decay-fd2-rk4-barf"></span><span class="eqno">(50)</span>\[     \bar{f}^{n+1} = f(u^n + \Delta t \hat{f}^{n+\frac{1}{2}}, t_{n+1}){\thinspace .}\]</div>
 <p>We have now used the Forward and Backward Euler methods as well as the

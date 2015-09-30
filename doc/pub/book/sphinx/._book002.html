@@ -467,11 +467,11 @@ or is constant.</p>
 formulated as one scheme with a varying parameter <span class="math">\(\theta\)</span>:</p>
 <div class="math" id="equation-decay:th0">
 <span id="eq-decay-th0"></span><span class="eqno">(17)</span>\[     \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -a (\theta u^{n+1} + (1-\theta) u^{n})\]\[     {\thinspace .}\]</div>
-<p>Observe:</p>
+<p>Observe that</p>
 <blockquote>
 <div><ul class="simple">
 <li><span class="math">\(\theta =0\)</span> gives the Forward Euler scheme</li>
-<li><span class="math">\(\theta =1\)</span> gives the Backward Euler scheme, and</li>
+<li><span class="math">\(\theta =1\)</span> gives the Backward Euler scheme,</li>
 <li><span class="math">\(\theta =\frac{1}{2}\)</span> gives the Crank-Nicolson scheme.</li>
 </ul>
 </div></blockquote>
@@ -557,7 +557,9 @@ Euler, and Crank-Nicolson schemes. They complement each other with their
 different pros and cons, thus providing a useful collection of
 solution methods for many differential equation problems.
 The unifying notation of the <span class="math">\(\theta\)</span>-rule makes it convenient to
-work with all three methods through just one formula.</p>
+work with all three methods through just one formula. This is
+particularly advantageous in computer implementations since one avoids
+if-else tests with formulas that have repetitive elements.</p>
 <div class="admonition-test-your-understanding admonition">
 <p class="first admonition-title">Test your understanding</p>
 <p class="last">To check that key concepts are really understood, the reader is

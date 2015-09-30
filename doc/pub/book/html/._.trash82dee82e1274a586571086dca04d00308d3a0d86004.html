@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -336,10 +336,10 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                '___sec121'),
               ('A biochemical reaction', 2, None, '___sec122'),
               ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
-              ('Predator-pray models in ecology',
+              ('Predator-prey models in ecology',
                1,
-               'decay:app:predpray',
-               'decay:app:predpray'),
+               'decay:app:predprey',
+               'decay:app:predprey'),
               ('Decay of atmospheric pressure with altitude',
                1,
                'decay:app:atm',
@@ -437,10 +437,10 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'decay:app:exer:SIR',
                'decay:app:exer:SIR'),
-              ('Exercise 27: Simulate predator-pray interaction',
+              ('Exercise 27: Simulate predator-prey interaction',
                2,
-               'decay:app:exer:predpray',
-               'decay:app:exer:predpray'),
+               'decay:app:exer:predprey',
+               'decay:app:exer:predprey'),
               ('Exercise 28: Simulate the pressure drop in the atmosphere',
                2,
                'decay:app:exer:atm1',
@@ -830,7 +830,7 @@ $$
 u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
 $$
 
-since it can generate the three other schemes by various of
+since it can generate the three other schemes by various
 choices of \( \theta \): \( \theta=0 \) for Forward Euler, \( \theta =1 \) for
 Backward Euler, and \( \theta =1/2 \) for Crank-Nicolson.
 Given \( a \), \( u^0=I \), \( T \), and \( \Delta t \),
@@ -843,7 +843,7 @@ compute \( u^1, u^2,\ldots,u^{N_t} \), where \( t_{N_t}=N_t\Delta t \), and
 <p>
 Any programming language can be used to generate the \( u^{n+1} \) values from
 the formula above. However, in this document we shall mainly make use of
-Python. There several good reasons for this choice:
+Python. There are several good reasons for this choice:
 
 <ul>
   <li> Python has a very clean, readable syntax (often known as
@@ -1021,7 +1021,7 @@ Right below the header line in the <code>solver</code> function there is a
 Python string enclosed in triple double quotes <code>&quot;&quot;&quot;</code>.
 The purpose of this string object is to document what the function
 does and what the arguments are. In this case the necessary
-documentation do not span more than one line, but with triple double
+documentation does not span more than one line, but with triple double
 quoted strings the text may span several lines:
 
 <p>
@@ -1072,7 +1072,7 @@ This compact <code>print</code> statement unfortunately gives less readable outp
 because the <code>t</code> and <code>u</code> values are not aligned in nicely formatted columns.
 To fix this problem, we recommend to use the <em>printf format</em>, supported in most
 programming languages inherited from C. Another choice is
-Python's recent <em>format string syntax</em>. Both kind of syntax is illustrated
+Python's recent <em>format string syntax</em>. Both kinds of syntax are illustrated
 below.
 
 <p>
@@ -1582,7 +1582,7 @@ $$
 \begin{align}
 ||f^n||_{\ell^2} &= \left( \Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2},
 \tag{51}\\ 
-||f^n||_{\ell^1} &= \Delta t\sum_{n=0}^{N_t} |f^n|
+||f^n||_{\ell^1} &= \Delta t\sum_{n=0}^{N_t} |f^n|,
 \tag{52}\\ 
 ||f^n||_{\ell^\infty} &= \max_{0\leq n\leq N_t}|f^n|\tp
 \tag{53}
@@ -1607,7 +1607,7 @@ $$
 \begin{align}
 ||f||_2 &= \left( \frac{1}{N+1}\sum_{n=0}^{N} (f_n)^2\right)^{1/2},
 \tag{54}\\ 
-||f||_1 &= \frac{1}{N+1}\sum_{n=0}^{N} |f_n|
+||f||_1 &= \frac{1}{N+1}\sum_{n=0}^{N} |f_n|,
 \tag{55}\\ 
 ||f||_{\ell^\infty} &= \max_{0\leq n\leq N}|f_n|\tp
 \tag{56}
@@ -1934,7 +1934,7 @@ basic plotting functionality and being able to look up
 the cited technical documentation.
 
 <p>
-<div class="alert alert-block alert-info alert-text-normal"><b>Test your understanding.</b>
+<div class="alert alert-block alert-info alert-text-normal"><b>Test your understanding!</b>
 <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:cooling:py">Exercise 18: Implement schemes for Newton's law of cooling</a> asks you to implement
 a solver for a problem that is slightly different from the
 one above. You may use the <code>solver</code> and <code>explore</code> functions
@@ -2029,7 +2029,7 @@ recent values of the unknown:
 </pre></div>
 <p>
 This code snippet also serves as a quick introduction to file writing in Python.
-Reading the data in the file into arrays <code>t</code> and <code>u</code> are done by the
+Reading the data in the file into arrays <code>t</code> and <code>u</code> is done by the
 function
 
 <p>

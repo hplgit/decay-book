@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-pray model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Vogt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -365,10 +365,10 @@ div { text-align: justify; text-justify: inter-word; }
                '___sec121'),
               ('A biochemical reaction', 2, None, '___sec122'),
               ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
-              ('Predator-pray models in ecology',
+              ('Predator-prey models in ecology',
                1,
-               'decay:app:predpray',
-               'decay:app:predpray'),
+               'decay:app:predprey',
+               'decay:app:predprey'),
               ('Decay of atmospheric pressure with altitude',
                1,
                'decay:app:atm',
@@ -466,10 +466,10 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'decay:app:exer:SIR',
                'decay:app:exer:SIR'),
-              ('Exercise 27: Simulate predator-pray interaction',
+              ('Exercise 27: Simulate predator-prey interaction',
                2,
-               'decay:app:exer:predpray',
-               'decay:app:exer:predpray'),
+               'decay:app:exer:predprey',
+               'decay:app:exer:predprey'),
               ('Exercise 28: Simulate the pressure drop in the atmosphere',
                2,
                'decay:app:exer:atm1',
@@ -852,7 +852,7 @@ u^{\prime}(t) = -a(t)u(t),\quad t\in (0,T],\quad u(0)=I \tp
 $$
 
 <p>
-A Forward Euler scheme consist of evaluating <a href="#mjx-eqn-74">(74)</a>
+A Forward Euler scheme consists of evaluating <a href="#mjx-eqn-74">(74)</a>
 at \( t=t_n \) and approximating the derivative with a forward
 difference \( [D^+_t u]^n \):
 
@@ -1272,46 +1272,6 @@ test based on a linear exact solution:
     print difference
     tol = 1E-14  # depends on c!
     assert difference &lt; tol
-
-def test_convergence_rates():
-    # Create a manufactured solution with sympy
-    import sympy as sym
-    t = sym.symbols('t')
-    u_e = sym.sin(t)*sym.exp(-2*t)
-    a = t**2
-    b = sym.diff(u_e, t) + a*u_exact
-
-    # Turn sympy expressions into Python function
-    u_exact = sym.lambdify([t], u_e, modules='numpy')
-    a = sym.lambdify([t], a, modules='numpy')
-    b = sym.lambdify([t], b, modules='numpy')
-
-    def compute_rates(dt_values, E_values):
-        m = len(dt_values)
-        r = [log(E_values[i-1]/E_values[i])/
-             log(dt_values[i-1]/dt_values[i])
-             for i in range(1, m, 1)]
-        # Round to two decimals
-        r = [round(r_, 2) for r_ in r]
-        return r
-
-    dt_values = [0.1*2**(-i) for i in range(7)]
-    I = u_exact(0)
-
-    for theta in (0, 1, 0.5):
-        E_values = []
-        for dt in dt_values:
-            u, t = solver(I=I, a=a, b=b, T=6, dt=dt, theta=theta)
-            u_e = u_exact(t)
-            e = u_e - u
-            E = sqrt(dt*sum(e**2))
-            E_values.append(E)
-        r = compute_rates(dt_values, E_values)
-        print 'theta=%g, r: %s' % (theta, r)
-        expected_rate = 2 if theta == 0.5 else 1
-        tol = 0.1
-        diff = abs(expected_rate - r[-1])
-        assert diff &lt; tol
 </code></pre>
 <!-- end verbatim block -->
 Any error in the updating formula makes this test fail!
@@ -1400,7 +1360,7 @@ That is, those time steps lie outside the asymptotic range of
 
 <p>
 We can compute \( r_0, r_1, \ldots, r_{m-2} \) from \( E_i \) and \( \Delta t_i \)
-by the following functionL
+by the following function
 
 <p>
 <!-- begin verbatim block  pycod-->
@@ -1481,7 +1441,7 @@ theta=1, r: [0.94, 0.97, 0.99, 0.99, 1.0, 1.0]
 theta=0.5, r: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0]
 </code></pre>
 <!-- end verbatim block -->
-We clearly see how the convergence rates goes to the expected values.
+We clearly see how the convergence rates approach the expected values.
 
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
@@ -1591,13 +1551,13 @@ a scalar function of time \( t \), or a vector valued function of \( t \) in
 case of a <em>system of ODEs</em> with \( m \) unknown components:
 $$ u(t) = (u^{(0)}(t),u^{(1)}(t),\ldots,u^{(m-1)}(t)) \tp  $$
 
-In that case, the right-hand side is vector-valued function with \( m \)
+In that case, the right-hand side is a vector-valued function with \( m \)
 components,
 $$
 \begin{align*}
 f(u, t) = ( & f^{(0)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\ 
             & f^{(1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\ 
-            & \vdots,\\ 
+            & \vdots\\ 
             & f^{(m-1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)))
 \tp
 \end{align*}
@@ -1905,7 +1865,7 @@ $$
 
 With \( \tilde{f}^{n+\half} \) as a hopefully good approximation to
 \( f^{n+\half} \), we can for the final term \( \bar{f}^{n+1} \) use
-a Crank-Nicolson method to approximate \( u^{n+1} \):
+a Crank-Nicolson method on \( [t_n, t_{n+1}] \) to approximate \( u^{n+1} \):
 
 $$
 \begin{equation}

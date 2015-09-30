@@ -402,7 +402,7 @@ discretization parameter, here <span class="math">\(\Delta t\)</span>, becomes s
 present case, we let <span class="math">\(p\)</span> be our small discretization parameter, and it
 makes sense to simplify the expressions for <span class="math">\(A\)</span> and <span class="math">\({A_{\small\mbox{e}}}\)</span> by using
 Taylor polynomials around <span class="math">\(p=0\)</span>.  The Taylor polynomials are accurate
-for small <span class="math">\(p\)</span> and greatly simplifies the comparison of the analytical
+for small <span class="math">\(p\)</span> and greatly simplify the comparison of the analytical
 expressions since we then can compare polynomials, term by term.</p>
 <p>Calculating the Taylor series for <span class="math">\({A_{\small\mbox{e}}}\)</span> is easily done by hand, but
 the three versions of <span class="math">\(A\)</span> for <span class="math">\(\theta=0,1,{\frac{1}{2}}\)</span> lead to more
@@ -484,7 +484,7 @@ clearly dominates over the higher-order terms (think of <span class="math">\(p=0
 <span class="math">\(p\)</span> is a hundred times larger than <span class="math">\(p^2\)</span>).</p>
 <p>Now, <span class="math">\(a\)</span> is a given parameter in the problem, while <span class="math">\(\Delta t\)</span> is
 what we can vary. Not surprisingly, the error expressions are usually
-written in terms <span class="math">\(\Delta t\)</span>. When then have</p>
+written in terms <span class="math">\(\Delta t\)</span>. We then have</p>
 <div class="math" id="equation-_auto22">
 <span id="eq-auto22"></span><span class="eqno">(9)</span>\[\begin{split}     A-{A_{\small\mbox{e}}} = \left\lbrace\begin{array}{ll}
      {\mathcal{O}(\Delta t^2)}, &amp; \hbox{Forward and Backward Euler},\\
@@ -755,7 +755,7 @@ in the world of nonlinear differential equations the relations between
 consistency, stability, and convergence are much more complicated.</p>
 <p>We have seen in the previous analysis that the Forward Euler,
 Backward Euler, and Crank-Nicolson schemes are convergent (<span class="math">\(e^n\rightarrow 0\)</span>),
-that they are consistent (<span class="math">\(R^n\rightarrow 0\)</span>, and that they are
+that they are consistent (<span class="math">\(R^n\rightarrow 0\)</span>), and that they are
 stable under certain conditions on the size of <span class="math">\(\Delta t\)</span>.
 We have also derived explicit mathematical expressions for <span class="math">\(e^n\)</span>,
 the truncation error, and the stability criteria.</p>
