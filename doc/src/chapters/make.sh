@@ -246,5 +246,5 @@ fi
 fi
 fi
 
-cd $repo
+cd $dest
 git add .
