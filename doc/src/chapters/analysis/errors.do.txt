@@ -125,6 +125,17 @@ plotted the logarithm of the absolute value of the numerical error.
 
 FIGURE: [fig-analysis/numerical_errors, width=700 frac=0.9] Discretization errors in various schemes for 4 time step values. label{decay:analysis:numerical_errors:fig}
 
+The table below presents exact figures of the discretization error
+for various choices of $\Delta t$ and schemes.
+
+|----------------------------------------------------------------------|
+| $\Delta t$ |        FE        |        BE        |        CN         |
+|----r---------------r------------------r------------------r-----------|
+| 0.4        | $9\cdot 10^{-2}$ | $6\cdot 10^{-2}$ | $ 5\cdot 10^{-3}$ |
+| 0.1        | $2\cdot 10^{-2}$ | $2\cdot 10^{-2}$ | $ 3\cdot 10^{-4}$ |
+| 0.01       | $2\cdot 10^{-3}$ | $2\cdot 10^{-3}$ | $ 3\cdot 10^{-6}$ |
+|----------------------------------------------------------------------|
+
 The computer code used to generate the plots appear next. It makes use
 of a `solver` function
 % if DOCUMENT == "document":
@@ -167,24 +178,41 @@ and then we run our numerical algorithm (the Crank-Nicolson scheme to
 be precise) with `Decimal` objects for all real numbers and test the
 error arising from using 4, 16, 64, and 128 digits.
 
-When computing with numbers around unity in size, we typically
+When computing with numbers around unity in size and doing 40 time
+steps, we typically
 get a rounding error of $10^{-d}$, where $d$ is the number
-of digits used. However, if we compute with numbers that
-are larger, e.g., the $u$ values implied by $I=1000$ and $a=100$,
+of digits used. The effect of rounding errors may accumulate if
+we perform more operations, so increasing the number of time steps
+to 4000 gives a rounding error of the order $10^{-d+2}$.
+Also, if we compute with numbers that
+are much larger than unit, we lose accuracy due to rounding
+errors. For example, for the $u$ values implied by $I=1000$ and $a=100$,
 the rounding errors increase to about $10^{-d+3}$. Below is
-a table of the the computed maximum rounding error for various number of digits
-and two different magnitudes of $I$ and $a$.
+a table summarizing a set of experiments. A rough model for
+the size of rounding errors is $10^{-d+q+r}$, where $d$ is the
+number of digits, we take of the order $10^q$ time steps, and
+the size of the numbers in the arithmetic expressions are of
+order $10^r$.
 
-|----c----------c--------------------------c--------------|
-| digits  | $I=1$, $a=1$          | $I=1000$, $a=100$     |
-|----r----------l--------------------------l--------------|
-| 4       | $3.05\cdot 10^{-4}$   | $3.05\cdot 10^{-1}$   |
-| 16      | $1.71\cdot 10^{-16}$  | $1.58\cdot 10^{-13}$  |
-| 64      | $2.99\cdot 10^{-64}$  | $2.06\cdot 10^{-61}$  |
-| 128     | $1.60\cdot 10^{-128}$ | $2.41\cdot 10^{-125}$ |
-|---------------------------------------------------------|
+|----c-----------------c--------------------------c---------------------c--------------------------------c-------------------|
+| digits  | $I=1$, $a=1$; 40 steps | $I=1$, $a=1$; 4000 steps | $I=1000$, $a=100$; 40 steps | $I=10^3$, $a=10^2$; 4000 steps |
+|----r-----------------l--------------------------l---------------------l--------------------------------l-------------------|
+| 4       | $3.05\cdot 10^{-4}$    | $2.51\cdot 10^{-1}$      | $3.05\cdot 10^{-1}$         | $9.82\cdot 10^{2}$             |
+| 16      | $1.71\cdot 10^{-16}$   | $1.42\cdot 10^{-14}$     | $1.58\cdot 10^{-13}$        | $4.84\cdot 10^{-11}$           |
+| 64      | $2.99\cdot 10^{-64}$   | $1.80\cdot 10^{-62}$     | $2.06\cdot 10^{-61}$        | $1.04\cdot 10^{-57}$           |
+| 128     | $1.60\cdot 10^{-128}$  | $1.56\cdot 10^{-126}$    | $2.41\cdot 10^{-125}$       | $1.07\cdot 10^{-122}$          |
+|----------------------------------------------------------------------------------------------------------------------------|
 
-The computer code for doing these experiments need a new version
+We realize that rounding errors are at the lowest possible level
+if we scale the differential equation model,
+% if document != "DOCUMENT":
+see Section ref{decay:app:scaling},
+% endif
+the numbers entering the computations are of unity in size,
+and if we take a small number of steps (40 steps gives a discretization error
+of $5\cdot 10^{-3}$ with the Crank-Nicolson scheme).
+
+The computer code for doing the reported experiments need a new version
 of the `solver` function where we do arithmetics with `Decimal`
 objects:
 

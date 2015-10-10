@@ -1774,6 +1774,7 @@ last is then \texttt{len(u)-1} (the length of an array \texttt{u} is obtained by
 \texttt{len(u)} or \texttt{u.size}).
 
 \subsection{Integer division}
+\label{decay:py2}
 
 The shown implementation of the \texttt{solver} may face problems and
 wrong results if \texttt{T}, \texttt{a}, \texttt{dt}, and \texttt{theta} are given as integers
@@ -4168,6 +4169,476 @@ Modify the \href{{http://tinyurl.com/ofkw6kc/analysis/decay_ampf_plot.py}}{\noli
 
 \end{doconceexercise}
 % --- end exercise ---
+
+
+\section{Various types of errors in a differential equation model}
+
+So far we have been concerned with one type of error, namely the
+discretization error committed by replacing the differential equation
+problem by a recursive set of difference equations. There are,
+however, other types of errors that must be considered too. We can
+classify errors into four groups:
+
+\begin{enumerate}
+\item model errors
+
+\item data errors
+
+\item discretization errors
+
+\item round-off errors
+\end{enumerate}
+
+\noindent
+Below, we shall briefly describe and illustrate these four types
+of errors.
+
+\subsection{Model errors}
+
+Any mathematical model like $u^{\prime}=-au$, $u(0)=I$, is just an
+approximate description of a real-world phenomenon. Suppose a more
+accurate model has $a$ as a function of time rather than a
+constant. Here we take $a(t)$ as a simple linear function: $a +
+pt$. Obviously, $u$ with $p>0$ will go faster to zero with time than a
+constant $a$.
+
+The solution of
+
+\[ u^{\prime} = (a + pt)u,\quad u(0)=I,\]
+can be shown (see below) to be
+
+\[ u(t) = I e^{t \left(- a - \frac{p t}{2}\right)}\tp\]
+With the above $u$ available in a Python function \Verb!u_true(t, I, a, p)!
+and the solution from our model $u^{\prime}=-au$ available in \texttt{u(t, I, a)},
+we can make some plots of the two models and the error for some values
+of $p$. Figure~\ref{decay:analysis:model_errors:fig:model_u} displays
+the two curves for $p=0.01, 0.1, 1$, while Figure~\ref{decay:analysis:model_errors:fig:model_e} shows the difference
+between the two models as a function of $t$ for the same $p$ values.
+
+
+\begin{figure}[!ht]  % decay:analysis:model_errors:fig:model_u
+  \centerline{\includegraphics[width=1.0\linewidth]{fig-analysis/model_errors_u.pdf}}
+  \caption{
+  Comparison of two models for three values of $p$. \label{decay:analysis:model_errors:fig:model_u}
+  }
+\end{figure}
+%\clearpage % flush figures decay:analysis:model_errors:fig:model_u
+
+
+
+\begin{figure}[!ht]  % decay:analysis:model_errors:fig:model_e
+  \centerline{\includegraphics[width=0.8\linewidth]{fig-analysis/model_errors_e.pdf}}
+  \caption{
+  Discrepancy of Comparison of two models for three values of $p$. \label{decay:analysis:model_errors:fig:model_e}
+  }
+\end{figure}
+%\clearpage % flush figures decay:analysis:model_errors:fig:model_e
+
+
+The code that was used to produce the plots looks like
+
+\begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
+from numpy import linspace, exp
+from matplotlib.pyplot import \ 
+     plot, show, xlabel, ylabel, legend, savefig, figure, title
+
+def model_errors():
+    p_values = [0.01, 0.1, 1]
+    a = 1
+    I = 1
+    t = linspace(0, 4, 101)
+    legends = []
+    # Work with figure(1) for the discrepancy and figure(2+i)
+    # for plotting the model and the true model for p value no i
+    for i, p in enumerate(p_values):
+        u = model(t, I, a)
+        u_true = true_model(t, I, a, p)
+        discrepancy = u_true - u
+        figure(1)
+        plot(t, discrepancy)
+        figure(2+i)
+        plot(t, u, 'r-', t, u_true, 'b--')
+        legends.append('p=%g' % p)
+    figure(1)
+    legend(legends, loc='lower right')
+    savefig('tmp1.png'); savefig('tmp1.pdf')
+    for i, p in enumerate(p_values):
+        figure(2+i)
+        legend(['model', 'true model'])
+        title('p=%g' % p)
+        savefig('tmp%d.png' % (2+i)); savefig('tmp%d.pdf' % (2+i))
+\end{Verbatim}
+\end{cod}
+\noindent
+
+To derive the analytical solution of the model $u^{\prime}=-(a+pt)u$, $
+u(0)=I$, we can use SymPy and the code below. This is somewhat advanced
+SymPy use for a newbie, but serves to illustrate the possibilities to
+solve differential equations by symbolic software.
+
+\begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
+def derive_true_solution():
+    import sympy as sym
+    u = sym.symbols('u', cls=sym.Function)  # function u(t)
+    t, a, p, I = sym.symbols('t a p I', real=True)
+
+    def ode(u, t, a, p):
+        """Define ODE: u' = (a + p*t)*u. Return residual."""
+        return sym.diff(u, t) + (a + p*t)*u
+
+    eq = ode(u(t), t, a, p)
+    s = sym.dsolve(eq)
+    # s is sym.Eq object u(t) == expression, we want u = expression,
+    # so grab the right-hand side of the equality (Eq obj.)
+    u = s.rhs
+    print u
+    # u contains C1, replace it with a symbol we can fit to
+    # the initial condition
+    C1 = sym.symbols('C1', real=True)
+    u = u.subs('C1', C1)
+    print u
+    # Initial condition equation
+    eq = u.subs(t, 0) - I
+    s = sym.solve(eq, C1)  # solve eq wrt C1
+    print s
+    # s is a list s[0] = ...
+    # Replace C1 in u by the solution
+    u = u.subs(C1, s[0])
+    print 'u:', u
+    print sym.latex(u)  # latex formula for reports
+
+    # Consistency check: u must fulfill ODE and initial condition
+    print 'ODE is fulfilled:', sym.simplify(ode(u, t, a, p))
+    print 'u(0)-I:', sym.simplify(u.subs(t, 0) - I)
+
+    # Convert u expression to Python numerical function
+    # (modules='numpy' allows numpy arrays as arguments,
+    # we want this for t)
+    u_func = sym.lambdify([t, I, a, p], u, modules='numpy')
+    return u_func
+
+true_model = derive_true_solution()
+\end{Verbatim}
+\end{cod}
+\noindent
+
+\subsection{Data errors}
+
+\index{Monte Carlo simulation}
+
+By ``data'' we mean all the input parameters to a model, in our case
+$I$ and $a$. The values of these may contain errors, or at least
+uncertainty. Suppose $I$ and $a$ are measured from some physical
+experiments. Ideally, we have many samples of $I$ and $a$ and
+from these we can fit probability distributions. Assume that $I$
+turns out to be normally distributed with mean 1 and standard deviation 0.2,
+while $a$ is uniformly distributed in the interval $[0.5, 1.5]$.
+
+How will the uncertainty in $I$ and $a$ propagate through the model
+$u=Ie^{-at}$? That is, what is the uncertainty in $u$ at a particular
+time $t$? This answer can easily be answered using \emph{Monte Carlo
+simulation}. It means that we draw a lot of samples from the
+distributions for $I$ and $a$. For each combination of $I$ and $a$
+sample we compute the corresponding $u$ value for selected values of
+$t$.  Afterwards, we can for each selected $t$ values make a histogram
+of all the computed $u$ values to see what the distribution of $u$
+values look like. Figure~\ref{decay:analysis:data_errors:fig} shows the
+histograms corresponding to $t=0,1,3$. We see that the distribution of
+$u$ values is much like a symmetric normal distribution at $t=0$,
+centered around $u=1$. At later times, the distribution gets more
+asymmetric and narrower. It means that the uncertainty decreases with
+time. From the computed $u$ values we can easily calculate the mean
+and standard deviation. The table below shows the mean and standard
+deviation values along with the value if we just use the formula
+$u=Ie^{-at}$ with the mean values of $I$ and $a$: $I=1$ and $a=1$. As
+we see, there is some discrepancy between this latter (naive)
+computation and the mean value produced by Monte Carlo simulation.
+
+
+
+{\small   % for Springer style: small table font and more vspace
+
+\vspace{4mm}
+
+\begin{tabular}{llll}
+\hline
+\multicolumn{1}{c}{ time } & \multicolumn{1}{c}{ mean } & \multicolumn{1}{c}{ st.dev. } & \multicolumn{1}{c}{ $u(t;I=1,a=1)$ } \\
+\hline
+0    & 1.00 & 0.200   & 1.00           \\
+1    & 0.38 & 0.135   & 0.37           \\
+3    & 0.07 & 0.060   & 0.14           \\
+\hline
+\end{tabular}
+
+\vspace{4mm}
+
+}
+
+
+\noindent
+Actually, $u(t;I,a)$ becomes a stochastic variable for each $t$ when
+$I$ and $a$ are stochastic variables, as they are in the above
+Monte Carlo simulation. The mean of the stochastic $u(t;I,a)$ is
+not equal to $u(t;I=1,a=1)$ unless $u$ is linear in $I$ and $a$
+(here $u$ is nonlinear in $a$). The accuracy of the Monte Carlo
+results increases with increasing number of samples.
+
+
+\begin{figure}[!ht]  % decay:analysis:data_errors:fig
+  \centerline{\includegraphics[width=1.0\linewidth]{fig-analysis/data_errors.pdf}}
+  \caption{
+  Histogram of solution uncertainty at three time points, due to data errors. \label{decay:analysis:data_errors:fig}
+  }
+\end{figure}
+%\clearpage % flush figures decay:analysis:data_errors:fig
+
+
+The computer code required to do the Monte Carlo simulation and
+produce the plots in Figure~\ref{decay:analysis:data_errors:fig}
+is shown below.
+
+\begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
+def data_errors():
+    from numpy import random, mean, std
+    from matplotlib.pyplot import hist
+    N = 10000
+    # Draw random numbers for I and a
+    I_values = random.normal(1, 0.2, N)
+    a_values = random.uniform(0.5, 1.5, N)
+    # Compute corresponding u values for some t values
+    t = [0, 1, 3]
+    u_values = {}  # samples for various t values
+    u_mean = {}
+    u_std = {}
+    for t_ in t:
+        # Compute u samples corresponding to I and a samples
+        u_values[t_] = [model(t_, I, a)
+                        for I, a in zip(I_values, a_values)]
+        u_mean[t_] = mean(u_values[t_])
+        u_std[t_] = std(u_values[t_])
+
+        figure()
+        dummy1, bins, dummy2 = hist(
+            u_values[t_], bins=30, range=(0, I_values.max()),
+            normed=True, facecolor='green')
+        #plot(bins)
+        title('t=%g' % t_)
+        savefig('tmp_%g.png' % t_); savefig('tmp_%g.pdf' % t_)
+    # Table of mean and standard deviation values
+    print 'time   mean   st.dev.'
+    for t_ in t:
+        print '%3g    %.2f    %.3f' % (t_, u_mean[t_], u_std[t_])
+\end{Verbatim}
+\end{cod}
+\noindent
+
+\subsection{Discretization errors}
+
+The errors implied by solving the differential equation problem by
+the $\theta$-rule has been thoroughly analyzed in the previous
+sections. Below are some plots of the error versus time for the
+Forward Euler (FE), Backward Euler (BN), and Crank-Nicolson (CN)
+schemes for decreasing values of $\Delta t$. Since the difference
+in magnitude between the errors in the CN scheme versus the FE ad
+BN schemes grows significantly as $\Delta t$ is reduced (the error
+goes like $\Delta t^2$ for CN versus $\Delta t$ for FE/BE), we have
+plotted the logarithm of the absolute value of the numerical error.
+
+
+\begin{figure}[!ht]  % decay:analysis:numerical_errors:fig
+  \centerline{\includegraphics[width=0.9\linewidth]{fig-analysis/numerical_errors.pdf}}
+  \caption{
+  Discretization errors in various schemes for 4 time step values. \label{decay:analysis:numerical_errors:fig}
+  }
+\end{figure}
+%\clearpage % flush figures decay:analysis:numerical_errors:fig
+
+
+The table below presents exact figures of the discretization error
+for various choices of $\Delta t$ and schemes.
+
+
+
+{\small   % for Springer style: small table font and more vspace
+
+\vspace{4mm}
+
+\begin{tabular}{rrrr}
+\hline
+\multicolumn{1}{c}{ $\Delta t$ } & \multicolumn{1}{c}{ FE } & \multicolumn{1}{c}{ BE } & \multicolumn{1}{c}{ CN } \\
+\hline
+0.4        & $9\cdot 10^{-2}$ & $6\cdot 10^{-2}$ & $ 5\cdot 10^{-3}$ \\
+0.1        & $2\cdot 10^{-2}$ & $2\cdot 10^{-2}$ & $ 3\cdot 10^{-4}$ \\
+0.01       & $2\cdot 10^{-3}$ & $2\cdot 10^{-3}$ & $ 3\cdot 10^{-6}$ \\
+\hline
+\end{tabular}
+
+\vspace{4mm}
+
+}
+
+
+\noindent
+The computer code used to generate the plots appear next. It makes use
+of a \texttt{solver} function
+as shown in Section~\ref{decay:py2}.
+
+\begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
+def discretization_errors():
+    from numpy import log, abs
+    I = 1
+    a = 1
+    T = 4
+    t = linspace(0, T, 101)
+    schemes = {'FE': 0, 'BE': 1, 'CN': 0.5}  # theta to scheme name
+    dt_values = [0.8, 0.4, 0.1, 0.01]
+    for dt in dt_values:
+        figure()
+        legends = []
+        for scheme in schemes:
+            theta = schemes[scheme]
+            u, t = solver(I, a, T, dt, theta)
+            u_e = model(t, I, a)
+            error = u_e - u
+            print '%s: dt=%.2f, %d steps, max error: %.2E' % \ 
+                  (scheme, dt, len(u)-1, abs(error).max())
+            # Plot log(error), but exclude error[0] since it is 0
+            plot(t[1:], log(abs(error[1:])))
+            legends.append(scheme)
+        xlabel('t');  ylabel('log(abs(numerical error))')
+        legend(legends, loc='upper right')
+        title(r'$\Delta t=%g$' % dt)
+        savefig('tmp_dt%g.png' % dt); savefig('tmp_dt%g.pdf' % dt)
+\end{Verbatim}
+\end{cod}
+\noindent
+
+\subsection{Rounding errors}
+
+Real numbers on a computer are represented by \href{{https://en.wikipedia.org/wiki/Floating_point}}{floating-point numbers}, which means that just a finite
+number of digits are stored and used. Therefore, the floating-point number
+is an approximation to the underlying real number. When doing
+arithmetics with floating-point numbers, there will be small
+approximation errors, called round-off errors or rounding errors,
+that may or may not accumulate in comprehensive computations.
+A typical example is shown below.
+
+\begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
+>>> 1.0/51*51
+1.0
+>>> 1.0/49*49
+0.9999999999999999
+\end{Verbatim}
+\end{cod}
+\noindent
+We see there is not an exact result in the latter case, but a rounding
+error of $10^{-16}$. This is the typical level of a rounding error
+from an arithmetic operation with 64 bit floating-point numbers
+(\texttt{float} object in Python, often called \texttt{double} or double precision
+in other languages).
+
+What is the effect of using \texttt{float} objects and not exact arithmetics?
+Python has a \texttt{Decimal} object in the \href{{https://docs.python.org/2/library/decimal.html}}{\nolinkurl{decimal}} module that allows us
+to use as many digits in floating-point numbers as we like. We take
+1000 digits as the true answer where rounding errors are negligible,
+and then we run our numerical algorithm (the Crank-Nicolson scheme to
+be precise) with \texttt{Decimal} objects for all real numbers and test the
+error arising from using 4, 16, 64, and 128 digits.
+
+When computing with numbers around unity in size and doing 40 time
+steps, we typically
+get a rounding error of $10^{-d}$, where $d$ is the number
+of digits used. The effect of rounding errors may accumulate if
+we perform more operations, so increasing the number of time steps
+to 4000 gives a rounding error of the order $10^{-d+2}$.
+Also, if we compute with numbers that
+are much larger than unit, we lose accuracy due to rounding
+errors. For example, for the $u$ values implied by $I=1000$ and $a=100$,
+the rounding errors increase to about $10^{-d+3}$. Below is
+a table summarizing a set of experiments. A rough model for
+the size of rounding errors is $10^{-d+q+r}$, where $d$ is the
+number of digits, we take of the order $10^q$ time steps, and
+the size of the numbers in the arithmetic expressions are of
+order $10^r$.
+
+
+
+{\small   % for Springer style: small table font and more vspace
+
+\vspace{4mm}
+
+\begin{tabular}{rllll}
+\hline
+\multicolumn{1}{c}{ digits } & \multicolumn{1}{c}{ $I=1$, $a=1$; 40 steps } & \multicolumn{1}{c}{ $I=1$, $a=1$; 4000 steps } & \multicolumn{1}{c}{ $I=1000$, $a=100$; 40 steps } & \multicolumn{1}{c}{ $I=10^3$, $a=10^2$; 4000 steps } \\
+\hline
+4      & $3.05\cdot 10^{-4}$    & $2.51\cdot 10^{-1}$      & $3.05\cdot 10^{-1}$         & $9.82\cdot 10^{2}$             \\
+16     & $1.71\cdot 10^{-16}$   & $1.42\cdot 10^{-14}$     & $1.58\cdot 10^{-13}$        & $4.84\cdot 10^{-11}$           \\
+64     & $2.99\cdot 10^{-64}$   & $1.80\cdot 10^{-62}$     & $2.06\cdot 10^{-61}$        & $1.04\cdot 10^{-57}$           \\
+128    & $1.60\cdot 10^{-128}$  & $1.56\cdot 10^{-126}$    & $2.41\cdot 10^{-125}$       & $1.07\cdot 10^{-122}$          \\
+\hline
+\end{tabular}
+
+\vspace{4mm}
+
+}
+
+
+\noindent
+We realize that rounding errors are at the lowest possible level
+if we scale the differential equation model,
+see Section~\ref{decay:app:scaling},
+the numbers entering the computations are of unity in size,
+and if we take a small number of steps (40 steps gives a discretization error
+of $5\cdot 10^{-3}$ with the Crank-Nicolson scheme).
+
+The computer code for doing the reported experiments need a new version
+of the \texttt{solver} function where we do arithmetics with \texttt{Decimal}
+objects:
+
+\begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
+def solver_decimal(I, a, T, dt, theta):
+    """Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt."""
+    from numpy import zeros, linspace
+    from decimal import Decimal as D
+    dt = D(dt)
+    a = D(a)
+    theta = D(theta)
+    Nt = int(round(D(T)/dt))
+    T = Nt*dt
+    u = zeros(Nt+1, dtype=object)  # array of Decimal objects
+    t = linspace(0, float(T), Nt+1)
+
+    u[0] = D(I)               # assign initial condition
+    for n in range(0, Nt):    # n=0,1,...,Nt-1
+        u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
+    return u, t
+\end{Verbatim}
+\end{cod}
+\noindent
+The function below carries out the experiments. Note that we can
+set the number of digits as we want through the \texttt{decimal.getcontext().prec}
+variable.
+
+\begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
+def rounding_errors(I=1, a=1, T=4, dt=0.1):
+    import decimal
+    from numpy import log, array, abs
+    digits_values = [4, 16, 64, 128]
+    # "Exact" arithmetics is taken as 1000 decimals here
+    decimal.getcontext().prec = 1000
+    u_e, t = solver_decimal(I=I, a=a, T=T, dt=dt, theta=0.5)
+    for digits in digits_values:
+        decimal.getcontext().prec = digits  # set no of digits
+        u, t = solver_decimal(I=I, a=a, T=T, dt=dt, theta=0.5)
+        error = u_e - u
+        error = array(error[1:], dtype=float)
+        print '%d digits, %d steps, max abs(error): %.2E' % \ 
+              (digits, len(u)-1, abs(error).max())
+\end{Verbatim}
+\end{cod}
+\noindent
+
+\subsection{Discussion of the size of various errors}
 
 
 % !split

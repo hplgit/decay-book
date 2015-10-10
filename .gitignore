@@ -25,6 +25,10 @@ sphinx-rootdir
 *.toc
 *.snm
 *.vrb
+*.bbl
+*.ilg
+*.ind
+*.loe
 # eclipse files:
 *.cproject
 *.project

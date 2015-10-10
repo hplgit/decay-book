@@ -139,6 +139,8 @@ def discretization_errors():
             u, t = solver(I, a, T, dt, theta)
             u_e = model(t, I, a)
             error = u_e - u
+            print '%s: dt=%.2f, %d steps, max error: %.2E' % \
+                  (scheme, dt, len(u)-1, abs(error).max())
             # Plot log(error), but exclude error[0] since it is 0
             plot(t[1:], log(abs(error[1:])))
             legends.append(scheme)
@@ -176,13 +178,15 @@ def rounding_errors(I=1, a=1, T=4, dt=0.1):
         u, t = solver_decimal(I=I, a=a, T=T, dt=dt, theta=0.5)
         error = u_e - u
         error = array(error[1:], dtype=float)
-        print '%d digits, max abs(error): %.2E' % \
-              (digits, abs(error).max())
+        print '%d digits, %d steps, max abs(error): %.2E' % \
+              (digits, len(u)-1, abs(error).max())
 
 if __name__ == '__main__':
-    model_errors()
-    data_errors()
+    #model_errors()
+    #data_errors()
     discretization_errors()
-    rounding_errors()
-    rounding_errors(I=1000, a=100, T=0.04, dt=0.001)
+    #rounding_errors()
+    #rounding_errors(dt=0.001)
+    #rounding_errors(I=1000, a=100, T=0.04, dt=0.001)
+    #rounding_errors(I=1000, a=100, T=0.04, dt=0.000001)
     show()

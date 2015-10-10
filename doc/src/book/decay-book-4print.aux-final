@@ -119,6 +119,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2.2}Making a solver function}{33}{subsection.1.2.2}}
 \newlabel{decay:py1}{{1.2.2}{33}{Making a solver function}{subsection.1.2.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2.3}Integer division}{34}{subsection.1.2.3}}
+\newlabel{decay:py2}{{1.2.3}{34}{Integer division}{subsection.1.2.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2.4}Doc strings}{35}{subsection.1.2.4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2.5}Formatting numbers}{36}{subsection.1.2.5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2.6}Running the program}{37}{subsection.1.2.6}}
@@ -251,478 +252,492 @@
 \@writefile{toc}{\contentsline {paragraph}{a)}{79}{section*.52}}
 \@writefile{toc}{\contentsline {paragraph}{b)}{79}{section*.53}}
 \@writefile{toc}{\contentsline {paragraph}{Hint.}{79}{section*.54}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Generalizations}{81}{chapter.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Various types of errors in a differential equation model}{79}{section.2.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Model errors}{80}{subsection.2.5.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces  Comparison of two models for three values of $p$.  \relax }}{80}{figure.caption.55}}
+\newlabel{decay:analysis:model_errors:fig:model_u}{{2.7}{80}{Comparison of two models for three values of $p$.  \relax }{figure.caption.55}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces  Discrepancy of Comparison of two models for three values of $p$.  \relax }}{81}{figure.caption.56}}
+\newlabel{decay:analysis:model_errors:fig:model_e}{{2.8}{81}{Discrepancy of Comparison of two models for three values of $p$.  \relax }{figure.caption.56}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Data errors}{82}{subsection.2.5.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces  Histogram of solution uncertainty at three time points, due to data errors.  \relax }}{83}{figure.caption.57}}
+\newlabel{decay:analysis:data_errors:fig}{{2.9}{83}{Histogram of solution uncertainty at three time points, due to data errors.  \relax }{figure.caption.57}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Discretization errors}{84}{subsection.2.5.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.10}{\ignorespaces  Discretization errors in various schemes for 4 time step values.  \relax }}{85}{figure.caption.58}}
+\newlabel{decay:analysis:numerical_errors:fig}{{2.10}{85}{Discretization errors in various schemes for 4 time step values.  \relax }{figure.caption.58}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.4}Rounding errors}{85}{subsection.2.5.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.5}Discussion of the size of various errors}{87}{subsection.2.5.5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Generalizations}{89}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Model extensions}{81}{section.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Generalization: including a variable coefficient}{82}{subsection.3.1.1}}
-\newlabel{decay:problem:a}{{3.1}{82}{Generalization: including a variable coefficient}{equation.3.1.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Generalization: including a source term}{83}{subsection.3.1.2}}
-\newlabel{decay:source}{{3.1.2}{83}{Generalization: including a source term}{subsection.3.1.2}{}}
-\newlabel{decay:problem:ab}{{3.14}{83}{Generalization: including a source term}{equation.3.1.14}{}}
-\newlabel{decay:problem:ab:theta:avg:all:op}{{3.20}{83}{Generalization: including a source term}{equation.3.1.20}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Implementation of the generalized model problem}{83}{subsection.3.1.3}}
-\newlabel{decay:general}{{3.1.3}{83}{Implementation of the generalized model problem}{subsection.3.1.3}{}}
-\@writefile{toc}{\contentsline {paragraph}{Deriving the $\theta $-rule formula.}{83}{section*.55}}
-\newlabel{decay:problem:ab:theta:avg:all}{{3.21}{84}{Deriving the $\theta $-rule formula}{equation.3.1.21}{}}
-\@writefile{toc}{\contentsline {paragraph}{Python code.}{84}{section*.56}}
-\@writefile{toc}{\contentsline {paragraph}{Coding of variable coefficients.}{84}{section*.57}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Verifying a constant solution}{85}{subsection.3.1.4}}
-\newlabel{decay:verify:trivial}{{3.1.4}{85}{Verifying a constant solution}{subsection.3.1.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Verification via manufactured solutions}{86}{subsection.3.1.5}}
-\newlabel{decay:MMS}{{3.1.5}{86}{Verification via manufactured solutions}{subsection.3.1.5}{}}
-\newlabel{decay:fd2:Dop:tn:fw}{{3.23}{87}{Verification via manufactured solutions}{equation.3.1.23}{}}
-\newlabel{decay:fd2:Dop:tn:bw}{{3.24}{87}{Verification via manufactured solutions}{equation.3.1.24}{}}
-\newlabel{decay:fd2:Dop:tn:cn}{{3.25}{87}{Verification via manufactured solutions}{equation.3.1.25}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}Computing convergence rates}{88}{subsection.3.1.6}}
-\newlabel{decay:convergence:rate}{{3.1.6}{88}{Computing convergence rates}{subsection.3.1.6}{}}
-\newlabel{decay:E:dt}{{3.26}{88}{Computing convergence rates}{equation.3.1.26}{}}
-\@writefile{toc}{\contentsline {paragraph}{Estimating $r$.}{89}{section*.58}}
-\newlabel{decay:conv:rate}{{3.27}{89}{Estimating $r$}{equation.3.1.27}{}}
-\@writefile{toc}{\contentsline {paragraph}{Implementation.}{89}{section*.59}}
-\zref@newlabel{mdf@pagelabel-19}{\default{3.1.6}\page{91}\abspage{93}\mdf@pagevalue{91}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Model extensions}{89}{section.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Generalization: including a variable coefficient}{90}{subsection.3.1.1}}
+\newlabel{decay:problem:a}{{3.1}{90}{Generalization: including a variable coefficient}{equation.3.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Generalization: including a source term}{91}{subsection.3.1.2}}
+\newlabel{decay:source}{{3.1.2}{91}{Generalization: including a source term}{subsection.3.1.2}{}}
+\newlabel{decay:problem:ab}{{3.14}{91}{Generalization: including a source term}{equation.3.1.14}{}}
+\newlabel{decay:problem:ab:theta:avg:all:op}{{3.20}{91}{Generalization: including a source term}{equation.3.1.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Implementation of the generalized model problem}{91}{subsection.3.1.3}}
+\newlabel{decay:general}{{3.1.3}{91}{Implementation of the generalized model problem}{subsection.3.1.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Deriving the $\theta $-rule formula.}{91}{section*.59}}
+\newlabel{decay:problem:ab:theta:avg:all}{{3.21}{92}{Deriving the $\theta $-rule formula}{equation.3.1.21}{}}
+\@writefile{toc}{\contentsline {paragraph}{Python code.}{92}{section*.60}}
+\@writefile{toc}{\contentsline {paragraph}{Coding of variable coefficients.}{92}{section*.61}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Verifying a constant solution}{93}{subsection.3.1.4}}
+\newlabel{decay:verify:trivial}{{3.1.4}{93}{Verifying a constant solution}{subsection.3.1.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Verification via manufactured solutions}{94}{subsection.3.1.5}}
+\newlabel{decay:MMS}{{3.1.5}{94}{Verification via manufactured solutions}{subsection.3.1.5}{}}
+\newlabel{decay:fd2:Dop:tn:fw}{{3.23}{95}{Verification via manufactured solutions}{equation.3.1.23}{}}
+\newlabel{decay:fd2:Dop:tn:bw}{{3.24}{95}{Verification via manufactured solutions}{equation.3.1.24}{}}
+\newlabel{decay:fd2:Dop:tn:cn}{{3.25}{95}{Verification via manufactured solutions}{equation.3.1.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}Computing convergence rates}{96}{subsection.3.1.6}}
+\newlabel{decay:convergence:rate}{{3.1.6}{96}{Computing convergence rates}{subsection.3.1.6}{}}
+\newlabel{decay:E:dt}{{3.26}{96}{Computing convergence rates}{equation.3.1.26}{}}
+\@writefile{toc}{\contentsline {paragraph}{Estimating $r$.}{97}{section*.62}}
+\newlabel{decay:conv:rate}{{3.27}{97}{Estimating $r$}{equation.3.1.27}{}}
+\@writefile{toc}{\contentsline {paragraph}{Implementation.}{97}{section*.63}}
+\zref@newlabel{mdf@pagelabel-19}{\default{3.1.6}\page{99}\abspage{101}\mdf@pagevalue{99}}
 \pgfsyspdfmark {pgfid35}{4344704}{38357579}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.7}Extension to systems of ODEs}{91}{subsection.3.1.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.7}Extension to systems of ODEs}{99}{subsection.3.1.7}}
 \citation{Petzold_Ascher_1998}
 \citation{Griffiths_et_al_2010}
 \citation{Hairer_Wanner_Norsett_bookI}
 \citation{Hairer_Wanner_bookII}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}General first-order ODEs}{92}{section.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Generic form of first-order ODEs}{92}{subsection.3.2.1}}
-\newlabel{decay:ode:general}{{3.36}{92}{Generic form of first-order ODEs}{equation.3.2.36}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}The $\theta $-rule}{93}{subsection.3.2.2}}
-\newlabel{decay:fd2:theta}{{3.37}{93}{The $\theta $-rule}{equation.3.2.37}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}An implicit 2-step backward scheme}{93}{subsection.3.2.3}}
-\newlabel{decay:fd2:bw:2step}{{3.39}{93}{An implicit 2-step backward scheme}{equation.3.2.39}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Leapfrog schemes}{94}{subsection.3.2.4}}
-\@writefile{toc}{\contentsline {paragraph}{The ordinary Leapfrog scheme.}{94}{section*.60}}
-\newlabel{decay:fd2:leapfrog}{{3.41}{94}{The ordinary Leapfrog scheme}{equation.3.2.41}{}}
-\@writefile{toc}{\contentsline {paragraph}{The filtered Leapfrog scheme.}{94}{section*.61}}
-\newlabel{decay:fd2:leapfrog:filtered}{{3.42}{94}{The filtered Leapfrog scheme}{equation.3.2.42}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}The 2nd-order Runge-Kutta method}{95}{subsection.3.2.5}}
-\newlabel{decay:fd2:RK2:s1}{{3.43}{95}{The 2nd-order Runge-Kutta method}{equation.3.2.43}{}}
-\newlabel{decay:fd2:RK2:s2}{{3.44}{95}{The 2nd-order Runge-Kutta method}{equation.3.2.44}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.6}A 2nd-order Taylor-series method}{95}{subsection.3.2.6}}
-\newlabel{decay:fd2:Taylor2}{{3.45}{95}{A 2nd-order Taylor-series method}{equation.3.2.45}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.7}The 2nd- and 3rd-order Adams-Bashforth schemes}{96}{subsection.3.2.7}}
-\newlabel{decay:fd2:AB2}{{3.46}{96}{The 2nd- and 3rd-order Adams-Bashforth schemes}{equation.3.2.46}{}}
-\newlabel{decay:fd2:AB3}{{3.47}{96}{The 2nd- and 3rd-order Adams-Bashforth schemes}{equation.3.2.47}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.8}The 4th-order Runge-Kutta method}{96}{subsection.3.2.8}}
-\newlabel{decay:fd2:RK4}{{3.2.8}{96}{The 4th-order Runge-Kutta method}{subsection.3.2.8}{}}
-\newlabel{decay:fd2:RK4:hatf}{{3.48}{97}{The 4th-order Runge-Kutta method}{equation.3.2.48}{}}
-\newlabel{decay:fd2:RK4:tildef}{{3.49}{97}{The 4th-order Runge-Kutta method}{equation.3.2.49}{}}
-\newlabel{decay:fd2:RK4:barf}{{3.50}{97}{The 4th-order Runge-Kutta method}{equation.3.2.50}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}General first-order ODEs}{100}{section.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Generic form of first-order ODEs}{100}{subsection.3.2.1}}
+\newlabel{decay:ode:general}{{3.36}{100}{Generic form of first-order ODEs}{equation.3.2.36}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}The $\theta $-rule}{101}{subsection.3.2.2}}
+\newlabel{decay:fd2:theta}{{3.37}{101}{The $\theta $-rule}{equation.3.2.37}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}An implicit 2-step backward scheme}{101}{subsection.3.2.3}}
+\newlabel{decay:fd2:bw:2step}{{3.39}{101}{An implicit 2-step backward scheme}{equation.3.2.39}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Leapfrog schemes}{102}{subsection.3.2.4}}
+\@writefile{toc}{\contentsline {paragraph}{The ordinary Leapfrog scheme.}{102}{section*.64}}
+\newlabel{decay:fd2:leapfrog}{{3.41}{102}{The ordinary Leapfrog scheme}{equation.3.2.41}{}}
+\@writefile{toc}{\contentsline {paragraph}{The filtered Leapfrog scheme.}{102}{section*.65}}
+\newlabel{decay:fd2:leapfrog:filtered}{{3.42}{102}{The filtered Leapfrog scheme}{equation.3.2.42}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}The 2nd-order Runge-Kutta method}{103}{subsection.3.2.5}}
+\newlabel{decay:fd2:RK2:s1}{{3.43}{103}{The 2nd-order Runge-Kutta method}{equation.3.2.43}{}}
+\newlabel{decay:fd2:RK2:s2}{{3.44}{103}{The 2nd-order Runge-Kutta method}{equation.3.2.44}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.6}A 2nd-order Taylor-series method}{103}{subsection.3.2.6}}
+\newlabel{decay:fd2:Taylor2}{{3.45}{103}{A 2nd-order Taylor-series method}{equation.3.2.45}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.7}The 2nd- and 3rd-order Adams-Bashforth schemes}{104}{subsection.3.2.7}}
+\newlabel{decay:fd2:AB2}{{3.46}{104}{The 2nd- and 3rd-order Adams-Bashforth schemes}{equation.3.2.46}{}}
+\newlabel{decay:fd2:AB3}{{3.47}{104}{The 2nd- and 3rd-order Adams-Bashforth schemes}{equation.3.2.47}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.8}The 4th-order Runge-Kutta method}{104}{subsection.3.2.8}}
+\newlabel{decay:fd2:RK4}{{3.2.8}{104}{The 4th-order Runge-Kutta method}{subsection.3.2.8}{}}
+\newlabel{decay:fd2:RK4:hatf}{{3.48}{105}{The 4th-order Runge-Kutta method}{equation.3.2.48}{}}
+\newlabel{decay:fd2:RK4:tildef}{{3.49}{105}{The 4th-order Runge-Kutta method}{equation.3.2.49}{}}
+\newlabel{decay:fd2:RK4:barf}{{3.50}{105}{The 4th-order Runge-Kutta method}{equation.3.2.50}{}}
 \citation{odespy}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.9}The Odespy software}{98}{subsection.3.2.9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.10}Example: Runge-Kutta methods}{99}{subsection.3.2.10}}
-\zref@newlabel{mdf@pagelabel-20}{\default{3.2.10}\page{100}\abspage{102}\mdf@pagevalue{100}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.9}The Odespy software}{106}{subsection.3.2.9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.10}Example: Runge-Kutta methods}{107}{subsection.3.2.10}}
+\zref@newlabel{mdf@pagelabel-20}{\default{3.2.10}\page{108}\abspage{110}\mdf@pagevalue{108}}
 \pgfsyspdfmark {pgfid37}{6339911}{13276703}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces  Behavior of different schemes for the decay equation.  \relax }}{101}{figure.caption.62}}
-\newlabel{decay:odespy:fig1}{{3.1}{101}{Behavior of different schemes for the decay equation.  \relax }{figure.caption.62}{}}
-\@writefile{toc}{\contentsline {paragraph}{Remark about using the $\theta $-rule in Odespy.}{101}{section*.63}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.11}Example: Adaptive Runge-Kutta methods}{102}{subsection.3.2.11}}
-\newlabel{decay:fd2:adaptiveRK}{{3.2.11}{102}{Example: Adaptive Runge-Kutta methods}{subsection.3.2.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces  Choice of adaptive time mesh by the Dormand-Prince method for different tolerances.  \relax }}{104}{figure.caption.64}}
-\newlabel{decay:odespy:fig2}{{3.2}{104}{Choice of adaptive time mesh by the Dormand-Prince method for different tolerances.  \relax }{figure.caption.64}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Exercises}{104}{section.3.3}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 3.1: Experiment with precision in tests and the size of $u$}{104}{section*.65}}
-\newlabel{decay:fd2:exer:precision}{{3.1}{104}{Exercise \thedoconceexercisecounter : Experiment with precision in tests and the size of $u$}{section*.65}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 3.2: Implement the 2-step backward scheme}{105}{section*.66}}
-\newlabel{decay:fd2:exer:bw2}{{3.2}{105}{Exercise \thedoconceexercisecounter : Implement the 2-step backward scheme}{section*.66}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 3.3: Implement the 2nd-order Adams-Bashforth scheme}{105}{section*.67}}
-\newlabel{decay:fd2:exer:AB2}{{3.3}{105}{Exercise \thedoconceexercisecounter : Implement the 2nd-order Adams-Bashforth scheme}{section*.67}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 3.4: Implement the 3rd-order Adams-Bashforth scheme}{105}{section*.68}}
-\newlabel{decay:fd2:exer:AB3}{{3.4}{105}{Exercise \thedoconceexercisecounter : Implement the 3rd-order Adams-Bashforth scheme}{section*.68}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 3.5: Analyze explicit 2nd-order methods}{105}{section*.69}}
-\newlabel{decay:exer:RK2:Taylor:analysis}{{3.5}{105}{Exercise \thedoconceexercisecounter : Analyze explicit 2nd-order methods}{section*.69}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Project 3.6: Implement and investigate the Leapfrog scheme}{106}{section*.70}}
-\newlabel{decay:fd2:exer:leapfrog1}{{3.6}{106}{Project \thedoconceexercisecounter : Implement and investigate the Leapfrog scheme}{section*.70}{}}
-\newlabel{decay:fd2:exer:leapfrog1:scheme}{{3.52}{106}{Project \thedoconceexercisecounter : Implement and investigate the Leapfrog scheme}{equation.3.3.52}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{106}{section*.71}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{106}{section*.72}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{106}{section*.73}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{107}{section*.74}}
-\@writefile{toc}{\contentsline {paragraph}{d)}{107}{section*.75}}
-\@writefile{toc}{\contentsline {paragraph}{e)}{107}{section*.76}}
-\@writefile{toc}{\contentsline {paragraph}{f)}{107}{section*.77}}
-\@writefile{toc}{\contentsline {paragraph}{g)}{107}{section*.78}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 3.7: Make a unified implementation of many schemes}{108}{section*.79}}
-\newlabel{decay:fd2:exer:uni}{{3.7}{108}{Problem \thedoconceexercisecounter : Make a unified implementation of many schemes}{section*.79}{}}
-\newlabel{decay:analysis:exer:sumcj}{{3.53}{108}{Problem \thedoconceexercisecounter : Make a unified implementation of many schemes}{equation.3.3.53}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Models}{109}{chapter.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces  Behavior of different schemes for the decay equation.  \relax }}{109}{figure.caption.66}}
+\newlabel{decay:odespy:fig1}{{3.1}{109}{Behavior of different schemes for the decay equation.  \relax }{figure.caption.66}{}}
+\@writefile{toc}{\contentsline {paragraph}{Remark about using the $\theta $-rule in Odespy.}{109}{section*.67}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.11}Example: Adaptive Runge-Kutta methods}{110}{subsection.3.2.11}}
+\newlabel{decay:fd2:adaptiveRK}{{3.2.11}{110}{Example: Adaptive Runge-Kutta methods}{subsection.3.2.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces  Choice of adaptive time mesh by the Dormand-Prince method for different tolerances.  \relax }}{112}{figure.caption.68}}
+\newlabel{decay:odespy:fig2}{{3.2}{112}{Choice of adaptive time mesh by the Dormand-Prince method for different tolerances.  \relax }{figure.caption.68}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Exercises}{112}{section.3.3}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 3.1: Experiment with precision in tests and the size of $u$}{112}{section*.69}}
+\newlabel{decay:fd2:exer:precision}{{3.1}{112}{Exercise \thedoconceexercisecounter : Experiment with precision in tests and the size of $u$}{section*.69}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 3.2: Implement the 2-step backward scheme}{113}{section*.70}}
+\newlabel{decay:fd2:exer:bw2}{{3.2}{113}{Exercise \thedoconceexercisecounter : Implement the 2-step backward scheme}{section*.70}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 3.3: Implement the 2nd-order Adams-Bashforth scheme}{113}{section*.71}}
+\newlabel{decay:fd2:exer:AB2}{{3.3}{113}{Exercise \thedoconceexercisecounter : Implement the 2nd-order Adams-Bashforth scheme}{section*.71}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 3.4: Implement the 3rd-order Adams-Bashforth scheme}{113}{section*.72}}
+\newlabel{decay:fd2:exer:AB3}{{3.4}{113}{Exercise \thedoconceexercisecounter : Implement the 3rd-order Adams-Bashforth scheme}{section*.72}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 3.5: Analyze explicit 2nd-order methods}{113}{section*.73}}
+\newlabel{decay:exer:RK2:Taylor:analysis}{{3.5}{113}{Exercise \thedoconceexercisecounter : Analyze explicit 2nd-order methods}{section*.73}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Project 3.6: Implement and investigate the Leapfrog scheme}{114}{section*.74}}
+\newlabel{decay:fd2:exer:leapfrog1}{{3.6}{114}{Project \thedoconceexercisecounter : Implement and investigate the Leapfrog scheme}{section*.74}{}}
+\newlabel{decay:fd2:exer:leapfrog1:scheme}{{3.52}{114}{Project \thedoconceexercisecounter : Implement and investigate the Leapfrog scheme}{equation.3.3.52}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{114}{section*.75}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{114}{section*.76}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{114}{section*.77}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{115}{section*.78}}
+\@writefile{toc}{\contentsline {paragraph}{d)}{115}{section*.79}}
+\@writefile{toc}{\contentsline {paragraph}{e)}{115}{section*.80}}
+\@writefile{toc}{\contentsline {paragraph}{f)}{115}{section*.81}}
+\@writefile{toc}{\contentsline {paragraph}{g)}{115}{section*.82}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 3.7: Make a unified implementation of many schemes}{116}{section*.83}}
+\newlabel{decay:fd2:exer:uni}{{3.7}{116}{Problem \thedoconceexercisecounter : Make a unified implementation of many schemes}{section*.83}{}}
+\newlabel{decay:analysis:exer:sumcj}{{3.53}{116}{Problem \thedoconceexercisecounter : Make a unified implementation of many schemes}{equation.3.3.53}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Models}{117}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{decay:app}{{4}{109}{Models}{chapter.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Scaling}{109}{section.4.1}}
-\newlabel{decay:app:scaling}{{4.1}{109}{Scaling}{section.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Dimensionless variables}{110}{subsection.4.1.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Dimensionless numbers}{110}{subsection.4.1.2}}
+\newlabel{decay:app}{{4}{117}{Models}{chapter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Scaling}{117}{section.4.1}}
+\newlabel{decay:app:scaling}{{4.1}{117}{Scaling}{section.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Dimensionless variables}{118}{subsection.4.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Dimensionless numbers}{118}{subsection.4.1.2}}
 \citation{Langtangen_scaling}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}A scaling for vanishing initial condition}{111}{subsection.4.1.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Evolution of a population}{111}{section.4.2}}
-\newlabel{decay:app:pop}{{4.2}{111}{Evolution of a population}{section.4.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Exponential growth}{111}{subsection.4.2.1}}
-\newlabel{decay:app:pop:exp}{{4.2.1}{111}{Exponential growth}{subsection.4.2.1}{}}
-\newlabel{decay:app:pop:ueq}{{4.3}{112}{Exponential growth}{equation.4.2.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Logistic growth}{113}{subsection.4.2.2}}
-\newlabel{decay:app:pop:log}{{4.2.2}{113}{Logistic growth}{subsection.4.2.2}{}}
-\newlabel{decay:app:pop:logistic}{{4.4}{113}{Logistic growth}{equation.4.2.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Compound interest and inflation}{113}{section.4.3}}
-\newlabel{decay:app:interest}{{4.3}{113}{Compound interest and inflation}{section.4.3}{}}
-\newlabel{decay:app:interest:eq1}{{4.5}{113}{Compound interest and inflation}{equation.4.3.5}{}}
-\newlabel{decay:app:interest:eq2}{{4.7}{114}{Compound interest and inflation}{equation.4.3.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Newton's law of cooling}{114}{section.4.4}}
-\newlabel{decay:app:Newton:cooling}{{4.4}{114}{Newton's law of cooling}{section.4.4}{}}
-\newlabel{decay:Newton:cooling}{{4.8}{115}{Newton's law of cooling}{equation.4.4.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Radioactive decay}{115}{section.4.5}}
-\newlabel{decay:app:nuclear}{{4.5}{115}{Radioactive decay}{section.4.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Deterministic model}{115}{subsection.4.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Stochastic model}{116}{subsection.4.5.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Relation between stochastic and deterministic models}{117}{subsection.4.5.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.4}Generalization of the radioactive decay modeling}{118}{subsection.4.5.4}}
-\newlabel{decay:app:waitingtime}{{4.5.4}{118}{Generalization of the radioactive decay modeling}{subsection.4.5.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}Chemical kinetics}{119}{section.4.6}}
-\newlabel{decay:app:kinetics}{{4.6}{119}{Chemical kinetics}{section.4.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Irreversible reaction of two substances}{119}{subsection.4.6.1}}
-\newlabel{decay:app:kinetics:irrev:A}{{4.11}{119}{Irreversible reaction of two substances}{equation.4.6.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.2}Reversible reaction of two substances}{120}{subsection.4.6.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.3}Irreversible reaction of two substances into a third}{121}{subsection.4.6.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.4}A biochemical reaction}{122}{subsection.4.6.4}}
-\newlabel{decay:app:MMK:ES1}{{4.23}{122}{A biochemical reaction}{equation.4.6.23}{}}
-\newlabel{decay:app:MMK:P1}{{4.24}{122}{A biochemical reaction}{equation.4.6.24}{}}
-\newlabel{decay:app:MMK:S1}{{4.25}{122}{A biochemical reaction}{equation.4.6.25}{}}
-\newlabel{decay:app:MMK:E1}{{4.26}{122}{A biochemical reaction}{equation.4.6.26}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.7}Spreading of diseases}{123}{section.4.7}}
-\newlabel{decay:app:SIR}{{4.7}{123}{Spreading of diseases}{section.4.7}{}}
-\newlabel{decay:app:SIR:S}{{4.27}{123}{Spreading of diseases}{equation.4.7.27}{}}
-\newlabel{decay:app:SIR:I}{{4.28}{123}{Spreading of diseases}{equation.4.7.28}{}}
-\newlabel{decay:app:SIR:R}{{4.29}{123}{Spreading of diseases}{equation.4.7.29}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.8}Predator-prey models in ecology}{124}{section.4.8}}
-\newlabel{decay:app:predprey}{{4.8}{124}{Predator-prey models in ecology}{section.4.8}{}}
-\newlabel{decay:app:predprey:eqH}{{4.30}{125}{Predator-prey models in ecology}{equation.4.8.30}{}}
-\newlabel{decay:app:predprey:eqL}{{4.31}{125}{Predator-prey models in ecology}{equation.4.8.31}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.9}Decay of atmospheric pressure with altitude}{125}{section.4.9}}
-\newlabel{decay:app:atm}{{4.9}{125}{Decay of atmospheric pressure with altitude}{section.4.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.1}The general model}{125}{subsection.4.9.1}}
-\newlabel{decay:app:atm:dpdz}{{4.32}{125}{The general model}{equation.4.9.32}{}}
-\newlabel{decay:app:atm:rho}{{4.33}{125}{The general model}{equation.4.9.33}{}}
-\newlabel{decay:app:atm:ode}{{4.34}{126}{The general model}{equation.4.9.34}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.2}Multiple atmospheric layers}{126}{subsection.4.9.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.3}Simplifications}{126}{subsection.4.9.3}}
-\@writefile{toc}{\contentsline {paragraph}{Constant layer temperature.}{126}{section*.80}}
-\@writefile{toc}{\contentsline {paragraph}{One-layer model.}{127}{section*.81}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.10}Compaction of sediments}{127}{section.4.10}}
-\newlabel{decay:app:sediment}{{4.10}{127}{Compaction of sediments}{section.4.10}{}}
-\newlabel{decay:app:sediment:phi:eq}{{4.36}{127}{Compaction of sediments}{equation.4.10.36}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces  Illustration of the compaction of geological layers (with different colors) through time.  \relax }}{128}{figure.caption.82}}
-\newlabel{decay:app:sediment:fig:layers}{{4.1}{128}{Illustration of the compaction of geological layers (with different colors) through time.  \relax }{figure.caption.82}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.11}Vertical motion of a body in a viscous fluid}{128}{section.4.11}}
-\newlabel{decay:app:drag}{{4.11}{128}{Vertical motion of a body in a viscous fluid}{section.4.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.1}Overview of forces}{128}{subsection.4.11.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.2}Equation of motion}{129}{subsection.4.11.2}}
-\newlabel{decay:app:fallingbody:model:S}{{4.40}{130}{Equation of motion}{equation.4.11.40}{}}
-\newlabel{decay:app:fallingbody:gmodel:S}{{4.42}{130}{Equation of motion}{equation.4.11.42}{}}
-\newlabel{decay:app:fallingbody:model:q}{{4.43}{130}{Equation of motion}{equation.4.11.43}{}}
-\newlabel{decay:app:fallingbody:gmodel:q}{{4.45}{130}{Equation of motion}{equation.4.11.45}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.3}Terminal velocity}{130}{subsection.4.11.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.4}A Crank-Nicolson scheme}{131}{subsection.4.11.4}}
-\newlabel{decay:app:fallingbody:gmodel:CN}{{4.46}{131}{A Crank-Nicolson scheme}{equation.4.11.46}{}}
-\newlabel{decay:app:fallingbody:gmodel:q:CN}{{4.48}{131}{A Crank-Nicolson scheme}{equation.4.11.48}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.5}Physical data}{132}{subsection.4.11.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.6}Verification}{132}{subsection.4.11.6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.7}Scaling}{133}{subsection.4.11.7}}
-\newlabel{decay:app:drag:scaling}{{4.11.7}{133}{Scaling}{subsection.4.11.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.12}Viscoelastic materials}{133}{section.4.12}}
-\newlabel{decay:app:viscoelasticity}{{4.12}{133}{Viscoelastic materials}{section.4.12}{}}
-\newlabel{decay:app:viscoelasticity:se}{{4.49}{134}{Viscoelastic materials}{equation.4.12.49}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.13}Decay ODEs from solving a PDE by Fourier expansions}{134}{section.4.13}}
-\newlabel{decay:app:diffusion:Fourier}{{4.13}{134}{Decay ODEs from solving a PDE by Fourier expansions}{section.4.13}{}}
-\@writefile{toc}{\contentsline {paragraph}{Remark.}{135}{section*.83}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.14}Exercises}{135}{section.4.14}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 4.1: Radioactive decay of Carbon-14}{135}{section*.84}}
-\newlabel{decay:app:exer:radio:C14}{{4.1}{135}{Problem \thedoconceexercisecounter : Radioactive decay of Carbon-14}{section*.84}{}}
-\@writefile{toc}{\contentsline {paragraph}{Hint 1.}{136}{section*.85}}
-\@writefile{toc}{\contentsline {paragraph}{Hint 2.}{136}{section*.86}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.2: Derive schemes for Newton's law of cooling}{136}{section*.87}}
-\newlabel{decay:app:exer:cooling:schemes}{{4.2}{136}{Exercise \thedoconceexercisecounter : Derive schemes for Newton's law of cooling}{section*.87}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.3: Implement schemes for Newton's law of cooling}{136}{section*.88}}
-\newlabel{decay:app:exer:cooling:py}{{4.3}{136}{Exercise \thedoconceexercisecounter : Implement schemes for Newton's law of cooling}{section*.88}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{136}{section*.89}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{137}{section*.90}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{137}{section*.91}}
-\@writefile{toc}{\contentsline {paragraph}{d)}{137}{section*.92}}
-\@writefile{toc}{\contentsline {paragraph}{e)}{137}{section*.93}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{137}{section*.94}}
-\@writefile{toc}{\contentsline {paragraph}{f)}{137}{section*.95}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{137}{section*.96}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.4: Find time of murder from body temperature}{138}{section*.97}}
-\newlabel{decay:app:exer:cooling:murder}{{4.4}{138}{Exercise \thedoconceexercisecounter : Find time of murder from body temperature}{section*.97}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.5: Simulate an oscillating cooling process}{139}{section*.98}}
-\newlabel{decay:app:exer:cooling:osc}{{4.5}{139}{Exercise \thedoconceexercisecounter : Simulate an oscillating cooling process}{section*.98}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.6: Simulate stochastic radioactive decay}{139}{section*.99}}
-\newlabel{decay:app:exer:stoch:nuclear}{{4.6}{139}{Exercise \thedoconceexercisecounter : Simulate stochastic radioactive decay}{section*.99}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 4.7: Radioactive decay of two substances}{140}{section*.100}}
-\newlabel{decay:app:exer:radio:twosubst}{{4.7}{140}{Problem \thedoconceexercisecounter : Radioactive decay of two substances}{section*.100}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{140}{section*.101}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{140}{section*.102}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{140}{section*.103}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.8: Simulate a simple chemical reaction}{140}{section*.104}}
-\newlabel{decay:app:exer:kinetics:AB}{{4.8}{140}{Exercise \thedoconceexercisecounter : Simulate a simple chemical reaction}{section*.104}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.9: Simulate an $n$-th order chemical reaction}{141}{section*.105}}
-\newlabel{decay:app:exer:kinetics:ABn}{{4.9}{141}{Exercise \thedoconceexercisecounter : Simulate an $n$-th order chemical reaction}{section*.105}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.10: Simulate a biochemical process}{142}{section*.106}}
-\newlabel{decay:app:exer:MMK}{{4.10}{142}{Exercise \thedoconceexercisecounter : Simulate a biochemical process}{section*.106}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{142}{section*.107}}
-\newlabel{decay:app:MMK:Q2}{{4.54}{142}{a)}{equation.4.14.54}{}}
-\newlabel{decay:app:MMK:P2}{{4.55}{142}{a)}{equation.4.14.55}{}}
-\newlabel{decay:app:MMK:S2}{{4.56}{142}{a)}{equation.4.14.56}{}}
-\newlabel{decay:app:MMK:E2}{{4.57}{142}{a)}{equation.4.14.57}{}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{143}{section*.108}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{143}{section*.109}}
-\@writefile{toc}{\contentsline {paragraph}{d)}{143}{section*.110}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.11: Simulate spreading of a disease}{143}{section*.111}}
-\newlabel{decay:app:exer:SIR}{{4.11}{143}{Exercise \thedoconceexercisecounter : Simulate spreading of a disease}{section*.111}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{143}{section*.112}}
-\newlabel{decay:app:SIR:S2}{{4.60}{143}{a)}{equation.4.14.60}{}}
-\newlabel{decay:app:SIR:I2}{{4.61}{143}{a)}{equation.4.14.61}{}}
-\newlabel{decay:SIR:R2}{{4.62}{143}{a)}{equation.4.14.62}{}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{144}{section*.113}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{144}{section*.114}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{144}{section*.115}}
-\@writefile{toc}{\contentsline {paragraph}{d)}{144}{section*.116}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.12: Simulate predator-prey interaction}{144}{section*.117}}
-\newlabel{decay:app:exer:predprey}{{4.12}{144}{Exercise \thedoconceexercisecounter : Simulate predator-prey interaction}{section*.117}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{144}{section*.118}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{144}{section*.119}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{144}{section*.120}}
-\@writefile{toc}{\contentsline {paragraph}{d)}{144}{section*.121}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.13: Simulate the pressure drop in the atmosphere}{144}{section*.122}}
-\newlabel{decay:app:exer:atm1}{{4.13}{144}{Exercise \thedoconceexercisecounter : Simulate the pressure drop in the atmosphere}{section*.122}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.14: Make a program for vertical motion in a fluid}{145}{section*.123}}
-\newlabel{decay:app:exer:drag:prog}{{4.14}{145}{Exercise \thedoconceexercisecounter : Make a program for vertical motion in a fluid}{section*.123}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Project 4.15: Simulate parachuting}{146}{section*.124}}
-\newlabel{decay:app:exer:parachute}{{4.15}{146}{Project \thedoconceexercisecounter : Simulate parachuting}{section*.124}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{146}{section*.125}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{146}{section*.126}}
-\@writefile{toc}{\contentsline {paragraph}{Hint 1.}{146}{section*.127}}
-\@writefile{toc}{\contentsline {paragraph}{Hint 2.}{146}{section*.128}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{146}{section*.129}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}A scaling for vanishing initial condition}{119}{subsection.4.1.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Evolution of a population}{119}{section.4.2}}
+\newlabel{decay:app:pop}{{4.2}{119}{Evolution of a population}{section.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Exponential growth}{119}{subsection.4.2.1}}
+\newlabel{decay:app:pop:exp}{{4.2.1}{119}{Exponential growth}{subsection.4.2.1}{}}
+\newlabel{decay:app:pop:ueq}{{4.3}{120}{Exponential growth}{equation.4.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Logistic growth}{121}{subsection.4.2.2}}
+\newlabel{decay:app:pop:log}{{4.2.2}{121}{Logistic growth}{subsection.4.2.2}{}}
+\newlabel{decay:app:pop:logistic}{{4.4}{121}{Logistic growth}{equation.4.2.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Compound interest and inflation}{121}{section.4.3}}
+\newlabel{decay:app:interest}{{4.3}{121}{Compound interest and inflation}{section.4.3}{}}
+\newlabel{decay:app:interest:eq1}{{4.5}{121}{Compound interest and inflation}{equation.4.3.5}{}}
+\newlabel{decay:app:interest:eq2}{{4.7}{122}{Compound interest and inflation}{equation.4.3.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Newton's law of cooling}{122}{section.4.4}}
+\newlabel{decay:app:Newton:cooling}{{4.4}{122}{Newton's law of cooling}{section.4.4}{}}
+\newlabel{decay:Newton:cooling}{{4.8}{123}{Newton's law of cooling}{equation.4.4.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Radioactive decay}{123}{section.4.5}}
+\newlabel{decay:app:nuclear}{{4.5}{123}{Radioactive decay}{section.4.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Deterministic model}{123}{subsection.4.5.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Stochastic model}{124}{subsection.4.5.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Relation between stochastic and deterministic models}{125}{subsection.4.5.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.4}Generalization of the radioactive decay modeling}{126}{subsection.4.5.4}}
+\newlabel{decay:app:waitingtime}{{4.5.4}{126}{Generalization of the radioactive decay modeling}{subsection.4.5.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Chemical kinetics}{127}{section.4.6}}
+\newlabel{decay:app:kinetics}{{4.6}{127}{Chemical kinetics}{section.4.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Irreversible reaction of two substances}{127}{subsection.4.6.1}}
+\newlabel{decay:app:kinetics:irrev:A}{{4.11}{127}{Irreversible reaction of two substances}{equation.4.6.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.2}Reversible reaction of two substances}{128}{subsection.4.6.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.3}Irreversible reaction of two substances into a third}{129}{subsection.4.6.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.4}A biochemical reaction}{130}{subsection.4.6.4}}
+\newlabel{decay:app:MMK:ES1}{{4.23}{130}{A biochemical reaction}{equation.4.6.23}{}}
+\newlabel{decay:app:MMK:P1}{{4.24}{130}{A biochemical reaction}{equation.4.6.24}{}}
+\newlabel{decay:app:MMK:S1}{{4.25}{130}{A biochemical reaction}{equation.4.6.25}{}}
+\newlabel{decay:app:MMK:E1}{{4.26}{130}{A biochemical reaction}{equation.4.6.26}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Spreading of diseases}{131}{section.4.7}}
+\newlabel{decay:app:SIR}{{4.7}{131}{Spreading of diseases}{section.4.7}{}}
+\newlabel{decay:app:SIR:S}{{4.27}{131}{Spreading of diseases}{equation.4.7.27}{}}
+\newlabel{decay:app:SIR:I}{{4.28}{131}{Spreading of diseases}{equation.4.7.28}{}}
+\newlabel{decay:app:SIR:R}{{4.29}{131}{Spreading of diseases}{equation.4.7.29}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.8}Predator-prey models in ecology}{132}{section.4.8}}
+\newlabel{decay:app:predprey}{{4.8}{132}{Predator-prey models in ecology}{section.4.8}{}}
+\newlabel{decay:app:predprey:eqH}{{4.30}{133}{Predator-prey models in ecology}{equation.4.8.30}{}}
+\newlabel{decay:app:predprey:eqL}{{4.31}{133}{Predator-prey models in ecology}{equation.4.8.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.9}Decay of atmospheric pressure with altitude}{133}{section.4.9}}
+\newlabel{decay:app:atm}{{4.9}{133}{Decay of atmospheric pressure with altitude}{section.4.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.1}The general model}{133}{subsection.4.9.1}}
+\newlabel{decay:app:atm:dpdz}{{4.32}{133}{The general model}{equation.4.9.32}{}}
+\newlabel{decay:app:atm:rho}{{4.33}{133}{The general model}{equation.4.9.33}{}}
+\newlabel{decay:app:atm:ode}{{4.34}{134}{The general model}{equation.4.9.34}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.2}Multiple atmospheric layers}{134}{subsection.4.9.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.3}Simplifications}{134}{subsection.4.9.3}}
+\@writefile{toc}{\contentsline {paragraph}{Constant layer temperature.}{134}{section*.84}}
+\@writefile{toc}{\contentsline {paragraph}{One-layer model.}{135}{section*.85}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.10}Compaction of sediments}{135}{section.4.10}}
+\newlabel{decay:app:sediment}{{4.10}{135}{Compaction of sediments}{section.4.10}{}}
+\newlabel{decay:app:sediment:phi:eq}{{4.36}{135}{Compaction of sediments}{equation.4.10.36}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces  Illustration of the compaction of geological layers (with different colors) through time.  \relax }}{136}{figure.caption.86}}
+\newlabel{decay:app:sediment:fig:layers}{{4.1}{136}{Illustration of the compaction of geological layers (with different colors) through time.  \relax }{figure.caption.86}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.11}Vertical motion of a body in a viscous fluid}{136}{section.4.11}}
+\newlabel{decay:app:drag}{{4.11}{136}{Vertical motion of a body in a viscous fluid}{section.4.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.1}Overview of forces}{136}{subsection.4.11.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.2}Equation of motion}{137}{subsection.4.11.2}}
+\newlabel{decay:app:fallingbody:model:S}{{4.40}{138}{Equation of motion}{equation.4.11.40}{}}
+\newlabel{decay:app:fallingbody:gmodel:S}{{4.42}{138}{Equation of motion}{equation.4.11.42}{}}
+\newlabel{decay:app:fallingbody:model:q}{{4.43}{138}{Equation of motion}{equation.4.11.43}{}}
+\newlabel{decay:app:fallingbody:gmodel:q}{{4.45}{138}{Equation of motion}{equation.4.11.45}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.3}Terminal velocity}{138}{subsection.4.11.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.4}A Crank-Nicolson scheme}{139}{subsection.4.11.4}}
+\newlabel{decay:app:fallingbody:gmodel:CN}{{4.46}{139}{A Crank-Nicolson scheme}{equation.4.11.46}{}}
+\newlabel{decay:app:fallingbody:gmodel:q:CN}{{4.48}{139}{A Crank-Nicolson scheme}{equation.4.11.48}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.5}Physical data}{140}{subsection.4.11.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.6}Verification}{140}{subsection.4.11.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.7}Scaling}{141}{subsection.4.11.7}}
+\newlabel{decay:app:drag:scaling}{{4.11.7}{141}{Scaling}{subsection.4.11.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.12}Viscoelastic materials}{141}{section.4.12}}
+\newlabel{decay:app:viscoelasticity}{{4.12}{141}{Viscoelastic materials}{section.4.12}{}}
+\newlabel{decay:app:viscoelasticity:se}{{4.49}{142}{Viscoelastic materials}{equation.4.12.49}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.13}Decay ODEs from solving a PDE by Fourier expansions}{142}{section.4.13}}
+\newlabel{decay:app:diffusion:Fourier}{{4.13}{142}{Decay ODEs from solving a PDE by Fourier expansions}{section.4.13}{}}
+\@writefile{toc}{\contentsline {paragraph}{Remark.}{143}{section*.87}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.14}Exercises}{143}{section.4.14}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 4.1: Radioactive decay of Carbon-14}{143}{section*.88}}
+\newlabel{decay:app:exer:radio:C14}{{4.1}{143}{Problem \thedoconceexercisecounter : Radioactive decay of Carbon-14}{section*.88}{}}
+\@writefile{toc}{\contentsline {paragraph}{Hint 1.}{144}{section*.89}}
+\@writefile{toc}{\contentsline {paragraph}{Hint 2.}{144}{section*.90}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.2: Derive schemes for Newton's law of cooling}{144}{section*.91}}
+\newlabel{decay:app:exer:cooling:schemes}{{4.2}{144}{Exercise \thedoconceexercisecounter : Derive schemes for Newton's law of cooling}{section*.91}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.3: Implement schemes for Newton's law of cooling}{144}{section*.92}}
+\newlabel{decay:app:exer:cooling:py}{{4.3}{144}{Exercise \thedoconceexercisecounter : Implement schemes for Newton's law of cooling}{section*.92}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{144}{section*.93}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{145}{section*.94}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{145}{section*.95}}
+\@writefile{toc}{\contentsline {paragraph}{d)}{145}{section*.96}}
+\@writefile{toc}{\contentsline {paragraph}{e)}{145}{section*.97}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{145}{section*.98}}
+\@writefile{toc}{\contentsline {paragraph}{f)}{145}{section*.99}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{145}{section*.100}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.4: Find time of murder from body temperature}{146}{section*.101}}
+\newlabel{decay:app:exer:cooling:murder}{{4.4}{146}{Exercise \thedoconceexercisecounter : Find time of murder from body temperature}{section*.101}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.5: Simulate an oscillating cooling process}{147}{section*.102}}
+\newlabel{decay:app:exer:cooling:osc}{{4.5}{147}{Exercise \thedoconceexercisecounter : Simulate an oscillating cooling process}{section*.102}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.6: Simulate stochastic radioactive decay}{147}{section*.103}}
+\newlabel{decay:app:exer:stoch:nuclear}{{4.6}{147}{Exercise \thedoconceexercisecounter : Simulate stochastic radioactive decay}{section*.103}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 4.7: Radioactive decay of two substances}{148}{section*.104}}
+\newlabel{decay:app:exer:radio:twosubst}{{4.7}{148}{Problem \thedoconceexercisecounter : Radioactive decay of two substances}{section*.104}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{148}{section*.105}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{148}{section*.106}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{148}{section*.107}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.8: Simulate a simple chemical reaction}{148}{section*.108}}
+\newlabel{decay:app:exer:kinetics:AB}{{4.8}{148}{Exercise \thedoconceexercisecounter : Simulate a simple chemical reaction}{section*.108}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.9: Simulate an $n$-th order chemical reaction}{149}{section*.109}}
+\newlabel{decay:app:exer:kinetics:ABn}{{4.9}{149}{Exercise \thedoconceexercisecounter : Simulate an $n$-th order chemical reaction}{section*.109}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.10: Simulate a biochemical process}{150}{section*.110}}
+\newlabel{decay:app:exer:MMK}{{4.10}{150}{Exercise \thedoconceexercisecounter : Simulate a biochemical process}{section*.110}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{150}{section*.111}}
+\newlabel{decay:app:MMK:Q2}{{4.54}{150}{a)}{equation.4.14.54}{}}
+\newlabel{decay:app:MMK:P2}{{4.55}{150}{a)}{equation.4.14.55}{}}
+\newlabel{decay:app:MMK:S2}{{4.56}{150}{a)}{equation.4.14.56}{}}
+\newlabel{decay:app:MMK:E2}{{4.57}{150}{a)}{equation.4.14.57}{}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{151}{section*.112}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{151}{section*.113}}
+\@writefile{toc}{\contentsline {paragraph}{d)}{151}{section*.114}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.11: Simulate spreading of a disease}{151}{section*.115}}
+\newlabel{decay:app:exer:SIR}{{4.11}{151}{Exercise \thedoconceexercisecounter : Simulate spreading of a disease}{section*.115}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{151}{section*.116}}
+\newlabel{decay:app:SIR:S2}{{4.60}{151}{a)}{equation.4.14.60}{}}
+\newlabel{decay:app:SIR:I2}{{4.61}{151}{a)}{equation.4.14.61}{}}
+\newlabel{decay:SIR:R2}{{4.62}{151}{a)}{equation.4.14.62}{}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{152}{section*.117}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{152}{section*.118}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{152}{section*.119}}
+\@writefile{toc}{\contentsline {paragraph}{d)}{152}{section*.120}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.12: Simulate predator-prey interaction}{152}{section*.121}}
+\newlabel{decay:app:exer:predprey}{{4.12}{152}{Exercise \thedoconceexercisecounter : Simulate predator-prey interaction}{section*.121}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{152}{section*.122}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{152}{section*.123}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{152}{section*.124}}
+\@writefile{toc}{\contentsline {paragraph}{d)}{152}{section*.125}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.13: Simulate the pressure drop in the atmosphere}{152}{section*.126}}
+\newlabel{decay:app:exer:atm1}{{4.13}{152}{Exercise \thedoconceexercisecounter : Simulate the pressure drop in the atmosphere}{section*.126}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.14: Make a program for vertical motion in a fluid}{153}{section*.127}}
+\newlabel{decay:app:exer:drag:prog}{{4.14}{153}{Exercise \thedoconceexercisecounter : Make a program for vertical motion in a fluid}{section*.127}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Project 4.15: Simulate parachuting}{154}{section*.128}}
+\newlabel{decay:app:exer:parachute}{{4.15}{154}{Project \thedoconceexercisecounter : Simulate parachuting}{section*.128}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{154}{section*.129}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{154}{section*.130}}
+\@writefile{toc}{\contentsline {paragraph}{Hint 1.}{154}{section*.131}}
+\@writefile{toc}{\contentsline {paragraph}{Hint 2.}{154}{section*.132}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{154}{section*.133}}
 \citation{parachute_1999}
 \citation{parachute_1999}
-\@writefile{toc}{\contentsline {paragraph}{d)}{147}{section*.130}}
-\@writefile{toc}{\contentsline {paragraph}{e)}{147}{section*.131}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{147}{section*.132}}
-\@writefile{toc}{\contentsline {paragraph}{f)}{147}{section*.133}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{147}{section*.134}}
-\@writefile{toc}{\contentsline {paragraph}{g)}{147}{section*.135}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{147}{section*.136}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.16: Formulate vertical motion in the atmosphere}{148}{section*.137}}
-\newlabel{decay:app:exer:drag:atm1}{{4.16}{148}{Exercise \thedoconceexercisecounter : Formulate vertical motion in the atmosphere}{section*.137}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.17: Simulate vertical motion in the atmosphere}{148}{section*.138}}
-\newlabel{decay:app:exer:drag:atm2}{{4.17}{148}{Exercise \thedoconceexercisecounter : Simulate vertical motion in the atmosphere}{section*.138}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 4.18: Compute $y=|x|$ by solving an ODE}{149}{section*.139}}
-\newlabel{decay:app:exer:signum}{{4.18}{149}{Problem \thedoconceexercisecounter : Compute $y=|x|$ by solving an ODE}{section*.139}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 4.19: Simulate fortune growth with random interest rate}{149}{section*.140}}
-\newlabel{decay:app:exer:interest}{{4.19}{149}{Problem \thedoconceexercisecounter : Simulate fortune growth with random interest rate}{section*.140}{}}
-\@writefile{toc}{\contentsline {paragraph}{Hint 1.}{149}{section*.141}}
-\@writefile{toc}{\contentsline {paragraph}{Hint 2.}{150}{section*.142}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.20: Simulate a population in a changing environment}{150}{section*.143}}
-\newlabel{decay:app:exer:pop:at}{{4.20}{150}{Exercise \thedoconceexercisecounter : Simulate a population in a changing environment}{section*.143}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{150}{section*.144}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{150}{section*.145}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.21: Simulate logistic growth}{151}{section*.146}}
-\newlabel{decay:app:exer:pop:logistic1}{{4.21}{151}{Exercise \thedoconceexercisecounter : Simulate logistic growth}{section*.146}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.22: Rederive the equation for continuous compound interest}{151}{section*.147}}
-\newlabel{decay:app:exer:interest:derive}{{4.22}{151}{Exercise \thedoconceexercisecounter : Rederive the equation for continuous compound interest}{section*.147}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.23: Simulate the deformation of a viscoelastic material}{151}{section*.148}}
-\newlabel{decay:app:exer:viscoelasticity1}{{4.23}{151}{Exercise \thedoconceexercisecounter : Simulate the deformation of a viscoelastic material}{section*.148}{}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{152}{section*.149}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Scientific software engineering}{153}{chapter.5}}
+\@writefile{toc}{\contentsline {paragraph}{d)}{155}{section*.134}}
+\@writefile{toc}{\contentsline {paragraph}{e)}{155}{section*.135}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{155}{section*.136}}
+\@writefile{toc}{\contentsline {paragraph}{f)}{155}{section*.137}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{155}{section*.138}}
+\@writefile{toc}{\contentsline {paragraph}{g)}{155}{section*.139}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{155}{section*.140}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.16: Formulate vertical motion in the atmosphere}{156}{section*.141}}
+\newlabel{decay:app:exer:drag:atm1}{{4.16}{156}{Exercise \thedoconceexercisecounter : Formulate vertical motion in the atmosphere}{section*.141}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.17: Simulate vertical motion in the atmosphere}{156}{section*.142}}
+\newlabel{decay:app:exer:drag:atm2}{{4.17}{156}{Exercise \thedoconceexercisecounter : Simulate vertical motion in the atmosphere}{section*.142}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 4.18: Compute $y=|x|$ by solving an ODE}{157}{section*.143}}
+\newlabel{decay:app:exer:signum}{{4.18}{157}{Problem \thedoconceexercisecounter : Compute $y=|x|$ by solving an ODE}{section*.143}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 4.19: Simulate fortune growth with random interest rate}{157}{section*.144}}
+\newlabel{decay:app:exer:interest}{{4.19}{157}{Problem \thedoconceexercisecounter : Simulate fortune growth with random interest rate}{section*.144}{}}
+\@writefile{toc}{\contentsline {paragraph}{Hint 1.}{157}{section*.145}}
+\@writefile{toc}{\contentsline {paragraph}{Hint 2.}{158}{section*.146}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.20: Simulate a population in a changing environment}{158}{section*.147}}
+\newlabel{decay:app:exer:pop:at}{{4.20}{158}{Exercise \thedoconceexercisecounter : Simulate a population in a changing environment}{section*.147}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{158}{section*.148}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{158}{section*.149}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.21: Simulate logistic growth}{159}{section*.150}}
+\newlabel{decay:app:exer:pop:logistic1}{{4.21}{159}{Exercise \thedoconceexercisecounter : Simulate logistic growth}{section*.150}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.22: Rederive the equation for continuous compound interest}{159}{section*.151}}
+\newlabel{decay:app:exer:interest:derive}{{4.22}{159}{Exercise \thedoconceexercisecounter : Rederive the equation for continuous compound interest}{section*.151}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 4.23: Simulate the deformation of a viscoelastic material}{159}{section*.152}}
+\newlabel{decay:app:exer:viscoelasticity1}{{4.23}{159}{Exercise \thedoconceexercisecounter : Simulate the deformation of a viscoelastic material}{section*.152}{}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{160}{section*.153}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Scientific software engineering}{161}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{decay:se}{{5}{153}{Scientific software engineering}{chapter.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Implementations with functions and modules}{154}{section.5.1}}
-\newlabel{softeng1:basic}{{5.1}{154}{Implementations with functions and modules}{section.5.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Mathematical problem and solution technique}{154}{subsection.5.1.1}}
-\newlabel{softeng1:basic:math}{{5.1.1}{154}{Mathematical problem and solution technique}{subsection.5.1.1}{}}
-\newlabel{softeng1:ode}{{5.1}{154}{Mathematical problem and solution technique}{equation.5.1.1}{}}
-\newlabel{softeng1:u0}{{5.2}{154}{Mathematical problem and solution technique}{equation.5.1.2}{}}
-\newlabel{softeng1:utheta}{{5.3}{154}{Mathematical problem and solution technique}{equation.5.1.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}A first, quick implementation}{155}{subsection.5.1.2}}
-\newlabel{softeng1:basic:impl1}{{5.1.2}{155}{A first, quick implementation}{subsection.5.1.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}A more decent program}{156}{subsection.5.1.3}}
-\newlabel{softeng1:basic:impl2}{{5.1.3}{156}{A more decent program}{subsection.5.1.3}{}}
-\@writefile{toc}{\contentsline {paragraph}{Comments in a program.}{156}{section*.150}}
-\@writefile{toc}{\contentsline {paragraph}{Refactoring into functions.}{156}{section*.151}}
-\@writefile{toc}{\contentsline {paragraph}{Program file vs IDE vs notebook.}{157}{section*.152}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Prefixing imported functions by the module name}{157}{subsection.5.1.4}}
-\newlabel{softeng1:basic:modprefix}{{5.1.4}{157}{Prefixing imported functions by the module name}{subsection.5.1.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces  Experimental code in a notebook.  \relax }}{158}{figure.caption.153}}
-\newlabel{softeng1:ipynb}{{5.1}{158}{Experimental code in a notebook.  \relax }{figure.caption.153}{}}
-\zref@newlabel{mdf@pagelabel-21}{\default{5.1.4}\page{159}\abspage{161}\mdf@pagevalue{159}}
+\newlabel{decay:se}{{5}{161}{Scientific software engineering}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Implementations with functions and modules}{162}{section.5.1}}
+\newlabel{softeng1:basic}{{5.1}{162}{Implementations with functions and modules}{section.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Mathematical problem and solution technique}{162}{subsection.5.1.1}}
+\newlabel{softeng1:basic:math}{{5.1.1}{162}{Mathematical problem and solution technique}{subsection.5.1.1}{}}
+\newlabel{softeng1:ode}{{5.1}{162}{Mathematical problem and solution technique}{equation.5.1.1}{}}
+\newlabel{softeng1:u0}{{5.2}{162}{Mathematical problem and solution technique}{equation.5.1.2}{}}
+\newlabel{softeng1:utheta}{{5.3}{162}{Mathematical problem and solution technique}{equation.5.1.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}A first, quick implementation}{163}{subsection.5.1.2}}
+\newlabel{softeng1:basic:impl1}{{5.1.2}{163}{A first, quick implementation}{subsection.5.1.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}A more decent program}{164}{subsection.5.1.3}}
+\newlabel{softeng1:basic:impl2}{{5.1.3}{164}{A more decent program}{subsection.5.1.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Comments in a program.}{164}{section*.154}}
+\@writefile{toc}{\contentsline {paragraph}{Refactoring into functions.}{164}{section*.155}}
+\@writefile{toc}{\contentsline {paragraph}{Program file vs IDE vs notebook.}{165}{section*.156}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Prefixing imported functions by the module name}{165}{subsection.5.1.4}}
+\newlabel{softeng1:basic:modprefix}{{5.1.4}{165}{Prefixing imported functions by the module name}{subsection.5.1.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces  Experimental code in a notebook.  \relax }}{166}{figure.caption.157}}
+\newlabel{softeng1:ipynb}{{5.1}{166}{Experimental code in a notebook.  \relax }{figure.caption.157}{}}
+\zref@newlabel{mdf@pagelabel-21}{\default{5.1.4}\page{167}\abspage{169}\mdf@pagevalue{167}}
 \pgfsyspdfmark {pgfid39}{4344704}{9323402}
-\zref@newlabel{mdf@pagelabel-22}{\default{5.1.4}\page{160}\abspage{162}\mdf@pagevalue{160}}
+\zref@newlabel{mdf@pagelabel-22}{\default{5.1.4}\page{168}\abspage{170}\mdf@pagevalue{168}}
 \pgfsyspdfmark {pgfid40}{6339911}{40823804}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.5}Implementing the numerical algorithm in a function}{160}{subsection.5.1.5}}
-\newlabel{softeng1:basic:func}{{5.1.5}{160}{Implementing the numerical algorithm in a function}{subsection.5.1.5}{}}
-\zref@newlabel{mdf@pagelabel-23}{\default{5.1.5}\page{160}\abspage{162}\mdf@pagevalue{160}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.5}Implementing the numerical algorithm in a function}{168}{subsection.5.1.5}}
+\newlabel{softeng1:basic:func}{{5.1.5}{168}{Implementing the numerical algorithm in a function}{subsection.5.1.5}{}}
+\zref@newlabel{mdf@pagelabel-23}{\default{5.1.5}\page{168}\abspage{170}\mdf@pagevalue{168}}
 \pgfsyspdfmark {pgfid42}{6339911}{12995141}
-\zref@newlabel{mdf@pagelabel-24}{\default{5.1.5}\page{161}\abspage{163}\mdf@pagevalue{161}}
+\zref@newlabel{mdf@pagelabel-24}{\default{5.1.5}\page{169}\abspage{171}\mdf@pagevalue{169}}
 \pgfsyspdfmark {pgfid44}{4344704}{39242315}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.6}Do not have several versions of a code}{161}{subsection.5.1.6}}
-\zref@newlabel{mdf@pagelabel-25}{\default{5.1.6}\page{161}\abspage{163}\mdf@pagevalue{161}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.6}Do not have several versions of a code}{169}{subsection.5.1.6}}
+\zref@newlabel{mdf@pagelabel-25}{\default{5.1.6}\page{169}\abspage{171}\mdf@pagevalue{169}}
 \pgfsyspdfmark {pgfid46}{4344704}{17047934}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.7}Making a module}{162}{subsection.5.1.7}}
-\newlabel{softeng1:basic:module}{{5.1.7}{162}{Making a module}{subsection.5.1.7}{}}
-\zref@newlabel{mdf@pagelabel-26}{\default{5.1.7}\page{163}\abspage{165}\mdf@pagevalue{163}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.7}Making a module}{170}{subsection.5.1.7}}
+\newlabel{softeng1:basic:module}{{5.1.7}{170}{Making a module}{subsection.5.1.7}{}}
+\zref@newlabel{mdf@pagelabel-26}{\default{5.1.7}\page{171}\abspage{173}\mdf@pagevalue{171}}
 \pgfsyspdfmark {pgfid48}{4344704}{30542471}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.8}Example on extending the module code}{164}{subsection.5.1.8}}
-\newlabel{softeng1:basic:experiment2}{{5.1.8}{164}{Example on extending the module code}{subsection.5.1.8}{}}
-\zref@newlabel{mdf@pagelabel-27}{\default{5.1.8}\page{164}\abspage{166}\mdf@pagevalue{164}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.8}Example on extending the module code}{172}{subsection.5.1.8}}
+\newlabel{softeng1:basic:experiment2}{{5.1.8}{172}{Example on extending the module code}{subsection.5.1.8}{}}
+\zref@newlabel{mdf@pagelabel-27}{\default{5.1.8}\page{172}\abspage{174}\mdf@pagevalue{172}}
 \pgfsyspdfmark {pgfid50}{6339911}{10578636}
-\zref@newlabel{mdf@pagelabel-28}{\default{5.1.8}\page{165}\abspage{167}\mdf@pagevalue{165}}
+\zref@newlabel{mdf@pagelabel-28}{\default{5.1.8}\page{173}\abspage{175}\mdf@pagevalue{173}}
 \pgfsyspdfmark {pgfid51}{4344704}{42116696}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.9}Documenting functions and modules}{165}{subsection.5.1.9}}
-\newlabel{softeng1:basic:docstring}{{5.1.9}{165}{Documenting functions and modules}{subsection.5.1.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces  Example on Sphinx API manual in HTML.  \relax }}{167}{figure.caption.154}}
-\newlabel{softeng1:basic:docstring:fig}{{5.2}{167}{Example on Sphinx API manual in HTML.  \relax }{figure.caption.154}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.10}Logging intermediate results}{167}{subsection.5.1.10}}
-\newlabel{softeng1:basic:logging}{{5.1.10}{167}{Logging intermediate results}{subsection.5.1.10}{}}
-\@writefile{toc}{\contentsline {paragraph}{Introductory example.}{167}{section*.155}}
-\@writefile{toc}{\contentsline {paragraph}{Using a logger in our solver function.}{168}{section*.156}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}User interfaces}{170}{section.5.2}}
-\newlabel{softeng1:basic:UI}{{5.2}{170}{User interfaces}{section.5.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Command-line arguments}{171}{subsection.5.2.1}}
-\zref@newlabel{mdf@pagelabel-29}{\default{5.2.1}\page{173}\abspage{175}\mdf@pagevalue{173}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.9}Documenting functions and modules}{173}{subsection.5.1.9}}
+\newlabel{softeng1:basic:docstring}{{5.1.9}{173}{Documenting functions and modules}{subsection.5.1.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces  Example on Sphinx API manual in HTML.  \relax }}{175}{figure.caption.158}}
+\newlabel{softeng1:basic:docstring:fig}{{5.2}{175}{Example on Sphinx API manual in HTML.  \relax }{figure.caption.158}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.10}Logging intermediate results}{175}{subsection.5.1.10}}
+\newlabel{softeng1:basic:logging}{{5.1.10}{175}{Logging intermediate results}{subsection.5.1.10}{}}
+\@writefile{toc}{\contentsline {paragraph}{Introductory example.}{175}{section*.159}}
+\@writefile{toc}{\contentsline {paragraph}{Using a logger in our solver function.}{176}{section*.160}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}User interfaces}{178}{section.5.2}}
+\newlabel{softeng1:basic:UI}{{5.2}{178}{User interfaces}{section.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Command-line arguments}{179}{subsection.5.2.1}}
+\zref@newlabel{mdf@pagelabel-29}{\default{5.2.1}\page{181}\abspage{183}\mdf@pagevalue{181}}
 \pgfsyspdfmark {pgfid53}{4344704}{40127051}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Positional command-line arguments}{173}{subsection.5.2.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}Option-value pairs on the command line}{174}{subsection.5.2.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Creating a graphical web user interface}{177}{subsection.5.2.4}}
-\@writefile{toc}{\contentsline {paragraph}{Making a compute function.}{177}{section*.157}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces  Automatically generated graphical web interface.  \relax }}{178}{figure.caption.158}}
-\newlabel{softeng1:fig:GUI}{{5.3}{178}{Automatically generated graphical web interface.  \relax }{figure.caption.158}{}}
-\@writefile{toc}{\contentsline {paragraph}{Generating the user interface.}{179}{section*.159}}
-\@writefile{toc}{\contentsline {paragraph}{Running the web application.}{180}{section*.160}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Tests for verifying implementations}{180}{section.5.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Doctests}{181}{subsection.5.3.1}}
-\zref@newlabel{mdf@pagelabel-30}{\default{5.3.1}\page{182}\abspage{184}\mdf@pagevalue{182}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Positional command-line arguments}{181}{subsection.5.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}Option-value pairs on the command line}{182}{subsection.5.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Creating a graphical web user interface}{185}{subsection.5.2.4}}
+\@writefile{toc}{\contentsline {paragraph}{Making a compute function.}{185}{section*.161}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces  Automatically generated graphical web interface.  \relax }}{186}{figure.caption.162}}
+\newlabel{softeng1:fig:GUI}{{5.3}{186}{Automatically generated graphical web interface.  \relax }{figure.caption.162}{}}
+\@writefile{toc}{\contentsline {paragraph}{Generating the user interface.}{187}{section*.163}}
+\@writefile{toc}{\contentsline {paragraph}{Running the web application.}{188}{section*.164}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Tests for verifying implementations}{188}{section.5.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Doctests}{189}{subsection.5.3.1}}
+\zref@newlabel{mdf@pagelabel-30}{\default{5.3.1}\page{190}\abspage{192}\mdf@pagevalue{190}}
 \pgfsyspdfmark {pgfid55}{6339911}{34571835}
-\zref@newlabel{mdf@pagelabel-31}{\default{5.3.1}\page{182}\abspage{184}\mdf@pagevalue{182}}
+\zref@newlabel{mdf@pagelabel-31}{\default{5.3.1}\page{190}\abspage{192}\mdf@pagevalue{190}}
 \pgfsyspdfmark {pgfid57}{6339911}{9327883}
-\zref@newlabel{mdf@pagelabel-32}{\default{5.3.1}\page{183}\abspage{185}\mdf@pagevalue{183}}
+\zref@newlabel{mdf@pagelabel-32}{\default{5.3.1}\page{191}\abspage{193}\mdf@pagevalue{191}}
 \pgfsyspdfmark {pgfid58}{4344704}{42613302}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Unit tests and test functions}{183}{subsection.5.3.2}}
-\@writefile{toc}{\contentsline {paragraph}{Two Python test frameworks: nose and pytest.}{183}{section*.161}}
-\@writefile{toc}{\contentsline {paragraph}{Test function requirements.}{183}{section*.162}}
-\@writefile{toc}{\contentsline {paragraph}{Comparison of real numbers.}{184}{section*.163}}
-\zref@newlabel{mdf@pagelabel-33}{\default{5.3.2}\page{185}\abspage{187}\mdf@pagevalue{185}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Unit tests and test functions}{191}{subsection.5.3.2}}
+\@writefile{toc}{\contentsline {paragraph}{Two Python test frameworks: nose and pytest.}{191}{section*.165}}
+\@writefile{toc}{\contentsline {paragraph}{Test function requirements.}{191}{section*.166}}
+\@writefile{toc}{\contentsline {paragraph}{Comparison of real numbers.}{192}{section*.167}}
+\zref@newlabel{mdf@pagelabel-33}{\default{5.3.2}\page{193}\abspage{195}\mdf@pagevalue{193}}
 \pgfsyspdfmark {pgfid60}{4344704}{35738346}
-\@writefile{toc}{\contentsline {paragraph}{Special assert functions from nose.}{185}{section*.164}}
-\@writefile{toc}{\contentsline {paragraph}{Locating test functions.}{185}{section*.165}}
-\@writefile{toc}{\contentsline {paragraph}{Running tests.}{185}{section*.166}}
-\@writefile{toc}{\contentsline {paragraph}{Embedding doctests in a test function.}{186}{section*.167}}
-\@writefile{toc}{\contentsline {paragraph}{Installing nose and pytest.}{187}{section*.168}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}Test function for the solver}{187}{subsection.5.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.4}Test function for reading positional command-line arguments}{188}{subsection.5.3.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.5}Test function for reading option-value pairs}{189}{subsection.5.3.5}}
-\zref@newlabel{mdf@pagelabel-34}{\default{5.3.5}\page{189}\abspage{191}\mdf@pagevalue{189}}
+\@writefile{toc}{\contentsline {paragraph}{Special assert functions from nose.}{193}{section*.168}}
+\@writefile{toc}{\contentsline {paragraph}{Locating test functions.}{193}{section*.169}}
+\@writefile{toc}{\contentsline {paragraph}{Running tests.}{193}{section*.170}}
+\@writefile{toc}{\contentsline {paragraph}{Embedding doctests in a test function.}{194}{section*.171}}
+\@writefile{toc}{\contentsline {paragraph}{Installing nose and pytest.}{195}{section*.172}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}Test function for the solver}{195}{subsection.5.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.4}Test function for reading positional command-line arguments}{196}{subsection.5.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.5}Test function for reading option-value pairs}{197}{subsection.5.3.5}}
+\zref@newlabel{mdf@pagelabel-34}{\default{5.3.5}\page{197}\abspage{199}\mdf@pagevalue{197}}
 \pgfsyspdfmark {pgfid62}{4344704}{9455602}
-\zref@newlabel{mdf@pagelabel-35}{\default{5.3.5}\page{190}\abspage{192}\mdf@pagevalue{190}}
+\zref@newlabel{mdf@pagelabel-35}{\default{5.3.5}\page{198}\abspage{200}\mdf@pagevalue{198}}
 \pgfsyspdfmark {pgfid63}{6339911}{29531649}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.6}Classical class-based unit testing}{190}{subsection.5.3.6}}
-\newlabel{softeng1:basic:unittest}{{5.3.6}{190}{Classical class-based unit testing}{subsection.5.3.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Sharing the software with other users}{192}{section.5.4}}
-\newlabel{softeng1:prog:se:git}{{5.4}{192}{Sharing the software with other users}{section.5.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}Organizing the software directory tree}{192}{subsection.5.4.1}}
-\@writefile{toc}{\contentsline {paragraph}{Distributing just a module file.}{193}{section*.169}}
-\@writefile{toc}{\contentsline {paragraph}{Distributing a package.}{193}{section*.170}}
-\zref@newlabel{mdf@pagelabel-36}{\default{5.4.1}\page{193}\abspage{195}\mdf@pagevalue{193}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.6}Classical class-based unit testing}{198}{subsection.5.3.6}}
+\newlabel{softeng1:basic:unittest}{{5.3.6}{198}{Classical class-based unit testing}{subsection.5.3.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Sharing the software with other users}{200}{section.5.4}}
+\newlabel{softeng1:prog:se:git}{{5.4}{200}{Sharing the software with other users}{section.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}Organizing the software directory tree}{200}{subsection.5.4.1}}
+\@writefile{toc}{\contentsline {paragraph}{Distributing just a module file.}{201}{section*.173}}
+\@writefile{toc}{\contentsline {paragraph}{Distributing a package.}{201}{section*.174}}
+\zref@newlabel{mdf@pagelabel-36}{\default{5.4.1}\page{201}\abspage{203}\mdf@pagevalue{201}}
 \pgfsyspdfmark {pgfid65}{4344704}{10475335}
-\zref@newlabel{mdf@pagelabel-37}{\default{5.4.1}\page{194}\abspage{196}\mdf@pagevalue{194}}
+\zref@newlabel{mdf@pagelabel-37}{\default{5.4.1}\page{202}\abspage{204}\mdf@pagevalue{202}}
 \pgfsyspdfmark {pgfid66}{6339911}{33995751}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}Publishing the software at GitHub}{194}{subsection.5.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}Publishing the software at GitHub}{202}{subsection.5.4.2}}
 \citation{Langtangen_bitgit}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Downloading and installing the software}{196}{subsection.5.4.3}}
-\@writefile{toc}{\contentsline {paragraph}{Installing just a module file.}{196}{section*.171}}
-\@writefile{toc}{\contentsline {paragraph}{Installing a package.}{197}{section*.172}}
-\zref@newlabel{mdf@pagelabel-38}{\default{5.4.3}\page{197}\abspage{199}\mdf@pagevalue{197}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Downloading and installing the software}{204}{subsection.5.4.3}}
+\@writefile{toc}{\contentsline {paragraph}{Installing just a module file.}{204}{section*.175}}
+\@writefile{toc}{\contentsline {paragraph}{Installing a package.}{205}{section*.176}}
+\zref@newlabel{mdf@pagelabel-38}{\default{5.4.3}\page{205}\abspage{207}\mdf@pagevalue{205}}
 \pgfsyspdfmark {pgfid68}{4344704}{18551962}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}Classes for problem and solution method}{197}{section.5.5}}
-\newlabel{softeng1:prog:se:class}{{5.5}{197}{Classes for problem and solution method}{section.5.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Classes for problem and solution method}{205}{section.5.5}}
+\newlabel{softeng1:prog:se:class}{{5.5}{205}{Classes for problem and solution method}{section.5.5}{}}
 \citation{Langtangen_2012}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}The problem class}{198}{subsection.5.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}The solver class}{200}{subsection.5.5.2}}
-\@writefile{toc}{\contentsline {paragraph}{Combining the objects.}{201}{section*.173}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.3}Improving the problem and solver classes}{201}{subsection.5.5.3}}
-\newlabel{softeng1:prog:se:class2}{{5.5.3}{201}{Improving the problem and solver classes}{subsection.5.5.3}{}}
-\@writefile{toc}{\contentsline {paragraph}{A generic class for parameters.}{203}{section*.174}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}Automating scientific experiments}{204}{section.5.6}}
-\newlabel{softeng1:experiments}{{5.6}{204}{Automating scientific experiments}{section.5.6}{}}
-\zref@newlabel{mdf@pagelabel-39}{\default{5.6}\page{204}\abspage{206}\mdf@pagevalue{204}}
-\newlabel{softeng1:experiments:model}{{5.4}{204}{Automating scientific experiments}{equation.5.6.4}{}}
-\newlabel{softeng1:experiments:theta}{{5.5}{204}{Automating scientific experiments}{equation.5.6.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}The problem class}{206}{subsection.5.5.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}The solver class}{208}{subsection.5.5.2}}
+\@writefile{toc}{\contentsline {paragraph}{Combining the objects.}{209}{section*.177}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.3}Improving the problem and solver classes}{209}{subsection.5.5.3}}
+\newlabel{softeng1:prog:se:class2}{{5.5.3}{209}{Improving the problem and solver classes}{subsection.5.5.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{A generic class for parameters.}{211}{section*.178}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Automating scientific experiments}{212}{section.5.6}}
+\newlabel{softeng1:experiments}{{5.6}{212}{Automating scientific experiments}{section.5.6}{}}
+\zref@newlabel{mdf@pagelabel-39}{\default{5.6}\page{212}\abspage{214}\mdf@pagevalue{212}}
+\newlabel{softeng1:experiments:model}{{5.4}{212}{Automating scientific experiments}{equation.5.6.4}{}}
+\newlabel{softeng1:experiments:theta}{{5.5}{212}{Automating scientific experiments}{equation.5.6.5}{}}
 \pgfsyspdfmark {pgfid70}{6339911}{11028005}
-\zref@newlabel{mdf@pagelabel-40}{\default{5.6}\page{205}\abspage{207}\mdf@pagevalue{205}}
+\zref@newlabel{mdf@pagelabel-40}{\default{5.6}\page{213}\abspage{215}\mdf@pagevalue{213}}
 \pgfsyspdfmark {pgfid71}{4344704}{42613302}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.1}Available software}{205}{subsection.5.6.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.2}The results we want to produce}{205}{subsection.5.6.2}}
-\zref@newlabel{mdf@pagelabel-41}{\default{5.6.2}\page{206}\abspage{208}\mdf@pagevalue{206}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.1}Available software}{213}{subsection.5.6.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.2}The results we want to produce}{213}{subsection.5.6.2}}
+\zref@newlabel{mdf@pagelabel-41}{\default{5.6.2}\page{214}\abspage{216}\mdf@pagevalue{214}}
 \pgfsyspdfmark {pgfid73}{6339911}{10828185}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.3}Combining plot files}{207}{subsection.5.6.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces  Illustration of the Backward Euler method for four time step values.  \relax }}{207}{figure.caption.175}}
-\newlabel{softeng1:experiments:fig:BE4a}{{5.4}{207}{Illustration of the Backward Euler method for four time step values.  \relax }{figure.caption.175}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.4}Running a program from Python}{208}{subsection.5.6.4}}
-\zref@newlabel{mdf@pagelabel-42}{\default{5.6.4}\page{208}\abspage{210}\mdf@pagevalue{208}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.3}Combining plot files}{215}{subsection.5.6.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces  Illustration of the Backward Euler method for four time step values.  \relax }}{215}{figure.caption.179}}
+\newlabel{softeng1:experiments:fig:BE4a}{{5.4}{215}{Illustration of the Backward Euler method for four time step values.  \relax }{figure.caption.179}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.4}Running a program from Python}{216}{subsection.5.6.4}}
+\zref@newlabel{mdf@pagelabel-42}{\default{5.6.4}\page{216}\abspage{218}\mdf@pagevalue{216}}
 \pgfsyspdfmark {pgfid75}{6339911}{10358227}
-\zref@newlabel{mdf@pagelabel-43}{\default{5.6.4}\page{209}\abspage{211}\mdf@pagevalue{209}}
+\zref@newlabel{mdf@pagelabel-43}{\default{5.6.4}\page{217}\abspage{219}\mdf@pagevalue{217}}
 \pgfsyspdfmark {pgfid76}{4344704}{33643319}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.5}The automating script}{209}{subsection.5.6.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.6}Making a report}{212}{subsection.5.6.6}}
-\newlabel{softeng1:exper:report}{{5.6.6}{212}{Making a report}{subsection.5.6.6}{}}
-\@writefile{toc}{\contentsline {paragraph}{Word, OpenOffice, GoogleDocs.}{212}{section*.176}}
-\@writefile{toc}{\contentsline {paragraph}{HTML with MathJax.}{212}{section*.177}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces  Report in HTML format with MathJax.  \relax }}{213}{figure.caption.178}}
-\newlabel{softeng1:exper:report:fig:mathjax}{{5.5}{213}{Report in HTML format with MathJax.  \relax }{figure.caption.178}{}}
-\@writefile{toc}{\contentsline {paragraph}{{\LaTeX  }.}{213}{section*.179}}
-\@writefile{toc}{\contentsline {paragraph}{Sphinx.}{213}{section*.181}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces  Report in PDF format generated from {\LaTeX  } source.  \relax }}{214}{figure.caption.180}}
-\newlabel{softeng1:exper:report:fig:latex}{{5.6}{214}{Report in PDF format generated from {\LaTeX } source.  \relax }{figure.caption.180}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces  Report in HTML format generated from Sphinx source.  \relax }}{214}{figure.caption.182}}
-\newlabel{softeng1:exper:report:fig:sphinx}{{5.7}{214}{Report in HTML format generated from Sphinx source.  \relax }{figure.caption.182}{}}
-\@writefile{toc}{\contentsline {paragraph}{Markdown.}{214}{section*.183}}
-\@writefile{toc}{\contentsline {paragraph}{IPython/Jupyter notebooks.}{215}{section*.184}}
-\@writefile{toc}{\contentsline {paragraph}{Wiki formats.}{215}{section*.185}}
-\@writefile{toc}{\contentsline {paragraph}{DocOnce.}{215}{section*.186}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.7}Publishing a complete project}{215}{subsection.5.6.7}}
-\newlabel{softeng1:exper:github}{{5.6.7}{215}{Publishing a complete project}{subsection.5.6.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.7}Exercises}{216}{section.5.7}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.1: Make a tool for differentiating curves}{216}{section*.187}}
-\newlabel{softeng1:exer:derivative}{{5.1}{216}{Problem \thedoconceexercisecounter : Make a tool for differentiating curves}{section*.187}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{217}{section*.188}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{217}{section*.189}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{217}{section*.190}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.2: Make solid software for the Trapezoidal rule}{217}{section*.191}}
-\newlabel{softeng1:exer:integral:flat}{{5.2}{217}{Problem \thedoconceexercisecounter : Make solid software for the Trapezoidal rule}{section*.191}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{218}{section*.192}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{218}{section*.193}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{218}{section*.194}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{218}{section*.195}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{219}{section*.196}}
-\@writefile{toc}{\contentsline {paragraph}{d)}{219}{section*.197}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.3: Implement classes for the Trapezoidal rule}{219}{section*.198}}
-\newlabel{softeng1:exer:integral:flat2}{{5.3}{219}{Problem \thedoconceexercisecounter : Implement classes for the Trapezoidal rule}{section*.198}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.4: Write a doctest and a test function}{220}{section*.199}}
-\newlabel{softeng1:exer:doctest1}{{5.4}{220}{Problem \thedoconceexercisecounter : Write a doctest and a test function}{section*.199}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{220}{section*.200}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{220}{section*.201}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.5: Experiment with tolerances in comparisons}{220}{section*.202}}
-\newlabel{softeng1:exer:tol}{{5.5}{220}{Problem \thedoconceexercisecounter : Experiment with tolerances in comparisons}{section*.202}{}}
-\@writefile{toc}{\contentsline {paragraph}{Remarks.}{220}{section*.203}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 5.6: Make use of a class implementation}{220}{section*.204}}
-\newlabel{softeng1:exer:class:dts}{{5.6}{220}{Exercise \thedoconceexercisecounter : Make use of a class implementation}{section*.204}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.7: Make solid software for a difference equation}{221}{section*.205}}
-\newlabel{softeng1:exer:logistic}{{5.7}{221}{Problem \thedoconceexercisecounter : Make solid software for a difference equation}{section*.205}{}}
-\newlabel{softeng1:exer:logistic:eq}{{5.9}{221}{Problem \thedoconceexercisecounter : Make solid software for a difference equation}{equation.5.7.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.5}The automating script}{217}{subsection.5.6.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.6}Making a report}{220}{subsection.5.6.6}}
+\newlabel{softeng1:exper:report}{{5.6.6}{220}{Making a report}{subsection.5.6.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Word, OpenOffice, GoogleDocs.}{220}{section*.180}}
+\@writefile{toc}{\contentsline {paragraph}{HTML with MathJax.}{220}{section*.181}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces  Report in HTML format with MathJax.  \relax }}{221}{figure.caption.182}}
+\newlabel{softeng1:exper:report:fig:mathjax}{{5.5}{221}{Report in HTML format with MathJax.  \relax }{figure.caption.182}{}}
+\@writefile{toc}{\contentsline {paragraph}{{\LaTeX  }.}{221}{section*.183}}
+\@writefile{toc}{\contentsline {paragraph}{Sphinx.}{221}{section*.185}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces  Report in PDF format generated from {\LaTeX  } source.  \relax }}{222}{figure.caption.184}}
+\newlabel{softeng1:exper:report:fig:latex}{{5.6}{222}{Report in PDF format generated from {\LaTeX } source.  \relax }{figure.caption.184}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces  Report in HTML format generated from Sphinx source.  \relax }}{222}{figure.caption.186}}
+\newlabel{softeng1:exper:report:fig:sphinx}{{5.7}{222}{Report in HTML format generated from Sphinx source.  \relax }{figure.caption.186}{}}
+\@writefile{toc}{\contentsline {paragraph}{Markdown.}{222}{section*.187}}
+\@writefile{toc}{\contentsline {paragraph}{IPython/Jupyter notebooks.}{223}{section*.188}}
+\@writefile{toc}{\contentsline {paragraph}{Wiki formats.}{223}{section*.189}}
+\@writefile{toc}{\contentsline {paragraph}{DocOnce.}{223}{section*.190}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.7}Publishing a complete project}{223}{subsection.5.6.7}}
+\newlabel{softeng1:exper:github}{{5.6.7}{223}{Publishing a complete project}{subsection.5.6.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.7}Exercises}{224}{section.5.7}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.1: Make a tool for differentiating curves}{224}{section*.191}}
+\newlabel{softeng1:exer:derivative}{{5.1}{224}{Problem \thedoconceexercisecounter : Make a tool for differentiating curves}{section*.191}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{225}{section*.192}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{225}{section*.193}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{225}{section*.194}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.2: Make solid software for the Trapezoidal rule}{225}{section*.195}}
+\newlabel{softeng1:exer:integral:flat}{{5.2}{225}{Problem \thedoconceexercisecounter : Make solid software for the Trapezoidal rule}{section*.195}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{226}{section*.196}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{226}{section*.197}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{226}{section*.198}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{226}{section*.199}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{227}{section*.200}}
+\@writefile{toc}{\contentsline {paragraph}{d)}{227}{section*.201}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.3: Implement classes for the Trapezoidal rule}{227}{section*.202}}
+\newlabel{softeng1:exer:integral:flat2}{{5.3}{227}{Problem \thedoconceexercisecounter : Implement classes for the Trapezoidal rule}{section*.202}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.4: Write a doctest and a test function}{228}{section*.203}}
+\newlabel{softeng1:exer:doctest1}{{5.4}{228}{Problem \thedoconceexercisecounter : Write a doctest and a test function}{section*.203}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{228}{section*.204}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{228}{section*.205}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.5: Experiment with tolerances in comparisons}{228}{section*.206}}
+\newlabel{softeng1:exer:tol}{{5.5}{228}{Problem \thedoconceexercisecounter : Experiment with tolerances in comparisons}{section*.206}{}}
+\@writefile{toc}{\contentsline {paragraph}{Remarks.}{228}{section*.207}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 5.6: Make use of a class implementation}{228}{section*.208}}
+\newlabel{softeng1:exer:class:dts}{{5.6}{228}{Exercise \thedoconceexercisecounter : Make use of a class implementation}{section*.208}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.7: Make solid software for a difference equation}{229}{section*.209}}
+\newlabel{softeng1:exer:logistic}{{5.7}{229}{Problem \thedoconceexercisecounter : Make solid software for a difference equation}{section*.209}{}}
+\newlabel{softeng1:exer:logistic:eq}{{5.9}{229}{Problem \thedoconceexercisecounter : Make solid software for a difference equation}{equation.5.7.9}{}}
 \bibstyle{plain}
 \bibdata{../chapters/papers}
 \bibcite{Griffiths_et_al_2010}{1}
@@ -735,6 +750,6 @@
 \bibcite{Langtangen_scaling}{8}
 \bibcite{odespy}{9}
 \bibcite{parachute_1999}{10}
-\@writefile{toc}{\contentsline {chapter}{References}{223}{chapter*.206}}
+\@writefile{toc}{\contentsline {chapter}{References}{231}{chapter*.210}}
 \bibcite{Petzold_Ascher_1998}{11}
-\@writefile{toc}{\contentsline {chapter}{Index}{225}{section*.207}}
+\@writefile{toc}{\contentsline {chapter}{Index}{233}{section*.211}}
