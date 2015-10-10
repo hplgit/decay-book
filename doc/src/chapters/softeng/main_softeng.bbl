@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+
+\bibitem{Langtangen_bitgit}
+H.~P. Langtangen.
+\newblock Quick intro to version control systems and project hosting sites.
+\newblock \url{http://hplgit.github.io/teamods/bitgit/html/}.
+
+\bibitem{Langtangen_2012}
+H.~P. Langtangen.
+\newblock {\em A Primer on Scientific Programming with {P}ython}.
+\newblock Texts in Computational Science and Engineering. Springer, fourth
+  edition, 2014.
+
+\end{thebibliography}

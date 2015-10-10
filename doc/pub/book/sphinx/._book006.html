@@ -92,7 +92,7 @@ schemes, Runge-Kutta methods, and Adams-Bashforth formulas.</p>
 <h2>Model extensions<a class="headerlink" href="#model-extensions" title="Permalink to this headline">¶</a></h2>
 <p>This section looks at the generalizations to <span class="math">\(u^{\prime}=-a(t)u\)</span>
 and <span class="math">\(u^{\prime}=-a(t)u + b(t)\)</span>. We sketch the corresponding
-implementations of the <span class="math">\(\theta\)</span>-rule for such variable-coeffients ODEs.
+implementations of the <span class="math">\(\theta\)</span>-rule for such variable-coefficient ODEs.
 Verification can no longer make use of an exact solution of the
 numerical problem so we make use of manufactured solutions,
 for deriving an exact solution of the ODE problem, and then we can
@@ -1143,8 +1143,8 @@ Filename: <code class="docutils literal"><span class="pre">decay_RK2_Taylor2</sp
 <span id="decay-fd2-exer-leapfrog1"></span><h3>Project 14: Implement and investigate the Leapfrog scheme<a class="headerlink" href="#project-14-implement-and-investigate-the-leapfrog-scheme" title="Permalink to this headline">¶</a></h3>
 <p>A Leapfrog scheme
 for the ODE <span class="math">\(u^{\prime}(t) = -a(t)u(t) + b(t)\)</span> is defined by</p>
-<div class="math">
-\[\lbrack D_{2t}u = -au+b\rbrack^n{\thinspace .}\]</div>
+<div class="math" id="equation-decay:fd2:exer:leapfrog1:scheme">
+<span id="eq-decay-fd2-exer-leapfrog1-scheme"></span><span class="eqno">(52)</span>\[     \lbrack D_{2t}u = -au+b\rbrack^n{\thinspace .}\]</div>
 <p>A separate method is needed to compute <span class="math">\(u^1\)</span>. The Forward Euler
 scheme is a possible candidate.</p>
 <p><strong>a)</strong>
@@ -1207,11 +1207,11 @@ Leapfrog scheme is <span class="math">\({\mathcal{O}(\Delta t^2)}\)</span>. Does
 1st-order method for the first step impact the convergence rate?</p>
 <p><strong>e)</strong>
 Set up a set of experiments to demonstrate that the Leapfrog scheme
-<a href="#equation-decay:fd2:leapfrog">(41)</a> is associated with numerical artifacts
+<a href="#equation-decay:fd2:exer:leapfrog1:scheme">(52)</a> is associated with numerical artifacts
 (instabilities). Document the main results from this investigation.</p>
 <p><strong>f)</strong>
 Analyze and explain the
-instabilities of the Leapfrog scheme <a href="#equation-decay:fd2:leapfrog">(41)</a>:</p>
+instabilities of the Leapfrog scheme <a href="#equation-decay:fd2:exer:leapfrog1:scheme">(52)</a>:</p>
 <ol class="arabic simple">
 <li>Choose <span class="math">\(a=\mbox{const}\)</span> and <span class="math">\(b=0\)</span>. Assume that an exact solution
 of the discrete equations has
@@ -1240,17 +1240,17 @@ Leapfrog scheme is unstable.</p>
 <p>Consider the linear ODE problem <span class="math">\(u^{\prime}(t)=-a(t)u(t) + b(t)\)</span>, <span class="math">\(u(0)=I\)</span>.
 Explicit schemes for this problem can be written in the general form</p>
 <div class="math" id="equation-decay:analysis:exer:sumcj">
-<span id="eq-decay-analysis-exer-sumcj"></span><span class="eqno">(52)</span>\[     u^{n+1} = \sum_{j=0}^m c_ju^{n-j},\]</div>
+<span id="eq-decay-analysis-exer-sumcj"></span><span class="eqno">(53)</span>\[     u^{n+1} = \sum_{j=0}^m c_ju^{n-j},\]</div>
 <p>for some choice of <span class="math">\(c_0,\ldots,c_m\)</span>.
 Find expressions for the <span class="math">\(c_j\)</span> coefficients in case of the
 <span class="math">\(\theta\)</span>-rule, the three-level backward scheme,
 the Leapfrog scheme, the 2nd-order Runge-Kutta method,
 and the 3rd-order Adams-Bashforth scheme.</p>
 <p>Make a class <code class="docutils literal"><span class="pre">ExpDecay</span></code> that implements the
-general updating formula <a href="#equation-decay:analysis:exer:sumcj">(52)</a>.
+general updating formula <a href="#equation-decay:analysis:exer:sumcj">(53)</a>.
 The formula cannot be applied for <span class="math">\(n &lt; m\)</span>, and for those <span class="math">\(n\)</span> values, other
 schemes must be used. Assume for simplicity that we just
-repeat Crank-Nicolson steps until <a href="#equation-decay:analysis:exer:sumcj">(52)</a> can be used.
+repeat Crank-Nicolson steps until <a href="#equation-decay:analysis:exer:sumcj">(53)</a> can be used.
 Use a subclass
 to specify the list <span class="math">\(c_0,\ldots,c_m\)</span> for a particular method, and
 implement subclasses for all the mentioned schemes.

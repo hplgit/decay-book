@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{u\PYGdefaultZus{}discrete\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{n}\PYGdefault{p}{,} \PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{p}{,} \PYGdefault{n}{dt}\PYGdefault{p}{):}
+    \PYGdefault{l+s+sd}{\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}Return exact discrete solution of the numerical schemes.\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+    \PYGdefault{n}{dt} \PYGdefault{o}{=} \PYGdefault{n+nb}{float}\PYGdefault{p}{(}\PYGdefault{n}{dt}\PYGdefault{p}{)}  \PYGdefault{c}{\PYGdefaultZsh{} avoid integer division}
+    \PYGdefault{n}{A} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{l+m+mi}{1} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{theta}\PYGdefault{p}{)}\PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{o}{*}\PYGdefault{n}{dt}\PYGdefault{p}{)}\PYGdefault{o}{/}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1} \PYGdefault{o}{+} \PYGdefault{n}{theta}\PYGdefault{o}{*}\PYGdefault{n}{dt}\PYGdefault{o}{*}\PYGdefault{n}{a}\PYGdefault{p}{)}
+    \PYGdefault{k}{return} \PYGdefault{n}{I}\PYGdefault{o}{*}\PYGdefault{n}{A}\PYGdefault{o}{**}\PYGdefault{n}{n}
+\end{Verbatim}

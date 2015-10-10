@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+git fetch origin         \PYGdefaultZsh{} instead of git pull
+git diff origin/master   \PYGdefaultZsh{} what are the changes?
+git merge origin/master  \PYGdefaultZsh{} update my files
+\end{Verbatim}

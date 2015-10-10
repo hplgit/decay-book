@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{test\PYGdefaultZus{}constant\PYGdefaultZus{}solution}\PYGdefault{p}{():}
+    \PYGdefault{l+s+sd}{\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+\PYGdefault{l+s+sd}{    Test problem where u=u\PYGdefaultZus{}const is the exact solution, to be}
+\PYGdefault{l+s+sd}{    reproduced (to machine precision) by any relevant method.}
+\PYGdefault{l+s+sd}{    \PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+    \PYGdefault{k}{def} \PYGdefault{n+nf}{u\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{):}
+        \PYGdefault{k}{return} \PYGdefault{n}{u\PYGdefaultZus{}const}
+
+    \PYGdefault{k}{def} \PYGdefault{n+nf}{a}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{):}
+        \PYGdefault{k}{return} \PYGdefault{l+m+mf}{2.5}\PYGdefault{o}{*}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{+}\PYGdefault{n}{t}\PYGdefault{o}{**}\PYGdefault{l+m+mi}{3}\PYGdefault{p}{)}  \PYGdefault{c}{\PYGdefaultZsh{} can be arbitrary}
+
+    \PYGdefault{k}{def} \PYGdefault{n+nf}{b}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{):}
+        \PYGdefault{k}{return} \PYGdefault{n}{a}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{)}\PYGdefault{o}{*}\PYGdefault{n}{u\PYGdefaultZus{}const}
+
+    \PYGdefault{n}{u\PYGdefaultZus{}const} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{2.15}
+    \PYGdefault{n}{theta} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{0.4}\PYGdefault{p}{;} \PYGdefault{n}{I} \PYGdefault{o}{=} \PYGdefault{n}{u\PYGdefaultZus{}const}\PYGdefault{p}{;} \PYGdefault{n}{dt} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{4}
+    \PYGdefault{n}{Nt} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{4}  \PYGdefault{c}{\PYGdefaultZsh{} enough with a few steps}
+    \PYGdefault{n}{u}\PYGdefault{p}{,} \PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{n}{solver}\PYGdefault{p}{(}\PYGdefault{n}{I}\PYGdefault{o}{=}\PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{o}{=}\PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{b}\PYGdefault{o}{=}\PYGdefault{n}{b}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{o}{=}\PYGdefault{n}{Nt}\PYGdefault{o}{*}\PYGdefault{n}{dt}\PYGdefault{p}{,} \PYGdefault{n}{dt}\PYGdefault{o}{=}\PYGdefault{n}{dt}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{o}{=}\PYGdefault{n}{theta}\PYGdefault{p}{)}
+    \PYGdefault{k}{print} \PYGdefault{n}{u}
+    \PYGdefault{n}{u\PYGdefaultZus{}e} \PYGdefault{o}{=} \PYGdefault{n}{u\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{)}
+    \PYGdefault{n}{difference} \PYGdefault{o}{=} \PYGdefault{n+nb}{abs}\PYGdefault{p}{(}\PYGdefault{n}{u\PYGdefaultZus{}e} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{u}\PYGdefault{p}{)}\PYGdefault{o}{.}\PYGdefault{n}{max}\PYGdefault{p}{()}  \PYGdefault{c}{\PYGdefaultZsh{} max deviation}
+    \PYGdefault{n}{tol} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{1E\PYGdefaultZhy{}14}
+    \PYGdefault{k}{assert} \PYGdefault{n}{difference} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{n}{tol}
+\end{Verbatim}

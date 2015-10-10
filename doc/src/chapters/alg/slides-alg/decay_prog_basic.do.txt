@@ -1,0 +1,507 @@
+
+!split
+======= Implementation =======
+label{decay:impl1}
+
+Model:
+!bt
+\[
+u'(t) = -au(t),\quad t\in (0,T], \quad u(0)=I
+\]
+!et
+
+Numerical method:
+
+!bt
+\[
+u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n
+\]
+!et
+for $\theta\in [0,1]$. Note
+
+ * $\theta=0$ gives Forward Euler
+ * $\theta=1$ gives Backward Euler
+ * $\theta=1/2$ gives Crank-Nicolson
+
+!split
+===== Requirements of a program =====
+
+  * Compute the numerical solution $u^n$, $n=1,2,\ldots,N_t$
+  * Display the numerical and exact solution $\uex(t)=e^{-at}$
+  * Bring evidence to a correct implementation (*verification*)
+  * Compare the numerical and the exact solution in a plot
+  * computes the error $\uex (t_n) - u^n$
+  * computes the convergence rate of the numerical scheme
+  * reads its input data from the command line
+
+!split
+===== Tools to learn =====
+
+  * Basic "Python": "http://python.org" programming
+  * Array computing with "`numpy`": "http://numpy.org/"
+  * Plotting with "`matplotlib.pyplot`": "http://matplotlib.sourceforge.net/" and "`scitools`": "https://github.com/hplgit/scitools/"
+  * File writing and reading
+# #ifdef NOTHERE
+  * Making command-line user interface via `argparse.ArgumentParser`
+  * Making graphical user interfaces via "Parampool": "https://github.com/hplgit/parampool"
+# #endif
+
+!bnotice
+All programs are in the directory
+"`src/alg`": "${src_alg}".
+!enotice
+
+!split
+===== Why implement in Python? =====
+
+  * Python has a very clean, readable syntax (often known as
+    "executable pseudo-code").
+  * Python code is very similar to MATLAB code (and MATLAB has a
+    particularly widespread use for scientific computing).
+  * Python is a full-fledged, very powerful programming language.
+  * Python is similar to, but much simpler to work with and
+    results in more reliable code than C++.
+
+!split
+===== Why implement in Python? =====
+
+  * Python has a rich set of modules for scientific computing, and its
+    popularity in scientific computing is rapidly growing.
+  * Python was made for being combined with compiled languages
+    (C, C++, Fortran) to reuse existing numerical software and to
+    reach high computational performance of new implementations.
+  * Python has extensive support for administrative task
+    needed when doing large-scale computational investigations.
+  * Python has extensive support for graphics (visualization,
+    user interfaces, web applications).
+  * FEniCS, a very powerful tool for solving PDEs by
+    the finite element method, is most human-efficient to operate
+    from Python.
+
+!split
+===== Algorithm =====
+label{decay:py1}
+
+ * Store $u^n$, $n=0,1,\ldots,N_t$ in an array `u`.
+ * Algorithm:
+   o initialize $u^0$
+   o for $t=t_n$, $n=1,2,\ldots,N_t$: compute $u_n$ using
+     the $\theta$-rule formula
+
+!split
+===== Translation to Python function =====
+
+@@@CODE src-alg/decay_v1.py  fromto: from numpy import@u, t =
+
+Note about the `for` loop: `range(0, Nt, s)` generates all integers
+from `0` to `Nt` in steps of `s` (default 1), *but not including* `Nt` (!).
+
+Sample call:
+!bc pycod
+u, t = solver(I=1, a=2, T=8, dt=0.8, theta=1)
+!ec
+
+!split
+===== Integer division =====
+
+Python applies integer division: `1/2` is 0, while `1./2` or `1.0/2` or
+`1/2.` or `1/2.0` or `1.0/2.0` all give 0.5.
+
+A safer `solver` function (`dt = float(dt)` - guarantee float):
+
+@@@CODE src-alg/decay_v2.py  fromto: from numpy import@def u_exact
+
+
+!split
+===== Doc strings =====
+
+ * First string after the function heading
+ * Used for documenting the function
+ * Automatic documentation tools can make fancy manuals for you
+ * Can be used for automatic testing
+
+!bc pycod
+def solver(I, a, T, dt, theta):
+    """
+    Solve
+
+        u'(t) = -a*u(t),
+
+    with initial condition u(0)=I, for t in the time interval
+    (0,T]. The time interval is divided into time steps of
+    length dt.
+
+    theta=1 corresponds to the Backward Euler scheme, theta=0
+    to the Forward Euler scheme, and theta=0.5 to the Crank-
+    Nicolson method.
+    """
+    ...
+!ec
+
+!split
+===== Formatting of numbers =====
+
+Can control formatting of reals and integers through the *printf* format:
+
+!bc pycod
+print 't=%6.3f u=%g' % (t[i], u[i])
+!ec
+
+Or the alternative *format string syntax*:
+!bc pycod
+print 't={t:6.3f} u={u:g}'.format(t=t[i], u=u[i])
+!ec
+
+!split
+===== Running the program =====
+
+How to run the program "`decay_v1.py`": "${src_alg}/decay_v1.py".
+
+!bc sys
+Terminal> python decay_v1.py
+!ec
+
+Can also run it as "normal" Unix programs: `./decay_v1.py` if the
+first line is
+
+!bc pycod
+`#!/usr/bin/env python`
+!ec
+
+Then
+!bc sys
+Terminal> chmod a+rx decay_v1.py
+Terminal> ./decay_v1.py
+!ec
+
+!split
+===== Plotting the solution =====
+
+Basic syntax:
+
+!bc pycod
+from matplotlib.pyplot import *
+
+plot(t, u)
+show()
+!ec
+
+Can (and should!) add labels on axes, title, legends.
+
+!split
+===== Comparing with the exact solution =====
+
+Python function for the exact solution $\uex(t)=Ie^{-at}$:
+
+@@@CODE src-alg/decay_v2.py fromto: def u_exact@from matplotlib.pyplot import
+
+Quick plotting:
+
+!bc pycod
+u_e = u_exact(t, I, a)
+plot(t, u, t, u_e)
+!ec
+
+Problem: $\uex(t)$ applies the same mesh as $u^n$ and
+looks as a piecewise linear function.
+
+Remedy: Introduce a very fine mesh for $\uex$.
+
+!bc pycod
+t_e = linspace(0, T, 1001)      # fine mesh
+u_e = u_exact(t_e, I, a)
+
+plot(t_e, u_e, 'b-',            # blue line for u_e
+     t,   u,   'r--o')          # red dashes w/circles
+!ec
+
+!split
+===== Add legends, axes labels, title, and wrap in a function =====
+
+@@@CODE src-alg/decay_v2.py fromto: from matplotlib.pyplot import@^plot_numerical
+
+Complete code in
+"`decay_v2.py`": "${src_alg}/decay_v2.py"
+
+FIGURE: [fig-alg/decay_v2, width=500 frac=0.8]
+
+
+!split
+===== Plotting with SciTools =====
+
+"SciTools": "https://github.com/hplgit/scitools" provides a
+unified plotting interface (Easyviz) to many different plotting
+packages: Matplotlib, Gnuplot, Grace, VTK, OpenDX, ...
+
+Can use Matplotlib (MATLAB-like) syntax,
+or a more compact `plot` function syntax:
+
+!bc pycod
+from scitools.std import *
+
+plot(t,   u,   'r--o',           # red dashes w/circles
+     t_e, u_e, 'b-',             # blue line for exact sol.
+     legend=['numerical', 'exact'],
+     xlabel='t',
+     ylabel='u',
+     title='theta=%g, dt=%g' % (theta, dt),
+     savefig='%s_%g.png' % (theta2name[theta], dt),
+     show=True)
+!ec
+
+Change backend (plotting engine, Matplotlib by default):
+
+!bc sys
+Terminal> python decay_plot_st.py --SCITOOLS_easyviz_backend gnuplot
+Terminal> python decay_plot_st.py --SCITOOLS_easyviz_backend grace
+!ec
+
+
+!split
+======= Verifying the implementation =======
+label{decay:verification}
+
+
+ * Verification = bring evidence that the program works
+ * Find suitable test problems
+ * Make function for each test problem
+ * Later: put the verification tests in a professional testing framework
+
+!split
+===== Simplest method: run a few algorithmic steps by hand =====
+
+Use a calculator ($I=0.1$, $\theta=0.8$, $\Delta t =0.8$):
+
+!bt
+\[ A\equiv \frac{1 - (1-\theta) a\Delta t}{1 + \theta a \Delta t} = 0.298245614035\]
+!et
+
+!bt
+\begin{align*}
+u^1 &= AI=0.0298245614035,\\
+u^2 &= Au^1= 0.00889504462912,\\
+u^3 &=Au^2= 0.00265290804728
+\end{align*}
+!et
+
+See the function `verify_three_steps` in "`decay_verf1.py`": "${src_alg}/decay_verf1.py".
+
+!split
+===== Comparison with an exact discrete solution =====
+
+!bnotice Best verification
+Compare computed numerical solution
+with a closed-form *exact discrete solution* (if possible).
+!enotice
+
+Define
+!bt
+\[ A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a \Delta t}\]
+!et
+Repeated use of the $\theta$-rule:
+!bt
+\begin{align*}
+u^0 &= I,\\
+u^1 &= Au^0 = AI\\
+u^n &= A^nu^{n-1} = A^nI
+\end{align*}
+!et
+
+!split
+===== Making a test based on an exact discrete solution =====
+
+The exact discrete solution is
+
+!bt
+\begin{equation}
+u^n = IA^n
+label{decay:un:exact}
+\end{equation}
+!et
+
+!bquestion
+Understand what $n$ in $u^n$ and in $A^n$ means!
+!equestion
+
+Test if
+
+!bt
+\[ \max_n |u^n - \uex(t_n)| < \epsilon\sim 10^{-15}\]
+!et
+
+Implementation in "`decay_verf2.py`": "${src_alg}/decay_verf2.py".
+
+!split
+===== Test the understanding! =====
+
+Make a program for solving Newton's law of cooling
+
+!bt
+\[ T' = -k(T-T_s),\quad T(0)=T_0,\ t\in (0,t_{\mbox{end}}]\]
+!et
+with the Forward Euler, Backward Euler, and Crank-Nicolson schemes
+(or a $\theta$ scheme). Verify the implementation.
+
+
+!split
+===== Computing the numerical error as a mesh function =====
+label{decay:computing:error}
+
+Task: compute the numerical error $e^n = \uex(t_n) - u^n$
+
+Exact solution: $\uex(t)=Ie^{-at}$, implemented as
+
+@@@CODE src-alg/decay_v2.py fromto: def u_exact@from matplotlib.pyplot import
+
+Compute $e^n$ by
+
+!bc pycod
+u, t = solver(I, a, T, dt, theta)  # Numerical solution
+u_e = u_exact(t, I, a)
+e = u_e - u
+!ec
+
+!bnotice Array arithmetics - we compute on entire arrays!
+
+ * `u_exact(t, I, a)` works with `t` as array
+ * Must have `exp` from `numpy` (not `math`)
+ * `e = u_e - u`: array subtraction
+ * Array arithmetics gives shorter and much faster code
+!enotice
+
+!split
+===== Computing the norm of the error =====
+label{decay:computing:error:norm}
+
+ * $e^n$ is a mesh function
+ * Usually we want one number for the error
+ * Use a norm of $e^n$
+
+Norms of a function $f(t)$:
+
+!bt
+\begin{align}
+||f||_{L^2} &= \left( \int_0^T f(t)^2 dt\right)^{1/2}
+label{decay:norms:L2}\\
+||f||_{L^1} &= \int_0^T |f(t)| dt
+label{decay:norms:L1}\\
+||f||_{L^\infty} &= \max_{t\in [0,T]}|f(t)|
+label{decay:norms:Linf}
+\end{align}
+!et
+
+!split
+===== Norms of mesh functions =====
+
+ * Problem: $f^n =f(t_n)$ is a mesh function and hence not defined for all $t$.
+   How to integrate $f^n$?
+ * Idea: Apply a numerical integration rule, using only
+   the mesh points of the mesh function.
+
+The Trapezoidal rule:
+
+!bt
+\[ ||f^n|| = \left(\Delta t\left(\half(f^0)^2 + \half(f^{N_t})^2
++ \sum_{n=1}^{N_t-1} (f^n)^2\right)\right)^{1/2} \]
+!et
+
+Common simplification yields the $L^2$ norm of a mesh function:
+
+!bt
+\[ ||f^n||_{\ell^2} = \left(\Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2}\]
+!et
+
+
+!split
+===== Implementation of the norm of the error =====
+
+!bt
+\[ E = ||e^n||_{\ell^2}  = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}\]
+!et
+
+Python w/array arithmetics:
+
+!bc pycod
+e = u_exact(t) - u
+E = sqrt(dt*sum(e**2))
+!ec
+
+!split
+===== Comment on array vs scalar computation =====
+
+Scalar computing of `E = sqrt(dt*sum(e**2))`:
+
+!bc pycod
+m = len(u)     # length of u array (alt: u.size)
+u_e = zeros(m)
+t = 0
+for i in range(m):
+    u_e[i] = u_exact(t, a, I)
+    t = t + dt
+e = zeros(m)
+for i in range(m):
+    e[i] = u_e[i] - u[i]
+s = 0  # summation variable
+for i in range(m):
+    s = s + e[i]**2
+error = sqrt(dt*s)
+!ec
+Obviously, scalar computing
+
+ * takes more code
+ * is less readable
+ * runs much slower
+
+!bnotice Rule
+Compute on entire arrays (when possible)!
+!enotice
+
+
+!split
+===== Memory-saving implementation =====
+
+ * Note 1: we store the entire array `u`, i.e., $u^n$ for $n=0,1,\ldots,N_t$
+ * Note 2: the formula for $u^{n+1}$ needs $u^n$ only, not $u^{n-1}$, $u^{n-2}$, ...
+ * No need to store more than $u^{n+1}$ and $u^{n}$
+ * Extremely important when solving PDEs
+ * No practical importance here (much memory available)
+ * But let's illustrate how to do save memory!
+ * Idea 1: store $u^{n+1}$ in `u`, $u^n$ in `u_1` (`float`)
+ * Idea 2: store `u` in a file, read file later for plotting
+
+
+!split
+===== Memory-saving solver function =====
+
+@@@CODE src-alg/decay_memsave.py  fromto: def solver_mem@def read_file\(
+
+!split
+===== Reading computed data from file =====
+
+@@@CODE src-alg/decay_memsave.py  fromto: def read_file\(@def read_file_numpy
+
+Simpler code with `numpy` functionality for reading/writing tabular data:
+
+@@@CODE src-alg/decay_memsave.py  fromto: def read_file_numpy@def u_exact
+
+Similar function `np.savetxt`, but then we need all $u^n$ and $t^n$ values
+in a two-dimensional array (which we try to prevent now!).
+
+!split
+===== Usage of memory-saving code =====
+
+!bc pycod
+def explore(I, a, T, dt, theta=0.5, makeplot=True):
+    filename = 'u.dat'
+    u, t = solver_memsave(I, a, T, dt, theta, filename)
+
+    t, u = read_file(filename)
+    u_e = u_exact(t, I, a)
+    e = u_e - u
+    E = np.sqrt(dt*np.sum(e**2))
+    if makeplot:
+        plt.figure()
+        ...
+!ec
+
+Complete program: "`decay_memsave.py`": "${src_alg}/decay_memsave.py".

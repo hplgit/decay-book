@@ -1,0 +1,17 @@
+======= Exponential decay models appear in a wide range of applications! =======
+
+Applications are found in physics, biology, chemistry, geology, finance, ...
+
+ * Population growth (cells, animals, humans)
+ * Financial engineering
+ * Radioactivity
+ * Waiting times for an event to happen
+ * Chemical kinetics and biochemistry
+ * Spreading of diseases
+ * Compaction of the Earth's crust
+ * Air/fluid resistance
+ * Pressure in the atmosphere
+ * Subproblems when solving PDEs
+ * ...
+
+===== No slides made for this chapter yet ... =====

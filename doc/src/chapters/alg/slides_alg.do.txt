@@ -1,0 +1,16 @@
+TITLE: Study guide: Algorithms and implementations for exponential decay models
+# #include "../AUTHOR.txt"
+DATE: today
+
+# #ifdef WITH_TOC
+!split
+TOC: on
+# #endif
+
+# #include "../mako_code.txt"
+
+# #include "slides-alg/about.do.txt"
+
+# #include "slides-alg/decay_fd1.do.txt"
+
+# #include "slides-alg/decay_prog_basic.do.txt"

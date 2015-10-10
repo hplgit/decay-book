@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{m} \PYGdefault{o}{=} \PYGdefault{n+nb}{len}\PYGdefault{p}{(}\PYGdefault{n}{u}\PYGdefault{p}{)}     \PYGdefault{c}{\PYGdefaultZsh{} length of u array (alt: u.size)}
+\PYGdefault{n}{u\PYGdefaultZus{}e} \PYGdefault{o}{=} \PYGdefault{n}{zeros}\PYGdefault{p}{(}\PYGdefault{n}{m}\PYGdefault{p}{)}
+\PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{0}
+\PYGdefault{k}{for} \PYGdefault{n}{i} \PYGdefault{o+ow}{in} \PYGdefault{n+nb}{range}\PYGdefault{p}{(}\PYGdefault{n}{m}\PYGdefault{p}{):}
+    \PYGdefault{n}{u\PYGdefaultZus{}e}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{]} \PYGdefault{o}{=} \PYGdefault{n}{u\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{I}\PYGdefault{p}{)}
+    \PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{n}{t} \PYGdefault{o}{+} \PYGdefault{n}{dt}
+\PYGdefault{n}{e} \PYGdefault{o}{=} \PYGdefault{n}{zeros}\PYGdefault{p}{(}\PYGdefault{n}{m}\PYGdefault{p}{)}
+\PYGdefault{k}{for} \PYGdefault{n}{i} \PYGdefault{o+ow}{in} \PYGdefault{n+nb}{range}\PYGdefault{p}{(}\PYGdefault{n}{m}\PYGdefault{p}{):}
+    \PYGdefault{n}{e}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{]} \PYGdefault{o}{=} \PYGdefault{n}{u\PYGdefaultZus{}e}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{]} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{u}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{]}
+\PYGdefault{n}{s} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{0}  \PYGdefault{c}{\PYGdefaultZsh{} summation variable}
+\PYGdefault{k}{for} \PYGdefault{n}{i} \PYGdefault{o+ow}{in} \PYGdefault{n+nb}{range}\PYGdefault{p}{(}\PYGdefault{n}{m}\PYGdefault{p}{):}
+    \PYGdefault{n}{s} \PYGdefault{o}{=} \PYGdefault{n}{s} \PYGdefault{o}{+} \PYGdefault{n}{e}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{]}\PYGdefault{o}{**}\PYGdefault{l+m+mi}{2}
+\PYGdefault{n}{error} \PYGdefault{o}{=} \PYGdefault{n}{sqrt}\PYGdefault{p}{(}\PYGdefault{n}{dt}\PYGdefault{o}{*}\PYGdefault{n}{s}\PYGdefault{p}{)}
+\end{Verbatim}

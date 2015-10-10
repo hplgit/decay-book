@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{read\PYGdefaultZus{}file}\PYGdefault{p}{(}\PYGdefault{n}{filename}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}sol.dat\PYGdefaultZsq{}}\PYGdefault{p}{):}
+    \PYGdefault{n}{infile} \PYGdefault{o}{=} \PYGdefault{n+nb}{open}\PYGdefault{p}{(}\PYGdefault{n}{filename}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}r\PYGdefaultZsq{}}\PYGdefault{p}{)}
+    \PYGdefault{n}{u} \PYGdefault{o}{=} \PYGdefault{p}{[];}  \PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{p}{[]}
+    \PYGdefault{k}{for} \PYGdefault{n}{line} \PYGdefault{o+ow}{in} \PYGdefault{n}{infile}\PYGdefault{p}{:}
+        \PYGdefault{n}{words} \PYGdefault{o}{=} \PYGdefault{n}{line}\PYGdefault{o}{.}\PYGdefault{n}{split}\PYGdefault{p}{()}
+        \PYGdefault{k}{if} \PYGdefault{n+nb}{len}\PYGdefault{p}{(}\PYGdefault{n}{words}\PYGdefault{p}{)} \PYGdefault{o}{!=} \PYGdefault{l+m+mi}{2}\PYGdefault{p}{:}
+            \PYGdefault{k}{print} \PYGdefault{l+s}{\PYGdefaultZsq{}Found more than two numbers on a line!\PYGdefaultZsq{}}\PYGdefault{p}{,} \PYGdefault{n}{words}
+            \PYGdefault{n}{sys}\PYGdefault{o}{.}\PYGdefault{n}{exit}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{)}  \PYGdefault{c}{\PYGdefaultZsh{} abort}
+        \PYGdefault{n}{t}\PYGdefault{o}{.}\PYGdefault{n}{append}\PYGdefault{p}{(}\PYGdefault{n+nb}{float}\PYGdefault{p}{(}\PYGdefault{n}{words}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{]))}
+        \PYGdefault{n}{u}\PYGdefault{o}{.}\PYGdefault{n}{append}\PYGdefault{p}{(}\PYGdefault{n+nb}{float}\PYGdefault{p}{(}\PYGdefault{n}{words}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]))}
+    \PYGdefault{k}{return} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{),} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{(}\PYGdefault{n}{u}\PYGdefault{p}{)}
+\end{Verbatim}

@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kn}{from} \PYGdefault{n+nn}{parampool.generator.flask} \PYGdefault{k+kn}{import} \PYGdefault{n}{generate}
+\PYGdefault{k+kn}{from} \PYGdefault{n+nn}{decay} \PYGdefault{k+kn}{import} \PYGdefault{n}{main\PYGdefaultZus{}GUI}
+\PYGdefault{n}{generate}\PYGdefault{p}{(}\PYGdefault{n}{main\PYGdefaultZus{}GUI}\PYGdefault{p}{,}
+         \PYGdefault{n}{filename\PYGdefaultZus{}controller}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}decay\PYGdefaultZus{}GUI\PYGdefaultZus{}controller.py\PYGdefaultZsq{}}\PYGdefault{p}{,}
+         \PYGdefault{n}{filename\PYGdefaultZus{}template}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}decay\PYGdefaultZus{}GUI\PYGdefaultZus{}view.py\PYGdefaultZsq{}}\PYGdefault{p}{,}
+         \PYGdefault{n}{filename\PYGdefaultZus{}model}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}decay\PYGdefaultZus{}GUI\PYGdefaultZus{}model.py\PYGdefaultZsq{}}\PYGdefault{p}{)}
+\end{Verbatim}

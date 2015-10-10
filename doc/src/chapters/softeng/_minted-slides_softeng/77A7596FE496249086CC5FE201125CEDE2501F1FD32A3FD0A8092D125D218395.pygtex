@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} nosetests \PYGdefaultZhy{}s \PYGdefaultZhy{}v}
+\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} py.test   \PYGdefaultZhy{}s \PYGdefaultZhy{}v}
+\end{Verbatim}

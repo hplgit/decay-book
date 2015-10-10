@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{solver}\PYGdefault{p}{(}\PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{p}{,} \PYGdefault{n}{dt}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{p}{):}
+    \PYGdefault{l+s+sd}{\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+\PYGdefault{l+s+sd}{    Solve u\PYGdefaultZsq{}=\PYGdefaultZhy{}a*u, u(0)=I, for t in (0,T] with steps of dt.}
+
+
+\PYGdefault{l+s+sd}{    \PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{} u, t = solver(I=0.8, a=1.2, T=2, dt=0.5, theta=0.5)}
+\PYGdefault{l+s+sd}{    \PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{} for t\PYGdefaultZus{}n, u\PYGdefaultZus{}n in zip(t, u):}
+\PYGdefault{l+s+sd}{    ...     print \PYGdefaultZsq{}t=\PYGdefaultZpc{}.1f, u=\PYGdefaultZpc{}.14f\PYGdefaultZsq{} \PYGdefaultZpc{} (t\PYGdefaultZus{}n, u\PYGdefaultZus{}n)}
+\PYGdefault{l+s+sd}{    t=0.0, u=0.80000000000000}
+\PYGdefault{l+s+sd}{    t=0.5, u=0.43076923076923}
+\PYGdefault{l+s+sd}{    t=1.0, u=0.23195266272189}
+\PYGdefault{l+s+sd}{    t=1.5, u=0.12489758761948}
+\PYGdefault{l+s+sd}{    t=2.0, u=0.06725254717972}
+\PYGdefault{l+s+sd}{    \PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+    \PYGdefault{o}{...}
+\end{Verbatim}

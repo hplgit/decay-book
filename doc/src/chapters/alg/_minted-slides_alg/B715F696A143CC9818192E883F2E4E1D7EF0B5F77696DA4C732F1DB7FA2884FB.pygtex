@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kn}{from} \PYGdefault{n+nn}{scitools.std} \PYGdefault{k+kn}{import} \PYGdefault{o}{*}
+
+\PYGdefault{n}{plot}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{,}   \PYGdefault{n}{u}\PYGdefault{p}{,}   \PYGdefault{l+s}{\PYGdefaultZsq{}r\PYGdefaultZhy{}\PYGdefaultZhy{}o\PYGdefaultZsq{}}\PYGdefault{p}{,}           \PYGdefault{c}{\PYGdefaultZsh{} red dashes w/circles}
+     \PYGdefault{n}{t\PYGdefaultZus{}e}\PYGdefault{p}{,} \PYGdefault{n}{u\PYGdefaultZus{}e}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}b\PYGdefaultZhy{}\PYGdefaultZsq{}}\PYGdefault{p}{,}             \PYGdefault{c}{\PYGdefaultZsh{} blue line for exact sol.}
+     \PYGdefault{n}{legend}\PYGdefault{o}{=}\PYGdefault{p}{[}\PYGdefault{l+s}{\PYGdefaultZsq{}numerical\PYGdefaultZsq{}}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}exact\PYGdefaultZsq{}}\PYGdefault{p}{],}
+     \PYGdefault{n}{xlabel}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}t\PYGdefaultZsq{}}\PYGdefault{p}{,}
+     \PYGdefault{n}{ylabel}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}u\PYGdefaultZsq{}}\PYGdefault{p}{,}
+     \PYGdefault{n}{title}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}theta=}\PYGdefault{l+s+si}{\PYGdefaultZpc{}g}\PYGdefault{l+s}{, dt=}\PYGdefault{l+s+si}{\PYGdefaultZpc{}g}\PYGdefault{l+s}{\PYGdefaultZsq{}} \PYGdefault{o}{\PYGdefaultZpc{}} \PYGdefault{p}{(}\PYGdefault{n}{theta}\PYGdefault{p}{,} \PYGdefault{n}{dt}\PYGdefault{p}{),}
+     \PYGdefault{n}{savefig}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}}\PYGdefault{l+s+si}{\PYGdefaultZpc{}s}\PYGdefault{l+s}{\PYGdefaultZus{}}\PYGdefault{l+s+si}{\PYGdefaultZpc{}g}\PYGdefault{l+s}{.png\PYGdefaultZsq{}} \PYGdefault{o}{\PYGdefaultZpc{}} \PYGdefault{p}{(}\PYGdefault{n}{theta2name}\PYGdefault{p}{[}\PYGdefault{n}{theta}\PYGdefault{p}{],} \PYGdefault{n}{dt}\PYGdefault{p}{),}
+     \PYGdefault{n}{show}\PYGdefault{o}{=}\PYGdefault{n+nb+bp}{True}\PYGdefault{p}{)}
+\end{Verbatim}

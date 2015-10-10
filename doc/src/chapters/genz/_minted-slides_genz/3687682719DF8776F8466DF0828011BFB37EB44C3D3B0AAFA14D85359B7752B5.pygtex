@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{a}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{):}
+    \PYGdefault{k}{return} \PYGdefault{n}{a\PYGdefaultZus{}0} \PYGdefault{k}{if} \PYGdefault{n}{t} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{n}{tp} \PYGdefault{k}{else} \PYGdefault{n}{k}\PYGdefault{o}{*}\PYGdefault{n}{a\PYGdefaultZus{}0}
+
+\PYGdefault{k}{def} \PYGdefault{n+nf}{b}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{):}
+    \PYGdefault{k}{return} \PYGdefault{l+m+mi}{1}
+\end{Verbatim}

@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{read\PYGdefaultZus{}file\PYGdefaultZus{}numpy}\PYGdefault{p}{(}\PYGdefault{n}{filename}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}sol.dat\PYGdefaultZsq{}}\PYGdefault{p}{):}
+    \PYGdefault{n}{data} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{loadtxt}\PYGdefault{p}{(}\PYGdefault{n}{filename}\PYGdefault{p}{)}
+    \PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{n}{data}\PYGdefault{p}{[:,}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{]}
+    \PYGdefault{n}{u} \PYGdefault{o}{=} \PYGdefault{n}{data}\PYGdefault{p}{[:,}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]}
+    \PYGdefault{k}{return} \PYGdefault{n}{t}\PYGdefault{p}{,} \PYGdefault{n}{u}
+\end{Verbatim}

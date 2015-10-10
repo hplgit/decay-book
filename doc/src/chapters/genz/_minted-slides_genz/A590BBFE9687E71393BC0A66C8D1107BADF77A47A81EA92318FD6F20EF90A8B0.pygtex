@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} python decay\PYGdefaultZus{}vc.py}
+\PYGdefault{g+go}{...}
+\PYGdefault{g+go}{theta=0, r: [1.06, 1.03, 1.01, 1.01, 1.0, 1.0]}
+\PYGdefault{g+go}{theta=1, r: [0.94, 0.97, 0.99, 0.99, 1.0, 1.0]}
+\PYGdefault{g+go}{theta=0.5, r: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0]}
+\end{Verbatim}

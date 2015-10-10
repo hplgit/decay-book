@@ -17,7 +17,7 @@ Model extensions
 
 This section looks at the generalizations to :math:`u^{\prime}=-a(t)u`
 and :math:`u^{\prime}=-a(t)u + b(t)`. We sketch the corresponding
-implementations of the :math:`\theta`-rule for such variable-coeffients ODEs.
+implementations of the :math:`\theta`-rule for such variable-coefficient ODEs.
 Verification can no longer make use of an exact solution of the
 numerical problem so we make use of manufactured solutions,
 for deriving an exact solution of the ODE problem, and then we can
@@ -1714,8 +1714,14 @@ Project 14: Implement and investigate the Leapfrog scheme
 A Leapfrog scheme
 for the ODE :math:`u^{\prime}(t) = -a(t)u(t) + b(t)` is defined by
 
+.. _Eq:decay:fd2:exer:leapfrog1:scheme:
+
 .. math::
-         \lbrack D_{2t}u = -au+b\rbrack^n{\thinspace .}
+   :label: decay:fd2:exer:leapfrog1:scheme
+        
+        \lbrack D_{2t}u = -au+b\rbrack^n{\thinspace .}
+        
+        
 
 A separate method is needed to compute :math:`u^1`. The Forward Euler
 scheme is a possible candidate.
@@ -1796,12 +1802,12 @@ Leapfrog scheme is :math:`{\mathcal{O}(\Delta t^2)}`. Does the use of a
 
 **e)**
 Set up a set of experiments to demonstrate that the Leapfrog scheme
-:eq:`decay:fd2:leapfrog` is associated with numerical artifacts
+:eq:`decay:fd2:exer:leapfrog1:scheme` is associated with numerical artifacts
 (instabilities). Document the main results from this investigation.
 
 **f)**
 Analyze and explain the
-instabilities of the Leapfrog scheme :eq:`decay:fd2:leapfrog`:
+instabilities of the Leapfrog scheme :eq:`decay:fd2:exer:leapfrog1:scheme`:
 
 1. Choose :math:`a=\mbox{const}` and :math:`b=0`. Assume that an exact solution
    of the discrete equations has

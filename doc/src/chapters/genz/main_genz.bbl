@@ -1,0 +1,30 @@
+\begin{thebibliography}{1}
+
+\bibitem{Griffiths_et_al_2010}
+D.~Griffiths, F.~David, and D.~J. Higham.
+\newblock {\em Numerical Methods for Ordinary Differential Equations: Initial
+  Value Problems}.
+\newblock Springer, 2010.
+
+\bibitem{Hairer_Wanner_Norsett_bookI}
+E.~Hairer, S.~P. N{\o}rsett, and G.~Wanner.
+\newblock {\em Solving Ordinary Differential Equations I. Nonstiff Problems}.
+\newblock Springer, 1993.
+
+\bibitem{Hairer_Wanner_bookII}
+G.~Hairer and E.~Wanner.
+\newblock {\em Solving Ordinary Differential Equations II}.
+\newblock Springer, 2010.
+
+\bibitem{odespy}
+H.~P. Langtangen and L.~Wang.
+\newblock {Odespy} software package.
+\newblock \url{https://github.com/hplgit/odespy}.
+
+\bibitem{Petzold_Ascher_1998}
+L.~Petzold and U.~M. Ascher.
+\newblock {\em Computer Methods for Ordinary Differential Equations and
+  Differential-Algebraic Equations}, volume~61.
+\newblock SIAM, 1998.
+
+\end{thebibliography}

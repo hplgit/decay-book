@@ -1,0 +1,102 @@
+REFEREE REPORT 1
+
+Here is my general impression upon a quick reading.
+
+It is always hard to write a critical assessment of a book proposal:
+the author must have written a lot and invested a lot of effort and
+time, just in order to enable the referee to have a chance of saying
+something worthwhile. Here, fortunately, there is a proposal to cut
+part of a planned book (one of three planned books) and make it into a
+separate tutorial. So, even if the referee does not like the proposal,
+there is a way out.
+
+And indeed I must confess that I am not thrilled with the packaging
+proposed here. It is far from clear that a student learning ODE
+methods must know the details of Python, let alone software
+engineering, and it is far from clear that a software engineer must
+know details of numerical methods for ODEs. Moreover, there are really
+many accessible ODE texts, including Griffiths‐David‐Higham and
+Ascher‐Petzold, and also long chapters in some introductory numerical
+textbooks, which are better written than this exposition.
+
+For instance, why are the Python tutorial and the ODE introduction in
+Chapter 1 so tightly coupled? – The Python tutorial can be given in an
+appendix for the author’s planned book, and for a Python example it
+would suffice to consider forward Euler for u’=‐u, which could be
+introduced in one page (at most).
+
+I believe that the student should first be motivated to look at the
+simple ODE of Chapter 1 (referring to Chapter 4 does not do it),
+before so many details are exposed in the first two chapters. Note
+also that you need a>0 to talk about decay (are you
+really?!). Further, the theta‐method is far less fundamental than
+forward Euler, bakward Euler, trapezoidal and midpoint. Also, must an
+elementary student or a casual reader know in detail about odespy,
+which is just another initial‐value ODE package?  If the author is
+aiming at PDEs then I don't understand the essentially‐nonexistent
+treatment of nonlinear problems when using implicit methods. But that
+does lead again to the suggestion of a different organization of the
+material.
+
+
+REFEREE REPORT  2
+
+I have read quickly through Hans Petter Langtangen’s text and, to be
+frank, I am undecided. To put it frankly, I hate the first part of the
+book and love the second.
+
+The first part of the book essentially assumes zero knowledge of
+mathematics. But what is the audience?  Each and every undergraduate
+student in physical sciences and engineering in any half‐respectable
+university has under their belt considerably more mathematical
+knowledge than assumed in the first part of the text. This is not
+“gentle”, it is so soft as to be utterly boring and repetitive,
+exploring the same kind of very basic ideas first for a scalar linear
+equation with a contact coefficient and no inhomogeneous term, then
+for a scalar linear equation with a variable coefficient and an
+inhomogeneous term and finally for systems of equations. Presumably,
+students, before they even open the first page of such a book, have
+some basic common knowledge. No matter how low the common denominator,
+it will include vectors and matrices, basic definition and properties
+of ODEs and, most importantly, basic understanding of how mathematics
+works at its simplest.
+
+
+By setting the bar so low, the text will bore to death most students,
+or just persuade them that the subject is not stretching them
+enough. If all they need is to solve a numerical problem without
+bothering about the underlying numerics, they may use a library
+routine and Numerical Recipes. My assumption is that any lecture
+course in scientific computing must actually treat students as adults,
+stretch them and use their intelligence. I honestly don’t believe that
+the first part of the book is doing this. Moreover, I am quite sure
+that the author, who is a very knowledgeable scientific computing
+expert, is capable of writing a much more suitable
+text. (Incidentally, this attempt to infantilise the subject often
+leads to infelicities and rather dicey statements: sometimes an
+oversimplification is just misleading.)
+
+However, I loved the second part of the book, on the programming and
+software engineering side of things. It is replete with useful
+material, moreover much of this material is not accessible in standard
+texts.
+
+Of course, in this moment of time, an obvious objection to my opinion
+is that “well, the guy is clearly a numerical analyst who knows
+mathematics but not software engineering, hence the first part of the
+book is boring and the second is interesting”. Guilty as charged,
+however I believe that I am quite typical. Who is studying scientific
+computing, in greater generality who needs scientific computing?
+Neither mathematicians nor computer scientists. Mathematicians might
+be interested in computational mathematics which is a different kettle
+of fish), computer scientists in, well, computer science and a
+discrete world. Typical audience for this material are budding
+scientists and engineers, and those will have a great deal of
+mathematical foundation – but none in software engineering – in the
+course of their studies.
+
+Hence my recommendation is to toughen up the first part, make it more
+enticing mathematically, to push the students harder, while retaining
+the second part.
+
+

@@ -1,0 +1,48 @@
+## Mako variables and functions
+
+<%
+# Amazon URLs
+fenics_book = 'http://goo.gl/myz5yp'
+primer_book = 'http://goo.gl/OKDAzs'
+
+# Note that goo.gl URLs cannot have slashes and continuation: goo.gl/decay.
+# Therefore we use tinyurl.
+
+src = 'https://github.com/hplgit/decay-book/tree/master/src'
+src = 'http://tinyurl.com/ofkw6kc'
+
+doc = 'http://hplgit.github.io/decay-book/doc'
+doc = 'http://tinyurl.com/nclmcng'
+
+#writing_reports = 'http://hplgit.github.io/teamods/writing_reports'
+writing_reports = 'http://tinyurl.com/nc4upel'
+#writing_reports_repo = 'https://github.com/hplgit/hplgit.github.com/blob/master/teamods/writing_reports'
+writing_reports_repo = 'http://tinyurl.com/p96acy2'
+
+src_alg = src + '/alg'
+src_analysis = src + '/analysis'
+src_genz = src + '/genz'
+src_models = src + '/models'
+src_softeng = src + '/softeng'
+
+doc_notes = doc + '/pub'
+
+doc_scale = 'http://hplgit.github.io/scaling-book/doc'
+doc_scale = 'http://tinyurl.com/qfjgxmf'
+
+chapters = {
+ 'alg': 'Algorithms and implementations for exponential decay models',
+ 'softeng': 'Software engineering with exponential decay models',
+ 'analysis': 'Analysis of exponential decay models',
+ 'genz': 'Generalizations of exponential decay models',
+ 'models': 'Exponential decay models',
+}
+
+def format_specific(text, formats, else_text=''):
+    if isinstance(formats, str):
+        formats = [formats]
+    if FORMAT in formats:
+        return text
+    else:
+        return else_text
+%>

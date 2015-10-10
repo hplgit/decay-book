@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+09/26/2015 09:25:10 AM \PYGdefaultZhy{} INFO \PYGdefaultZhy{} Here is some general info.
+09/26/2015 09:25:10 AM \PYGdefaultZhy{} WARNING \PYGdefaultZhy{} Here is a warning.
+09/26/2015 09:25:10 AM \PYGdefaultZhy{} CRITICAL \PYGdefaultZhy{} Dividing by zero!
+09/26/2015 09:25:10 AM \PYGdefaultZhy{} ERROR \PYGdefaultZhy{} Encountered an error.
+\end{Verbatim}

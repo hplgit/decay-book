@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{solvers} \PYGdefault{o}{=} \PYGdefault{p}{[}\PYGdefault{n}{odespy}\PYGdefault{o}{.}\PYGdefault{n}{RK2}\PYGdefault{p}{(}\PYGdefault{n}{f}\PYGdefault{p}{),}
+           \PYGdefault{n}{odespy}\PYGdefault{o}{.}\PYGdefault{n}{RK3}\PYGdefault{p}{(}\PYGdefault{n}{f}\PYGdefault{p}{),}
+           \PYGdefault{n}{odespy}\PYGdefault{o}{.}\PYGdefault{n}{RK4}\PYGdefault{p}{(}\PYGdefault{n}{f}\PYGdefault{p}{),}
+           \PYGdefault{n}{odespy}\PYGdefault{o}{.}\PYGdefault{n}{BackwardEuler}\PYGdefault{p}{(}\PYGdefault{n}{f}\PYGdefault{p}{,} \PYGdefault{n}{nonlinear\PYGdefaultZus{}solver}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}Newton\PYGdefaultZsq{}}\PYGdefault{p}{)]}
+
+\PYGdefault{k}{for} \PYGdefault{n}{solver} \PYGdefault{o+ow}{in} \PYGdefault{n}{solvers}\PYGdefault{p}{:}
+    \PYGdefault{n}{solver}\PYGdefault{o}{.}\PYGdefault{n}{set\PYGdefaultZus{}initial\PYGdefaultZus{}condition}\PYGdefault{p}{(}\PYGdefault{n}{I}\PYGdefault{p}{)}
+    \PYGdefault{n}{u}\PYGdefault{p}{,} \PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{n}{solver}\PYGdefault{o}{.}\PYGdefault{n}{solve}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{)}
+
+\PYGdefault{c}{\PYGdefaultZsh{} + lots of plot code...}
+\end{Verbatim}

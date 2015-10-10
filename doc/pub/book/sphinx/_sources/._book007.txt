@@ -994,10 +994,9 @@ be the number of predators. For example, :math:`H` may be hares and :math:`L` ly
 or rabbits and foxes.
 
 The population of the prey evolves due to births and deaths, exactly
-as in a population dynamics model from Section
-reff{decay:app:pop:exp}.
-During a time interval :math:`\Delta t`
-the increase in the population is therefore
+as in a population dynamics model from the section :ref:`decay:app:pop:exp`.
+During a time interval :math:`\Delta t` the increase in the population is
+therefore
 
 .. math::
          H(t+\Delta t) - H(t) =  a\Delta t H(t),
@@ -2461,7 +2460,7 @@ two populations develop.
 .. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **c)**
-The scaling in a) used a scale for :math:`H` and :math:`L` based on on the
+The scaling in a) used a scale for :math:`H` and :math:`L` based on the
 initial condition :math:`H(0)=H_0`. An alternative scaling is to make
 the ODEs as simple as possible by introducing separate scales
 :math:`H_c` and :math:`L_c` for :math:`H` and :math:`L`, respectively. Fit :math:`H_c`,

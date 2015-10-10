@@ -1,0 +1,31 @@
+\begin{theindex}
+
+  \item A-stable methods, \hyperpage{10}
+  \item amplification factor, \hyperpage{9}
+
+  \indexspace
+
+  \item consistency, \hyperpage{18}
+  \item convergence, \hyperpage{18}
+
+  \indexspace
+
+  \item error
+    \subitem amplification factor, \hyperpage{14}
+    \subitem global, \hyperpage{14}
+
+  \indexspace
+
+  \item interactive Python, \hyperpage{12}
+  \item {\rm\texttt{isympy}}, \hyperpage{12}
+
+  \indexspace
+
+  \item L-stable methods, \hyperpage{10}
+
+  \indexspace
+
+  \item stability, \hyperpage{9}, \hyperpage{18}
+  \item {\rm\texttt{sympy}}, \hyperpage{12}
+
+\end{theindex}

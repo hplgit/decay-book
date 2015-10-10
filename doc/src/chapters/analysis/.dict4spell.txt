@@ -1,0 +1,7 @@
+CN
+Mathematica
+Nicolson
+ODEs
+Richtmeyer
+discretization
+unscaled

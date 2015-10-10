@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{t\PYGdefaultZus{}e} \PYGdefault{o}{=} \PYGdefault{n}{linspace}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{p}{,} \PYGdefault{l+m+mi}{1001}\PYGdefault{p}{)}      \PYGdefault{c}{\PYGdefaultZsh{} fine mesh}
+\PYGdefault{n}{u\PYGdefaultZus{}e} \PYGdefault{o}{=} \PYGdefault{n}{u\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{t\PYGdefaultZus{}e}\PYGdefault{p}{,} \PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{)}
+
+\PYGdefault{n}{plot}\PYGdefault{p}{(}\PYGdefault{n}{t\PYGdefaultZus{}e}\PYGdefault{p}{,} \PYGdefault{n}{u\PYGdefaultZus{}e}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}b\PYGdefaultZhy{}\PYGdefaultZsq{}}\PYGdefault{p}{,}            \PYGdefault{c}{\PYGdefaultZsh{} blue line for u\PYGdefaultZus{}e}
+     \PYGdefault{n}{t}\PYGdefault{p}{,}   \PYGdefault{n}{u}\PYGdefault{p}{,}   \PYGdefault{l+s}{\PYGdefaultZsq{}r\PYGdefaultZhy{}\PYGdefaultZhy{}o\PYGdefaultZsq{}}\PYGdefault{p}{)}          \PYGdefault{c}{\PYGdefaultZsh{} red dashes w/circles}
+\end{Verbatim}

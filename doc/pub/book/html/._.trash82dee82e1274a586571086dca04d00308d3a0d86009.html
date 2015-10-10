@@ -123,7 +123,7 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                'decay:exer:meshfunc',
                'decay:exer:meshfunc'),
               ('Remarks', 3, None, '___sec42'),
-              ('Exercise 2: Differentiate a function',
+              ('Problem 2: Differentiate a function',
                2,
                'decay:exer:dudt',
                'decay:exer:dudt'),
@@ -858,8 +858,8 @@ We address the differential equation problem
 
 $$
 \begin{align}
-u'(t) &= -au(t), \quad t \in (0,T], \tag{199}\\ 
-u(0)  &= I,                         \tag{200}
+u'(t) &= -au(t), \quad t \in (0,T], \tag{200}\\ 
+u(0)  &= I,                         \tag{201}
 \end{align}
 $$
 
@@ -880,7 +880,7 @@ A family of popular numerical methods are provided by the \( \theta \) scheme,
 $$
 \begin{equation}
 u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
-\tag{201}
+\tag{202}
 \end{equation}
 $$
 
@@ -895,7 +895,7 @@ scheme when \( \theta=1/2 \).
 <h2 id="softeng1:basic:impl1">A first, quick implementation</h2>
 
 <p>
-Solving <a href="#mjx-eqn-201">(201)</a> in a program is very straightforward:
+Solving <a href="#mjx-eqn-202">(202)</a> in a program is very straightforward:
 just make a loop over \( n \) and evaluate the formula. The \( u(t_n \))
 values for discrete \( n \) can be stored in an array. This makes it easy
 to also plot the solution. It would be natural to also add
@@ -1178,11 +1178,11 @@ Other calls to <code>numpy</code> function are done with the prefix, as in
 <h2 id="softeng1:basic:func">Implementing the numerical algorithm in a function</h2>
 
 <p>
-The solution formula <a href="#mjx-eqn-201">(201)</a> is completely general and
+The solution formula <a href="#mjx-eqn-202">(202)</a> is completely general and
 should be available as a Python function <code>solver</code> with all input data as
 function arguments and all output data returned to the calling code.
 With this <code>solver</code> function we can solve all types of problems
-<a href="#mjx-eqn-199">(199)</a>-<a href="#mjx-eqn-200">(200)</a>
+<a href="#mjx-eqn-200">(200)</a>-<a href="#mjx-eqn-201">(201)</a>
 by an easy-to-read one-line statement:
 
 <p>
@@ -1593,7 +1593,6 @@ module:
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">logging</span>
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">logging</span>
 logging<span style="color: #666666">.</span>basicConfig(
     filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;myprog.log&#39;</span>, filemode<span style="color: #666666">=</span><span style="color: #BA2121">&#39;w&#39;</span>, level<span style="color: #666666">=</span>logging<span style="color: #666666">.</span>WARNING,
     format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%(asctime)s</span><span style="color: #BA2121"> - </span><span style="color: #BB6688; font-weight: bold">%(levelname)s</span><span style="color: #BA2121"> - </span><span style="color: #BB6688; font-weight: bold">%(message)s</span><span style="color: #BA2121">&#39;</span>,
@@ -2804,8 +2803,8 @@ With <code>pip</code> available, it is trivial to install nose and/or pytest:
 Finding good test problems for verifying the implementation of numerical
 methods is a topic on its own. The challenge is that we very seldom know
 what the numerical errors are. For the present model problem
-<a href="#mjx-eqn-199">(199)</a>-<a href="#mjx-eqn-200">(200)</a> solved by
-<a href="#mjx-eqn-201">(201)</a> one can, fortunately, derive a formula for
+<a href="#mjx-eqn-200">(200)</a>-<a href="#mjx-eqn-201">(201)</a> solved by
+<a href="#mjx-eqn-202">(202)</a> one can, fortunately, derive a formula for
 the numerical approximation:
 
 $$ u^n = I\left(
@@ -3498,7 +3497,7 @@ The purpose of the problem class is to store all information about
 the mathematical model. This usually means the physical parameters
 and formulas
 in the problem. Looking at our model problem
-<a href="#mjx-eqn-199">(199)</a>-<a href="#mjx-eqn-200">(200)</a>, the physical data cover
+<a href="#mjx-eqn-200">(200)</a>-<a href="#mjx-eqn-201">(201)</a>, the physical data cover
 \( I \), \( a \), and \( T \). Since we have an analytical solution of
 the ODE problem, we may add this solution in terms of a Python
 function (or method) to the problem class as well.
@@ -3855,7 +3854,7 @@ solve the initial-value problem
 $$
 \begin{equation}
 u^\prime(t) = -au(t),\quad u(0)=I,\quad t\in (0,T],
-\tag{202}
+\tag{203}
 \end{equation}
 $$
 
@@ -3865,7 +3864,7 @@ $$
 \begin{equation}
 u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
 \quad u^0=I\tp
-\tag{203}
+\tag{204}
 \end{equation}
 $$
 
@@ -3893,7 +3892,7 @@ investigation.
 <h2 id="___sec226">Available software </h2>
 
 <p>
-Appropriate software for implementing <a href="#mjx-eqn-203">(203)</a>
+Appropriate software for implementing <a href="#mjx-eqn-204">(204)</a>
 is available in a program <a href="http://tinyurl.com/nc4upel/doconce_src/model.py" target="_self"><tt>model.py</tt></a>, which is run as
 
 <p>
@@ -4515,11 +4514,11 @@ The derivative of this curve, defined as a new curve with points
 $$
 \begin{align}
 d_0 &= \frac{y_1-y_0}{\Delta x},
-\tag{204}\\ 
-d_i &= \frac{y_{i+1}-y_{i-1}}{2\Delta x},\quad i=1,\ldots,n-1,
 \tag{205}\\ 
+d_i &= \frac{y_{i+1}-y_{i-1}}{2\Delta x},\quad i=1,\ldots,n-1,
+\tag{206}\\ 
 d_n &= \frac{y_n-y_{n-1}}{\Delta x}\tp
-\tag{206}
+\tag{207}
 \end{align}
 $$
 
@@ -4865,7 +4864,7 @@ $$
 \begin{equation}
 u^{n+1} = u^n + \Delta t\, r u^n\left(1 - \frac{u^n}{M^n}\right),
 \quad u^0=U_0\tp
-\tag{207}
+\tag{208}
 \end{equation}
 $$
 

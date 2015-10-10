@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+git branch newstuff
+git checkout newstuff
+\PYGdefaultZsh{} edit files
+git commit \PYGdefaultZhy{}am \PYGdefaultZsq{}Changed ...\PYGdefaultZsq{}
+git push origin newstuff
+\end{Verbatim}

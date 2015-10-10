@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{print} \PYGdefault{l+s}{\PYGdefaultZsq{}t=\PYGdefaultZob{}t:6.3f\PYGdefaultZcb{} u=\PYGdefaultZob{}u:g\PYGdefaultZcb{}\PYGdefaultZsq{}}\PYGdefault{o}{.}\PYGdefault{n}{format}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{o}{=}\PYGdefault{n}{t}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{],} \PYGdefault{n}{u}\PYGdefault{o}{=}\PYGdefault{n}{u}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{])}
+\end{Verbatim}

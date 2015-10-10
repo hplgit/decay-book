@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{f}\PYGdefault{p}{(}\PYGdefault{n}{arg1}\PYGdefault{p}{,} \PYGdefault{n}{arg2}\PYGdefault{p}{,} \PYGdefault{o}{...}\PYGdefault{p}{):}
+    \PYGdefault{k}{return} \PYGdefault{n}{expression}
+\end{Verbatim}

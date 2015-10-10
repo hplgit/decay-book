@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{compute\PYGdefaultZus{}rates}\PYGdefault{p}{(}\PYGdefault{n}{dt\PYGdefaultZus{}values}\PYGdefault{p}{,} \PYGdefault{n}{E\PYGdefaultZus{}values}\PYGdefault{p}{):}
+    \PYGdefault{n}{m} \PYGdefault{o}{=} \PYGdefault{n+nb}{len}\PYGdefault{p}{(}\PYGdefault{n}{dt\PYGdefaultZus{}values}\PYGdefault{p}{)}
+    \PYGdefault{n}{r} \PYGdefault{o}{=} \PYGdefault{p}{[}\PYGdefault{n}{log}\PYGdefault{p}{(}\PYGdefault{n}{E\PYGdefaultZus{}values}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]}\PYGdefault{o}{/}\PYGdefault{n}{E\PYGdefaultZus{}values}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{])}\PYGdefault{o}{/}
+         \PYGdefault{n}{log}\PYGdefault{p}{(}\PYGdefault{n}{dt\PYGdefaultZus{}values}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]}\PYGdefault{o}{/}\PYGdefault{n}{dt\PYGdefaultZus{}values}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{])}
+         \PYGdefault{k}{for} \PYGdefault{n}{i} \PYGdefault{o+ow}{in} \PYGdefault{n+nb}{range}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{,} \PYGdefault{n}{m}\PYGdefault{p}{,} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{)]}
+    \PYGdefault{c}{\PYGdefaultZsh{} Round to two decimals}
+    \PYGdefault{n}{r} \PYGdefault{o}{=} \PYGdefault{p}{[}\PYGdefault{n+nb}{round}\PYGdefault{p}{(}\PYGdefault{n}{r\PYGdefaultZus{}}\PYGdefault{p}{,} \PYGdefault{l+m+mi}{2}\PYGdefault{p}{)} \PYGdefault{k}{for} \PYGdefault{n}{r\PYGdefaultZus{}} \PYGdefault{o+ow}{in} \PYGdefault{n}{r}\PYGdefault{p}{]}
+    \PYGdefault{k}{return} \PYGdefault{n}{r}
+\end{Verbatim}
