@@ -1,0 +1,63 @@
+\begin{thebibliography}{10}
+
+\bibitem{Griffiths_et_al_2010}
+D.~Griffiths, F.~David, and D.~J. Higham.
+\newblock {\em Numerical Methods for Ordinary Differential Equations: Initial
+  Value Problems}.
+\newblock Springer, 2010.
+
+\bibitem{Hairer_Wanner_Norsett_bookI}
+E.~Hairer, S.~P. N{\o}rsett, and G.~Wanner.
+\newblock {\em Solving Ordinary Differential Equations I. Nonstiff Problems}.
+\newblock Springer, 1993.
+
+\bibitem{Hairer_Wanner_bookII}
+G.~Hairer and E.~Wanner.
+\newblock {\em Solving Ordinary Differential Equations II}.
+\newblock Springer, 2010.
+
+\bibitem{Matplotlib:doc}
+J.~D. Hunter, D.~Dale, E.~Firing, and M.~Droettboom.
+\newblock {Matplotlib} documentation, 2012.
+\newblock \url{http://matplotlib.org/users/}.
+
+\bibitem{Langtangen_bitgit}
+H.~P. Langtangen.
+\newblock Quick intro to version control systems and project hosting sites.
+\newblock \url{http://hplgit.github.io/teamods/bitgit/html/}.
+
+\bibitem{SciTools:doc}
+H.~P. Langtangen.
+\newblock {SciTools} documentation.
+\newblock \url{http://hplgit.github.io/scitools/doc/web/index.html}.
+
+\bibitem{Langtangen_2012}
+H.~P. Langtangen.
+\newblock {\em A Primer on Scientific Programming with {P}ython}.
+\newblock Texts in Computational Science and Engineering. Springer, fourth
+  edition, 2014.
+
+\bibitem{Langtangen_scaling}
+H.~P. Langtangen.
+\newblock {\em Scaling of Differential Equations}.
+\newblock SimulaSpringerBrief. Springer, 2015.
+\newblock \url{http://tinyurl.com/qfjgxmf/web}.
+
+\bibitem{odespy}
+H.~P. Langtangen and L.~Wang.
+\newblock {Odespy} software package.
+\newblock \url{https://github.com/hplgit/odespy}.
+
+\bibitem{parachute_1999}
+D.~B. Meade and A.~A. Struthers.
+\newblock Differential equations in the new millenium: the parachute problem.
+\newblock {\em International Journal of Engineering Education}, 15(6):417--424,
+  1999.
+
+\bibitem{Petzold_Ascher_1998}
+L.~Petzold and U.~M. Ascher.
+\newblock {\em Computer Methods for Ordinary Differential Equations and
+  Differential-Algebraic Equations}, volume~61.
+\newblock SIAM, 1998.
+
+\end{thebibliography}

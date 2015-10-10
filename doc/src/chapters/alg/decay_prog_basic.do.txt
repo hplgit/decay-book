@@ -141,6 +141,7 @@ last is then `len(u)-1` (the length of an array `u` is obtained by
 `len(u)` or `u.size`).
 
 ===== Integer division =====
+label{decay:py2}
 
 The shown implementation of the `solver` may face problems and
 wrong results if `T`, `a`, `dt`, and `theta` are given as integers

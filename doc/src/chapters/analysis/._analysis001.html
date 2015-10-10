@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Analysis of exponential decay models">
-<meta name="keywords" content="stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence">
+<meta name="keywords" content="stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation">
 
 <title>Analysis of exponential decay models</title>
 
@@ -74,7 +74,19 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:analysis:exer:growth',
                'decay:analysis:exer:growth'),
-              ('Bibliography', 1, None, '___sec17')]}
+              ('Various types of errors in a differential equation model',
+               1,
+               None,
+               '___sec17'),
+              ('Model errors', 2, None, '___sec18'),
+              ('Data errors', 2, None, '___sec19'),
+              ('Discretization errors', 2, None, '___sec20'),
+              ('Rounding errors', 2, None, '___sec21'),
+              ('Discussion of the size of various errors',
+               2,
+               None,
+               '___sec22'),
+              ('Bibliography', 1, None, '___sec23')]}
 end of tocinfo -->
 
 <body>
@@ -125,7 +137,8 @@ $$
      <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">Stability</a></li>
      <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">Accuracy</a></li>
      <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._analysis002.html#___sec17" style="font-size: 80%;">Bibliography</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">Various types of errors in a differential equation model</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis002.html#___sec23" style="font-size: 80%;">Bibliography</a></li>
 
         </ul>
       </li>
@@ -1187,6 +1200,423 @@ Filename: <code>exponential_growth</code>.
 
 <p>
 <!-- --- end exercise --- -->
+
+<h1 id="___sec17">Various types of errors in a differential equation model </h1>
+
+<p>
+So far we have been concerned with one type of error, namely the
+discretization error committed by replacing the differential equation
+problem by a recursive set of difference equations. There are,
+however, other types of errors that must be considered too. We can
+classify errors into four groups:
+
+<ol>
+<li> model errors</li>
+<li> data errors</li>
+<li> discretization errors</li>
+<li> round-off errors</li>
+</ol>
+
+Below, we shall briefly describe and illustrate these four types
+of errors.
+
+<h2 id="___sec18">Model errors </h2>
+
+<p>
+Any mathematical model like \( u^{\prime}=-au \), \( u(0)=I \), is just an
+approximate description of a real-world phenomenon. Suppose a more
+accurate model has \( a \) as a function of time rather than a
+constant. Here we take \( a(t) \) as a simple linear function: \( a +
+pt \). Obviously, \( u \) with \( p>0 \) will go faster to zero with time than a
+constant \( a \).
+
+<p>
+The solution of
+
+$$ u^{\prime} = (a + pt)u,\quad u(0)=I,$$
+
+can be shown (see below) to be
+
+$$ u(t) = I e^{t \left(- a - \frac{p t}{2}\right)}\tp$$
+
+With the above \( u \) available in a Python function <code>u_true(t, I, a, p)</code>
+and the solution from our model \( u^{\prime}=-au \) available in <code>u(t, I, a)</code>,
+we can make some plots of the two models and the error for some values
+of \( p \). Figure <a href="#decay:analysis:model_errors:fig:model_u">8</a> displays
+the two curves for \( p=0.01, 0.1, 1 \), while Figure
+<a href="#decay:analysis:model_errors:fig:model_e">9</a> shows the difference
+between the two models as a function of \( t \) for the same \( p \) values.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 8:  Comparison of two models for three values of \( p \). <div id="decay:analysis:model_errors:fig:model_u"></div> </p></center>
+<p><img src="fig-analysis/model_errors_u.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 9:  Discrepancy of Comparison of two models for three values of \( p \). <div id="decay:analysis:model_errors:fig:model_e"></div> </p></center>
+<p><img src="fig-analysis/model_errors_e.png" align="bottom" width=500></p>
+</center>
+
+<p>
+The code that was used to produce the plots looks like
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace, exp
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> \ 
+     plot, show, xlabel, ylabel, legend, savefig, figure, title
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">model_errors</span>():
+    p_values <span style="color: #666666">=</span> [<span style="color: #666666">0.01</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">1</span>]
+    a <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    I <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, <span style="color: #666666">4</span>, <span style="color: #666666">101</span>)
+    legends <span style="color: #666666">=</span> []
+    <span style="color: #408080; font-style: italic"># Work with figure(1) for the discrepancy and figure(2+i)</span>
+    <span style="color: #408080; font-style: italic"># for plotting the model and the true model for p value no i</span>
+    <span style="color: #008000; font-weight: bold">for</span> i, p <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(p_values):
+        u <span style="color: #666666">=</span> model(t, I, a)
+        u_true <span style="color: #666666">=</span> true_model(t, I, a, p)
+        discrepancy <span style="color: #666666">=</span> u_true <span style="color: #666666">-</span> u
+        figure(<span style="color: #666666">1</span>)
+        plot(t, discrepancy)
+        figure(<span style="color: #666666">2+</span>i)
+        plot(t, u, <span style="color: #BA2121">&#39;r-&#39;</span>, t, u_true, <span style="color: #BA2121">&#39;b--&#39;</span>)
+        legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;p=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> p)
+    figure(<span style="color: #666666">1</span>)
+    legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;lower right&#39;</span>)
+    savefig(<span style="color: #BA2121">&#39;tmp1.png&#39;</span>); savefig(<span style="color: #BA2121">&#39;tmp1.pdf&#39;</span>)
+    <span style="color: #008000; font-weight: bold">for</span> i, p <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(p_values):
+        figure(<span style="color: #666666">2+</span>i)
+        legend([<span style="color: #BA2121">&#39;model&#39;</span>, <span style="color: #BA2121">&#39;true model&#39;</span>])
+        title(<span style="color: #BA2121">&#39;p=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> p)
+        savefig(<span style="color: #BA2121">&#39;tmp</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">.png&#39;</span> <span style="color: #666666">%</span> (<span style="color: #666666">2+</span>i)); savefig(<span style="color: #BA2121">&#39;tmp</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">.pdf&#39;</span> <span style="color: #666666">%</span> (<span style="color: #666666">2+</span>i))
+</pre></div>
+<p>
+To derive the analytical solution of the model \( u^{\prime}=-(a+pt)u \), \( 
+u(0)=I \), we can use SymPy and the code below. This is somewhat advanced
+SymPy use for a newbie, but serves to illustrate the possibilities to
+solve differential equations by symbolic software.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">derive_true_solution</span>():
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sympy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">sym</span>
+    u <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;u&#39;</span>, cls<span style="color: #666666">=</span>sym<span style="color: #666666">.</span>Function)  <span style="color: #408080; font-style: italic"># function u(t)</span>
+    t, a, p, I <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;t a p I&#39;</span>, real<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ode</span>(u, t, a, p):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Define ODE: u&#39; = (a + p*t)*u. Return residual.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> sym<span style="color: #666666">.</span>diff(u, t) <span style="color: #666666">+</span> (a <span style="color: #666666">+</span> p<span style="color: #666666">*</span>t)<span style="color: #666666">*</span>u
+
+    eq <span style="color: #666666">=</span> ode(u(t), t, a, p)
+    s <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>dsolve(eq)
+    <span style="color: #408080; font-style: italic"># s is sym.Eq object u(t) == expression, we want u = expression,</span>
+    <span style="color: #408080; font-style: italic"># so grab the right-hand side of the equality (Eq obj.)</span>
+    u <span style="color: #666666">=</span> s<span style="color: #666666">.</span>rhs
+    <span style="color: #008000; font-weight: bold">print</span> u
+    <span style="color: #408080; font-style: italic"># u contains C1, replace it with a symbol we can fit to</span>
+    <span style="color: #408080; font-style: italic"># the initial condition</span>
+    C1 <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>symbols(<span style="color: #BA2121">&#39;C1&#39;</span>, real<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+    u <span style="color: #666666">=</span> u<span style="color: #666666">.</span>subs(<span style="color: #BA2121">&#39;C1&#39;</span>, C1)
+    <span style="color: #008000; font-weight: bold">print</span> u
+    <span style="color: #408080; font-style: italic"># Initial condition equation</span>
+    eq <span style="color: #666666">=</span> u<span style="color: #666666">.</span>subs(t, <span style="color: #666666">0</span>) <span style="color: #666666">-</span> I
+    s <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>solve(eq, C1)  <span style="color: #408080; font-style: italic"># solve eq wrt C1</span>
+    <span style="color: #008000; font-weight: bold">print</span> s
+    <span style="color: #408080; font-style: italic"># s is a list s[0] = ...</span>
+    <span style="color: #408080; font-style: italic"># Replace C1 in u by the solution</span>
+    u <span style="color: #666666">=</span> u<span style="color: #666666">.</span>subs(C1, s[<span style="color: #666666">0</span>])
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;u:&#39;</span>, u
+    <span style="color: #008000; font-weight: bold">print</span> sym<span style="color: #666666">.</span>latex(u)  <span style="color: #408080; font-style: italic"># latex formula for reports</span>
+
+    <span style="color: #408080; font-style: italic"># Consistency check: u must fulfill ODE and initial condition</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;ODE is fulfilled:&#39;</span>, sym<span style="color: #666666">.</span>simplify(ode(u, t, a, p))
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;u(0)-I:&#39;</span>, sym<span style="color: #666666">.</span>simplify(u<span style="color: #666666">.</span>subs(t, <span style="color: #666666">0</span>) <span style="color: #666666">-</span> I)
+
+    <span style="color: #408080; font-style: italic"># Convert u expression to Python numerical function</span>
+    <span style="color: #408080; font-style: italic"># (modules=&#39;numpy&#39; allows numpy arrays as arguments,</span>
+    <span style="color: #408080; font-style: italic"># we want this for t)</span>
+    u_func <span style="color: #666666">=</span> sym<span style="color: #666666">.</span>lambdify([t, I, a, p], u, modules<span style="color: #666666">=</span><span style="color: #BA2121">&#39;numpy&#39;</span>)
+    <span style="color: #008000; font-weight: bold">return</span> u_func
+
+true_model <span style="color: #666666">=</span> derive_true_solution()
+</pre></div>
+
+<h2 id="___sec19">Data errors </h2>
+
+<p>
+By &quot;data&quot; we mean all the input parameters to a model, in our case
+\( I \) and \( a \). The values of these may contain errors, or at least
+uncertainty. Suppose \( I \) and \( a \) are measured from some physical
+experiments. Ideally, we have many samples of \( I \) and \( a \) and
+from these we can fit probability distributions. Assume that \( I \)
+turns out to be normally distributed with mean 1 and standard deviation 0.2,
+while \( a \) is uniformly distributed in the interval \( [0.5, 1.5] \).
+
+<p>
+How will the uncertainty in \( I \) and \( a \) propagate through the model
+\( u=Ie^{-at} \)? That is, what is the uncertainty in \( u \) at a particular
+time \( t \)? This answer can easily be answered using <em>Monte Carlo
+simulation</em>. It means that we draw a lot of samples from the
+distributions for \( I \) and \( a \). For each combination of \( I \) and \( a \)
+sample we compute the corresponding \( u \) value for selected values of
+\( t \).  Afterwards, we can for each selected \( t \) values make a histogram
+of all the computed \( u \) values to see what the distribution of \( u \)
+values look like. Figure <a href="#decay:analysis:data_errors:fig">10</a> shows the
+histograms corresponding to \( t=0,1,3 \). We see that the distribution of
+\( u \) values is much like a symmetric normal distribution at \( t=0 \),
+centered around \( u=1 \). At later times, the distribution gets more
+asymmetric and narrower. It means that the uncertainty decreases with
+time. From the computed \( u \) values we can easily calculate the mean
+and standard deviation. The table below shows the mean and standard
+deviation values along with the value if we just use the formula
+\( u=Ie^{-at} \) with the mean values of \( I \) and \( a \): \( I=1 \) and \( a=1 \). As
+we see, there is some discrepancy between this latter (naive)
+computation and the mean value produced by Monte Carlo simulation.
+
+<p>
+
+<div class="row">
+  <div class="col-xs-3">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center"><b>time</b></td> <td align="center"><b>mean</b></td> <td align="center"><b>st.dev.</b></td> <td align="center">\( u(t;I=1,a=1) \)</td> </tr>
+</thead>
+<tbody>
+<tr><td align="left">   0       </td> <td align="left">   1.00    </td> <td align="left">   0.200      </td> <td align="left">   1.00                  </td> </tr>
+<tr><td align="left">   1       </td> <td align="left">   0.38    </td> <td align="left">   0.135      </td> <td align="left">   0.37                  </td> </tr>
+<tr><td align="left">   3       </td> <td align="left">   0.07    </td> <td align="left">   0.060      </td> <td align="left">   0.14                  </td> </tr>
+</tbody>
+    </table>
+  </div>
+</div> <!-- col-xs-3 -->
+<p>
+Actually, \( u(t;I,a) \) becomes a stochastic variable for each \( t \) when
+\( I \) and \( a \) are stochastic variables, as they are in the above
+Monte Carlo simulation. The mean of the stochastic \( u(t;I,a) \) is
+not equal to \( u(t;I=1,a=1) \) unless \( u \) is linear in \( I \) and \( a \)
+(here \( u \) is nonlinear in \( a \)). The accuracy of the Monte Carlo
+results increases with increasing number of samples.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 10:  Histogram of solution uncertainty at three time points, due to data errors. <div id="decay:analysis:data_errors:fig"></div> </p></center>
+<p><img src="fig-analysis/data_errors.png" align="bottom" width=800></p>
+</center>
+
+<p>
+The computer code required to do the Monte Carlo simulation and
+produce the plots in Figure <a href="#decay:analysis:data_errors:fig">10</a>
+is shown below.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">data_errors</span>():
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> random, mean, std
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> hist
+    N <span style="color: #666666">=</span> <span style="color: #666666">10000</span>
+    <span style="color: #408080; font-style: italic"># Draw random numbers for I and a</span>
+    I_values <span style="color: #666666">=</span> random<span style="color: #666666">.</span>normal(<span style="color: #666666">1</span>, <span style="color: #666666">0.2</span>, N)
+    a_values <span style="color: #666666">=</span> random<span style="color: #666666">.</span>uniform(<span style="color: #666666">0.5</span>, <span style="color: #666666">1.5</span>, N)
+    <span style="color: #408080; font-style: italic"># Compute corresponding u values for some t values</span>
+    t <span style="color: #666666">=</span> [<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">3</span>]
+    u_values <span style="color: #666666">=</span> {}  <span style="color: #408080; font-style: italic"># samples for various t values</span>
+    u_mean <span style="color: #666666">=</span> {}
+    u_std <span style="color: #666666">=</span> {}
+    <span style="color: #008000; font-weight: bold">for</span> t_ <span style="color: #AA22FF; font-weight: bold">in</span> t:
+        <span style="color: #408080; font-style: italic"># Compute u samples corresponding to I and a samples</span>
+        u_values[t_] <span style="color: #666666">=</span> [model(t_, I, a)
+                        <span style="color: #008000; font-weight: bold">for</span> I, a <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(I_values, a_values)]
+        u_mean[t_] <span style="color: #666666">=</span> mean(u_values[t_])
+        u_std[t_] <span style="color: #666666">=</span> std(u_values[t_])
+
+        figure()
+        dummy1, bins, dummy2 <span style="color: #666666">=</span> hist(
+            u_values[t_], bins<span style="color: #666666">=30</span>, <span style="color: #008000">range</span><span style="color: #666666">=</span>(<span style="color: #666666">0</span>, I_values<span style="color: #666666">.</span>max()),
+            normed<span style="color: #666666">=</span><span style="color: #008000">True</span>, facecolor<span style="color: #666666">=</span><span style="color: #BA2121">&#39;green&#39;</span>)
+        <span style="color: #408080; font-style: italic">#plot(bins)</span>
+        title(<span style="color: #BA2121">&#39;t=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> t_)
+        savefig(<span style="color: #BA2121">&#39;tmp_</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">.png&#39;</span> <span style="color: #666666">%</span> t_); savefig(<span style="color: #BA2121">&#39;tmp_</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">.pdf&#39;</span> <span style="color: #666666">%</span> t_)
+    <span style="color: #408080; font-style: italic"># Table of mean and standard deviation values</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;time   mean   st.dev.&#39;</span>
+    <span style="color: #008000; font-weight: bold">for</span> t_ <span style="color: #AA22FF; font-weight: bold">in</span> t:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%3g</span><span style="color: #BA2121">    </span><span style="color: #BB6688; font-weight: bold">%.2f</span><span style="color: #BA2121">    </span><span style="color: #BB6688; font-weight: bold">%.3f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (t_, u_mean[t_], u_std[t_])
+</pre></div>
+
+<h2 id="___sec20">Discretization errors </h2>
+
+<p>
+The errors implied by solving the differential equation problem by
+the \( \theta \)-rule has been thoroughly analyzed in the previous
+sections. Below are some plots of the error versus time for the
+Forward Euler (FE), Backward Euler (BN), and Crank-Nicolson (CN)
+schemes for decreasing values of \( \Delta t \). Since the difference
+in magnitude between the errors in the CN scheme versus the FE ad
+BN schemes grows significantly as \( \Delta t \) is reduced (the error
+goes like \( \Delta t^2 \) for CN versus \( \Delta t \) for FE/BE), we have
+plotted the logarithm of the absolute value of the numerical error.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 11:  Discretization errors in various schemes for 4 time step values. <div id="decay:analysis:numerical_errors:fig"></div> </p></center>
+<p><img src="fig-analysis/numerical_errors.png" align="bottom" width=700></p>
+</center>
+
+<p>
+The computer code used to generate the plots appear next. It makes use
+of a <code>solver</code> function
+for computing the numerical solution of \( u^{\prime}=-au \) with
+the \( \theta \)-rule.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">discretization_errors</span>():
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log, <span style="color: #008000">abs</span>
+    I <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    a <span style="color: #666666">=</span> <span style="color: #666666">1</span>
+    T <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">101</span>)
+    schemes <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;FE&#39;</span>: <span style="color: #666666">0</span>, <span style="color: #BA2121">&#39;BE&#39;</span>: <span style="color: #666666">1</span>, <span style="color: #BA2121">&#39;CN&#39;</span>: <span style="color: #666666">0.5</span>}  <span style="color: #408080; font-style: italic"># theta to scheme name</span>
+    dt_values <span style="color: #666666">=</span> [<span style="color: #666666">0.8</span>, <span style="color: #666666">0.4</span>, <span style="color: #666666">0.1</span>, <span style="color: #666666">0.01</span>]
+    <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values:
+        figure()
+        legends <span style="color: #666666">=</span> []
+        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> schemes:
+            theta <span style="color: #666666">=</span> schemes[scheme]
+            u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)
+            u_e <span style="color: #666666">=</span> model(t, I, a)
+            error <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
+            <span style="color: #408080; font-style: italic"># Plot log(error), but exclude error[0] since it is 0</span>
+            plot(t[<span style="color: #666666">1</span>:], log(<span style="color: #008000">abs</span>(error[<span style="color: #666666">1</span>:])))
+            legends<span style="color: #666666">.</span>append(scheme)
+        xlabel(<span style="color: #BA2121">&#39;t&#39;</span>);  ylabel(<span style="color: #BA2121">&#39;log(abs(numerical error))&#39;</span>)
+        legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;upper right&#39;</span>)
+        title(<span style="color: #BA2121">r&#39;$\Delta t=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">$&#39;</span> <span style="color: #666666">%</span> dt)
+        savefig(<span style="color: #BA2121">&#39;tmp_dt</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">.png&#39;</span> <span style="color: #666666">%</span> dt); savefig(<span style="color: #BA2121">&#39;tmp_dt</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">.pdf&#39;</span> <span style="color: #666666">%</span> dt)
+</pre></div>
+
+<h2 id="___sec21">Rounding errors </h2>
+
+<p>
+Real numbers on a computer are represented by <a href="https://en.wikipedia.org/wiki/Floating_point" target="_self">floating-point numbers</a>, which means that just a finite
+number of digits are stored and used. Therefore, the floating-point number
+is an approximation to the underlying real number. When doing
+arithmetics with floating-point numbers, there will be small
+approximation errors, called round-off errors or rounding errors,
+that may or may not accumulate in comprehensive computations.
+A typical example is shown below.
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #666666">1.0/51*51</span>
+<span style="color: #666666">1.0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #666666">1.0/49*49</span>
+<span style="color: #666666">0.9999999999999999</span>
+</pre></div>
+<p>
+We see there is not an exact result in the latter case, but a rounding
+error of \( 10^{-16} \). This is the typical level of a rounding error
+from an arithmetic operation with 64 bit floating-point numbers
+(<code>float</code> object in Python, often called <code>double</code> or double precision
+in other languages).
+
+<p>
+What is the effect of using <code>float</code> objects and not exact arithmetics?
+Python has a <code>Decimal</code> object in the <a href="https://docs.python.org/2/library/decimal.html" target="_self"><tt>decimal</tt></a> module that allows us
+to use as many digits in floating-point numbers as we like. We take
+1000 digits as the true answer where rounding errors are negligible,
+and then we run our numerical algorithm (the Crank-Nicolson scheme to
+be precise) with <code>Decimal</code> objects for all real numbers and test the
+error arising from using 4, 16, 64, and 128 digits.
+
+<p>
+When computing with numbers around unity in size, we typically
+get a rounding error of \( 10^{-d} \), where \( d \) is the number
+of digits used. However, if we compute with numbers that
+are larger, e.g., the \( u \) values implied by \( I=1000 \) and \( a=100 \),
+the rounding errors increase to about \( 10^{-d+3} \). Below is
+a table of the the computed maximum rounding error for various number of digits
+and two different magnitudes of \( I \) and \( a \).
+
+<p>
+
+<div class="row">
+  <div class="col-xs-6">
+    <table class="table table-striped table-hover table-condensed">
+<thead>
+<tr><td align="center"><b>digits</b></td> <td align="center">   \( I=1 \), \( a=1 \)  </td> <td align="center">\( I=1000 \), \( a=100 \)</td> </tr>
+</thead>
+<tbody>
+<tr><td align="right">   4         </td> <td align="left">   \( 3.05\cdot 10^{-4} \)      </td> <td align="left">   \( 3.05\cdot 10^{-1} \)      </td> </tr>
+<tr><td align="right">   16        </td> <td align="left">   \( 1.71\cdot 10^{-16} \)     </td> <td align="left">   \( 1.58\cdot 10^{-13} \)     </td> </tr>
+<tr><td align="right">   64        </td> <td align="left">   \( 2.99\cdot 10^{-64} \)     </td> <td align="left">   \( 2.06\cdot 10^{-61} \)     </td> </tr>
+<tr><td align="right">   128       </td> <td align="left">   \( 1.60\cdot 10^{-128} \)    </td> <td align="left">   \( 2.41\cdot 10^{-125} \)    </td> </tr>
+</tbody>
+    </table>
+  </div>
+</div> <!-- col-xs-6 -->
+<p>
+The computer code for doing these experiments need a new version
+of the <code>solver</code> function where we do arithmetics with <code>Decimal</code>
+objects:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver_decimal</span>(I, a, T, dt, theta):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> zeros, linspace
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">decimal</span> <span style="color: #008000; font-weight: bold">import</span> Decimal <span style="color: #008000; font-weight: bold">as</span> D
+    dt <span style="color: #666666">=</span> D(dt)
+    a <span style="color: #666666">=</span> D(a)
+    theta <span style="color: #666666">=</span> D(theta)
+    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(D(T)<span style="color: #666666">/</span>dt))
+    T <span style="color: #666666">=</span> Nt<span style="color: #666666">*</span>dt
+    u <span style="color: #666666">=</span> zeros(Nt<span style="color: #666666">+1</span>, dtype<span style="color: #666666">=</span><span style="color: #008000">object</span>)  <span style="color: #408080; font-style: italic"># array of Decimal objects</span>
+    t <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, <span style="color: #008000">float</span>(T), Nt<span style="color: #666666">+1</span>)
+
+    u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> D(I)               <span style="color: #408080; font-style: italic"># assign initial condition</span>
+    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Nt):    <span style="color: #408080; font-style: italic"># n=0,1,...,Nt-1</span>
+        u[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)<span style="color: #666666">*</span>u[n]
+    <span style="color: #008000; font-weight: bold">return</span> u, t
+</pre></div>
+<p>
+The function below carries out the experiments. Note that we can
+set the number of digits as we want through the <code>decimal.getcontext().prec</code>
+variable.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rounding_errors</span>(I<span style="color: #666666">=1</span>, a<span style="color: #666666">=1</span>, T<span style="color: #666666">=4</span>, dt<span style="color: #666666">=0.1</span>):
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">decimal</span>
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log, array, <span style="color: #008000">abs</span>
+    digits_values <span style="color: #666666">=</span> [<span style="color: #666666">4</span>, <span style="color: #666666">16</span>, <span style="color: #666666">64</span>, <span style="color: #666666">128</span>]
+    <span style="color: #408080; font-style: italic"># &quot;Exact&quot; arithmetics is taken as 1000 decimals here</span>
+    decimal<span style="color: #666666">.</span>getcontext()<span style="color: #666666">.</span>prec <span style="color: #666666">=</span> <span style="color: #666666">1000</span>
+    u_e, t <span style="color: #666666">=</span> solver_decimal(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>T, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=0.5</span>)
+    <span style="color: #008000; font-weight: bold">for</span> digits <span style="color: #AA22FF; font-weight: bold">in</span> digits_values:
+        decimal<span style="color: #666666">.</span>getcontext()<span style="color: #666666">.</span>prec <span style="color: #666666">=</span> digits  <span style="color: #408080; font-style: italic"># set no of digits</span>
+        u, t <span style="color: #666666">=</span> solver_decimal(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>T, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=0.5</span>)
+        error <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
+        error <span style="color: #666666">=</span> array(error[<span style="color: #666666">1</span>:], dtype<span style="color: #666666">=</span><span style="color: #008000">float</span>)
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> digits, max abs(error): </span><span style="color: #BB6688; font-weight: bold">%.2E</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> \ 
+              (digits, <span style="color: #008000">abs</span>(error)<span style="color: #666666">.</span>max())
+</pre></div>
+
+<h2 id="___sec22">Discussion of the size of various errors </h2>
 
 <p>
 <p>
