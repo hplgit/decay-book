@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} pdftk f1.pdf f2.pdf f3.pdf f4.pdf output tmp.pdf}
+\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} pdfnup \PYGdefaultZhy{}\PYGdefaultZhy{}nup 2x2 \PYGdefaultZhy{}\PYGdefaultZhy{}outfile tmp.pdf tmp.pdf}
+\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} pdfcrop tmp.pdf f.pdf}
+\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} rm \PYGdefaultZhy{}f tmp.pdf}
+\end{Verbatim}

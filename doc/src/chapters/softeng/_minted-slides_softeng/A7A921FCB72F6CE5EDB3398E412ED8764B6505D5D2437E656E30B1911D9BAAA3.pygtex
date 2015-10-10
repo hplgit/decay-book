@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{read\PYGdefaultZus{}command\PYGdefaultZus{}line\PYGdefaultZus{}argparse}\PYGdefault{p}{():}
+    \PYGdefault{n}{parser} \PYGdefault{o}{=} \PYGdefault{n}{define\PYGdefaultZus{}command\PYGdefaultZus{}line\PYGdefaultZus{}options}\PYGdefault{p}{()}
+    \PYGdefault{n}{args} \PYGdefault{o}{=} \PYGdefault{n}{parser}\PYGdefault{o}{.}\PYGdefault{n}{parse\PYGdefaultZus{}args}\PYGdefault{p}{()}
+    \PYGdefault{n}{scheme2theta} \PYGdefault{o}{=} \PYGdefault{p}{\PYGdefaultZob{}}\PYGdefault{l+s}{\PYGdefaultZsq{}BE\PYGdefaultZsq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}CN\PYGdefaultZsq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mf}{0.5}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}FE\PYGdefaultZsq{}}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{\PYGdefaultZcb{}}
+    \PYGdefault{n}{data} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{n}{args}\PYGdefault{o}{.}\PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{args}\PYGdefault{o}{.}\PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{args}\PYGdefault{o}{.}\PYGdefault{n}{T}\PYGdefault{p}{,} \PYGdefault{n}{scheme2theta}\PYGdefault{p}{[}\PYGdefault{n}{args}\PYGdefault{o}{.}\PYGdefault{n}{scheme}\PYGdefault{p}{],}
+            \PYGdefault{n}{args}\PYGdefault{o}{.}\PYGdefault{n}{dt\PYGdefaultZus{}values}\PYGdefault{p}{)}
+    \PYGdefault{k}{return} \PYGdefault{n}{data}
+\end{Verbatim}

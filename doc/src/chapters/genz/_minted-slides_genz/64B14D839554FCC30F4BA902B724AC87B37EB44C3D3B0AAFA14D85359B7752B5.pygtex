@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{f} \PYGdefault{o}{=} \PYGdefault{k}{lambda} \PYGdefault{n}{arg1}\PYGdefault{p}{,} \PYGdefault{n}{arg2}\PYGdefault{p}{,} \PYGdefault{o}{...}\PYGdefault{p}{:} \PYGdefault{n}{expressin}
+\end{Verbatim}

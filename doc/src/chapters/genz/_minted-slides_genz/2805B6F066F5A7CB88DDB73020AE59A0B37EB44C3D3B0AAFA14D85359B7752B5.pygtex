@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{class} \PYGdefault{n+nc}{A}\PYGdefault{p}{:}
+    \PYGdefault{k}{def} \PYGdefault{n+nf}{\PYGdefaultZus{}\PYGdefaultZus{}init\PYGdefaultZus{}\PYGdefaultZus{}}\PYGdefault{p}{(}\PYGdefault{n+nb+bp}{self}\PYGdefault{p}{,} \PYGdefault{n}{a0}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{,} \PYGdefault{n}{k}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{2}\PYGdefault{p}{):}
+        \PYGdefault{n+nb+bp}{self}\PYGdefault{o}{.}\PYGdefault{n}{a0}\PYGdefault{p}{,} \PYGdefault{n+nb+bp}{self}\PYGdefault{o}{.}\PYGdefault{n}{k} \PYGdefault{o}{=} \PYGdefault{n}{a0}\PYGdefault{p}{,} \PYGdefault{n}{k}
+
+    \PYGdefault{k}{def} \PYGdefault{n+nf}{\PYGdefaultZus{}\PYGdefaultZus{}call\PYGdefaultZus{}\PYGdefaultZus{}}\PYGdefault{p}{(}\PYGdefault{n+nb+bp}{self}\PYGdefault{p}{,} \PYGdefault{n}{t}\PYGdefault{p}{):}
+        \PYGdefault{k}{return} \PYGdefault{n+nb+bp}{self}\PYGdefault{o}{.}\PYGdefault{n}{a0} \PYGdefault{k}{if} \PYGdefault{n}{t} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{n+nb+bp}{self}\PYGdefault{o}{.}\PYGdefault{n}{tp} \PYGdefault{k}{else} \PYGdefault{n+nb+bp}{self}\PYGdefault{o}{.}\PYGdefault{n}{k}\PYGdefault{o}{*}\PYGdefault{n+nb+bp}{self}\PYGdefault{o}{.}\PYGdefault{n}{a0}
+
+\PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{n}{A}\PYGdefault{p}{(}\PYGdefault{n}{a0}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{2}\PYGdefault{p}{,} \PYGdefault{n}{k}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{)}  \PYGdefault{c}{\PYGdefaultZsh{} a behaves as a function a(t)}
+\end{Verbatim}

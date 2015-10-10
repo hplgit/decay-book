@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{c}{\PYGdefaultZsh{} Create a manufactured solution with sympy}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{sympy} \PYGdefault{k+kn}{as} \PYGdefault{n+nn}{sym}
+\PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{n}{sym}\PYGdefault{o}{.}\PYGdefault{n}{symbols}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}t\PYGdefaultZsq{}}\PYGdefault{p}{)}
+\PYGdefault{n}{u\PYGdefaultZus{}exact} \PYGdefault{o}{=} \PYGdefault{n}{sym}\PYGdefault{o}{.}\PYGdefault{n}{sin}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{)}\PYGdefault{o}{*}\PYGdefault{n}{sym}\PYGdefault{o}{.}\PYGdefault{n}{exp}\PYGdefault{p}{(}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{2}\PYGdefault{o}{*}\PYGdefault{n}{t}\PYGdefault{p}{)}
+\PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{n}{t}\PYGdefault{o}{**}\PYGdefault{l+m+mi}{2}
+\PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{n}{sym}\PYGdefault{o}{.}\PYGdefault{n}{diff}\PYGdefault{p}{(}\PYGdefault{n}{u\PYGdefaultZus{}exact}\PYGdefault{p}{,} \PYGdefault{n}{t}\PYGdefault{p}{)} \PYGdefault{o}{+} \PYGdefault{n}{a}\PYGdefault{o}{*}\PYGdefault{n}{u\PYGdefaultZus{}exact}
+
+\PYGdefault{c}{\PYGdefaultZsh{} Turn sympy expressions into Python function}
+\PYGdefault{n}{u\PYGdefaultZus{}exact} \PYGdefault{o}{=} \PYGdefault{n}{sym}\PYGdefault{o}{.}\PYGdefault{n}{lambdify}\PYGdefault{p}{([}\PYGdefault{n}{t}\PYGdefault{p}{],} \PYGdefault{n}{u\PYGdefaultZus{}exact}\PYGdefault{p}{,} \PYGdefault{n}{modules}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}numpy\PYGdefaultZsq{}}\PYGdefault{p}{)}
+\PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{n}{sym}\PYGdefault{o}{.}\PYGdefault{n}{lambdify}\PYGdefault{p}{([}\PYGdefault{n}{t}\PYGdefault{p}{],} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{modules}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}numpy\PYGdefaultZsq{}}\PYGdefault{p}{)}
+\PYGdefault{n}{b} \PYGdefault{o}{=} \PYGdefault{n}{sym}\PYGdefault{o}{.}\PYGdefault{n}{lambdify}\PYGdefault{p}{([}\PYGdefault{n}{t}\PYGdefault{p}{],} \PYGdefault{n}{b}\PYGdefault{p}{,} \PYGdefault{n}{modules}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}numpy\PYGdefaultZsq{}}\PYGdefault{p}{)}
+\end{Verbatim}

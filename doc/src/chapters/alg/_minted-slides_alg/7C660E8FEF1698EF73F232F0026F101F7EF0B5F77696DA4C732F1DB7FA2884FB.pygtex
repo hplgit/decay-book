@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{e} \PYGdefault{o}{=} \PYGdefault{n}{u\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{)} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{u}
+\PYGdefault{n}{E} \PYGdefault{o}{=} \PYGdefault{n}{sqrt}\PYGdefault{p}{(}\PYGdefault{n}{dt}\PYGdefault{o}{*}\PYGdefault{n+nb}{sum}\PYGdefault{p}{(}\PYGdefault{n}{e}\PYGdefault{o}{**}\PYGdefault{l+m+mi}{2}\PYGdefault{p}{))}
+\end{Verbatim}

@@ -1,0 +1,235 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Generalizations of exponential decay models">
+<meta name="keywords" content="lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method">
+
+<title>Generalizations of exponential decay models</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Model extensions', 1, None, '___sec0'),
+              ('Generalization: including a variable coefficient',
+               2,
+               None,
+               '___sec1'),
+              ('Generalization: including a source term',
+               2,
+               'decay:source',
+               'decay:source'),
+              ('Implementation of the generalized model problem',
+               2,
+               'decay:general',
+               'decay:general'),
+              ('Deriving the $\\theta$-rule formula', 3, None, '___sec4'),
+              ('Python code', 3, None, '___sec5'),
+              ('Coding of variable coefficients', 3, None, '___sec6'),
+              ('Verifying a constant solution',
+               2,
+               'decay:verify:trivial',
+               'decay:verify:trivial'),
+              ('Verification via manufactured solutions',
+               2,
+               'decay:MMS',
+               'decay:MMS'),
+              ('Computing convergence rates',
+               2,
+               'decay:convergence:rate',
+               'decay:convergence:rate'),
+              ('Estimating $r$', 3, None, '___sec10'),
+              ('Implementation', 3, None, '___sec11'),
+              ('Extension to systems of ODEs', 2, None, '___sec12'),
+              ('General first-order ODEs', 1, None, '___sec13'),
+              ('Generic form of first-order ODEs', 2, None, '___sec14'),
+              ('The $\\theta$-rule', 2, None, '___sec15'),
+              ('An implicit 2-step backward scheme', 2, None, '___sec16'),
+              ('Leapfrog schemes', 2, None, '___sec17'),
+              ('The ordinary Leapfrog scheme', 3, None, '___sec18'),
+              ('The filtered Leapfrog scheme', 3, None, '___sec19'),
+              ('The 2nd-order Runge-Kutta method', 2, None, '___sec20'),
+              ('A 2nd-order Taylor-series method', 2, None, '___sec21'),
+              ('The 2nd- and 3rd-order Adams-Bashforth schemes',
+               2,
+               None,
+               '___sec22'),
+              ('The 4th-order Runge-Kutta method',
+               2,
+               'decay:fd2:RK4',
+               'decay:fd2:RK4'),
+              ('The Odespy software', 2, None, '___sec24'),
+              ('Example: Runge-Kutta methods', 2, None, '___sec25'),
+              ('Remark about using the $\\theta$-rule in Odespy',
+               3,
+               None,
+               '___sec26'),
+              ('Example: Adaptive Runge-Kutta methods',
+               2,
+               'decay:fd2:adaptiveRK',
+               'decay:fd2:adaptiveRK'),
+              ('Exercises', 1, None, '___sec28'),
+              ('Exercise 1: Experiment with precision in tests and the size of $u$',
+               2,
+               'decay:fd2:exer:precision',
+               'decay:fd2:exer:precision'),
+              ('Exercise 2: Implement the 2-step backward scheme',
+               2,
+               'decay:fd2:exer:bw2',
+               'decay:fd2:exer:bw2'),
+              ('Exercise 3: Implement the 2nd-order Adams-Bashforth scheme',
+               2,
+               'decay:fd2:exer:AB2',
+               'decay:fd2:exer:AB2'),
+              ('Exercise 4: Implement the 3rd-order Adams-Bashforth scheme',
+               2,
+               'decay:fd2:exer:AB3',
+               'decay:fd2:exer:AB3'),
+              ('Exercise 5: Analyze explicit 2nd-order methods',
+               2,
+               'decay:exer:RK2:Taylor:analysis',
+               'decay:exer:RK2:Taylor:analysis'),
+              ('Project 6: Implement and investigate the Leapfrog scheme',
+               2,
+               'decay:fd2:exer:leapfrog1',
+               'decay:fd2:exer:leapfrog1'),
+              ('Problem 7: Make a unified implementation of many schemes',
+               2,
+               'decay:fd2:exer:uni',
+               'decay:fd2:exer:uni'),
+              ('Bibliography', 1, None, '___sec36')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\tp}{\thinspace .}
+\newcommand{\uex}{{u_{\small\mbox{e}}}}
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="genz.html">Generalizations of exponential decay models</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._genz001.html#___sec0" style="font-size: 80%;">Model extensions</a></li>
+     <!-- navigation toc: --> <li><a href="._genz001.html#___sec13" style="font-size: 80%;">General first-order ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._genz001.html#___sec28" style="font-size: 80%;">Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec36" style="font-size: 80%;">Bibliography</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0002"></a>
+<!-- !split -->
+
+<h1 id="___sec36">Bibliography </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="Petzold_Ascher_1998"></div> <b>L. Petzold and U. M. Ascher</b>. 
+    <em>Computer Methods for Ordinary Differential Equations and Differential-Algebraic Equations</em>,
+    SIAM,
+    1998.</li>
+ <li> <div id="Griffiths_et_al_2010"></div> <b>D. Griffiths, F. David and D. J. Higham</b>. 
+    <em>Numerical Methods for Ordinary Differential Equations: Initial Value Problems</em>,
+    Springer,
+    2010.</li>
+ <li> <div id="Hairer_Wanner_Norsett_bookI"></div> <b>E. Hairer, S. P. N\orsett and G. Wanner</b>. 
+    <em>Solving Ordinary Differential Equations I. Nonstiff Problems</em>,
+    Springer,
+    1993.</li>
+ <li> <div id="Hairer_Wanner_bookII"></div> <b>G. Hairer and E. Wanner</b>. 
+    <em>Solving Ordinary Differential Equations II</em>,
+    Springer,
+    2010.</li>
+ <li> <div id="odespy"></div> <b>H. P. Langtangen and L. Wang</b>. 
+    Odespy Software Package,
+    <a href="https://github.com/hplgit/odespy" target="_self"><tt>https://github.com/hplgit/odespy</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._genz001.html">&larr; Prev</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

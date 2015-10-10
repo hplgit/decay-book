@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{explore}\PYGdefault{p}{(}\PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{p}{,} \PYGdefault{n}{dt}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{o}{=}\PYGdefault{l+m+mf}{0.5}\PYGdefault{p}{,} \PYGdefault{n}{makeplot}\PYGdefault{o}{=}\PYGdefault{n+nb+bp}{True}\PYGdefault{p}{):}
+    \PYGdefault{n}{filename} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZsq{}u.dat\PYGdefaultZsq{}}
+    \PYGdefault{n}{u}\PYGdefault{p}{,} \PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{n}{solver\PYGdefaultZus{}memsave}\PYGdefault{p}{(}\PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{p}{,} \PYGdefault{n}{dt}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{p}{,} \PYGdefault{n}{filename}\PYGdefault{p}{)}
+
+    \PYGdefault{n}{t}\PYGdefault{p}{,} \PYGdefault{n}{u} \PYGdefault{o}{=} \PYGdefault{n}{read\PYGdefaultZus{}file}\PYGdefault{p}{(}\PYGdefault{n}{filename}\PYGdefault{p}{)}
+    \PYGdefault{n}{u\PYGdefaultZus{}e} \PYGdefault{o}{=} \PYGdefault{n}{u\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{,} \PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{)}
+    \PYGdefault{n}{e} \PYGdefault{o}{=} \PYGdefault{n}{u\PYGdefaultZus{}e} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{u}
+    \PYGdefault{n}{E} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{sqrt}\PYGdefault{p}{(}\PYGdefault{n}{dt}\PYGdefault{o}{*}\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{sum}\PYGdefault{p}{(}\PYGdefault{n}{e}\PYGdefault{o}{**}\PYGdefault{l+m+mi}{2}\PYGdefault{p}{))}
+    \PYGdefault{k}{if} \PYGdefault{n}{makeplot}\PYGdefault{p}{:}
+        \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{figure}\PYGdefault{p}{()}
+        \PYGdefault{o}{...}
+\end{Verbatim}

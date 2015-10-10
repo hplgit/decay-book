@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefaultZsh{} Define right\PYGdefaultZhy{}hand side of ODE
+def f(u, t):
+    return \PYGdefaultZhy{}a*u
+
+import odespy
+import numpy as np
+
+\PYGdefaultZsh{} Set parameters and time mesh
+I = 1; a = 2; T = 6; dt = 1.0
+Nt = int(round(T/dt))
+t\PYGdefaultZus{}mesh = np.linspace(0, T, Nt+1)
+
+\PYGdefaultZsh{} Use a 4th\PYGdefaultZhy{}order Runge\PYGdefaultZhy{}Kutta method
+solver = odespy.RK4(f)
+solver.set\PYGdefaultZus{}initial\PYGdefaultZus{}condition(I)
+u, t = solver.solve(t\PYGdefaultZus{}mesh)
+\end{Verbatim}

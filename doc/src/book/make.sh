@@ -33,7 +33,7 @@ else
   spellcheck=spell
 fi
 
-system doconce spellcheck -d .dict4spell.txt book.do.txt preface_decay.do.txt
+system doconce spellcheck -d .dict4spell.txt book.do.txt preface.do.txt
 # No spellchecking of local files here since book.do.txt just includes files.
 # Spellcheck all *.do.txt files in each chapter.
 if [ "$spellcheck" != 'nospell' ]; then
@@ -44,7 +44,7 @@ if [ "$spellcheck" != 'nospell' ]; then
     fi
 fi
 
-system preprocess -DFORMAT=pdflatex ../${topicname}-chapters/newcommands_keep.p.tex > newcommands_keep.tex
+system preprocess -DFORMAT=pdflatex ../chapters/newcommands_keep.p.tex > newcommands_keep.tex
 doconce replace 'newcommand{\E}' 'renewcommand{\E}' newcommands_keep.tex
 doconce replace 'newcommand{\I}' 'renewcommand{\I}' newcommands_keep.tex
 

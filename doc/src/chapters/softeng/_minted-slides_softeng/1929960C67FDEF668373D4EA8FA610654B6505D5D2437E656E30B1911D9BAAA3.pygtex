@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{experiment\PYGdefaultZus{}classes}\PYGdefault{p}{():}
+    \PYGdefault{n}{problem} \PYGdefault{o}{=} \PYGdefault{n}{Problem}\PYGdefault{p}{()}
+    \PYGdefault{n}{solver} \PYGdefault{o}{=} \PYGdefault{n}{Solver}\PYGdefault{p}{(}\PYGdefault{n}{problem}\PYGdefault{p}{)}
+
+    \PYGdefault{c}{\PYGdefaultZsh{} Read input from the command line}
+    \PYGdefault{n}{parser} \PYGdefault{o}{=} \PYGdefault{n}{problem}\PYGdefault{o}{.}\PYGdefault{n}{define\PYGdefaultZus{}command\PYGdefaultZus{}line\PYGdefaultZus{}options}\PYGdefault{p}{()}
+    \PYGdefault{n}{parser} \PYGdefault{o}{=} \PYGdefault{n}{solver}\PYGdefault{o}{.} \PYGdefault{n}{define\PYGdefaultZus{}command\PYGdefaultZus{}line\PYGdefaultZus{}options}\PYGdefault{p}{(}\PYGdefault{n}{parser}\PYGdefault{p}{)}
+    \PYGdefault{n}{args} \PYGdefault{o}{=} \PYGdefault{n}{parser}\PYGdefault{o}{.}\PYGdefault{n}{parse\PYGdefaultZus{}args}\PYGdefault{p}{()}
+    \PYGdefault{n}{problem}\PYGdefault{o}{.}\PYGdefault{n}{init\PYGdefaultZus{}from\PYGdefaultZus{}command\PYGdefaultZus{}line}\PYGdefault{p}{(}\PYGdefault{n}{args}\PYGdefault{p}{)}
+    \PYGdefault{n}{solver}\PYGdefault{o}{.} \PYGdefault{n}{init\PYGdefaultZus{}from\PYGdefaultZus{}command\PYGdefaultZus{}line}\PYGdefault{p}{(}\PYGdefault{n}{args}\PYGdefault{p}{)}
+
+    \PYGdefault{c}{\PYGdefaultZsh{} Solve and plot}
+    \PYGdefault{n}{solver}\PYGdefault{o}{.}\PYGdefault{n}{solve}\PYGdefault{p}{()}
+    \PYGdefault{k+kn}{import} \PYGdefault{n+nn}{matplotlib.pyplot} \PYGdefault{k+kn}{as} \PYGdefault{n+nn}{plt}
+    \PYGdefault{n}{t\PYGdefaultZus{}e} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{linspace}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{p}{,} \PYGdefault{l+m+mi}{1001}\PYGdefault{p}{)}    \PYGdefault{c}{\PYGdefaultZsh{} very fine mesh for u\PYGdefaultZus{}e}
+    \PYGdefault{n}{u\PYGdefaultZus{}e} \PYGdefault{o}{=} \PYGdefault{n}{problem}\PYGdefault{o}{.}\PYGdefault{n}{u\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{t\PYGdefaultZus{}e}\PYGdefault{p}{)}
+
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{plot}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{,}   \PYGdefault{n}{u}\PYGdefault{p}{,}   \PYGdefault{l+s}{\PYGdefaultZsq{}r\PYGdefaultZhy{}\PYGdefaultZhy{}o\PYGdefaultZsq{}}\PYGdefault{p}{)}       \PYGdefault{c}{\PYGdefaultZsh{} dashed red line with circles}
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{plot}\PYGdefault{p}{(}\PYGdefault{n}{t\PYGdefaultZus{}e}\PYGdefault{p}{,} \PYGdefault{n}{u\PYGdefaultZus{}e}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}b\PYGdefaultZhy{}\PYGdefaultZsq{}}\PYGdefault{p}{)}         \PYGdefault{c}{\PYGdefaultZsh{} blue line for u\PYGdefaultZus{}e}
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{legend}\PYGdefault{p}{([}\PYGdefault{l+s}{\PYGdefaultZsq{}numerical, theta=}\PYGdefault{l+s+si}{\PYGdefaultZpc{}g}\PYGdefault{l+s}{\PYGdefaultZsq{}} \PYGdefault{o}{\PYGdefaultZpc{}} \PYGdefault{n}{theta}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}exact\PYGdefaultZsq{}}\PYGdefault{p}{])}
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{xlabel}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}t\PYGdefaultZsq{}}\PYGdefault{p}{)}
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{ylabel}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}u\PYGdefaultZsq{}}\PYGdefault{p}{)}
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{show}\PYGdefault{p}{()}
+\end{Verbatim}

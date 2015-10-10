@@ -1,0 +1,20 @@
+
+.. Master file automatically created by doconce sphinx_dir
+
+Generalizations of exponential decay models
+===========================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
+   ._main_genz000
+   ._main_genz001
+   ._main_genz002
+
+
+Index
+=====
+
+* :ref:`genindex`

@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kn}{from} \PYGdefault{n+nn}{distutils.core} \PYGdefault{k+kn}{import} \PYGdefault{n}{setup}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{os}
+
+\PYGdefault{n}{setup}\PYGdefault{p}{(}\PYGdefault{n}{name}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}decay\PYGdefaultZsq{}}\PYGdefault{p}{,}
+      \PYGdefault{n}{version}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}0.1\PYGdefaultZsq{}}\PYGdefault{p}{,}
+      \PYGdefault{n}{author}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}Hans Petter Langtangen\PYGdefaultZsq{}}\PYGdefault{p}{,}
+      \PYGdefault{n}{author\PYGdefaultZus{}email}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}hpl@simula.no\PYGdefaultZsq{}}\PYGdefault{p}{,}
+      \PYGdefault{n}{url}\PYGdefault{o}{=}\PYGdefault{l+s}{\PYGdefaultZsq{}https://github.com/hplgit/decay\PYGdefaultZhy{}package/\PYGdefaultZsq{}}\PYGdefault{p}{,}
+      \PYGdefault{n}{packages}\PYGdefault{o}{=}\PYGdefault{p}{[}\PYGdefault{l+s}{\PYGdefaultZsq{}decay\PYGdefaultZsq{}}\PYGdefault{p}{],}
+      \PYGdefault{n}{scripts}\PYGdefault{o}{=}\PYGdefault{p}{[}\PYGdefault{n}{os}\PYGdefault{o}{.}\PYGdefault{n}{path}\PYGdefault{o}{.}\PYGdefault{n}{join}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}decay\PYGdefaultZsq{}}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}decay.py\PYGdefaultZsq{}}\PYGdefault{p}{)]}
+     \PYGdefault{p}{)}
+\end{Verbatim}

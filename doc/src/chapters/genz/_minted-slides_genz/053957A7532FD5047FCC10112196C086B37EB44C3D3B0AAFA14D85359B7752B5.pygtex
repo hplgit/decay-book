@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{k}{lambda} \PYGdefault{n}{t}\PYGdefault{p}{:} \PYGdefault{n}{a\PYGdefaultZus{}0} \PYGdefault{k}{if} \PYGdefault{n}{t} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{n}{tp} \PYGdefault{k}{else} \PYGdefault{n}{k}\PYGdefault{o}{*}\PYGdefault{n}{a\PYGdefaultZus{}0}
+\end{Verbatim}

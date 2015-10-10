@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{numpy} \PYGdefault{k+kn}{as} \PYGdefault{n+nn}{np}
+\PYGdefault{k+kn}{import} \PYGdefault{n+nn}{matplotlib.pyplot} \PYGdefault{k+kn}{as} \PYGdefault{n+nn}{plt}
+
+\PYGdefault{k}{def} \PYGdefault{n+nf}{solver}\PYGdefault{p}{(}\PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{p}{,} \PYGdefault{n}{dt}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{p}{):}
+    \PYGdefault{o}{...}
+
+\PYGdefault{k}{def} \PYGdefault{n+nf}{u\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{,} \PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{):}
+    \PYGdefault{k}{return} \PYGdefault{n}{I}\PYGdefault{o}{*}\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{exp}\PYGdefault{p}{(}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{a}\PYGdefault{o}{*}\PYGdefault{n}{t}\PYGdefault{p}{)}
+
+\PYGdefault{k}{def} \PYGdefault{n+nf}{experiment\PYGdefaultZus{}compare\PYGdefaultZus{}numerical\PYGdefaultZus{}and\PYGdefaultZus{}exact}\PYGdefault{p}{():}
+    \PYGdefault{n}{I} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{;}  \PYGdefault{n}{a} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{2}\PYGdefault{p}{;}  \PYGdefault{n}{T} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{4}\PYGdefault{p}{;}  \PYGdefault{n}{dt} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{0.4}\PYGdefault{p}{;}  \PYGdefault{n}{theta} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{1}
+    \PYGdefault{n}{u}\PYGdefault{p}{,} \PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{n}{solver}\PYGdefault{p}{(}\PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{p}{,} \PYGdefault{n}{dt}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{p}{)}
+
+    \PYGdefault{n}{t\PYGdefaultZus{}e} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{linspace}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{p}{,} \PYGdefault{l+m+mi}{1001}\PYGdefault{p}{)}       \PYGdefault{c}{\PYGdefaultZsh{} very fine mesh for u\PYGdefaultZus{}e}
+    \PYGdefault{n}{u\PYGdefaultZus{}e} \PYGdefault{o}{=} \PYGdefault{n}{u\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{t\PYGdefaultZus{}e}\PYGdefault{p}{,} \PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{)}
+
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{plot}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{,}   \PYGdefault{n}{u}\PYGdefault{p}{,}   \PYGdefault{l+s}{\PYGdefaultZsq{}r\PYGdefaultZhy{}\PYGdefaultZhy{}o\PYGdefaultZsq{}}\PYGdefault{p}{)}       \PYGdefault{c}{\PYGdefaultZsh{} dashed red line with circles}
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{plot}\PYGdefault{p}{(}\PYGdefault{n}{t\PYGdefaultZus{}e}\PYGdefault{p}{,} \PYGdefault{n}{u\PYGdefaultZus{}e}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}b\PYGdefaultZhy{}\PYGdefaultZsq{}}\PYGdefault{p}{)}         \PYGdefault{c}{\PYGdefaultZsh{} blue line for u\PYGdefaultZus{}e}
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{legend}\PYGdefault{p}{([}\PYGdefault{l+s}{\PYGdefaultZsq{}numerical, theta=}\PYGdefault{l+s+si}{\PYGdefaultZpc{}g}\PYGdefault{l+s}{\PYGdefaultZsq{}} \PYGdefault{o}{\PYGdefaultZpc{}} \PYGdefault{n}{theta}\PYGdefault{p}{,} \PYGdefault{l+s}{\PYGdefaultZsq{}exact\PYGdefaultZsq{}}\PYGdefault{p}{])}
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{xlabel}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}t\PYGdefaultZsq{}}\PYGdefault{p}{)}
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{ylabel}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}u\PYGdefaultZsq{}}\PYGdefault{p}{)}
+    \PYGdefault{n}{plotfile} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZsq{}tmp\PYGdefaultZsq{}}
+    \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{savefig}\PYGdefault{p}{(}\PYGdefault{n}{plotfile} \PYGdefault{o}{+} \PYGdefault{l+s}{\PYGdefaultZsq{}.png\PYGdefaultZsq{}}\PYGdefault{p}{);}  \PYGdefault{n}{plt}\PYGdefault{o}{.}\PYGdefault{n}{savefig}\PYGdefault{p}{(}\PYGdefault{n}{plotfile} \PYGdefault{o}{+} \PYGdefault{l+s}{\PYGdefaultZsq{}.pdf\PYGdefaultZsq{}}\PYGdefault{p}{)}
+
+    \PYGdefault{n}{error} \PYGdefault{o}{=} \PYGdefault{n}{u\PYGdefaultZus{}exact}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{p}{,} \PYGdefault{n}{I}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{p}{)} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{u}
+    \PYGdefault{n}{E} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{sqrt}\PYGdefault{p}{(}\PYGdefault{n}{dt}\PYGdefault{o}{*}\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{sum}\PYGdefault{p}{(}\PYGdefault{n}{error}\PYGdefault{o}{**}\PYGdefault{l+m+mi}{2}\PYGdefault{p}{))}
+    \PYGdefault{k}{print} \PYGdefault{l+s}{\PYGdefaultZsq{}Error norm:\PYGdefaultZsq{}}\PYGdefault{p}{,} \PYGdefault{n}{E}
+
+\PYGdefault{k}{if} \PYGdefault{n}{\PYGdefaultZus{}\PYGdefaultZus{}name\PYGdefaultZus{}\PYGdefaultZus{}} \PYGdefault{o}{==} \PYGdefault{l+s}{\PYGdefaultZsq{}\PYGdefaultZus{}\PYGdefaultZus{}main\PYGdefaultZus{}\PYGdefaultZus{}\PYGdefaultZsq{}}\PYGdefault{p}{:}
+    \PYGdefault{n}{experiment\PYGdefaultZus{}compare\PYGdefaultZus{}numerical\PYGdefaultZus{}and\PYGdefaultZus{}exact}\PYGdefault{p}{()}
+\end{Verbatim}

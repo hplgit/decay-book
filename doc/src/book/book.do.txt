@@ -25,7 +25,7 @@ DATE: today
 ========= Preface  =========
 label{ch:preface}
 
-# #include "decay.do.txt"
+# #include "preface.do.txt"
 
 !split
 TOC: on
