@@ -1,0 +1,9 @@
+Cython
+Euler's
+MATLAB
+Mathematica
+Nicolson
+SymPy
+discretization
+pytest
+reimports

@@ -1,0 +1,441 @@
+TITLE: Reponse to referee reports on ``Finite Difference Computing with Exponential Decay Models''
+AUTHOR: Hans Petter Langtangen
+DATE: Today
+
+======= Background =======
+
+The original preface to this book explained the background for the book,
+but this part was removed since I thought it was irrelevant for the
+audience that shows enough interest to pick up the book. However, for
+referees and editors the background can certainly be of interest as it
+provides a response to some of the criticism in the reports.
+
+The book started out as compact a 15-page appendix to define the
+expected level in numerical methods and Python implementation required
+for a course/book on finite difference and element methods for PDEs.
+The course is at the MSc/PhD level at the University of Oslo and
+attracts about 50 students with widely different backgrounds ever
+year.  The students come from physics, mathematics, numerical
+analysis, computer science, geoscience, life science, chemistry,
+nanotechnology, and so on, with bachelor degrees from various types of
+universities and university colleges in Norway and abroad.  The goal
+of the course is to equip the students with all the *practical tools*
+they need to do solve PDEs in their thesis work in a reliable,
+reproducible, and human-efficient way. This means that any project in
+the course involves the entire scientific computing pipeline, but with
+a particular focus on programs that can be ``proved'' to work. Because
+we emphasize the entire pipeline (and not just the mathematics, as was
+usual in our previous traditional numerical analysis courses) there
+are many different types of scientific topics, so most students will
+be very familiar with some elements and struggle with others. In the
+end, we produce a quite homogeneous group of ``PDE
+practitioners''. The course is very popular with excellent student
+critiques, and lots of supervisors who send their students to this
+course and regard it as a ``gold standard'' on how to do PDE
+computing. My main argument for sending this tutorial to Springer, is
+that it works well to define a common knowledge ground in this course,
+and the students like the text.
+
+There is a strong tradition that courses on numerical solution of PDEs
+are given by numerical analysis or scientific computing groups and
+adapted to students specializing in these subjects.  A nice by-product
+is that such courses often work well for physicists and mathematicians
+too. Nevertheless, computing with PDEs grows rapidly throuhout the
+sciences these days, and the computing technology must be taught to
+much broader and heterogeneous audiences than what we are used to. I
+believe the course I have designed in Oslo is a first step in this
+direction and therefore provide relevant experience for the future
+demands to teaching material.
+
+The typical feature of such heterogeneous audiences is that some
+students are very strong in mathematics, but surprisingly weak in
+programming, and vice versa, while others have their strengths in
+modeling and keeping track of all details in real-world problems. My
+solution to this challenge of heterogeneity is to provide teaching
+material where *all details are written out and explained*. Obviously,
+lots of such detailed material will be boring for a given student, but
+other parts are new and unfamiliar.  If new material is easy to read
+and tightly coupled to computer implementations, my experience is that
+students start doing computational experiments and spend hours on
+exploring the subject and digesting the details.
+On the other hand, if new material is described
+in a compact way, with many mathematical and implementational details
+left to the reader, the chances are high of losing interest, stopping up, and
+not putting in hours of experimentation and deep learning.
+This is why I have adopted over the years a writing style that is very
+verbose and explores all ``nuts and bolts'' necessary to solve the
+problems, with a tight coupling of mathematics and implementation.
+Students like this style, but it goes without saying that
+experts, like referees and colleagues, find the familiar material tedious and
+boring, while the subjects they are not familiar with, typically
+implementation, are often not considered so important or interesting. In this
+landscape, I listen to the students and stick to the philosophy that
+implementational aspects are at least as important as mathematical topics.
+
+Back to the initial, brief appendix that led to this book: it listed
+the required knowledge through a solution of the problem $u'=-au$, but
+failed to *teach* any of this knowledge. I was asked to make the
+example less brief, and this led to a series of requests for more
+details, especially regardig implementational aspects.  The appendix
+became a chapter with the software engineering topics fully integrated
+throughout the text, then the software engineering parts were factored out
+in a separate chapter, and finally all this material reached a size
+that made it look odd as the first half of a book on PDEs.  The
+mathematics and computer science level of this introductory material
+is also much lower than for the PDE topics. In the course I described
+above, the material is meant for self-study. It therefore made more
+sense to factor out such introductory material in a separate tutorial.
+
+Although I personally have used the tutorial only for refreshing known
+subjects and supplementing lacking knowledge for students at the
+MSc/PhD level, it is clear that it could be used very early
+on in a bachelor program as a first taste of the scientific computing
+pipeline for a broad audience. Only some elementary calculus and
+computer programming is needed as background. The tradition is to
+wait with ODEs until the mathematical foundation is good, but this
+is neither motivating nor necessary. Whether the text would
+function in, e.g., a second-semester course is impossible to say without
+testing. All I know, is that over 150 students have used the material and
+requested all the changes that made a compact appendix grow into the
+proposed book.
+
+As I comment upon below, Project 4.15 has been a compulsory starting
+project to ``set the stage'' in my course, and the present tutorial
+emerged partly as a response to the low performance in such a real-world
+project. It was clear that the students needed more knowledge about
+making reliable computer programs, even in mathematically very simple
+cases.
+
+
+======= Report 1 =======
+
+=== Referee ===
+
+Here is my general impression upon a quick reading.
+
+It is always hard to write a critical assessment of a book proposal:
+the author must have written a lot and invested a lot of effort and
+time, just in order to enable the referee to have a chance of saying
+something worthwhile. Here, fortunately, there is a proposal to cut
+part of a planned book (one of three planned books[^other-books])
+and make it into a
+separate tutorial. So, even if the referee does not like the proposal,
+there is a way out.
+
+[^other-books]: Author's notification:
+The tutorial was part of another book on finite difference
+methods for PDEs. The two other books mentioned are about different topics
+and not related to this tutorial.
+
+And indeed I must confess that I am not thrilled with the packaging
+proposed here. It is far from clear that a student learning ODE
+methods must know the details of Python, let alone software
+engineering, and it is far from clear that a software engineer must
+know details of numerical methods for ODEs. Moreover, there are really
+many accessible ODE texts, including Griffiths-David-Higham and
+Ascher-Petzold, and also long chapters in some introductory numerical
+textbooks, which are better written than this exposition.
+
+=== Response ===
+
+It is not difficult agree with the comments in the last paragraph. However,
+the text assumes that the student's goal is the learn ODE methods
+*and* make reliable programs for computing the solution. The goal is
+not one of the topics, but the combination, because that is what is
+required when doing real-world science or engineering.
+
+No student of software engineering will every read this tutorial as it
+is far too trivial and incomplete. Better sources of information
+exists for those who can afford to spend the time reading them. Similarly, students
+in numerical analysis or scientific computing will take several
+numerical methods courses, most likely one devoted to ODE methods,
+e.g., using the two mentioned excellent textbooks. This tutorial was
+written for all those who follow other programs where there is no
+space or interest for separate courses on ODE methods or software engineering, yet
+the students have a demand for computing with differential equations
+in a thesis context. Or the tutorial could be a very first taste of
+these topics and their interplay very early on in the studies.
+
+=== Referee ===
+
+For instance, why are the Python tutorial and the ODE introduction in
+Chapter 1 so tightly coupled? The Python tutorial can be given in an
+appendix for the author's planned book, and for a Python example it
+would suffice to consider forward Euler for $u'=-u$, which could be
+introduced in one page (at most).
+
+=== Response ===
+
+The referee's suggestion is the normal way to do it in the
+existing literature: compact
+description of a method and a *separate* brief listing of programming aspects.
+My experience is that these are not separate subjects, but tightly
+coupled. When presented and taught separately, students struggle with the
+understanding of the interplay between the topics. Methods, implementation,
+and testing are equally important in a science project, and especially
+testing is tightly coupled to the results of mathematical analysis.
+
+It is true that the forward Euler method can be introduced in one page at most,
+but to avoid that the method is memorized just as a formula, rather than being
+well understood, it is key to spend time on the *ideas* and to show
+how the same reasoning can produce alternative schemes. That is the rationale for
+all the space used on introducing the thinking around finite difference
+methods. I want the ideas to get through, not the formulas, and Chapter 1
+is the convergence of this writing journey.
+
+=== Referee ===
+
+I believe that the student should first be motivated to look at the
+simple ODE of Chapter 1 (referring to Chapter 4 does not do it),
+before so many details are exposed in the first two chapters.
+
+=== Response ===
+
+I did not understand this comment, but would of course like to improve
+the motivation in Chapter 1. Chapter 4 is factored out because the
+material brings in so many topics from applied sciences that are
+irrelevant for producing reliable programs.  Parts of Chapter 4 can be
+used as motivation for the model in Chapter 1 (I always do that), but
+a fundamental idea (as stated) is to always start with a stripped
+mathematical model that captures just the essence of real-world
+models. I chose $u'=-au$ over $u'=-u$ because the former has a
+parameter, and this parameter will always be attached to the
+discretization parameter as the key dimensionless parameter that
+governs the quality of the numerical solution.
+
+=== Referee ===
+
+Note also that you need $a>0$ to talk about decay (are you
+really?!).
+
+=== Response ===
+
+We do not need $a>0$, but the features of the numerical solution, especially
+artifacts, are different for $a<0$ and left as an exercise to investigate.
+I realize that $a>0$ was not mentioned in the opening of the text, but now
+it is stated that $a>0$ is required for decay.
+
+=== Referee ===
+
+Further, the theta-method is far less fundamental than
+forward Euler, bakward Euler, trapezoidal and midpoint.
+
+=== Response ===
+
+That is true, from a mathematical point of view, but the theta-method is
+fundamental for implementation.  Without it, we get if-tests with
+repetitive code for the three schemes.
+
+=== Referee ===
+
+Also, must an elementary student or a casual reader know in detail
+about odespy, which is just another initial-value ODE package?
+
+=== Response ===
+
+There is a separate tutorial on using Odespy (available on URL:
+"https://github.com/hplgit/odespy"), so the text in this tutorial is
+meant to be brief. We show 1) a minimalistic example, and 2) how to
+set up an experiment with lots of solvers. This information covers
+about a page and is useful when doing many of the exercises in
+Chapters 3 and 4.  The rest of the text seemingly related to Odespy
+is about numerical performance
+of different methods.
+
+There is, however, a detailed remark about a less pedagogial aspect of
+using implicit methods in Odespy. Motivated by the refeee's comment,
+this remark is now moved to the code and left out of the tutorial.
+
+=== Referee ===
+
+If the author is aiming at PDEs then I don't understand the
+essentially-nonexistent treatment of nonlinear problems when using
+implicit methods. But that does lead again to the suggestion of a
+different organization of the material.
+
+=== Response ===
+
+This is absolutely a valid comment. Methods for nonlinear problems
+could well be introduced in Chapter 3. The reason for not doing this
+is two-fold: 1) to limit the amount of mathematical topics in the
+tutorial, and 2) because I have written an extensive chapter elsewhere
+on nonlinear problems for ODEs and PDEs, and it appeared very natural
+to do both ODEs and PDEs together in that chapter.
+
+======= Report 2 =======
+
+I have read quickly through Hans Petter Langtangen’s text and, to be
+frank, I am undecided. To put it frankly, I hate the first part of the
+book and love the second.
+
+The first part of the book essentially assumes zero knowledge of
+mathematics. But what is the audience?  Each and every undergraduate
+student in physical sciences and engineering in any half-respectable
+university has under their belt considerably more mathematical
+knowledge than assumed in the first part of the text. This is not
+``gentle'', it is so soft as to be utterly boring and repetitive,
+exploring the same kind of very basic ideas first for a scalar linear
+equation with a contact coefficient and no inhomogeneous term, then
+for a scalar linear equation with a variable coefficient and an
+inhomogeneous term and finally for systems of equations. Presumably,
+students, before they even open the first page of such a book, have
+some basic common knowledge. No matter how low the common denominator,
+it will include vectors and matrices, basic definition and properties
+of ODEs and, most importantly, basic understanding of how mathematics
+works at its simplest.
+
+=== Response ===
+
+The referee's comment is certainly true for many students in
+mathematically-oriented programs, but the new coming audiences from
+geoscience and bioscience are significant in size, and these
+students have a much weaker mathematical knowledge, understanding,
+and interest,
+even those who have taken a couple of mathematics courses.  My
+experience is that if these students are given the present ``utterly
+boring and repetitive'' text, rather than just pointing them to thick
+math books to upgrade their mathematical foundation, they get enough
+interest and drive to catch up, and they actually posess sufficient
+other types of knowledge to complete a practially oriented PDE
+computing course with a decent grade.
+
+I should add that there have been many requests from students to
+extend explainations in the present tutorial, but actually no comments
+on making the text more compact (and this includes detailed student critiques
+from 50+ students with very strong mathematical background).
+
+Another potential use of the tutorial is to expose students to the
+scientific computing pipeline *before* they have multi-variable
+calculus, linear algebra, and differential equations under their belt.
+I don't know of other texts with ODE models that address such an audience.
+
+=== Referee ===
+
+By setting the bar so low, the text will bore to death most students,
+or just persuade them that the subject is not stretching them
+enough. If all they need is to solve a numerical problem without
+bothering about the underlying numerics, they may use a library
+routine and Numerical Recipes. My assumption is that any lecture
+course in scientific computing must actually treat students as adults,
+stretch them and use their intelligence. I honestly don't believe that
+the first part of the book is doing this. Moreover, I am quite sure
+that the author, who is a very knowledgeable scientific computing
+expert, is capable of writing a much more suitable text.
+
+=== Response ===
+
+I agree with the referee when it comes to students who specialize in
+mathematical topics, but this text has a much broader audience in
+sight. The referee points to an audience who will jump over the math
+part, basically because they know all this (perhaps not the numerical
+artifacts in detail), but the programming topics are much less known,
+so this part is useful.
+
+It might be interesting to add that critical comments similar to the
+referee's have been issued regarding the software engineering part. It
+is trivial, shallow, and boring - and of much lower quality than the
+text in true theoretical software engineering books. At the University
+of Oslo, even the beginning course in programming (based on TCSE6) in
+the first semester go
+further than this tutorial. But again, lots of students do not have
+any background on software engineering, and they appreciate the more
+to-the-point and compact Chapter 5 rather than thick software
+engineering books with much theory, little practice, and ``high
+level''.  The similarity to the comments on the mathematical content
+of the tutorial is striking...
+
+About 150 students have been required to do Project 4.15 in this
+tutorial as a
+compulsory project at the beginning of the mentioned course.  Although
+many find the mathematics of this problem extremely simple, it is
+disappointing to see how few who are capable of writing a clean
+program with good tests for this problem. The surprisingly low
+performance in the first class of students led to much of the writing
+of the programming details in this tutorial. Even those who have taken
+a course based on TCSE6, where all these programming topics are dealt
+with in detail, need to refresh software engineering topics since
+hardly any course on mathematical subjects pay attention to this
+(essential) part of computing. On the other hand, any student seems
+capable of making a functioning program for $u'=-u$; it is the
+real-world version of this problem, with lots of parameters, that
+quickly leads to spaghetti code with bugs.
+
+TCSE1 is a book more aligned with the referee's wishes. However, after
+having using that book for over 10 years in the mentioned course, it
+was a common feedback from students that far too many details were
+left out in the text. It certainly stretched the students, but it
+didn't get them sufficiently excited to experiment with the theory
+through codes for hours in the evenings. Given that the software
+content in TCSE1 is also outdated, I decided to write up the numerics and
+software topics for PDEs again, but this time with all nuts and bolts
+visible. It has been a much greater success as teaching material,
+based on student feedback and reduced drop-out in the course.
+
+=== Referee ===
+
+(Incidentally, this attempt to infantilise the subject often
+leads to infelicities and rather dicey statements: sometimes an
+oversimplification is just misleading.)
+
+=== Response ===
+
+I know that this comment is subject to debate when it comes to the
+final chapter, but I do hope there are no serious ``infelicities and
+rather dicey statements'' in the mathematical parts.
+
+=== Referee ===
+
+However, I loved the second part of the book, on the programming and
+software engineering side of things. It is replete with useful
+material, moreover much of this material is not accessible in standard
+texts.
+
+=== Response ===
+
+The software engineering topics are important for high-quality, reliable
+scientific software, but none of the numerous books on ``numerical methods
+with Matlab'' that I have examined contain any information on such topics.
+On the other hand, experts in software engineering will most likely
+claim that the level in Chapter 5 should be much higher...
+
+
+=== Referee ===
+
+Of course, in this moment of time, an obvious objection to my opinion
+is that ``well, the guy is clearly a numerical analyst who knows
+mathematics but not software engineering, hence the first part of the
+book is boring and the second is interesting''. Guilty as charged,
+however I believe that I am quite typical. Who is studying scientific
+computing, in greater generality who needs scientific computing?
+Neither mathematicians nor computer scientists. Mathematicians might
+be interested in computational mathematics which is a different kettle
+of fish), computer scientists in, well, computer science and a
+discrete world. Typical audience for this material are budding
+scientists and engineers, and those will have a great deal of
+mathematical foundation - but none in software engineering - in the
+course of their studies.
+
+=== Response ===
+
+I can add that we have quite some students from computer science, with
+a relatively weak mathematical background, who go for PDE-based
+simulation in a master's thesis. These students are in fact capable of
+learning the minimum of mathematics to enter such an application
+domain. The result is often amazing software and visualizations, and
+then they can be hired as scientific programmers. But this audience
+needs gentle mathematics to get motivated. And
+students from geoscience and bioscience are not mentally tuned to be
+stretched by mathematics. I simply try to reach a different audience
+than the one the referee is thinking of.
+
+=== Referee ===
+
+Hence my recommendation is to toughen up the first part, make it more
+enticing mathematically, to push the students harder, while retaining
+the second part.
+
+=== Response ===
+
+This is a very valid recommendation, but I think the unique selling point
+of the book is the soft and accessible treatment of both parts.
+

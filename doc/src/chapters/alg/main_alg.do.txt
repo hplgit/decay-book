@@ -1,0 +1,22 @@
+TITLE: Algorithms and implementations for exponential decay models
+# #include "../AUTHOR.txt"
+DATE: today
+
+TOC: on
+
+# #include "../mako_code.txt"
+
+
+!split
+# #include "decay_fd1.do.txt"
+
+!split
+# #include "decay_prog_basic.do.txt"
+
+!split
+# #include "decay_prog_exer.do.txt"
+
+!split
+======= Bibliography =======
+
+BIBFILE: ../papers.pub

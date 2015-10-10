@@ -1,0 +1,15 @@
+TITLE: Software engineering with exponential decay models
+# #include "../AUTHOR.txt"
+DATE: today
+
+TOC: on
+
+# #include "../mako_code.txt"
+
+!split
+# #include "softeng1.do.txt"
+
+!split
+======= Bibliography =======
+
+BIBFILE: ../papers.pub

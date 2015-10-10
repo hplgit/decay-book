@@ -1,0 +1,1104 @@
+!split
+======= From flat program to module with functions =======
+
+!split
+===== Mathematical model problem =====
+
+!bt
+\begin{align*}
+u'(t) &= -au(t), \quad t \in (0,T]\\
+u(0)  &= I
+\end{align*}
+!et
+
+Solution by $\theta$-scheme:
+
+!bt
+\begin{equation*}
+u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n
+\end{equation*}
+!et
+
+$\theta =0$: Forward Euler, $\theta =1$: Backward Euler, $\theta =1/2$: Crank-Nicolson (midpoint method)
+
+!split
+===== Many will make a rough, flat program first =====
+
+@@@CODE src-softeng/decay_flat0.py
+
+!split
+
+===== There are major issues with this solution =====
+
+ o The notation in the program does not correspond exactly to
+   the notation in the mathematical problem: the solution is called
+   `y` and corresponds to $u$ in the mathematical description,
+   the variable `A` corresponds to the mathematical parameter $I$,
+   `N` in the program is called $N_t$ in the mathematics.
+ o There are no comments in the program.
+
+!split
+===== New flat program =====
+
+@@@CODE src-softeng/decay_flat.py
+
+!split
+===== Such flat programs are ideal for IPython notebooks! =====
+
+FIGURE: [fig-softeng/ipynb_flat, width=800]
+
+!split
+===== But: Further development of such flat programs require many scattered edits - easy to make mistakes! =====
+
+!bbox
+The solution formula for $u^{n+1}$ is completely general and
+should be available as a Python function with all input data as
+function arguments and all output data returned to the calling code
+!ebox
+
+@@@CODE src-softeng/decay.py fromto: def solver@def u_exact
+
+Call:
+
+!bc pycod
+u, t = solver(I=1, a=2, T=4, dt=0.2, theta=0.5)
+!ec
+
+!split
+===== The DRY principle: Don't repeat yourself! =====
+
+!bnotice DRY:
+When implementing a particular functionality in a computer program, make sure
+this functionality and its variations are implemented in just one piece
+of code. That is, if you need to revise the implementation, there should be
+*one and only one* place to edit. It follows that you should never
+duplicate code (don't repeat yourself!), and code snippets that are
+similar should be factored into one piece (function) and parameterized (by
+function arguments).
+!enotice
+
+!split
+===== Make sure any program file is a valid Python module =====
+
+ * Module requires code to be divided into functions :-)
+ * Why module? Other programs can import the functions
+
+!bc pycod
+from decay import solver
+# Solve a decay problem
+u, t = solver(I=1, a=2, T=4, dt=0.2, theta=0.5)
+!ec
+or prefix function names by the module name:
+
+!bc pycod
+import decay
+# Solve a decay problem
+u, t = decay.solver(I=1, a=2, T=4, dt=0.2, theta=0.5)
+!ec
+
+!split
+===== The requirements of a module are so simple =====
+
+ o The filename without `.py` must be a valid Python variable name.
+ o The main program must be executed (through statements or
+   a function call) in the *test block*.
+
+The *test block* is normally placed at the end of a module file:
+
+!bc pycod
+if __name__ == '__main__':
+    # Statements
+!ec
+
+If the file is imported, the if test fails and no main program is run,
+otherwise, the file works as a program
+
+!split
+===== The module file `decay.py` for our example =====
+
+!bc pycod
+from numpy import *
+from matplotlib.pyplot import *
+
+def solver(I, a, T, dt, theta):
+    ...
+
+def u_exact(t, I, a):
+    return I*exp(-a*t)
+
+def experiment_compare_numerical_and_exact():
+    I = 1;  a = 2;  T = 4;  dt = 0.4;  theta = 1
+    u, t = solver(I, a, T, dt, theta)
+
+    t_e = linspace(0, T, 1001)       # very fine mesh for u_e
+    u_e = u_exact(t_e, I, a)
+
+    plot(t,   u,   'r--o')           # dashed red line with circles
+    plot(t_e, u_e, 'b-')             # blue line for u_e
+    legend(['numerical, theta=%g' % theta, 'exact'])
+    xlabel('t')
+    ylabel('u')
+    plotfile = 'tmp'
+    savefig(plotfile + '.png');  savefig(plotfile + '.pdf')
+
+    error = u_exact(t, I, a) - u
+    E = sqrt(dt*sum(error**2))
+    print 'Error norm:', E
+
+if __name__ == '__main__':
+    experiment_compare_numerical_and_exact()
+!ec
+
+Complete file: "`decay.py`": "${src_softeng}/decay.py"
+
+!split
+===== The module file `decay.py` for our example w/prefix =====
+
+!bc pycod
+import numpy as np
+import matplotlib.pyplot as plt
+
+def solver(I, a, T, dt, theta):
+    ...
+
+def u_exact(t, I, a):
+    return I*np.exp(-a*t)
+
+def experiment_compare_numerical_and_exact():
+    I = 1;  a = 2;  T = 4;  dt = 0.4;  theta = 1
+    u, t = solver(I, a, T, dt, theta)
+
+    t_e = np.linspace(0, T, 1001)       # very fine mesh for u_e
+    u_e = u_exact(t_e, I, a)
+
+    plt.plot(t,   u,   'r--o')       # dashed red line with circles
+    plt.plot(t_e, u_e, 'b-')         # blue line for u_e
+    plt.legend(['numerical, theta=%g' % theta, 'exact'])
+    plt.xlabel('t')
+    plt.ylabel('u')
+    plotfile = 'tmp'
+    plt.savefig(plotfile + '.png');  plt.savefig(plotfile + '.pdf')
+
+    error = u_exact(t, I, a) - u
+    E = np.sqrt(dt*np.sum(error**2))
+    print 'Error norm:', E
+
+if __name__ == '__main__':
+    experiment_compare_numerical_and_exact()
+!ec
+
+!split
+===== How do we add code for comparing schemes visually? =====
+
+FIGURE: [fig-softeng/compare, width=700]
+
+Think of edits in the flat program that are required to produce this plot (!)
+
+!split
+===== We just add a new function with the tailored plotting =====
+
+@@@CODE src-softeng/decay.py fromto: def experiment_compare_schemes@import sys
+
+
+!split
+===== The comparison =====
+
+
+!split
+===== Prefixing imported functions by the module name =====
+
+MATLAB-style names (`linspace`, `plot`):
+
+!bc pycod
+from numpy import *
+from matplotlib.pyplot import *
+!ec
+
+Python community convention is to prefix with module name
+(`np.linspace`, `plt.plot`):
+
+!bc pycod
+import numpy as np
+import matplotlib.pyplot as plt
+!ec
+
+
+!split
+===== Documenting functions and modules =====
+label{softeng1:basic:docstring}
+
+ * Use NumPy-style doc strings!
+ * See "extensive documentation": "https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt"
+ * These dominate in the Python scientific computing community
+ * Easy to read with `pydoc` in the terminal
+ * Can easily autogenerate beautiful online manuals
+
+!split
+===== Example on NumPy-style doc string =====
+
+@@@CODE src-softeng/solver_docstring.py fromto: def solver@dt = float
+
+!split
+===== Example on an autogenerated nice HTML manual =====
+
+ * Can use a "premade script": "${src_softeng}/make_sphinx_api.py" to use "Sphinx": "http://sphinx-doc.org/" to generate an API manual in (e.g.) HTML
+
+FIGURE: [fig-softeng/selfdoc_numpy, width=700 frac=0.8]
+
+
+!split
+===== Logging intermediate results =====
+label{softeng1:basic:logging}
+
+ * Simulation programs often have long CPU times
+ * Desire 1: monitor intermediate results/progress
+ * Desire 2: turn on more intermediate results for debugging or troubleshooting
+
+Most programming languages has a *logging* object for this purpose:
+
+ * Write messages to a log file
+ * Classify messages as *critical*, *warning*, *info*, or *debug*
+ * Set logging level to one of the four types of messages
+
+!split
+===== Introductory example on using a logger =====
+
+!bc pypro
+import logging
+import logging
+logging.basicConfig(
+    filename='myprog.log', filemode='w', level=logging.WARNING,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%m/%d/%Y %I:%M:%S %p')
+logging.info('Here is some general info.')
+logging.warning('Here is a warning.')
+logging.debug('Here is some debugging info.')
+logging.critical('Dividing by zero!')
+logging.error('Encountered an error.')
+!ec
+
+Output in `myprog.log`:
+
+!bc dat
+09/26/2015 09:25:10 AM - INFO - Here is some general info.
+09/26/2015 09:25:10 AM - WARNING - Here is a warning.
+09/26/2015 09:25:10 AM - CRITICAL - Dividing by zero!
+09/26/2015 09:25:10 AM - ERROR - Encountered an error.
+!ec
+
+!split
+===== A message is tied to a level, and one can specify one many levels that get printed =====
+
+Levels: critical, error, warning, info, debug
+
+ o `level=logging.CRITICAL`: print critical messages
+ o `level=logging.ERROR`: print critical and error messages
+ o `level=logging.WARNING`: print critical, error, and warning messages
+ o `level=logging.INFO`: print critical, error, warning, and info messages
+ o `level=logging.DEBUG`: print critical, error, warning, info, and debug messages
+
+!split
+===== Using a logger in our solver function =====
+
+@@@CODE src-softeng/decay.py fromto: import logging@import sys
+
+!split
+===== Monitoring messages =====
+
+One terminal window (1M steps!):
+
+!bc pyshell
+>>> import decay
+>>> u, t = decay.solver_with_logging(I=1, a=0.5, T=10, \
+           dt=0.5, theta=0.5)
+!ec
+
+Another terminal window:
+
+!bc sys
+Terminal> tail -f decay.log
+2015.09.26 05:37:41 AM - INFO - u[0]=1
+2015.09.26 05:37:41 AM - INFO - u[1]=0.777778
+2015.09.26 05:37:41 AM - INFO - u[2]=0.604938
+2015.09.26 05:37:41 AM - INFO - u[3]=0.470508
+2015.09.26 05:37:41 AM - INFO - u[4]=0.36595
+2015.09.26 05:37:41 AM - INFO - u[5]=0.284628
+!ec
+
+Or if `level=logging.DEBUG`:
+
+!bc sys
+Terminal> tail -f decay.log
+2015.09.26 05:40:01 AM - DEBUG - solver: dt=0.5, Nt=20, T=10
+2015.09.26 05:40:01 AM - INFO - u[0]=1
+2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+2015.09.26 05:40:01 AM - INFO - u[1]=0.777778
+2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
+2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+!ec
+
+!split
+======= User interfaces =======
+label{decay:GUI}
+
+ * Never edit the program to change input!
+ * Set input data on the command line or in a graphical user interface
+ * How is explained next
+
+!split
+===== Accessing command-line arguments =====
+
+ * All command-line arguments are available in `sys.argv`
+ * `sys.argv[0]` is the program
+ * `sys.argv[1:]` holds the command-line arguments
+ * Method 1: fixed sequence of parameters on the command line
+ * Method 2: `--option value` pairs on the command line (with default values)
+
+!bc sys
+Terminal> python myprog.py 1.5 2 0.5 0.8 0.4
+Terminal> python myprog.py --I 1.5 --a 2 --dt 0.8 0.4
+!ec
+
+!split
+===== Reading a sequence of command-line arguments =====
+
+Required input:
+
+ * $I$
+ * $a$
+ * $T$
+ * name of scheme (FE, BE, CN)
+ * a list of $\Delta t$ values
+
+Give these on the command line in correct sequence
+
+!bc sys
+Terminal> python decay_cml.py 1.5 0.5 4 CN 0.1 0.2 0.05
+!ec
+
+!split
+===== Implementation =====
+
+@@@CODE src-softeng/decay.py fromto: def define_command_line_options@def read_command_line_argparse
+
+Note:
+
+  * `sys.argv[i]` is *always a string*
+  * Must explicitly convert to (e.g.) `float` for computations
+  * List comprehensions make lists: `[expression for e in somelist]`
+
+
+!split
+===== Working with an argument parser =====
+
+Set option-value pairs on the command line if the default value is not
+suitable:
+
+!bc sys
+Terminal> python decay_argparse.py --I 1.5 --a 2 --dt 0.8 0.4
+!ec
+
+Code:
+
+@@@CODE src-softeng/decay.py fromto: def read_command_line_argparse@def experiment_compare_dt
+
+(`metavar` is the symbol used in help output)
+
+
+!split
+===== A graphical user interface =====
+
+FIGURE: [fig-softeng/web_GUI, width=800 frac=1]
+
+Normally very much programming required - and much competence on
+graphical user interfaces.
+
+Here: use a tool to automatically create it in a few minutes (!)
+
+!split
+===== The Parampool package =====
+
+ * "Parampool": "https://github.com/hplgit/parampool" is a package
+   for handling a large pool of input parameters in simulation programs
+ * Parampool can automatically create a sophisticated web-based
+   graphical user interface (GUI) to set parameters and view solutions
+
+!bwarning Remark
+The forthcoming material aims at those with particular interest in
+equipping their programs with a GUI - others can safely skip it.
+!ewarning
+
+!split
+===== Making a compute function =====
+
+ * Key concept: a *compute function* that takes all input data as arguments
+   and returning HTML code for viewing the results (e.g., plots and numbers)
+ * What we have: "`decay_plot.py`": "${src_softeng}/decay_plot.py"
+ * `main` function carries out simulations and plotting for a
+   series of $\Delta t$ values
+ * Goal: steer and view these experiments from a web GUI
+ * What to do:
+   * create a compute function
+   * call `parampool` functionality
+
+!split
+===== The compute function must return HTML code  =====
+
+@@@CODE src-softeng/decay.py fromto: def main_GUI@def solver_with_doctest
+
+
+!split
+===== Generating the user interface =====
+
+Make a file `decay_GUI_generate.py`:
+
+@@@CODE src-softeng/decay_GUI_generate.py
+
+Running `decay_GUI_generate.py` results in
+
+  o `decay_GUI_model.py` defines HTML widgets to be used to set
+    input data in the web interface,
+  o `templates/decay_GUI_views.py` defines the layout of the web page,
+  o `decay_GUI_controller.py` runs the web application.
+
+Good news: we only need to run `decay_GUI_controller.py`
+and there is no need to look into any of these files!
+
+!split
+===== Running the web application =====
+
+Start the GUI
+
+!bc sys
+Terminal> python decay_GUI_controller.py
+!ec
+Open a web browser at `127.0.0.1:5000`
+
+FIGURE: [fig-softeng/web_GUI, width=800 frac=1]
+
+!split
+===== More advanced use =====
+
+ * The compute function can have arguments of type float, int, string,
+   list, dict, numpy array, filename (file upload)
+ * Alternative: specify a hierarchy of input parameters with name,
+   default value, data type, widget type, unit (m, kg, s), validity check
+ * The generated web GUI can have user accounts with login and storage
+   of results in a database
+
+
+!split
+======= Tests for verifying implementations =======
+
+!split
+===== Doctests =====
+
+idx{doctests}
+idx{software testing!doctests}
+
+Doc strings can be equipped with interactive Python sessions for
+demonstrating usage and *automatic testing* of functions.
+
+!bc pycod
+def solver(I, a, T, dt, theta):
+    """
+    Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt.
+
+
+    >>> u, t = solver(I=0.8, a=1.2, T=2, dt=0.5, theta=0.5)
+    >>> for t_n, u_n in zip(t, u):
+    ...     print 't=%.1f, u=%.14f' % (t_n, u_n)
+    t=0.0, u=0.80000000000000
+    t=0.5, u=0.43076923076923
+    t=1.0, u=0.23195266272189
+    t=1.5, u=0.12489758761948
+    t=2.0, u=0.06725254717972
+    """
+    ...
+!ec
+
+!split
+===== Running doctests =====
+
+Automatic check that the code reproduces the doctest output:
+
+!bc pycod
+Terminal> python -m doctest decay.py
+!ec
+
+!bwarning Floats are difficult to compare
+Limit the number of digits in the output in doctests! Otherwise,
+round-off errors on a different machine may ruin the test.
+!ewarning
+
+
+!split
+===== Unit testing with nose =====
+
+idx{`nose` testing}
+idx{unit testing}
+idx{software testing!nose}
+
+ * Nose and pytest are a very user-friendly testing frameworks
+ * Based on *unit testing*
+ * Identify (small) units of code and test each unit
+ * Nose automates running all tests
+ * Good habit: run all tests after (small) edits of a code
+ * Even better habit: write tests *before* the code (!)
+ * Remark: unit testing in scientific computing is not yet well established
+
+!split
+===== Basic use of nose and pytest =====
+
+  o Implement tests in *test functions* with names starting with `test_`.
+  o Test functions cannot have arguments.
+  o Test functions perform assertions on computed results
+    using `assert` functions from the `nose.tools` module.
+  o Test functions can be in the source code files or be
+    collected in separate files `test*.py`.
+
+!split
+===== Example on a test function in the source code =====
+
+Very simple module `mymod` (in file `mymod.py`):
+
+!bc pycod
+def double(n):
+    return 2*n
+!ec
+
+Write test function in `mymod.py`:
+
+!bc pycod
+def double(n):
+    return 2*n
+
+def test_double():
+    n = 4
+    expected = 2*4
+    computed = double(n)
+    assert expected == computed
+!ec
+
+Running one of
+
+!bc sys
+Terminal> nosetests -s -v mymod
+Terminal> py.test   -s -v mymod
+!ec
+makes the framework run all `test_*()` functions in `mymod.py`.
+
+!split
+===== Example on test functions in a separate file =====
+
+Write the test in a separate file, say `test_mymod.py`:
+
+!bc pycod
+import mymod
+
+def test_double():
+    n = 4
+    expected = 2*4
+    computed = double(n)
+    assert expected == computed
+!ec
+
+Running one of
+
+!bc sys
+Terminal> nosetests -s -v
+Terminal> py.test   -s -v
+!ec
+makes the frameworks run all `test_*()` functions in all files
+`test*.py` in the current directory and in all subdirectories (pytest)
+or just those with names `tests` or `*_tests` (nose)
+
+!bnotice Tip
+Start with test functions in the source code file. When the file
+contains many tests, or when you have many source code files,
+move tests to separate files.
+!enotice
+
+
+!split
+===== Test function for solver =====
+
+Use exact discrete solution of the $\theta$ scheme as test:
+
+!bt
+\[ u^n = I\left(
+\frac{1 - (1-\theta) a\Delta t}{1 + \theta a \Delta t}
+\right)^n\]
+!et
+
+@@@CODE src-softeng/decay.py fromto: def u_discrete_exact@def test_u_discrete_exact
+
+@@@CODE src-softeng/decay.py fromto: def test_u_discrete_exact@def test_potential_integer_division
+
+!split
+===== Can test that potential integer division is avoided too =====
+
+!bwarning
+If $a$, $\Delta t$, and
+$\theta$ are integers, the formula for $u^{n+1}$ in the solver
+function may lead to 0 because of unintended integer division.
+!ewarning
+
+@@@CODE src-softeng/decay.py fromto: def test_potential_integer_division@def test_read_command_line_p
+
+
+!split
+======= Packaging the software for other users =======
+
+===== Python convention: install your software with setup.py =====
+
+Installation of a single module file `decay.py`:
+
+!bc pypro
+from distutils.core import setup
+setup(name='decay',
+      version='0.1',
+      py_modules=['decay'],
+      scripts=['decay.py'],
+      )
+!ec
+
+Installation:
+
+!bc sys
+Terminal> sudo python setup.py install
+!ec
+
+(Many variants!)
+
+!split
+===== split.py for several modules in a package =====
+
+ * Python package = several modules
+ * Modules be in a directory with a `__init__.py` file
+ * Name of package = name of directory
+
+`setup.py`:
+
+!bc pypro
+from distutils.core import setup
+import os
+
+setup(name='decay',
+      version='0.1',
+      author='Hans Petter Langtangen',
+      author_email='hpl@simula.no',
+      url='https://github.com/hplgit/decay-package/',
+      packages=['decay'],
+      scripts=[os.path.join('decay', 'decay.py')]
+     )
+!ec
+
+!split
+===== The `__init__.py` file can be empty =====
+
+Empty `__init__.py`:
+
+!bc
+import decay
+u, t = decay.decay.solver(...)
+!ec
+
+Do this in `__init__.py` to avoid `decay.decay.solver`:
+
+!bc pypro
+from decay import *
+!ec
+
+Can now write
+
+!bc
+import decay
+u, t = decay.solver(...)
+
+# or
+from decay import solver
+u, t = solver(...)
+!ec
+
+!split
+===== Always develop software and write reports with Git =====
+
+ * Git keeps track of different versions of files
+ * Can roll back to previous versions
+ * Can see who did what when
+ * Can merge simultaneous edits by different users
+ * Professionals rely on Git!
+
+The Git work cycle:
+
+!bc
+git pull                # before starting a new session
+# edit files
+git add mynewfile       # remember to add new files!
+git commit -am 'Short description of what I did'
+git push origin master  # before end of day or a break
+!ec
+
+!split
+===== More pro use with Git =====
+
+See what others have done in the project:
+
+!bc
+git fetch origin         # instead of git pull
+git diff origin/master   # what are the changes?
+git merge origin/master  # update my files
+!ec
+
+Develop new features in a separate branch:
+
+!bc
+git branch newstuff
+git checkout newstuff
+# edit files
+git commit -am 'Changed ...'
+git push origin newstuff
+!ec
+When `newstuff` is tested and matured, merge back in master:
+
+!bc
+git checkout master
+git merge newstuff
+!ec
+
+#!split
+#===== Put your software on GitHub! =====
+
+
+!split
+======= Classes for problem and solution method =======
+label{softeng1:prog:se:class}
+
+!split
+===== Collect physical problem and parameters in class Problem =====
+
+!bc pycod
+from numpy import exp
+
+class Problem(object):
+    def __init__(self, I=1, a=1, T=10):
+        self.T, self.I, self.a = I, float(a), T
+
+    def u_exact(self, t):
+        I, a = self.I, self.a
+        return I*exp(-a*t)
+!ec
+
+!split
+===== Collect numerical parameters and methods in class Solver =====
+
+!bc pycod
+class Solver(object):
+    def __init__(self, problem, dt=0.1, theta=0.5):
+        self.problem = problem
+        self.dt, self.theta = float(dt), theta
+
+    def solve(self):
+        self.u, self.t = solver(
+            self.problem.I, self.problem.a, self.problem.T,
+            self.dt, self.theta)
+
+    def error(self):
+        """Return norm of error at the mesh points."""
+        u_e = self.problem.u_exact(self.t)
+        e = u_e - self.u
+        E = np.sqrt(self.dt*np.sum(e**2))
+        return E
+!ec
+
+!split
+===== Get input from the command line; class Problem =====
+
+!bc pycod
+class Problem(object):
+    def __init__(self, I=1, a=1, T=10):
+        self.T, self.I, self.a = I, float(a), T
+
+    def define_command_line_options(self, parser=None):
+        """Return updated (parser) or new ArgumentParser object."""
+        if parser is None:
+            import argparse
+            parser = argparse.ArgumentParser()
+
+        parser.add_argument(
+            '--I', '--initial_condition', type=float,
+            default=1.0, help='initial condition, u(0)',
+            metavar='I')
+        parser.add_argument(
+            '--a', type=float, default=1.0,
+            help='coefficient in ODE', metavar='a')
+        parser.add_argument(
+            '--T', '--stop_time', type=float,
+            default=1.0, help='end time of simulation',
+            metavar='T')
+        return parser
+
+    def init_from_command_line(self, args):
+        """Load attributes from ArgumentParser into instance."""
+        self.I, self.a, self.T = args.I, args.a, args.T
+!ec
+
+!split
+===== Get input from the command line; class Problem =====
+
+!bc pycod
+class Solver(object):
+    def __init__(self, problem, dt=0.1, theta=0.5):
+        self.problem = problem
+        self.dt, self.theta = float(dt), theta
+
+    def define_command_line_options(self, parser):
+        """Return updated (parser) or new ArgumentParser object."""
+        parser.add_argument(
+            '--scheme', type=str, default='CN',
+            help='FE, BE, or CN')
+        parser.add_argument(
+            '--dt', '--time_step_values', type=float,
+            default=[1.0], help='time step values',
+            metavar='dt', nargs='+', dest='dt_values')
+        return parser
+
+    def init_from_command_line(self, args):
+        """Load attributes from ArgumentParser into instance."""
+        self.dt, self.theta = args.dt, args.theta
+!ec
+
+!split
+===== How to combine class Problem and class Solver =====
+
+!bc pycod
+def experiment_classes():
+    problem = Problem()
+    solver = Solver(problem)
+
+    # Read input from the command line
+    parser = problem.define_command_line_options()
+    parser = solver. define_command_line_options(parser)
+    args = parser.parse_args()
+    problem.init_from_command_line(args)
+    solver. init_from_command_line(args)
+
+    # Solve and plot
+    solver.solve()
+    import matplotlib.pyplot as plt
+    t_e = np.linspace(0, T, 1001)    # very fine mesh for u_e
+    u_e = problem.u_exact(t_e)
+
+    plt.plot(t,   u,   'r--o')       # dashed red line with circles
+    plt.plot(t_e, u_e, 'b-')         # blue line for u_e
+    plt.legend(['numerical, theta=%g' % theta, 'exact'])
+    plt.xlabel('t')
+    plt.ylabel('u')
+    plt.show()
+!ec
+
+!split
+======= Performning scientific experiments =======
+label{decay:experiments}
+
+idx{numerical experiments} idx{scientific experiments}
+
+Goals:
+
+ o Explore the behavior of a numerical method for an ODE
+ o Show how a program can set up, execute, and report scientific investigations
+ o Demonstrate how to write a scientific report
+ o Demonstrate various technologies for reports: HTML w/MathJax, LaTeX, Sphinx, IPython notebooks, ...
+
+
+!split
+===== Model problem and numerical solution method =====
+
+Problem:
+
+!bt
+\begin{equation}
+u'(t) = -au(t),\quad u(0)=I,\ 0< t \leq T,
+label{decay:experiments:model}
+\end{equation}
+!et
+
+Solution method ($\theta$-rule):
+
+!bt
+\[
+u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
+\quad u^0=I\tp
+\]
+!et
+
+!split
+===== Plan for the experiments =====
+
+For fixed $I$, $a$, and $T$, we run the three schemes for various
+values of $\Delta t$, and present in a report the following results:
+
+ o visual comparison of the numerical and exact solution in a plot for
+   each $\Delta t$ and $\theta=0,1,\frac{1}{2}$,
+ o a table and a plot of the norm of the numerical error versus $\Delta t$
+   for $\theta=0,1,\frac{1}{2}$.
+
+!split
+===== Available software =====
+
+"`model.py`": "${writing_reports}/doconce_src/model.py":
+
+!bc sys
+Terminal> python model.py --I 1.5 --a 0.25 --T 6 --dt 1.25 0.75 0.5
+0.0   1.25:    5.998E-01
+0.0   0.75:    1.926E-01
+0.0   0.50:    1.123E-01
+0.0   0.10:    1.558E-02
+0.5   1.25:    6.231E-02
+0.5   0.75:    1.543E-02
+0.5   0.50:    7.237E-03
+0.5   0.10:    2.469E-04
+1.0   1.25:    1.766E-01
+1.0   0.75:    8.579E-02
+1.0   0.50:    6.884E-02
+1.0   0.10:    1.411E-02
+!ec
+
++ a set of plot files of numerial vs exact solution
+
+!split
+===== Required new results =====
+
+ * Put plots together in table of plots
+ * Table of numerical error vs $\Delta t$ and $\theta$
+ * Log-log convergence plot of numerical error vs $\Delta t$ for $\theta=0,1,0.5$
+
+Must write a script `exper1.py` to automate running `model.py`
+and generating these results
+
+!bc sys
+Terminal> python exper1.py 0.5 0.25 0.1 0.05
+!ec
+($\Delta t$ values on the comand line)
+
+!split
+===== Reproducible science is key! =====
+
+Let your scientific investigations be automated by
+scripts!
+
+ * Excellent documentation
+ * Trivial to re-run experiments
+ * Easy to extend investigations
+
+!split
+===== What actions are needed in the script? =====
+
+ o Run `model.py` program with appropriate input
+ o Interpret the output and make table and plot of numerical errors
+ o Combine plot files to new figures
+
+Complete script: "`exper1.py`": "${writing_reports}/report_generation/exper1.py"
+
+!split
+===== Run a program from a program with `subprocess` =====
+
+idx{`subprocess` (Python module)}
+idx{`Popen` (in `subprocess` module)}
+
+Command to be run:
+
+!bc
+python model.py --I 1.2 --a 0.2 --T 8 -dt 1.25 0.75 0.5 0.1
+!ec
+
+Constructed in Python:
+
+!bc pycod
+# Given I, a, T, and a list dt_values
+cmd = 'python model.py --I %g --a %g --T %g' % (I, a, T)
+dt_values_str = ' '.join([str(v) for v in dt_values])
+cmd += ' --dt %s' % dt_values_str
+!ec
+
+Run under the operating system:
+
+!bc pycod
+from subprocess import Popen, PIPE, STDOUT
+p = Popen(cmd, shell=True, stdout=PIPE, stderr=STDOUT)
+output, dummy = p.communicate()
+
+failure = p.returncode
+if failure:
+    print 'Command failed:', cmd; sys.exit(1)
+!ec
+
+!split
+===== Interpreting the output from an operating system command =====
+
+The output if the previous command run by `subprocess` is in a string
+`output`:
+
+!bc pycod
+errors = {'dt': dt_values, 1: [], 0: [], 0.5: []}
+for line in output.splitlines():
+    words = line.split()
+    if words[0] in ('0.0', '0.5', '1.0'):  # line with E?
+        # typical line: 0.0   1.25:    7.463E+00
+        theta = float(words[0])
+        E = float(words[2])
+        errors[theta].append(E)
+!ec
+
+!split
+===== Combining plot files: PNG and PDF solutions =====
+
+PNG:
+
+!bc sys
+Terminal> montage -background white -geometry 100% -tile 2x \
+          f1.png f2.png f3.png f4.png f.png
+Terminal> convert -trim f.png f.png
+Terminal> convert f.png -transparent white f.png
+!ec
+
+PDF:
+
+!bc sys
+Terminal> pdftk f1.pdf f2.pdf f3.pdf f4.pdf output tmp.pdf
+Terminal> pdfnup --nup 2x2 --outfile tmp.pdf tmp.pdf
+Terminal> pdfcrop tmp.pdf f.pdf
+Terminal> rm -f tmp.pdf
+!ec
+
+Easy to build these commands in Python and execute them with `subprocess`
+or `os.system`: `os.system(cmd)`
+
+
+!split
+===== Making a report =====
+label{decay:exper:report}
+
+ * Scientific investigations are best documented in a report!
+ * "A sample report": "http://hplgit.github.com/INF5620/doc/writing_reports/sphinx-cloud/"
+ * How can we write such a report?
+ * First problem: what format should I write in?
+ * "Plain HTML": "${writing_reports}/_static/report_html.html"
+ * "HTML with MathJax": "${writing_reports}/_static/report_html_mathjax.html"
+ * "LaTeX PDF": "${writing_reports}/_static/report.pdf", based on "LaTeX source": "${writing_reports}/_static/report.tex.html"
+ * "Sphinx HTML": "${writing_reports}/_static/sphinx-cloud/index.html", based on "reStructuredText": "${writing_reports}/_static/report_sphinx.rst.html"
+ * IPython notebook, Markdown, MediaWiki, ...
+ * "DocOnce": "https://github.com/hplgit/doconce" can generate LaTeX, HTML w/MathJax, Sphinx, IPython notebook, Markdown, MediaWiki, ... ("DocOnce source": "${writing_reports}/_static/report.do.txt.html" for the examples above)
+ * "Examples on different report formats": "http://hplgit.github.com/INF5620/doc/writing_reports/"
+
+!split
+===== Publishing a complete project =====
+label{decay:exper:github}
+
+ * Make folder (directory) tree
+ * Keep track of all files via a *version control system* (Git!)
+ * Publish as private or public repository
+ * Utilize Bitbucket or GitHub
+ * See the "intro to project hosting sites with version control": "http://hplgit.github.com/teamods/bitgit/html/"

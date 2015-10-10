@@ -1,0 +1,12 @@
+TITLE: Study guide: Generalizations of exponential decay models
+# #include "../AUTHOR.txt"
+DATE: today
+
+# #ifdef WITH_TOC
+!split
+TOC: on
+# #endif
+
+# #include "../mako_code.txt"
+
+# #include "slides-genz/decay_fd2.do.txt"

@@ -1,0 +1,53 @@
+# NOTE: compile with --figure_prefix=../
+
+TITLE: Analysis of schemes for exponential growth
+
+We study
+
+!bt
+\[ u^{\prime}(t) = -au(t),\quad u(0)=I,\]
+!et
+with $a<0$ such that the ODE models exponential growth with
+analytical solution $u(t)=Ie^{-at}$.
+
+=== Simulations ===
+
+The schemes are exactly the same as in the case $a>0$.
+A program solving the problem numerically is shown below.
+
+@@@CODE exer-decay/exponential.py fromto: from numpy import@# Exercise b
+
+# #if FORMAT == 'ipynb'
+!bc pycod
+dt_values = [3.0, 0.5, 0.1, 0.01]
+for dt in dt_values:
+    demo(dt)
+!ec
+# #else
+We can try different $\Delta t$ values: 3, 0.5, 0.1, and 0.01.
+
+FIGURE: [fig-decay/exponential_growth_demo, width=800 frac=1]
+# #endif
+
+=== Analysis ===
+
+The amplification factor is the same as when $a>0$, but here we introduce
+$p=-a\Delta t>0$ since $a<0$:
+
+!bt
+\begin{equation}
+A(p) = \frac{1+(1-\theta)p}{1-\theta p}.
+\end{equation}
+!et
+A major problem is that the denominator can be zero when $a<0$. This
+happens for $p=1/\theta$. The exact amplification factor is $\Aex = e^{p}$.
+
+Here is code for computing and plotting the factors:
+
+@@@CODE exer-decay/exponential.py fromto: # Exercise b@if __name
+
+# #if FORMAT == 'ipynb'
+plot_amplification_factors('FE BE CN'.split())
+# #else
+FIGURE: [fig-decay/A_growth, width=700 frac=0.9]
+# #endif

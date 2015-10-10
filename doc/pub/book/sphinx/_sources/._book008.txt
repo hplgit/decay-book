@@ -797,7 +797,6 @@ module:
 .. code-block:: python
 
         import logging
-        import logging
         logging.basicConfig(
             filename='myprog.log', filemode='w', level=logging.WARNING,
             format='%(asctime)s - %(levelname)s - %(message)s',

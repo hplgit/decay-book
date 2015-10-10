@@ -1,0 +1,500 @@
+======= Quiz =======
+
+===== Exercise: Characterize a finite difference =====
+label{decay:quiz:fd:FE}
+
+!bquiz
+Q: We can approximate the derivative at a point using two function values:
+
+FIGURE: [fig-quiz/fd_forward2, width=400 frac=0.6]
+
+What is this type of difference called and how large is the error?
+
+K: finite difference
+
+Cw: This is a centered difference with error proportional to $\Delta t^2$.
+E: No, a centered difference would have the two function values equally displaced to either side of the target point $t_n$.
+
+Cr: This is a forward difference with error proportional to $\Delta t$.
+E: The name is forward difference, or Forward Euler difference in the context of differential equations. In such contexts the formula is also known as Euler's method or formula.
+
+Cw: This is a Forward Euler difference with error proportional to $\Delta t^3$.
+E: One may well call this a Forward Euler difference, but the error is not as ``good'' as $\Delta t^3$.
+
+Cw: This is a Backward Euler finite difference with error proportional to $\Delta t$.
+E: Since we use the points $t_{n+1}$ and $t_n$ when constructing the difference, we go *forward* in time, not backward. Therefore, this is a forward difference.
+!equiz
+
+===== Exercise: Characterize a finite difference =====
+label{decay:quiz:fd:CN}
+
+!bquiz
+Q: We can approximate the derivative at a point using two function values:
+
+FIGURE: [fig-quiz/fd_centered2, width=400 frac=0.6]
+
+What is this type of difference called and how large is the error?
+
+K: finite difference
+
+Cr: This is a centered difference with error proportional to $\Delta t^2$.
+
+Cw: This is a forward difference with error proportional to $\Delta t^2$.
+E: A forward difference makes use of the point itself, $t_n$, and a point *forward* in time, $t_{n+1}$. This is not the case here: we use points to the left and right, and the derivative is approximated in the center point. Also, a forward difference would not have an error $\mathcal{O}(\Delta t^2)$.
+
+Cw: This is a centered difference with error proportional to $\Delta t^4$.
+E: It is centered, but the error is only $\mathcal{O}(\Delta t^2)$.
+
+Cw: This is a Backward Euler finite difference with error proportional to $\Delta t$.
+E: Since we use the points $t_{n+1}$ and $t_n$ when constructing the difference at $t_{n+1/2}$, the derivative is in the *center* of the two points, and the difference is therefore a *centered* difference. A backward difference, or Backward Euler difference, would use $t_{n+1/2}$ in this case and some point $t_{n-1/2}$ *backward* in time.
+!equiz
+
+# #ifdef EXTRA
+===== Exercise: The $\theta$ rule =====
+label{decay:quiz:thetarule}
+
+!bquiz
+Q: Why is the $\theta$-rule a convenient method? For example, $u'=-au$ can
+be solved by
+
+!bt
+\[ \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -a (\theta u^{n+1} + (1-\theta) u^{n}) \]
+!et
+
+K: finite difference
+
+Cw: It is more accurate than the Forward Euler and Backward Euler schemes.
+E: This is true, but only if $\theta =1/2$. Otherwise, it has the same
+accuracy as the Forward and Backward Euler schemes.
+
+Cw: It is easier to implement than, e.g., the Forward and Backward Euler schemes.
+E: The formula has slightly more complexity than the Forward and Backward
+Euler schemes, but cannot be said to be easier to implement - all of them
+are very simple formulas to program.
+
+Cr: It offers the Forward and Backward Euler schemes, the Crank-Nicolson scheme, and more variants in a single formula.
+E: Yes, this is the advantage.
+
+Cw: It can be used for other equations than $u'=-au$.
+E: True, but that is true for almost all other finite difference schemes too.
+!equiz
+# #endif
+
+===== Exercise: What is the problem with this program? =====
+label{decay:quiz:program}
+
+!bquiz
+Q: We want to solve
+
+!bt
+\[ u ' = -au, \quad u(0)=1, \]
+!et
+by a Forward Euler scheme,
+
+!bt
+\[ u^{n+1} = u^n - a\Delta t\, u^n,\]
+!et
+and the following program
+
+!bc pycod
+from numpy import *
+u = zeros(10)
+u[0] = 1
+dt = 0.1
+for i in range(10):
+    u[i+1] = u[i] - dt*a*u[n]
+!ec
+What is the major problem with this program?
+
+K: differential equation
+
+Cw: `from numpy import *` is not recommended; one should import explicitly the functions needed or do `import numpy as np`.
+E: True, these are recommended rules, but it is not a problem to do the ``star import'': it is legal and convenient.
+
+Cr: The program aborts with a `NameError`.
+E: True, `a` is not defined. This is the only reason why one cannot execute the program.
+
+Cw: The program is ``flat''. It should be wrapped in a function `solver(U0, dt, N, a)`.
+E: That is definitely a good idea, but it is not a major problem for computing the solution of the differential equation.
+
+Cw: The scheme is unstable!
+E: Actually, this can be true. Since `a` is not defined, it may happen that `dt=0.1` is a too long time step for the stability restrictions of the Forward Euler method for this differential equation. We need $\Delta t\leq 1/a$. However, the answer is wrong in the sense that this *potential* instability is not the major problem with the program - it is a bigger problem that `a` is not defined.
+!equiz
+
+===== Exercise: Is the solution correct? =====
+label{decay:quiz:stability}
+
+!bquiz
+Q: You have solved $u'=-au$ by the Crank-Nicolson scheme and tested
+your program thoroughly. Suddenly you run the program with $I=1$, $a=10$, $T=1$, and $\Delta t=0.225$. You get somewhat unexpected results:
+
+FIGURE: [fig-quiz/CN_osc, width=500 frac=0.8]
+
+The results are unexpected because we know the exact solution should be
+monotone and decreasing, while this numerical solution also shows an
+increasing stage. What is the problem?
+
+K: differential equation; instability; stability
+
+Cw: The program is not tested well enough - yet another bug is there.
+E: No, this computation is in fact correct - numerically.
+
+Cw: The numerical solution method is more general than the analytical one,
+and this is an example where the solution can increase, but the analytical
+solution technique is not capable of dealing with this situation.
+E: The analytical solution $u(t)=Ie^{-at}$ covers all possible cases.
+
+Cr: The time step is too large and cause an instability in the form of non-physical oscillations.
+E: True. One needs $\Delta t \leq 2/a = 0.2$ in this case to avoid oscillations.
+
+Cw: The Crank-Nicolson scheme is unconditionally stable and can be used with all time-step sizes, but the problem here is that round-off errors due to a ``too large'' $a$ (10, not around 1) accumulate to the effect seen in the plot.
+E: 1: The first part is true if unconditionally stable means that the solution is bounded and decays with time, but one may also argue that oscillations, which are non-physical, are a kind of instability, and these occur if $\Delta t >2/a$.
+2: Round-off errors are *very* small in this problem, compared to the discretization errors, and cannot cause an oscillating solution.
+!equiz
+
+===== Exercise: Is this a proper test function? =====
+label{decay:quiz:testfunc}
+
+!bquiz
+Q: Suppose we have some function `compute` that we want to test. We construct
+a unit test and implement an associated test function (according to the
+rules for test functions in the nose or pytest test frameworks):
+
+!bc pycod
+def test_compute(n):
+    expected = (n**2)/4.5 - 1
+    computed = compute(n)
+    assert expected != computed
+!ec
+
+The question is if this test function can be used as is or if improvements
+must be implemented.
+
+K: test function; unit test
+
+Cw: One should use special assert functions from `nose.tools`, here the choice is `nose.tools.assert_almost_equal`.
+E: It is true that an ``almost equal'' type of assert function is appropriate, but there is nothing in the rules that requires use of special assert functions. The requirement is that an `AssertionError` is raised if the test fails. That is done by a plain `assert` as used here.
+
+Cw: One cannot test `compute(n)` for only one `n` value. Many are required for good evidence that the function works.
+E: This depends on what is inside `compute`. If it has several branches depending on the value of `n`, one must test for a visit to each branch, which requires multiple `n` values, but if it is a formula (the test might indicate so), one value can be sufficient.
+
+Cr: The test function does not test `expected != computed` with a tolerance
+and the `n` parameter cannot be an argument.
+E: The formula for `expected` indicates that this is a real number that is subject to potential round-off errors, so one should use a tolerance: `abs(expected - computed) < 1E-14`. Also, test functions should never take arguments.
+
+Cw: The `assert` statement also needs a message explaining what is wrong when the test fails.
+E: This is always a good idea, but not a requirement.
+!equiz
+
+===== Exercise: Rewrite an expression with array arithmetics =====
+label{decay:quiz:arrayarithm}
+
+!bquiz
+Q: A mesh function is initialized with the code segment
+
+!bc pypro
+from math import exp
+N_t = 100
+T = 3.0
+dt = T/N_t
+t = []
+u = []
+for i in range(len(t)):
+    t.append(i*dt)
+    u.append(1 - exp(-t[-1]))
+!ec
+Rewrite this code such that there is no loop and `u` is computed by
+array arithmetics.
+
+Cw:
+!bc pypro
+from numpy import *
+from math import exp
+N_t = 100
+t = np.linspace(0, 3, N_t+1)
+u = 1 - exp(-t)
+!ec
+E: The `exp` function is imported from `math` (since `from math import exp`
+reimports the `exp` name that was imported by `from numpy import *`)
+and cannot be used with array argument `t`.
+
+Cr:
+!bc pypro
+import numpy as np
+N_t = 100
+t = np.linspace(0, 3, N_t+1)
+u = 1 - np.exp(-t)
+!ec
+
+Cw:
+!bc pypro
+N_t = 100
+dt = 3.0/N_t
+t = [i*dt for i in range(N_t+1)]
+from numpy import exp
+u = 1 - exp(-t)
+!ec
+E: The computation of `u` applies array arithmetics, but the list
+comprehension for `t` involves a standard (slow) Python loop.
+
+Cw:
+!bc pypro
+import numpy
+t = numpy.mesh([0, 3], 100)
+u = numpy.func(numpy.exp, t)
+!ec
+E: There are no functions `numpy.mesh` and `numpy.func`.
+!equiz
+
+===== Exercise: What is the truncation error? =====
+label{decay:quiz:trunc}
+
+!bquiz
+Q: What is the truncation error?
+
+Cw: The difference between the exact solution and the numerical solution
+at a mesh point.
+E: This is the global error.
+
+Cw: The error in the factor that takes `u[i]` to `u[i+1]`.
+E: This is the amplification factor error or the local error.
+
+Cw: The difference between the exact solution and the numerical
+solution truncated to one decimal.
+E: Nobody applies this error measure.
+
+Cr: The error in the scheme when the exact solution is inserted in the
+scheme's difference equation.
+!equiz
+
+===== Exercise: Recognize a programming language =====
+label{decay:quiz:prog:m}
+
+!bquiz
+Q: What kind of programming language is this?
+
+!bc mcod
+function integral = trapezoidal(f, a, b, n)
+     %% Integrate f from a to b with n intervals
+    h = (b-a)/n;
+    result = 0.5*f(a) + 0.5*f(b);
+    for i = 1:(n-1)
+        result = result + f(a + i*h);
+    end
+    integral = h*result;
+end
+!ec
+
+K: programming language
+
+Cw: Python
+Cr: MATLAB or Octave
+Cw: Cython
+Cw: FORTRAN 77
+!equiz
+
+===== Exercise: Recognize a programming language =====
+label{decay:quiz:prog:py}
+
+!bquiz
+Q: What kind of programming language is this?
+
+!bc mcod
+def trapezoidal(f, a, b, n):
+    # Integrate f from a to b with n intervals
+    h = (b-a)/float(n)
+    result = 0.5*f(a) + 0.5*f(b)
+    for i in range(1, n):
+        result += f(a + i*h)
+    return h*result
+!ec
+
+K: programming language
+
+Cr: Python
+Cw: MATLAB or Octave
+Cw: Cython
+Cw: FORTRAN 77
+!equiz
+
+===== Exercise: Recognize a programming language =====
+label{decay:quiz:prog:f77}
+
+!bquiz
+Q: What kind of programming language is this?
+
+!bc fcod
+      real*8 function trapezoidal(f, a, b, n)
+C     Integrate f from a to b with n intervals
+      real*8 h, result, f
+      external f
+      h = (b-a)/n
+      result = 0.5*f(a) + 0.5*f(b)
+      do i = 1, n-1
+        result = result + f(a + i*h)
+      end do
+      trapezoidal = h*result
+      return
+      end
+!ec
+
+K: programming language
+
+Cw: Python
+Cw: MATLAB or Octave
+Cw: Cython
+Cr: FORTRAN 77
+!equiz
+
+===== Exercise: Recognize a programming language =====
+label{decay:quiz:prog:c}
+
+!bquiz
+Q: What kind of programming language is this?
+
+!bc mcod
+double trapezoidal(
+    double (*f)(double), double a, double b, int n)
+{
+    double h, result;
+    h = (b-a)/n;
+    result = 0.5*f(a) + 0.5*f(b);
+    for (i=1; i++; i <= n-1) {
+        result += f(a + i*h);
+    }
+    return h*result;
+}
+!ec
+
+K: programming language
+
+Cr: C
+Cw: C++
+Cw: Cython
+Cw: Octave dialect
+!equiz
+
+===== Exercise: What is SymPy? =====
+label{decay:quiz:sympy1}
+
+!bquiz
+Q: What is SymPy?
+
+K: symbolic computations
+
+Cw: A Python module for computing with symmetric matrices.
+E: SymPy can compute with symmetric matrices, so that is true, but it can do very much more.
+Cr: A Python package for doing symbolic computations (exact/analytical differentiation, integration, equation solves, etc.).
+Cw: A Python package for numerical approximations to differentiation, integration, equation solving, etc.
+E: It's the opposite: analytical, not numerical.
+Cw: A free, open source version of Mathematica.
+E: Could be viewed as such, but Mathematica is a much more advanced tool for symbolic computing.
+!equiz
+
+===== Exercise: Testing of code =====
+label{decay:quiz:testing1}
+
+!bquiz
+Q: What is an appropriate test for computing the solution of some ODE?
+
+Cw: We compare the numerical solution with the analytical solution
+in a plot. The curves are quite close, showing that the computations
+are correct (here using 31 mesh points).
+
+FIGURE: [fig-quiz/comparison_num_vs_exact_quiz, width=500 frac=0.8]
+
+E: This comparison says nothing if the discrepancy is the unavoidable
+numerical error or if it also contains the effect of bugs in the program.
+
+Cw: The maximum error between the numerical and exact solution at
+the mesh points is $1.886\cdot 10^{-5}$, which is small. Therefore, the
+program works.
+E: Nobody knows if this is the numerical approximation error or if it
+also contains programming errors.
+
+Cr: The scheme is $\Oof{\Delta t^2}$. With 31 points we get a maximum
+point-wise error of $1.243\cdot 10^{-4}$. With 61 points (halving $\Delta t$)
+the corresponding error is $3.108\cdot 10^{-5}$. This is a reduction of
+approximately a factor 4, which is what we expect for such a scheme when
+halving $\Delta t$.
+E: This test involves checking of the convergence rate, which is a good
+test. The only knowledge we have of the numerical error is its rate!
+
+Cw: The numerical solution and the exact solutions get closer and closer
+in a plot as we reduce $\Delta t$. Therefore, the program works.
+E: This test points to convergence of the method, but the error can
+still contain the effect of bugs. One needs to measure *how fast*
+the curves get closer and closer.
+!equiz
+
+===== Exercise: What kind of scheme is this? =====
+label{decay:quiz:scheme:CN_error}
+
+!bquiz
+Q: Given $u^{\prime}=-au + b$, where $a$ and $b$ are functions of time.
+Is the following scheme correct?
+
+!bt
+\[ \frac{u^{n}-u^{n-1}}{\Delta t} = -a(t_n)\frac{1}{2}(u^n + u^{n-1})
++ b(t_n)\tp\]
+!et
+
+Cw: Yes, it is a Crank-Nicolson type of scheme.
+E: No, then $a$ and $b$ should have been evaluated at $t_{n-1/2}$.
+
+Cw: Yes, if $a(t_n)$ and $b(t_n)$ are evaluated at the previous time
+step, $a(t_{n-1})$ and $a(t_{n-1})$.
+E: No, this will be wrong since the arithmetic mean on the right-hand
+side points sampling the ODE at $t_{n-1/2}$. Then $a$ and $b$ must
+be evaluated at this point.
+
+Cr: No, the coefficients $a$ and $b$ are not evaluated correctly.
+E: That is right: they should be evaluated at $t_{n-1/2}$.
+
+Cw: No, the right-hand side should be $a(t_n)u^n + b(t_n)$.
+E: That is right if the scheme should be a Backward Euler scheme, but
+the arithmetic mean on the right-hand side points to a Crank-Nicolson
+scheme, though with wrong sampling of $a$ and $b$.
+!equiz
+
+
+===== Exercise: What kind of scheme is this? =====
+label{decay:quiz:scheme:BE}
+
+!bquiz
+Q: We want to solve $y'=g(x, y)$ for $y(x)$ and have the scheme
+
+!bt
+\[ y^{i+1} = y^i + \Delta t\, g(x_{i+1}, y^{i+1})\tp\]
+!et
+
+What is this scheme called?
+
+Cw: The implicit midpoint scheme.
+E: There is no midpoint $i+1/2$ involved here.
+Cr: The Backward Euler scheme or just the backward scheme.
+Cw: The Forward Euler scheme, Euler's method, or just the forward scheme.
+E: This is true if we had $g(x_i, y^{i})$.
+Cw: The implicit Adams scheme of order one.
+!equiz
+
+===== Exercise: What kind of scheme is this? =====
+label{decay:quiz:scheme:leapfrog}
+
+!bquiz
+Q: We want to solve $y'=g(x, y)$ for $y(x)$ and have the scheme
+
+!bt
+\[ y^{i+1} = y^{i-1} + 2\Delta t\, g(x_{i}, y^{i})\tp\]
+!et
+
+What is this scheme called?
+
+Cw: The implicit midpoint scheme.
+E: It is a midpoint scheme, but it is explicit rather than implicit.
+Cw: The two-step backward scheme.
+Cw: The Crank-Nicolson scheme.
+E: No, that looks quite different and is based on a centered difference
+over $[x_i,x_{i+1}]$, not $[x_{i-1},x_{i+1}]$.
+Cr: The leapfrog scheme.
+!equiz

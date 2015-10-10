@@ -64,8 +64,8 @@ We also remark that the function in b) is the solution of :math:`u^{\prime}=-au`
 
 .. _decay:exer:dudt:
 
-Exercise 2: Differentiate a function
-------------------------------------
+Problem 2: Differentiate a function
+-----------------------------------
 
 .. index:: array arithmetics
 

@@ -1,0 +1,12 @@
+TITLE: Study guide: Software engineering with exponential decay models
+# #include "../AUTHOR.txt"
+DATE: today
+
+# #ifdef WITH_TOC
+!split
+TOC: on
+# #endif
+
+# #include "../mako_code.txt"
+
+# #include "slides-softeng/softeng1.do.txt"

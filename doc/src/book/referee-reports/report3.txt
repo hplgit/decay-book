@@ -1,0 +1,15 @@
+das geplante Buch von Hans Petter Langtangen, “Finite Difference
+Computing with Exponential Decay Models”, ist mathematisch auf einer
+sehr elementaren, einfuehrenden Ebene, deutlich unterhalb gaengiger
+Numerik-Vorlesungen. Es verbindet jedoch Aspekte aus den Bereichen
+Numerik, Modellierung, Simulation und informatische Aspekte des
+wissenschaftlichen Rechnens, die sich in dieser Weise in keinem
+anderen Buch finden. Es liefert fuer diese Verbindung einen Proof of
+Concept, ausgehend von einem sehr einfachen, aber fuer eine derartige
+Illustration doch bemerkenswert tragfaehigen Modell. Dies gibt dem
+Buchprojekt grossen Charme. Ich kann mir vorstellen, dass das Buch
+eine breite Leserschaft anspricht, wie vom Autor intendiert. Ich
+empfehle es zur Veroeffentlichung als Tutorial (!) in Ihrer Reihe
+"Lecture Notes in Computational Science and Engineering” oder aber in
+einer Lehrbuchreihe fuer Undergraduates.
+

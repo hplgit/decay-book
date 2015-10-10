@@ -152,7 +152,7 @@ div { text-align: justify; text-justify: inter-word; }
                'decay:exer:meshfunc',
                'decay:exer:meshfunc'),
               ('Remarks', 3, None, '___sec42'),
-              ('Exercise 2: Differentiate a function',
+              ('Problem 2: Differentiate a function',
                2,
                'decay:exer:dudt',
                'decay:exer:dudt'),
@@ -825,7 +825,7 @@ schemes, Runge-Kutta methods, and Adams-Bashforth formulas.
 <p>
 This section looks at the generalizations to \( u^{\prime}=-a(t)u \)
 and \( u^{\prime}=-a(t)u + b(t) \). We sketch the corresponding
-implementations of the \( \theta \)-rule for such variable-coeffients ODEs.
+implementations of the \( \theta \)-rule for such variable-coefficient ODEs.
 Verification can no longer make use of an exact solution of the
 numerical problem so we make use of manufactured solutions,
 for deriving an exact solution of the ODE problem, and then we can
@@ -2294,7 +2294,12 @@ Filename: <code>decay_RK2_Taylor2</code>.
 A Leapfrog scheme
 for the ODE \( u^{\prime}(t) = -a(t)u(t) + b(t) \) is defined by
 
-$$ \lbrack D_{2t}u = -au+b\rbrack^n\tp$$
+$$
+\begin{equation}
+\lbrack D_{2t}u = -au+b\rbrack^n\tp
+\tag{125}
+\end{equation}
+$$
 
 A separate method is needed to compute \( u^1 \). The Forward Euler
 scheme is a possible candidate.
@@ -2384,13 +2389,13 @@ Leapfrog scheme is \( \Oof{\Delta t^2} \). Does the use of a
 <p>
 <b>e)</b>
 Set up a set of experiments to demonstrate that the Leapfrog scheme
-<a href="#mjx-eqn-114">(114)</a> is associated with numerical artifacts
+<a href="#mjx-eqn-125">(125)</a> is associated with numerical artifacts
 (instabilities). Document the main results from this investigation.
 
 <p>
 <b>f)</b>
 Analyze and explain the
-instabilities of the Leapfrog scheme <a href="#mjx-eqn-114">(114)</a>:
+instabilities of the Leapfrog scheme <a href="#mjx-eqn-125">(125)</a>:
 
 <ol>
 <li> Choose \( a=\mbox{const} \) and \( b=0 \). Assume that an exact solution
@@ -2432,7 +2437,7 @@ Explicit schemes for this problem can be written in the general form
 $$
 \begin{equation}
 u^{n+1} = \sum_{j=0}^m c_ju^{n-j},
-\tag{125}
+\tag{126}
 \end{equation}
 $$
 
@@ -2444,10 +2449,10 @@ and the 3rd-order Adams-Bashforth scheme.
 
 <p>
 Make a class <code>ExpDecay</code> that implements the
-general updating formula <a href="#mjx-eqn-125">(125)</a>.
+general updating formula <a href="#mjx-eqn-126">(126)</a>.
 The formula cannot be applied for \( n < m \), and for those \( n \) values, other
 schemes must be used. Assume for simplicity that we just
-repeat Crank-Nicolson steps until <a href="#mjx-eqn-125">(125)</a> can be used.
+repeat Crank-Nicolson steps until <a href="#mjx-eqn-126">(126)</a> can be used.
 Use a subclass
 to specify the list \( c_0,\ldots,c_m \) for a particular method, and
 implement subclasses for all the mentioned schemes.

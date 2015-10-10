@@ -1,0 +1,5 @@
+This directory contains the Python package decay with the module decay
+for solving a decay-type differential equation. The software is
+written by Hans Petter Langtangen <hpl@simula.no> and described in
+
+http://hplgit.github.io/num-methods-for-PDEs/doc/pub/softeng1/html/softeng1.html

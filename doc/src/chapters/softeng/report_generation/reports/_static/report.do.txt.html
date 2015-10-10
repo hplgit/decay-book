@@ -1,0 +1,189 @@
+<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #000080; font-weight: bold">TITLE: Experiments with Schemes for Exponential Decay</span>
+<span style="color: #000080; font-weight: bold">AUTHOR:</span> Hans Petter Langtangen Email:hpl@simula.no at Center for Biomedical Computing, Simula Research Laboratory &amp; Department of Informatics, University of Oslo.
+<span style="color: #000080; font-weight: bold">DATE:</span> today
+
+<span style="color: #800080; font-weight: bold">__Summary.__</span>
+This report investigates the accuracy of three finite difference
+schemes for the ordinary differential equation $u&#39;=-au$ with the
+aid of numerical experiments. Numerical artifacts are in particular
+demonstrated.
+
+<span style="color: #228B22">## Include table of contents (latex and html; sphinx always has a toc).</span>
+<span style="color: #228B22">## (Lines starting with ## are not propagated to the output file,</span>
+<span style="color: #228B22">## otherwise comments lines starting with # are visible in the</span>
+<span style="color: #228B22">## output file.)</span>
+
+<span style="color: #000080; font-weight: bold">TOC:</span> on
+
+
+<span style="color: #8B008B; font-weight: bold">!split</span>
+<span style="color: #000080; font-weight: bold">======= Mathematical problem =======</span>
+<span style="color: #658b00">label{math:problem}</span>
+
+<span style="color: #228B22">## Purpose: section with multi-line equation.</span>
+<span style="color: #228B22">## idx{keyword} adds keyword to the index</span>
+<span style="color: #228B22">## (to be place before the actual paragraph).</span>
+
+<span style="color: #658b00">idx{model problem}</span> idx{exponential decay}
+
+We address the initial-value problem
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+<span style="color: #658b00">\begin{align}</span>
+u&#39;(t) &amp;= -au(t), \quad t \in (0,T], label{ode}\\
+u(0)  &amp;= I,                         label{initial:value}
+<span style="color: #658b00">\end{align}</span>
+<span style="color: #8B008B; font-weight: bold">!et</span>
+where $a$, $I$, and $T$ are prescribed parameters, and $u(t)$ is
+the unknown function to be estimated. This mathematical model
+is relevant for physical phenomena featuring exponential decay
+in time, e.g., vertical pressure variation in the atmosphere,
+cooling of an object, and radioactive decay.
+
+<span style="color: #000080; font-weight: bold">======= Numerical solution method =======</span>
+<span style="color: #658b00">label{numerical:problem}</span>
+
+<span style="color: #228B22">## Purpose: section with single-line equation, equation reference,</span>
+<span style="color: #228B22">## a bullet list, and links to URLs (&quot;link text&quot;: &quot;url&quot;).</span>
+
+<span style="color: #658b00">idx{mesh in time}</span> idx{$\theta$-rule} idx{numerical scheme}
+<span style="color: #658b00">idx{finite difference scheme}</span>
+
+We introduce a mesh in time with points $0 = t_0 &lt; t_1 \cdots &lt; t_{N_t}=T$.
+For simplicity, we assume constant spacing $\Delta t$ between the
+mesh points: $\Delta t = t_{n}-t_{n-1}$, $n=1,\ldots,N_t$. Let
+$u^n$ be the numerical approximation to the exact solution at $t_n$.
+
+The $\theta$-rule cite{Iserles_2009}
+is used to solve (ref{ode}) numerically:
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+\[
+u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
+\]
+<span style="color: #8B008B; font-weight: bold">!et</span>
+for $n=0,1,\ldots,N_t-1$. This scheme corresponds to
+
+  * The &quot;Forward Euler&quot;:
+    &quot;http://en.wikipedia.org/wiki/Forward_Euler_method&quot;
+    scheme when $\theta=0$
+  * The &quot;Backward Euler&quot;:
+    &quot;http://en.wikipedia.org/wiki/Backward_Euler_method&quot;
+    scheme when $\theta=1$
+  * The &quot;Crank-Nicolson&quot;:
+    &quot;http://en.wikipedia.org/wiki/Crank-Nicolson&quot;
+    scheme when $\theta=1/2$
+
+
+<span style="color: #000080; font-weight: bold">======= Implementation =======</span>
+
+<span style="color: #228B22">## Purpose: section with computer code taken from a part of</span>
+<span style="color: #228B22">## a file. The fromto: f@t syntax copies from the regular</span>
+<span style="color: #228B22">## expression f up to the line, but not including, the regular</span>
+<span style="color: #228B22">## expression t.</span>
+
+The numerical method is implemented in a Python function
+cite{Langtangen_2014} `solver` (found in the &quot;`model`&quot;:
+<span style="color: #CD5555">&quot;https://github.com/hplgit/INF5620/blob/gh-pages/src/decay/experiments/dc_mod.py&quot;</span> module):
+
+<span style="color: #800080; font-weight: bold">@@@CODE ../model.py  fromto: def solver@def exact_sol</span>
+
+
+<span style="color: #000080; font-weight: bold">======= Numerical experiments =======</span>
+
+<span style="color: #228B22">## Purpose: section with figures.</span>
+
+<span style="color: #658b00">idx{numerical experiments}</span>
+
+We define a set of numerical experiments where $I$, $a$, and $T$ are
+fixed, while $\Delta t$ and $\theta$ are varied.
+In particular, $I=1$, $a=2$, $\Delta t = 1.25, 0.75, 0.5, 0.1$.
+
+
+
+<span style="color: #000080; font-weight: bold">===== The Backward Euler method =====</span>
+
+<span style="color: #228B22">## Purpose: subsection with inline figure (figure without caption).</span>
+
+
+<span style="color: #658b00">idx{BE}</span>
+
+<span style="color: #658b00">FIGURE: [BE, width=800]</span>
+
+
+
+<span style="color: #000080; font-weight: bold">===== The Crank-Nicolson method =====</span>
+
+<span style="color: #228B22">## Purpose: subsection with inline figure (figure without caption).</span>
+
+
+<span style="color: #658b00">idx{CN}</span>
+
+<span style="color: #658b00">FIGURE: [CN, width=800]</span>
+
+
+
+<span style="color: #000080; font-weight: bold">===== The Forward Euler method =====</span>
+
+<span style="color: #228B22">## Purpose: subsection with inline figure (figure without caption).</span>
+
+
+<span style="color: #658b00">idx{FE}</span>
+
+<span style="color: #658b00">FIGURE: [FE, width=800]</span>
+
+
+
+<span style="color: #000080; font-weight: bold">===== Error vs $\Delta t$ =====</span>
+
+<span style="color: #228B22">## Purpose: exemplify referring to a figure with label and caption.</span>
+
+<span style="color: #658b00">idx{error vs time step}</span>
+
+How $E$ varies with $\Delta t$ for $\theta=0,0.5,1$
+is shown in Figure ref{fig:error}.
+
+<span style="color: #228B22">## Here is an admonition box for warnings</span>
+
+<span style="color: #8B008B; font-weight: bold">!bwarning</span> Observe:
+The data points for the three largest $\Delta t$ values in the
+Forward Euler method are not relevant as the solution behaves
+non-physically.
+<span style="color: #8B008B; font-weight: bold">!ewarning</span>
+
+<span style="color: #658b00">FIGURE: [error, width=400] Variation of the error with the time step. label{fig:error}</span>
+
+<span style="color: #228B22">## A corresponding table</span>
+
+The numbers corresponding to the figure above are given in the table below.
+
+<span style="color: #CD5555">|------c--------------c--------------c--------------c-------|</span>
+<span style="color: #CD5555">| $\Delta t$   | $\theta=0$   | $\theta=0.5$ | $\theta=1$   |</span>
+<span style="color: #CD5555">|------r--------------r--------------r--------------r-------|</span>
+<span style="color: #CD5555">| 1.25         | 7.4630       | 0.2161       | 0.2440       |</span>
+<span style="color: #CD5555">| 0.75         | 0.6632       | 0.0744       | 0.1875       |</span>
+<span style="color: #CD5555">| 0.50         | 0.2797       | 0.0315       | 0.1397       |</span>
+<span style="color: #CD5555">| 0.10         | 0.0377       | 0.0012       | 0.0335       |</span>
+<span style="color: #CD5555">|-----------------------------------------------------------|</span>
+
+<span style="color: #228B22">## Here is an admonition box for summaries</span>
+
+<span style="color: #8B008B; font-weight: bold">!bsummary</span>
+ o $\theta =1$: $E\sim \Delta t$ (first-order convergence).
+ o $\theta =0.5$: $E\sim \Delta t^2$ (second-order convergence).
+ o $\theta =1$ is always stable and gives qualitatively corrects results.
+ o $\theta =0.5$ never blows up, but may give oscillating solutions
+   if $\Delta t$ is not sufficiently small.
+ o $\theta =0$ suffers from fast-growing solution if $\Delta t$ is
+   not small enough, but even below this limit one can have oscillating
+   solutions (unless $\Delta t$ is sufficiently small).
+<span style="color: #8B008B; font-weight: bold">!esummary</span>
+
+<span style="color: #000080; font-weight: bold">======= Bibliography =======</span>
+
+<span style="color: #228B22">## Publish (https://bitbucket.org/logg/publish is used to</span>
+<span style="color: #228B22">## handle references. The line below specifies the name of</span>
+<span style="color: #228B22">## the Publish database file (see the doconce manual for details).</span>
+
+BIBFILE: .publish_references.pub
+</pre></div>
