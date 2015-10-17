@@ -83,7 +83,7 @@ code { color: inherit; background-color: transparent; }
               ('Implementation', 1, 'decay:impl1', 'decay:impl1'),
               ('Computer language: Python', 2, None, '___sec21'),
               ('Making a solver function', 2, 'decay:py1', 'decay:py1'),
-              ('Integer division', 2, None, '___sec23'),
+              ('Integer division', 2, 'decay:py2', 'decay:py2'),
               ('Doc strings', 2, None, '___sec24'),
               ('Formatting numbers', 2, None, '___sec25'),
               ('Running the program', 2, None, '___sec26'),
@@ -115,23 +115,23 @@ code { color: inherit; background-color: transparent; }
                'decay:exer:meshfunc',
                'decay:exer:meshfunc'),
               ('Remarks', 3, None, '___sec39'),
-              ('Exercise 2: Differentiate a function',
+              ('Problem 2: Differentiate a function',
                2,
                'decay:exer:dudt',
                'decay:exer:dudt'),
-              ('Exercise 3: Experiment with divisions',
+              ('Problem 3: Experiment with divisions',
                2,
                'decay:exer:intdiv',
                'decay:exer:intdiv'),
-              ('Exercise 4: Experiment with wrong computations',
+              ('Problem 4: Experiment with wrong computations',
                2,
                'decay:exer:decay1err',
                'decay:exer:decay1err'),
-              ('Exercise 5: Plot the error function',
+              ('Problem 5: Plot the error function',
                2,
                'decay:exer:plot:error',
                'decay:exer:plot:error'),
-              ('Exercise 6: Change formatting of numbers and debug',
+              ('Problem 6: Change formatting of numbers and debug',
                2,
                'decay:exer:inexact:output',
                'decay:exer:inexact:output'),
@@ -227,7 +227,7 @@ $$
 u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
 $$
 
-since it can generate the three other schemes by various of
+since it can generate the three other schemes by various
 choices of \( \theta \): \( \theta=0 \) for Forward Euler, \( \theta =1 \) for
 Backward Euler, and \( \theta =1/2 \) for Crank-Nicolson.
 Given \( a \), \( u^0=I \), \( T \), and \( \Delta t \),
@@ -240,7 +240,7 @@ compute \( u^1, u^2,\ldots,u^{N_t} \), where \( t_{N_t}=N_t\Delta t \), and
 <p>
 Any programming language can be used to generate the \( u^{n+1} \) values from
 the formula above. However, in this document we shall mainly make use of
-Python. There several good reasons for this choice:
+Python. There are several good reasons for this choice:
 
 <ul>
   <li> Python has a very clean, readable syntax (often known as
@@ -363,12 +363,12 @@ The first index in Python arrays or lists is <em>always</em> <code>0</code> and 
 last is then <code>len(u)-1</code> (the length of an array <code>u</code> is obtained by
 <code>len(u)</code> or <code>u.size</code>).
 
-<h2 id="___sec23">Integer division </h2>
+<h2 id="decay:py2">Integer division</h2>
 
 <p>
 The shown implementation of the <code>solver</code> may face problems and
 wrong results if <code>T</code>, <code>a</code>, <code>dt</code>, and <code>theta</code> are given as integers
-(see <a href="._alg003.html#decay:exer:intdiv">Exercise 3: Experiment with divisions</a> and <a href="._alg003.html#decay:exer:decay1err">Exercise 4: Experiment with wrong computations</a>).
+(see <a href="._alg003.html#decay:exer:intdiv">Problem 3: Experiment with divisions</a> and <a href="._alg003.html#decay:exer:decay1err">Problem 4: Experiment with wrong computations</a>).
 The problem is related to <em>integer division</em> in Python (as
 in Fortran, C, C++, and many other computer languages!): <code>1/2</code> becomes <code>0</code>,
 while <code>1.0/2</code>, <code>1/2.0</code>, or <code>1.0/2.0</code> all become <code>0.5</code>. So, it is enough
@@ -418,7 +418,7 @@ Right below the header line in the <code>solver</code> function there is a
 Python string enclosed in triple double quotes <code>&quot;&quot;&quot;</code>.
 The purpose of this string object is to document what the function
 does and what the arguments are. In this case the necessary
-documentation do not span more than one line, but with triple double
+documentation does not span more than one line, but with triple double
 quoted strings the text may span several lines:
 
 <p>
@@ -469,7 +469,7 @@ This compact <code>print</code> statement unfortunately gives less readable outp
 because the <code>t</code> and <code>u</code> values are not aligned in nicely formatted columns.
 To fix this problem, we recommend to use the <em>printf format</em>, supported in most
 programming languages inherited from C. Another choice is
-Python's recent <em>format string syntax</em>. Both kind of syntax is illustrated
+Python's recent <em>format string syntax</em>. Both kinds of syntax are illustrated
 below.
 
 <p>
@@ -609,7 +609,7 @@ need to make a Python function for computing the exact solution:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t, I, a):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(t, I, a):
     <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)
 </pre></div>
 <p>
@@ -618,7 +618,7 @@ It is tempting to just do
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u_e <span style="color: #666666">=</span> u_exact(t, I, a)
 plot(t, u, t, u_e)
 </pre></div>
 <p>
@@ -632,7 +632,7 @@ the mesh points is to introduce a very fine mesh for \( \uex(t) \):
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">t_e <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)      <span style="color: #408080; font-style: italic"># fine mesh</span>
-u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
 </pre></div>
 <p>
 We can also plot the curves with different colors and styles, e.g.,
@@ -662,7 +662,7 @@ the comparison plot becomes
     u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>T, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
 
     t_e <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)        <span style="color: #408080; font-style: italic"># fine mesh for u_e</span>
-    u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
 
     plot(t,   u,   <span style="color: #BA2121">&#39;r--o&#39;</span>,            <span style="color: #408080; font-style: italic"># red dashes w/circles</span>
          t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>)              <span style="color: #408080; font-style: italic"># blue line for exact sol.</span>
@@ -838,6 +838,7 @@ calculate their difference as a mesh function for the error:
 $$
 \begin{equation}
 e^n = \uex(t_n) - u^n,\quad n=0,1,\ldots,N_t \tp
+\tag{46}
 \end{equation}
 $$
 
@@ -855,7 +856,7 @@ The error mesh function \( e^n \) can be computed by
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)  <span style="color: #408080; font-style: italic"># Numerical sol.</span>
-u_e <span style="color: #666666">=</span> exact_solution(t, I, a)      <span style="color: #408080; font-style: italic"># Representative of exact sol.</span>
+u_e <span style="color: #666666">=</span> u_exact(t, I, a)             <span style="color: #408080; font-style: italic"># Representative of exact sol.</span>
 e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
 </pre></div>
 <p>
@@ -869,19 +870,19 @@ The last statements
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">u_e <span style="color: #666666">=</span> u_exact(t, I, a)
 e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
 </pre></div>
 <p>
 demonstrate some standard examples of array arithmetics: <code>t</code> is an
-array of mesh points that we pass to <code>exact_solution</code>. This function
+array of mesh points that we pass to <code>u_exact</code>. This function
 evaluates <code>-a*t</code>, which is a scalar times an array, meaning that
 the scalar is multiplied with each array element.
 The result is an array, let us call it <code>tmp1</code>. Then
 <code>exp(tmp1)</code> means applying the exponential function to each element in
 <code>tmp1</code>, giving an array, say <code>tmp2</code>. Finally, <code>I*tmp2</code> is computed
 (scalar times array) and <code>u_e</code> refers to this array returned from
-<code>exact_solution</code>. The expression <code>u_e - u</code> is the difference between
+<code>u_exact</code>. The expression <code>u_e - u</code> is the difference between
 two arrays, resulting in a new array referred to by <code>e</code>.
 
 <p>
@@ -905,15 +906,15 @@ Three common norms are
 $$
 \begin{align}
 ||f||_{L^2} &= \left( \int_0^T f(t)^2 dt\right)^{1/2},
-\tag{39}\\ 
+\tag{47}\\ 
 ||f||_{L^1} &= \int_0^T |f(t)| dt,
-\tag{40}\\ 
+\tag{48}\\ 
 ||f||_{L^\infty} &= \max_{t\in [0,T]}|f(t)|\tp
-\tag{41}
+\tag{49}
 \end{align}
 $$
 
-The \( L^2 \) norm <a href="#mjx-eqn-39">(39)</a> (&quot;L-two norm&quot;)
+The \( L^2 \) norm <a href="#mjx-eqn-47">(47)</a> (&quot;L-two norm&quot;)
 has nice mathematical properties and
 is the most popular norm. It is a generalization
 of the well-known Eucledian norm of vectors to functions.
@@ -931,6 +932,7 @@ In fact, there is a whole family of norms,
 $$
 \begin{equation}
 ||f||_{L^p} = \left(\int_0^T f(t)^pdt\right)^{1/p},
+\tag{50}
 \end{equation}
 $$
 
@@ -976,11 +978,11 @@ defined by
 $$
 \begin{align}
 ||f^n||_{\ell^2} &= \left( \Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2},
-\tag{42}\\ 
-||f^n||_{\ell^1} &= \Delta t\sum_{n=0}^{N_t} |f^n|
-\tag{43}\\ 
+\tag{51}\\ 
+||f^n||_{\ell^1} &= \Delta t\sum_{n=0}^{N_t} |f^n|,
+\tag{52}\\ 
 ||f^n||_{\ell^\infty} &= \max_{0\leq n\leq N_t}|f^n|\tp
-\tag{44}
+\tag{53}
 \end{align}
 $$
 
@@ -1001,20 +1003,20 @@ This reasoning gives rise to the <em>vector norms</em> for a vector
 $$
 \begin{align}
 ||f||_2 &= \left( \frac{1}{N+1}\sum_{n=0}^{N} (f_n)^2\right)^{1/2},
-\tag{45}\\ 
-||f||_1 &= \frac{1}{N+1}\sum_{n=0}^{N} |f_n|
-\tag{46}\\ 
+\tag{54}\\ 
+||f||_1 &= \frac{1}{N+1}\sum_{n=0}^{N} |f_n|,
+\tag{55}\\ 
 ||f||_{\ell^\infty} &= \max_{0\leq n\leq N}|f_n|\tp
-\tag{47}
+\tag{56}
 \end{align}
 $$
 
 Here we have used the common vector component notation with subscripts
 (\( f_n \)) and \( N \) as length. We will mostly work with mesh functions
 and use the discrete \( \ell^2 \)
-norm <a href="#mjx-eqn-42">(42)</a> or the max norm \( \ell^\infty \)
-<a href="#mjx-eqn-44">(44)</a>, but the corresponding vector norms
-<a href="#mjx-eqn-45">(45)</a>-<a href="#mjx-eqn-47">(47)</a> are also much used
+norm <a href="#mjx-eqn-51">(51)</a> or the max norm \( \ell^\infty \)
+<a href="#mjx-eqn-53">(53)</a>, but the corresponding vector norms
+<a href="#mjx-eqn-54">(54)</a>-<a href="#mjx-eqn-56">(56)</a> are also much used
 in numerical computations, so it is important to know the different
 norms and the relations between them.
 
@@ -1025,7 +1027,7 @@ will be taken as \( ||e^n||_{\ell^2} \) and called \( E \):
 $$
 \begin{equation}
 E = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}
-\tag{48}
+\tag{57}
 \end{equation}
 $$
 
@@ -1053,7 +1055,7 @@ one element at a time:
 u_e <span style="color: #666666">=</span> zeros(m)
 t <span style="color: #666666">=</span> <span style="color: #666666">0</span>
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(m):
-    u_e[i] <span style="color: #666666">=</span> exact_solution(t, a, I)
+    u_e[i] <span style="color: #666666">=</span> u_exact(t, a, I)
     t <span style="color: #666666">=</span> t <span style="color: #666666">+</span> dt
 e <span style="color: #666666">=</span> zeros(m)
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(m):
@@ -1086,13 +1088,13 @@ resolution.
 <span style="color: #BA2121; font-style: italic">    and plot the numerical and exact solutions (if makeplot=True).</span>
 <span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
     u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)    <span style="color: #408080; font-style: italic"># Numerical solution</span>
-    u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t, I, a)
     e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
     E <span style="color: #666666">=</span> sqrt(dt<span style="color: #666666">*</span><span style="color: #008000">sum</span>(e<span style="color: #666666">**2</span>))
     <span style="color: #008000; font-weight: bold">if</span> makeplot:
         figure()                         <span style="color: #408080; font-style: italic"># create new plot</span>
         t_e <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)       <span style="color: #408080; font-style: italic"># fine mesh for u_e</span>
-        u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+        u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
         plot(t,   u,   <span style="color: #BA2121">&#39;r--o&#39;</span>)           <span style="color: #408080; font-style: italic"># red dashes w/circles</span>
         plot(t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>)             <span style="color: #408080; font-style: italic"># blue line for exact sol.</span>
         legend([<span style="color: #BA2121">&#39;numerical&#39;</span>, <span style="color: #BA2121">&#39;exact&#39;</span>])
@@ -1414,7 +1416,7 @@ recent values of the unknown:
 </pre></div>
 <p>
 This code snippet also serves as a quick introduction to file writing in Python.
-Reading the data in the file into arrays <code>t</code> and <code>u</code> are done by the
+Reading the data in the file into arrays <code>t</code> and <code>u</code> is done by the
 function
 
 <p>
@@ -1463,7 +1465,7 @@ the error measure and make the plot:
     u, t <span style="color: #666666">=</span> solver_memsave(I, a, T, dt, theta, filename)
 
     t, u <span style="color: #666666">=</span> read_file(filename)
-    u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t, I, a)
     e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
     E <span style="color: #666666">=</span> sqrt(dt<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sum(e<span style="color: #666666">**2</span>))
     <span style="color: #008000; font-weight: bold">if</span> makeplot:

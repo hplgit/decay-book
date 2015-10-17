@@ -149,12 +149,12 @@ if [ $? -ne 0 ]; then echo "doconce could not compile slides - abort"; exit; fi
 fi
 rsync="rsync -rtDvz -u -e ssh -b --exclude-from=$HOME/1/.rsyncexclude --delete --force "
 
-#repo=~/vc/decay-book
+#repo=~/vc/decay-book/doc
 repo=../../..
 if [ $publish -eq 1 ]; then
 # Copy compiled documents to destination repo
-dest=$repo/doc/pub
-dest_sol=$repo/doc/Trash
+dest=$repo/pub
+dest_sol=$repo/Trash
 if [ ! -d $dest/${nickname} ]; then
 echo "making directory ${dest}/${nickname}"
 mkdir $dest/${nickname}

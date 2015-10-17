@@ -49,6 +49,8 @@ label{decay:analysis}
 
 # #include "../chapters/analysis/errors.do.txt"
 
+# #include "../chapters/analysis/exer.do.txt"
+
 
 !split
 ========= Generalizations =========

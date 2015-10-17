@@ -64,8 +64,8 @@ We also remark that the function in b) is the solution of :math:`u^{\prime}=-au`
 
 .. _decay:exer:dudt:
 
-Exercise 2: Differentiate a function
-------------------------------------
+Problem 2: Differentiate a function
+-----------------------------------
 
 .. index:: array arithmetics
 
@@ -80,9 +80,9 @@ centered differences:
 .. _Eq:decay:exer:dudt:D2t:
 
 .. math::
-   :label: decay:exer:dudt:D2t
-        
-        d^n = [D_{2t}u]^n =
+
+    \tag{58}
+    d^n = [D_{2t}u]^n =
         \frac{u^{n+1}-u^{n-1}}{2\Delta t},\quad n=1,\ldots,N_t-1{\thinspace .}
         
         
@@ -115,7 +115,7 @@ exact for quadratic polynomials. Use this property to verify the program.
 .. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **b)**
-A standard implementation of the formula :eq:`decay:exer:dudt:D2t` is to
+A standard implementation of the formula :ref:`(58) <Eq:decay:exer:dudt:D2t>` is to
 have a loop over :math:`i`. For large :math:`N_t`, such loop may run slowly in
 Python. A technique for speeding up the computations, called vectorization
 or array computing,
@@ -129,7 +129,7 @@ define two arrays
         u^- &= (u^0,u^1,\ldots,u^{N_t-2}){\thinspace .}
         
 
-The formula :eq:`decay:exer:dudt:D2t` can now be expressed as
+The formula :ref:`(58) <Eq:decay:exer:dudt:D2t>` can now be expressed as
 
 .. math::
          (d^1,d^2,\ldots,d^{N_t-1}) = \frac{1}{2\Delta t}(u^+ - u^-){\thinspace .}
@@ -161,8 +161,8 @@ Filename: ``differentiate``.
 
 .. _decay:exer:intdiv:
 
-Exercise 3: Experiment with divisions
--------------------------------------
+Problem 3: Experiment with divisions
+------------------------------------
 
 Explain what happens in the following computations, where
 some are mathematically unexpected:
@@ -188,8 +188,8 @@ Filename: ``pyproblems``.
 
 .. _decay:exer:decay1err:
 
-Exercise 4: Experiment with wrong computations
-----------------------------------------------
+Problem 4: Experiment with wrong computations
+---------------------------------------------
 
 Consider the ``solver`` function in the `decay_v1.py <http://tinyurl.com/ofkw6kc/alg/decay_v1.py>`__ file
 and the following call:
@@ -223,13 +223,13 @@ Filename: ``decay_v1_err``.
 
 .. _decay:exer:plot:error:
 
-Exercise 5: Plot the error function
------------------------------------
+Problem 5: Plot the error function
+----------------------------------
 
 Solve the problem :math:`u'=-au`, :math:`u(0)=I`, using the Forward Euler, Backward
 Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
-function :math:`e^n = {u_{\small\mbox{e}}}(t_n)-u^n` for :math:`\Delta t`, :math:`\frac{1}{4}\Delta t`, and
-:math:`\frac{1}{8}\Delta t`, where :math:`{u_{\small\mbox{e}}}` is the exact solution of the ODE and
+function :math:`e^n = {u_{\small\mbox{e}}}(t_n)-u^n` for :math:`\Delta t=0.1, 0.05, 0.025`,
+where :math:`{u_{\small\mbox{e}}}` is the exact solution of the ODE and
 :math:`u^n` is the numerical solution at mesh point :math:`t_n`.
 
 .. --- begin hint in exercise ---
@@ -249,8 +249,8 @@ Filename: ``decay_plot_error``.
 
 .. _decay:exer:inexact:output:
 
-Exercise 6: Change formatting of numbers and debug
---------------------------------------------------
+Problem 6: Change formatting of numbers and debug
+-------------------------------------------------
 
 The `decay_memsave.py <http://tinyurl.com/ofkw6kc/alg/decay_memsave.py>`__ program
 writes the time values and solution values to a file which looks

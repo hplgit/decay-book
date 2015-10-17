@@ -11,6 +11,8 @@ TOC: on
 
 # #include "errors.do.txt"
 
+# #include "exer.do.txt"
+
 !split
 ======= Bibliography =======
 

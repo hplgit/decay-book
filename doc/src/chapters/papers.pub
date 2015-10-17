@@ -95,6 +95,14 @@
    status:    published
    series:    Texts in Computational Science and Engineering
    entrytype: book
+** Scientific Computing - An Introducting Using {Maple} and {MATLAB}
+   key:       Gander_2015
+   author:    W. Gander, M. J. Gander, F. Kwok
+   year:      2015
+   publisher: Springer
+   status:    published
+   series:    Texts in Computational Science and Engineering
+   entrytype: book
 ** Fluid Mechanics
    key:       Douglas_et_al_1979
    author:    J. F. Douglas, J. M. Gasiorek, J. A. Swaffield

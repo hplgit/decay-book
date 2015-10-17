@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -57,8 +56,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -70,14 +69,14 @@
         <li class="right" >
           <a href="._main_alg001.html" title="Finite difference methods"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="implementation">
 <span id="decay-impl1"></span><h1>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h1>
@@ -98,7 +97,7 @@ From an implementational point of view, it is advantageous to
 implement the <span class="math">\(\theta\)</span>-rule</p>
 <div class="math">
 \[u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,\]</div>
-<p>since it can generate the three other schemes by various of
+<p>since it can generate the three other schemes by various
 choices of <span class="math">\(\theta\)</span>: <span class="math">\(\theta=0\)</span> for Forward Euler, <span class="math">\(\theta =1\)</span> for
 Backward Euler, and <span class="math">\(\theta =1/2\)</span> for Crank-Nicolson.
 Given <span class="math">\(a\)</span>, <span class="math">\(u^0=I\)</span>, <span class="math">\(T\)</span>, and <span class="math">\(\Delta t\)</span>,
@@ -109,7 +108,7 @@ compute <span class="math">\(u^1, u^2,\ldots,u^{N_t}\)</span>, where <span class
 <h2>Computer language: Python<a class="headerlink" href="#computer-language-python" title="Permalink to this headline">¶</a></h2>
 <p>Any programming language can be used to generate the <span class="math">\(u^{n+1}\)</span> values from
 the formula above. However, in this document we shall mainly make use of
-Python. There several good reasons for this choice:</p>
+Python. There are several good reasons for this choice:</p>
 <blockquote>
 <div><ul class="simple">
 <li>Python has a very clean, readable syntax (often known as
@@ -217,10 +216,10 @@ last is then <code class="docutils literal"><span class="pre">len(u)-1</span></c
 <code class="docutils literal"><span class="pre">len(u)</span></code> or <code class="docutils literal"><span class="pre">u.size</span></code>).</p>
 </div>
 <div class="section" id="integer-division">
-<h2>Integer division<a class="headerlink" href="#integer-division" title="Permalink to this headline">¶</a></h2>
+<span id="decay-py2"></span><h2>Integer division<a class="headerlink" href="#integer-division" title="Permalink to this headline">¶</a></h2>
 <p>The shown implementation of the <code class="docutils literal"><span class="pre">solver</span></code> may face problems and
 wrong results if <code class="docutils literal"><span class="pre">T</span></code>, <code class="docutils literal"><span class="pre">a</span></code>, <code class="docutils literal"><span class="pre">dt</span></code>, and <code class="docutils literal"><span class="pre">theta</span></code> are given as integers
-(see <a class="reference internal" href="._main_alg003.html#decay-exer-intdiv"><span class="std std-ref">Exercise 3: Experiment with divisions</span></a> and <a class="reference internal" href="._main_alg003.html#decay-exer-decay1err"><span class="std std-ref">Exercise 4: Experiment with wrong computations</span></a>).
+(see <a class="reference internal" href="._main_alg003.html#decay-exer-intdiv"><span class="std std-ref">Problem 3: Experiment with divisions</span></a> and <a class="reference internal" href="._main_alg003.html#decay-exer-decay1err"><span class="std std-ref">Problem 4: Experiment with wrong computations</span></a>).
 The problem is related to <em>integer division</em> in Python (as
 in Fortran, C, C++, and many other computer languages!): <code class="docutils literal"><span class="pre">1/2</span></code> becomes <code class="docutils literal"><span class="pre">0</span></code>,
 while <code class="docutils literal"><span class="pre">1.0/2</span></code>, <code class="docutils literal"><span class="pre">1/2.0</span></code>, or <code class="docutils literal"><span class="pre">1.0/2.0</span></code> all become <code class="docutils literal"><span class="pre">0.5</span></code>. So, it is enough
@@ -261,7 +260,7 @@ mathematical rounding as known from school is obtained by</p>
 Python string enclosed in triple double quotes <code class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></code>.
 The purpose of this string object is to document what the function
 does and what the arguments are. In this case the necessary
-documentation do not span more than one line, but with triple double
+documentation does not span more than one line, but with triple double
 quoted strings the text may span several lines:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -302,7 +301,7 @@ the numbers:</p>
 because the <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">u</span></code> values are not aligned in nicely formatted columns.
 To fix this problem, we recommend to use the <em>printf format</em>, supported in most
 programming languages inherited from C. Another choice is
-Python&#8217;s recent <em>format string syntax</em>. Both kind of syntax is illustrated
+Python&#8217;s recent <em>format string syntax</em>. Both kinds of syntax are illustrated
 below.</p>
 <p id="index-3">Writing <code class="docutils literal"><span class="pre">t[i]</span></code> and <code class="docutils literal"><span class="pre">u[i]</span></code> in two nicely formatted columns is done like
 this with the printf format:</p>
@@ -404,12 +403,12 @@ by the intuitive command <code class="docutils literal"><span class="pre">plot(t
 <p>It will be illustrative to also plot the exact solution
 <span class="math">\({u_{\small\mbox{e}}}(t)=Ie^{-at}\)</span> for comparison. We first
 need to make a Python function for computing the exact solution:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">I</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>It is tempting to just do</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u_e</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -419,7 +418,7 @@ straight lines between the discrete points <code class="docutils literal"><span 
 The technique for showing the &#8220;exact&#8221; variation of <span class="math">\({u_{\small\mbox{e}}}(t)\)</span> between
 the mesh points is to introduce a very fine mesh for <span class="math">\({u_{\small\mbox{e}}}(t)\)</span>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">t_e</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>      <span class="c"># fine mesh</span>
-<span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We can also plot the curves with different colors and styles, e.g.,</p>
@@ -441,7 +440,7 @@ the comparison plot becomes</p>
     <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
 
     <span class="n">t_e</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>        <span class="c"># fine mesh for u_e</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 
     <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">,</span>            <span class="c"># red dashes w/circles</span>
          <span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>              <span class="c"># blue line for exact sol.</span>
@@ -581,8 +580,9 @@ the exact <span class="math">\(u\)</span> values at the mesh points, in order to
 in the numerical solution.</p>
 <p id="index-7">A natural way to compare the exact and discrete solutions is to
 calculate their difference as a mesh function for the error:</p>
-<div class="math">
-\[e^n = {u_{\small\mbox{e}}}(t_n) - u^n,\quad n=0,1,\ldots,N_t {\thinspace .}\]</div>
+<div class="math" id="eq-auto8">
+\[\tag{46}
+e^n = {u_{\small\mbox{e}}}(t_n) - u^n,\quad n=0,1,\ldots,N_t {\thinspace .}\]</div>
 <p>We may view the mesh function
 <span class="math">\({u_{\small\mbox{e}}}^n = {u_{\small\mbox{e}}}(t_n)\)</span> as a representation of the continuous function <span class="math">\({u_{\small\mbox{e}}}(t)\)</span>
 defined for all <span class="math">\(t\in [0,T]\)</span>. In fact,
@@ -591,7 +591,7 @@ defined for all <span class="math">\(t\in [0,T]\)</span>. In fact,
 the difference of two mesh functions.</p>
 <p>The error mesh function <span class="math">\(e^n\)</span> can be computed by</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>  <span class="c"># Numerical sol.</span>
-<span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>      <span class="c"># Representative of exact sol.</span>
+<span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>             <span class="c"># Representative of exact sol.</span>
 <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
 </pre></div>
 </div>
@@ -600,19 +600,19 @@ and associated with the points in the array <code class="docutils literal"><span
 <span class="target" id="index-8"></span><span class="target" id="index-9"></span><div class="admonition-array-arithmetics admonition" id="index-10">
 <p class="first admonition-title">Array arithmetics</p>
 <p>The last statements</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
 </pre></div>
 </div>
 <p>demonstrate some standard examples of array arithmetics: <code class="docutils literal"><span class="pre">t</span></code> is an
-array of mesh points that we pass to <code class="docutils literal"><span class="pre">exact_solution</span></code>. This function
+array of mesh points that we pass to <code class="docutils literal"><span class="pre">u_exact</span></code>. This function
 evaluates <code class="docutils literal"><span class="pre">-a*t</span></code>, which is a scalar times an array, meaning that
 the scalar is multiplied with each array element.
 The result is an array, let us call it <code class="docutils literal"><span class="pre">tmp1</span></code>. Then
 <code class="docutils literal"><span class="pre">exp(tmp1)</span></code> means applying the exponential function to each element in
 <code class="docutils literal"><span class="pre">tmp1</span></code>, giving an array, say <code class="docutils literal"><span class="pre">tmp2</span></code>. Finally, <code class="docutils literal"><span class="pre">I*tmp2</span></code> is computed
 (scalar times array) and <code class="docutils literal"><span class="pre">u_e</span></code> refers to this array returned from
-<code class="docutils literal"><span class="pre">exact_solution</span></code>. The expression <code class="docutils literal"><span class="pre">u_e</span> <span class="pre">-</span> <span class="pre">u</span></code> is the difference between
+<code class="docutils literal"><span class="pre">u_exact</span></code>. The expression <code class="docutils literal"><span class="pre">u_e</span> <span class="pre">-</span> <span class="pre">u</span></code> is the difference between
 two arrays, resulting in a new array referred to by <code class="docutils literal"><span class="pre">e</span></code>.</p>
 <p class="last">Replacement of array element computations inside a loop by array
 arithmetics is known as <em>vectorization</em>.</p>
@@ -626,13 +626,16 @@ This is obtained by taking the norm of the error function.</p>
 <p>Let us first define norms of a function <span class="math">\(f(t)\)</span>
 defined for all <span class="math">\(t\in [0,T]\)</span>.
 Three common norms are</p>
-<div class="math" id="equation-decay:norms:L2">
-<span id="eq-decay-norms-l2"></span><span class="eqno">(1)</span>\[     ||f||_{L^2} = \left( \int_0^T f(t)^2 dt\right)^{1/2},\]</div>
-<div class="math" id="equation-decay:norms:L1">
-<span id="eq-decay-norms-l1"></span><span class="eqno">(2)</span>\[     ||f||_{L^1} = \int_0^T |f(t)| dt,\]</div>
-<div class="math" id="equation-decay:norms:Linf">
-<span id="eq-decay-norms-linf"></span><span class="eqno">(3)</span>\[     ||f||_{L^\infty} = \max_{t\in [0,T]}|f(t)|{\thinspace .}\]</div>
-<p>The <span class="math">\(L^2\)</span> norm <a href="#equation-decay:norms:L2">(1)</a> (&#8220;L-two norm&#8221;)
+<div class="math" id="eq-decay-norms-l2">
+\[\tag{47}
+||f||_{L^2} = \left( \int_0^T f(t)^2 dt\right)^{1/2},\]</div>
+<div class="math" id="eq-decay-norms-l1">
+\[\tag{48}
+||f||_{L^1} = \int_0^T |f(t)| dt,\]</div>
+<div class="math" id="eq-decay-norms-linf">
+\[\tag{49}
+||f||_{L^\infty} = \max_{t\in [0,T]}|f(t)|{\thinspace .}\]</div>
+<p>The <span class="math">\(L^2\)</span> norm <span class="xref std std-ref">(47)</span> (&#8220;L-two norm&#8221;)
 has nice mathematical properties and
 is the most popular norm. It is a generalization
 of the well-known Eucledian norm of vectors to functions.
@@ -644,8 +647,9 @@ and is widely used. It focuses on a single point with the largest
 value of <span class="math">\(|f|\)</span>, while the other norms measure average behavior of
 the function.</p>
 <p>In fact, there is a whole family of norms,</p>
-<div class="math">
-\[||f||_{L^p} = \left(\int_0^T f(t)^pdt\right)^{1/p},\]</div>
+<div class="math" id="eq-auto9">
+\[\tag{50}
+||f||_{L^p} = \left(\int_0^T f(t)^pdt\right)^{1/p},\]</div>
 <p>with <span class="math">\(p\)</span> real. In particular,
 <span class="math">\(p=1\)</span> corresponds to the <span class="math">\(L^1\)</span> norm above while <span class="math">\(p=\infty\)</span> is the
 <span class="math">\(L^\infty\)</span> norm.</p>
@@ -678,12 +682,15 @@ rule is of no concern.</p>
 <p>The three discrete norms for a mesh function <span class="math">\(f^n\)</span>, corresponding to
 the <span class="math">\(L^2\)</span>, <span class="math">\(L^1\)</span>, and <span class="math">\(L^\infty\)</span> norms of <span class="math">\(f(t)\)</span> defined above, are
 defined by</p>
-<div class="math" id="equation-decay:norms:l2">
-<span id="id2"></span><span class="eqno">(4)</span>\[     ||f^n||_{\ell^2} = \left( \Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2},\]</div>
-<div class="math" id="equation-decay:norms:l1">
-<span id="id3"></span><span class="eqno">(5)</span>\[     ||f^n||_{\ell^1} = \Delta t\sum_{n=0}^{N_t} |f^n|\]</div>
-<div class="math" id="equation-decay:norms:linf">
-<span id="id4"></span><span class="eqno">(6)</span>\[     ||f^n||_{\ell^\infty} = \max_{0\leq n\leq N_t}|f^n|{\thinspace .}\]</div>
+<div class="math" id="id2">
+\[\tag{51}
+||f^n||_{\ell^2} = \left( \Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2},\]</div>
+<div class="math" id="id3">
+\[\tag{52}
+||f^n||_{\ell^1} = \Delta t\sum_{n=0}^{N_t} |f^n|,\]</div>
+<div class="math" id="id4">
+\[\tag{53}
+||f^n||_{\ell^\infty} = \max_{0\leq n\leq N_t}|f^n|{\thinspace .}\]</div>
 <p>Note that the <span class="math">\(L^2\)</span>, <span class="math">\(L^1\)</span>, <span class="math">\(\ell^2\)</span>, and <span class="math">\(\ell^1\)</span> norms depend on the
 length of the interval of interest (think of <span class="math">\(f=1\)</span>, then the
 norms are proportional to <span class="math">\(\sqrt{T}\)</span> or <span class="math">\(T\)</span>). In some applications it
@@ -696,24 +703,28 @@ values). Moreover, people prefer
 to divide by the total length of the vector, <span class="math">\(N_t+1\)</span>, instead of <span class="math">\(N_t\)</span>.
 This reasoning gives rise to the <em>vector norms</em> for a vector
 <span class="math">\(f=(f_0,\ldots,f_{N})\)</span>:</p>
-<div class="math" id="equation-decay:norms:vl2">
-<span id="eq-decay-norms-vl2"></span><span class="eqno">(7)</span>\[     ||f||_2 = \left( \frac{1}{N+1}\sum_{n=0}^{N} (f_n)^2\right)^{1/2},\]</div>
-<div class="math" id="equation-decay:norms:vl1">
-<span id="eq-decay-norms-vl1"></span><span class="eqno">(8)</span>\[     ||f||_1 = \frac{1}{N+1}\sum_{n=0}^{N} |f_n|\]</div>
-<div class="math" id="equation-decay:norms:vlinf">
-<span id="eq-decay-norms-vlinf"></span><span class="eqno">(9)</span>\[     ||f||_{\ell^\infty} = \max_{0\leq n\leq N}|f_n|{\thinspace .}\]</div>
+<div class="math" id="eq-decay-norms-vl2">
+\[\tag{54}
+||f||_2 = \left( \frac{1}{N+1}\sum_{n=0}^{N} (f_n)^2\right)^{1/2},\]</div>
+<div class="math" id="eq-decay-norms-vl1">
+\[\tag{55}
+||f||_1 = \frac{1}{N+1}\sum_{n=0}^{N} |f_n|,\]</div>
+<div class="math" id="eq-decay-norms-vlinf">
+\[\tag{56}
+||f||_{\ell^\infty} = \max_{0\leq n\leq N}|f_n|{\thinspace .}\]</div>
 <p>Here we have used the common vector component notation with subscripts
 (<span class="math">\(f_n\)</span>) and <span class="math">\(N\)</span> as length. We will mostly work with mesh functions
 and use the discrete <span class="math">\(\ell^2\)</span>
-norm <a href="#equation-decay:norms:l2">(4)</a> or the max norm <span class="math">\(\ell^\infty\)</span>
-<a href="#equation-decay:norms:linf">(6)</a>, but the corresponding vector norms
-<a href="#equation-decay:norms:vl2">(7)</a>-<a href="#equation-decay:norms:vlinf">(9)</a> are also much used
+norm <span class="xref std std-ref">(51)</span> or the max norm <span class="math">\(\ell^\infty\)</span>
+<span class="xref std std-ref">(53)</span>, but the corresponding vector norms
+<a class="reference internal" href="#eq-decay-norms-vl2"><span class="std std-ref">(54)</span></a>-<a class="reference internal" href="#eq-decay-norms-vlinf"><span class="std std-ref">(56)</span></a> are also much used
 in numerical computations, so it is important to know the different
 norms and the relations between them.</p>
 <p id="index-16">A single number that expresses the size of the numerical error
 will be taken as <span class="math">\(||e^n||_{\ell^2}\)</span> and called <span class="math">\(E\)</span>:</p>
-<div class="math" id="equation-decay:E">
-<span id="eq-decay-e"></span><span class="eqno">(10)</span>\[     E = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}\]</div>
+<div class="math" id="eq-decay-e">
+\[\tag{57}
+E = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}\]</div>
 <p>The corresponding Python code, using array arithmetics, reads</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
@@ -729,7 +740,7 @@ one element at a time:</p>
 <span class="n">u_e</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="n">u_e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+    <span class="n">u_e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">dt</span>
 <span class="n">e</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
@@ -758,13 +769,13 @@ resolution.</p>
 <span class="sd">    and plot the numerical and exact solutions (if makeplot=True).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>    <span class="c"># Numerical solution</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
     <span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">makeplot</span><span class="p">:</span>
         <span class="n">figure</span><span class="p">()</span>                         <span class="c"># create new plot</span>
         <span class="n">t_e</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>       <span class="c"># fine mesh for u_e</span>
-        <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
         <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">)</span>           <span class="c"># red dashes w/circles</span>
         <span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>             <span class="c"># blue line for exact sol.</span>
         <span class="n">legend</span><span class="p">([</span><span class="s">&#39;numerical&#39;</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">])</span>
@@ -1010,7 +1021,7 @@ recent values of the unknown:</p>
 </pre></div>
 </div>
 <p>This code snippet also serves as a quick introduction to file writing in Python.
-Reading the data in the file into arrays <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">u</span></code> are done by the
+Reading the data in the file into arrays <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">u</span></code> is done by the
 function</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&#39;sol.dat&#39;</span><span class="p">):</span>
     <span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
@@ -1047,7 +1058,7 @@ the error measure and make the plot:</p>
     <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver_memsave</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
     <span class="n">t</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
     <span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">makeplot</span><span class="p">:</span>
@@ -1065,7 +1076,7 @@ exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.p
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <center>
             <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
@@ -1107,15 +1118,17 @@ exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.p
   <h4>Next topic</h4>
   <p class="topless"><a href="._main_alg003.html"
                         title="next chapter">Exercises</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/._main_alg002.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._main_alg002.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -1129,7 +1142,7 @@ exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.p
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1141,12 +1154,15 @@ exactly as the <code class="docutils literal"><span class="pre">decay_plot_mpl.p
         <li class="right" >
           <a href="._main_alg001.html" title="Finite difference methods"
              >previous</a> |</li>
-        <li><a href="index.html">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">
   <div class="footer">
-  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;H. P. Langtangen.
   </div>
 </div>
 

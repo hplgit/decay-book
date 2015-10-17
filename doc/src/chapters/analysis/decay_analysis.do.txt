@@ -355,7 +355,7 @@ Let us illustrate `sympy` with a standard Python shell syntax
 !bc pyshell
 >>> from sympy import *
 >>> # Create p as a mathematical symbol with name 'p'
->>> p = Symbol('p')
+>>> p = Symbols('p')
 >>> # Create a mathematical expression with p
 >>> A_e = exp(-p)
 >>>
@@ -372,6 +372,7 @@ recognized as the beginning of the Taylor series for $e^{-p}$.
 
 Let us define the numerical amplification factor where $p$ and $\theta$
 enter the formula as symbols:
+
 !bc pyshell
 >>> theta = Symbol('theta')
 >>> A = (1-(1-theta)*p)/(1+theta*p)
@@ -481,7 +482,8 @@ over all previous time steps. This error,
 $e^n = u^n-\uex(t_n)$, is known as the *global error*. We
 may look at $u^n$ for some $n$ and Taylor expand the
 mathematical expressions as functions of $p=a\Delta t$ to get a simple
-expression for the global error (for small $p$):
+expression for the global error (for small $p$). Continuing the
+`sympy` expression from previous section, we can write
 
 !bc pyshell
 >>> n = Symbol('n')
@@ -535,21 +537,27 @@ It is common to study the norm of the numerical error, as
 explained in detail in Section ref{decay:computing:error:norm}.
 % endif
 The $L^2$ norm of the error can be computed by treating $e^n$ as a function
-of $t$ in `sympy` and performing symbolic integration. For
-the Forward Euler scheme we have
+of $t$ in `sympy` and performing symbolic integration.
+From now on we shall do `import sympy as sym` and prefix all functions
+in `sympy` by `sym` to explicitly notify ourselves that the functions
+are from `sympy`. This is particularly advantageous when we use
+mathematical functions like `sin`: `sym.sin` is for symbolic expressions,
+while `sin` from `numpy` or `math` is for numerical computation.
+For the Forward Euler scheme we have
 
 !bc pycod
-p, n, a, dt, t, T, theta = symbols('p n a dt t T 'theta')
+import sympy as sym
+p, n, a, dt, t, T, theta = sym.symbols('p n a dt t T theta')
 A = (1-(1-theta)*p)/(1+theta*p)
-u_e = exp(-p*n)
+u_e = sym.exp(-p*n)
 u_n = A**n
 error = u_e.series(p, 0, 4) - u_n.subs(theta, 0).series(p, 0, 4)
 # Introduce t and dt instead of n and p
 error = error.subs('n', 't/dt').subs(p, 'a*dt')
 error = error.as_leading_term(dt) # study only the first term
 print error
-error_L2 = sqrt(integrate(error**2, (t, 0, T)))
-print error_L2
+error_L2 = sym.sqrt(sym.integrate(error**2, (t, 0, T)))
+print 'L2 error:', sym.simplify(error_error_L2)
 !ec
 The output reads
 
@@ -775,151 +783,3 @@ We have also derived explicit mathematical expressions for $e^n$,
 the truncation error, and the stability criteria.
 
 # Look in Asher and Petzold, p 40
-
-======= Exercises =======
-
-===== Problem: Visualize the accuracy of finite differences =====
-
-label{decay:analysis:exer:fd:exp:plot}
-file=decay_plot_fd_error
-
-The purpose of this exercise is to visualize the accuracy of finite difference
-approximations of the derivative of a given function.
-For any finite difference approximation, take the Forward Euler difference
-as an example, and any specific function, take  $u=e^{-at}$,
-we may introduce an error fraction
-
-!bt
-\begin{align*}
-E = \frac{[D_t^+ u]^n}{u'(t_n)} &= \frac{\exp{(-a(t_n+\Delta t))} - \exp{(-at_n)}}{-a\exp{(-at_n)\Delta t}}\\
-&= \frac{1}{a\Delta t}\left(1 -\exp{(-a\Delta t)}\right),
-\end{align*}
-!et
-and view $E$ as a function of $\Delta t$. We expect that
-$\lim_{\Delta t\rightarrow 0}E=1$, while $E$ may deviate significantly from
-unity for large $\Delta t$. How the error depends on $\Delta t$ is best
-visualized in a graph where we use a logarithmic scale for $\Delta t$,
-so we can cover many orders of magnitude of that quantity. Here is
-a code segment creating an array of 100 intervals, on the logarithmic
-scale, ranging from $10^{-6}$ to $10^{-0.5}$ and then plotting $E$ versus
-$p=a\Delta t$ with logarithmic scale on the $p$ axis:
-
-!bc pycod
-from numpy import logspace, exp
-from matplotlib.pyplot import semilogx
-p = logspace(-6, -0.5, 101)
-y = (1-exp(-p))/p
-semilogx(p, y)
-!ec
-Illustrate such errors for the finite difference operators $[D_t^+u]^n$
-(forward), $[D_t^-u]^n$ (backward), and $[D_t u]^n$ (centered) in
-the same plot.
-
-Perform a Taylor series expansions of the error fractions and find
-the leading order $r$ in the expressions of type
-$1 + Cp^r + \Oof{p^{r+1}}$, where $C$ is some constant.
-
-!bhint
-To save manual calculations and learn more about symbolic computing,
-make functions for the three difference operators and use `sympy`
-to perform the symbolic differences, differentiation, and Taylor series
-expansion. To plot a symbolic expression `E` against `p`, convert the
-expression to a Python function first: `E = sympy.lamdify([p], E)`.
-!ehint
-
-!bsol
-Here is Python code for the exercise:
-
-@@@CODE exer-analysis/decay_plot_fd_error.py
-The output of the Taylor polynomials reads
-
-!bc
-forward E: (exp(p) - 1)*exp(-p)/p
-Taylor series: 1 - p/2 + p**2/6 + O(p**3)
-backward E: (exp(p) - 1)/p
-Taylor series: 1 + p/2 + p**2/6 + O(p**3)
-central E: sinh(p)/p
-Taylor series: 1 + p**2/6 + O(p**3)
-!ec
-
-FIGURE: [fig-analysis/decay_plot_fd_error, width=700 frac=0.9] Plot for Exercise ref{decay:analysis:exer:fd:exp:plot}.
-!esol
-
-===== Problem: Explore the $\theta$-rule for exponential growth =====
-
-label{decay:analysis:exer:growth}
-file=exponential_growth
-
-This exercise asks you to solve the ODE $u'=-au$ with $a < 0$ such that
-the ODE models exponential growth instead of exponential decay.  A
-central theme is to investigate numerical artifacts and non-physical
-solution behavior.
-
-!bsubex
-Set $a=-1$ and run experiments with $\theta=0, 0.5, 1$ for
-various values of $\Delta t$ to uncover numerical artifacts.
-Recall that the exact solution is a
-monotone, growing function when $a < 0$. Oscillations or significantly
-wrong growth are signs of wrong qualitative behavior.
-
-From the experiments, select four values of $\Delta t$ that
-demonstrate the kind of numerical solutions that are characteristic
-for this model.
-
-!bsol
-#Does not work: @@@CODE exer-analysis/exponential_growth.do.txt envir=None fromto: The schemes are@=== Analysis
-
-The schemes are exactly the same as in the case $a>0$.
-A program solving the problem numerically is shown below.
-
-@@@CODE exer-analysis/exponential_growth.py fromto: from numpy import@# Exercise b
-
-# #if FORMAT == 'ipynb'
-!bc pycod
-dt_values = [3.0, 0.5, 0.1, 0.01]
-for dt in dt_values:
-    demo(dt)
-!ec
-# #else
-We can try different $\Delta t$ values: 3, 0.5, 0.1, and 0.01.
-
-FIGURE: [fig-analysis/exponential_growth_demo, width=800 frac=1]
-# #endif
-!esol
-!esubex
-
-!bsubex
-Write up the amplification factor and plot it for $\theta=0,0.5,1$
-together with the exact one for $a\Delta t < 0$. Use the plot to
-explain the observations made in the experiments.
-
-!bhint
-Modify the "`decay_ampf_plot.py`": "${src_analysis}/decay_ampf_plot.py" code
-(in the `src/analysis` directory).
-!ehint
-
-!bsol
-#@@@CODE exer-analysis/exponential_growth.do.txt envir=None fromto: === Analysis@
-
-The amplification factor is the same as when $a>0$, but here we introduce
-$p=-a\Delta t>0$ since $a < 0$:
-
-!bt
-\begin{equation}
-A(p) = \frac{1+(1-\theta)p}{1-\theta p}.
-\end{equation}
-!et
-A major problem is that the denominator can be zero when $a < 0$. This
-happens for $p=1/\theta$. The exact amplification factor is $\Aex = e^{p}$.
-
-Here is code for computing and plotting the factors:
-
-@@@CODE exer-analysis/exponential_growth.py fromto: # Exercise b@if __name
-
-# #if FORMAT == 'ipynb'
-plot_amplification_factors('FE BE CN'.split())
-# #else
-FIGURE: [fig-analysis/A_growth, width=700 frac=0.9]
-# #endif
-!esol
-!esubex

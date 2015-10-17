@@ -83,7 +83,7 @@ code { color: inherit; background-color: transparent; }
               ('Implementation', 1, 'decay:impl1', 'decay:impl1'),
               ('Computer language: Python', 2, None, '___sec21'),
               ('Making a solver function', 2, 'decay:py1', 'decay:py1'),
-              ('Integer division', 2, None, '___sec23'),
+              ('Integer division', 2, 'decay:py2', 'decay:py2'),
               ('Doc strings', 2, None, '___sec24'),
               ('Formatting numbers', 2, None, '___sec25'),
               ('Running the program', 2, None, '___sec26'),
@@ -115,23 +115,23 @@ code { color: inherit; background-color: transparent; }
                'decay:exer:meshfunc',
                'decay:exer:meshfunc'),
               ('Remarks', 3, None, '___sec39'),
-              ('Exercise 2: Differentiate a function',
+              ('Problem 2: Differentiate a function',
                2,
                'decay:exer:dudt',
                'decay:exer:dudt'),
-              ('Exercise 3: Experiment with divisions',
+              ('Problem 3: Experiment with divisions',
                2,
                'decay:exer:intdiv',
                'decay:exer:intdiv'),
-              ('Exercise 4: Experiment with wrong computations',
+              ('Problem 4: Experiment with wrong computations',
                2,
                'decay:exer:decay1err',
                'decay:exer:decay1err'),
-              ('Exercise 5: Plot the error function',
+              ('Problem 5: Plot the error function',
                2,
                'decay:exer:plot:error',
                'decay:exer:plot:error'),
-              ('Exercise 6: Change formatting of numbers and debug',
+              ('Problem 6: Change formatting of numbers and debug',
                2,
                'decay:exer:inexact:output',
                'decay:exer:inexact:output'),
@@ -250,13 +250,15 @@ u^{\prime}(t) = -au(t)\tp
 $$
 
 In this equation, \( u(t) \) is a scalar function of time \( t \),
-\( a \) is a constant, and \( u^{\prime}(t) \) means differentiation with
+\( a \) is a constant (in this book we mostly work with \( a>0 \)),
+and \( u^{\prime}(t) \) means differentiation with
 respect to \( t \). This type of equation arises in a number of
 widely different phenomena where some quantity \( u \) undergoes
-exponential reduction. Examples include radioactive decay, population
+exponential reduction (provided \( a>0 \)).
+Examples include radioactive decay, population
 decay, investment decay, cooling of an object, pressure decay in the
-atmosphere, and retarded motion in fluids (for some of these models,
-\( a \) can be negative as
+atmosphere, and retarded motion in fluids. Some models with growth,
+\( a < 0 \), are treated as
 well.
 We have chosen this particular ODE not only because
 its applications are relevant, but even more because studying
@@ -267,9 +269,10 @@ when solving diffusion-type partial differential equations.
 <h3 id="___sec2">The exact solution </h3>
 
 <p>
-Although our interest is in <em>approximate</em> numerical solutions of \( u^{\prime}=-au \), it is convenient to know the exact analytical solution of the problem so
-we can compute the error in numerical approximations.
-The analytical solution of this ODE is found by
+Although our interest is in <em>approximate</em> numerical solutions of
+\( u^{\prime}=-au \), it is convenient to know the exact analytical
+solution of the problem so we can compute the error in numerical
+approximations.  The analytical solution of this ODE is found by
 separation of variables, which results in
 
 $$
@@ -335,6 +338,7 @@ The time domain \( [0,T] \) is represented by a finite number of
 $$
 \begin{equation}
 0 = t_0 < t_1 < t_2 < \cdots < t_{N_t-1} < t_{N_t} = T\tp
+\tag{2}
 \end{equation}
 $$
 
@@ -380,6 +384,7 @@ linear interpolation formula
 $$
 \begin{equation}
 u(t) \approx u^n + \frac{u^{n+1}-u^n}{t_{n+1}-t_n}(t - t_n)\tp
+\tag{3}
 \end{equation}
 $$
 
@@ -411,15 +416,15 @@ The original ODE is then reduced to  the following equations:
 $$
 \begin{equation}
 u^{\prime}(t_n) = -au(t_n),\quad n=0,\ldots,N_t,\quad u(0)=I\tp
-\tag{2}
+\tag{4}
 \end{equation}
 $$
 
 Even though the original ODE is not stated to be valid at \( t=0 \), it
 is valid as close to \( t=0 \) as we like, and it turns out that it
 is useful for construction of numerical methods to have
-<a href="#mjx-eqn-2">(2)</a> valid for \( n=0 \). The next two steps show that we
-need <a href="#mjx-eqn-2">(2)</a> for \( n=0 \).
+<a href="#mjx-eqn-4">(4)</a> valid for \( n=0 \). The next two steps show that we
+need <a href="#mjx-eqn-4">(4)</a> for \( n=0 \).
 
 <h3 id="___sec7">Step 3: Replacing derivatives by finite differences </h3>
 
@@ -431,36 +436,36 @@ try a <em>forward</em> difference approximation (see Figure <a href="#decay:sket
 $$
 \begin{equation}
 u^{\prime}(t_n) \approx \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n}\tp
-\tag{3}
+\tag{5}
 \end{equation}
 $$
 
 The name forward relates to the fact that we use a value forward in
 time, \( u^{n+1} \), together with the value \( u^n \) at the point \( t_n \), where
 we seek the derivative, to approximate \( u^{\prime}(t_n) \).
-Inserting this approximation in <a href="#mjx-eqn-2">(2)</a> results in
+Inserting this approximation in <a href="#mjx-eqn-4">(4)</a> results in
 
 $$
 \begin{equation}
 \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -au^{n},\quad n=0,1,\ldots,N_t-1\tp
-\tag{4}
+\tag{6}
 \end{equation}
 $$
 
 Note that if we want to compute the solution
 up to time level \( N_t \),
-we only need <a href="#mjx-eqn-2">(2)</a> to hold for \( n=0,\ldots,N_t-1 \) since
-<a href="#mjx-eqn-4">(4)</a> for \( n=N_t-1 \) creates an equation for the final
+we only need <a href="#mjx-eqn-4">(4)</a> to hold for \( n=0,\ldots,N_t-1 \) since
+<a href="#mjx-eqn-6">(6)</a> for \( n=N_t-1 \) creates an equation for the final
 value \( u^{N_t} \).
 
 <p>
-Also note that we use the approximation symbol \( \approx \) in <a href="#mjx-eqn-3">(3)</a>,
-but not in <a href="#mjx-eqn-4">(4)</a>. Instead, we view <a href="#mjx-eqn-4">(4)</a> as
-an equation that is not mathematically equivalent to <a href="#mjx-eqn-3">(3)</a>,
-but represents an approximation to the equation <a href="#mjx-eqn-3">(3)</a>.
+Also note that we use the approximation symbol \( \approx \) in <a href="#mjx-eqn-5">(5)</a>,
+but not in <a href="#mjx-eqn-6">(6)</a>. Instead, we view <a href="#mjx-eqn-6">(6)</a> as
+an equation that is not mathematically equivalent to <a href="#mjx-eqn-5">(5)</a>,
+but represents an approximation to the equation <a href="#mjx-eqn-5">(5)</a>.
 
 <p>
-Equation <a href="#mjx-eqn-4">(4)</a>
+Equation <a href="#mjx-eqn-6">(6)</a>
 is the discrete counterpart to the original ODE problem
 <a href="#mjx-eqn-1">(1)</a>, and often referred to as a <em>finite difference scheme</em>
 or more generally as the <em>discrete equations</em> of the problem.
@@ -481,29 +486,29 @@ the mesh points: \( u^n \), \( n=1,2,\ldots,N_t \).
 <p>
 The final step is to identify the computational algorithm to be implemented
 in a program. The key observation here is to realize that
-<a href="#mjx-eqn-4">(4)</a> can be used to compute \( u^{n+1} \) if \( u^n \) is known.
+<a href="#mjx-eqn-6">(6)</a> can be used to compute \( u^{n+1} \) if \( u^n \) is known.
 Starting with \( n=0 \), \( u^0 \) is known since \( u^0=u(0)=I \), and
-<a href="#mjx-eqn-4">(4)</a> gives an equation for \( u^1 \). Knowing \( u^1 \),
-\( u^2 \) can be found from <a href="#mjx-eqn-4">(4)</a>. In general, \( u^n \)
-in <a href="#mjx-eqn-4">(4)</a> can be assumed known, and then we can easily solve for
+<a href="#mjx-eqn-6">(6)</a> gives an equation for \( u^1 \). Knowing \( u^1 \),
+\( u^2 \) can be found from <a href="#mjx-eqn-6">(6)</a>. In general, \( u^n \)
+in <a href="#mjx-eqn-6">(6)</a> can be assumed known, and then we can easily solve for
 the unknown \( u^{n+1} \):
 
 $$
 \begin{equation}
 u^{n+1} = u^n - a(t_{n+1} -t_n)u^n\tp
-\tag{5}
+\tag{7}
 \end{equation}
 $$
 
-We shall refer to <a href="#mjx-eqn-5">(5)</a> as the Forward Euler (FE) scheme
+We shall refer to <a href="#mjx-eqn-7">(7)</a> as the Forward Euler (FE) scheme
 for our model problem. From a mathematical point of view,
-equations of the form <a href="#mjx-eqn-5">(5)</a> are known as
+equations of the form <a href="#mjx-eqn-7">(7)</a> are known as
 <em>difference equations</em> since they express how differences in
 the dependent variable, here \( u \), evolve with \( n \). In our case,
 the differences in \( u \) are given by \( u^{n+1}-u^n = -a(t_{n+1}-t_n)u^n \).
 The finite difference method can be viewed as a method for turning
 a differential equation into an algebraic difference equation that
-can be easily solved by repeated use of a formula like <a href="#mjx-eqn-5">(5)</a>.
+can be easily solved by repeated use of a formula like <a href="#mjx-eqn-7">(7)</a>.
 
 <h3 id="___sec9">Interpretation </h3>
 
@@ -532,7 +537,7 @@ can compute a new slope and continue the process.
 <h3 id="___sec10">Computing with the recursive formula </h3>
 
 <p>
-Mathematical computation with <a href="#mjx-eqn-5">(5)</a> is straightforward:
+Mathematical computation with <a href="#mjx-eqn-7">(7)</a> is straightforward:
 
 $$
 \begin{align*}
@@ -567,7 +572,7 @@ simple problems, so in general finite difference equations must be
 solved on a computer.
 
 <p>
-As the next sections will show, the scheme <a href="#mjx-eqn-5">(5)</a> is just one
+As the next sections will show, the scheme <a href="#mjx-eqn-7">(7)</a> is just one
 out of many alternative finite difference (and other) methods for
 the model problem <a href="#mjx-eqn-1">(1)</a>.
 
@@ -581,7 +586,7 @@ Another alternative is
 $$
 \begin{equation}
 u^{\prime}(t_n) \approx \frac{u^{n}-u^{n-1}}{t_{n}-t_{n-1}}\tp
-\tag{6}
+\tag{8}
 \end{equation}
 $$
 
@@ -598,32 +603,32 @@ Figure <a href="#decay:sketch:BE">4</a> explains the idea.
 </center>
 
 <p>
-Inserting <a href="#mjx-eqn-6">(6)</a> in <a href="#mjx-eqn-2">(2)</a> yields
+Inserting <a href="#mjx-eqn-8">(8)</a> in <a href="#mjx-eqn-4">(4)</a> yields
 the Backward Euler (BE) scheme:
 
 $$
 \begin{equation}
 \frac{u^{n}-u^{n-1}}{t_{n}-t_{n-1}} = -a u^n,\quad n=1,\ldots,N_t\tp
-\tag{7}
+\tag{9}
 \end{equation}
 $$
 
 We assume, as explained under step 4 in the section <a href="#decay:schemes:FE">The Forward Euler scheme</a>,
 that we have computed \( u^0, u^1, \ldots, u^{n-1} \) such that
-<a href="#mjx-eqn-7">(7)</a> can be used to compute \( u^n \). Note that
-<a href="#mjx-eqn-7">(7)</a> needs \( n \) to start at 1 (then it involves \( u^0 \), but
+<a href="#mjx-eqn-9">(9)</a> can be used to compute \( u^n \). Note that
+<a href="#mjx-eqn-9">(9)</a> needs \( n \) to start at 1 (then it involves \( u^0 \), but
 no \( u^{-1} \)) and end at \( N_t \).
 
 <p>
 For direct similarity with the formula for the
-Forward Euler scheme <a href="#mjx-eqn-5">(5)</a>
-we replace \( n \) by \( n+1 \) in <a href="#mjx-eqn-7">(7)</a> and solve for the
+Forward Euler scheme <a href="#mjx-eqn-7">(7)</a>
+we replace \( n \) by \( n+1 \) in <a href="#mjx-eqn-9">(9)</a> and solve for the
 unknown value \( u^{n+1} \):
 
 $$
 \begin{equation}
 u^{n+1} = \frac{1}{1+ a(t_{n+1}-t_n)} u^n,\quad n=0,\ldots,N_t-1\tp
-\tag{8}
+\tag{10}
 \end{equation}
 $$
 
@@ -631,8 +636,8 @@ $$
 
 <p>
 The finite difference approximations
-<a href="#mjx-eqn-3">(3)</a> and <a href="#mjx-eqn-6">(6)</a> used to derive the schemes
-<a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-8">(8)</a>, respectively,
+<a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-8">(8)</a> used to derive the schemes
+<a href="#mjx-eqn-7">(7)</a> and <a href="#mjx-eqn-10">(10)</a>, respectively,
 are both one-sided differences, i.e.,
 we collect information either forward or backward in time when approximating
 the derivative at a point. Such one-sided differences are
@@ -651,15 +656,15 @@ The approximation reads
 $$
 \begin{equation}
 u^{\prime}(t_{n+\half}) \approx \frac{u^{n+1}-u^n}{t_{n+1}-t_n}\tp
-\tag{9}
+\tag{11}
 \end{equation}
 $$
 
 Figure <a href="#decay:sketch:CN">5</a> sketches the geometric interpretation of
 such a centered difference.
 Note that the fraction on the right-hand side is the same as for the
-Forward Euler approximation <a href="#mjx-eqn-3">(3)</a> and
-the Backward Euler approximation <a href="#mjx-eqn-6">(6)</a> (with
+Forward Euler approximation <a href="#mjx-eqn-5">(5)</a> and
+the Backward Euler approximation <a href="#mjx-eqn-8">(8)</a> (with
 \( n \) replaced by \( n+1 \)). The accuracy of this fraction as an approximation
 to the derivative of \( u \) depends on <em>where</em> we seek the derivative:
 in the center of the interval \( [t_{n},t_{n+1}] \) or at the end points.
@@ -673,7 +678,7 @@ We shall later see that it is more accurate at the center point.
 </center>
 
 <p>
-With the formula <a href="#mjx-eqn-9">(9)</a>, where \( u^{\prime} \) is evaluated at
+With the formula <a href="#mjx-eqn-11">(11)</a>, where \( u^{\prime} \) is evaluated at
 \( t_{n+\half} \), it is natural to demand the
 ODE to be fulfilled at the time points <em>between</em> the mesh points:
 
@@ -681,17 +686,17 @@ $$
 \begin{equation}
 u^{\prime}(t_{n+\half}) = -au(t_{n+\half}),\quad n=0,
 \ldots,N_t-1\tp
-\tag{10}
+\tag{12}
 \end{equation}
 $$
 
-Using <a href="#mjx-eqn-9">(9)</a> in <a href="#mjx-eqn-10">(10)</a> results in
+Using <a href="#mjx-eqn-11">(11)</a> in <a href="#mjx-eqn-12">(12)</a> results in
 the approximate discrete equation
 
 $$
 \begin{equation}
 \frac{u^{n+1}-u^n}{t_{n+1}-t_n} = -au^{n+\half},\quad n=0,\ldots,N_t-1,
-\tag{11}
+\tag{13}
 \end{equation}
 $$
 
@@ -700,7 +705,7 @@ to \( u(t_{n+\half}) \).
 
 <p>
 There is a fundamental problem with the right-hand side of
-<a href="#mjx-eqn-11">(11)</a>: we aim to compute \( u^n \) for integer \( n \), which means
+<a href="#mjx-eqn-13">(13)</a>: we aim to compute \( u^n \) for integer \( n \), which means
 that \( u^{n+\half} \) is not a quantity computed by our method. The
 quantity must
 therefore be
@@ -712,17 +717,17 @@ as an arithmetic mean of the \( u \) values at the neighboring mesh points:
 $$
 \begin{equation}
 u^{n+\half} \approx \half (u^n + u^{n+1})\tp
-\tag{12}
+\tag{14}
 \end{equation}
 $$
 
-Using <a href="#mjx-eqn-12">(12)</a> in <a href="#mjx-eqn-11">(11)</a> results in a new
+Using <a href="#mjx-eqn-14">(14)</a> in <a href="#mjx-eqn-13">(13)</a> results in a new
 approximate discrete equation
 
 $$
 \begin{equation}
 \frac{u^{n+1}-u^n}{t_{n+1}-t_n} = -a\half (u^n + u^{n+1})\tp
-\tag{13}
+\tag{15}
 \end{equation}
 $$
 
@@ -742,13 +747,13 @@ unknown, which we can solve for:
 $$
 \begin{equation}
 u^{n+1} = \frac{1-\half a(t_{n+1}-t_n)}{1 + \half a(t_{n+1}-t_n)}u^n\tp
-\tag{14}
+\tag{16}
 \end{equation}
 $$
 
-The finite difference scheme <a href="#mjx-eqn-14">(14)</a> is often called
+The finite difference scheme <a href="#mjx-eqn-16">(16)</a> is often called
 the Crank-Nicolson (CN) scheme or a midpoint or centered scheme.
-Note that <a href="#mjx-eqn-14">(14)</a> as well as <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-8">(8)</a>
+Note that <a href="#mjx-eqn-16">(16)</a> as well as <a href="#mjx-eqn-7">(7)</a> and <a href="#mjx-eqn-10">(10)</a>
 apply whether the spacing in the time mesh, \( t_{n+1}-t_n \), depends on \( n \)
 or is constant.
 
@@ -761,17 +766,17 @@ formulated as one scheme with a varying parameter \( \theta \):
 $$
 \begin{equation}
 \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -a (\theta u^{n+1} + (1-\theta) u^{n})
-\tag{15}
+\tag{17}
 \tp
 \end{equation}
 $$
 
 <p>
-Observe:
+Observe that
 
 <ul>
  <li> \( \theta =0 \) gives the Forward Euler scheme</li>
- <li> \( \theta =1 \) gives the Backward Euler scheme, and</li>
+ <li> \( \theta =1 \) gives the Backward Euler scheme,</li>
  <li> \( \theta =\half \) gives the Crank-Nicolson scheme.</li>
 </ul>
 
@@ -787,7 +792,7 @@ we solve for the latter:
 $$
 \begin{equation}
 u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)}\tp
-\tag{16}
+\tag{18}
 \end{equation}
 $$
 
@@ -824,7 +829,7 @@ The weighted average reads
 $$
 \begin{equation}
 u(\tilde t) \approx \theta u^{n+1} + (1-\theta) u^{n},
-\tag{17}
+\tag{19}
 \end{equation}
 $$
 
@@ -834,7 +839,7 @@ We can also express \( \tilde t \) as a similar weighted average
 $$
 \begin{equation}
 \tilde t \approx \theta t_{n+1} + (1-\theta) t_{n}\tp
-\tag{18}
+\tag{20}
 \end{equation}
 $$
 
@@ -842,8 +847,8 @@ $$
 Let now the ODE hold at the point
 \( \tilde t\in [t_n,t_{n+1}] \), approximate \( u^{\prime} \) by the fraction
 \( (u^{n+1}-u^{n})/(t_{n+1}-t_n) \), and approximate the right-hand
-side \( -au \) by the weighted average <a href="#mjx-eqn-17">(17)</a>.
-The result is <a href="#mjx-eqn-15">(15)</a>.
+side \( -au \) by the weighted average <a href="#mjx-eqn-19">(19)</a>.
+The result is <a href="#mjx-eqn-17">(17)</a>.
 
 <p>
 </div>
@@ -878,13 +883,13 @@ well known.
 $$
 \begin{align}
 u^{n+1} &= (1 - a\Delta t )u^n  \quad (\hbox{FE})
-\tag{19}\\ 
-u^{n+1} &= \frac{1}{1+ a\Delta t} u^n  \quad (\hbox{BE})
-\tag{20}\\ 
-u^{n+1} &= \frac{1-\half a\Delta t}{1 + \half a\Delta t} u^n \quad (\hbox{CN})
 \tag{21}\\ 
+u^{n+1} &= \frac{1}{1+ a\Delta t} u^n  \quad (\hbox{BE})
+\tag{22}\\ 
+u^{n+1} &= \frac{1-\half a\Delta t}{1 + \half a\Delta t} u^n \quad (\hbox{CN})
+\tag{23}\\ 
 u^{n+1} &= \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n \quad (\theta-\hbox{rule})
-\tag{22}
+\tag{24}
 \end{align}
 $$
 </div>
@@ -896,7 +901,9 @@ Euler, and Crank-Nicolson schemes. They complement each other with their
 different pros and cons, thus providing a useful collection of
 solution methods for many differential equation problems.
 The unifying notation of the \( \theta \)-rule makes it convenient to
-work with all three methods through just one formula.
+work with all three methods through just one formula. This is
+particularly advantageous in computer implementations since one avoids
+if-else tests with formulas that have repetitive elements.
 
 <h2 id="decay:fd:taylor">Mathematical derivation of finite difference formulas</h2>
 
@@ -927,6 +934,7 @@ $$
 f(x) & \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2 +
 \frac{1}{6}f'''(a)(x-a)^3 + \cdots \nonumber\\ 
  &\quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(a)(x-a)^m\tp
+\tag{25}
 \end{align}
 $$
 
@@ -941,14 +949,14 @@ f(t_n+\Delta t) & \approx f(t_n) + f'(t_n)\Delta t + \frac{1}{2}f''(t_n)
 \Delta t^2 +
 \frac{1}{6}f'''(t_n)\Delta t^3 + \cdots\nonumber\\ 
 &\quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^m\tp
-\tag{23}
+\tag{26}
 \end{align}
 $$
 
 <h3 id="___sec16">The forward difference </h3>
 
 <p>
-We can use <a href="#mjx-eqn-23">(23)</a> to find an approximation for
+We can use <a href="#mjx-eqn-26">(26)</a> to find an approximation for
 \( f'(t_n) \) simply by solving with respect to this quantity:
 
 $$
@@ -957,7 +965,7 @@ f'(t_n) & \approx  \frac{f(t_n+\Delta t) - f(t_n)}{\Delta t}
 - \frac{1}{2}f''(t_n)\Delta t -
 \frac{1}{6}f'''(t_n)\Delta t^2 + \cdots\nonumber\\ 
 &\quad - \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^{m-1}\tp
-\tag{24}
+\tag{27}
 \end{align}
 $$
 
@@ -969,17 +977,17 @@ the formula
 $$
 \begin{equation}
 f'(t_n) \approx \frac{f(t_n+\Delta t) - f(t_n)}{\Delta t}
-\tag{25}
+\tag{28}
 \end{equation}
 $$
 
 is exact in the limit \( \Delta t\rightarrow 0 \).
 
 <p>
-The interesting feature of <a href="#mjx-eqn-24">(24)</a> is that we have
-a measure of the error in the formula <a href="#mjx-eqn-25">(25)</a>: the
+The interesting feature of <a href="#mjx-eqn-27">(27)</a> is that we have
+a measure of the error in the formula <a href="#mjx-eqn-28">(28)</a>: the
 error is given by the extra terms on the right-hand side of
-<a href="#mjx-eqn-24">(24)</a>. We assume that \( \Delta t \) is a small quantity
+<a href="#mjx-eqn-27">(27)</a>. We assume that \( \Delta t \) is a small quantity
 (\( \Delta t\ll 1 \)).
 Then \( \Delta t^2\ll\Delta t \), \( \Delta t^3\ll \Delta t^2 \), and so on,
 which means that the first term is the dominating term. This first
@@ -998,7 +1006,7 @@ f(t_n-\Delta t) &\approx f(t_n) - f'(t_n)\Delta t + \frac{1}{2}f''(t_n)
 \Delta t^2 -
 \frac{1}{6}f'''(t_n)\Delta t^3+ \cdots\nonumber\\ 
 &\quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^m\tp
-\tag{26}
+\tag{29}
 \end{align}
 $$
 
@@ -1010,7 +1018,7 @@ f'(t_n) &\approx \frac{f(t_n) - f(t_n-\Delta t)}{\Delta t}
 + \frac{1}{2}f''(t_n)\Delta t -
 \frac{1}{6}f'''(t_n)\Delta t^2+ \cdots\nonumber\\ 
 &\quad - \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^{m-1}\tp
-\tag{27}
+\tag{30}
 \end{align}
 $$
 
@@ -1030,11 +1038,13 @@ $$
 f(t_n) &\approx f(t_n+\frac{1}{2}\Delta t) -
 f'(t_n+\frac{1}{2}\Delta t)\frac{1}{2}\Delta t +
 f''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^2 -\nonumber\\ 
-& \quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots\\ 
+& \quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots
+\tag{31}\\ 
 f(t_{n+1}) & \approx f(t_n+\frac{1}{2}\Delta t) +
 f'(t_n+\frac{1}{2}\Delta t)\frac{1}{2}\Delta t +
 f''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^2 +\nonumber\\ 
 &\quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots
+\tag{32}
 \end{align}
 $$
 
@@ -1044,7 +1054,7 @@ $$
 \begin{equation}
 f(t_{n+1}) - f(t_n) = f'(t_n+\frac{1}{2}\Delta t)\Delta t
 + 2f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots
-\tag{28}
+\tag{33}
 \end{equation}
 $$
 
@@ -1056,7 +1066,7 @@ $$
 f'(t_n+\frac{1}{2}\Delta t) \approx \frac{f(t_{n+1}) - f(t_n)}{\Delta t}
 - \frac{1}{4}f'''(t_n+\frac{1}{2}\Delta t)\Delta t^2 + c
 \cdots
-\tag{29}
+\tag{34}
 \end{equation}
 $$
 
@@ -1068,7 +1078,7 @@ This means that the centered difference formula
 $$
 \begin{equation}
 f'(t_n+\frac{1}{2}\Delta t) \approx \frac{f(t_{n+1}) - f(t_n)}{\Delta t}
-\tag{30}
+\tag{35}
 \end{equation}
 $$
 
@@ -1089,7 +1099,7 @@ by the \( D_t^+ \) operator and written as
 $$
 \begin{equation}
 [D_t^+u]^n = \frac{u^{n+1} - u^{n}}{\Delta t}
-\ \left( \approx \frac{d}{dt} u(t_n)\right) \tag{31}
+\ \left( \approx \frac{d}{dt} u(t_n)\right) \tag{36}
 \tp
 \end{equation}
 $$
@@ -1111,7 +1121,7 @@ a backward difference reads
 $$
 \begin{equation}
 [D_tu]^n = \frac{u^{n+\half} - u^{n-\half}}{\Delta t}
-\approx \frac{d}{dt} u(t_n), \tag{32}
+\approx \frac{d}{dt} u(t_n), \tag{37}
 \end{equation}
 $$
 
@@ -1119,7 +1129,7 @@ and
 $$
 \begin{equation}
 [D_t^-u]^n = \frac{u^{n} - u^{n-1}}{\Delta t}
-\approx \frac{d}{dt} u(t_n) \tag{33}
+\approx \frac{d}{dt} u(t_n) \tag{38}
 \tp
 \end{equation}
 $$
@@ -1133,7 +1143,7 @@ An averaging operator is also convenient to have:
 $$
 \begin{equation}
 [\overline{u}^{t}]^n = \half (u^{n-\half} + u^{n+\half} )
-\approx u(t_n) \tag{34}
+\approx u(t_n) \tag{39}
 \end{equation}
 $$
 
@@ -1160,6 +1170,7 @@ since each term must be approximated at the same point:
 $$
 \begin{equation}
 [D_t^- u  = -au]^n \tp
+\tag{40}
 \end{equation}
 $$
 
@@ -1168,6 +1179,7 @@ Similarly, the Forward Euler scheme takes the form
 $$
 \begin{equation}
 [D_t^+ u  = -au]^n,
+\tag{41}
 \end{equation}
 $$
 
@@ -1176,14 +1188,14 @@ while the Crank-Nicolson scheme is written as
 $$
 \begin{equation}
 [D_t u = -a\overline{u}^t]^{n+\half}\tp
-\tag{35}
+\tag{42}
 \end{equation}
 $$
 
 <p>
-<div class="alert alert-block alert-info alert-text-normal"><b>Question.</b>
-By use of <a href="#mjx-eqn-32">(32)</a> and <a href="#mjx-eqn-34">(34)</a>, are you able to
-write out the expressions in <a href="#mjx-eqn-35">(35)</a> to verify that
+<div class="alert alert-block alert-info alert-text-normal"><b>Question:</b>
+By use of <a href="#mjx-eqn-37">(37)</a> and <a href="#mjx-eqn-39">(39)</a>, are you able to
+write out the expressions in <a href="#mjx-eqn-42">(42)</a> to verify that
 it is indeed the Crank-Nicolson scheme?
 </div>
 
@@ -1194,7 +1206,7 @@ The \( \theta \)-rule can be specified in operator notation by
 $$
 \begin{equation}
 [\bar D_t u = -a\overline{u}^{t,\theta}]^{n+\theta},\tp
-\tag{36}
+\tag{43}
 \end{equation}
 $$
 
@@ -1203,7 +1215,7 @@ We define a new time difference
 $$
 \begin{equation}
 \lbrack\bar D_t u\rbrack^{n+\theta} = \frac{u^{n+1}-u^n}{t^{n+1}-t^n},
-\tag{37}
+\tag{44}
 \end{equation}
 $$
 
@@ -1214,13 +1226,13 @@ $$
 \begin{equation}
 \lbrack\overline{u}^{t,\theta}\rbrack^{n+\theta} = (1-\theta)u^{n} + \theta u^{n+1}
 \approx u(t_{n+\theta}),
-\tag{38}
+\tag{45}
 \end{equation}
 $$
 
 where \( \theta\in [0,1] \) as usual. Note that for \( \theta =\half \) we recover
 the standard centered difference and the standard arithmetic mean.
-The idea in <a href="#mjx-eqn-36">(36)</a> is to sample the equation at
+The idea in <a href="#mjx-eqn-43">(43)</a> is to sample the equation at
 \( t_{n+\theta} \), use a non-symmetric difference at that
 point \( [\bar D_t u]^{n+\theta} \), and a weighted (non-symmetric) mean value.
 
