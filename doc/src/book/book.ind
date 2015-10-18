@@ -1,0 +1,224 @@
+\begin{theindex}
+
+  \item $\theta$-rule, \hyperpage{24}, \hyperpage{103}
+
+  \indexspace
+
+  \item A-stable methods, \hyperpage{67}
+  \item Adams-Bashforth scheme, 2nd-order, \hyperpage{106}
+  \item Adams-Bashforth scheme, 3rd order, \hyperpage{106}
+  \item adaptive time stepping, \hyperpage{112}
+  \item algebraic equation, \hyperpage{19}
+  \item amplification factor, \hyperpage{67}
+  \item {\rm\texttt{argparse}} (Python module), \hyperpage{184}
+  \item {\rm\texttt{ArgumentParser}} (Python class), \hyperpage{184}
+  \item array arithmetics, \hyperpage{43}, \hyperpage{54}
+  \item array computing, \hyperpage{43}, \hyperpage{54}
+  \item averaging
+    \subitem arithmetic, \hyperpage{23}
+    \subitem geometric, \hyperpage{141}
+
+  \indexspace
+
+  \item backward difference, \hyperpage{21}
+  \item Backward Euler scheme, \hyperpage{21}
+  \item backward scheme, 1-step, \hyperpage{21}
+  \item backward scheme, 2-step, \hyperpage{103}
+  \item BDF2 scheme, \hyperpage{103}
+
+  \indexspace
+
+  \item centered difference, \hyperpage{22}
+  \item chemical reactions
+    \subitem irreversible, \hyperpage{129}
+    \subitem reversible, \hyperpage{130}
+  \item command-line arguments, \hyperpage{183, 184}
+  \item consistency, \hyperpage{76}
+  \item continuous function norms, \hyperpage{43}
+  \item convergence, \hyperpage{76}
+  \item convergence rate, \hyperpage{98}
+  \item Crank-Nicolson scheme, \hyperpage{22}
+  \item cropping images, \hyperpage{49}
+
+  \indexspace
+
+  \item debugging, \hyperpage{177}
+  \item decay ODE, \hyperpage{14}
+  \item difference equation, \hyperpage{19}
+  \item directory, \hyperpage{32}
+  \item discrete equation, \hyperpage{19}
+  \item discrete function norms, \hyperpage{44}
+  \item Distutils, \hyperpage{203}
+  \item doc strings, \hyperpage{35}
+  \item DocOnce, \hyperpage{225}
+  \item doctest in test function, \hyperpage{196}
+  \item doctests, \hyperpage{191}
+  \item Dormand-Prince Runge-Kutta 4-5 method, \hyperpage{112}
+
+  \indexspace
+
+  \item EPS plot, \hyperpage{47}
+  \item error
+    \subitem amplification factor, \hyperpage{71}
+    \subitem global, \hyperpage{72}
+    \subitem norms, \hyperpage{46}
+  \item explicit schemes, \hyperpage{103}
+  \item exponential decay, \hyperpage{14}
+
+  \indexspace
+
+  \item finite difference operator notation, \hyperpage{29}
+  \item finite difference scheme, \hyperpage{19}
+  \item finite differences, \hyperpage{18}
+    \subitem backward, \hyperpage{21}
+    \subitem centered, \hyperpage{22}
+    \subitem forward, \hyperpage{18}
+  \item folder, \hyperpage{32}
+  \item format string syntax (Python), \hyperpage{36}
+  \item forward difference, \hyperpage{18}
+  \item Forward Euler scheme, \hyperpage{19}
+
+  \indexspace
+
+  \item geometric mean, \hyperpage{141}
+  \item GitHub, \hyperpage{204}
+  \item Google Docs, \hyperpage{222}
+  \item grid, \hyperpage{15}
+
+  \indexspace
+
+  \item Heun's method, \hyperpage{105}
+  \item HTML, \hyperpage{222}
+
+  \indexspace
+
+  \item implicit schemes, \hyperpage{103}
+  \item importing modules, \hyperpage{167}, \hyperpage{207}
+  \item interactive Python, \hyperpage{70}
+  \item IPython notebooks, \hyperpage{225}
+  \item {\rm\texttt{isympy}}, \hyperpage{70}
+
+  \indexspace
+
+  \item Jupyter notebooks, \hyperpage{225}
+
+  \indexspace
+
+  \item Kelvin-Voigt material model, \hyperpage{143}
+
+  \indexspace
+
+  \item L-stable methods, \hyperpage{67}
+  \item lambda functions, \hyperpage{95}
+  \item LaTeX, \hyperpage{222}
+  \item Leapfrog scheme, \hyperpage{104}
+  \item Leapfrog scheme, filtered, \hyperpage{104}
+  \item LibreOffice, \hyperpage{222}
+  \item list comprehension, \hyperpage{183}
+  \item logger, \hyperpage{177}
+  \item {\rm\texttt{logging}} module, \hyperpage{177}
+  \item logistic model, \hyperpage{123}
+  \item Lotka-Volterra model, \hyperpage{134}
+
+  \indexspace
+
+  \item Markdown, \hyperpage{224}
+  \item MathJax, \hyperpage{222}
+  \item mesh, \hyperpage{15}
+  \item mesh function, \hyperpage{15}
+  \item mesh function norms, \hyperpage{44}
+  \item method of manufactured solutions, \hyperpage{96}
+  \item MMS (method of manufactured solutions), \hyperpage{96}
+  \item {\rm\texttt{montage}} program, \hyperpage{49}
+  \item Monte Carlo simulation, \hyperpage{81}
+
+  \indexspace
+
+  \item norm
+    \subitem continuous, \hyperpage{43}
+    \subitem discrete (mesh function), \hyperpage{44}
+  \item {\rm\texttt{nose}} tests, \hyperpage{193}
+
+  \indexspace
+
+  \item {\rm\texttt{ode45}}, \hyperpage{112}
+  \item OpenOffice, \hyperpage{222}
+  \item operator notation, finite differences, \hyperpage{29}
+  \item option-value pairs (command line), \hyperpage{184}
+  \item {\rm\texttt{os.system}}, \hyperpage{221}
+
+  \indexspace
+
+  \item PDF plot, \hyperpage{47}
+  \item {\rm\texttt{pdfcrop}} program, \hyperpage{50}
+  \item {\rm\texttt{pdfnup}} program, \hyperpage{50}
+  \item {\rm\texttt{pdftk}} program, \hyperpage{50}
+  \item plotting curves, \hyperpage{38}
+  \item PNG plot, \hyperpage{47}
+  \item population dynamics, \hyperpage{121}
+  \item predator-prey model, \hyperpage{134}
+  \item printf format, \hyperpage{36}
+  \item problem class, \hyperpage{208}
+  \item {\rm\texttt{pytest}} tests, \hyperpage{193}
+
+  \indexspace
+
+  \item radioactive decay, \hyperpage{125}
+  \item reading the command line, \hyperpage{184}
+  \item refactoring, \hyperpage{166}
+  \item replicability, \hyperpage{216}, \hyperpage{225}
+  \item representative (mesh function), \hyperpage{42}
+  \item reproducibility, \hyperpage{216}
+  \item RK4, \hyperpage{106}
+  \item Runge-Kutta, 2nd-order method, \hyperpage{105}
+  \item Runge-Kutta, 4th-order method, \hyperpage{106}
+
+  \indexspace
+
+  \item scalar computing, \hyperpage{46}
+  \item scaling, \hyperpage{142}
+  \item {\rm\texttt{setup.py}}, \hyperpage{203}
+  \item software testing
+    \subitem doctests, \hyperpage{191}
+    \subitem nose, \hyperpage{193}
+    \subitem pytest, \hyperpage{193}
+    \subitem test function, \hyperpage{193}
+    \subitem unit testing (class-based), \hyperpage{200}
+  \item solver class, \hyperpage{210}
+  \item Sphinx (typesetting tool), \hyperpage{223}
+  \item stability, \hyperpage{66}, \hyperpage{76}
+  \item {\rm\texttt{sympy}}, \hyperpage{70}
+  \item {\rm\texttt{sys.argv}}, \hyperpage{183}
+
+  \indexspace
+
+  \item Taylor-series methods (for ODEs), \hyperpage{105}
+  \item terminal velocity, \hyperpage{140}
+  \item test function, \hyperpage{193}
+  \item {\rm\texttt{TestCase}} (class in {\rm\texttt{unittest}}), 
+		\hyperpage{200}
+  \item theta-rule, \hyperpage{24}, \hyperpage{103}
+  \item time step, \hyperpage{26}
+
+  \indexspace
+
+  \item unit testing, \hyperpage{193}, \hyperpage{200}
+  \item {\rm\texttt{unittest}}, \hyperpage{200}
+  \item Unix wildcard notation, \hyperpage{221}
+
+  \indexspace
+
+  \item vectorization, \hyperpage{43}, \hyperpage{54}
+  \item verification, \hyperpage{100}
+  \item viewing graphics files, \hyperpage{47}
+  \item viscoelasticity, \hyperpage{143}
+  \item visualizing curves, \hyperpage{38}
+
+  \indexspace
+
+  \item weighted average, \hyperpage{24}
+  \item wildcard notation (Unix), \hyperpage{221}
+  \item Word (Microsoft), \hyperpage{222}
+  \item wrapper (code), \hyperpage{210}
+
+\end{theindex}

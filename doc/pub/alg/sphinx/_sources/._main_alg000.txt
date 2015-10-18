@@ -7,5 +7,5 @@ Algorithms and implementations for exponential decay models
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Hans Petter Langtangen
-:Date: Oct 17, 2015
+:Date: Oct 18, 2015
 
