@@ -42,24 +42,41 @@ create well-tested, reliable, and flexible software for such a
 mathematical model.
 # #endif
 
-The writing style is gentle and aims at a broad audience.
-Prerequisite knowledge is basic one-dimensional calculus and preferably
-some experience with computer programming in Python or MATLAB.
-The material was initially written for self study and therefore features
-comprehensive and easy-to-understand explanations. For
-some readers it may act as an overview and refresher of traditional
-mathematical topics and likely a first introduction to many of the
-software topics. The text can also be used
-as a case-based and mathematically simple introduction to modern
-multi-disciplinary problem solving with computers, using the
-range of applications in Chapter ref{decay:app}
-as motivation and then treating the details of
+The writing style is gentle and aims at a broad audience. I am much
+inspired by Nick Trefethen's praise of easy learning:
+
+!bquote
+*Some people think that stiff challenges are the best device to
+induce learning, but I am not one of them. The natural way to learn
+something is by spending vast amounts of easy, enjoyable time at it.
+This goes whether you want to speak German, sight-read at the
+piano, type, or do mathematics. Give me the German storybook for
+fifth graders that I feel like reading in bed, not Goethe and a
+dictionary. The latter will bring rapid progress at first, then
+exhaustion and failure to resolve.*
+
+*The main thing to be said for stiff challenges is that inevitably
+we will encounter them, so we had better learn to face them boldly.
+Putting them in the curriculum can help teach us to do so. But for
+teaching the skill or subject matter itself, they are overrated.*
+cite[p. 86]{index_cards}
+!equote
+
+Prerequisite knowledge for this book is basic one-dimensional calculus
+and preferably some experience with computer programming in Python or
+MATLAB.  The material was initially written for self study and
+therefore features comprehensive and easy-to-understand
+explanations. For some readers it may act as an overview and refresher
+of traditional mathematical topics and likely a first introduction to
+many of the software topics. The text can also be used as a case-based
+and mathematically simple introduction to modern multi-disciplinary
+problem solving with computers, using the range of applications in
+Chapter ref{decay:app} as motivation and then treating the details of
 the mathematical and computer science subjects from the other
-chapters.
-#Nowadays, many people need to enter the world of
-#computer-based differential equation modeling, and this book
-#should be useful for readers with minor background in mathematics and
-#programming.
+chapters. In particular, I have also had in mind the new groups of
+readers from bio- and geo-sciences who need to enter the world of
+computer-based differential equation modeling, but lack experience
+with (and perhaps also interest in) mathematics and programming.
 
 The choice of topics in this book is motivated from what is needed in
 more advanced courses on finite difference methods for partial
@@ -73,10 +90,11 @@ stronger focus on how to turn mathematics into working code.
 It also explains the mathematics and programming in more detail
 than what is common in the literature.
 
-There is a more advanced companion book in the works that treat finite
-difference methods for PDEs using the same writing style and having
-the same focus on turning mathematical algorithms into reliable
-software.
+There is a more advanced companion book in the works, ``Finite
+Difference Computing with Partial Differential Equations'', which
+treats finite difference methods for PDEs using the same writing style
+and having the same focus on turning mathematical algorithms into
+reliable software.
 
 Although the main example in the present book is $u^{\prime}=-au$, we
 also address the more general model problem $u'=-a(t)u + b(t)$, and
@@ -129,7 +147,7 @@ The following list of topics will be elaborated on.
  * How to write scientific reports in various formats (LaTeX, HTML).
 
 # #if FORMAT == "pdflatex"
-##\clearpage
+\clearpage
 # #endif
 
 !bsummary The exposition in a nutshell
@@ -153,8 +171,10 @@ The exercises are divided into three categories: *exercises*
 refer to the text (usually variations or extensions of examples
 in the text), *problems* are stand-alone exercises without
 references to the text, and *projects* are larger problems.
-Exercises, problems, and projects share the same numbering to
-avoid confusion between Exercise 4.3 and Problem 4.3.
+Exercises, problems, and projects share a common numbering to
+avoid confusion between, e.g., Exercise 4.3 and Problem 4.3
+(it will be Exercise 4.3 and Problem 4.4 if they follow after
+each other).
 
 
 
@@ -164,7 +184,7 @@ Professor Svein Linge has provided very detailed and constructive
 feedback on this text, and all his efforts are highly appreciated. I
 also want to thank a number of students who have pointed out
 weaknesses and found errors. The proof reading of Yapi Donatien Achou
-is much appreciated.  Many thanks also to Linda Falch-Koslung,
+is appreciated.  Many thanks also to Linda Falch-Koslung,
 Dr. Olav Dajani, and the rest of the OUS team for feeding me with
 FOLFIRINOX and thereby keeping me alive and in good enough shape to
 finish this book.

@@ -19,6 +19,7 @@
 
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="reveal.js/css/reveal.css">
 <link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
@@ -36,14 +37,21 @@
 <link rel="stylesheet" href="reveal.js/css/theme/default.css" id="theme">
 <link rel="stylesheet" href="reveal.js/css/theme/cbc.css" id="theme">
 <link rel="stylesheet" href="reveal.js/css/theme/simula.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
 -->
 
 <!-- For syntax highlighting -->
 <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
 
-<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<!-- Printing and PDF exports -->
 <script>
-document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
 </script>
 
 <style type="text/css">
@@ -58,7 +66,7 @@ document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.l
              text-shadow:0 1px 0 rgba(255,255,255,0.5);
              border:5px solid #bababa;
              -webkit-border-radius: 14px; -moz-border-radius: 14px;
-             border-radius:14px
+             border-radius:14px;
              background-position: 10px 10px;
              background-repeat: no-repeat;
              background-size: 38px;
@@ -147,7 +155,7 @@ $$
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <br>
 <p>&nbsp;<br>
-<center><h4>Aug 16, 2015</h4></center> <!-- date -->
+<center><h4>Oct 17, 2015</h4></center> <!-- date -->
 <br>
 </section>
 
@@ -620,6 +628,7 @@ by <em>linear interpolation</em>:
 $$
 \begin{equation}
 u(t) \approx u^n + \frac{u^{n+1}-u^n}{t_{n+1}-t_n}(t - t_n)
+\tag{3}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -640,7 +649,7 @@ $$
 $$
 \begin{equation}
 u'(t_n) = -au(t_n),\quad n=1,\ldots,N_t
-\tag{3}
+\tag{4}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -658,7 +667,7 @@ derivatives:
 $$
 \begin{equation}
 u'(t_n) \approx \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n}
-\tag{4}
+\tag{5}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -684,7 +693,7 @@ gives
 $$
 \begin{equation}
 \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -au^{n},\quad n=0,1,\ldots,N_t-1
-\tag{5}
+\tag{6}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -725,7 +734,7 @@ Solve wrt \( u^{n+1} \) to get the computational formula:
 $$
 \begin{equation}
 u^{n+1} = u^n - a(t_{n+1} -t_n)u^n
-\tag{6}
+\tag{7}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -769,7 +778,7 @@ derivative (backward difference):
 $$
 \begin{equation}
 u'(t_n) \approx \frac{u^{n}-u^{n-1}}{t_{n}-t_{n-1}}
-\tag{7}
+\tag{8}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -790,7 +799,7 @@ the Backward Euler (BE) scheme:
 $$
 \begin{equation}
 \frac{u^{n}-u^{n-1}}{t_{n}-t_{n-1}} = -a u^n
-\tag{8}
+\tag{9}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -801,7 +810,7 @@ Solve with respect to the unknown \( u^{n+1} \):
 $$
 \begin{equation}
 u^{n+1} = \frac{1}{1+ a(t_{n+1}-t_n)} u^n
-\tag{9}
+\tag{10}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -837,7 +846,7 @@ Idea 2: approximate \( u'(t_{n+\half} \) by a centered difference
 $$
 \begin{equation}
 u'(t_{n+\half}) \approx \frac{u^{n+1}-u^n}{t_{n+1}-t_n}
-\tag{10}
+\tag{11}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -864,7 +873,7 @@ Result:
 $$
 \begin{equation}
 \frac{u^{n+1}-u^n}{t_{n+1}-t_n} = -a\half (u^n + u^{n+1})
-\tag{11}
+\tag{12}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -876,7 +885,7 @@ Solve wrt to \( u^{n+1} \):
 $$
 \begin{equation}
 u^{n+1} = \frac{1-\half a(t_{n+1}-t_n)}{1 + \half a(t_{n+1}-t_n)}u^n
-\tag{12}
+\tag{13}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -896,7 +905,7 @@ formulated as one scheme with a varying parameter \( \theta \):
 $$
 \begin{equation}
 \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -a (\theta u^{n+1} + (1-\theta) u^{n})
-\tag{13}
+\tag{14}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -916,7 +925,7 @@ $$
 $$
 \begin{equation}
 u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)}
-\tag{14}
+\tag{15}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -937,13 +946,13 @@ simplicity hereafter): constant time step \( t_{n+1}-t_n\equiv\Delta t \)
 $$
 \begin{align}
 u^{n+1} &= (1 - a\Delta t )u^n  \quad (\hbox{FE})
-\tag{15}\\ 
-u^{n+1} &= \frac{1}{1+ a\Delta t} u^n  \quad (\hbox{BE})
 \tag{16}\\ 
-u^{n+1} &= \frac{1-\half a\Delta t}{1 + \half a\Delta t} u^n \quad (\hbox{CN})
+u^{n+1} &= \frac{1}{1+ a\Delta t} u^n  \quad (\hbox{BE})
 \tag{17}\\ 
+u^{n+1} &= \frac{1-\half a\Delta t}{1 + \half a\Delta t} u^n \quad (\hbox{CN})
+\tag{18}\\ 
 u^{n+1} &= \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n \quad (\theta-\hbox{rule})
-\tag{18}
+\tag{19}
 \end{align}
 $$
 <p>&nbsp;<br>
@@ -986,6 +995,7 @@ Physical quantities:
 $$
 \begin{equation}
 [D_t^- u  = -au]^n
+\tag{20}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -1002,7 +1012,7 @@ Forward difference:
 $$
 \begin{equation}
 [D_t^+u]^n = \frac{u^{n+1} - u^{n}}{\Delta t}
-\approx \frac{d}{dt} u(t_n) \tag{19}
+\approx \frac{d}{dt} u(t_n) \tag{21}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -1013,7 +1023,7 @@ Centered difference:
 $$
 \begin{equation}
 [D_tu]^n = \frac{u^{n+\half} - u^{n-\half}}{\Delta t}
-\approx \frac{d}{dt} u(t_n), \tag{20}
+\approx \frac{d}{dt} u(t_n), \tag{22}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -1024,7 +1034,7 @@ Backward difference:
 $$
 \begin{equation}
 [D_t^-u]^n = \frac{u^{n} - u^{n-1}}{\Delta t}
-\approx \frac{d}{dt} u(t_n) \tag{21}
+\approx \frac{d}{dt} u(t_n) \tag{23}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -1049,6 +1059,7 @@ Common to put the whole equation inside square brackets:
 $$
 \begin{equation}
 [D_t^- u  = -au]^n
+\tag{24}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -1062,6 +1073,7 @@ $$
 $$
 \begin{equation}
 [D_t^+ u  = -au]^n
+\tag{25}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -1078,7 +1090,7 @@ Introduce an averaging operator:
 $$
 \begin{equation}
 [\overline{u}^{t}]^n = \half (u^{n-\half} + u^{n+\half} )
-\approx u(t_n) \tag{22}
+\approx u(t_n) \tag{26}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -1090,7 +1102,7 @@ The Crank-Nicolson scheme can then be written as
 $$
 \begin{equation}
 [D_t u = -a\overline{u}^t]^{n+\half}
-\tag{23}
+\tag{27}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -1416,7 +1428,7 @@ Python function for the exact solution \( \uex(t)=Ie^{-at} \):
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
-<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">exact_solution</span>(t, I, a):
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">u_exact</span>(t, I, a):
     <span style="color: #8B008B; font-weight: bold">return</span> I*exp(-a*t)
 </pre></div>
 <p>
@@ -1425,7 +1437,7 @@ Quick plotting:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
-<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">u_e = exact_solution(t, I, a)
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">u_e = u_exact(t, I, a)
 plot(t, u, t, u_e)
 </pre></div>
 <p>
@@ -1439,7 +1451,7 @@ Remedy: Introduce a very fine mesh for \( \uex \).
 
 <!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
 <div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">t_e = linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)      <span style="color: #228B22"># fine mesh</span>
-u_e = exact_solution(t_e, I, a)
+u_e = u_exact(t_e, I, a)
 
 plot(t_e, u_e, <span style="color: #CD5555">&#39;b-&#39;</span>,            <span style="color: #228B22"># blue line for u_e</span>
      t,   u,   <span style="color: #CD5555">&#39;r--o&#39;</span>)          <span style="color: #228B22"># red dashes w/circles</span>
@@ -1460,7 +1472,7 @@ plot(t_e, u_e, <span style="color: #CD5555">&#39;b-&#39;</span>,            <spa
     u, t = solver(I=I, a=a, T=T, dt=dt, theta=theta)
 
     t_e = linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)        <span style="color: #228B22"># fine mesh for u_e</span>
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
 
     plot(t,   u,   <span style="color: #CD5555">&#39;r--o&#39;</span>,            <span style="color: #228B22"># red dashes w/circles</span>
          t_e, u_e, <span style="color: #CD5555">&#39;b-&#39;</span>)              <span style="color: #228B22"># blue line for exact sol.</span>
@@ -1594,7 +1606,7 @@ The exact discrete solution is
 $$
 \begin{equation}
 u^n = IA^n
-\tag{24}
+\tag{28}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -1645,7 +1657,7 @@ Exact solution: \( \uex(t)=Ie^{-at} \), implemented as
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
-<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">exact_solution</span>(t, I, a):
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">u_exact</span>(t, I, a):
     <span style="color: #8B008B; font-weight: bold">return</span> I*exp(-a*t)
 </pre></div>
 <p>
@@ -1655,14 +1667,14 @@ Compute \( e^n \) by
 
 <!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
 <div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">u, t = solver(I, a, T, dt, theta)  <span style="color: #228B22"># Numerical solution</span>
-u_e = exact_solution(t, I, a)
+u_e = u_exact(t, I, a)
 e = u_e - u
 </pre></div>
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
 <b>Array arithmetics - we compute on entire arrays!</b>
 <ul>
- <p><li> <code>exact_solution(t, I, a)</code> works with <code>t</code> as array</li>
+ <p><li> <code>u_exact(t, I, a)</code> works with <code>t</code> as array</li>
  <p><li> Must have <code>exp</code> from <code>numpy</code> (not <code>math</code>)</li>
  <p><li> <code>e = u_e - u</code>: array subtraction</li>
  <p><li> Array arithmetics gives shorter and much faster code</li>
@@ -1687,11 +1699,11 @@ Norms of a function \( f(t) \):
 $$
 \begin{align}
 ||f||_{L^2} &= \left( \int_0^T f(t)^2 dt\right)^{1/2}
-\tag{25}\\ 
+\tag{29}\\ 
 ||f||_{L^1} &= \int_0^T |f(t)| dt
-\tag{26}\\ 
+\tag{30}\\ 
 ||f||_{L^\infty} &= \max_{t\in [0,T]}|f(t)|
-\tag{27}
+\tag{31}
 \end{align}
 $$
 <p>&nbsp;<br>
@@ -1738,7 +1750,7 @@ Python w/array arithmetics:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
-<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">e = exact_solution(t) - u
+<div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%">e = u_exact(t) - u
 E = sqrt(dt*<span style="color: #658b00">sum</span>(e**<span style="color: #B452CD">2</span>))
 </pre></div>
 </section>
@@ -1757,7 +1769,7 @@ Scalar computing of <code>E = sqrt(dt*sum(e**2))</code>:
 u_e = zeros(m)
 t = <span style="color: #B452CD">0</span>
 <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(m):
-    u_e[i] = exact_solution(t, a, I)
+    u_e[i] = u_exact(t, a, I)
     t = t + dt
 e = zeros(m)
 <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(m):
@@ -1879,7 +1891,7 @@ in a two-dimensional array (which we try to prevent now!).
     u, t = solver_memsave(I, a, T, dt, theta, filename)
 
     t, u = read_file(filename)
-    u_e = exact_solution(t, I, a)
+    u_e = u_exact(t, I, a)
     e = u_e - u
     E = np.sqrt(dt*np.sum(e**<span style="color: #B452CD">2</span>))
     <span style="color: #8B008B; font-weight: bold">if</span> makeplot:
@@ -1896,7 +1908,7 @@ Complete program: <a href="http://tinyurl.com/ofkw6kc/alg/decay_memsave.py" targ
 </div> <!-- class="reveal" -->
 
 <script src="reveal.js/lib/js/head.min.js"></script>
-<script src="reveal.js/js/reveal.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
 
 <script>
 // Full list of configuration options available here:

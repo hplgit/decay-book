@@ -252,8 +252,8 @@ file=decay_plot_error
 
 Solve the problem $u'=-au$, $u(0)=I$, using the Forward Euler, Backward
 Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
-function $e^n = \uex(t_n)-u^n$ for $\Delta t$, $\frac{1}{4}\Delta t$, and
-$\frac{1}{8}\Delta t$, where $\uex$ is the exact solution of the ODE and
+function $e^n = \uex(t_n)-u^n$ for $\Delta t=0.1, 0.05, 0.025$,
+where $\uex$ is the exact solution of the ODE and
 $u^n$ is the numerical solution at mesh point $t_n$.
 
 !bhint

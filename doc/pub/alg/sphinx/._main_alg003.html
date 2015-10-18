@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -57,8 +56,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -70,14 +69,14 @@
         <li class="right" >
           <a href="._main_alg002.html" title="Implementation"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="exercises">
 <h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
@@ -117,14 +116,15 @@ at a time as suggested in a) is a way of out of this problem.</p>
 <span class="math">\(t\in [3,4]\)</span>.</p>
 </div>
 </div>
-<div class="section" id="exercise-2-differentiate-a-function">
-<span id="decay-exer-dudt"></span><h2>Exercise 2: Differentiate a function<a class="headerlink" href="#exercise-2-differentiate-a-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-2-differentiate-a-function">
+<span id="decay-exer-dudt"></span><h2>Problem 2: Differentiate a function<a class="headerlink" href="#problem-2-differentiate-a-function" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="index-0"></span><span class="target" id="index-1"></span><p id="index-2">Given a mesh function <span class="math">\(u^n\)</span> as an array <code class="docutils literal"><span class="pre">u</span></code> with <span class="math">\(u^n\)</span> values at mesh
 points <span class="math">\(t_n=n\Delta t\)</span>, the discrete derivative can be based on
 centered differences:</p>
-<div class="math" id="equation-decay:exer:dudt:D2t">
-<span id="eq-decay-exer-dudt-d2t"></span><span class="eqno">(1)</span>\[     d^n = [D_{2t}u]^n =
-     \frac{u^{n+1}-u^{n-1}}{2\Delta t},\quad n=1,\ldots,N_t-1{\thinspace .}\]</div>
+<div class="math" id="eq-decay-exer-dudt-d2t">
+\[\tag{58}
+d^n = [D_{2t}u]^n =
+    \frac{u^{n+1}-u^{n-1}}{2\Delta t},\quad n=1,\ldots,N_t-1{\thinspace .}\]</div>
 <p>At the end points we use forward and backward differences:</p>
 <div class="math">
 \[d^0 = [D_t^+u]^n = \frac{u^{1}-u^{0}}{\Delta t},\]</div>
@@ -141,7 +141,7 @@ mesh spacing <span class="math">\(\Delta t\)</span>. Write a corresponding test 
 The three differentiation formulas are
 exact for quadratic polynomials. Use this property to verify the program.</p>
 <p><strong>b)</strong>
-A standard implementation of the formula <a href="#equation-decay:exer:dudt:D2t">(1)</a> is to
+A standard implementation of the formula <a class="reference internal" href="#eq-decay-exer-dudt-d2t"><span class="std std-ref">(58)</span></a> is to
 have a loop over <span class="math">\(i\)</span>. For large <span class="math">\(N_t\)</span>, such loop may run slowly in
 Python. A technique for speeding up the computations, called vectorization
 or array computing,
@@ -151,7 +151,7 @@ define two arrays</p>
 <div class="math">
 \[\begin{split}u^+ &amp;= (u^2,u^3,\ldots,u^{N_t}),
 u^- &amp;= (u^0,u^1,\ldots,u^{N_t-2}){\thinspace .}\end{split}\]</div>
-<p>The formula <a href="#equation-decay:exer:dudt:D2t">(1)</a> can now be expressed as</p>
+<p>The formula <a class="reference internal" href="#eq-decay-exer-dudt-d2t"><span class="std std-ref">(58)</span></a> can now be expressed as</p>
 <div class="math">
 \[(d^1,d^2,\ldots,d^{N_t-1}) = \frac{1}{2\Delta t}(u^+ - u^-){\thinspace .}\]</div>
 <p>The corresponding Python code reads</p>
@@ -169,8 +169,8 @@ test function that compares the result with that of
 <code class="docutils literal"><span class="pre">differentiate</span></code>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">differentiate</span></code>.</p>
 </div>
-<div class="section" id="exercise-3-experiment-with-divisions">
-<span id="decay-exer-intdiv"></span><h2>Exercise 3: Experiment with divisions<a class="headerlink" href="#exercise-3-experiment-with-divisions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-3-experiment-with-divisions">
+<span id="decay-exer-intdiv"></span><h2>Problem 3: Experiment with divisions<a class="headerlink" href="#problem-3-experiment-with-divisions" title="Permalink to this headline">¶</a></h2>
 <p>Explain what happens in the following computations, where
 some are mathematically unexpected:</p>
 <div class="highlight-ipy"><div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">dt</span> <span class="o">=</span> <span class="mi">3</span>
@@ -185,8 +185,8 @@ some are mathematically unexpected:</p>
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">pyproblems</span></code>.</p>
 </div>
-<div class="section" id="exercise-4-experiment-with-wrong-computations">
-<span id="decay-exer-decay1err"></span><h2>Exercise 4: Experiment with wrong computations<a class="headerlink" href="#exercise-4-experiment-with-wrong-computations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-4-experiment-with-wrong-computations">
+<span id="decay-exer-decay1err"></span><h2>Problem 4: Experiment with wrong computations<a class="headerlink" href="#problem-4-experiment-with-wrong-computations" title="Permalink to this headline">¶</a></h2>
 <p>Consider the <code class="docutils literal"><span class="pre">solver</span></code> function in the <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_v1.py">decay_v1.py</a> file
 and the following call:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -206,19 +206,19 @@ why <code class="docutils literal"><span class="pre">u</span></code> is wrong an
 specified <span class="math">\(T=7\)</span>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">decay_v1_err</span></code>.</p>
 </div>
-<div class="section" id="exercise-5-plot-the-error-function">
-<span id="decay-exer-plot-error"></span><h2>Exercise 5: Plot the error function<a class="headerlink" href="#exercise-5-plot-the-error-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-5-plot-the-error-function">
+<span id="decay-exer-plot-error"></span><h2>Problem 5: Plot the error function<a class="headerlink" href="#problem-5-plot-the-error-function" title="Permalink to this headline">¶</a></h2>
 <p>Solve the problem <span class="math">\(u'=-au\)</span>, <span class="math">\(u(0)=I\)</span>, using the Forward Euler, Backward
 Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
-function <span class="math">\(e^n = {u_{\small\mbox{e}}}(t_n)-u^n\)</span> for <span class="math">\(\Delta t\)</span>, <span class="math">\(\frac{1}{4}\Delta t\)</span>, and
-<span class="math">\(\frac{1}{8}\Delta t\)</span>, where <span class="math">\({u_{\small\mbox{e}}}\)</span> is the exact solution of the ODE and
+function <span class="math">\(e^n = {u_{\small\mbox{e}}}(t_n)-u^n\)</span> for <span class="math">\(\Delta t=0.1, 0.05, 0.025\)</span>,
+where <span class="math">\({u_{\small\mbox{e}}}\)</span> is the exact solution of the ODE and
 <span class="math">\(u^n\)</span> is the numerical solution at mesh point <span class="math">\(t_n\)</span>.</p>
 <p><strong>Hint.</strong>
 Modify the <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_plot_mpl.py">decay_plot_mpl.py</a> code.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">decay_plot_error</span></code>.</p>
 </div>
-<div class="section" id="exercise-6-change-formatting-of-numbers-and-debug">
-<span id="decay-exer-inexact-output"></span><h2>Exercise 6: Change formatting of numbers and debug<a class="headerlink" href="#exercise-6-change-formatting-of-numbers-and-debug" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-6-change-formatting-of-numbers-and-debug">
+<span id="decay-exer-inexact-output"></span><h2>Problem 6: Change formatting of numbers and debug<a class="headerlink" href="#problem-6-change-formatting-of-numbers-and-debug" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_memsave.py">decay_memsave.py</a> program
 writes the time values and solution values to a file which looks
 like</p>
@@ -259,7 +259,7 @@ terminal window. Why?</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <center>
             <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
@@ -273,11 +273,11 @@ terminal window. Why?</p>
 <li><a class="reference internal" href="#remarks">Remarks</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#exercise-2-differentiate-a-function">Exercise 2: Differentiate a function</a></li>
-<li><a class="reference internal" href="#exercise-3-experiment-with-divisions">Exercise 3: Experiment with divisions</a></li>
-<li><a class="reference internal" href="#exercise-4-experiment-with-wrong-computations">Exercise 4: Experiment with wrong computations</a></li>
-<li><a class="reference internal" href="#exercise-5-plot-the-error-function">Exercise 5: Plot the error function</a></li>
-<li><a class="reference internal" href="#exercise-6-change-formatting-of-numbers-and-debug">Exercise 6: Change formatting of numbers and debug</a></li>
+<li><a class="reference internal" href="#problem-2-differentiate-a-function">Problem 2: Differentiate a function</a></li>
+<li><a class="reference internal" href="#problem-3-experiment-with-divisions">Problem 3: Experiment with divisions</a></li>
+<li><a class="reference internal" href="#problem-4-experiment-with-wrong-computations">Problem 4: Experiment with wrong computations</a></li>
+<li><a class="reference internal" href="#problem-5-plot-the-error-function">Problem 5: Plot the error function</a></li>
+<li><a class="reference internal" href="#problem-6-change-formatting-of-numbers-and-debug">Problem 6: Change formatting of numbers and debug</a></li>
 </ul>
 </li>
 </ul>
@@ -288,15 +288,17 @@ terminal window. Why?</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._main_alg004.html"
                         title="next chapter">Bibliography</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/._main_alg003.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._main_alg003.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -310,7 +312,7 @@ terminal window. Why?</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -322,12 +324,15 @@ terminal window. Why?</p>
         <li class="right" >
           <a href="._main_alg002.html" title="Implementation"
              >previous</a> |</li>
-        <li><a href="index.html">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">
   <div class="footer">
-  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;H. P. Langtangen.
   </div>
 </div>
 

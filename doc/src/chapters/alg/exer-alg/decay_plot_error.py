@@ -25,7 +25,8 @@ def explore(I, a, T, dt_values, theta=0.5):
     figure() # create new plot
     for dt in dt_values:
         print 'dt', dt
-        u, t = solver(I, a, T, dt, theta)    # Numerical solution
+        u, t = solver(I, a, T, dt, theta)
+        # Numerical solution
         u_e = u_exact(t, I, a)
         e = u_e - u
         plot(t, e)

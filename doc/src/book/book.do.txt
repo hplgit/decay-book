@@ -47,6 +47,11 @@ label{decay:analysis}
 
 # #include "../chapters/analysis/decay_analysis.do.txt"
 
+# #include "../chapters/analysis/errors.do.txt"
+
+# #include "../chapters/analysis/exer.do.txt"
+
+
 !split
 ========= Generalizations =========
 

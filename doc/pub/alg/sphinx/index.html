@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -56,8 +55,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -66,14 +65,14 @@
         <li class="right" >
           <a href="._main_alg000.html" title="Algorithms and implementations for exponential decay models"
              accesskey="N">next</a> |</li>
-        <li><a href="#">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="algorithms-and-implementations-for-exponential-decay-models">
 <h1>Algorithms and implementations for exponential decay models<a class="headerlink" href="#algorithms-and-implementations-for-exponential-decay-models" title="Permalink to this headline">¶</a></h1>
@@ -82,30 +81,13 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="._main_alg000.html">Algorithms and implementations for exponential decay models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._main_alg001.html">Finite difference methods</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#a-basic-model-for-exponential-decay">A basic model for exponential decay</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#the-exact-solution">The exact solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#a-complete-problem-formulation">A complete problem formulation</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#the-forward-euler-scheme">The Forward Euler scheme</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#step-1-discretizing-the-domain">Step 1: Discretizing the domain</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#step-2-fulfilling-the-equation-at-discrete-time-points">Step 2: Fulfilling the equation at discrete time points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#step-3-replacing-derivatives-by-finite-differences">Step 3: Replacing derivatives by finite differences</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#step-4-formulating-a-recursive-algorithm">Step 4: Formulating a recursive algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#interpretation">Interpretation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#computing-with-the-recursive-formula">Computing with the recursive formula</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#a-basic-model-for-exponential-decay">A basic model for exponential decay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#the-forward-euler-scheme">The Forward Euler scheme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#the-backward-euler-scheme">The Backward Euler scheme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#the-crank-nicolson-scheme">The Crank-Nicolson scheme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#the-unifying-rule">The unifying <span class="math">\(\theta\)</span>-rule</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#constant-time-step">Constant time step</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#mathematical-derivation-of-finite-difference-formulas">Mathematical derivation of finite difference formulas</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#the-forward-difference">The forward difference</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#the-backward-difference">The backward difference</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg001.html#the-centered-difference">The centered difference</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#mathematical-derivation-of-finite-difference-formulas">Mathematical derivation of finite difference formulas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_alg001.html#compact-operator-notation-for-finite-differences">Compact operator notation for finite differences</a></li>
 </ul>
 </li>
@@ -117,45 +99,30 @@
 <li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#formatting-numbers">Formatting numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#running-the-program">Running the program</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#plotting-the-solution">Plotting the solution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#verifying-the-implementation">Verifying the implementation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg002.html#running-a-few-algorithmic-steps-by-hand">Running a few algorithmic steps by hand</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#verifying-the-implementation">Verifying the implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#computing-the-numerical-error-as-a-mesh-function">Computing the numerical error as a mesh function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#computing-the-norm-of-the-error-mesh-function">Computing the norm of the error mesh function</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg002.html#scalar-computing">Scalar computing</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#experiments-with-computing-and-plotting">Experiments with computing and plotting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg002.html#combining-plot-files">Combining plot files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg002.html#plotting-with-scitools">Plotting with SciTools</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#computing-the-norm-of-the-error-mesh-function">Computing the norm of the error mesh function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#experiments-with-computing-and-plotting">Experiments with computing and plotting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_alg002.html#memory-saving-implementation">Memory-saving implementation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._main_alg003.html">Exercises</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#exercise-1-define-a-mesh-function-and-visualize-it">Exercise 1: Define a mesh function and visualize it</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_alg003.html#remarks">Remarks</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#exercise-2-differentiate-a-function">Exercise 2: Differentiate a function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#exercise-3-experiment-with-divisions">Exercise 3: Experiment with divisions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#exercise-4-experiment-with-wrong-computations">Exercise 4: Experiment with wrong computations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#exercise-5-plot-the-error-function">Exercise 5: Plot the error function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#exercise-6-change-formatting-of-numbers-and-debug">Exercise 6: Change formatting of numbers and debug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#exercise-1-define-a-mesh-function-and-visualize-it">Exercise 1: Define a mesh function and visualize it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#problem-2-differentiate-a-function">Problem 2: Differentiate a function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#problem-3-experiment-with-divisions">Problem 3: Experiment with divisions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#problem-4-experiment-with-wrong-computations">Problem 4: Experiment with wrong computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#problem-5-plot-the-error-function">Problem 5: Plot the error function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_alg003.html#problem-6-change-formatting-of-numbers-and-debug">Problem 6: Change formatting of numbers and debug</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._main_alg004.html">Bibliography</a></li>
 </ul>
 </div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="index">
+<h1>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 </div>
 
@@ -163,7 +130,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <center>
             <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
@@ -173,21 +140,23 @@
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Algorithms and implementations for exponential decay models</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#index">Index</a></li>
 </ul>
 
   <h4>Next topic</h4>
   <p class="topless"><a href="._main_alg000.html"
                         title="next chapter">Algorithms and implementations for exponential decay models</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -201,7 +170,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -210,12 +179,15 @@
         <li class="right" >
           <a href="._main_alg000.html" title="Algorithms and implementations for exponential decay models"
              >next</a> |</li>
-        <li><a href="#">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Algorithms and implementations for exponential decay models</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">
   <div class="footer">
-  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;H. P. Langtangen.
   </div>
 </div>
 

@@ -62,13 +62,15 @@ equation (ODE):
         
 
 In this equation, :math:`u(t)` is a scalar function of time :math:`t`,
-:math:`a` is a constant, and :math:`u^{\prime}(t)` means differentiation with
+:math:`a` is a constant (in this book we mostly work with :math:`a>0`),
+and :math:`u^{\prime}(t)` means differentiation with
 respect to :math:`t`. This type of equation arises in a number of
 widely different phenomena where some quantity :math:`u` undergoes
-exponential reduction. Examples include radioactive decay, population
+exponential reduction (provided :math:`a>0`).
+Examples include radioactive decay, population
 decay, investment decay, cooling of an object, pressure decay in the
-atmosphere, and retarded motion in fluids (for some of these models,
-:math:`a` can be negative as
+atmosphere, and retarded motion in fluids. Some models with growth,
+:math:`a<0`, are treated as
 well.
 We have chosen this particular ODE not only because
 its applications are relevant, but even more because studying
@@ -79,9 +81,10 @@ when solving diffusion-type partial differential equations.
 The exact solution
 ~~~~~~~~~~~~~~~~~~
 
-Although our interest is in *approximate* numerical solutions of :math:`u^{\prime}=-au`, it is convenient to know the exact analytical solution of the problem so
-we can compute the error in numerical approximations.
-The analytical solution of this ODE is found by
+Although our interest is in *approximate* numerical solutions of
+:math:`u^{\prime}=-au`, it is convenient to know the exact analytical
+solution of the problem so we can compute the error in numerical
+approximations.  The analytical solution of this ODE is found by
 separation of variables, which results in
 
 .. math::
@@ -111,9 +114,9 @@ such that
 .. _Eq:decay:problem:
 
 .. math::
-   :label: decay:problem
-        
-        u^{\prime} = -au,\ t\in (0,T], \quad u(0)=I{\thinspace .}   
+
+    \tag{1}
+    u^{\prime} = -au,\ t\in (0,T], \quad u(0)=I{\thinspace .}   
         
 
 This is known as a *continuous problem* because the parameter :math:`t`
@@ -131,7 +134,7 @@ and create algorithms that generate the corresponding :math:`u` values
 The Forward Euler scheme
 ------------------------
 
-Solving an ODE like :eq:`decay:problem` by a finite difference method
+Solving an ODE like :ref:`(1) <Eq:decay:problem>` by a finite difference method
 consists of the following four steps:
 
 1. discretizing the domain,
@@ -152,9 +155,13 @@ Step 1: Discretizing the domain
 The time domain :math:`[0,T]` is represented by a finite number of
 :math:`N_t+1` points
 
+.. _Eq:_auto1:
+
 .. math::
+
+    \tag{2}
+    0 = t_0 < t_1 < t_2 < \cdots < t_{N_t-1} < t_{N_t} = T{\thinspace .}
         
-        0 = t_0 < t_1 < t_2 < \cdots < t_{N_t-1} < t_{N_t} = T{\thinspace .}
         
 
 The collection of points :math:`t_0,t_1,\ldots,t_{N_t}` constitutes a *mesh*
@@ -195,9 +202,13 @@ the mesh function values, see Figure :ref:`decay:fdu:e`, suffices.
 To compute the solution for some :math:`t\in [t_n, t_{n+1}]`, we use the
 linear interpolation formula
 
+.. _Eq:_auto2:
+
 .. math::
+
+    \tag{3}
+    u(t) \approx u^n + \frac{u^{n+1}-u^n}{t_{n+1}-t_n}(t - t_n){\thinspace .}
         
-        u(t) \approx u^n + \frac{u^{n+1}-u^n}{t_{n+1}-t_n}(t - t_n){\thinspace .}
         
 
 .. _decay:fdu:ei:
@@ -229,17 +240,17 @@ The original ODE is then reduced to  the following equations:
 .. _Eq:decay:step2:
 
 .. math::
-   :label: decay:step2
-        
-        u^{\prime}(t_n) = -au(t_n),\quad n=0,\ldots,N_t,\quad u(0)=I{\thinspace .}
+
+    \tag{4}
+    u^{\prime}(t_n) = -au(t_n),\quad n=0,\ldots,N_t,\quad u(0)=I{\thinspace .}
         
         
 
 Even though the original ODE is not stated to be valid at :math:`t=0`, it
 is valid as close to :math:`t=0` as we like, and it turns out that it
 is useful for construction of numerical methods to have
-:eq:`decay:step2` valid for :math:`n=0`. The next two steps show that we
-need :eq:`decay:step2` for :math:`n=0`.
+:ref:`(4) <Eq:decay:step2>` valid for :math:`n=0`. The next two steps show that we
+need :ref:`(4) <Eq:decay:step2>` for :math:`n=0`.
 
 .. index:: finite differences
 
@@ -258,40 +269,40 @@ try a *forward* difference approximation (see Figure :ref:`decay:sketch:FE`),
 .. _Eq:decay:FEdiff:
 
 .. math::
-   :label: decay:FEdiff
-        
-        u^{\prime}(t_n) \approx \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n}{\thinspace .}
+
+    \tag{5}
+    u^{\prime}(t_n) \approx \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n}{\thinspace .}
         
         
 
 The name forward relates to the fact that we use a value forward in
 time, :math:`u^{n+1}`, together with the value :math:`u^n` at the point :math:`t_n`, where
 we seek the derivative, to approximate :math:`u^{\prime}(t_n)`.
-Inserting this approximation in :eq:`decay:step2` results in
+Inserting this approximation in :ref:`(4) <Eq:decay:step2>` results in
 
 .. _Eq:decay:step3:
 
 .. math::
-   :label: decay:step3
-        
-        \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -au^{n},\quad n=0,1,\ldots,N_t-1{\thinspace .}
+
+    \tag{6}
+    \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -au^{n},\quad n=0,1,\ldots,N_t-1{\thinspace .}
         
         
 
 Note that if we want to compute the solution
 up to time level :math:`N_t`,
-we only need :eq:`decay:step2` to hold for :math:`n=0,\ldots,N_t-1` since
-:eq:`decay:step3` for :math:`n=N_t-1` creates an equation for the final
+we only need :ref:`(4) <Eq:decay:step2>` to hold for :math:`n=0,\ldots,N_t-1` since
+:ref:`(6) <Eq:decay:step3>` for :math:`n=N_t-1` creates an equation for the final
 value :math:`u^{N_t}`.
 
-Also note that we use the approximation symbol :math:`\approx` in :eq:`decay:FEdiff`,
-but not in :eq:`decay:step3`. Instead, we view :eq:`decay:step3` as
-an equation that is not mathematically equivalent to :eq:`decay:FEdiff`,
-but represents an approximation to the equation :eq:`decay:FEdiff`.
+Also note that we use the approximation symbol :math:`\approx` in :ref:`(5) <Eq:decay:FEdiff>`,
+but not in :ref:`(6) <Eq:decay:step3>`. Instead, we view :ref:`(6) <Eq:decay:step3>` as
+an equation that is not mathematically equivalent to :ref:`(5) <Eq:decay:FEdiff>`,
+but represents an approximation to the equation :ref:`(5) <Eq:decay:FEdiff>`.
 
-Equation :eq:`decay:step3`
+Equation :ref:`(6) <Eq:decay:step3>`
 is the discrete counterpart to the original ODE problem
-:eq:`decay:problem`, and often referred to as a *finite difference scheme*
+:ref:`(1) <Eq:decay:problem>`, and often referred to as a *finite difference scheme*
 or more generally as the *discrete equations* of the problem.
 The fundamental feature of these equations is that they are *algebraic*
 and can hence be straightforwardly solved to produce the mesh function, i.e.,
@@ -320,31 +331,31 @@ Step 4: Formulating a recursive algorithm
 
 The final step is to identify the computational algorithm to be implemented
 in a program. The key observation here is to realize that
-:eq:`decay:step3` can be used to compute :math:`u^{n+1}` if :math:`u^n` is known.
+:ref:`(6) <Eq:decay:step3>` can be used to compute :math:`u^{n+1}` if :math:`u^n` is known.
 Starting with :math:`n=0`, :math:`u^0` is known since :math:`u^0=u(0)=I`, and
-:eq:`decay:step3` gives an equation for :math:`u^1`. Knowing :math:`u^1`,
-:math:`u^2` can be found from :eq:`decay:step3`. In general, :math:`u^n`
-in :eq:`decay:step3` can be assumed known, and then we can easily solve for
+:ref:`(6) <Eq:decay:step3>` gives an equation for :math:`u^1`. Knowing :math:`u^1`,
+:math:`u^2` can be found from :ref:`(6) <Eq:decay:step3>`. In general, :math:`u^n`
+in :ref:`(6) <Eq:decay:step3>` can be assumed known, and then we can easily solve for
 the unknown :math:`u^{n+1}`:
 
 .. _Eq:decay:FE:
 
 .. math::
-   :label: decay:FE
-        
-        u^{n+1} = u^n - a(t_{n+1} -t_n)u^n{\thinspace .}
+
+    \tag{7}
+    u^{n+1} = u^n - a(t_{n+1} -t_n)u^n{\thinspace .}
         
         
 
-We shall refer to :eq:`decay:FE` as the Forward Euler (FE) scheme
+We shall refer to :ref:`(7) <Eq:decay:FE>` as the Forward Euler (FE) scheme
 for our model problem. From a mathematical point of view,
-equations of the form :eq:`decay:FE` are known as
+equations of the form :ref:`(7) <Eq:decay:FE>` are known as
 *difference equations* since they express how differences in
 the dependent variable, here :math:`u`, evolve with :math:`n`. In our case,
 the differences in :math:`u` are given by :math:`u^{n+1}-u^n = -a(t_{n+1}-t_n)u^n`.
 The finite difference method can be viewed as a method for turning
 a differential equation into an algebraic difference equation that
-can be easily solved by repeated use of a formula like :eq:`decay:FE`.
+can be easily solved by repeated use of a formula like :ref:`(7) <Eq:decay:FE>`.
 
 Interpretation
 ~~~~~~~~~~~~~~
@@ -371,7 +382,7 @@ can compute a new slope and continue the process.
 Computing with the recursive formula
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Mathematical computation with :eq:`decay:FE` is straightforward:
+Mathematical computation with :ref:`(7) <Eq:decay:FE>` is straightforward:
 
 .. math::
         
@@ -403,9 +414,9 @@ However, finding such a formula for :math:`u^n` is possible only for a few very
 simple problems, so in general finite difference equations must be
 solved on a computer.
 
-As the next sections will show, the scheme :eq:`decay:FE` is just one
+As the next sections will show, the scheme :ref:`(7) <Eq:decay:FE>` is just one
 out of many alternative finite difference (and other) methods for
-the model problem :eq:`decay:problem`.
+the model problem :ref:`(1) <Eq:decay:problem>`.
 
 .. _decay:schemes:BE:
 
@@ -424,9 +435,9 @@ Another alternative is
 .. _Eq:decay:BEdiff:
 
 .. math::
-   :label: decay:BEdiff
-        
-        u^{\prime}(t_n) \approx \frac{u^{n}-u^{n-1}}{t_{n}-t_{n-1}}{\thinspace .}
+
+    \tag{8}
+    u^{\prime}(t_n) \approx \frac{u^{n}-u^{n-1}}{t_{n}-t_{n-1}}{\thinspace .}
         
         
 
@@ -447,35 +458,35 @@ Figure :ref:`decay:sketch:BE` explains the idea.
 
 .. index:: Backward Euler scheme
 
-Inserting :eq:`decay:BEdiff` in :eq:`decay:step2` yields
+Inserting :ref:`(8) <Eq:decay:BEdiff>` in :ref:`(4) <Eq:decay:step2>` yields
 the Backward Euler (BE) scheme:
 
 .. _Eq:decay:BE0:
 
 .. math::
-   :label: decay:BE0
-        
-        \frac{u^{n}-u^{n-1}}{t_{n}-t_{n-1}} = -a u^n,\quad n=1,\ldots,N_t{\thinspace .}
+
+    \tag{9}
+    \frac{u^{n}-u^{n-1}}{t_{n}-t_{n-1}} = -a u^n,\quad n=1,\ldots,N_t{\thinspace .}
         
         
 
 We assume, as explained under step 4 in the section :ref:`decay:schemes:FE`,
 that we have computed :math:`u^0, u^1, \ldots, u^{n-1}` such that
-:eq:`decay:BE0` can be used to compute :math:`u^n`. Note that
-:eq:`decay:BE0` needs :math:`n` to start at 1 (then it involves :math:`u^0`, but
+:ref:`(9) <Eq:decay:BE0>` can be used to compute :math:`u^n`. Note that
+:ref:`(9) <Eq:decay:BE0>` needs :math:`n` to start at 1 (then it involves :math:`u^0`, but
 no :math:`u^{-1}`) and end at :math:`N_t`.
 
 For direct similarity with the formula for the
-Forward Euler scheme :eq:`decay:FE`
-we replace :math:`n` by :math:`n+1` in :eq:`decay:BE0` and solve for the
+Forward Euler scheme :ref:`(7) <Eq:decay:FE>`
+we replace :math:`n` by :math:`n+1` in :ref:`(9) <Eq:decay:BE0>` and solve for the
 unknown value :math:`u^{n+1}`:
 
 .. _Eq:decay:BE:
 
 .. math::
-   :label: decay:BE
-        
-        u^{n+1} = \frac{1}{1+ a(t_{n+1}-t_n)} u^n,\quad n=0,\ldots,N_t-1{\thinspace .}
+
+    \tag{10}
+    u^{n+1} = \frac{1}{1+ a(t_{n+1}-t_n)} u^n,\quad n=0,\ldots,N_t-1{\thinspace .}
         
         
 
@@ -492,8 +503,8 @@ The Crank-Nicolson scheme
    single: finite differences; centered
 
 The finite difference approximations
-:eq:`decay:FEdiff` and :eq:`decay:BEdiff` used to derive the schemes
-:eq:`decay:FE` and :eq:`decay:BE`, respectively,
+:ref:`(5) <Eq:decay:FEdiff>` and :ref:`(8) <Eq:decay:BEdiff>` used to derive the schemes
+:ref:`(7) <Eq:decay:FE>` and :ref:`(10) <Eq:decay:BE>`, respectively,
 are both one-sided differences, i.e.,
 we collect information either forward or backward in time when approximating
 the derivative at a point. Such one-sided differences are
@@ -511,17 +522,17 @@ The approximation reads
 .. _Eq:decay:CNdiff:
 
 .. math::
-   :label: decay:CNdiff
-        
-        u^{\prime}(t_{n+\frac{1}{2}}) \approx \frac{u^{n+1}-u^n}{t_{n+1}-t_n}{\thinspace .}
+
+    \tag{11}
+    u^{\prime}(t_{n+\frac{1}{2}}) \approx \frac{u^{n+1}-u^n}{t_{n+1}-t_n}{\thinspace .}
         
         
 
 Figure :ref:`decay:sketch:CN` sketches the geometric interpretation of
 such a centered difference.
 Note that the fraction on the right-hand side is the same as for the
-Forward Euler approximation :eq:`decay:FEdiff` and
-the Backward Euler approximation :eq:`decay:BEdiff` (with
+Forward Euler approximation :ref:`(5) <Eq:decay:FEdiff>` and
+the Backward Euler approximation :ref:`(8) <Eq:decay:BEdiff>` (with
 :math:`n` replaced by :math:`n+1`). The accuracy of this fraction as an approximation
 to the derivative of :math:`u` depends on *where* we seek the derivative:
 in the center of the interval :math:`[t_{n},t_{n+1}]` or at the end points.
@@ -534,29 +545,29 @@ We shall later see that it is more accurate at the center point.
 
    *Illustration of a centered difference*
 
-With the formula :eq:`decay:CNdiff`, where :math:`u^{\prime}` is evaluated at
+With the formula :ref:`(11) <Eq:decay:CNdiff>`, where :math:`u^{\prime}` is evaluated at
 :math:`t_{n+\frac{1}{2}}`, it is natural to demand the
 ODE to be fulfilled at the time points *between* the mesh points:
 
 .. _Eq:decay:step2m:
 
 .. math::
-   :label: decay:step2m
-        
-        u^{\prime}(t_{n+\frac{1}{2}}) = -au(t_{n+\frac{1}{2}}),\quad n=0,
+
+    \tag{12}
+    u^{\prime}(t_{n+\frac{1}{2}}) = -au(t_{n+\frac{1}{2}}),\quad n=0,
         \ldots,N_t-1{\thinspace .}
         
         
 
-Using :eq:`decay:CNdiff` in :eq:`decay:step2m` results in
+Using :ref:`(11) <Eq:decay:CNdiff>` in :ref:`(12) <Eq:decay:step2m>` results in
 the approximate discrete equation
 
 .. _Eq:decay:CN0:
 
 .. math::
-   :label: decay:CN0
-        
-        \frac{u^{n+1}-u^n}{t_{n+1}-t_n} = -au^{n+\frac{1}{2}},\quad n=0,\ldots,N_t-1,
+
+    \tag{13}
+    \frac{u^{n+1}-u^n}{t_{n+1}-t_n} = -au^{n+\frac{1}{2}},\quad n=0,\ldots,N_t-1,
         
         
 
@@ -564,7 +575,7 @@ where :math:`u^{n+\frac{1}{2}}` is a short form for the numerical approximation
 to :math:`u(t_{n+\frac{1}{2}})`.
 
 There is a fundamental problem with the right-hand side of
-:eq:`decay:CN0`: we aim to compute :math:`u^n` for integer :math:`n`, which means
+:ref:`(13) <Eq:decay:CN0>`: we aim to compute :math:`u^n` for integer :math:`n`, which means
 that :math:`u^{n+\frac{1}{2}}` is not a quantity computed by our method. The
 quantity must
 therefore be
@@ -579,21 +590,21 @@ as an arithmetic mean of the :math:`u` values at the neighboring mesh points:
 .. _Eq:decay:uhalfavg:
 
 .. math::
-   :label: decay:uhalfavg
-        
-        u^{n+\frac{1}{2}} \approx \frac{1}{2} (u^n + u^{n+1}){\thinspace .}
+
+    \tag{14}
+    u^{n+\frac{1}{2}} \approx \frac{1}{2} (u^n + u^{n+1}){\thinspace .}
         
         
 
-Using :eq:`decay:uhalfavg` in :eq:`decay:CN0` results in a new
+Using :ref:`(14) <Eq:decay:uhalfavg>` in :ref:`(13) <Eq:decay:CN0>` results in a new
 approximate discrete equation
 
 .. _Eq:decay:CN1:
 
 .. math::
-   :label: decay:CN1
-        
-        \frac{u^{n+1}-u^n}{t_{n+1}-t_n} = -a\frac{1}{2} (u^n + u^{n+1}){\thinspace .}
+
+    \tag{15}
+    \frac{u^{n+1}-u^n}{t_{n+1}-t_n} = -a\frac{1}{2} (u^n + u^{n+1}){\thinspace .}
         
         
 
@@ -612,15 +623,15 @@ unknown, which we can solve for:
 .. _Eq:decay:CN:
 
 .. math::
-   :label: decay:CN
-        
-        u^{n+1} = \frac{1-\frac{1}{2} a(t_{n+1}-t_n)}{1 + \frac{1}{2} a(t_{n+1}-t_n)}u^n{\thinspace .}
+
+    \tag{16}
+    u^{n+1} = \frac{1-\frac{1}{2} a(t_{n+1}-t_n)}{1 + \frac{1}{2} a(t_{n+1}-t_n)}u^n{\thinspace .}
         
         
 
-The finite difference scheme :eq:`decay:CN` is often called
+The finite difference scheme :ref:`(16) <Eq:decay:CN>` is often called
 the Crank-Nicolson (CN) scheme or a midpoint or centered scheme.
-Note that :eq:`decay:CN` as well as :eq:`decay:FE` and :eq:`decay:BE`
+Note that :ref:`(16) <Eq:decay:CN>` as well as :ref:`(7) <Eq:decay:FE>` and :ref:`(10) <Eq:decay:BE>`
 apply whether the spacing in the time mesh, :math:`t_{n+1}-t_n`, depends on :math:`n`
 or is constant.
 
@@ -641,18 +652,18 @@ formulated as one scheme with a varying parameter :math:`\theta`:
 .. _Eq:decay:th0:
 
 .. math::
-   :label: decay:th0
-        
-        \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -a (\theta u^{n+1} + (1-\theta) u^{n})
+
+    \tag{17}
+    \frac{u^{n+1}-u^{n}}{t_{n+1}-t_n} = -a (\theta u^{n+1} + (1-\theta) u^{n})
         
         {\thinspace .}
         
 
-Observe:
+Observe that
 
  * :math:`\theta =0` gives the Forward Euler scheme
 
- * :math:`\theta =1` gives the Backward Euler scheme, and
+ * :math:`\theta =1` gives the Backward Euler scheme,
 
  * :math:`\theta =\frac{1}{2}` gives the Crank-Nicolson scheme.
 
@@ -667,9 +678,9 @@ we solve for the latter:
 .. _Eq:decay:th:
 
 .. math::
-   :label: decay:th
-        
-        u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)}{\thinspace .}
+
+    \tag{18}
+    u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)}{\thinspace .}
         
         
 
@@ -706,9 +717,9 @@ the "theta-rule".
    .. _Eq:decay:thetaavg_u:
 
 .. math::
-   :label: decay:thetaavg_u
-           
-           u(\tilde t) \approx \theta u^{n+1} + (1-\theta) u^{n},
+
+    \tag{19}
+    u(\tilde t) \approx \theta u^{n+1} + (1-\theta) u^{n},
            
            
    
@@ -718,17 +729,17 @@ the "theta-rule".
    .. _Eq:decay:thetaavg_t:
 
 .. math::
-   :label: decay:thetaavg_t
-           
-           \tilde t \approx \theta t_{n+1} + (1-\theta) t_{n}{\thinspace .}
+
+    \tag{20}
+    \tilde t \approx \theta t_{n+1} + (1-\theta) t_{n}{\thinspace .}
            
            
    
    Let now the ODE hold at the point
    :math:`\tilde t\in [t_n,t_{n+1}]`, approximate :math:`u^{\prime}` by the fraction
    :math:`(u^{n+1}-u^{n})/(t_{n+1}-t_n)`, and approximate the right-hand
-   side :math:`-au` by the weighted average :eq:`decay:thetaavg_u`.
-   The result is :eq:`decay:th0`.
+   side :math:`-au` by the weighted average :ref:`(19) <Eq:decay:thetaavg_u>`.
+   The result is :ref:`(17) <Eq:decay:th0>`.
 
 
 
@@ -765,36 +776,36 @@ well known.
    .. _Eq:decay:FE:u:
 
 .. math::
-   :label: decay:FE:u
-           
-           u^{n+1} = (1 - a\Delta t )u^n  \quad (\hbox{FE})
+
+    \tag{21}
+    u^{n+1} = (1 - a\Delta t )u^n  \quad (\hbox{FE})
            
            
    
    .. _Eq:decay:BE:u:
 
 .. math::
-   :label: decay:BE:u
-             
-           u^{n+1} = \frac{1}{1+ a\Delta t} u^n  \quad (\hbox{BE})
+
+    \tag{22}
+    u^{n+1} = \frac{1}{1+ a\Delta t} u^n  \quad (\hbox{BE})
            
            
    
    .. _Eq:decay:CN:u:
 
 .. math::
-   :label: decay:CN:u
-             
-           u^{n+1} = \frac{1-\frac{1}{2} a\Delta t}{1 + \frac{1}{2} a\Delta t} u^n \quad (\hbox{CN})
+
+    \tag{23}
+    u^{n+1} = \frac{1-\frac{1}{2} a\Delta t}{1 + \frac{1}{2} a\Delta t} u^n \quad (\hbox{CN})
            
            
    
    .. _Eq:decay:th:u:
 
 .. math::
-   :label: decay:th:u
-             
-           u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n \quad (\theta-\hbox{rule})
+
+    \tag{24}
+    u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n \quad (\theta-\hbox{rule})
 
 
 
@@ -804,7 +815,9 @@ Euler, and Crank-Nicolson schemes. They complement each other with their
 different pros and cons, thus providing a useful collection of
 solution methods for many differential equation problems.
 The unifying notation of the :math:`\theta`-rule makes it convenient to
-work with all three methods through just one formula.
+work with all three methods through just one formula. This is
+particularly advantageous in computer implementations since one avoids
+if-else tests with formulas that have repetitive elements.
 
 .. _decay:fd:taylor:
 
@@ -837,9 +850,13 @@ Taylor polynomial reads
         \frac{1}{6}f'''(a)(x-a)^3 + \cdots \nonumber
         
 
+.. _Eq:_auto3:
+
 .. math::
-          
-         \quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(a)(x-a)^m{\thinspace .}
+
+    \tag{25}
+    \quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(a)(x-a)^m{\thinspace .}
+        
         
 
 For a function of time, :math:`f(t)`, related to a mesh with spacing :math:`\Delta t`,
@@ -857,16 +874,16 @@ given :math:`f` and its derivatives at :math:`t=t_n`. Replacing :math:`x` by :ma
 .. _Eq:decay:taylor:FE1:
 
 .. math::
-   :label: decay:taylor:FE1
-          
-        \quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^m{\thinspace .}
+
+    \tag{26}
+    \quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^m{\thinspace .}
         
         
 
 The forward difference
 ~~~~~~~~~~~~~~~~~~~~~~
 
-We can use :eq:`decay:taylor:FE1` to find an approximation for
+We can use :ref:`(26) <Eq:decay:taylor:FE1>` to find an approximation for
 :math:`f'(t_n)` simply by solving with respect to this quantity:
 
 .. math::
@@ -879,9 +896,9 @@ We can use :eq:`decay:taylor:FE1` to find an approximation for
 .. _Eq:decay:taylor:FE2:
 
 .. math::
-   :label: decay:taylor:FE2
-          
-        \quad - \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^{m-1}{\thinspace .}
+
+    \tag{27}
+    \quad - \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^{m-1}{\thinspace .}
         
         
 
@@ -893,18 +910,18 @@ the formula
 .. _Eq:decay:taylor:FE3:
 
 .. math::
-   :label: decay:taylor:FE3
-        
-        f'(t_n) \approx \frac{f(t_n+\Delta t) - f(t_n)}{\Delta t}
+
+    \tag{28}
+    f'(t_n) \approx \frac{f(t_n+\Delta t) - f(t_n)}{\Delta t}
         
         
 
 is exact in the limit :math:`\Delta t\rightarrow 0`.
 
-The interesting feature of :eq:`decay:taylor:FE2` is that we have
-a measure of the error in the formula :eq:`decay:taylor:FE3`: the
+The interesting feature of :ref:`(27) <Eq:decay:taylor:FE2>` is that we have
+a measure of the error in the formula :ref:`(28) <Eq:decay:taylor:FE3>`: the
 error is given by the extra terms on the right-hand side of
-:eq:`decay:taylor:FE2`. We assume that :math:`\Delta t` is a small quantity
+:ref:`(27) <Eq:decay:taylor:FE2>`. We assume that :math:`\Delta t` is a small quantity
 (:math:`\Delta t\ll 1`).
 Then :math:`\Delta t^2\ll\Delta t`, :math:`\Delta t^3\ll \Delta t^2`, and so on,
 which means that the first term is the dominating term. This first
@@ -927,9 +944,9 @@ approximation at :math:`f(t_n-\Delta t)`:
 .. _Eq:decay:taylor:BE1:
 
 .. math::
-   :label: decay:taylor:BE1
-          
-        \quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^m{\thinspace .}
+
+    \tag{29}
+    \quad + \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^m{\thinspace .}
         
         
 
@@ -945,9 +962,9 @@ Solving with respect to :math:`f'(t_n)` gives
 .. _Eq:decay:taylor:BE2:
 
 .. math::
-   :label: decay:taylor:BE2
-          
-        \quad - \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^{m-1}{\thinspace .}
+
+    \tag{30}
+    \quad - \frac{1}{m!}\frac{df^{(m)}}{dx^m}(t_n)\Delta t^{m-1}{\thinspace .}
         
         
 
@@ -969,9 +986,13 @@ approximations to :math:`f(t_n)` and :math:`f(t_{n+1})` around :math:`t_n+\frac{
         f''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^2 -\nonumber
         
 
+.. _Eq:_auto4:
+
 .. math::
-          
-         \quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots
+
+    \tag{31}
+    \quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots
+        
         
 
 .. math::
@@ -981,9 +1002,13 @@ approximations to :math:`f(t_n)` and :math:`f(t_{n+1})` around :math:`t_n+\frac{
         f''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^2 +\nonumber
         
 
+.. _Eq:_auto5:
+
 .. math::
-          
-        \quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots
+
+    \tag{32}
+    \quad f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots
+        
         
 
 Subtracting the first from the second gives
@@ -991,9 +1016,9 @@ Subtracting the first from the second gives
 .. _Eq:decay:taylor:CN2:
 
 .. math::
-   :label: decay:taylor:CN2
-        
-        f(t_{n+1}) - f(t_n) = f'(t_n+\frac{1}{2}\Delta t)\Delta t
+
+    \tag{33}
+    f(t_{n+1}) - f(t_n) = f'(t_n+\frac{1}{2}\Delta t)\Delta t
         + 2f'''(t_n+\frac{1}{2}\Delta t)(\frac{1}{2}\Delta t)^3 + \cdots
         
         
@@ -1004,9 +1029,9 @@ in
 .. _Eq:decay:taylor:CN3:
 
 .. math::
-   :label: decay:taylor:CN3
-        
-        f'(t_n+\frac{1}{2}\Delta t) \approx \frac{f(t_{n+1}) - f(t_n)}{\Delta t}
+
+    \tag{34}
+    f'(t_n+\frac{1}{2}\Delta t) \approx \frac{f(t_{n+1}) - f(t_n)}{\Delta t}
         - \frac{1}{4}f'''(t_n+\frac{1}{2}\Delta t)\Delta t^2 + c
         \cdots
         
@@ -1020,9 +1045,9 @@ This means that the centered difference formula
 .. _Eq:decay:taylor:CN4:
 
 .. math::
-   :label: decay:taylor:CN4
-        
-        f'(t_n+\frac{1}{2}\Delta t) \approx \frac{f(t_{n+1}) - f(t_n)}{\Delta t}
+
+    \tag{35}
+    f'(t_n+\frac{1}{2}\Delta t) \approx \frac{f(t_{n+1}) - f(t_n)}{\Delta t}
         
         
 
@@ -1050,9 +1075,9 @@ by the :math:`D_t^+` operator and written as
 .. _Eq:fd:D:f:
 
 .. math::
-   :label: fd:D:f
-        
-        [D_t^+u]^n = \frac{u^{n+1} - u^{n}}{\Delta t}
+
+    \tag{36}
+    [D_t^+u]^n = \frac{u^{n+1} - u^{n}}{\Delta t}
         \ \left( \approx \frac{d}{dt} u(t_n)\right) 
         {\thinspace .}
         
@@ -1073,9 +1098,9 @@ a backward difference reads
 .. _Eq:fd:D:c:
 
 .. math::
-   :label: fd:D:c
-        
-        [D_tu]^n = \frac{u^{n+\frac{1}{2}} - u^{n-\frac{1}{2}}}{\Delta t}
+
+    \tag{37}
+    [D_tu]^n = \frac{u^{n+\frac{1}{2}} - u^{n-\frac{1}{2}}}{\Delta t}
         \approx \frac{d}{dt} u(t_n), 
         
 
@@ -1084,9 +1109,9 @@ and
 .. _Eq:fd:D:b:
 
 .. math::
-   :label: fd:D:b
-        
-        [D_t^-u]^n = \frac{u^{n} - u^{n-1}}{\Delta t}
+
+    \tag{38}
+    [D_t^-u]^n = \frac{u^{n} - u^{n-1}}{\Delta t}
         \approx \frac{d}{dt} u(t_n) 
         {\thinspace .}
         
@@ -1099,9 +1124,9 @@ An averaging operator is also convenient to have:
 .. _Eq:fd:mean:a:
 
 .. math::
-   :label: fd:mean:a
-        
-        [\overline{u}^{t}]^n = \frac{1}{2} (u^{n-\frac{1}{2}} + u^{n+\frac{1}{2}} )
+
+    \tag{39}
+    [\overline{u}^{t}]^n = \frac{1}{2} (u^{n-\frac{1}{2}} + u^{n+\frac{1}{2}} )
         \approx u(t_n) 
         
 
@@ -1123,16 +1148,24 @@ In difference equations we often place the square brackets around
 the whole equation, to indicate at which mesh point the equation applies,
 since each term must be approximated at the same point:
 
+.. _Eq:_auto6:
+
 .. math::
+
+    \tag{40}
+    [D_t^- u  = -au]^n {\thinspace .}
         
-        [D_t^- u  = -au]^n {\thinspace .}
         
 
 Similarly, the Forward Euler scheme takes the form
 
+.. _Eq:_auto7:
+
 .. math::
+
+    \tag{41}
+    [D_t^+ u  = -au]^n,
         
-        [D_t^+ u  = -au]^n,
         
 
 while the Crank-Nicolson scheme is written as
@@ -1140,17 +1173,17 @@ while the Crank-Nicolson scheme is written as
 .. _Eq:fd:compact:ex:CN:
 
 .. math::
-   :label: fd:compact:ex:CN
-        
-        [D_t u = -a\overline{u}^t]^{n+\frac{1}{2}}{\thinspace .}
+
+    \tag{42}
+    [D_t u = -a\overline{u}^t]^{n+\frac{1}{2}}{\thinspace .}
         
         
 
 
 .. admonition:: Question
 
-   By use of :eq:`fd:D:c` and :eq:`fd:mean:a`, are you able to
-   write out the expressions in :eq:`fd:compact:ex:CN` to verify that
+   By use of :ref:`(37) <Eq:fd:D:c>` and :ref:`(39) <Eq:fd:mean:a>`, are you able to
+   write out the expressions in :ref:`(42) <Eq:fd:compact:ex:CN>` to verify that
    it is indeed the Crank-Nicolson scheme?
 
 
@@ -1161,9 +1194,9 @@ The :math:`\theta`-rule can be specified in operator notation by
 .. _Eq:decay:fd1:op:theta:
 
 .. math::
-   :label: decay:fd1:op:theta
-        
-        [\bar D_t u = -a\overline{u}^{t,\theta}]^{n+\theta},{\thinspace .}
+
+    \tag{43}
+    [\bar D_t u = -a\overline{u}^{t,\theta}]^{n+\theta},{\thinspace .}
         
         
 
@@ -1172,9 +1205,9 @@ We define a new time difference
 .. _Eq:decay:fd1:Du:theta:
 
 .. math::
-   :label: decay:fd1:Du:theta
-        
-        \lbrack\bar D_t u\rbrack^{n+\theta} = \frac{u^{n+1}-u^n}{t^{n+1}-t^n},
+
+    \tag{44}
+    \lbrack\bar D_t u\rbrack^{n+\theta} = \frac{u^{n+1}-u^n}{t^{n+1}-t^n},
         
         
 
@@ -1184,16 +1217,16 @@ to be applied at the time point :math:`t_{n+\theta}\approx\theta t_n + (1-\theta
 .. _Eq:decay:fd1:wmean:a:
 
 .. math::
-   :label: decay:fd1:wmean:a
-        
-        \lbrack\overline{u}^{t,\theta}\rbrack^{n+\theta} = (1-\theta)u^{n} + \theta u^{n+1}
+
+    \tag{45}
+    \lbrack\overline{u}^{t,\theta}\rbrack^{n+\theta} = (1-\theta)u^{n} + \theta u^{n+1}
         \approx u(t_{n+\theta}),
         
         
 
 where :math:`\theta\in [0,1]` as usual. Note that for :math:`\theta =\frac{1}{2}` we recover
 the standard centered difference and the standard arithmetic mean.
-The idea in :eq:`decay:fd1:op:theta` is to sample the equation at
+The idea in :ref:`(43) <Eq:decay:fd1:op:theta>` is to sample the equation at
 :math:`t_{n+\theta}`, use a non-symmetric difference at that
 point :math:`[\bar D_t u]^{n+\theta}`, and a weighted (non-symmetric) mean value.
 

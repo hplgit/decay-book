@@ -289,7 +289,7 @@ $$
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <br>
 <p>
-<center><h4>Aug 16, 2015</h4></center> <!-- date -->
+<center><h4>Oct 17, 2015</h4></center> <!-- date -->
 <br>
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
@@ -826,6 +826,7 @@ by <em>linear interpolation</em>:
 $$
 \begin{equation}
 u(t) \approx u^n + \frac{u^{n+1}-u^n}{t_{n+1}-t_n}(t - t_n)
+\label{_auto1}
 \end{equation}
 $$
 
@@ -1152,6 +1153,7 @@ Physical quantities:
 $$
 \begin{equation}
 [D_t^- u  = -au]^n
+\label{_auto2}
 \end{equation}
 $$
 
@@ -1205,6 +1207,7 @@ Common to put the whole equation inside square brackets:
 $$
 \begin{equation}
 [D_t^- u  = -au]^n
+\label{_auto3}
 \end{equation}
 $$
 
@@ -1216,6 +1219,7 @@ $$
 $$
 \begin{equation}
 [D_t^+ u  = -au]^n
+\label{_auto4}
 \end{equation}
 $$
 
@@ -1530,7 +1534,7 @@ Python function for the exact solution \( \uex(t)=Ie^{-at} \):
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t, I, a):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(t, I, a):
     <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)
 </pre></div>
 <p>
@@ -1539,7 +1543,7 @@ Quick plotting:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u_e <span style="color: #666666">=</span> u_exact(t, I, a)
 plot(t, u, t, u_e)
 </pre></div>
 <p>
@@ -1553,7 +1557,7 @@ Remedy: Introduce a very fine mesh for \( \uex \).
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">t_e <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)      <span style="color: #408080; font-style: italic"># fine mesh</span>
-u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
 
 plot(t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>,            <span style="color: #408080; font-style: italic"># blue line for u_e</span>
      t,   u,   <span style="color: #BA2121">&#39;r--o&#39;</span>)          <span style="color: #408080; font-style: italic"># red dashes w/circles</span>
@@ -1573,7 +1577,7 @@ plot(t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>,            <spa
     u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>T, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
 
     t_e <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)        <span style="color: #408080; font-style: italic"># fine mesh for u_e</span>
-    u_e <span style="color: #666666">=</span> exact_solution(t_e, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
 
     plot(t,   u,   <span style="color: #BA2121">&#39;r--o&#39;</span>,            <span style="color: #408080; font-style: italic"># red dashes w/circles</span>
          t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>)              <span style="color: #408080; font-style: italic"># blue line for exact sol.</span>
@@ -1745,7 +1749,7 @@ Exact solution: \( \uex(t)=Ie^{-at} \), implemented as
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">exact_solution</span>(t, I, a):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(t, I, a):
     <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)
 </pre></div>
 <p>
@@ -1755,7 +1759,7 @@ Compute \( e^n \) by
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)  <span style="color: #408080; font-style: italic"># Numerical solution</span>
-u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+u_e <span style="color: #666666">=</span> u_exact(t, I, a)
 e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
 </pre></div>
 <p>
@@ -1764,7 +1768,7 @@ e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span
 <p>
 
 <ul>
- <p><li> <code>exact_solution(t, I, a)</code> works with <code>t</code> as array</li>
+ <p><li> <code>u_exact(t, I, a)</code> works with <code>t</code> as array</li>
  <p><li> Must have <code>exp</code> from <code>numpy</code> (not <code>math</code>)</li>
  <p><li> <code>e = u_e - u</code>: array subtraction</li>
  <p><li> Array arithmetics gives shorter and much faster code</li>
@@ -1831,7 +1835,7 @@ Python w/array arithmetics:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">e <span style="color: #666666">=</span> exact_solution(t) <span style="color: #666666">-</span> u
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">e <span style="color: #666666">=</span> u_exact(t) <span style="color: #666666">-</span> u
 E <span style="color: #666666">=</span> sqrt(dt<span style="color: #666666">*</span><span style="color: #008000">sum</span>(e<span style="color: #666666">**2</span>))
 </pre></div>
 <p>
@@ -1849,7 +1853,7 @@ Scalar computing of <code>E = sqrt(dt*sum(e**2))</code>:
 u_e <span style="color: #666666">=</span> zeros(m)
 t <span style="color: #666666">=</span> <span style="color: #666666">0</span>
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(m):
-    u_e[i] <span style="color: #666666">=</span> exact_solution(t, a, I)
+    u_e[i] <span style="color: #666666">=</span> u_exact(t, a, I)
     t <span style="color: #666666">=</span> t <span style="color: #666666">+</span> dt
 e <span style="color: #666666">=</span> zeros(m)
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(m):
@@ -1969,7 +1973,7 @@ in a two-dimensional array (which we try to prevent now!).
     u, t <span style="color: #666666">=</span> solver_memsave(I, a, T, dt, theta, filename)
 
     t, u <span style="color: #666666">=</span> read_file(filename)
-    u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+    u_e <span style="color: #666666">=</span> u_exact(t, I, a)
     e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
     E <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(dt<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sum(e<span style="color: #666666">**2</span>))
     <span style="color: #008000; font-weight: bold">if</span> makeplot:

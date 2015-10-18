@@ -9,6 +9,10 @@ TOC: on
 !split
 # #include "decay_analysis.do.txt"
 
+# #include "errors.do.txt"
+
+# #include "exer.do.txt"
+
 !split
 ======= Bibliography =======
 

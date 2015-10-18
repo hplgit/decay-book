@@ -1,0 +1,314 @@
+======= Various types of errors in a differential equation model =======
+
+So far we have been concerned with one type of error, namely the
+discretization error committed by replacing the differential equation
+problem by a recursive set of difference equations. There are,
+however, other types of errors that must be considered too. We can
+classify errors into four groups:
+
+ o model errors: how wrong is the ODE model?
+ o data errors: how wrong are the input parameters?
+ o discretization errors: how wrong is the numerical method?
+ o rounding errors: how wrong is the computer arithmetics?
+
+Below, we shall briefly describe and illustrate these four types
+of errors. Each of the errors deserve its own chapter, at least,
+so the treatment here is superficial to give some indication
+about the nature of size of the errors in a specific case.
+Some of the required computer codes quickly become more advanced
+than in the rest of the book, but we include to code to document
+all the details that lie behind the investigations of the errors.
+
+===== Model errors =====
+
+Any mathematical model like $u^{\prime}=-au$, $u(0)=I$, is just an
+approximate description of a real-world phenomenon. How good this
+approximation is can be determined by comparing physical experiments
+with what the model predicts. This is the topic of *validation* and is
+obviously an essential part of mathematical model. One difficulty with
+validation is that we need to estimate the parameters in the model, and
+this brings in data errors. Quantifying data errors is challenging,
+and a frequently used method is to *tune* the parameters in the model
+to make model predictions as close as possible to the experiments.
+That is, we do not attempt to measure or estimate all input
+parameters, but instead find values that ``make the model good''.
+Another difficulty is that the response in experiments also contains
+errors due to measurement techniques.
+
+Let us try to quantify model errors in a very simple example involving
+$u^{\prime}=-au$, $u(0)=I$, with constant $a$.  Suppose a more
+accurate model has $a$ as a function of time rather than a
+constant. Here we take $a(t)$ as a simple linear function: $a +
+pt$. Obviously, $u$ with $p>0$ will go faster to zero with time than a
+constant $a$.
+
+The solution of
+
+!bt
+\[ u^{\prime} = (a + pt)u,\quad u(0)=I,\]
+!et
+can be shown (see below) to be
+
+!bt
+\[ u(t) = I e^{-t \left(a + \half pt\right)}\tp\]
+!et
+Let a Python function `true_model(t, I, a, p)` implement the
+above $u(t)$ and let
+the solution of our primary ODE $u^{\prime}=-au$ be available as
+the function `model(t, I, a)`.
+We can now make some plots of the two models and the error for some values
+of $p$. Figure ref{decay:analysis:model_errors:fig:model_u} displays
+`model` versus `true_model` for $p=0.01, 0.1, 1$, while Figure
+ref{decay:analysis:model_errors:fig:model_e} shows the difference
+between the two models as a function of $t$ for the same $p$ values.
+
+FIGURE: [fig-analysis/model_errors_u, width=800 frac=1] Comparison of two models for three values of $p$. label{decay:analysis:model_errors:fig:model_u}
+
+FIGURE: [fig-analysis/model_errors_e, width=500 frac=0.8] Discrepancy of Comparison of two models for three values of $p$. label{decay:analysis:model_errors:fig:model_e}
+
+The code that was used to produce the plots looks like
+
+@@@CODE src-analysis/errors.py fromto: from numpy import@def data_errors
+
+To derive the analytical solution of the model $u^{\prime}=-(a+pt)u$, $
+u(0)=I$, we can use SymPy and the code below. This is somewhat advanced
+SymPy use for a newbie, but serves to illustrate the possibilities to
+solve differential equations by symbolic software.
+
+@@@CODE src-analysis/errors.py fromto: def derive_true_solution@from numpy import linspace
+
+===== Data errors =====
+
+idx{Monte Carlo simulation}
+
+By ``data'' we mean all the input parameters to a model, in our case
+$I$ and $a$. The values of these may contain errors, or at least
+uncertainty. Suppose $I$ and $a$ are measured from some physical
+experiments. Ideally, we have many samples of $I$ and $a$ and
+from these we can fit probability distributions. Assume that $I$
+turns out to be normally distributed with mean 1 and standard deviation 0.2,
+while $a$ is uniformly distributed in the interval $[0.5, 1.5]$.
+
+How will the uncertainty in $I$ and $a$ propagate through the model
+$u=Ie^{-at}$? That is, what is the uncertainty in $u$ at a particular
+time $t$? This answer can easily be answered using *Monte Carlo
+simulation*. It means that we draw a lot of samples from the
+distributions for $I$ and $a$. For each combination of $I$ and $a$
+sample we compute the corresponding $u$ value for selected values of
+$t$.  Afterwards, we can for each selected $t$ values make a histogram
+of all the computed $u$ values to see what the distribution of $u$
+values look like. Figure ref{decay:analysis:data_errors:fig} shows the
+histograms corresponding to $t=0,1,3$. We see that the distribution of
+$u$ values is much like a symmetric normal distribution at $t=0$,
+centered around $u=1$. At later times, the distribution gets more
+asymmetric and narrower. It means that the uncertainty decreases with
+time.
+
+From the computed $u$ values we can easily calculate the mean and
+standard deviation. The table below shows the mean and standard
+deviation values along with the value if we just use the formula
+$u=Ie^{-at}$ with the mean values of $I$ and $a$: $I=1$ and $a=1$. As
+we see, there is some discrepancy between this latter (naive)
+computation and the mean value produced by Monte Carlo simulation.
+
+|------------------------------------------|
+| time | mean |  st.dev. | $u(t;I=a=1)$  |
+|--l------l--------l---------l-------------|
+|  0   | 1.00 |  0.200   | 1.00            |
+|  1   | 0.38 |  0.135   | 0.37            |
+|  3   | 0.07 |  0.060   | 0.14            |
+|------------------------------------------|
+
+Actually, $u(t;I,a)$ becomes a stochastic variable for each $t$ when
+$I$ and $a$ are stochastic variables, as they are in the above
+Monte Carlo simulation. The mean of the stochastic $u(t;I,a)$ is
+not equal to $u$ with mean values of the input data, $u(t;I=a=1)$,
+unless $u$ is linear in $I$ and $a$ (here $u$ is nonlinear in $a$).
+
+FIGURE: [fig-analysis/data_errors, width=800 frac=1] Histogram of solution uncertainty at three time points, due to data errors. label{decay:analysis:data_errors:fig}
+
+
+Estimating statistical uncertainty in input data and investigating
+how this uncertainty
+propagates to uncertainty in the response of a differential equation model
+(or other models) are key topics in the scientific field called
+*uncertainty quantification*, simply known as UQ.
+Estimation of the statistical properties of input data can either be
+done directly from physical experiments, or one can find the
+parameter values that provide a ``best fit'' of model predictions with
+experiments. Monte Carlo simulation is a general and widely used
+tool to solve the associated statistical problems.
+The accuracy of the Monte Carlo results increases with increasing
+number of samples $N$, typically the error behaves like $N^{-1/2}$.
+
+The computer code required to do the Monte Carlo simulation and
+produce the plots in Figure ref{decay:analysis:data_errors:fig}
+is shown below.
+
+@@@CODE src-analysis/errors.py fromto: def data_errors@def solver
+
+===== Discretization errors =====
+
+The errors implied by solving the differential equation problem by
+the $\theta$-rule has been thoroughly analyzed in the previous
+sections. Below are some plots of the error versus time for the
+Forward Euler (FE), Backward Euler (BN), and Crank-Nicolson (CN)
+schemes for decreasing values of $\Delta t$. Since the difference
+in magnitude between the errors in the CN scheme versus the FE and
+BN schemes grows significantly as $\Delta t$ is reduced (the error
+goes like $\Delta t^2$ for CN versus $\Delta t$ for FE/BE), we have
+plotted the logarithm of the absolute value of the numerical error
+as a mesh function.
+
+FIGURE: [fig-analysis/numerical_errors, width=700 frac=0.9] Discretization errors in various schemes for four time step values. label{decay:analysis:numerical_errors:fig}
+
+The table below presents exact figures of the discretization error
+for various choices of $\Delta t$ and schemes.
+
+|----------------------------------------------------------------------|
+| $\Delta t$ |        FE        |        BE        |        CN         |
+|----r---------------r------------------r------------------r-----------|
+| 0.4        | $9\cdot 10^{-2}$ | $6\cdot 10^{-2}$ | $ 5\cdot 10^{-3}$ |
+| 0.1        | $2\cdot 10^{-2}$ | $2\cdot 10^{-2}$ | $ 3\cdot 10^{-4}$ |
+| 0.01       | $2\cdot 10^{-3}$ | $2\cdot 10^{-3}$ | $ 3\cdot 10^{-6}$ |
+|----------------------------------------------------------------------|
+
+The computer code used to generate the plots appear next. It makes use
+of a `solver` function
+% if DOCUMENT == "document":
+for computing the numerical solution of $u^{\prime}=-au$ with
+the $\theta$-rule.
+% else:
+as shown in Section ref{decay:py2}.
+% endif
+
+@@@CODE src-analysis/errors.py fromto: def discretization_errors@def solver_decimal
+
+===== Rounding errors =====
+
+Real numbers on a computer are represented by "floating-point
+numbers": "https://en.wikipedia.org/wiki/Floating_point", which means
+that just a finite number of digits are stored and used. Therefore,
+the floating-point number is an approximation to the underlying real
+number. When doing arithmetics with floating-point numbers, there will
+be small approximation errors, called round-off errors or rounding
+errors, that may or may not accumulate in comprehensive computations.
+
+The cause and analysis of rounding errors are described in most
+books on numerical analysis, see for instance
+Chapter 2 in Gander et al. cite{Gander_2015}. For very simple
+algorithms it is possible to theoretically establish bounds for
+the rounding errors, but for most algorithms one cannot know to
+what extent rounding errors accumulate and potentially destroy
+the final answer. Exercise ref{decay:analysis:exer:rounding}
+demonstrates the impact of rounding errors on numerical
+differentiation and integration.
+
+Here is a simplest possible example of the effect of rounding
+errors:
+
+!bc pyshell
+>>> 1.0/51*51
+1.0
+>>> 1.0/49*49
+0.9999999999999999
+!ec
+We see that the latter result is not exact, but features an
+error of $10^{-16}$. This is the typical level of a rounding error
+from an arithmetic operation with the widely used
+64 bit floating-point number
+(`float` object in Python, often called `double` or double precision
+in other languages). One cannot expect more accuracy than $10^{-16}$.
+The big question is if errors at this level accumulate in a given
+numerical algorithm.
+
+What is the effect of using `float` objects and not exact arithmetics
+when solving differential equations? We can investigate this question
+through computer experiments if we have the ability to represent real
+numbers to a desired accuracy. Fortunately, Python has a `Decimal`
+object in the "`decimal`":
+"https://docs.python.org/2/library/decimal.html" module that allows us
+to use as many digits in floating-point numbers as we like. We take
+1000 digits as the true answer where rounding errors are negligible,
+and then we run our numerical algorithm (the Crank-Nicolson scheme to
+be precise) with `Decimal` objects for all real numbers and compute
+the maximum error arising from using 4, 16, 64, and 128 digits.
+
+When computing with numbers around unity in size and doing $N_t=40$ time
+steps, we typically get a rounding error of $10^{-d}$, where $d$ is
+the number of digits used. The effect of rounding errors may
+accumulate if we perform more operations, so increasing the number of
+time steps to 4000 gives a rounding error of the order $10^{-d+2}$.
+Also, if we compute with numbers that are much larger than unity, we
+lose accuracy due to rounding errors. For example, for the $u$ values
+implied by $I=1000$ and $a=100$ ($u\sim 10^3$),
+the rounding errors increase to about
+$10^{-d+3}$. Below is a table summarizing a set of experiments. A
+rough model for the size of rounding errors is $10^{-d+q+r}$, where
+$d$ is the number of digits, the number of time steps is of the order
+$10^q$ time steps, and the size of the numbers in the arithmetic
+expressions are of order $10^r$.
+
+|----c-----------------c--------------------------c---------------------c--------------------------------c-------------|
+| digits  | $u\sim 1$, $N_t=40$    | $u\sim 1$, $N_t=4000$    | $u\sim 10^3$, $N_t=40$      | $u\sim 10^3$, $N_t=4000$ |
+|----r-----------------l--------------------------l---------------------l--------------------------------l-------------|
+| 4       | $3.05\cdot 10^{-4}$    | $2.51\cdot 10^{-1}$      | $3.05\cdot 10^{-1}$         | $9.82\cdot 10^{2}$       |
+| 16      | $1.71\cdot 10^{-16}$   | $1.42\cdot 10^{-14}$     | $1.58\cdot 10^{-13}$        | $4.84\cdot 10^{-11}$     |
+| 64      | $2.99\cdot 10^{-64}$   | $1.80\cdot 10^{-62}$     | $2.06\cdot 10^{-61}$        | $1.04\cdot 10^{-57}$     |
+| 128     | $1.60\cdot 10^{-128}$  | $1.56\cdot 10^{-126}$    | $2.41\cdot 10^{-125}$       | $1.07\cdot 10^{-122}$    |
+|----------------------------------------------------------------------------------------------------------------------|
+
+We realize that rounding errors are at the lowest possible level
+if we scale the differential equation model,
+% if document != "DOCUMENT":
+see Section ref{decay:app:scaling},
+% endif
+so the numbers entering the computations are of unity in size,
+and if we take a small number of steps (40 steps gives a discretization error
+of $5\cdot 10^{-3}$ with the Crank-Nicolson scheme).
+In general, rounding errors are negligible in comparison with other errors
+in differential equation models.
+
+The computer code for doing the reported experiments need a new version
+of the `solver` function where we do arithmetics with `Decimal`
+objects:
+
+@@@CODE src-analysis/errors.py fromto: def solver_decimal@def rounding
+The function below carries out the experiments. We can conveniently
+set the number of digits as we want through the `decimal.getcontext().prec`
+variable.
+
+@@@CODE src-analysis/errors.py fromto: def rounding@if __name
+
+===== Discussion of the size of various errors =====
+
+The previous computational examples of model, data, discretization,
+and rounding errors are tied to one particular mathematical problem,
+so it is in principle dangerous to make general conclusions.  However,
+the illustrations made point to some common trends that apply to
+differential equation models.
+
+First, rounding errors have very little impact compared to the other
+types of errors.  Second, numerical errors are in general smaller than
+model and data errors, but more importantly, numerical errors are
+often well understood and can be reduced by just increasing the
+computational work (in our example by taking more smaller time steps).
+
+Third, data errors may be significant, and it also takes a significant
+amount of computational work to quantify them and their impact on the
+solution. Many types of input data are also difficult or impossible
+to measure, so finding suitable values requires tuning of the data
+and the model to a known (measured) response.
+Nevertheless, even if the predictive precision of a model
+is limited because of severe errors or uncertainty in input data, the
+model can still be of high value for investigating qualitative
+properties of the underlying phenomenon. Through computer experiments
+with synthetic input data one can understand a lot of the science or
+engineering that goes into the model.
+
+Fourth, model errors are the most challenging type of error to deal
+with. Simplicity of model is in general preferred over complexity,
+but adding complexity is often the only way to improve the predictive
+capabilities of a model. More complexity usually also means a need
+for more input data and consequently the danger of increasing
+data errors.

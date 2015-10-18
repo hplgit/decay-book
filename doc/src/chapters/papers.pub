@@ -39,6 +39,13 @@
    status:    published
    entrytype: article
 * books
+** Trefethen's index cards - Forty years of notes about People, Words and Mathematics
+   key:       index_cards
+   author:    L. N. Trefethen
+   year:      2011
+   publisher: World Scientific
+   status:    published
+   entrytype: book
 ** Physical Fluid Dynamics
    key:       Tritton
    author:    D. J. Tritton
@@ -91,6 +98,14 @@
    key:       Larson_2013
    author:    M. G. Larson, F. Bengzon
    year:      2013
+   publisher: Springer
+   status:    published
+   series:    Texts in Computational Science and Engineering
+   entrytype: book
+** Scientific Computing - An Introducting Using {Maple} and {MATLAB}
+   key:       Gander_2015
+   author:    W. Gander, M. J. Gander, F. Kwok
+   year:      2015
    publisher: Springer
    status:    published
    series:    Texts in Computational Science and Engineering

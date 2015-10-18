@@ -149,12 +149,12 @@ if [ $? -ne 0 ]; then echo "doconce could not compile slides - abort"; exit; fi
 fi
 rsync="rsync -rtDvz -u -e ssh -b --exclude-from=$HOME/1/.rsyncexclude --delete --force "
 
-#repo=~/vc/decay-book
+#repo=~/vc/decay-book/doc
 repo=../../..
 if [ $publish -eq 1 ]; then
 # Copy compiled documents to destination repo
-dest=$repo/doc/pub
-dest_sol=$repo/doc/Trash
+dest=$repo/pub
+dest_sol=$repo/Trash
 if [ ! -d $dest/${nickname} ]; then
 echo "making directory ${dest}/${nickname}"
 mkdir $dest/${nickname}
@@ -192,7 +192,8 @@ for dir in $dirs; do
 done
 
 echo "copying compiled documents to $dest_sol"
-
+# Should not copy chapters since that requires ref[][][] and
+# publishing of separate chapters...or should chapters exist in html?
 cp ${nickname}-sol.pdf ${dest_sol}/${nickname}/pdf
 cp ${nickname}-sol.html ._${nickname}-sol*.html ${dest_sol}/${nickname}/html
 dirs="fig-${nickname} mov-${nickname}"
@@ -213,9 +214,9 @@ done
 cd ..
 cp index_files.do.txt index.do.txt
 system doconce format html index --html_style=bootstrap --html_links_in_new_window --html_bootstrap_navbar=off
-cp index.html $dest
-rm -f index.*
 cd -
+cp ../index.html $dest
+rm -f ../index.*
 
 # Copy src
 if [ $# -ge 3 ]; then
@@ -246,5 +247,5 @@ fi
 fi
 fi
 
-cd $repo
+cd $dest
 git add .

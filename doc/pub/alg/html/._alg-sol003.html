@@ -83,7 +83,7 @@ code { color: inherit; background-color: transparent; }
               ('Implementation', 1, 'decay:impl1', 'decay:impl1'),
               ('Computer language: Python', 2, None, '___sec21'),
               ('Making a solver function', 2, 'decay:py1', 'decay:py1'),
-              ('Integer division', 2, None, '___sec23'),
+              ('Integer division', 2, 'decay:py2', 'decay:py2'),
               ('Doc strings', 2, None, '___sec24'),
               ('Formatting numbers', 2, None, '___sec25'),
               ('Running the program', 2, None, '___sec26'),
@@ -115,23 +115,23 @@ code { color: inherit; background-color: transparent; }
                'decay:exer:meshfunc',
                'decay:exer:meshfunc'),
               ('Remarks', 3, None, '___sec39'),
-              ('Exercise 2: Differentiate a function',
+              ('Problem 2: Differentiate a function',
                2,
                'decay:exer:dudt',
                'decay:exer:dudt'),
-              ('Exercise 3: Experiment with divisions',
+              ('Problem 3: Experiment with divisions',
                2,
                'decay:exer:intdiv',
                'decay:exer:intdiv'),
-              ('Exercise 4: Experiment with wrong computations',
+              ('Problem 4: Experiment with wrong computations',
                2,
                'decay:exer:decay1err',
                'decay:exer:decay1err'),
-              ('Exercise 5: Plot the error function',
+              ('Problem 5: Plot the error function',
                2,
                'decay:exer:plot:error',
                'decay:exer:plot:error'),
-              ('Exercise 6: Change formatting of numbers and debug',
+              ('Problem 6: Change formatting of numbers and debug',
                2,
                'decay:exer:inexact:output',
                'decay:exer:inexact:output'),
@@ -333,7 +333,7 @@ We also remark that the function in b) is the solution of \( u^{\prime}=-au \),
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:exer:dudt">Exercise 2: Differentiate a function</h2>
+<h2 id="decay:exer:dudt">Problem 2: Differentiate a function</h2>
 
 <p>
 Given a mesh function \( u^n \) as an array <code>u</code> with \( u^n \) values at mesh
@@ -344,7 +344,7 @@ $$
 \begin{equation}
 d^n = [D_{2t}u]^n =
 \frac{u^{n+1}-u^{n-1}}{2\Delta t},\quad n=1,\ldots,N_t-1\tp
-\tag{49}
+\tag{58}
 \end{equation}
 $$
 
@@ -434,7 +434,7 @@ The functions can be written as
 
 <p>
 <b>b)</b>
-A standard implementation of the formula <a href="#mjx-eqn-49">(49)</a> is to
+A standard implementation of the formula <a href="#mjx-eqn-58">(58)</a> is to
 have a loop over \( i \). For large \( N_t \), such loop may run slowly in
 Python. A technique for speeding up the computations, called vectorization
 or array computing,
@@ -449,7 +449,7 @@ u^- &= (u^0,u^1,\ldots,u^{N_t-2})\tp
 \end{align*}
 $$
 
-The formula <a href="#mjx-eqn-49">(49)</a> can now be expressed as
+The formula <a href="#mjx-eqn-58">(58)</a> can now be expressed as
 
 $$ (d^1,d^2,\ldots,d^{N_t-1}) = \frac{1}{2\Delta t}(u^+ - u^-)\tp$$
 
@@ -523,7 +523,7 @@ Filename: <code>differentiate</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:exer:intdiv">Exercise 3: Experiment with divisions</h2>
+<h2 id="decay:exer:intdiv">Problem 3: Experiment with divisions</h2>
 
 <p>
 Explain what happens in the following computations, where
@@ -575,7 +575,7 @@ in the computations:
 <span style="color: #666666">2</span>
 </pre></div>
 <p>
-From this we realize at the unexpected results are caused by
+From this we realize that the unexpected results are caused by
 integer division: <code>int</code> object divided by <code>int</code> object.
 For example,
 <code>Nt</code> is an integer, not a real as we want, because 8/3 according integer
@@ -596,7 +596,7 @@ Filename: <code>pyproblems</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:exer:decay1err">Exercise 4: Experiment with wrong computations</h2>
+<h2 id="decay:exer:decay1err">Problem 4: Experiment with wrong computations</h2>
 
 <p>
 Consider the <code>solver</code> function in the <a href="http://tinyurl.com/ofkw6kc/alg/decay_v1.py" target="_self"><tt>decay_v1.py</tt></a> file
@@ -667,7 +667,7 @@ u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">
     <span style="color: #408080; font-style: italic"># or print &#39;t={t:6.3f} u={u:g}&#39;.format(t=t[i], u=u[i])</span>
 </pre></div>
 <p>
-Running this code show
+Running this code shows
 
 <p>
 
@@ -701,13 +701,13 @@ Filename: <code>decay_v1_err</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:exer:plot:error">Exercise 5: Plot the error function</h2>
+<h2 id="decay:exer:plot:error">Problem 5: Plot the error function</h2>
 
 <p>
 Solve the problem \( u'=-au \), \( u(0)=I \), using the Forward Euler, Backward
 Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
-function \( e^n = \uex(t_n)-u^n \) for \( \Delta t \), \( \frac{1}{4}\Delta t \), and
-\( \frac{1}{8}\Delta t \), where \( \uex \) is the exact solution of the ODE and
+function \( e^n = \uex(t_n)-u^n \) for \( \Delta t=0.1, 0.05, 0.025 \),
+where \( \uex \) is the exact solution of the ODE and
 \( u^n \) is the numerical solution at mesh point \( t_n \).
 
 <p>
@@ -752,7 +752,7 @@ some edits.
 <p>
 The <code>solver</code> and <code>exact_solution</code> functions are not altered.
 The <code>explore</code> and <code>main</code> functions as well as the call to <code>main</code> are
-edited to
+edited to:
 
 <p>
 
@@ -765,8 +765,9 @@ edited to
     figure() <span style="color: #408080; font-style: italic"># create new plot</span>
     <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values:
         <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;dt&#39;</span>, dt
-        u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)    <span style="color: #408080; font-style: italic"># Numerical solution</span>
-        u_e <span style="color: #666666">=</span> exact_solution(t, I, a)
+        u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)
+        <span style="color: #408080; font-style: italic"># Numerical solution</span>
+        u_e <span style="color: #666666">=</span> u_exact(t, I, a)
         e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
         plot(t, e)
         hold(<span style="color: #BA2121">&#39;on&#39;</span>)
@@ -805,7 +806,7 @@ Filename: <code>decay_plot_error</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:exer:inexact:output">Exercise 6: Change formatting of numbers and debug</h2>
+<h2 id="decay:exer:inexact:output">Problem 6: Change formatting of numbers and debug</h2>
 
 <p>
 The <a href="http://tinyurl.com/ofkw6kc/alg/decay_memsave.py" target="_self"><tt>decay_memsave.py</tt></a> program
