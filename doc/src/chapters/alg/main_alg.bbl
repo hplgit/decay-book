@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{Matplotlib:doc}
+J.~D. Hunter, D.~Dale, E.~Firing, and M.~Droettboom.
+\newblock {Matplotlib} documentation, 2012.
+\newblock \url{http://matplotlib.org/users/}.
+
+\bibitem{SciTools:doc}
+H.~P. Langtangen.
+\newblock {SciTools} documentation.
+\newblock \url{http://hplgit.github.io/scitools/doc/web/index.html}.
+
+\bibitem{Langtangen_2012}
+H.~P. Langtangen.
+\newblock {\em A Primer on Scientific Programming with {P}ython}.
+\newblock Texts in Computational Science and Engineering. Springer, fourth
+  edition, 2014.
+
+\end{thebibliography}

@@ -1,0 +1,109 @@
+\begin{theindex}
+
+  \item $\theta$-rule, \hyperpage{13}
+
+  \indexspace
+
+  \item algebraic equation, \hyperpage{8}
+  \item array arithmetics, \hyperpage{29}, \hyperpage{39}
+  \item array computing, \hyperpage{29}, \hyperpage{39}
+  \item averaging
+    \subitem arithmetic, \hyperpage{13}
+
+  \indexspace
+
+  \item backward difference, \hyperpage{11}
+  \item Backward Euler scheme, \hyperpage{11}
+  \item backward scheme, 1-step, \hyperpage{11}
+
+  \indexspace
+
+  \item centered difference, \hyperpage{11}
+  \item continuous function norms, \hyperpage{30}
+  \item Crank-Nicolson scheme, \hyperpage{11}
+  \item cropping images, \hyperpage{34}
+
+  \indexspace
+
+  \item decay ODE, \hyperpage{4}
+  \item difference equation, \hyperpage{8}
+  \item directory, \hyperpage{19}
+  \item discrete equation, \hyperpage{8}
+  \item discrete function norms, \hyperpage{30}
+  \item doc strings, \hyperpage{23}
+
+  \indexspace
+
+  \item EPS plot, \hyperpage{33}
+  \item error
+    \subitem norms, \hyperpage{32}
+  \item exponential decay, \hyperpage{4}
+
+  \indexspace
+
+  \item finite difference operator notation, \hyperpage{18}
+  \item finite difference scheme, \hyperpage{8}
+  \item finite differences, \hyperpage{8}
+    \subitem backward, \hyperpage{11}
+    \subitem centered, \hyperpage{11}
+    \subitem forward, \hyperpage{8}
+  \item folder, \hyperpage{19}
+  \item format string syntax (Python), \hyperpage{24}
+  \item forward difference, \hyperpage{8}
+  \item Forward Euler scheme, \hyperpage{8}
+
+  \indexspace
+
+  \item grid, \hyperpage{5}
+
+  \indexspace
+
+  \item mesh, \hyperpage{5}
+  \item mesh function, \hyperpage{6}
+  \item mesh function norms, \hyperpage{30}
+  \item {\rm\texttt{montage}} program, \hyperpage{34}
+
+  \indexspace
+
+  \item norm
+    \subitem continuous, \hyperpage{30}
+    \subitem discrete (mesh function), \hyperpage{30}
+
+  \indexspace
+
+  \item operator notation, finite differences, \hyperpage{18}
+
+  \indexspace
+
+  \item PDF plot, \hyperpage{33}
+  \item {\rm\texttt{pdfcrop}} program, \hyperpage{35}
+  \item {\rm\texttt{pdfnup}} program, \hyperpage{35}
+  \item {\rm\texttt{pdftk}} program, \hyperpage{35}
+  \item plotting curves, \hyperpage{25}
+  \item PNG plot, \hyperpage{33}
+  \item printf format, \hyperpage{23}
+
+  \indexspace
+
+  \item representative (mesh function), \hyperpage{29}
+
+  \indexspace
+
+  \item scalar computing, \hyperpage{32}
+
+  \indexspace
+
+  \item theta-rule, \hyperpage{13}
+  \item time step, \hyperpage{15}
+
+  \indexspace
+
+  \item vectorization, \hyperpage{29}, \hyperpage{39}
+  \item viewing graphics files, \hyperpage{33}
+  \item visualizing curves, \hyperpage{25}
+
+  \indexspace
+
+  \item weighted average, \hyperpage{13}
+
+\end{theindex}
