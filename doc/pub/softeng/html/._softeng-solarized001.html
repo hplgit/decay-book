@@ -405,7 +405,7 @@ ylabel(<span style="color: #CD5555">&#39;y&#39;</span>)
 show()
 </pre></div>
 <p>
-This program is easy to read, and as long it is correct, many will
+This program is easy to read, and as long as it is correct, many will
 claim that it has sufficient quality. Nevertheless, the program suffers
 from two serious flaws:
 
@@ -472,11 +472,11 @@ show()
 
 <p>
 There is obviously not just one way to comment a program, and opinions
-may differ as to what code should be accomplished by comments.
+may differ as to what code should be commented.
 The guiding principle is, however, that comments should make the
-program easy to understand for human eye. Do not comment obvious
+program easy to understand for the human eye. Do not comment obvious
 constructions, but focus on ideas and (&quot;what happens in the next
-statements?&quot;) and on explaining code that can be interpreted as
+statements?&quot;) and on explaining code that can be found
 complicated.
 
 <h3 id="___sec5">Refactoring into functions </h3>
@@ -497,8 +497,8 @@ next natural step is therefore to isolate the numerical computations
 and the visualization in separate Python functions.
 Such a rewrite of a code, without essentially changing the functionality,
 but just improve the quality of the code, is known as <em>refactoring</em>.
-After one has quickly put some code down and tested it, it is a common
-step to refactor it so it is better prepared for extensions.
+After quickly putting together and testing a program, the next
+step is to refactor it so it becomes better prepared for extensions.
 
 <h3 id="___sec6">Program file vs IDE vs notebook </h3>
 
@@ -1072,7 +1072,6 @@ module:
 
 <!-- code=python (!bc pypro) typeset with pygments style "perldoc" -->
 <div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">logging</span>
-<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">logging</span>
 logging.basicConfig(
     filename=<span style="color: #CD5555">&#39;myprog.log&#39;</span>, filemode=<span style="color: #CD5555">&#39;w&#39;</span>, level=logging.WARNING,
     format=<span style="color: #CD5555">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span>,
@@ -1233,7 +1232,7 @@ in particular to automate large-scale investigations by other programs
 Reading input data can be done in many ways. We have to decide on the
 functionality of the user interface, i.e., how we want to operate the
 program when providing input. Thereafter, we use appropriate tools to
-implement that particular user interface. There are four basic types
+implement the particular user interface. There are four basic types
 of user interface, listed here according to implementational
 complexity, from lowest to highest:
 
@@ -1249,7 +1248,7 @@ difficult to present recommendations or pros and cons.
 Alternatives 2 and 4 are most popular and will be addressed next.
 The goal is to make it easy for the user to
 set physical and numerical parameters in
-our <code>decay.py</code> program. We use  a little toy program, called
+our <code>decay.py</code> program. However, we use  a little toy program, called
 <code>prog.py</code>, as introductory
 example:
 
@@ -1400,7 +1399,7 @@ program failed.
 <b>Command-line arguments are strings!</b>
 <p>
 Note that all elements in <code>sys.argv</code> are string objects.
-If the values will enter mathematical computations, we need
+If the values are used in mathematical computations, we need
 to explicitly convert the strings to numbers.
 </div>
 
@@ -1428,7 +1427,7 @@ result = delta*exp(-p)
 </pre></div>
 <p>
 Because the default values of <code>delta</code> and <code>p</code> are float numbers,
-the <code>args.delta</code> and <code>args.p</code> variable are automatically of type <code>float</code>.
+the <code>args.delta</code> and <code>args.p</code> variables are automatically of type <code>float</code>.
 
 <p>
 Our next task is to use these basic code constructs to equip our
@@ -1437,7 +1436,7 @@ Our next task is to use these basic code constructs to equip our
 <h2 id="___sec18">Positional command-line arguments </h2>
 
 <p>
-For our <code>decay.py</code> module file, we want include functionality such
+For our <code>decay.py</code> module file, we want to include functionality such
 that we can read \( I \), \( a \), \( T \), \( \theta \), and a range of \( \Delta t \)
 values from the command line.  A plot is then to be made, comparing
 the different numerical solutions for different \( \Delta t \) values
@@ -1868,9 +1867,9 @@ correctness of the implementations.
 There exists
 well-established procedures and corresponding tools for automating
 the execution of such tests. These tools allow large test sets to be
-run with a one-line command, making it easy to check of the
-still software works (as far as the
-tests tell!). Here we shall illustrate two important
+run with a one-line command, making it easy to check that the
+software still works (as far as the
+tests can tell!). Here we shall illustrate two important
 software testing techniques: <em>doctest</em> and <em>unit testing</em>.
 The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.
@@ -2647,8 +2646,8 @@ variable).
 <p>
 Let us start out with the minimum solution alternative: distributing
 just the <code>decay.py</code> file. Then the software is just one file and all
-we need is a directory with this file.  Users will also this directory
-to contain an installation script <code>setup.py</code> and a <code>README</code> file
+we need is a directory with this file. This directory will also
+contain an installation script <code>setup.py</code> and a <code>README</code> file
 telling what the software is about, the author's email address, a URL
 for downloading the software, and other useful information.
 
@@ -2709,7 +2708,8 @@ write <code>setup.py</code> scripts.
 <div class="alert alert-block alert-notice alert-text-normal">
 <b>Remark about the executable file.</b>
 <p>
-The executable program, <code>decay.py</code>, is above taken to be the complete
+The executable program, <code>decay.py</code>, is in the above installation
+script taken to be the complete
 module file <code>decay.py</code>. It would normally be preferred to instead
 write a very short script essentially importing <code>decay</code> and running
 the test block in <code>decay.py</code>.  In this way, we distribute a module and
@@ -2949,13 +2949,13 @@ Obviously, it is the package developer who decides on such an
 <h1 id="softeng1:prog:se:class">Classes for problem and solution method</h1>
 
 <p>
-The numerical solution procedure was compactly and conveniently implemented in
-a Python function <code>solver</code> in the section <a href="#softeng1:basic:math">Mathematical problem and solution technique</a>.
-In more complicated problems it might
-be beneficial to use classes instead of functions only. Here we shall
-describe a class-based software design well suited for scientific problems
-where there is a mathematical model of some physical phenomenon and
-some numerical methods to solve the equations involved in the model.
+The numerical solution procedure was compactly and conveniently
+implemented in a Python function <code>solver</code> in the section <a href="#softeng1:basic:math">Mathematical problem and solution technique</a>.  In more complicated problems it might be
+beneficial to use classes instead of functions only. Here we shall
+describe a class-based software design well suited for scientific
+problems where there is a mathematical model of some physical
+phenomenon, and some numerical methods to solve the equations involved
+in the model.
 
 <p>
 We introduce a class <code>Problem</code> to hold the definition of the physical
@@ -3306,9 +3306,9 @@ A simplified version of the parameter class looks as follows:
 </pre></div>
 <p>
 The file <a href="http://tinyurl.com/ofkw6kc/softeng/decay_oo.py" target="_self"><tt>decay_oo.py</tt></a> contains
-a slightly more advanced version of class <code>Parameters</code> where we
-in the functions for getting and setting parameters
-test for valid parameter names and
+a slightly more advanced version of class <code>Parameters</code> where
+the functions for getting and setting parameters
+contain tests for valid parameter names, and
 raise exceptions with informative messages if any name is not registered.
 
 <p>
@@ -3316,7 +3316,7 @@ We have already sketched the <code>Problem</code> and <code>Solver</code> classe
 on inheritance from <code>Parameters</code>. We have also shown how they are
 used. The only remaining code is to make the plot, but this code is
 identical to previous versions when the numerical solution is
-available in an object <code>t</code> and the exact one in <code>u_e</code>.
+available in an object <code>u</code> and the exact one in <code>u_e</code>.
 
 <p>
 The advantage with the <code>Parameters</code> class is that it scales to problems
@@ -3436,7 +3436,7 @@ what is directly produced by <code>model.py</code>:
 <ol>
 <li> We need to collect all the plots for one
    numerical method (FE, BE, CN) in a single plot.
-   For example, if 4 \( \Delta t \) values are run, the summarizing plot
+   For example, if 4 \( \Delta t \) values are run, the summarizing figure
    for the BE method has \( 2\times 2 \) subplots, with the subplot corresponding
    to the largest \( \Delta t \) in the upper left corner and the smallest
    in the bottom right corner.</li>
@@ -3517,7 +3517,7 @@ Figure <a href="#softeng1:experiments:fig:BE4a">4</a> for an example.
 <center> <!-- figure -->
 <hr class="figure">
 <center><p class="caption">Figure 4:  Illustration of the Backward Euler method for four time step values. <div id="softeng1:experiments:fig:BE4a"></div> </p></center>
-<p><img src="fig-softeng/BE4a.png" align="bottom" width=600></p>
+<p><img src="fig-softeng/BE.png" align="bottom" width=800></p>
 </center>
 
 <p>
@@ -3591,7 +3591,7 @@ but we are not interested in all the variables. One example is
 <div class="highlight" style="background: #eee8d5"><pre style="line-height: 125%">output, error = p.communicate()
 </pre></div>
 <p>
-but <code>error</code> is of no interest.
+but <code>error</code> is of no interest in the example above.
 One can then use underscore <code>_</code> as variable name for the dummy
 (uninteresting) variable(s):
 
@@ -3797,7 +3797,7 @@ tracked by version control systems like Git. The result is a very
 strong tool for monitoring &quot;who did what when&quot; with the files,
 resulting in increased reliability of the writing process. For
 collaborative writing, the merge functionality in Git leads to safer
-simultaneously editing that what is offered even by collaborative
+simultaneously editing than what is offered even by collaborative
 tools like GoogleDocs.
 
 <h3 id="___sec61">HTML with MathJax </h3>
@@ -4041,7 +4041,7 @@ in three separate test functions.
 <li> The formulas for \( d_i \) are exact for points on
    a straight line, as all the \( d_i \) values are then the same, equal to
    the slope of the line. A test can check this property.</li>
-<li> For point lying on a parabola, the values for \( d_i \), \( i=1,\ldots,n-1 \),
+<li> For points lying on a parabola, the values for \( d_i \), \( i=1,\ldots,n-1 \),
    should equal the exact derivative of the parabola. Make a test based on
    this property.</li>
 </ol>
@@ -4291,7 +4291,7 @@ Filename: <code>test_roots</code>.
 <p>
 When we replace a comparison <code>a == b</code>, where <code>a</code> and/or <code>b</code> are
 <code>float</code> objects, by a comparison with tolerance, <code>abs(a-b) &lt; tol</code>,
-the appropriate size of <code>tol</code> depends on the size <code>a</code> and <code>b</code>.
+the appropriate size of <code>tol</code> depends on the size of <code>a</code> and <code>b</code>.
 Investigate how the size of <code>abs(a-b)</code> varies when <code>b</code> takes on
 values \( 10^k \), \( k=-5,-9,\ldots,20 \) and <code>a=1.0/49*b*49</code>.
 Filename: <code>tolerance</code>.
@@ -4337,7 +4337,7 @@ of individuals \( u^n \) of a certain specie at time \( n\Delta t \):
 
 $$
 \begin{equation}
-u^{n+1} = u^n + \Delta t r u^n\left(1 - \frac{u^n}{M^n}\right),
+u^{n+1} = u^n + \Delta t\, r u^n\left(1 - \frac{u^n}{M^n}\right),
 \quad u^0=U_0\tp
 \tag{9}
 \end{equation}

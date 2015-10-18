@@ -59,17 +59,17 @@ We address the differential equation problem
 .. _Eq:softeng1:ode:
 
 .. math::
-   :label: softeng1:ode
-        
-        u'(t) = -au(t), \quad t \in (0,T], 
+
+    \tag{1}
+    u'(t) = -au(t), \quad t \in (0,T], 
         
 
 .. _Eq:softeng1:u0:
 
 .. math::
-   :label: softeng1:u0
-          
-        u(0)  = I,                         
+
+    \tag{2}
+    u(0)  = I,                         
         
 
 where :math:`a`, :math:`I`, and :math:`T` are prescribed parameters, and :math:`u(t)` is
@@ -88,9 +88,9 @@ A family of popular numerical methods are provided by the :math:`\theta` scheme,
 .. _Eq:softeng1:utheta:
 
 .. math::
-   :label: softeng1:utheta
-        
-        u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
+
+    \tag{3}
+    u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
         
         
 
@@ -107,7 +107,7 @@ scheme when :math:`\theta=1/2`.
 A first, quick implementation
 -----------------------------
 
-Solving :eq:`softeng1:utheta` in a program is very straightforward:
+Solving :ref:`(3) <Eq:softeng1:utheta>` in a program is very straightforward:
 just make a loop over :math:`n` and evaluate the formula. The :math:`u(t_n`)
 values for discrete :math:`n` can be stored in an array. This makes it easy
 to also plot the solution. It would be natural to also add
@@ -147,7 +147,7 @@ to write a simple program like this:
         ylabel('y')
         show()
 
-This program is easy to read, and as long it is correct, many will
+This program is easy to read, and as long as it is correct, many will
 claim that it has sufficient quality. Nevertheless, the program suffers
 from two serious flaws:
 
@@ -212,11 +212,11 @@ Comments in a program
 ~~~~~~~~~~~~~~~~~~~~~
 
 There is obviously not just one way to comment a program, and opinions
-may differ as to what code should be accomplished by comments.
+may differ as to what code should be commented.
 The guiding principle is, however, that comments should make the
-program easy to understand for human eye. Do not comment obvious
+program easy to understand for the human eye. Do not comment obvious
 constructions, but focus on ideas and ("what happens in the next
-statements?") and on explaining code that can be interpreted as
+statements?") and on explaining code that can be found
 complicated.
 
 .. index:: refactoring
@@ -239,8 +239,8 @@ next natural step is therefore to isolate the numerical computations
 and the visualization in separate Python functions.
 Such a rewrite of a code, without essentially changing the functionality,
 but just improve the quality of the code, is known as *refactoring*.
-After one has quickly put some code down and tested it, it is a common
-step to refactor it so it is better prepared for extensions.
+After quickly putting together and testing a program, the next
+step is to refactor it so it becomes better prepared for extensions.
 
 Program file vs IDE vs notebook
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -384,11 +384,11 @@ needed functions:
 Implementing the numerical algorithm in a function
 --------------------------------------------------
 
-The solution formula :eq:`softeng1:utheta` is completely general and
+The solution formula :ref:`(3) <Eq:softeng1:utheta>` is completely general and
 should be available as a Python function ``solver`` with all input data as
 function arguments and all output data returned to the calling code.
 With this ``solver`` function we can solve all types of problems
-:eq:`softeng1:ode`-:eq:`softeng1:u0`
+:ref:`(1) <Eq:softeng1:ode>`-:ref:`(2) <Eq:softeng1:u0>`
 by an easy-to-read one-line statement:
 
 .. code-block:: python
@@ -792,7 +792,6 @@ module:
 .. code-block:: python
 
         import logging
-        import logging
         logging.basicConfig(
             filename='myprog.log', filemode='w', level=logging.WARNING,
             format='%(asctime)s - %(levelname)s - %(message)s',
@@ -940,7 +939,7 @@ in particular to automate large-scale investigations by other programs
 Reading input data can be done in many ways. We have to decide on the
 functionality of the user interface, i.e., how we want to operate the
 program when providing input. Thereafter, we use appropriate tools to
-implement that particular user interface. There are four basic types
+implement the particular user interface. There are four basic types
 of user interface, listed here according to implementational
 complexity, from lowest to highest:
 
@@ -957,7 +956,7 @@ difficult to present recommendations or pros and cons.
 Alternatives 2 and 4 are most popular and will be addressed next.
 The goal is to make it easy for the user to
 set physical and numerical parameters in
-our ``decay.py`` program. We use  a little toy program, called
+our ``decay.py`` program. However, we use  a little toy program, called
 ``prog.py``, as introductory
 example:
 
@@ -1089,7 +1088,7 @@ program failed.
 .. admonition:: Command-line arguments are strings
 
    Note that all elements in ``sys.argv`` are string objects.
-   If the values will enter mathematical computations, we need
+   If the values are used in mathematical computations, we need
    to explicitly convert the strings to numbers.
 
 
@@ -1115,7 +1114,7 @@ Minimal code for our ``prog.py`` program reads
         print result
 
 Because the default values of ``delta`` and ``p`` are float numbers,
-the ``args.delta`` and ``args.p`` variable are automatically of type ``float``.
+the ``args.delta`` and ``args.p`` variables are automatically of type ``float``.
 
 Our next task is to use these basic code constructs to equip our
 ``decay.py`` module with command-line interfaces.
@@ -1129,7 +1128,7 @@ Positional command-line arguments
 
 .. index:: command-line arguments
 
-For our ``decay.py`` module file, we want include functionality such
+For our ``decay.py`` module file, we want to include functionality such
 that we can read :math:`I`, :math:`a`, :math:`T`, :math:`\theta`, and a range of :math:`\Delta t`
 values from the command line.  A plot is then to be made, comparing
 the different numerical solutions for different :math:`\Delta t` values
@@ -1528,9 +1527,9 @@ correctness of the implementations.
 There exists
 well-established procedures and corresponding tools for automating
 the execution of such tests. These tools allow large test sets to be
-run with a one-line command, making it easy to check of the
-still software works (as far as the
-tests tell!). Here we shall illustrate two important
+run with a one-line command, making it easy to check that the
+software still works (as far as the
+tests can tell!). Here we shall illustrate two important
 software testing techniques: *doctest* and *unit testing*.
 The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.
@@ -1935,8 +1934,8 @@ Test function for the solver
 Finding good test problems for verifying the implementation of numerical
 methods is a topic on its own. The challenge is that we very seldom know
 what the numerical errors are. For the present model problem
-:eq:`softeng1:ode`-:eq:`softeng1:u0` solved by
-:eq:`softeng1:utheta` one can, fortunately, derive a formula for
+:ref:`(1) <Eq:softeng1:ode>`-:ref:`(2) <Eq:softeng1:u0>` solved by
+:ref:`(3) <Eq:softeng1:utheta>` one can, fortunately, derive a formula for
 the numerical approximation:
 
 .. math::
@@ -2277,8 +2276,8 @@ Distributing just a module file
 
 Let us start out with the minimum solution alternative: distributing
 just the ``decay.py`` file. Then the software is just one file and all
-we need is a directory with this file.  Users will also this directory
-to contain an installation script ``setup.py`` and a ``README`` file
+we need is a directory with this file. This directory will also
+contain an installation script ``setup.py`` and a ``README`` file
 telling what the software is about, the author's email address, a URL
 for downloading the software, and other useful information.
 
@@ -2336,7 +2335,8 @@ write ``setup.py`` scripts.
 
 .. admonition:: Remark about the executable file
 
-   The executable program, ``decay.py``, is above taken to be the complete
+   The executable program, ``decay.py``, is in the above installation
+   script taken to be the complete
    module file ``decay.py``. It would normally be preferred to instead
    write a very short script essentially importing ``decay`` and running
    the test block in ``decay.py``.  In this way, we distribute a module and
@@ -2550,13 +2550,13 @@ That is, the call goes like ``packagename.modulename.functionname``.
 Classes for problem and solution method
 =======================================
 
-The numerical solution procedure was compactly and conveniently implemented in
-a Python function ``solver`` in the section :ref:`softeng1:basic:math`.
-In more complicated problems it might
-be beneficial to use classes instead of functions only. Here we shall
-describe a class-based software design well suited for scientific problems
-where there is a mathematical model of some physical phenomenon and
-some numerical methods to solve the equations involved in the model.
+The numerical solution procedure was compactly and conveniently
+implemented in a Python function ``solver`` in the section :ref:`softeng1:basic:math`.  In more complicated problems it might be
+beneficial to use classes instead of functions only. Here we shall
+describe a class-based software design well suited for scientific
+problems where there is a mathematical model of some physical
+phenomenon, and some numerical methods to solve the equations involved
+in the model.
 
 We introduce a class ``Problem`` to hold the definition of the physical
 problem, and a class ``Solver`` to hold the data and methods needed to
@@ -2589,7 +2589,7 @@ The purpose of the problem class is to store all information about
 the mathematical model. This usually means the physical parameters
 and formulas
 in the problem. Looking at our model problem
-:eq:`softeng1:ode`-:eq:`softeng1:u0`, the physical data cover
+:ref:`(1) <Eq:softeng1:ode>`-:ref:`(2) <Eq:softeng1:u0>`, the physical data cover
 :math:`I`, :math:`a`, and :math:`T`. Since we have an analytical solution of
 the ODE problem, we may add this solution in terms of a Python
 function (or method) to the problem class as well.
@@ -2893,16 +2893,16 @@ A simplified version of the parameter class looks as follows:
                     self.prm[name] = getattr(args, name)
 
 The file `decay_oo.py <http://tinyurl.com/ofkw6kc/softeng/decay_oo.py>`__ contains
-a slightly more advanced version of class ``Parameters`` where we
-in the functions for getting and setting parameters
-test for valid parameter names and
+a slightly more advanced version of class ``Parameters`` where
+the functions for getting and setting parameters
+contain tests for valid parameter names, and
 raise exceptions with informative messages if any name is not registered.
 
 We have already sketched the ``Problem`` and ``Solver`` classes that build
 on inheritance from ``Parameters``. We have also shown how they are
 used. The only remaining code is to make the plot, but this code is
 identical to previous versions when the numerical solution is
-available in an object ``t`` and the exact one in ``u_e``.
+available in an object ``u`` and the exact one in ``u_e``.
 
 The advantage with the ``Parameters`` class is that it scales to problems
 with a large number of physical and numerical parameters:
@@ -2933,9 +2933,9 @@ programs and archiving the results.
    .. _Eq:softeng1:experiments:model:
 
 .. math::
-   :label: softeng1:experiments:model
-           
-           u^\prime(t) = -au(t),\quad u(0)=I,\quad t\in (0,T],
+
+    \tag{4}
+    u^\prime(t) = -au(t),\quad u(0)=I,\quad t\in (0,T],
            
            
    
@@ -2944,9 +2944,9 @@ programs and archiving the results.
    .. _Eq:softeng1:experiments:theta:
 
 .. math::
-   :label: softeng1:experiments:theta
-           
-           u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
+
+    \tag{5}
+    u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
            \quad u^0=I{\thinspace .}
            
            
@@ -2974,7 +2974,7 @@ programs and archiving the results.
 Available software
 ------------------
 
-Appropriate software for implementing :eq:`softeng1:experiments:theta`
+Appropriate software for implementing :ref:`(5) <Eq:softeng1:experiments:theta>`
 is available in a program `model.py <http://tinyurl.com/nc4upel/doconce_src/model.py>`__, which is run as
 
 .. code-block:: text
@@ -3019,7 +3019,7 @@ what is directly produced by ``model.py``:
 
 1. We need to collect all the plots for one
    numerical method (FE, BE, CN) in a single plot.
-   For example, if 4 :math:`\Delta t` values are run, the summarizing plot
+   For example, if 4 :math:`\Delta t` values are run, the summarizing figure
    for the BE method has :math:`2\times 2` subplots, with the subplot corresponding
    to the largest :math:`\Delta t` in the upper left corner and the smallest
    in the bottom right corner.
@@ -3098,8 +3098,8 @@ Figure :ref:`softeng1:experiments:fig:BE4a` for an example.
 
 .. _softeng1:experiments:fig:BE4a:
 
-.. figure:: BE4a.png
-   :width: 600
+.. figure:: BE.png
+   :width: 800
 
    *Illustration of the Backward Euler method for four time step values*
 
@@ -3163,7 +3163,7 @@ that our program stopped with a failure.
    
            output, error = p.communicate()
    
-   but ``error`` is of no interest.
+   but ``error`` is of no interest in the example above.
    One can then use underscore ``_`` as variable name for the dummy
    (uninteresting) variable(s):
    
@@ -3379,7 +3379,7 @@ tracked by version control systems like Git. The result is a very
 strong tool for monitoring "who did what when" with the files,
 resulting in increased reliability of the writing process. For
 collaborative writing, the merge functionality in Git leads to safer
-simultaneously editing that what is offered even by collaborative
+simultaneously editing than what is offered even by collaborative
 tools like GoogleDocs.
 
 .. index:: HTML
@@ -3608,27 +3608,27 @@ The derivative of this curve, defined as a new curve with points
 .. _Eq:_auto1:
 
 .. math::
-   :label: _auto1
-        
-        d_0 = \frac{y_1-y_0}{\Delta x},
+
+    \tag{6}
+    d_0 = \frac{y_1-y_0}{\Delta x},
         
         
 
 .. _Eq:_auto2:
 
 .. math::
-   :label: _auto2
-          
-        d_i = \frac{y_{i+1}-y_{i-1}}{2\Delta x},\quad i=1,\ldots,n-1,
+
+    \tag{7}
+    d_i = \frac{y_{i+1}-y_{i-1}}{2\Delta x},\quad i=1,\ldots,n-1,
         
         
 
 .. _Eq:_auto3:
 
 .. math::
-   :label: _auto3
-          
-        d_n = \frac{y_n-y_{n-1}}{\Delta x}{\thinspace .}
+
+    \tag{8}
+    d_n = \frac{y_n-y_{n-1}}{\Delta x}{\thinspace .}
         
         
 
@@ -3653,7 +3653,7 @@ in three separate test functions.
    a straight line, as all the :math:`d_i` values are then the same, equal to
    the slope of the line. A test can check this property.
 
-3. For point lying on a parabola, the values for :math:`d_i`, :math:`i=1,\ldots,n-1`,
+3. For points lying on a parabola, the values for :math:`d_i`, :math:`i=1,\ldots,n-1`,
    should equal the exact derivative of the parabola. Make a test based on
    this property.
 
@@ -3879,7 +3879,7 @@ Problem 5: Experiment with tolerances in comparisons
 
 When we replace a comparison ``a == b``, where ``a`` and/or ``b`` are
 ``float`` objects, by a comparison with tolerance, ``abs(a-b) < tol``,
-the appropriate size of ``tol`` depends on the size ``a`` and ``b``.
+the appropriate size of ``tol`` depends on the size of ``a`` and ``b``.
 Investigate how the size of ``abs(a-b)`` varies when ``b`` takes on
 values :math:`10^k`, :math:`k=-5,-9,\ldots,20` and ``a=1.0/49*b*49``.
 Filename: ``tolerance``.
@@ -3925,9 +3925,9 @@ of individuals :math:`u^n` of a certain specie at time :math:`n\Delta t`:
 .. _Eq:softeng1:exer:logistic:eq:
 
 .. math::
-   :label: softeng1:exer:logistic:eq
-        
-        u^{n+1} = u^n + \Delta t r u^n\left(1 - \frac{u^n}{M^n}\right),
+
+    \tag{9}
+    u^{n+1} = u^n + \Delta t\, r u^n\left(1 - \frac{u^n}{M^n}\right),
         \quad u^0=U_0{\thinspace .}
         \
         
