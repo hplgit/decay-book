@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} python myprog.py 1.5 2 0.5 0.8 0.4}
-\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} python myprog.py \PYGdefaultZhy{}\PYGdefaultZhy{}I 1.5 \PYGdefaultZhy{}\PYGdefaultZhy{}a 2 \PYGdefaultZhy{}\PYGdefaultZhy{}dt 0.8 0.4}
-\end{Verbatim}

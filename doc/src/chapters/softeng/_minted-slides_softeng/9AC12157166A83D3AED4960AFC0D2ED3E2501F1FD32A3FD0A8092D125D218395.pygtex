@@ -1,9 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} tail \PYGdefaultZhy{}f decay.log}
-\PYGdefault{g+go}{2015.09.26 05:37:41 AM \PYGdefaultZhy{} INFO \PYGdefaultZhy{} u[0]=1}
-\PYGdefault{g+go}{2015.09.26 05:37:41 AM \PYGdefaultZhy{} INFO \PYGdefaultZhy{} u[1]=0.777778}
-\PYGdefault{g+go}{2015.09.26 05:37:41 AM \PYGdefaultZhy{} INFO \PYGdefaultZhy{} u[2]=0.604938}
-\PYGdefault{g+go}{2015.09.26 05:37:41 AM \PYGdefaultZhy{} INFO \PYGdefaultZhy{} u[3]=0.470508}
-\PYGdefault{g+go}{2015.09.26 05:37:41 AM \PYGdefaultZhy{} INFO \PYGdefaultZhy{} u[4]=0.36595}
-\PYGdefault{g+go}{2015.09.26 05:37:41 AM \PYGdefaultZhy{} INFO \PYGdefaultZhy{} u[5]=0.284628}
-\end{Verbatim}

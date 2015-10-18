@@ -1,9 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{k+kn}{from} \PYGdefault{n+nn}{subprocess} \PYGdefault{k+kn}{import} \PYGdefault{n}{Popen}\PYGdefault{p}{,} \PYGdefault{n}{PIPE}\PYGdefault{p}{,} \PYGdefault{n}{STDOUT}
-\PYGdefault{n}{p} \PYGdefault{o}{=} \PYGdefault{n}{Popen}\PYGdefault{p}{(}\PYGdefault{n}{cmd}\PYGdefault{p}{,} \PYGdefault{n}{shell}\PYGdefault{o}{=}\PYGdefault{n+nb+bp}{True}\PYGdefault{p}{,} \PYGdefault{n}{stdout}\PYGdefault{o}{=}\PYGdefault{n}{PIPE}\PYGdefault{p}{,} \PYGdefault{n}{stderr}\PYGdefault{o}{=}\PYGdefault{n}{STDOUT}\PYGdefault{p}{)}
-\PYGdefault{n}{output}\PYGdefault{p}{,} \PYGdefault{n}{dummy} \PYGdefault{o}{=} \PYGdefault{n}{p}\PYGdefault{o}{.}\PYGdefault{n}{communicate}\PYGdefault{p}{()}
-
-\PYGdefault{n}{failure} \PYGdefault{o}{=} \PYGdefault{n}{p}\PYGdefault{o}{.}\PYGdefault{n}{returncode}
-\PYGdefault{k}{if} \PYGdefault{n}{failure}\PYGdefault{p}{:}
-    \PYGdefault{k}{print} \PYGdefault{l+s}{\PYGdefaultZsq{}Command failed:\PYGdefaultZsq{}}\PYGdefault{p}{,} \PYGdefault{n}{cmd}\PYGdefault{p}{;} \PYGdefault{n}{sys}\PYGdefault{o}{.}\PYGdefault{n}{exit}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{)}
-\end{Verbatim}

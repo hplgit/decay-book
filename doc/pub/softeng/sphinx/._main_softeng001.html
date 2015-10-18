@@ -121,10 +121,12 @@ can be <em>refactored</em> into more reusable programs based on functions.</p>
 <div class="section" id="mathematical-problem-and-solution-technique">
 <span id="softeng1-basic-math"></span><h2>Mathematical problem and solution technique<a class="headerlink" href="#mathematical-problem-and-solution-technique" title="Permalink to this headline">¶</a></h2>
 <p>We address the differential equation problem</p>
-<div class="math" id="equation-softeng1:ode">
-<span id="eq-softeng1-ode"></span><span class="eqno">(1)</span>\[     u'(t) = -au(t), \quad t \in (0,T],\]</div>
-<div class="math" id="equation-softeng1:u0">
-<span id="eq-softeng1-u0"></span><span class="eqno">(2)</span>\[     u(0)  = I,\]</div>
+<div class="math" id="eq-softeng1-ode">
+\[\tag{1}
+u'(t) = -au(t), \quad t \in (0,T],\]</div>
+<div class="math" id="eq-softeng1-u0">
+\[\tag{2}
+u(0)  = I,\]</div>
 <p>where <span class="math">\(a\)</span>, <span class="math">\(I\)</span>, and <span class="math">\(T\)</span> are prescribed parameters, and <span class="math">\(u(t)\)</span> is
 the unknown function to be estimated. This mathematical model
 is relevant for physical phenomena featuring exponential decay
@@ -136,8 +138,9 @@ here with a constant spacing <span class="math">\(\Delta t\)</span> between the
 mesh points: <span class="math">\(\Delta t = t_{n}-t_{n-1}\)</span>, <span class="math">\(n=1,\ldots,N_t\)</span>. Let
 <span class="math">\(u^n\)</span> be the numerical approximation to the exact solution at <span class="math">\(t_n\)</span>.
 A family of popular numerical methods are provided by the <span class="math">\(\theta\)</span> scheme,</p>
-<div class="math" id="equation-softeng1:utheta">
-<span id="eq-softeng1-utheta"></span><span class="eqno">(3)</span>\[     u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,\]</div>
+<div class="math" id="eq-softeng1-utheta">
+\[\tag{3}
+u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,\]</div>
 <p>for <span class="math">\(n=0,1,\ldots,N_t-1\)</span>. This formula produces
 the Forward Euler
 scheme when <span class="math">\(\theta=0\)</span>,
@@ -148,7 +151,7 @@ scheme when <span class="math">\(\theta=1/2\)</span>.</p>
 </div>
 <div class="section" id="a-first-quick-implementation">
 <span id="softeng1-basic-impl1"></span><h2>A first, quick implementation<a class="headerlink" href="#a-first-quick-implementation" title="Permalink to this headline">¶</a></h2>
-<p>Solving <a href="#equation-softeng1:utheta">(3)</a> in a program is very straightforward:
+<p>Solving <a class="reference internal" href="#eq-softeng1-utheta"><span class="std std-ref">(3)</span></a> in a program is very straightforward:
 just make a loop over <span class="math">\(n\)</span> and evaluate the formula. The <span class="math">\(u(t_n\)</span>)
 values for discrete <span class="math">\(n\)</span> can be stored in an array. This makes it easy
 to also plot the solution. It would be natural to also add
@@ -185,7 +188,7 @@ to write a simple program like this:</p>
 <span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This program is easy to read, and as long it is correct, many will
+<p>This program is easy to read, and as long as it is correct, many will
 claim that it has sufficient quality. Nevertheless, the program suffers
 from two serious flaws:</p>
 <ol class="arabic simple">
@@ -242,11 +245,11 @@ fixing the notation and adding comments:</p>
 <div class="section" id="comments-in-a-program">
 <h3>Comments in a program<a class="headerlink" href="#comments-in-a-program" title="Permalink to this headline">¶</a></h3>
 <p>There is obviously not just one way to comment a program, and opinions
-may differ as to what code should be accomplished by comments.
+may differ as to what code should be commented.
 The guiding principle is, however, that comments should make the
-program easy to understand for human eye. Do not comment obvious
+program easy to understand for the human eye. Do not comment obvious
 constructions, but focus on ideas and (&#8220;what happens in the next
-statements?&#8221;) and on explaining code that can be interpreted as
+statements?&#8221;) and on explaining code that can be found
 complicated.</p>
 </div>
 <div class="section" id="refactoring-into-functions">
@@ -266,8 +269,8 @@ next natural step is therefore to isolate the numerical computations
 and the visualization in separate Python functions.
 Such a rewrite of a code, without essentially changing the functionality,
 but just improve the quality of the code, is known as <em>refactoring</em>.
-After one has quickly put some code down and tested it, it is a common
-step to refactor it so it is better prepared for extensions.</p>
+After quickly putting together and testing a program, the next
+step is to refactor it so it becomes better prepared for extensions.</p>
 </div>
 <div class="section" id="program-file-vs-ide-vs-notebook">
 <h3>Program file vs IDE vs notebook<a class="headerlink" href="#program-file-vs-ide-vs-notebook" title="Permalink to this headline">¶</a></h3>
@@ -382,11 +385,11 @@ Other calls to <code class="docutils literal"><span class="pre">numpy</span></co
 </div>
 <div class="section" id="implementing-the-numerical-algorithm-in-a-function">
 <span id="softeng1-basic-func"></span><h2>Implementing the numerical algorithm in a function<a class="headerlink" href="#implementing-the-numerical-algorithm-in-a-function" title="Permalink to this headline">¶</a></h2>
-<p>The solution formula <a href="#equation-softeng1:utheta">(3)</a> is completely general and
+<p>The solution formula <a class="reference internal" href="#eq-softeng1-utheta"><span class="std std-ref">(3)</span></a> is completely general and
 should be available as a Python function <code class="docutils literal"><span class="pre">solver</span></code> with all input data as
 function arguments and all output data returned to the calling code.
 With this <code class="docutils literal"><span class="pre">solver</span></code> function we can solve all types of problems
-<a href="#equation-softeng1:ode">(1)</a>-<a href="#equation-softeng1:u0">(2)</a>
+<a class="reference internal" href="#eq-softeng1-ode"><span class="std std-ref">(1)</span></a>-<a class="reference internal" href="#eq-softeng1-u0"><span class="std std-ref">(2)</span></a>
 by an easy-to-read one-line statement:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
@@ -707,7 +710,6 @@ to a log file. The messages are classified as debug, info, and warning.</p>
 <p>Here is a simple example using defining a logger, using Python&#8217;s <code class="docutils literal"><span class="pre">logging</span></code>
 module:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
     <span class="n">filename</span><span class="o">=</span><span class="s">&#39;myprog.log&#39;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
     <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span>
@@ -841,7 +843,7 @@ in particular to automate large-scale investigations by other programs
 <p>Reading input data can be done in many ways. We have to decide on the
 functionality of the user interface, i.e., how we want to operate the
 program when providing input. Thereafter, we use appropriate tools to
-implement that particular user interface. There are four basic types
+implement the particular user interface. There are four basic types
 of user interface, listed here according to implementational
 complexity, from lowest to highest:</p>
 <ol class="arabic simple">
@@ -855,7 +857,7 @@ difficult to present recommendations or pros and cons.
 Alternatives 2 and 4 are most popular and will be addressed next.
 The goal is to make it easy for the user to
 set physical and numerical parameters in
-our <code class="docutils literal"><span class="pre">decay.py</span></code> program. We use  a little toy program, called
+our <code class="docutils literal"><span class="pre">decay.py</span></code> program. However, we use  a little toy program, called
 <code class="docutils literal"><span class="pre">prog.py</span></code>, as introductory
 example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">delta</span> <span class="o">=</span> <span class="mf">0.5</span>
@@ -969,7 +971,7 @@ program failed.</p>
 <div class="admonition-command-line-arguments-are-strings admonition">
 <p class="first admonition-title">Command-line arguments are strings</p>
 <p class="last">Note that all elements in <code class="docutils literal"><span class="pre">sys.argv</span></code> are string objects.
-If the values will enter mathematical computations, we need
+If the values are used in mathematical computations, we need
 to explicitly convert the strings to numbers.</p>
 </div>
 <p>Option-value pairs requires more programming and is actually
@@ -990,13 +992,13 @@ Minimal code for our <code class="docutils literal"><span class="pre">prog.py</s
 </pre></div>
 </div>
 <p>Because the default values of <code class="docutils literal"><span class="pre">delta</span></code> and <code class="docutils literal"><span class="pre">p</span></code> are float numbers,
-the <code class="docutils literal"><span class="pre">args.delta</span></code> and <code class="docutils literal"><span class="pre">args.p</span></code> variable are automatically of type <code class="docutils literal"><span class="pre">float</span></code>.</p>
+the <code class="docutils literal"><span class="pre">args.delta</span></code> and <code class="docutils literal"><span class="pre">args.p</span></code> variables are automatically of type <code class="docutils literal"><span class="pre">float</span></code>.</p>
 <p>Our next task is to use these basic code constructs to equip our
 <code class="docutils literal"><span class="pre">decay.py</span></code> module with command-line interfaces.</p>
 </div>
 <div class="section" id="positional-command-line-arguments">
 <h2>Positional command-line arguments<a class="headerlink" href="#positional-command-line-arguments" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-5"></span><span class="target" id="index-6"></span><p id="index-7">For our <code class="docutils literal"><span class="pre">decay.py</span></code> module file, we want include functionality such
+<span class="target" id="index-5"></span><span class="target" id="index-6"></span><p id="index-7">For our <code class="docutils literal"><span class="pre">decay.py</span></code> module file, we want to include functionality such
 that we can read <span class="math">\(I\)</span>, <span class="math">\(a\)</span>, <span class="math">\(T\)</span>, <span class="math">\(\theta\)</span>, and a range of <span class="math">\(\Delta t\)</span>
 values from the command line.  A plot is then to be made, comparing
 the different numerical solutions for different <span class="math">\(\Delta t\)</span> values
@@ -1341,9 +1343,9 @@ correctness of the implementations.
 There exists
 well-established procedures and corresponding tools for automating
 the execution of such tests. These tools allow large test sets to be
-run with a one-line command, making it easy to check of the
-still software works (as far as the
-tests tell!). Here we shall illustrate two important
+run with a one-line command, making it easy to check that the
+software still works (as far as the
+tests can tell!). Here we shall illustrate two important
 software testing techniques: <em>doctest</em> and <em>unit testing</em>.
 The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.</p>
@@ -1663,8 +1665,8 @@ an import of the file and execution of the test function
 <p>Finding good test problems for verifying the implementation of numerical
 methods is a topic on its own. The challenge is that we very seldom know
 what the numerical errors are. For the present model problem
-<a href="#equation-softeng1:ode">(1)</a>-<a href="#equation-softeng1:u0">(2)</a> solved by
-<a href="#equation-softeng1:utheta">(3)</a> one can, fortunately, derive a formula for
+<a class="reference internal" href="#eq-softeng1-ode"><span class="std std-ref">(1)</span></a>-<a class="reference internal" href="#eq-softeng1-u0"><span class="std std-ref">(2)</span></a> solved by
+<a class="reference internal" href="#eq-softeng1-utheta"><span class="std std-ref">(3)</span></a> one can, fortunately, derive a formula for
 the numerical approximation:</p>
 <div class="math">
 \[u^n = I\left(
@@ -1947,8 +1949,8 @@ variable).</p>
 <h3>Distributing just a module file<a class="headerlink" href="#distributing-just-a-module-file" title="Permalink to this headline">¶</a></h3>
 <p>Let us start out with the minimum solution alternative: distributing
 just the <code class="docutils literal"><span class="pre">decay.py</span></code> file. Then the software is just one file and all
-we need is a directory with this file.  Users will also this directory
-to contain an installation script <code class="docutils literal"><span class="pre">setup.py</span></code> and a <code class="docutils literal"><span class="pre">README</span></code> file
+we need is a directory with this file. This directory will also
+contain an installation script <code class="docutils literal"><span class="pre">setup.py</span></code> and a <code class="docutils literal"><span class="pre">README</span></code> file
 telling what the software is about, the author&#8217;s email address, a URL
 for downloading the software, and other useful information.</p>
 <p id="index-28">The <code class="docutils literal"><span class="pre">setup.py</span></code> file can be as short as</p>
@@ -1993,7 +1995,8 @@ The reader is referred to the <a class="reference external" href="https://docs.p
 write <code class="docutils literal"><span class="pre">setup.py</span></code> scripts.</p>
 <div class="admonition-remark-about-the-executable-file admonition" id="index-29">
 <p class="first admonition-title">Remark about the executable file</p>
-<p>The executable program, <code class="docutils literal"><span class="pre">decay.py</span></code>, is above taken to be the complete
+<p>The executable program, <code class="docutils literal"><span class="pre">decay.py</span></code>, is in the above installation
+script taken to be the complete
 module file <code class="docutils literal"><span class="pre">decay.py</span></code>. It would normally be preferred to instead
 write a very short script essentially importing <code class="docutils literal"><span class="pre">decay</span></code> and running
 the test block in <code class="docutils literal"><span class="pre">decay.py</span></code>.  In this way, we distribute a module and
@@ -2162,13 +2165,13 @@ or <code class="docutils literal"><span class="pre">from</span> <span class="pre
 </div>
 <div class="section" id="classes-for-problem-and-solution-method">
 <span id="softeng1-prog-se-class"></span><h1>Classes for problem and solution method<a class="headerlink" href="#classes-for-problem-and-solution-method" title="Permalink to this headline">¶</a></h1>
-<p>The numerical solution procedure was compactly and conveniently implemented in
-a Python function <code class="docutils literal"><span class="pre">solver</span></code> in the section <a class="reference internal" href="#softeng1-basic-math"><span class="std std-ref">Mathematical problem and solution technique</span></a>.
-In more complicated problems it might
-be beneficial to use classes instead of functions only. Here we shall
-describe a class-based software design well suited for scientific problems
-where there is a mathematical model of some physical phenomenon and
-some numerical methods to solve the equations involved in the model.</p>
+<p>The numerical solution procedure was compactly and conveniently
+implemented in a Python function <code class="docutils literal"><span class="pre">solver</span></code> in the section <a class="reference internal" href="#softeng1-basic-math"><span class="std std-ref">Mathematical problem and solution technique</span></a>.  In more complicated problems it might be
+beneficial to use classes instead of functions only. Here we shall
+describe a class-based software design well suited for scientific
+problems where there is a mathematical model of some physical
+phenomenon, and some numerical methods to solve the equations involved
+in the model.</p>
 <p>We introduce a class <code class="docutils literal"><span class="pre">Problem</span></code> to hold the definition of the physical
 problem, and a class <code class="docutils literal"><span class="pre">Solver</span></code> to hold the data and methods needed to
 numerically solve the problem.  The forthcoming text will explain the
@@ -2196,7 +2199,7 @@ Other useful resources are</p>
 the mathematical model. This usually means the physical parameters
 and formulas
 in the problem. Looking at our model problem
-<a href="#equation-softeng1:ode">(1)</a>-<a href="#equation-softeng1:u0">(2)</a>, the physical data cover
+<a class="reference internal" href="#eq-softeng1-ode"><span class="std std-ref">(1)</span></a>-<a class="reference internal" href="#eq-softeng1-u0"><span class="std std-ref">(2)</span></a>, the physical data cover
 <span class="math">\(I\)</span>, <span class="math">\(a\)</span>, and <span class="math">\(T\)</span>. Since we have an analytical solution of
 the ODE problem, we may add this solution in terms of a Python
 function (or method) to the problem class as well.
@@ -2471,15 +2474,15 @@ reading and assigning parameter values:</p>
 </pre></div>
 </div>
 <p>The file <a class="reference external" href="http://tinyurl.com/ofkw6kc/softeng/decay_oo.py">decay_oo.py</a> contains
-a slightly more advanced version of class <code class="docutils literal"><span class="pre">Parameters</span></code> where we
-in the functions for getting and setting parameters
-test for valid parameter names and
+a slightly more advanced version of class <code class="docutils literal"><span class="pre">Parameters</span></code> where
+the functions for getting and setting parameters
+contain tests for valid parameter names, and
 raise exceptions with informative messages if any name is not registered.</p>
 <p>We have already sketched the <code class="docutils literal"><span class="pre">Problem</span></code> and <code class="docutils literal"><span class="pre">Solver</span></code> classes that build
 on inheritance from <code class="docutils literal"><span class="pre">Parameters</span></code>. We have also shown how they are
 used. The only remaining code is to make the plot, but this code is
 identical to previous versions when the numerical solution is
-available in an object <code class="docutils literal"><span class="pre">t</span></code> and the exact one in <code class="docutils literal"><span class="pre">u_e</span></code>.</p>
+available in an object <code class="docutils literal"><span class="pre">u</span></code> and the exact one in <code class="docutils literal"><span class="pre">u_e</span></code>.</p>
 <p>The advantage with the <code class="docutils literal"><span class="pre">Parameters</span></code> class is that it scales to problems
 with a large number of physical and numerical parameters:
 as long as the parameters are defined once via a dictionary,
@@ -2503,10 +2506,12 @@ programs and archiving the results.</p>
 solutions to an ordinary differential equation. More specifically, we
 solve the initial-value problem</p>
 </div>
-<div class="math" id="equation-softeng1:experiments:model">
-<span id="eq-softeng1-experiments-model"></span><span class="eqno">(4)</span>\[        u^\prime(t) = -au(t),\quad u(0)=I,\quad t\in (0,T],\]\[by the  \( \theta \) -rule:\]\[.. _Eq:softeng1:experiments:theta:\]</div>
-<div class="math" id="equation-softeng1:experiments:theta">
-<span class="eqno">(5)</span>\[        u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
+<div class="math" id="eq-softeng1-experiments-model">
+\[ \tag{4}
+ u^\prime(t) = -au(t),\quad u(0)=I,\quad t\in (0,T],\]\[by the  \( \theta \) -rule:\]\[.. _Eq:softeng1:experiments:theta:\]</div>
+<div class="math">
+\[ \tag{5}
+ u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
         \quad u^0=I{\thinspace .}\]\[This scheme corresponds to well-known methods:  \( \theta=0 \)  gives the
 Forward Euler (FE) scheme,  \( \theta=1 \)  gives the Backward Euler (BE) scheme,
 and  \( \theta=\frac{1}{2} \)  gives the Crank-Nicolson
@@ -2517,7 +2522,7 @@ values of  \( \Delta t \) , and present the following results in a report:\]\[1.
 investigation.\]</div>
 <div class="section" id="available-software">
 <h2>Available software<a class="headerlink" href="#available-software" title="Permalink to this headline">¶</a></h2>
-<p>Appropriate software for implementing <a href="#equation-softeng1:experiments:theta">(5)</a>
+<p>Appropriate software for implementing <span class="xref std std-ref">(5)</span>
 is available in a program <a class="reference external" href="http://tinyurl.com/nc4upel/doconce_src/model.py">model.py</a>, which is run as</p>
 <div class="highlight-text"><div class="highlight"><pre>Terminal&gt; python model.py --I 1.5 --a 0.25 --T 6 --dt 1.25 0.75 0.5
 </pre></div>
@@ -2556,7 +2561,7 @@ what is directly produced by <code class="docutils literal"><span class="pre">mo
 <ol class="arabic simple">
 <li>We need to collect all the plots for one
 numerical method (FE, BE, CN) in a single plot.
-For example, if 4 <span class="math">\(\Delta t\)</span> values are run, the summarizing plot
+For example, if 4 <span class="math">\(\Delta t\)</span> values are run, the summarizing figure
 for the BE method has <span class="math">\(2\times 2\)</span> subplots, with the subplot corresponding
 to the largest <span class="math">\(\Delta t\)</span> in the upper left corner and the smallest
 in the bottom right corner.</li>
@@ -2617,7 +2622,7 @@ and want to combine them into a <span class="math">\(2\times 2\)</span> table of
 file <code class="docutils literal"><span class="pre">f.png</span></code>, see
 Figure <a class="reference internal" href="#softeng1-experiments-fig-be4a"><span class="std std-ref">Illustration of the Backward Euler method for four time step values</span></a> for an example.</p>
 <div class="figure" id="id9">
-<span id="softeng1-experiments-fig-be4a"></span><a class="reference internal image-reference" href="_images/BE4a.png"><img alt="_images/BE4a.png" src="_images/BE4a.png" style="width: 600px;" /></a>
+<span id="softeng1-experiments-fig-be4a"></span><a class="reference internal image-reference" href="_images/BE.png"><img alt="_images/BE.png" src="_images/BE.png" style="width: 800px;" /></a>
 <p class="caption"><span class="caption-text"><em>Illustration of the Backward Euler method for four time step values</em></span></p>
 </div>
 <p>The appropriate ImageMagick commands are</p>
@@ -2669,7 +2674,7 @@ but we are not interested in all the variables. One example is</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">output</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>but <code class="docutils literal"><span class="pre">error</span></code> is of no interest.
+<p>but <code class="docutils literal"><span class="pre">error</span></code> is of no interest in the example above.
 One can then use underscore <code class="docutils literal"><span class="pre">_</span></code> as variable name for the dummy
 (uninteresting) variable(s):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">output</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
@@ -2854,7 +2859,7 @@ tracked by version control systems like Git. The result is a very
 strong tool for monitoring &#8220;who did what when&#8221; with the files,
 resulting in increased reliability of the writing process. For
 collaborative writing, the merge functionality in Git leads to safer
-simultaneously editing that what is offered even by collaborative
+simultaneously editing than what is offered even by collaborative
 tools like GoogleDocs.</p>
 <span class="target" id="index-44"></span></div>
 <div class="section" id="html-with-mathjax">
@@ -3026,12 +3031,15 @@ of discrete coordinates <span class="math">\((x_i,y_i)\)</span>, <span class="ma
 values are uniformly distributed with spacing <span class="math">\(\Delta x\)</span>: <span class="math">\(x_i=\Delta x\)</span>.
 The derivative of this curve, defined as a new curve with points
 <span class="math">\((x_i, d_i)\)</span>, can be computed via finite differences:</p>
-<div class="math" id="equation-_auto1">
-<span id="eq-auto1"></span><span class="eqno">(6)</span>\[     d_0 = \frac{y_1-y_0}{\Delta x},\]</div>
-<div class="math" id="equation-_auto2">
-<span id="eq-auto2"></span><span class="eqno">(7)</span>\[     d_i = \frac{y_{i+1}-y_{i-1}}{2\Delta x},\quad i=1,\ldots,n-1,\]</div>
-<div class="math" id="equation-_auto3">
-<span id="eq-auto3"></span><span class="eqno">(8)</span>\[     d_n = \frac{y_n-y_{n-1}}{\Delta x}{\thinspace .}\]</div>
+<div class="math" id="eq-auto1">
+\[\tag{6}
+d_0 = \frac{y_1-y_0}{\Delta x},\]</div>
+<div class="math" id="eq-auto2">
+\[\tag{7}
+d_i = \frac{y_{i+1}-y_{i-1}}{2\Delta x},\quad i=1,\ldots,n-1,\]</div>
+<div class="math" id="eq-auto3">
+\[\tag{8}
+d_n = \frac{y_n-y_{n-1}}{\Delta x}{\thinspace .}\]</div>
 <p><strong>a)</strong>
 Write a function
 <code class="docutils literal"><span class="pre">differentiate(x,</span> <span class="pre">y)</span></code> for differentiating a curve
@@ -3050,7 +3058,7 @@ from the function in a).</li>
 <li>The formulas for <span class="math">\(d_i\)</span> are exact for points on
 a straight line, as all the <span class="math">\(d_i\)</span> values are then the same, equal to
 the slope of the line. A test can check this property.</li>
-<li>For point lying on a parabola, the values for <span class="math">\(d_i\)</span>, <span class="math">\(i=1,\ldots,n-1\)</span>,
+<li>For points lying on a parabola, the values for <span class="math">\(d_i\)</span>, <span class="math">\(i=1,\ldots,n-1\)</span>,
 should equal the exact derivative of the parabola. Make a test based on
 this property.</li>
 </ol>
@@ -3204,7 +3212,7 @@ programming technology.</p>
 <span id="softeng1-exer-tol"></span><h2>Problem 5: Experiment with tolerances in comparisons<a class="headerlink" href="#problem-5-experiment-with-tolerances-in-comparisons" title="Permalink to this headline">¶</a></h2>
 <p>When we replace a comparison <code class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></code>, where <code class="docutils literal"><span class="pre">a</span></code> and/or <code class="docutils literal"><span class="pre">b</span></code> are
 <code class="docutils literal"><span class="pre">float</span></code> objects, by a comparison with tolerance, <code class="docutils literal"><span class="pre">abs(a-b)</span> <span class="pre">&lt;</span> <span class="pre">tol</span></code>,
-the appropriate size of <code class="docutils literal"><span class="pre">tol</span></code> depends on the size <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code>.
+the appropriate size of <code class="docutils literal"><span class="pre">tol</span></code> depends on the size of <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code>.
 Investigate how the size of <code class="docutils literal"><span class="pre">abs(a-b)</span></code> varies when <code class="docutils literal"><span class="pre">b</span></code> takes on
 values <span class="math">\(10^k\)</span>, <span class="math">\(k=-5,-9,\ldots,20\)</span> and <code class="docutils literal"><span class="pre">a=1.0/49*b*49</span></code>.
 Filename: <code class="docutils literal"><span class="pre">tolerance</span></code>.</p>
@@ -3229,10 +3237,11 @@ Filename: <code class="docutils literal"><span class="pre">experiment_compare_dt
 <span id="softeng1-exer-logistic"></span><h2>Problem 7: Make solid software for a difference equation<a class="headerlink" href="#problem-7-make-solid-software-for-a-difference-equation" title="Permalink to this headline">¶</a></h2>
 <p>We have the following evolutionary difference equation for the number
 of individuals <span class="math">\(u^n\)</span> of a certain specie at time <span class="math">\(n\Delta t\)</span>:</p>
-<div class="math" id="equation-softeng1:exer:logistic:eq">
-<span id="eq-softeng1-exer-logistic-eq"></span><span class="eqno">(9)</span>\[     u^{n+1} = u^n + \Delta t r u^n\left(1 - \frac{u^n}{M^n}\right),
-     \quad u^0=U_0{\thinspace .}
-     \\]</div>
+<div class="math" id="eq-softeng1-exer-logistic-eq">
+\[\tag{9}
+u^{n+1} = u^n + \Delta t\, r u^n\left(1 - \frac{u^n}{M^n}\right),
+    \quad u^0=U_0{\thinspace .}
+    \\]</div>
 <p>Here, <span class="math">\(n\)</span> is a counter in time, <span class="math">\(\Delta t\)</span> is time between time levels
 <span class="math">\(n\)</span> and <span class="math">\(n+1\)</span> (assumed constant), <span class="math">\(r\)</span> is a net reproduction rate
 for the specie,

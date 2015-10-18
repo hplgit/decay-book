@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-git pull                \PYGdefaultZsh{} before starting a new session
-\PYGdefaultZsh{} edit files
-git add mynewfile       \PYGdefaultZsh{} remember to add new files!
-git commit \PYGdefaultZhy{}am \PYGdefaultZsq{}Short description of what I did\PYGdefaultZsq{}
-git push origin master  \PYGdefaultZsh{} before end of day or a break
-\end{Verbatim}

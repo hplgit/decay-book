@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}} \PYGdefault{k+kn}{import} \PYGdefault{n+nn}{decay}
-\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}} \PYGdefault{n}{u}\PYGdefault{p}{,} \PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{n}{decay}\PYGdefault{o}{.}\PYGdefault{n}{solver\PYGdefaultZus{}with\PYGdefaultZus{}logging}\PYGdefault{p}{(}\PYGdefault{n}{I}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{o}{=}\PYGdefault{l+m+mf}{0.5}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{10}\PYGdefault{p}{,} \PYGdefaultZbs{}
-           \PYGdefault{n}{dt}\PYGdefault{o}{=}\PYGdefault{l+m+mf}{0.5}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{o}{=}\PYGdefault{l+m+mf}{0.5}\PYGdefault{p}{)}
-\end{Verbatim}

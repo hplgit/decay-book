@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} montage \PYGdefaultZhy{}background white \PYGdefaultZhy{}geometry 100\PYGdefaultZpc{} \PYGdefaultZhy{}tile 2x \PYGdefaultZbs{}}
-\PYGdefault{g+go}{          f1.png f2.png f3.png f4.png f.png}
-\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} convert \PYGdefaultZhy{}trim f.png f.png}
-\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} convert f.png \PYGdefaultZhy{}transparent white f.png}
-\end{Verbatim}
