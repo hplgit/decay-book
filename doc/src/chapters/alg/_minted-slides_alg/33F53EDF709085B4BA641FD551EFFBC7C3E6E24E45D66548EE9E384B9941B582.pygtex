@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} chmod a+rx decay\PYGdefaultZus{}v1.py}
-\PYGdefault{g+go}{Terminal\PYGdefaultZgt{} ./decay\PYGdefaultZus{}v1.py}
-\end{Verbatim}
