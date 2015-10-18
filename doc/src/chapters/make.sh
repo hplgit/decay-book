@@ -192,7 +192,8 @@ for dir in $dirs; do
 done
 
 echo "copying compiled documents to $dest_sol"
-
+# Should not copy chapters since that requires ref[][][] and
+# publishing of separate chapters...or should chapters exist in html?
 cp ${nickname}-sol.pdf ${dest_sol}/${nickname}/pdf
 cp ${nickname}-sol.html ._${nickname}-sol*.html ${dest_sol}/${nickname}/html
 dirs="fig-${nickname} mov-${nickname}"
@@ -213,9 +214,9 @@ done
 cd ..
 cp index_files.do.txt index.do.txt
 system doconce format html index --html_style=bootstrap --html_links_in_new_window --html_bootstrap_navbar=off
-cp index.html $dest
-rm -f index.*
 cd -
+cp ../index.html $dest
+rm -f ../index.*
 
 # Copy src
 if [ $# -ge 3 ]; then

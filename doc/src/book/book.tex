@@ -170,18 +170,11 @@
 \usepackage{fancyhdr}
 \fancyhf{} % sets both header and footer to nothing
 \renewcommand{\headrulewidth}{0pt}
-% Ensure copyright on titlepage (article) and chapter pages (article)
-\fancypagestyle{plain}{
+% Ensure copyright chapter pages
+\fancypagestyle{bchap}{
   \fancyhf{}
   \fancyfoot[C]{{\footnotesize\copyright\ 2015, Hans Petter Langtangen. Released under CC Attribution 4.0 license}}
 %  \renewcommand{\footrulewidth}{0mm}
-  \renewcommand{\headrulewidth}{0mm}
-}
-% Ensure copyright on titlepages with \thispagestyle{empty}
-\fancypagestyle{empty}{
-  \fancyhf{}
-  \fancyfoot[C]{{\footnotesize\copyright\ 2015, Hans Petter Langtangen. Released under CC Attribution 4.0 license}}
-  \renewcommand{\footrulewidth}{0mm}
   \renewcommand{\headrulewidth}{0mm}
 }
 
@@ -435,7 +428,7 @@ automating computer experiments.
 
 % --- begin date ---
 \ \\ [10mm]
-{\large\textsf{Oct 10, 2015}}
+{\large\textsf{Oct 18, 2015}}
 
 \end{center}
 % --- end date ---
@@ -462,24 +455,43 @@ about how one must combine mathematics and computer science to
 create well-tested, reliable, and flexible software for such a
 mathematical model.
 
-The writing style is gentle and aims at a broad audience.
-Prerequisite knowledge is basic one-dimensional calculus and preferably
-some experience with computer programming in Python or MATLAB.
-The material was initially written for self study and therefore features
-comprehensive and easy-to-understand explanations. For
-some readers it may act as an overview and refresher of traditional
-mathematical topics and likely a first introduction to many of the
-software topics. The text can also be used
-as a case-based and mathematically simple introduction to modern
-multi-disciplinary problem solving with computers, using the
-range of applications in Chapter~\ref{decay:app}
-as motivation and then treating the details of
+The writing style is gentle and aims at a broad audience. I am much
+inspired by Nick Trefethen's praise of easy learning:
+
+
+\begin{quote}
+\emph{Some people think that stiff challenges are the best device to
+induce learning, but I am not one of them. The natural way to learn
+something is by spending vast amounts of easy, enjoyable time at it.
+This goes whether you want to speak German, sight-read at the
+piano, type, or do mathematics. Give me the German storybook for
+fifth graders that I feel like reading in bed, not Goethe and a
+dictionary. The latter will bring rapid progress at first, then
+exhaustion and failure to resolve.}
+
+\emph{The main thing to be said for stiff challenges is that inevitably
+we will encounter them, so we had better learn to face them boldly.
+Putting them in the curriculum can help teach us to do so. But for
+teaching the skill or subject matter itself, they are overrated.}
+\cite[p.~86]{index_cards}
+\end{quote}
+
+
+Prerequisite knowledge for this book is basic one-dimensional calculus
+and preferably some experience with computer programming in Python or
+MATLAB.  The material was initially written for self study and
+therefore features comprehensive and easy-to-understand
+explanations. For some readers it may act as an overview and refresher
+of traditional mathematical topics and likely a first introduction to
+many of the software topics. The text can also be used as a case-based
+and mathematically simple introduction to modern multi-disciplinary
+problem solving with computers, using the range of applications in
+Chapter~\ref{decay:app} as motivation and then treating the details of
 the mathematical and computer science subjects from the other
-chapters.
-% Nowadays, many people need to enter the world of
-% computer-based differential equation modeling, and this book
-% should be useful for readers with minor background in mathematics and
-% programming.
+chapters. In particular, I have also had in mind the new groups of
+readers from bio- and geo-sciences who need to enter the world of
+computer-based differential equation modeling, but lack experience
+with (and perhaps also interest in) mathematics and programming.
 
 The choice of topics in this book is motivated from what is needed in
 more advanced courses on finite difference methods for partial
@@ -493,10 +505,11 @@ stronger focus on how to turn mathematics into working code.
 It also explains the mathematics and programming in more detail
 than what is common in the literature.
 
-There is a more advanced companion book in the works that treat finite
-difference methods for PDEs using the same writing style and having
-the same focus on turning mathematical algorithms into reliable
-software.
+There is a more advanced companion book in the works, ``Finite
+Difference Computing with Partial Differential Equations'', which
+treats finite difference methods for PDEs using the same writing style
+and having the same focus on turning mathematical algorithms into
+reliable software.
 
 Although the main example in the present book is $u^{\prime}=-au$, we
 also address the more general model problem $u'=-a(t)u + b(t)$, and
@@ -573,6 +586,8 @@ The following list of topics will be elaborated on.
 \end{itemize}
 
 \noindent
+\clearpage
+
 
 \begin{summary_mdfboxadmon}[The exposition in a nutshell]
 Everything we cover is put into a practical, hands-on context. All
@@ -601,8 +616,10 @@ The exercises are divided into three categories: \emph{exercises}
 refer to the text (usually variations or extensions of examples
 in the text), \emph{problems} are stand-alone exercises without
 references to the text, and \emph{projects} are larger problems.
-Exercises, problems, and projects share the same numbering to
-avoid confusion between Exercise 4.3 and Problem 4.3.
+Exercises, problems, and projects share a common numbering to
+avoid confusion between, e.g., Exercise 4.3 and Problem 4.3
+(it will be Exercise 4.3 and Problem 4.4 if they follow after
+each other).
 
 
 
@@ -611,7 +628,7 @@ Professor Svein Linge has provided very detailed and constructive
 feedback on this text, and all his efforts are highly appreciated. I
 also want to thank a number of students who have pointed out
 weaknesses and found errors. The proof reading of Yapi Donatien Achou
-is much appreciated.  Many thanks also to Linda Falch-Koslung,
+is appreciated.  Many thanks also to Linda Falch-Koslung,
 Dr.~Olav Dajani, and the rest of the OUS team for feeding me with
 FOLFIRINOX and thereby keeping me alive and in good enough shape to
 finish this book.
@@ -3105,8 +3122,8 @@ specified $T=7$.
 
 Solve the problem $u'=-au$, $u(0)=I$, using the Forward Euler, Backward
 Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
-function $e^n = \uex(t_n)-u^n$ for $\Delta t$, $\frac{1}{4}\Delta t$, and
-$\frac{1}{8}\Delta t$, where $\uex$ is the exact solution of the ODE and
+function $e^n = \uex(t_n)-u^n$ for $\Delta t=0.1, 0.05, 0.025$,
+where $\uex$ is the exact solution of the ODE and
 $u^n$ is the numerical solution at mesh point $t_n$.
 
 % --- begin hint in exercise ---
@@ -3631,7 +3648,7 @@ Let us illustrate \texttt{sympy} with a standard Python shell syntax
 \begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
 >>> from sympy import *
 >>> # Create p as a mathematical symbol with name 'p'
->>> p = Symbol('p')
+>>> p = Symbols('p')
 >>> # Create a mathematical expression with p
 >>> A_e = exp(-p)
 >>>
@@ -3650,6 +3667,7 @@ recognized as the beginning of the Taylor series for $e^{-p}$.
 
 Let us define the numerical amplification factor where $p$ and $\theta$
 enter the formula as symbols:
+
 \begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
 >>> theta = Symbol('theta')
 >>> A = (1-(1-theta)*p)/(1+theta*p)
@@ -3769,7 +3787,8 @@ over all previous time steps. This error,
 $e^n = u^n-\uex(t_n)$, is known as the \emph{global error}. We
 may look at $u^n$ for some $n$ and Taylor expand the
 mathematical expressions as functions of $p=a\Delta t$ to get a simple
-expression for the global error (for small $p$):
+expression for the global error (for small $p$). Continuing the
+\texttt{sympy} expression from previous section, we can write
 
 \begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
 >>> n = Symbol('n')
@@ -3824,21 +3843,27 @@ this is a much desired property of a numerical method.
 It is common to study the norm of the numerical error, as
 explained in detail in Section~\ref{decay:computing:error:norm}.
 The $L^2$ norm of the error can be computed by treating $e^n$ as a function
-of $t$ in \texttt{sympy} and performing symbolic integration. For
-the Forward Euler scheme we have
+of $t$ in \texttt{sympy} and performing symbolic integration.
+From now on we shall do \texttt{import sympy as sym} and prefix all functions
+in \texttt{sympy} by \texttt{sym} to explicitly notify ourselves that the functions
+are from \texttt{sympy}. This is particularly advantageous when we use
+mathematical functions like \texttt{sin}: \texttt{sym.sin} is for symbolic expressions,
+while \texttt{sin} from \texttt{numpy} or \texttt{math} is for numerical computation.
+For the Forward Euler scheme we have
 
 \begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
-p, n, a, dt, t, T, theta = symbols('p n a dt t T 'theta')
+import sympy as sym
+p, n, a, dt, t, T, theta = sym.symbols('p n a dt t T theta')
 A = (1-(1-theta)*p)/(1+theta*p)
-u_e = exp(-p*n)
+u_e = sym.exp(-p*n)
 u_n = A**n
 error = u_e.series(p, 0, 4) - u_n.subs(theta, 0).series(p, 0, 4)
 # Introduce t and dt instead of n and p
 error = error.subs('n', 't/dt').subs(p, 'a*dt')
 error = error.as_leading_term(dt) # study only the first term
 print error
-error_L2 = sqrt(integrate(error**2, (t, 0, T)))
-print error_L2
+error_L2 = sym.sqrt(sym.integrate(error**2, (t, 0, T)))
+print 'L2 error:', sym.simplify(error_error_L2)
 \end{Verbatim}
 \end{cod}
 \noindent
@@ -4050,127 +4075,6 @@ the truncation error, and the stability criteria.
 
 % Look in Asher and Petzold, p 40
 
-\section{Exercises}
-
-
-
-% --- begin exercise ---
-\begin{doconceexercise}
-\refstepcounter{doconceexercisecounter}
-
-\subsection*{Problem \thedoconceexercisecounter: Visualize the accuracy of finite differences}
-\addcontentsline{loe}{doconceexercise}{Problem \thedoconceexercisecounter: Visualize the accuracy of finite differences}
-
-\label{decay:analysis:exer:fd:exp:plot}
-
-The purpose of this exercise is to visualize the accuracy of finite difference
-approximations of the derivative of a given function.
-For any finite difference approximation, take the Forward Euler difference
-as an example, and any specific function, take  $u=e^{-at}$,
-we may introduce an error fraction
-
-\begin{align*}
-E = \frac{[D_t^+ u]^n}{u'(t_n)} &= \frac{\exp{(-a(t_n+\Delta t))} - \exp{(-at_n)}}{-a\exp{(-at_n)\Delta t}}\\ 
-&= \frac{1}{a\Delta t}\left(1 -\exp{(-a\Delta t)}\right),
-\end{align*}
-and view $E$ as a function of $\Delta t$. We expect that
-$\lim_{\Delta t\rightarrow 0}E=1$, while $E$ may deviate significantly from
-unity for large $\Delta t$. How the error depends on $\Delta t$ is best
-visualized in a graph where we use a logarithmic scale for $\Delta t$,
-so we can cover many orders of magnitude of that quantity. Here is
-a code segment creating an array of 100 intervals, on the logarithmic
-scale, ranging from $10^{-6}$ to $10^{-0.5}$ and then plotting $E$ versus
-$p=a\Delta t$ with logarithmic scale on the $p$ axis:
-
-\begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
-from numpy import logspace, exp
-from matplotlib.pyplot import semilogx
-p = logspace(-6, -0.5, 101)
-y = (1-exp(-p))/p
-semilogx(p, y)
-\end{Verbatim}
-\end{cod}
-\noindent
-Illustrate such errors for the finite difference operators $[D_t^+u]^n$
-(forward), $[D_t^-u]^n$ (backward), and $[D_t u]^n$ (centered) in
-the same plot.
-
-Perform a Taylor series expansions of the error fractions and find
-the leading order $r$ in the expressions of type
-$1 + Cp^r + \Oof{p^{r+1}}$, where $C$ is some constant.
-
-% --- begin hint in exercise ---
-
-\paragraph{Hint.}
-To save manual calculations and learn more about symbolic computing,
-make functions for the three difference operators and use \texttt{sympy}
-to perform the symbolic differences, differentiation, and Taylor series
-expansion. To plot a symbolic expression \texttt{E} against \texttt{p}, convert the
-expression to a Python function first: \texttt{E = sympy.lamdify([p], E)}.
-
-% --- end hint in exercise ---
-
-
-% removed !bsol ... !esol environment (because of the command-line option --without_solutions)
-\noindent Filename: \Verb!decay_plot_fd_error!.
-
-\end{doconceexercise}
-% --- end exercise ---
-
-
-
-
-% --- begin exercise ---
-\begin{doconceexercise}
-\refstepcounter{doconceexercisecounter}
-
-\subsection*{Problem \thedoconceexercisecounter: Explore the $\theta$-rule for exponential growth}
-\addcontentsline{loe}{doconceexercise}{Problem \thedoconceexercisecounter: Explore the $\theta$-rule for exponential growth}
-
-\label{decay:analysis:exer:growth}
-
-This exercise asks you to solve the ODE $u'=-au$ with $a < 0$ such that
-the ODE models exponential growth instead of exponential decay.  A
-central theme is to investigate numerical artifacts and non-physical
-solution behavior.
-
-
-\subex{a)}
-Set $a=-1$ and run experiments with $\theta=0, 0.5, 1$ for
-various values of $\Delta t$ to uncover numerical artifacts.
-Recall that the exact solution is a
-monotone, growing function when $a < 0$. Oscillations or significantly
-wrong growth are signs of wrong qualitative behavior.
-
-From the experiments, select four values of $\Delta t$ that
-demonstrate the kind of numerical solutions that are characteristic
-for this model.
-
-
-% removed !bsol ... !esol environment (because of the command-line option --without_solutions)
-
-\subex{b)}
-Write up the amplification factor and plot it for $\theta=0,0.5,1$
-together with the exact one for $a\Delta t < 0$. Use the plot to
-explain the observations made in the experiments.
-
-% --- begin hint in exercise ---
-
-\paragraph{Hint.}
-Modify the \href{{http://tinyurl.com/ofkw6kc/analysis/decay_ampf_plot.py}}{\nolinkurl{decay_ampf_plot.py}} code
-(in the \texttt{src/analysis} directory).
-
-% --- end hint in exercise ---
-
-
-% removed !bsol ... !esol environment (because of the command-line option --without_solutions)
-
-\noindent Filename: \Verb!exponential_growth!.
-
-\end{doconceexercise}
-% --- end exercise ---
-
-
 \section{Various types of errors in a differential equation model}
 
 So far we have been concerned with one type of error, namely the
@@ -4180,23 +4084,42 @@ however, other types of errors that must be considered too. We can
 classify errors into four groups:
 
 \begin{enumerate}
-\item model errors
+\item model errors: how wrong is the ODE model?
 
-\item data errors
+\item data errors: how wrong are the input parameters?
 
-\item discretization errors
+\item discretization errors: how wrong is the numerical method?
 
-\item round-off errors
+\item rounding errors: how wrong is the computer arithmetics?
 \end{enumerate}
 
 \noindent
 Below, we shall briefly describe and illustrate these four types
-of errors.
+of errors. Each of the errors deserve its own chapter, at least,
+so the treatment here is superficial to give some indication
+about the nature of size of the errors in a specific case.
+Some of the required computer codes quickly become more advanced
+than in the rest of the book, but we include to code to document
+all the details that lie behind the investigations of the errors.
 
 \subsection{Model errors}
 
 Any mathematical model like $u^{\prime}=-au$, $u(0)=I$, is just an
-approximate description of a real-world phenomenon. Suppose a more
+approximate description of a real-world phenomenon. How good this
+approximation is can be determined by comparing physical experiments
+with what the model predicts. This is the topic of \emph{validation} and is
+obviously an essential part of mathematical model. One difficulty with
+validation is that we need to estimate the parameters in the model, and
+this brings in data errors. Quantifying data errors is challenging,
+and a frequently used method is to \emph{tune} the parameters in the model
+to make model predictions as close as possible to the experiments.
+That is, we do not attempt to measure or estimate all input
+parameters, but instead find values that ``make the model good''.
+Another difficulty is that the response in experiments also contains
+errors due to measurement techniques.
+
+Let us try to quantify model errors in a very simple example involving
+$u^{\prime}=-au$, $u(0)=I$, with constant $a$.  Suppose a more
 accurate model has $a$ as a function of time rather than a
 constant. Here we take $a(t)$ as a simple linear function: $a +
 pt$. Obviously, $u$ with $p>0$ will go faster to zero with time than a
@@ -4207,12 +4130,14 @@ The solution of
 \[ u^{\prime} = (a + pt)u,\quad u(0)=I,\]
 can be shown (see below) to be
 
-\[ u(t) = I e^{t \left(- a - \frac{p t}{2}\right)}\tp\]
-With the above $u$ available in a Python function \Verb!u_true(t, I, a, p)!
-and the solution from our model $u^{\prime}=-au$ available in \texttt{u(t, I, a)},
-we can make some plots of the two models and the error for some values
+\[ u(t) = I e^{-t \left(a + \half pt\right)}\tp\]
+Let a Python function \Verb!true_model(t, I, a, p)! implement the
+above $u(t)$ and let
+the solution of our primary ODE $u^{\prime}=-au$ be available as
+the function \texttt{model(t, I, a)}.
+We can now make some plots of the two models and the error for some values
 of $p$. Figure~\ref{decay:analysis:model_errors:fig:model_u} displays
-the two curves for $p=0.01, 0.1, 1$, while Figure~\ref{decay:analysis:model_errors:fig:model_e} shows the difference
+\texttt{model} versus \Verb!true_model! for $p=0.01, 0.1, 1$, while Figure~\ref{decay:analysis:model_errors:fig:model_e} shows the difference
 between the two models as a function of $t$ for the same $p$ values.
 
 
@@ -4347,8 +4272,10 @@ histograms corresponding to $t=0,1,3$. We see that the distribution of
 $u$ values is much like a symmetric normal distribution at $t=0$,
 centered around $u=1$. At later times, the distribution gets more
 asymmetric and narrower. It means that the uncertainty decreases with
-time. From the computed $u$ values we can easily calculate the mean
-and standard deviation. The table below shows the mean and standard
+time.
+
+From the computed $u$ values we can easily calculate the mean and
+standard deviation. The table below shows the mean and standard
 deviation values along with the value if we just use the formula
 $u=Ie^{-at}$ with the mean values of $I$ and $a$: $I=1$ and $a=1$. As
 we see, there is some discrepancy between this latter (naive)
@@ -4362,11 +4289,11 @@ computation and the mean value produced by Monte Carlo simulation.
 
 \begin{tabular}{llll}
 \hline
-\multicolumn{1}{c}{ time } & \multicolumn{1}{c}{ mean } & \multicolumn{1}{c}{ st.dev. } & \multicolumn{1}{c}{ $u(t;I=1,a=1)$ } \\
+\multicolumn{1}{c}{ time } & \multicolumn{1}{c}{ mean } & \multicolumn{1}{c}{ st.dev. } & \multicolumn{1}{c}{ $u(t;I=a=1)$ } \\
 \hline
-0    & 1.00 & 0.200   & 1.00           \\
-1    & 0.38 & 0.135   & 0.37           \\
-3    & 0.07 & 0.060   & 0.14           \\
+0    & 1.00 & 0.200   & 1.00         \\
+1    & 0.38 & 0.135   & 0.37         \\
+3    & 0.07 & 0.060   & 0.14         \\
 \hline
 \end{tabular}
 
@@ -4379,9 +4306,8 @@ computation and the mean value produced by Monte Carlo simulation.
 Actually, $u(t;I,a)$ becomes a stochastic variable for each $t$ when
 $I$ and $a$ are stochastic variables, as they are in the above
 Monte Carlo simulation. The mean of the stochastic $u(t;I,a)$ is
-not equal to $u(t;I=1,a=1)$ unless $u$ is linear in $I$ and $a$
-(here $u$ is nonlinear in $a$). The accuracy of the Monte Carlo
-results increases with increasing number of samples.
+not equal to $u$ with mean values of the input data, $u(t;I=a=1)$,
+unless $u$ is linear in $I$ and $a$ (here $u$ is nonlinear in $a$).
 
 
 \begin{figure}[!ht]  % decay:analysis:data_errors:fig
@@ -4392,6 +4318,20 @@ results increases with increasing number of samples.
 \end{figure}
 %\clearpage % flush figures decay:analysis:data_errors:fig
 
+
+
+Estimating statistical uncertainty in input data and investigating
+how this uncertainty
+propagates to uncertainty in the response of a differential equation model
+(or other models) are key topics in the scientific field called
+\emph{uncertainty quantification}, simply known as UQ.
+Estimation of the statistical properties of input data can either be
+done directly from physical experiments, or one can find the
+parameter values that provide a ``best fit'' of model predictions with
+experiments. Monte Carlo simulation is a general and widely used
+tool to solve the associated statistical problems.
+The accuracy of the Monte Carlo results increases with increasing
+number of samples $N$, typically the error behaves like $N^{-1/2}$.
 
 The computer code required to do the Monte Carlo simulation and
 produce the plots in Figure~\ref{decay:analysis:data_errors:fig}
@@ -4439,16 +4379,17 @@ the $\theta$-rule has been thoroughly analyzed in the previous
 sections. Below are some plots of the error versus time for the
 Forward Euler (FE), Backward Euler (BN), and Crank-Nicolson (CN)
 schemes for decreasing values of $\Delta t$. Since the difference
-in magnitude between the errors in the CN scheme versus the FE ad
+in magnitude between the errors in the CN scheme versus the FE and
 BN schemes grows significantly as $\Delta t$ is reduced (the error
 goes like $\Delta t^2$ for CN versus $\Delta t$ for FE/BE), we have
-plotted the logarithm of the absolute value of the numerical error.
+plotted the logarithm of the absolute value of the numerical error
+as a mesh function.
 
 
 \begin{figure}[!ht]  % decay:analysis:numerical_errors:fig
   \centerline{\includegraphics[width=0.9\linewidth]{fig-analysis/numerical_errors.pdf}}
   \caption{
-  Discretization errors in various schemes for 4 time step values. \label{decay:analysis:numerical_errors:fig}
+  Discretization errors in various schemes for four time step values. \label{decay:analysis:numerical_errors:fig}
   }
 \end{figure}
 %\clearpage % flush figures decay:analysis:numerical_errors:fig
@@ -4515,13 +4456,26 @@ def discretization_errors():
 
 \subsection{Rounding errors}
 
-Real numbers on a computer are represented by \href{{https://en.wikipedia.org/wiki/Floating_point}}{floating-point numbers}, which means that just a finite
-number of digits are stored and used. Therefore, the floating-point number
-is an approximation to the underlying real number. When doing
-arithmetics with floating-point numbers, there will be small
-approximation errors, called round-off errors or rounding errors,
-that may or may not accumulate in comprehensive computations.
-A typical example is shown below.
+Real numbers on a computer are represented by \href{{https://en.wikipedia.org/wiki/Floating_point}}{floating-point
+numbers}, which means
+that just a finite number of digits are stored and used. Therefore,
+the floating-point number is an approximation to the underlying real
+number. When doing arithmetics with floating-point numbers, there will
+be small approximation errors, called round-off errors or rounding
+errors, that may or may not accumulate in comprehensive computations.
+
+The cause and analysis of rounding errors are described in most
+books on numerical analysis, see for instance
+Chapter 2 in Gander et al.~\cite{Gander_2015}. For very simple
+algorithms it is possible to theoretically establish bounds for
+the rounding errors, but for most algorithms one cannot know to
+what extent rounding errors accumulate and potentially destroy
+the final answer. Exercise~\ref{decay:analysis:exer:rounding}
+demonstrates the impact of rounding errors on numerical
+differentiation and integration.
+
+Here is a simplest possible example of the effect of rounding
+errors:
 
 \begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
 >>> 1.0/51*51
@@ -4531,35 +4485,40 @@ A typical example is shown below.
 \end{Verbatim}
 \end{cod}
 \noindent
-We see there is not an exact result in the latter case, but a rounding
+We see that the latter result is not exact, but features an
 error of $10^{-16}$. This is the typical level of a rounding error
-from an arithmetic operation with 64 bit floating-point numbers
+from an arithmetic operation with the widely used
+64 bit floating-point number
 (\texttt{float} object in Python, often called \texttt{double} or double precision
-in other languages).
+in other languages). One cannot expect more accuracy than $10^{-16}$.
+The big question is if errors at this level accumulate in a given
+numerical algorithm.
 
-What is the effect of using \texttt{float} objects and not exact arithmetics?
-Python has a \texttt{Decimal} object in the \href{{https://docs.python.org/2/library/decimal.html}}{\nolinkurl{decimal}} module that allows us
+What is the effect of using \texttt{float} objects and not exact arithmetics
+when solving differential equations? We can investigate this question
+through computer experiments if we have the ability to represent real
+numbers to a desired accuracy. Fortunately, Python has a \texttt{Decimal}
+object in the \href{{https://docs.python.org/2/library/decimal.html}}{\nolinkurl{decimal}} module that allows us
 to use as many digits in floating-point numbers as we like. We take
 1000 digits as the true answer where rounding errors are negligible,
 and then we run our numerical algorithm (the Crank-Nicolson scheme to
-be precise) with \texttt{Decimal} objects for all real numbers and test the
-error arising from using 4, 16, 64, and 128 digits.
+be precise) with \texttt{Decimal} objects for all real numbers and compute
+the maximum error arising from using 4, 16, 64, and 128 digits.
 
-When computing with numbers around unity in size and doing 40 time
-steps, we typically
-get a rounding error of $10^{-d}$, where $d$ is the number
-of digits used. The effect of rounding errors may accumulate if
-we perform more operations, so increasing the number of time steps
-to 4000 gives a rounding error of the order $10^{-d+2}$.
-Also, if we compute with numbers that
-are much larger than unit, we lose accuracy due to rounding
-errors. For example, for the $u$ values implied by $I=1000$ and $a=100$,
-the rounding errors increase to about $10^{-d+3}$. Below is
-a table summarizing a set of experiments. A rough model for
-the size of rounding errors is $10^{-d+q+r}$, where $d$ is the
-number of digits, we take of the order $10^q$ time steps, and
-the size of the numbers in the arithmetic expressions are of
-order $10^r$.
+When computing with numbers around unity in size and doing $N_t=40$ time
+steps, we typically get a rounding error of $10^{-d}$, where $d$ is
+the number of digits used. The effect of rounding errors may
+accumulate if we perform more operations, so increasing the number of
+time steps to 4000 gives a rounding error of the order $10^{-d+2}$.
+Also, if we compute with numbers that are much larger than unity, we
+lose accuracy due to rounding errors. For example, for the $u$ values
+implied by $I=1000$ and $a=100$ ($u\sim 10^3$),
+the rounding errors increase to about
+$10^{-d+3}$. Below is a table summarizing a set of experiments. A
+rough model for the size of rounding errors is $10^{-d+q+r}$, where
+$d$ is the number of digits, the number of time steps is of the order
+$10^q$ time steps, and the size of the numbers in the arithmetic
+expressions are of order $10^r$.
 
 
 
@@ -4569,12 +4528,12 @@ order $10^r$.
 
 \begin{tabular}{rllll}
 \hline
-\multicolumn{1}{c}{ digits } & \multicolumn{1}{c}{ $I=1$, $a=1$; 40 steps } & \multicolumn{1}{c}{ $I=1$, $a=1$; 4000 steps } & \multicolumn{1}{c}{ $I=1000$, $a=100$; 40 steps } & \multicolumn{1}{c}{ $I=10^3$, $a=10^2$; 4000 steps } \\
+\multicolumn{1}{c}{ digits } & \multicolumn{1}{c}{ $u\sim 1$, $N_t=40$ } & \multicolumn{1}{c}{ $u\sim 1$, $N_t=4000$ } & \multicolumn{1}{c}{ $u\sim 10^3$, $N_t=40$ } & \multicolumn{1}{c}{ $u\sim 10^3$, $N_t=4000$ } \\
 \hline
-4      & $3.05\cdot 10^{-4}$    & $2.51\cdot 10^{-1}$      & $3.05\cdot 10^{-1}$         & $9.82\cdot 10^{2}$             \\
-16     & $1.71\cdot 10^{-16}$   & $1.42\cdot 10^{-14}$     & $1.58\cdot 10^{-13}$        & $4.84\cdot 10^{-11}$           \\
-64     & $2.99\cdot 10^{-64}$   & $1.80\cdot 10^{-62}$     & $2.06\cdot 10^{-61}$        & $1.04\cdot 10^{-57}$           \\
-128    & $1.60\cdot 10^{-128}$  & $1.56\cdot 10^{-126}$    & $2.41\cdot 10^{-125}$       & $1.07\cdot 10^{-122}$          \\
+4      & $3.05\cdot 10^{-4}$   & $2.51\cdot 10^{-1}$   & $3.05\cdot 10^{-1}$    & $9.82\cdot 10^{2}$       \\
+16     & $1.71\cdot 10^{-16}$  & $1.42\cdot 10^{-14}$  & $1.58\cdot 10^{-13}$   & $4.84\cdot 10^{-11}$     \\
+64     & $2.99\cdot 10^{-64}$  & $1.80\cdot 10^{-62}$  & $2.06\cdot 10^{-61}$   & $1.04\cdot 10^{-57}$     \\
+128    & $1.60\cdot 10^{-128}$ & $1.56\cdot 10^{-126}$ & $2.41\cdot 10^{-125}$  & $1.07\cdot 10^{-122}$    \\
 \hline
 \end{tabular}
 
@@ -4587,9 +4546,11 @@ order $10^r$.
 We realize that rounding errors are at the lowest possible level
 if we scale the differential equation model,
 see Section~\ref{decay:app:scaling},
-the numbers entering the computations are of unity in size,
+so the numbers entering the computations are of unity in size,
 and if we take a small number of steps (40 steps gives a discretization error
 of $5\cdot 10^{-3}$ with the Crank-Nicolson scheme).
+In general, rounding errors are negligible in comparison with other errors
+in differential equation models.
 
 The computer code for doing the reported experiments need a new version
 of the \texttt{solver} function where we do arithmetics with \texttt{Decimal}
@@ -4615,7 +4576,7 @@ def solver_decimal(I, a, T, dt, theta):
 \end{Verbatim}
 \end{cod}
 \noindent
-The function below carries out the experiments. Note that we can
+The function below carries out the experiments. We can conveniently
 set the number of digits as we want through the \texttt{decimal.getcontext().prec}
 variable.
 
@@ -4639,6 +4600,208 @@ def rounding_errors(I=1, a=1, T=4, dt=0.1):
 \noindent
 
 \subsection{Discussion of the size of various errors}
+
+The previous computational examples of model, data, discretization,
+and rounding errors are tied to one particular mathematical problem,
+so it is in principle dangerous to make general conclusions.  However,
+the illustrations made point to some common trends that apply to
+differential equation models.
+
+First, rounding errors have very little impact compared to the other
+types of errors.  Second, numerical errors are in general smaller than
+model and data errors, but more importantly, numerical errors are
+often well understood and can be reduced by just increasing the
+computational work (in our example by taking more smaller time steps).
+
+Third, data errors may be significant, and it also takes a significant
+amount of computational work to quantify them and their impact on the
+solution. Many types of input data are also difficult or impossible
+to measure, so finding suitable values requires tuning of the data
+and the model to a known (measured) response.
+Nevertheless, even if the predictive precision of a model
+is limited because of severe errors or uncertainty in input data, the
+model can still be of high value for investigating qualitative
+properties of the underlying phenomenon. Through computer experiments
+with synthetic input data one can understand a lot of the science or
+engineering that goes into the model.
+
+Fourth, model errors are the most challenging type of error to deal
+with. Simplicity of model is in general preferred over complexity,
+but adding complexity is often the only way to improve the predictive
+capabilities of a model. More complexity usually also means a need
+for more input data and consequently the danger of increasing
+data errors.
+\section{Exercises}
+
+
+
+% --- begin exercise ---
+\begin{doconceexercise}
+\refstepcounter{doconceexercisecounter}
+
+\subsection*{Problem \thedoconceexercisecounter: Visualize the accuracy of finite differences}
+\addcontentsline{loe}{doconceexercise}{Problem \thedoconceexercisecounter: Visualize the accuracy of finite differences}
+
+\label{decay:analysis:exer:fd:exp:plot}
+
+The purpose of this exercise is to visualize the accuracy of finite difference
+approximations of the derivative of a given function.
+For any finite difference approximation, take the Forward Euler difference
+as an example, and any specific function, take  $u=e^{-at}$,
+we may introduce an error fraction
+
+\begin{align*}
+E = \frac{[D_t^+ u]^n}{u'(t_n)} &= \frac{\exp{(-a(t_n+\Delta t))} - \exp{(-at_n)}}{-a\exp{(-at_n)\Delta t}}\\ 
+&= \frac{1}{a\Delta t}\left(1 -\exp{(-a\Delta t)}\right),
+\end{align*}
+and view $E$ as a function of $\Delta t$. We expect that
+$\lim_{\Delta t\rightarrow 0}E=1$, while $E$ may deviate significantly from
+unity for large $\Delta t$. How the error depends on $\Delta t$ is best
+visualized in a graph where we use a logarithmic scale for $\Delta t$,
+so we can cover many orders of magnitude of that quantity. Here is
+a code segment creating an array of 100 intervals, on the logarithmic
+scale, ranging from $10^{-6}$ to $10^{-0.5}$ and then plotting $E$ versus
+$p=a\Delta t$ with logarithmic scale on the $p$ axis:
+
+\begin{cod}{cbg_blue1}\begin{Verbatim}[numbers=none,fontsize=\fontsize{9pt}{9pt},baselinestretch=0.95,xleftmargin=2mm]
+from numpy import logspace, exp
+from matplotlib.pyplot import semilogx
+p = logspace(-6, -0.5, 101)
+y = (1-exp(-p))/p
+semilogx(p, y)
+\end{Verbatim}
+\end{cod}
+\noindent
+Illustrate such errors for the finite difference operators $[D_t^+u]^n$
+(forward), $[D_t^-u]^n$ (backward), and $[D_t u]^n$ (centered) in
+the same plot.
+
+Perform a Taylor series expansions of the error fractions and find
+the leading order $r$ in the expressions of type
+$1 + Cp^r + \Oof{p^{r+1}}$, where $C$ is some constant.
+
+% --- begin hint in exercise ---
+
+\paragraph{Hint.}
+To save manual calculations and learn more about symbolic computing,
+make functions for the three difference operators and use \texttt{sympy}
+to perform the symbolic differences, differentiation, and Taylor series
+expansion. To plot a symbolic expression \texttt{E} against \texttt{p}, convert the
+expression to a Python function first: \texttt{E = sympy.lamdify([p], E)}.
+
+% --- end hint in exercise ---
+
+
+% removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+\noindent Filename: \Verb!decay_plot_fd_error!.
+
+\end{doconceexercise}
+% --- end exercise ---
+
+
+
+
+% --- begin exercise ---
+\begin{doconceexercise}
+\refstepcounter{doconceexercisecounter}
+
+\subsection*{Problem \thedoconceexercisecounter: Explore the $\theta$-rule for exponential growth}
+\addcontentsline{loe}{doconceexercise}{Problem \thedoconceexercisecounter: Explore the $\theta$-rule for exponential growth}
+
+\label{decay:analysis:exer:growth}
+
+This exercise asks you to solve the ODE $u'=-au$ with $a < 0$ such that
+the ODE models exponential growth instead of exponential decay.  A
+central theme is to investigate numerical artifacts and non-physical
+solution behavior.
+
+
+\subex{a)}
+Set $a=-1$ and run experiments with $\theta=0, 0.5, 1$ for
+various values of $\Delta t$ to uncover numerical artifacts.
+Recall that the exact solution is a
+monotone, growing function when $a < 0$. Oscillations or significantly
+wrong growth are signs of wrong qualitative behavior.
+
+From the experiments, select four values of $\Delta t$ that
+demonstrate the kind of numerical solutions that are characteristic
+for this model.
+
+
+% removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
+\subex{b)}
+Write up the amplification factor and plot it for $\theta=0,0.5,1$
+together with the exact one for $a\Delta t < 0$. Use the plot to
+explain the observations made in the experiments.
+
+% --- begin hint in exercise ---
+
+\paragraph{Hint.}
+Modify the \href{{http://tinyurl.com/ofkw6kc/analysis/decay_ampf_plot.py}}{\nolinkurl{decay_ampf_plot.py}} code
+(in the \texttt{src/analysis} directory).
+
+% --- end hint in exercise ---
+
+
+% removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
+\noindent Filename: \Verb!exponential_growth!.
+
+\end{doconceexercise}
+% --- end exercise ---
+
+
+
+
+% --- begin exercise ---
+\begin{doconceexercise}
+\refstepcounter{doconceexercisecounter}
+
+\subsection*{Problem \thedoconceexercisecounter: Explore rounding errors in numerical calculus}
+\addcontentsline{loe}{doconceexercise}{Problem \thedoconceexercisecounter: Explore rounding errors in numerical calculus}
+
+\label{decay:analysis:exer:rounding}
+
+
+\subex{a)}
+Compute the absolute values of the errors in the numerical derivative
+of $e^{-t}$ at $t=\half$ for three types of finite difference
+approximations: a forward difference, a backward difference, and
+a centered difference, for $\Delta t = 2^{-k}$, $k=0,4, 8, 12, \ldots, 60$.
+When do rounding errors destroy the accuracy?
+
+
+% removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
+\subex{b)}
+Compute the absolute values of the errors in the numerical
+approximation of $\int_0^4 e^{-t}dt$ using the Trapezoidal
+and the Midpoint integration methods. Make a table of
+the errors for $n=2^k$ intervals, $k=1,3,5=ldots,21$.
+Is there any impact of rounding errors?
+
+% --- begin hint in exercise ---
+
+\paragraph{Hint.}
+The Trapezoidal rule for $\int_a^bf(x)dx$ reads
+
+\[ \int_a^bf(x)dx\approx h(\half f(a) + \half f(b) + \sum_{i=1}^{n-1}
+f(a+ih)),\quad h = \frac{b-a}{n}\tp\]
+The Midpoint rule is
+
+\[ \int_a^bf(x)dx\approx h\sum_{i=1}^n f(a + (i+\half)h)\tp\]
+
+% --- end hint in exercise ---
+
+
+% removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
+
+\noindent Filename: \texttt{rounding}.
+
+\end{doconceexercise}
+% --- end exercise ---
 
 
 % !split

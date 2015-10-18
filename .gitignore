@@ -1,19 +1,19 @@
+syntax: glob
 # compiled files:
 *.o
 *.so
 *.a
 # temporary files:
+build
 *.bak
 *.swp
 *~
 .*~
 *.old
 tmp*
-.tmp*
 temp*
 .#*
 \#*
-sphinx-rootdir
 # tex files:
 *.log
 *.dvi
@@ -25,12 +25,14 @@ sphinx-rootdir
 *.toc
 *.snm
 *.vrb
-*.bbl
-*.ilg
-*.ind
-*.loe
 # eclipse files:
 *.cproject
 *.project
 # misc:
 .DS_Store
+.idea
+__pycache__
+# doconce:
+.*_html_file_collection
+.*.exerinfo
+.*.copyright

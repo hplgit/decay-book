@@ -235,7 +235,7 @@ The output becomes
 19     4.74E-12      2.38E-12
 21     3.62E-13      2.33E-13
 !ec
-The error descreases with increasing $n$, as expected.
+The error decreases with increasing $n$, as expected.
 Rounding errors are not of importance. The algorithm just
 adds values of $f$, and these operations are not sensitive
 to rounding errors.

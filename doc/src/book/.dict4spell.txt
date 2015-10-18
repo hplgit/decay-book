@@ -17,6 +17,9 @@ PDEs
 Runge
 Simula
 Svein
+Trefethen's
 Yapi
+bio
+geo
 refactor
 throuhgout

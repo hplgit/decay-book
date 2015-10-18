@@ -26,7 +26,7 @@ approximate description of a real-world phenomenon. How good this
 approximation is can be determined by comparing physical experiments
 with what the model predicts. This is the topic of *validation* and is
 obviously an essential part of mathematical model. One difficulty with
-validation is that we need to estimte the parameters in the model, and
+validation is that we need to estimate the parameters in the model, and
 this brings in data errors. Quantifying data errors is challenging,
 and a frequently used method is to *tune* the parameters in the model
 to make model predictions as close as possible to the experiments.

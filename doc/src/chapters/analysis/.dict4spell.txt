@@ -5,6 +5,8 @@ Nicolson
 ODEs
 Richtmeyer
 SymPy
+UQ
+al
 dev
 discretization
 unscaled
