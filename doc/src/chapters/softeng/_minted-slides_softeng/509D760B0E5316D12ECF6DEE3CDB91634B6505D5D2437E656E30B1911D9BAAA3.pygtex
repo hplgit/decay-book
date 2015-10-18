@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{n}{u}\PYGdefault{p}{,} \PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{n}{solver}\PYGdefault{p}{(}\PYGdefault{n}{I}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{,} \PYGdefault{n}{a}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{2}\PYGdefault{p}{,} \PYGdefault{n}{T}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{4}\PYGdefault{p}{,} \PYGdefault{n}{dt}\PYGdefault{o}{=}\PYGdefault{l+m+mf}{0.2}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{o}{=}\PYGdefault{l+m+mf}{0.5}\PYGdefault{p}{)}
-\end{Verbatim}

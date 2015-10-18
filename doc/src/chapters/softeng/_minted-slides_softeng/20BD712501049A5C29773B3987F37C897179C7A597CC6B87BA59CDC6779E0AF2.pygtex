@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-import decay
-u, t = decay.solver(...)
-
-\PYGdefaultZsh{} or
-from decay import solver
-u, t = solver(...)
-\end{Verbatim}

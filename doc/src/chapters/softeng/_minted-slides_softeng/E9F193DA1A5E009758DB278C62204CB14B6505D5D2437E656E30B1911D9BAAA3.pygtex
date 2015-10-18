@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{k}{if} \PYGdefault{n}{\PYGdefaultZus{}\PYGdefaultZus{}name\PYGdefaultZus{}\PYGdefaultZus{}} \PYGdefault{o}{==} \PYGdefault{l+s}{\PYGdefaultZsq{}\PYGdefaultZus{}\PYGdefaultZus{}main\PYGdefaultZus{}\PYGdefaultZus{}\PYGdefaultZsq{}}\PYGdefault{p}{:}
-    \PYGdefault{c}{\PYGdefaultZsh{} Statements}
-\end{Verbatim}
