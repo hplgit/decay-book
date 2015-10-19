@@ -16,7 +16,7 @@ function system {
 }
 
 pwd
-preprocess -DFORMAT=html ../decay-chapters/newcommands_keep.p.tex > newcommands_keep.tex
+preprocess -DFORMAT=html ../chapters/newcommands_keep.p.tex > newcommands_keep.tex
 
 opt="CHAPTER=$CHAPTER BOOK=$BOOK APPENDIX=$APPENDIX"
 

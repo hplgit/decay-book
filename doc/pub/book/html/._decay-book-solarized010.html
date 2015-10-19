@@ -6,10 +6,10 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="description" content="Finite Difference Computing with Partial Differential Equations">
+<meta name="keywords" content="vibration ODE,oscillations,mechanical vibrations,period (of oscillations),frequency (of oscillations),Hz (unit),mesh finite differences,mesh function,centered difference,finite differences centered,making movies,animation,WebM (video format),Ogg (video format),MP4 (video format),Flash (video format),video formats,HTML5 video tag,error global,stability criterion,phase plane plot,mechanical energy,energy principle,forward-backward Euler-Cromer scheme,nonlinear restoring force,nonlinear spring,forced vibrations,geometric mean,averaging geometric,waves on a string,wave equation 1D,wave equation 1D, finite difference method,mesh finite differences,stencil 1D wave equation,mesh function,wave equation 1D, implementation,callback function,nose test,pytest test,unit testing,software testing nose,software testing pytest,closure,vectorization,scalar code,vectorization,array computing,array slices,slice,lambda function (Python),Neumann conditions,Dirichlet conditions,homogeneous Neumann conditions,homogeneous Dirichlet conditions,boundary conditions Neumann,boundary conditions Dirichlet,stencil Neumann boundary,index set notation,geometric mean,arithmetic mean,harmonic average,averaging geometric,averaging arithmetic,averaging harmonic,radiation condition,open boundary condition,boundary condition open (radiation),periodic boundary conditions,boundary conditions periodic,wave equation 1D, analytical properties,Fourier series,Fourier transform,discrete Fourier transform,wave equation 1D, exact numerical solution,Courant number,stability criterion,wave equation 1D, stability,wave equation 2D, implementation,index set notation,diffusion equation, 1D,heat equation, 1D,stationary solution,explicit discretization methods,implicit discretization methods,amplification factor,energy estimates (diffusion),staggered mesh,staggered Euler-Cromer scheme,alternating mesh,truncation error general,finite differences backward,truncation error Backward Euler scheme,finite differences forward,truncation error Forward Euler scheme,finite differences centered,truncation error Crank-Nicolson scheme,truncation error table of formulas,decay ODE,correction terms,truncation error correction terms,verification,Cython,declaration of variables in Cython,C extension module,wrapper code,Fortran subroutine,row-major ordering,column-major ordering,Fortran array storage,C/Python array storage">
 
-<title>Finite Difference Computing with Exponential Decay Models</title>
+<title>Finite Difference Computing with Partial Differential Equations</title>
 
 
 <link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
@@ -57,708 +57,1098 @@ div { text-align: justify; text-justify: inter-word; }
 </style>
 
 
+
+<!-- Tools for embedded Bokeh plots -->
+<link rel="stylesheet"
+      href="http://cdn.pydata.org/bokeh/release/bokeh-0.9.0.min.css"
+      type="text/css" />
+<script type="text/javascript"
+	src="http://cdn.pydata.org/bokeh/release/bokeh-0.9.0.min.js">
+</script>
+<script type="text/javascript">
+  Bokeh.set_log_level("info");
+</script>
+
+
 </head>
 
 <!-- tocinfo
 {'highest level': 0,
- 'sections': [('Preface', 0, 'ch:preface', 'ch:preface'),
-              ('Acknowledgments', 3, None, '___sec1'),
-              ('Algorithms and implementations', 0, None, '___sec2'),
-              ('Finite difference methods',
-               1,
-               'decay:basics',
-               'decay:basics'),
-              ('A basic model for exponential decay',
-               2,
-               'decay:model',
-               'decay:model'),
-              ('The exact solution', 3, None, '___sec5'),
-              ('A complete problem formulation', 3, None, '___sec6'),
-              ('The Forward Euler scheme',
-               2,
-               'decay:schemes:FE',
-               'decay:schemes:FE'),
-              ('Step 1: Discretizing the domain', 3, None, '___sec8'),
-              ('Step 2: Fulfilling the equation at discrete time points',
+ 'sections': [(u'Preface', 0, u'ch:preface', u'ch:preface'),
+              (u'Simplify, understand, generalize', 3, None, '___sec1'),
+              (u'Constructive mathematics', 3, None, '___sec2'),
+              (u'All nuts and bolts', 3, None, '___sec3'),
+              (u'Python as programming language', 3, None, '___sec4'),
+              (u'Program verification', 3, None, '___sec5'),
+              (u'Analysis via exact solutions of discrete equations',
                3,
                None,
-               '___sec9'),
-              ('Step 3: Replacing derivatives by finite differences',
+               '___sec6'),
+              (u'Code-inspired mathematical notation', 3, None, '___sec7'),
+              (u'Limited scope', 3, None, '___sec8'),
+              (u'Independent chapters', 3, None, '___sec9'),
+              (u'Acknowledgments', 3, None, '___sec10'),
+              (u'Vibration ODEs', 0, None, '___sec11'),
+              (u'Finite difference discretization',
+               1,
+               u'vib:model1',
+               u'vib:model1'),
+              (u'A basic model for vibrations', 2, None, '___sec13'),
+              (u'A centered finite difference scheme',
+               2,
+               u'vib:ode1:fdm',
+               u'vib:ode1:fdm'),
+              (u'Step 1: Discretizing the domain', 3, None, '___sec15'),
+              (u'Step 2: Fulfilling the equation at discrete time points',
                3,
                None,
-               '___sec10'),
-              ('Step 4: Formulating a recursive algorithm',
+               '___sec16'),
+              (u'Step 3: Replacing derivatives by finite differences',
                3,
                None,
-               '___sec11'),
-              ('Interpretation', 3, None, '___sec12'),
-              ('Computing with the recursive formula', 3, None, '___sec13'),
-              ('The Backward Euler scheme',
-               2,
-               'decay:schemes:BE',
-               'decay:schemes:BE'),
-              ('The Crank-Nicolson scheme',
-               2,
-               'decay:schemes:CN',
-               'decay:schemes:CN'),
-              ('The unifying $\\theta$-rule',
-               2,
-               'decay:schemes:theta',
-               'decay:schemes:theta'),
-              ('Constant time step', 2, None, '___sec17'),
-              ('Mathematical derivation of finite difference formulas',
-               2,
-               'decay:fd:taylor',
-               'decay:fd:taylor'),
-              ('The forward difference', 3, None, '___sec19'),
-              ('The backward difference', 3, None, '___sec20'),
-              ('The centered difference', 3, None, '___sec21'),
-              ('Compact operator notation for finite differences',
-               2,
-               'decay:fd:op',
-               'decay:fd:op'),
-              ('Implementation', 1, 'decay:impl1', 'decay:impl1'),
-              ('Computer language: Python', 2, None, '___sec24'),
-              ('Making a solver function', 2, 'decay:py1', 'decay:py1'),
-              ('Integer division', 2, None, '___sec26'),
-              ('Doc strings', 2, None, '___sec27'),
-              ('Formatting numbers', 2, None, '___sec28'),
-              ('Running the program', 2, None, '___sec29'),
-              ('Plotting the solution', 2, None, '___sec30'),
-              ('Verifying the implementation', 2, None, '___sec31'),
-              ('Running a few algorithmic steps by hand',
+               '___sec17'),
+              (u'Step 4: Formulating a recursive algorithm',
                3,
                None,
-               '___sec32'),
-              ('Computing the numerical error as a mesh function',
+               '___sec18'),
+              (u'Computing the first step', 3, None, '___sec19'),
+              (u'The computational algorithm', 3, None, '___sec20'),
+              (u'Operator notation', 3, None, '___sec21'),
+              (u'Implementation', 1, u'vib:impl1', u'vib:impl1'),
+              (u'Making a solver function',
                2,
-               'decay:computing:error',
-               'decay:computing:error'),
-              ('Computing the norm of the error mesh function',
+               u'vib:impl1:solver',
+               u'vib:impl1:solver'),
+              (u'Computing $u^{\\prime}$', 3, None, '___sec24'),
+              (u'Verification', 2, u'vib:ode1:verify', u'vib:ode1:verify'),
+              (u'Manual calculation', 3, None, '___sec26'),
+              (u'Testing very simple solutions', 3, None, '___sec27'),
+              (u'Checking convergence rates', 3, None, '___sec28'),
+              (u'Scaled model', 2, None, '___sec29'),
+              (u'Long time simulations',
+               1,
+               u'vib:ode1:longseries',
+               u'vib:ode1:longseries'),
+              (u'Using a moving plot window', 2, None, '___sec31'),
+              (u'Making animations', 2, u'vib:ode1:anim', u'vib:ode1:anim'),
+              (u'Producing standard video formats', 3, None, '___sec33'),
+              (u'Paying PNG files in a web browser', 3, None, '___sec34'),
+              (u'Making animated GIF files', 3, None, '___sec35'),
+              (u'Using Bokeh to compare graphs', 2, None, '___sec36'),
+              (u'Using a line-by-line ascii plotter', 2, None, '___sec37'),
+              (u'Empirical analysis of the solution',
                2,
-               'decay:computing:error:norm',
-               'decay:computing:error:norm'),
-              ('Scalar computing', 3, None, '___sec35'),
-              ('Experiments with computing and plotting',
-               2,
-               None,
-               '___sec36'),
-              ('Combining plot files', 3, None, '___sec37'),
-              ('Plotting with SciTools', 3, None, '___sec38'),
-              ('Memory-saving implementation', 2, None, '___sec39'),
-              ('Exercises', 1, None, '___sec40'),
-              ('Exercise 1: Define a mesh function and visualize it',
-               2,
-               'decay:exer:meshfunc',
-               'decay:exer:meshfunc'),
-              ('Remarks', 3, None, '___sec42'),
-              ('Problem 2: Differentiate a function',
-               2,
-               'decay:exer:dudt',
-               'decay:exer:dudt'),
-              ('Problem 3: Experiment with divisions',
-               2,
-               'decay:exer:intdiv',
-               'decay:exer:intdiv'),
-              ('Problem 4: Experiment with wrong computations',
-               2,
-               'decay:exer:decay1err',
-               'decay:exer:decay1err'),
-              ('Problem 5: Plot the error function',
-               2,
-               'decay:exer:plot:error',
-               'decay:exer:plot:error'),
-              ('Problem 6: Change formatting of numbers and debug',
-               2,
-               'decay:exer:inexact:output',
-               'decay:exer:inexact:output'),
-              ('Analysis', 0, 'decay:analysis', 'decay:analysis'),
-              ('Experimental investigations', 1, None, '___sec49'),
-              ('Discouraging numerical solutions', 2, None, '___sec50'),
-              ('Detailed experiments', 2, None, '___sec51'),
-              ('Stability', 1, None, '___sec52'),
-              ('Exact numerical solution', 2, None, '___sec53'),
-              ('Stability properties derived from the amplification factor',
+               u'vib:ode1:empirical',
+               u'vib:ode1:empirical'),
+              (u'Analysis of the numerical scheme',
+               1,
+               u'vib:ode1:analysis',
+               u'vib:ode1:analysis'),
+              (u'Deriving a solution of the numerical scheme',
                2,
                None,
-               '___sec54'),
-              ('Accuracy', 1, None, '___sec55'),
-              ('Visual comparison of amplification factors',
+               '___sec40'),
+              (u'Exact discrete solution',
+               2,
+               u'vib:ode1:analysis:sol',
+               u'vib:ode1:analysis:sol'),
+              (u'Convergence',
+               2,
+               u'vib:ode1:analysis:conv',
+               u'vib:ode1:analysis:conv'),
+              (u'The global error', 2, None, '___sec43'),
+              (u'Stability', 2, None, '___sec44'),
+              (u'About the accuracy at the stability limit',
                2,
                None,
-               '___sec56'),
-              ('Series expansion of amplification factors',
+               '___sec45'),
+              (u'Alternative schemes based on 1st-order equations',
+               1,
+               u'vib:model2x2',
+               u'vib:model2x2'),
+              (u'The Forward Euler scheme', 2, None, '___sec47'),
+              (u'The Backward Euler scheme', 2, None, '___sec48'),
+              (u'The Crank-Nicolson scheme', 2, None, '___sec49'),
+              (u'Comparison of schemes',
+               2,
+               u'vib:model2x2:compare',
+               u'vib:model2x2:compare'),
+              (u'Runge-Kutta methods', 2, None, '___sec51'),
+              (u'Analysis of the Forward Euler scheme', 2, None, '___sec52'),
+              (u'Energy considerations',
+               1,
+               u'vib:model1:energy',
+               u'vib:model1:energy'),
+              (u'Derivation of the energy expression', 2, None, '___sec54'),
+              (u'Energy of the exact solution', 3, None, '___sec55'),
+              (u'An error measure based on energy', 2, None, '___sec56'),
+              (u'The Euler-Cromer method',
+               1,
+               u'vib:model2x2:EulerCromer',
+               u'vib:model2x2:EulerCromer'),
+              (u'Forward-backward discretization', 2, None, '___sec58'),
+              (u'Equivalence with the scheme for the second-order ODE',
+               2,
+               u'vib:model2x2:EulerCromer:equiv',
+               u'vib:model2x2:EulerCromer:equiv'),
+              (u'Implementation',
+               2,
+               u'vib:model2x2:EulerCromer:impl',
+               u'vib:model2x2:EulerCromer:impl'),
+              (u'The velocity Verlet algorithm', 2, None, '___sec61'),
+              (u'Generalization: damping, nonlinear spring, and external excitation',
+               1,
+               u'vib:model2',
+               u'vib:model2'),
+              (u'A centered scheme for linear damping',
+               2,
+               u'vib:ode2:fdm:flin',
+               u'vib:ode2:fdm:flin'),
+              (u'A centered scheme for quadratic damping',
+               2,
+               u'vib:ode2:fdm:fquad',
+               u'vib:ode2:fdm:fquad'),
+              (u'A forward-backward discretization of the quadratic damping term',
                2,
                None,
-               '___sec57'),
-              ('The ratio of numerical and exact amplification factors',
+               '___sec65'),
+              (u'Implementation', 2, u'vib:ode2:solver', u'vib:ode2:solver'),
+              (u'Verification', 2, u'vib:ode2:verify', u'vib:ode2:verify'),
+              (u'Constant solution', 3, None, '___sec68'),
+              (u'Linear solution', 3, None, '___sec69'),
+              (u'Quadratic solution', 3, None, '___sec70'),
+              (u'Visualization', 2, u'vib:ode2:viz', u'vib:ode2:viz'),
+              (u'User interface', 2, u'vib:ode2:ui', u'vib:ode2:ui'),
+              (u'The Euler-Cromer scheme for the generalized model',
                2,
                None,
-               '___sec58'),
-              ('The global error at a point',
+               '___sec73'),
+              (u'Exercises and Problems', 1, None, '___sec74'),
+              (u'Problem 1: Use linear/quadratic functions for verification',
                2,
-               'decay:analysis:gobal:error',
-               'decay:analysis:gobal:error'),
-              ('Integrated error',
+               u'vib:exer:undamped:verify:linquad',
+               u'vib:exer:undamped:verify:linquad'),
+              (u'Exercise 2: Show linear growth of the phase with time',
                2,
-               'decay:analysis:gobal:error_int',
-               'decay:analysis:gobal:error_int'),
-              ('Truncation error',
+               u'vib:exer:phase:err:growth',
+               u'vib:exer:phase:err:growth'),
+              (u'Exercise 3: Improve the accuracy by adjusting the frequency',
                2,
-               'decay:analysis:trunc',
-               'decay:analysis:trunc'),
-              ('Consistency, stability, and convergence',
+               u'vib:exer:w:adjust',
+               u'vib:exer:w:adjust'),
+              (u'Exercise 4: See if adaptive methods improve the phase error',
                2,
-               None,
-               '___sec62'),
-              ('Exercises', 1, None, '___sec63'),
-              ('Problem 7: Visualize the accuracy of finite differences',
+               u'vib:exer:undamped:adaptive',
+               u'vib:exer:undamped:adaptive'),
+              (u'Exercise 5: Use a Taylor polynomial to compute $u^1$',
                2,
-               'decay:analysis:exer:fd:exp:plot',
-               'decay:analysis:exer:fd:exp:plot'),
-              ('Problem 8: Explore the $\\theta$-rule for exponential growth',
+               u'vib:exer:step4b:alt',
+               u'vib:exer:step4b:alt'),
+              (u'Exercise 6: Find the minimal resolution of an oscillatory function',
                2,
-               'decay:analysis:exer:growth',
-               'decay:analysis:exer:growth'),
-              ('Generalizations', 0, None, '___sec66'),
-              ('Model extensions', 1, None, '___sec67'),
-              ('Generalization: including a variable coefficient',
+               u'vib:exer:wdt:limit',
+               u'vib:exer:wdt:limit'),
+              (u'Exercise 7: Visualize the accuracy of finite differences for a cosine function',
                2,
-               None,
-               '___sec68'),
-              ('Generalization: including a source term',
+               u'vib:exer:fd:exp:plot',
+               u'vib:exer:fd:exp:plot'),
+              (u'Exercise 8: Verify convergence rates of the error in energy',
                2,
-               'decay:source',
-               'decay:source'),
-              ('Implementation of the generalized model problem',
+               u'vib:exer:energy:convrate',
+               u'vib:exer:energy:convrate'),
+              (u'Exercise 9: Use linear/quadratic functions for verification',
                2,
-               'decay:general',
-               'decay:general'),
-              ('Deriving the $\\theta$-rule formula', 3, None, '___sec71'),
-              ('Python code', 3, None, '___sec72'),
-              ('Coding of variable coefficients', 3, None, '___sec73'),
-              ('Verifying a constant solution',
+               u'vib:exer:verify:gen:linear',
+               u'vib:exer:verify:gen:linear'),
+              (u'Exercise 10: Use an exact discrete solution for verification',
                2,
-               'decay:verify:trivial',
-               'decay:verify:trivial'),
-              ('Verification via manufactured solutions',
+               u'vib:exer:discrete:omega',
+               u'vib:exer:discrete:omega'),
+              (u'Exercise 11: Use analytical solution for convergence rate tests',
                2,
-               'decay:MMS',
-               'decay:MMS'),
-              ('Computing convergence rates',
+               u'vib:exer:conv:rate',
+               u'vib:exer:conv:rate'),
+              (u'Exercise 12: Investigate the amplitude errors of many solvers',
                2,
-               'decay:convergence:rate',
-               'decay:convergence:rate'),
-              ('Estimating $r$', 3, None, '___sec77'),
-              ('Implementation', 3, None, '___sec78'),
-              ('Extension to systems of ODEs', 2, None, '___sec79'),
-              ('General first-order ODEs', 1, None, '___sec80'),
-              ('Generic form of first-order ODEs', 2, None, '___sec81'),
-              ('The $\\theta$-rule', 2, None, '___sec82'),
-              ('An implicit 2-step backward scheme', 2, None, '___sec83'),
-              ('Leapfrog schemes', 2, None, '___sec84'),
-              ('The ordinary Leapfrog scheme', 3, None, '___sec85'),
-              ('The filtered Leapfrog scheme', 3, None, '___sec86'),
-              ('The 2nd-order Runge-Kutta method', 2, None, '___sec87'),
-              ('A 2nd-order Taylor-series method', 2, None, '___sec88'),
-              ('The 2nd- and 3rd-order Adams-Bashforth schemes',
+               u'vib:exer:undamped:odespy',
+               u'vib:exer:undamped:odespy'),
+              (u'Exercise 13: Minimize memory usage of a vibration solver',
                2,
-               None,
-               '___sec89'),
-              ('The 4th-order Runge-Kutta method',
+               u'vib:exer:memsave',
+               u'vib:exer:memsave'),
+              (u'Exercise 14: Implement the solver via classes',
                2,
-               'decay:fd2:RK4',
-               'decay:fd2:RK4'),
-              ('The Odespy software', 2, None, '___sec91'),
-              ('Example: Runge-Kutta methods', 2, None, '___sec92'),
-              ('Remark about using the $\\theta$-rule in Odespy',
+               u'vib:exer:gen:class',
+               u'vib:exer:gen:class'),
+              (u'Exercise 15: Interpret $[D_tD_t u]^n$ as a forward-backward difference',
+               2,
+               u'vib:exer:DtDt:asDtpDtm',
+               u'vib:exer:DtDt:asDtpDtm'),
+              (u'Exercise 16: Use a backward difference for the damping term',
+               2,
+               u'vib:exer:quad:damping:bw',
+               u'vib:exer:quad:damping:bw'),
+              (u'Exercise 17: Analysis of the Euler-Cromer scheme',
+               2,
+               u'vib:exer:EulerCromer:analysis',
+               u'vib:exer:EulerCromer:analysis'),
+              (u'Wave equations', 0, u'decay:analysis', u'decay:analysis'),
+              (u'Simulation of waves on a string',
+               1,
+               u'wave:string',
+               u'wave:string'),
+              (u'Discretizing the domain',
+               2,
+               u'wave:string:mesh',
+               u'wave:string:mesh'),
+              (u'Uniform meshes', 3, None, '___sec95'),
+              (u'The discrete solution',
+               2,
+               u'wave:string:numerical:sol',
+               u'wave:string:numerical:sol'),
+              (u'Fulfilling the equation at the mesh points',
+               2,
+               u'wave:string:samplingPDE',
+               u'wave:string:samplingPDE'),
+              (u'Replacing derivatives by finite differences',
+               2,
+               u'wave:string:fd',
+               u'wave:string:fd'),
+              (u'Algebraic version of the PDE', 3, None, '___sec99'),
+              (u'Interpretation of the equation as a stencil',
                3,
                None,
-               '___sec93'),
-              ('Example: Adaptive Runge-Kutta methods',
-               2,
-               'decay:fd2:adaptiveRK',
-               'decay:fd2:adaptiveRK'),
-              ('Exercises', 1, None, '___sec95'),
-              ('Exercise 9: Experiment with precision in tests and the size of $u$',
-               2,
-               'decay:fd2:exer:precision',
-               'decay:fd2:exer:precision'),
-              ('Exercise 10: Implement the 2-step backward scheme',
-               2,
-               'decay:fd2:exer:bw2',
-               'decay:fd2:exer:bw2'),
-              ('Exercise 11: Implement the 2nd-order Adams-Bashforth scheme',
-               2,
-               'decay:fd2:exer:AB2',
-               'decay:fd2:exer:AB2'),
-              ('Exercise 12: Implement the 3rd-order Adams-Bashforth scheme',
-               2,
-               'decay:fd2:exer:AB3',
-               'decay:fd2:exer:AB3'),
-              ('Exercise 13: Analyze explicit 2nd-order methods',
-               2,
-               'decay:exer:RK2:Taylor:analysis',
-               'decay:exer:RK2:Taylor:analysis'),
-              ('Project 14: Implement and investigate the Leapfrog scheme',
-               2,
-               'decay:fd2:exer:leapfrog1',
-               'decay:fd2:exer:leapfrog1'),
-              ('Problem 15: Make a unified implementation of many schemes',
-               2,
-               'decay:fd2:exer:uni',
-               'decay:fd2:exer:uni'),
-              ('Models', 0, 'decay:app', 'decay:app'),
-              ('Scaling', 1, 'decay:app:scaling', 'decay:app:scaling'),
-              ('Dimensionless variables', 2, None, '___sec105'),
-              ('Dimensionless numbers', 2, None, '___sec106'),
-              ('A scaling for vanishing initial condition',
-               2,
-               None,
-               '___sec107'),
-              ('Evolution of a population',
-               1,
-               'decay:app:pop',
-               'decay:app:pop'),
-              ('Exponential growth',
-               2,
-               'decay:app:pop:exp',
-               'decay:app:pop:exp'),
-              ('Logistic growth',
-               2,
-               'decay:app:pop:log',
-               'decay:app:pop:log'),
-              ('Compound interest and inflation',
-               1,
-               'decay:app:interest',
-               'decay:app:interest'),
-              ("Newton's law of cooling",
-               1,
-               'decay:app:Newton:cooling',
-               'decay:app:Newton:cooling'),
-              ('Radioactive decay',
-               1,
-               'decay:app:nuclear',
-               'decay:app:nuclear'),
-              ('Deterministic model', 2, None, '___sec114'),
-              ('Stochastic model', 2, None, '___sec115'),
-              ('Relation between stochastic and deterministic models',
-               2,
-               None,
-               '___sec116'),
-              ('Generalization of the radioactive decay modeling',
-               2,
-               'decay:app:waitingtime',
-               'decay:app:waitingtime'),
-              ('Chemical kinetics',
-               1,
-               'decay:app:kinetics',
-               'decay:app:kinetics'),
-              ('Irreversible reaction of two substances',
-               2,
-               None,
-               '___sec119'),
-              ('Reversible reaction of two substances', 2, None, '___sec120'),
-              ('Irreversible reaction of two substances into a third',
-               2,
-               None,
-               '___sec121'),
-              ('A biochemical reaction', 2, None, '___sec122'),
-              ('Spreading of diseases', 1, 'decay:app:SIR', 'decay:app:SIR'),
-              ('Predator-prey models in ecology',
-               1,
-               'decay:app:predprey',
-               'decay:app:predprey'),
-              ('Decay of atmospheric pressure with altitude',
-               1,
-               'decay:app:atm',
-               'decay:app:atm'),
-              ('The general model', 2, None, '___sec126'),
-              ('Multiple atmospheric layers', 2, None, '___sec127'),
-              ('Simplifications', 2, None, '___sec128'),
-              ('Constant layer temperature', 3, None, '___sec129'),
-              ('One-layer model', 3, None, '___sec130'),
-              ('Compaction of sediments',
-               1,
-               'decay:app:sediment',
-               'decay:app:sediment'),
-              ('Vertical motion of a body in a viscous fluid',
-               1,
-               'decay:app:drag',
-               'decay:app:drag'),
-              ('Overview of forces', 2, None, '___sec133'),
-              ('Equation of motion', 2, None, '___sec134'),
-              ('Terminal velocity', 2, None, '___sec135'),
-              ('A Crank-Nicolson scheme', 2, None, '___sec136'),
-              ('Physical data', 2, None, '___sec137'),
-              ('Verification', 2, None, '___sec138'),
-              ('Scaling',
-               2,
-               'decay:app:drag:scaling',
-               'decay:app:drag:scaling'),
-              ('Viscoelastic materials',
-               1,
-               'decay:app:viscoelasticity',
-               'decay:app:viscoelasticity'),
-              ('Decay ODEs from solving a PDE by Fourier expansions',
-               1,
-               'decay:app:diffusion:Fourier',
-               'decay:app:diffusion:Fourier'),
-              ('Exercises', 1, None, '___sec142'),
-              ('Problem 16: Radioactive decay of Carbon-14',
-               2,
-               'decay:app:exer:radio:C14',
-               'decay:app:exer:radio:C14'),
-              ("Exercise 17: Derive schemes for Newton's law of cooling",
-               2,
-               'decay:app:exer:cooling:schemes',
-               'decay:app:exer:cooling:schemes'),
-              ("Exercise 18: Implement schemes for Newton's law of cooling",
-               2,
-               'decay:app:exer:cooling:py',
-               'decay:app:exer:cooling:py'),
-              ('Bug 1: Wrong time level in the $T_s$ function',
+               '___sec100'),
+              (u'Algebraic version of the initial conditions',
                3,
+               None,
+               '___sec101'),
+              (u'Formulating a recursive algorithm',
+               2,
+               u'wave:string:alg',
+               u'wave:string:alg'),
+              (u'Sketch of an implementation',
+               2,
+               u'wave:string:impl',
+               u'wave:string:impl'),
+              (u'Verification', 1, None, '___sec104'),
+              (u'A slightly generalized model problem',
+               2,
+               u'wave:pde2:fd',
+               u'wave:pde2:fd'),
+              (u'Using an analytical solution of physical significance',
+               2,
+               u'wave:pde2:fd:standing:waves',
+               u'wave:pde2:fd:standing:waves'),
+              (u'Manufactured solution',
+               2,
+               u'wave:pde2:fd:MMS',
+               u'wave:pde2:fd:MMS'),
+              (u'Constructing an exact solution of the discrete equations',
+               2,
+               u'wave:pde2:fd:verify:quadratic',
+               u'wave:pde2:fd:verify:quadratic'),
+              (u'Implementation', 1, u'wave:pde1:impl', u'wave:pde1:impl'),
+              (u'Callback function for user-specific actions',
+               2,
+               None,
+               '___sec110'),
+              (u'The solver function',
+               2,
+               u'wave:pde1:impl:solver',
+               u'wave:pde1:impl:solver'),
+              (u'Verification: exact quadratic solution',
+               2,
+               u'wave:pde1:impl:verify:quadratic',
+               u'wave:pde1:impl:verify:quadratic'),
+              (u'Visualization: animating the solution',
+               2,
+               u'wave:pde1:impl:animate',
+               u'wave:pde1:impl:animate'),
+              (u'Function for administering the simulation',
+               3,
+               None,
+               '___sec114'),
+              (u'Dissection of the code', 3, None, '___sec115'),
+              (u'Making movie files', 3, None, '___sec116'),
+              (u'Skipping frames for animation speed', 3, None, '___sec117'),
+              (u'Running a case',
+               2,
+               u'wave:pde1:guitar:data',
+               u'wave:pde1:guitar:data'),
+              (u'Working with a scaled PDE model', 2, None, '___sec119'),
+              (u'Vectorization',
+               1,
+               u'wave:pde1:impl:vec',
+               u'wave:pde1:impl:vec'),
+              (u'Operations on slices of arrays',
+               2,
+               u'wave:pde1:impl:vec:slices:basics',
+               u'wave:pde1:impl:vec:slices:basics'),
+              (u'Finite difference schemes expressed as slices',
+               2,
+               u'wave:pde1:impl:vec:slices:fdm',
+               u'wave:pde1:impl:vec:slices:fdm'),
+              (u'Verification',
+               2,
+               u'wave:pde1:impl:vec:verify:quadratic',
+               u'wave:pde1:impl:vec:verify:quadratic'),
+              (u'Efficiency measurements', 2, None, '___sec124'),
+              (u'Solution 1', 3, None, '___sec125'),
+              (u'Solution 2', 3, None, '___sec126'),
+              (u'Efficiency experiments', 3, None, '___sec127'),
+              (u'Remark on the updating of arrays',
+               2,
+               u'wave:pde1:impl:ref:switch',
+               u'wave:pde1:impl:ref:switch'),
+              (u'Exercises', 1, None, '___sec129'),
+              (u'Exercise 18: Simulate a standing wave',
+               2,
+               u'wave:exer:standingwave',
+               u'wave:exer:standingwave'),
+              (u'Remarks', 3, None, '___sec131'),
+              (u'Exercise 19: Add storage of solution in a user action function',
+               2,
+               u'wave:exer:store:list',
+               u'wave:exer:store:list'),
+              (u'Exercise 20: Use a class for the user action function',
+               2,
+               u'wave:exer:store:list:class',
+               u'wave:exer:store:list:class'),
+              (u'Exercise 21: Compare several Courant numbers in one movie',
+               2,
+               u'wave:exer:multiple:C',
+               u'wave:exer:multiple:C'),
+              (u'Project 22: Calculus with 1D mesh functions',
+               2,
+               u'wave:exer:mesh1D:calculus',
+               u'wave:exer:mesh1D:calculus'),
+              (u'Generalization: reflecting boundaries',
+               1,
+               u'wave:pde2:Neumann',
+               u'wave:pde2:Neumann'),
+              (u'Neumann boundary condition',
+               2,
+               u'wave:pde2:Neumann:bc',
+               u'wave:pde2:Neumann:bc'),
+              (u'Discretization of derivatives at the boundary',
+               2,
+               u'wave:pde2:Neumann:discr',
+               u'wave:pde2:Neumann:discr'),
+              (u'Implementation of Neumann conditions',
+               2,
+               u'wave:pde2:Neumann:impl',
+               u'wave:pde2:Neumann:impl'),
+              (u'Index set notation', 2, u'wave:indexset', u'wave:indexset'),
+              (u'Verifying the implementation of Neumann conditions',
+               2,
+               u'wave:pde1:verify',
+               u'wave:pde1:verify'),
+              (u'Alternative implementation via ghost cells',
+               2,
+               u'wave:pde1:Neumann:ghost',
+               u'wave:pde1:Neumann:ghost'),
+              (u'Idea', 3, None, '___sec143'),
+              (u'Implementation', 3, None, '___sec144'),
+              (u'Generalization: variable wave velocity',
+               1,
+               u'wave:pde2:var:c',
+               u'wave:pde2:var:c'),
+              (u'The model PDE with a variable coefficient',
+               2,
                None,
                '___sec146'),
-              ('Bug 2: Wrong time level in the $T$ function',
+              (u'Discretizing the variable coefficient',
+               2,
+               u'wave:pde2:var:c:ideas',
+               u'wave:pde2:var:c:ideas'),
+              (u'Computing the coefficient between mesh points',
+               2,
+               u'wave:pde2:var:c:means',
+               u'wave:pde2:var:c:means'),
+              (u'How a variable coefficient affects the stability',
+               2,
+               u'wave:pde2:var:c:stability',
+               u'wave:pde2:var:c:stability'),
+              (u'Neumann condition and a variable coefficient',
+               2,
+               u'wave:pde2:var:c:Neumann',
+               u'wave:pde2:var:c:Neumann'),
+              (u'Implementation of variable coefficients',
+               2,
+               u'wave:pde2:var:c:impl',
+               u'wave:pde2:var:c:impl'),
+              (u'A more general PDE model with variable coefficients',
+               2,
+               None,
+               '___sec152'),
+              (u'Generalization: damping', 2, None, '___sec153'),
+              (u'Building a general 1D wave equation solver',
+               1,
+               u'wave:pde2:software',
+               u'wave:pde2:software'),
+              (u'User action function as a class', 2, None, '___sec155'),
+              (u'The code', 3, None, '___sec156'),
+              (u'Dissection', 3, None, '___sec157'),
+              (u'Pulse propagation in two media', 2, None, '___sec158'),
+              (u'Exercises', 1, None, '___sec159'),
+              (u'Exercise 23: Find the analytical solution to a damped wave equation',
+               2,
+               u'wave:exer:standingwave:damped:uex',
+               u'wave:exer:standingwave:damped:uex'),
+              (u'Problem 24: Explore symmetry boundary conditions',
+               2,
+               u'wave:exer:symmetry:bc',
+               u'wave:exer:symmetry:bc'),
+              (u'Exercise 25: Send pulse waves through a layered medium',
+               2,
+               u'wave:app:exer:pulse1D',
+               u'wave:app:exer:pulse1D'),
+              (u'Exercise 26: Explain why numerical noise occurs',
+               2,
+               u'wave:app:exer:pulse1D:analysis',
+               u'wave:app:exer:pulse1D:analysis'),
+              (u'Exercise 27: Investigate harmonic averaging in a 1D model',
+               2,
+               u'wave:app:exer:pulse1D:harmonic',
+               u'wave:app:exer:pulse1D:harmonic'),
+              (u'Problem 28: Implement open boundary conditions',
+               2,
+               u'wave:app:exer:radiationBC',
+               u'wave:app:exer:radiationBC'),
+              (u'Remarks', 3, None, '___sec166'),
+              (u'Exercise 29: Implement periodic boundary conditions',
+               2,
+               u'wave:exer:periodic',
+               u'wave:exer:periodic'),
+              (u'Exercise 30: Compare discretizations of a Neumann condition',
+               2,
+               None,
+               '___sec168'),
+              (u'Exercise 31: Verification by a cubic polynomial in space',
+               2,
+               u'wave:fd2:exer:verify:cubic',
+               u'wave:fd2:exer:verify:cubic'),
+              (u'Analysis of the difference equations',
+               1,
+               u'wave:pde1:analysis',
+               u'wave:pde1:analysis'),
+              (u'Properties of the solution of the wave equation',
+               2,
+               u'wave:pde1:properties',
+               u'wave:pde1:properties'),
+              (u'More precise definition of Fourier representations',
+               2,
+               u'wave:pde1:Fourier',
+               u'wave:pde1:Fourier'),
+              (u'Stability',
+               2,
+               u'wave:pde1:stability',
+               u'wave:pde1:stability'),
+              (u'Preliminary results', 3, None, '___sec174'),
+              (u'Numerical wave propagation', 3, None, '___sec175'),
+              (u'Numerical dispersion relation',
+               2,
+               u'wave:pde1:num:dispersion',
+               u'wave:pde1:num:dispersion'),
+              (u'Extending the analysis to 2D and 3D',
+               2,
+               u'wave:pde1:analysis:2D3D',
+               u'wave:pde1:analysis:2D3D'),
+              (u'Finite difference methods for 2D and 3D wave equations',
+               1,
+               u'wave:2D3D',
+               u'wave:2D3D'),
+              (u'Multi-dimensional wave equations',
+               2,
+               u'wave:2D3D:models',
+               u'wave:2D3D:models'),
+              (u'Mesh', 2, u'wave:2D3D:mesh', u'wave:2D3D:mesh'),
+              (u'Discretization',
+               2,
+               u'wave:2D3D:discretization',
+               u'wave:2D3D:discretization'),
+              (u'Discretizing the PDEs', 3, None, '___sec182'),
+              (u'Handling boundary conditions where $u$ is known',
                3,
                None,
-               '___sec147'),
-              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec148'),
-              ('Bug 4: Missing `k` in the updating formula',
+               '___sec183'),
+              (u'Discretizing the Neumann condition', 3, None, '___sec184'),
+              (u'Implementation', 1, u'wave:2D3D:impl', u'wave:2D3D:impl'),
+              (u'Scalar computations',
+               2,
+               u'wave2D3D:impl:scalar',
+               u'wave2D3D:impl:scalar'),
+              (u'Domain and mesh', 3, None, '___sec187'),
+              (u'Solution arrays', 3, None, '___sec188'),
+              (u'Index sets', 3, None, '___sec189'),
+              (u'Computing the solution', 3, None, '___sec190'),
+              (u'Vectorized computations',
+               2,
+               u'wave2D3D:impl:vectorized',
+               u'wave2D3D:impl:vectorized'),
+              (u'Verification',
+               2,
+               u'wave2D3D:impl:verify',
+               u'wave2D3D:impl:verify'),
+              (u'Testing a quadratic solution', 3, None, '___sec193'),
+              (u'Using classes to implement a simulator',
+               1,
+               None,
+               '___sec194'),
+              (u'Exercises', 1, None, '___sec195'),
+              (u'Exercise 32: Check that a solution fulfills the discrete model',
+               2,
+               u'wave:exer:quadratic:2D',
+               u'wave:exer:quadratic:2D'),
+              (u'Project 33: Calculus with 2D mesh functions',
+               2,
+               u'wave:exer:mesh3D:calculus',
+               u'wave:exer:mesh3D:calculus'),
+              (u'Exercise 34: Implement Neumann conditions in 2D',
+               2,
+               u'wave:app:exer:wave2D:Neumann',
+               u'wave:app:exer:wave2D:Neumann'),
+              (u'Exercise 35: Test the efficiency of compiled loops in 3D',
+               2,
+               u'wave:exer:3D:f77:cy:efficiency',
+               u'wave:exer:3D:f77:cy:efficiency'),
+              (u'Applications of wave equations',
+               1,
+               u'wave:app',
+               u'wave:app'),
+              (u'Waves on a string',
+               2,
+               u'wave:app:string',
+               u'wave:app:string'),
+              (u'Damping', 3, None, '___sec202'),
+              (u'External forcing', 3, None, '___sec203'),
+              (u'Modeling the tension via springs', 3, None, '___sec204'),
+              (u'Waves on a membrane',
+               2,
+               u'wave:app:membrane',
+               u'wave:app:membrane'),
+              (u'Elastic waves in a rod',
+               2,
+               u'wave:app:elastic:rod',
+               u'wave:app:elastic:rod'),
+              (u'The acoustic model for seismic waves',
+               2,
+               u'wave:app:acoustic:seismic',
+               u'wave:app:acoustic:seismic'),
+              (u'Anisotropy', 3, None, '___sec208'),
+              (u'Sound waves in liquids and gases',
+               2,
+               u'wave:app:sound',
+               u'wave:app:sound'),
+              (u'Spherical waves',
+               2,
+               u'wave:app:spherical',
+               u'wave:app:spherical'),
+              (u'The linear shallow water equations',
+               2,
+               u'wave:app:sw:2D',
+               u'wave:app:sw:2D'),
+              (u'Wind drag on the surface', 3, None, '___sec212'),
+              (u'Bottom drag', 3, None, '___sec213'),
+              (u"Effect of the Earth's rotation", 3, None, '___sec214'),
+              (u'Waves in blood vessels',
+               2,
+               u'wave:app:blood',
+               u'wave:app:blood'),
+              (u'Electromagnetic waves',
+               2,
+               u'wave:app:light',
+               u'wave:app:light'),
+              (u'Exercises', 1, u'wave:app:exer', u'wave:app:exer'),
+              (u'Exercise 36: Simulate waves on a non-homogeneous string',
+               2,
+               u'wave:app:exer:string:discont',
+               u'wave:app:exer:string:discont'),
+              (u'Exercise 37: Simulate damped waves on a string',
+               2,
+               u'wave:app:exer:string:damping',
+               u'wave:app:exer:string:damping'),
+              (u'Exercise 38: Simulate elastic waves in a rod',
+               2,
+               u'wave:app:exer:rod',
+               u'wave:app:exer:rod'),
+              (u'Exercise 39: Simulate spherical waves',
+               2,
+               u'wave:app:exer:spherical',
+               u'wave:app:exer:spherical'),
+              (u'Problem 40: Earthquake-generated tsunami over a subsea hill',
+               2,
+               u'wave:app:exer:tsunami1D:hill',
+               u'wave:app:exer:tsunami1D:hill'),
+              (u'Problem 41: Earthquake-generated tsunami over a 3D hill',
+               2,
+               u'wave:app:exer:tsunami2D:hill',
+               u'wave:app:exer:tsunami2D:hill'),
+              (u'Problem 42: Investigate Matplotlib for visualization',
+               2,
+               u'wave:app:exer:tsunami:hill:viz:matplotlib',
+               u'wave:app:exer:tsunami:hill:viz:matplotlib'),
+              (u'Problem 43: Investigate visualization packages',
+               2,
+               u'wave:app:exer:tsunami:hill:viz:packages',
+               u'wave:app:exer:tsunami:hill:viz:packages'),
+              (u'Problem 44: Implement loops in compiled languages',
+               2,
+               u'wave:app:exer:tsunami2D:hill:compiled',
+               u'wave:app:exer:tsunami2D:hill:compiled'),
+              (u'Exercise 45: Simulate seismic waves in 2D',
+               2,
+               u'wave:app:exer:seismic2D',
+               u'wave:app:exer:seismic2D'),
+              (u'Project 46: Model 3D acoustic waves in a room',
+               2,
+               u'wave:app:exer:acoustics',
+               u'wave:app:exer:acoustics'),
+              (u'Project 47: Solve a 1D transport equation',
+               2,
+               u'wave:app:exer:advec1D',
+               u'wave:app:exer:advec1D'),
+              (u'Problem 48: General analytical solution of a 1D damped wave equation',
+               2,
+               u'wave:app:exer:anal:damped:wave1D',
+               u'wave:app:exer:anal:damped:wave1D'),
+              (u'Problem 49: General analytical solution of a 2D damped wave equation',
+               2,
+               u'wave:app:exer:anal:damped:wave2D',
+               u'wave:app:exer:anal:damped:wave2D'),
+              (u'Diffusion equations', 0, None, '___sec232'),
+              (u'The 1D diffusion equation', 1, None, '___sec233'),
+              (u'The initial-boundary value problem for 1D diffusion',
+               2,
+               None,
+               '___sec234'),
+              (u'Forward Euler scheme',
+               2,
+               u'diffu:pde1:FE',
+               u'diffu:pde1:FE'),
+              (u'Backward Euler scheme',
+               2,
+               u'diffu:pde1:BE',
+               u'diffu:pde1:BE'),
+              (u'Sparse matrix implementation',
+               2,
+               u'diffu:pde1:impl:sparse',
+               u'diffu:pde1:impl:sparse'),
+              (u'Crank-Nicolson scheme',
+               2,
+               u'diffu:pde1:CN',
+               u'diffu:pde1:CN'),
+              (u'The $\\theta$ rule',
+               2,
+               u'diffu:pde1:theta',
+               u'diffu:pde1:theta'),
+              (u'The Laplace and Poisson equation', 2, None, '___sec240'),
+              (u'Extensions', 2, None, '___sec241'),
+              (u'Analysis of schemes for the diffusion equation',
+               1,
+               u'diffu:pde1:analysis',
+               u'diffu:pde1:analysis'),
+              (u'Properties of the solution',
+               2,
+               u'diffu:pde1:analysis:uex',
+               u'diffu:pde1:analysis:uex'),
+              (u'Similarity solution', 3, None, '___sec244'),
+              (u'Solution for a Gaussian pulse', 3, None, '___sec245'),
+              (u'Solution for a sine component', 3, None, '___sec246'),
+              (u'Example: Diffusion of a discontinues profile',
+               2,
+               None,
+               '___sec247'),
+              (u'Analysis of discrete equations', 2, None, '___sec248'),
+              (u'Analysis of the finite difference schemes',
+               2,
+               u'diffu:pde1:analysis:details',
+               u'diffu:pde1:analysis:details'),
+              (u'Stability', 3, None, '___sec250'),
+              (u'Accuracy', 3, None, '___sec251'),
+              (u'Analysis of the Forward Euler scheme',
+               2,
+               u'diffu:pde1:analysis:FE',
+               u'diffu:pde1:analysis:FE'),
+              (u'Stability', 3, None, '___sec253'),
+              (u'Accuracy', 3, None, '___sec254'),
+              (u'Analysis of the Backward Euler scheme',
+               2,
+               u'diffu:pde1:analysis:BE',
+               u'diffu:pde1:analysis:BE'),
+              (u'Stability', 3, None, '___sec256'),
+              (u'Analysis of the Crank-Nicolson scheme',
+               2,
+               u'diffu:pde1:analysis:CN',
+               u'diffu:pde1:analysis:CN'),
+              (u'Stability', 3, None, '___sec258'),
+              (u'Summary of accuracy of amplification factors',
+               2,
+               None,
+               '___sec259'),
+              (u'Exercise 50: Explore symmetry in a 1D problem',
+               2,
+               u'diffu:exer:1D:gaussian:symmetric',
+               u'diffu:exer:1D:gaussian:symmetric'),
+              (u'Exercise 51: Investigate approximation errors from a $u_x=0$ boundary condition',
+               2,
+               u'diffu:exer:1D:ux:onesided',
+               u'diffu:exer:1D:ux:onesided'),
+              (u'Exercise 52: Experiment with open boundary conditions in 1D',
+               2,
+               u'diffu:exer:1D:openBC',
+               u'diffu:exer:1D:openBC'),
+              (u'Exercise 53: Simulate a diffused Gaussian peak in 2D/3D',
+               2,
+               None,
+               '___sec263'),
+              (u'Exercise 54: Examine stability of a diffusion model with a source term',
+               2,
+               u'diffu:exer:uterm',
+               u'diffu:exer:uterm'),
+              (u'Diffusion in heterogeneous media', 1, None, '___sec265'),
+              (u'Stationary solution', 2, None, '___sec266'),
+              (u'Piecewise constant medium', 2, None, '___sec267'),
+              (u'Implementation', 2, None, '___sec268'),
+              (u'Diffusion equation in axi-symmetric geometries',
+               2,
+               u'diffu:fd2:radial',
+               u'diffu:fd2:radial'),
+              (u'Diffusion equation in spherically-symmetric geometries',
+               2,
+               u'diffu:fd2:spherical',
+               u'diffu:fd2:spherical'),
+              (u'Discretization in spherical coordinates',
                3,
                None,
-               '___sec149'),
-              ('Bug 5: Using `1-theta` instead of `theta`',
+               '___sec271'),
+              (u'Discretization in Cartesian coordinates',
                3,
                None,
-               '___sec150'),
-              ('Exercise 19: Find time of murder from body temperature',
+               '___sec272'),
+              (u'Exercises', 1, None, '___sec273'),
+              (u'Exercise 55: Stabilizing the Crank-Nicolson method by Rannacher time stepping',
                2,
-               'decay:app:exer:cooling:murder',
-               'decay:app:exer:cooling:murder'),
-              ('Exercise 20: Simulate an oscillating cooling process',
+               u'diffu:exer:CN:Rannacher',
+               u'diffu:exer:CN:Rannacher'),
+              (u'Project 56: Energy estimates for diffusion problems',
                2,
-               'decay:app:exer:cooling:osc',
-               'decay:app:exer:cooling:osc'),
-              ('Exercise 21: Simulate stochastic radioactive decay',
-               2,
-               'decay:app:exer:stoch:nuclear',
-               'decay:app:exer:stoch:nuclear'),
-              ('Problem 22: Radioactive decay of two substances',
-               2,
-               'decay:app:exer:radio:twosubst',
-               'decay:app:exer:radio:twosubst'),
-              ('Exercise 23: Simulate a simple chemical reaction',
-               2,
-               'decay:app:exer:kinetics:AB',
-               'decay:app:exer:kinetics:AB'),
-              ('Exercise 24: Simulate an $n$-th order chemical reaction',
-               2,
-               'decay:app:exer:kinetics:ABn',
-               'decay:app:exer:kinetics:ABn'),
-              ('Exercise 25: Simulate a biochemical process',
-               2,
-               'decay:app:exer:MMK',
-               'decay:app:exer:MMK'),
-              ('Exercise 26: Simulate spreading of a disease',
-               2,
-               'decay:app:exer:SIR',
-               'decay:app:exer:SIR'),
-              ('Exercise 27: Simulate predator-prey interaction',
-               2,
-               'decay:app:exer:predprey',
-               'decay:app:exer:predprey'),
-              ('Exercise 28: Simulate the pressure drop in the atmosphere',
-               2,
-               'decay:app:exer:atm1',
-               'decay:app:exer:atm1'),
-              ('Exercise 29: Make a program for vertical motion in a fluid',
-               2,
-               'decay:app:exer:drag:prog',
-               'decay:app:exer:drag:prog'),
-              ('Project 30: Simulate parachuting',
-               2,
-               'decay:app:exer:parachute',
-               'decay:app:exer:parachute'),
-              ('Exercise 31: Formulate vertical motion in the atmosphere',
-               2,
-               'decay:app:exer:drag:atm1',
-               'decay:app:exer:drag:atm1'),
-              ('Exercise 32: Simulate vertical motion in the atmosphere',
-               2,
-               'decay:app:exer:drag:atm2',
-               'decay:app:exer:drag:atm2'),
-              ('Problem 33: Compute $y=|x|$ by solving an ODE',
-               2,
-               'decay:app:exer:signum',
-               'decay:app:exer:signum'),
-              ('Problem 34: Simulate fortune growth with random interest rate',
-               2,
-               'decay:app:exer:interest',
-               'decay:app:exer:interest'),
-              ('Exercise 35: Simulate a population in a changing environment',
-               2,
-               'decay:app:exer:pop:at',
-               'decay:app:exer:pop:at'),
-              ('Exercise 36: Simulate logistic growth',
-               2,
-               'decay:app:exer:pop:logistic1',
-               'decay:app:exer:pop:logistic1'),
-              ('Exercise 37: Rederive the equation for continuous compound interest',
-               2,
-               'decay:app:exer:interest:derive',
-               'decay:app:exer:interest:derive'),
-              ('Exercise 38: Simulate the deformation of a viscoelastic material',
-               2,
-               'decay:app:exer:viscoelasticity1',
-               'decay:app:exer:viscoelasticity1'),
-              ('Scientific software engineering', 0, 'decay:se', 'decay:se'),
-              ('Implementations with functions and modules',
-               1,
-               'softeng1:basic',
-               'softeng1:basic'),
-              ('Mathematical problem and solution technique',
-               2,
-               'softeng1:basic:math',
-               'softeng1:basic:math'),
-              ('A first, quick implementation',
-               2,
-               'softeng1:basic:impl1',
-               'softeng1:basic:impl1'),
-              ('A more decent program',
-               2,
-               'softeng1:basic:impl2',
-               'softeng1:basic:impl2'),
-              ('Comments in a program', 3, None, '___sec176'),
-              ('Refactoring into functions', 3, None, '___sec177'),
-              ('Program file vs IDE vs notebook', 3, None, '___sec178'),
-              ('Prefixing imported functions by the module name',
-               2,
-               'softeng1:basic:modprefix',
-               'softeng1:basic:modprefix'),
-              ('Implementing the numerical algorithm in a function',
-               2,
-               'softeng1:basic:func',
-               'softeng1:basic:func'),
-              ('Do not have several versions of a code',
+               u'diffu:exer:energy:estimates',
+               u'diffu:exer:energy:estimates'),
+              (u'Staggered mesh discretization', 0, None, '___sec276'),
+              (u'The Euler-Cromer scheme on a standard mesh',
                2,
                None,
-               '___sec181'),
-              ('Making a module',
+               '___sec277'),
+              (u'The Euler-Cromer scheme on a staggered mesh',
                2,
-               'softeng1:basic:module',
-               'softeng1:basic:module'),
-              ('Example on extending the module code',
-               2,
-               'softeng1:basic:experiment2',
-               'softeng1:basic:experiment2'),
-              ('Documenting functions and modules',
-               2,
-               'softeng1:basic:docstring',
-               'softeng1:basic:docstring'),
-              ('Logging intermediate results',
-               2,
-               'softeng1:basic:logging',
-               'softeng1:basic:logging'),
-              ('Introductory example', 3, None, '___sec186'),
-              ('Using a logger in our solver function', 3, None, '___sec187'),
-              ('User interfaces',
-               1,
-               'softeng1:basic:UI',
-               'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec189'),
-              ('Positional command-line arguments', 2, None, '___sec190'),
-              ('Option-value pairs on the command line',
+               u'vib:model2x2:staggered',
+               u'vib:model2x2:staggered'),
+              (u'Implementation of the scheme on a staggered mesh',
                2,
                None,
-               '___sec191'),
-              ('Creating a graphical web user interface',
-               2,
-               None,
-               '___sec192'),
-              ('Making a compute function', 3, None, '___sec193'),
-              ('Generating the user interface', 3, None, '___sec194'),
-              ('Running the web application', 3, None, '___sec195'),
-              ('Tests for verifying implementations', 1, None, '___sec196'),
-              ('Doctests', 2, None, '___sec197'),
-              ('Unit tests and test functions', 2, None, '___sec198'),
-              ('Two Python test frameworks: nose and pytest',
+               '___sec279'),
+              (u'Implementation with integer indices', 3, None, '___sec280'),
+              (u'Implementation with half-integer indices',
                3,
                None,
-               '___sec199'),
-              ('Test function requirements', 3, None, '___sec200'),
-              ('Comparison of real numbers', 3, None, '___sec201'),
-              ('Special assert functions from nose', 3, None, '___sec202'),
-              ('Locating test functions', 3, None, '___sec203'),
-              ('Running tests', 3, None, '___sec204'),
-              ('Embedding doctests in a test function', 3, None, '___sec205'),
-              ('Installing nose and pytest', 3, None, '___sec206'),
-              ('Test function for the solver', 2, None, '___sec207'),
-              ('Test function for reading positional command-line arguments',
+               '___sec281'),
+              (u'A staggered Euler-Cromer scheme for a generalized model',
                2,
-               None,
-               '___sec208'),
-              ('Test function for reading option-value pairs',
+               u'vib:ode2:staggered',
+               u'vib:ode2:staggered'),
+              (u'Exercises', 1, None, '___sec283'),
+              (u'Exercise 57: Use the forward-backward scheme with quadratic damping',
                2,
-               None,
-               '___sec209'),
-              ('Classical class-based unit testing',
-               2,
-               'softeng1:basic:unittest',
-               'softeng1:basic:unittest'),
-              ('Sharing the software with other users',
+               u'vib:exer:quad:damping:fwbw',
+               u'vib:exer:quad:damping:fwbw'),
+              (u'Appendix: Useful formulas', 0, None, '___sec285'),
+              (u'Finite difference operator notation',
                1,
-               'softeng1:prog:se:git',
-               'softeng1:prog:se:git'),
-              ('Organizing the software directory tree',
+               u'sec:form:fdop',
+               u'sec:form:fdop'),
+              (u'Truncation errors of finite difference approximations',
+               1,
+               u'sec:form:truncerr',
+               u'sec:form:truncerr'),
+              (u'Finite differences of exponential functions',
+               1,
+               u'sec:form:fdexp',
+               u'sec:form:fdexp'),
+              (u'Complex exponentials', 3, None, '___sec289'),
+              (u'Real exponentials', 3, None, '___sec290'),
+              (u'Finite differences of $t^n$',
+               1,
+               u'sec:form:fdtn',
+               u'sec:form:fdtn'),
+              (u'Appendix: Truncation error analysis', 0, None, '___sec292'),
+              (u'Overview of truncation error analysis',
+               1,
+               None,
+               '___sec293'),
+              (u'Abstract problem setting', 2, None, '___sec294'),
+              (u'Error measures', 2, None, '___sec295'),
+              (u'Truncation errors in finite difference formulas',
+               1,
+               u'trunc:finite:differences',
+               u'trunc:finite:differences'),
+              (u"Example: The backward difference for $u'(t)$",
+               2,
+               u'trunc:fd:backward',
+               u'trunc:fd:backward'),
+              (u"Example: The forward difference for $u'(t)$",
+               2,
+               u'trunc:fd:forward',
+               u'trunc:fd:forward'),
+              (u"Example: The central difference for $u'(t)$",
+               2,
+               u'trunc:fd:central',
+               u'trunc:fd:central'),
+              (u'Overview of leading-order error terms in finite difference formulas',
+               2,
+               u'trunc:table',
+               u'trunc:table'),
+              (u'Software for computing truncation errors',
+               2,
+               u'trunc:sympy',
+               u'trunc:sympy'),
+              (u'Truncation errors in exponential decay ODE',
+               1,
+               u'trunc:decay',
+               u'trunc:decay'),
+              (u'Truncation error of the Forward Euler scheme',
+               2,
+               u'trunc:decay:FE',
+               u'trunc:decay:FE'),
+              (u'Truncation error of the Crank-Nicolson scheme',
+               2,
+               u'trunc:decay:CN',
+               u'trunc:decay:CN'),
+              (u'Truncation error of the $\\theta$-rule',
+               2,
+               u'trunc:decay:theta',
+               u'trunc:decay:theta'),
+              (u'Using symbolic software',
+               2,
+               u'trunc:decay:software',
+               u'trunc:decay:software'),
+              (u'Empirical verification of the truncation error',
+               2,
+               u'trunc:decay:estimate:R',
+               u'trunc:decay:estimate:R'),
+              (u'Increasing the accuracy by adding correction terms',
+               2,
+               u'trunc:decay:corr',
+               u'trunc:decay:corr'),
+              (u'Extension to variable coefficients', 2, None, '___sec309'),
+              (u'Exact solutions of the finite difference equations',
                2,
                None,
-               '___sec212'),
-              ('Distributing just a module file', 3, None, '___sec213'),
-              ('Distributing a package', 3, None, '___sec214'),
-              ('Publishing the software at GitHub', 2, None, '___sec215'),
-              ('Downloading and installing the software',
+               '___sec310'),
+              (u'Computing truncation errors in nonlinear problems',
+               2,
+               u'trunc:decay:gen',
+               u'trunc:decay:gen'),
+              (u'Truncation errors in vibration ODEs',
+               1,
+               u'trunc:vib',
+               u'trunc:vib'),
+              (u'Linear model without damping',
+               2,
+               u'trunc:vib:undamped',
+               u'trunc:vib:undamped'),
+              (u'The truncation error of a centered finite difference scheme',
+               3,
+               None,
+               '___sec314'),
+              (u"The truncation error of approximating $u'(0)$",
+               3,
+               None,
+               '___sec315'),
+              (u'Truncation error of the equation for the first step',
+               3,
+               None,
+               '___sec316'),
+              (u'Computing correction terms', 3, None, '___sec317'),
+              (u'Model with damping and nonlinearity',
+               2,
+               u'trunc:vib:gen',
+               u'trunc:vib:gen'),
+              (u'Extension to quadratic damping', 2, None, '___sec319'),
+              (u'The general model formulated as first-order ODEs',
+               2,
+               u'trunc:vib:gen:staggered',
+               u'trunc:vib:gen:staggered'),
+              (u'The forward-backward scheme', 3, None, '___sec321'),
+              (u'A centered scheme on a staggered mesh',
+               3,
+               None,
+               '___sec322'),
+              (u'Truncation errors in wave equations', 1, None, '___sec323'),
+              (u'Linear wave equation in 1D',
+               2,
+               u'trunc:wave:1D',
+               u'trunc:wave:1D'),
+              (u'Finding correction terms',
+               2,
+               u'trunc:wave:1D:corr',
+               u'trunc:wave:1D:corr'),
+              (u'Extension to variable coefficients',
+               2,
+               u'trunc:wave:1D:varcoeff',
+               u'trunc:wave:1D:varcoeff'),
+              (u'1D wave equation on a staggered mesh', 2, None, '___sec327'),
+              (u'Linear wave equation in 2D/3D',
+               2,
+               u'trunc:wave:2D',
+               u'trunc:wave:2D'),
+              (u'Truncation errors in diffusion equations',
+               1,
+               u'trunc:diffu',
+               u'trunc:diffu'),
+              (u'Linear diffusion equation in 1D',
+               2,
+               u'trunc:diffu:1D',
+               u'trunc:diffu:1D'),
+              (u'The Forward Euler scheme in time', 3, None, '___sec331'),
+              (u'The Crank-Nicolson scheme in time', 3, None, '___sec332'),
+              (u'Linear diffusion equation in 2D/3D', 2, None, '___sec333'),
+              (u'A nonlinear diffusion equation in 2D', 2, None, '___sec334'),
+              (u'Exercises', 1, None, '___sec335'),
+              (u'Exercise 58: Truncation error of a weighted mean',
+               2,
+               u'trunc:exer:theta:avg',
+               u'trunc:exer:theta:avg'),
+              (u'Exercise 59: Simulate the error of a weighted mean',
+               2,
+               u'trunc:exer:theta:avg2',
+               u'trunc:exer:theta:avg2'),
+              (u'Exercise 60: Verify a truncation error formula',
+               2,
+               u'trunc:exer:decay:bw2',
+               u'trunc:exer:decay:bw2'),
+              (u'Exercise 61: Truncation error of the Backward Euler scheme',
+               2,
+               u'trunc:exer:decay:BE',
+               u'trunc:exer:decay:BE'),
+              (u'Exercise 62: Empirical estimation of truncation errors',
+               2,
+               u'trunc:exer:decay:estimate',
+               u'trunc:exer:decay:estimate'),
+              (u'Exercise 63: Correction term for a Backward Euler scheme',
+               2,
+               u'trunc:exer:decay:corr:BE',
+               u'trunc:exer:decay:corr:BE'),
+              (u'Exercise 64: Verify the effect of correction terms',
+               2,
+               u'trunc:exer:decay:corr:verify',
+               u'trunc:exer:decay:corr:verify'),
+              (u'Exercise 65: Truncation error of the Crank-Nicolson scheme',
+               2,
+               u'trunc:exer:decay:varcoeff:CN',
+               u'trunc:exer:decay:varcoeff:CN'),
+              (u"Exercise 66: Truncation error of $u'=f(u,t)$",
+               2,
+               u'trunc:exer:decay:nonlin:BEFE',
+               u'trunc:exer:decay:nonlin:BEFE'),
+              (u'Exercise 67: Truncation error of $[D_t D_tu]^n$',
+               2,
+               u'trunc:exer:DtDtu',
+               u'trunc:exer:DtDtu'),
+              (u"Exercise 68: Investigate the impact of approximating $u'(0)$",
+               2,
+               u'trunc:exer:vib:ic:fw',
+               u'trunc:exer:vib:ic:fw'),
+              (u'Exercise 69: Investigate the accuracy of a simplified scheme',
+               2,
+               u'trunc:exer:vib:fbw',
+               u'trunc:exer:vib:fbw'),
+              (u'Appendix: Software engineering; wave equation model',
+               0,
+               None,
+               '___sec348'),
+              (u'A 1D wave equation simulator', 1, None, '___sec349'),
+              (u'Mathematical model', 2, None, '___sec350'),
+              (u'Numerical discretization', 2, None, '___sec351'),
+              (u'A solver function', 2, None, '___sec352'),
+              (u'Saving large arrays in files',
+               1,
+               u'softeng2:wave1D:filestorage',
+               u'softeng2:wave1D:filestorage'),
+              (u'Using `savez` to store arrays in files',
+               2,
+               u'softeng2:wave1D:filestorage:savez',
+               u'softeng2:wave1D:filestorage:savez'),
+              (u'Storing individual arrays', 3, None, '___sec355'),
+              (u'Merging zip archives', 3, None, '___sec356'),
+              (u'Reading arrays from zip archives', 3, None, '___sec357'),
+              (u'Using `joblib` to store arrays in files',
+               2,
+               u'softeng2:wave1D:filestorage:joblib',
+               u'softeng2:wave1D:filestorage:joblib'),
+              (u'Using a hash to create a file or directory name',
+               2,
+               u'softeng2:wave1D:filestorage:hash',
+               u'softeng2:wave1D:filestorage:hash'),
+              (u'Software for the 1D wave equation', 1, None, '___sec360'),
+              (u'Making hash strings from input data',
+               2,
+               u'softeng2:wave1D:filestorage:hashlib',
+               u'softeng2:wave1D:filestorage:hashlib'),
+              (u'Avoiding rerunning previously run cases',
+               2,
+               u'softeng2:wave1D:filestorage:norerun',
+               u'softeng2:wave1D:filestorage:norerun'),
+              (u'Verification', 2, None, '___sec363'),
+              (u'Programming the solver with classes', 1, None, '___sec364'),
+              (u'Class Problem', 2, None, '___sec365'),
+              (u'Class Mesh', 2, None, '___sec366'),
+              (u'Class Function', 2, None, '___sec367'),
+              (u'Class Solver', 2, None, '___sec368'),
+              (u'Migrating loops to Cython',
+               1,
+               u'wave2D3D:impl:Cython',
+               u'wave2D3D:impl:Cython'),
+              (u'Declaring variables and annotating the code',
                2,
                None,
-               '___sec216'),
-              ('Installing just a module file', 3, None, '___sec217'),
-              ('Installing a package', 3, None, '___sec218'),
-              ('Classes for problem and solution method',
-               1,
-               'softeng1:prog:se:class',
-               'softeng1:prog:se:class'),
-              ('The problem class', 2, None, '___sec220'),
-              ('The solver class', 2, None, '___sec221'),
-              ('Combining the objects', 3, None, '___sec222'),
-              ('Improving the problem and solver classes',
+               '___sec370'),
+              (u'Visual inspection of the C translation',
                2,
-               'softeng1:prog:se:class2',
-               'softeng1:prog:se:class2'),
-              ('A generic class for parameters', 3, None, '___sec224'),
-              ('Automating scientific experiments',
-               1,
-               'softeng1:experiments',
-               'softeng1:experiments'),
-              ('Available software', 2, None, '___sec226'),
-              ('The results we want to produce', 2, None, '___sec227'),
-              ('Combining plot files', 2, None, '___sec228'),
-              ('Running a program from Python', 2, None, '___sec229'),
-              ('The automating script', 2, None, '___sec230'),
-              ('Making a report',
+               None,
+               '___sec371'),
+              (u'Building the extension module', 2, None, '___sec372'),
+              (u'Calling the Cython function from Python',
                2,
-               'softeng1:exper:report',
-               'softeng1:exper:report'),
-              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec232'),
-              ('HTML with MathJax', 3, None, '___sec233'),
-              ('LaTeX', 3, None, '___sec234'),
-              ('Sphinx', 3, None, '___sec235'),
-              ('Markdown', 3, None, '___sec236'),
-              ('IPython/Jupyter notebooks', 3, None, '___sec237'),
-              ('Wiki formats', 3, None, '___sec238'),
-              ('DocOnce', 3, None, '___sec239'),
-              ('Publishing a complete project',
+               None,
+               '___sec373'),
+              (u'Efficiency', 3, None, '___sec374'),
+              (u'Migrating loops to Fortran', 1, None, '___sec375'),
+              (u'The Fortran subroutine', 2, None, '___sec376'),
+              (u'Building the Fortran module with f2py',
                2,
-               'softeng1:exper:github',
-               'softeng1:exper:github'),
-              ('Exercises', 1, None, '___sec241'),
-              ('Problem 39: Make a tool for differentiating curves',
+               None,
+               '___sec377'),
+              (u'How to avoid array copying', 2, None, '___sec378'),
+              (u'Efficiency', 3, None, '___sec379'),
+              (u'Migrating loops to C via Cython', 1, None, '___sec380'),
+              (u'Translating index pairs to single indices',
                2,
-               'softeng1:exer:derivative',
-               'softeng1:exer:derivative'),
-              ('Problem 40: Make solid software for the Trapezoidal rule',
+               None,
+               '___sec381'),
+              (u'The complete C code', 2, None, '___sec382'),
+              (u'The Cython interface file', 2, None, '___sec383'),
+              (u'Building the extension module', 2, None, '___sec384'),
+              (u'Efficiency', 3, None, '___sec385'),
+              (u'Migrating loops to C via f2py', 1, None, '___sec386'),
+              (u'Migrating loops to C++ via f2py', 2, None, '___sec387'),
+              (u'Exercises', 1, None, '___sec388'),
+              (u'Exercise 70: Make an improved `numpy.savez` function',
                2,
-               'softeng1:exer:integral:flat',
-               'softeng1:exer:integral:flat'),
-              ('Problem 41: Implement classes for the Trapezoidal rule',
-               2,
-               'softeng1:exer:integral:flat2',
-               'softeng1:exer:integral:flat2'),
-              ('Problem 42: Write a doctest and a test function',
-               2,
-               'softeng1:exer:doctest1',
-               'softeng1:exer:doctest1'),
-              ('Problem 43: Experiment with tolerances in comparisons',
-               2,
-               'softeng1:exer:tol',
-               'softeng1:exer:tol'),
-              ('Remarks', 3, None, '___sec247'),
-              ('Exercise 44: Make use of a class implementation',
-               2,
-               'softeng1:exer:class:dts',
-               'softeng1:exer:class:dts'),
-              ('Problem 45: Make solid software for a difference equation',
-               2,
-               'softeng1:exer:logistic',
-               'softeng1:exer:logistic'),
-              ('Summarizing multiple-choice questions', 0, None, '___sec250'),
-              ('Quiz', 1, None, '___sec251'),
-              ('Exercise 46: Characterize a finite difference',
-               2,
-               'decay:quiz:fd:FE',
-               'decay:quiz:fd:FE'),
-              ('Exercise 47: Characterize a finite difference',
-               2,
-               'decay:quiz:fd:CN',
-               'decay:quiz:fd:CN'),
-              ('Exercise 48: What is the problem with this program?',
-               2,
-               'decay:quiz:program',
-               'decay:quiz:program'),
-              ('Exercise 49: Is the solution correct?',
-               2,
-               'decay:quiz:stability',
-               'decay:quiz:stability'),
-              ('Exercise 50: Is this a proper test function?',
-               2,
-               'decay:quiz:testfunc',
-               'decay:quiz:testfunc'),
-              ('Exercise 51: Rewrite an expression with array arithmetics',
-               2,
-               'decay:quiz:arrayarithm',
-               'decay:quiz:arrayarithm'),
-              ('Exercise 52: What is the truncation error?',
-               2,
-               'decay:quiz:trunc',
-               'decay:quiz:trunc'),
-              ('Exercise 53: Recognize a programming language',
-               2,
-               'decay:quiz:prog:m',
-               'decay:quiz:prog:m'),
-              ('Exercise 54: Recognize a programming language',
-               2,
-               'decay:quiz:prog:py',
-               'decay:quiz:prog:py'),
-              ('Exercise 55: Recognize a programming language',
-               2,
-               'decay:quiz:prog:f77',
-               'decay:quiz:prog:f77'),
-              ('Exercise 56: Recognize a programming language',
-               2,
-               'decay:quiz:prog:c',
-               'decay:quiz:prog:c'),
-              ('Exercise 57: What is SymPy?',
-               2,
-               'decay:quiz:sympy1',
-               'decay:quiz:sympy1'),
-              ('Exercise 58: Testing of code',
-               2,
-               'decay:quiz:testing1',
-               'decay:quiz:testing1'),
-              ('Exercise 59: What kind of scheme is this?',
-               2,
-               'decay:quiz:scheme:CN_error',
-               'decay:quiz:scheme:CN_error'),
-              ('Exercise 60: What kind of scheme is this?',
-               2,
-               'decay:quiz:scheme:BE',
-               'decay:quiz:scheme:BE'),
-              ('Exercise 61: What kind of scheme is this?',
-               2,
-               'decay:quiz:scheme:leapfrog',
-               'decay:quiz:scheme:leapfrog'),
-              ('References', 1, None, '___sec268')]}
+               u'softeng2:exer:savez',
+               u'softeng2:exer:savez'),
+              (u'References', 1, None, '___sec390')]}
 end of tocinfo -->
 
 <body>
@@ -777,20 +1167,6 @@ MathJax.Hub.Config({
  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-<!-- newcommands_keep.tex -->
-$$
-\newcommand{\half}{\frac{1}{2}}
-\newcommand{\tp}{\thinspace .}
-\newcommand{\uex}{{u_{\small\mbox{e}}}}
-\newcommand{\Aex}{{A_{\small\mbox{e}}}}
-\newcommand{\E}[1]{\hbox{E}\lbrack #1 \rbrack}
-\newcommand{\Var}[1]{\hbox{Var}\lbrack #1 \rbrack}
-\newcommand{\Std}[1]{\hbox{Std}\lbrack #1 \rbrack}
-\newcommand{\Oof}[1]{\mathcal{O}(#1)}
-\newcommand{\stress}{\boldsymbol{\sigma}}
-$$
-
-
 
 
     
@@ -808,739 +1184,500 @@ $$
 <p>
 <!-- !split -->
 
-<center><h1 id="___sec250">Summarizing multiple-choice questions </h1></center> <hr>
+<center><h1 id="___sec276">Staggered mesh discretization </h1></center> <hr>
 
-<h1 id="___sec251">Quiz </h1>
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:fd:FE">Exercise 46: Characterize a finite difference</h2>
+<h2 id="___sec277">The Euler-Cromer scheme on a standard mesh </h2>
 
 <p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> We can approximate the derivative at a point using two function values:
+Consider the fundamental model problem for simple harmonic oscillations,
+
+$$
+\begin{equation}
+u'' + \omega^2u = 0,\quad u(0)=I,\ u'(0)=0,
+\tag{362}
+\end{equation}
+$$
+
+where \( \omega \) is the frequency of the oscillations (the exact solution
+is \( u(t)=I\cos\omega t \)). This model can equivalently be
+formulated as two first-order equations,
+
+$$
+\begin{align}
+v' &= -\omega^2 u,
+\tag{363} \\ 
+u' &= v\tp
+\tag{364}
+\end{align}
+$$
+
+The popular Euler-Cromer scheme for this \( 2\times 2 \) system of ODEs
+applies an explicit
+forward difference in <a href="#mjx-eqn-363">(363)</a> and a
+backward difference in <a href="#mjx-eqn-364">(364)</a>:
+
+$$
+\begin{align}
+\frac{v^{n+1}- v^n}{\Delta t} &=- \omega^2u^{n},
+\tag{365}\\ 
+\frac{u^{n+1} - u^n}{\Delta t} &= v^{n+1}\tp
+\tag{366}
+\end{align}
+$$
+
+For a time domain \( [0,T] \), we have introduced a mesh with points
+\( 0=t_0 < t_1 < \cdots < t_n=T \). The most common case is a mesh with
+uniform spacing \( \Delta t \): \( t_n=n\Delta t \). Then
+\( v^n \) is an approximation to \( v(t) \) at mesh point \( t_n \), and
+\( u^n \) is an approximation to \( u(t) \) at the same point.
+Note that the backward difference in <a href="#mjx-eqn-368">(368)</a>
+leads to an explicit updating formula for \( u^{n+1} \)
+since \( v^{n+1} \) is already computed:
+
+$$
+\begin{align}
+v^{n+1} &= v^n -\Delta t \omega^2u^{n},
+\tag{367}\\ 
+u^{n+1} &= u^n + \Delta t v^{n+1}\tp
+\tag{368}
+\end{align}
+$$
 
 <p>
-<center><p><img src="fig-quiz/fd_forward2.png" align="bottom" width=400></p></center>
+The Euler-Cromer scheme is equivalent with the standard second-order
+accurate scheme for <a href="#mjx-eqn-362">(362)</a>:
+
+$$
+\begin{equation}
+u^{n+1} = 2u^n - u^{n-1} - \Delta t^2\omega^2 u^n,\ n=1,2,\ldots,
+\tag{369}
+\end{equation}
+$$
+
+but for the first time step, the method for <a href="#mjx-eqn-362">(362)</a>
+leads to
+
+$$
+\begin{equation}
+u^1= u^0 - \frac{1}{2}\Delta t^2\omega^2u^0,
+\tag{370}
+\end{equation}
+$$
+
+while Euler-Cromer gives
+
+$$
+\begin{equation}
+u^1= u^0 - \Delta t^2\omega^2u^0,
+\tag{371}
+\end{equation}
+$$
+
+which can be interpreted as a first-order, backward difference approximation
+of \( u'(0)=0 \) combined with <a href="#mjx-eqn-369">(369)</a>. At later time steps,
+however, the alternating use of forward and backward differences in
+<a href="#mjx-eqn-367">(367)</a>-<a href="#mjx-eqn-368">(368)</a>
+leads to a method with error \( \Oof{\Delta t^2} \).
+
+<h2 id="vib:model2x2:staggered">The Euler-Cromer scheme on a staggered mesh</h2>
 
 <p>
-What is this type of difference called and how large is the error?</p>
 
-<p><div title="Wrong! No, a centered difference would have the two function values equally displaced to either side of the target point \( t_n \)."><b>Choice A:</b>
-This is a centered difference with error proportional to \( \Delta t^2 \).
-</div></p>
-
-<p><div title="Right! The name is forward difference, or Forward Euler difference in the context of differential equations. In such contexts the formula is also known as Euler's method or formula."><b>Choice B:</b>
-This is a forward difference with error proportional to \( \Delta t \).
-</div></p>
-
-<p><div title="Wrong! One may well call this a Forward Euler difference, but the error is not as &quot;good&quot; as \( \Delta t^3 \)."><b>Choice C:</b>
-This is a Forward Euler difference with error proportional to \( \Delta t^3 \).
-</div></p>
-
-<p><div title="Wrong! Since we use the points \( t_{n+1} \) and \( t_n \) when constructing the difference, we go  forward  in time, not backward. Therefore, this is a forward difference."><b>Choice D:</b>
-This is a Backward Euler finite difference with error proportional to \( \Delta t \).
-</div></p>
-<hr>
-<!-- end quiz -->
-
+<!-- begin inline comment -->
+<font color="red">(<b>hpl 13</b>: Do the equations in different sequence, first vel, then pos.)</font>
+<!-- end inline comment -->
 
 <p>
-<!-- --- end exercise --- -->
+The fact that the forward and backward differences used the Euler-Cromer
+method yield a second-order accurate method is not obvious from intuition.
+A much more intuitive discretization employs solely centered differences
+and leads to a scheme that is equivalent to the Euler-Cromer scheme.
+It is in fact fully equivalent to the second-order scheme for
+<a href="#mjx-eqn-362">(362)</a>, also for the first time step.
+This alternative scheme is based on using a <em>staggered</em> (or
+alternating) mesh in time.
 
 <p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:fd:CN">Exercise 47: Characterize a finite difference</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> We can approximate the derivative at a point using two function values:
+In a staggered mesh, the unknowns are sought at different points in
+the mesh. Specifically, \( u \) is sought at
+integer time points \( t_n \) and \( v \) is sought at \( t_{n+1/2} \)
+<em>between</em> two \( u \) points.
+The unknowns are then \( u^1, v^{3/2}, u^2, v^{5/2} \), and so on.
+We typically use the notation
+\( u^n \) and \( v^{n+\half} \) for the two unknown mesh functions.
 
 <p>
-<center><p><img src="fig-quiz/fd_centered2.png" align="bottom" width=400></p></center>
+On a staggered mesh it is natural to
+use centered difference approximations, expressed
+in operator notation as
+$$
+\begin{align}
+\lbrack D_t u &= v\rbrack^{n+\half},
+\tag{372}\\ 
+\lbrack D_t v &= -\omega u\rbrack^{n+1}
+\tp
+\tag{373}
+\end{align}
+$$
+
+Writing out the formulas gives
+
+$$
+\begin{align}
+u^{n+1} &= u^{n} + \Delta t v^{n+\half},
+\tag{374}\\ 
+v^{n+\frac{3}{2}} &= v^{n+\half} -\Delta t \omega^2u^{n+1}
+\tag{375}
+\tp
+\end{align}
+$$
+
+Of esthetic reasons one often writes these equations at the
+previous time level to replace the \( \frac{3}{2} \) by \( \half  \) in the
+left-most term in the last equation,
+
+$$
+\begin{align}
+u^{n} &= u^{n-1} + \Delta t v^{n-\half},
+\tag{376}\\ 
+v^{n+\half} &= v^{n-\half} -\Delta t \omega^2u^{n}
+\tag{377}
+\tp
+\end{align}
+$$
+
+Such a rewrite is only mathematical cosmetics. The important thing
+is that this centered scheme has exactly the same computational
+structure as the forward-backward scheme. We shall use the names
+<em>forward-backward Euler-Cromer</em> and <em>staggered Euler-Cromer</em>
+to distinguish the two schemes.
 
 <p>
-What is this type of difference called and how large is the error?</p>
-
-<p><div title="Right! "><b>Choice A:</b>
-This is a centered difference with error proportional to \( \Delta t^2 \).
-</div></p>
-
-<p><div title="Wrong! A forward difference makes use of the point itself, \( t_n \), and a point  forward  in time, \( t_{n+1} \). This is not the case here: we use points to the left and right, and the derivative is approximated in the center point. Also, a forward difference would not have an error \( \mathcal{O}(\Delta t^2) \)."><b>Choice B:</b>
-This is a forward difference with error proportional to \( \Delta t^2 \).
-</div></p>
-
-<p><div title="Wrong! It is centered, but the error is only \( \mathcal{O}(\Delta t^2) \)."><b>Choice C:</b>
-This is a centered difference with error proportional to \( \Delta t^4 \).
-</div></p>
-
-<p><div title="Wrong! Since we use the points \( t_{n+1} \) and \( t_n \) when constructing the difference at \( t_{n+1/2} \), the derivative is in the  center  of the two points, and the difference is therefore a  centered  difference. A backward difference, or Backward Euler difference, would use \( t_{n+1/2} \) in this case and some point \( t_{n-1/2} \)  backward  in time."><b>Choice D:</b>
-This is a Backward Euler finite difference with error proportional to \( \Delta t \).
-</div></p>
-<hr>
-<!-- end quiz -->
-
+We can eliminate the \( v \)
+values and get back the centered scheme based on the second-order
+differential equation, so all these three schemes are equivalent.
+However, they differ somewhat in the treatment of the initial
+conditions.
 
 <p>
-<!-- --- end exercise --- -->
+Suppose we have \( u(0)=I \) and \( u'(0)=v(0)=0 \) as mathematical
+initial conditions. This means \( u^0=I \) and
+
+$$ v(0)\approx \half(v^{-\half} + v^{\half}) = 0,
+\quad\Rightarrow\quad v^{-\half} =- v^\half\tp$$
+
+Using the discretized equation <a href="#mjx-eqn-377">(377)</a> for
+\( n=0 \) yields
+
+$$ v^\half = v^{-\half} -\Delta t\omega^2 I,$$
+
+and eliminating \( v^{-\half} =- v^{\half} \)
+results in \( v^\half = -\half\Delta t\omega^2I \) and
+
+$$ u^1 = u^0 - \half\Delta t^2\omega^2 I,$$
+
+which is exactly the same equation for \( u^1 \) as we had in the
+centered scheme based on the second-order differential equation
+(and hence corresponds to a centered difference approximation of
+the initial condition for \( u'(0) \)).
+The conclusion is that a staggered mesh is fully equivalent with
+that scheme, while the forward-backward version gives a slight
+deviation in the computation of \( u^1 \).
 
 <p>
-<!-- --- begin exercise --- -->
+We can redo the derivation of the initial conditions when \( u'(0)=V \):
 
-<h2 id="decay:quiz:program">Exercise 48: What is the problem with this program?</h2>
+$$ v(0)\approx \half(v^{-\half} + v^{\half}) = V,
+\quad\Rightarrow\quad v^{-\half} = 2V - v^\half\tp$$
+
+Using this \( v^{-\half} \) in
+
+$$ v^\half = v^{-\half} -\Delta t\omega^2 I,$$
+
+then gives \( v^\half = V - \half\Delta t\omega^2 I \).
+The general initial conditions are therefore
+
+$$
+\begin{align}
+u^0 &= I,
+\tag{378}\\ 
+v^\half &= V - \half\Delta t\omega^2I
+\tag{379}\tp
+\end{align}
+$$
+
+<h2 id="___sec279">Implementation of the scheme on a staggered mesh </h2>
 
 <p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
+The algorithm goes like this:
+
+<ol>
+<li> Set the initial values <a href="#mjx-eqn-378">(378)</a> and
+   <a href="#mjx-eqn-379">(379)</a>.</li>
+<li> For \( n=1,2,\ldots \):</li>
+
+<ol>
+  <li> Compute \( u^{n} \) from <a href="#mjx-eqn-376">(376)</a>.</li>
+  <li> Compute \( v^{n+\half} \) from <a href="#mjx-eqn-377">(377)</a>.</li>
+</ol>
+
+</ol>
+
+<h3 id="___sec280">Implementation with integer indices </h3>
+
 <p>
-<b>Question:</b> We want to solve
-
-$$ u ' = -au, \quad u(0)=1, $$
-
-by a Forward Euler scheme,
-
-$$ u^{n+1} = u^n - a\Delta t\, u^n,$$
-
-and the following program
+Translating the schemes <a href="#mjx-eqn-376">(376)</a>
+and <a href="#mjx-eqn-377">(377)</a> to computer code
+faces the problem of how to store and access \( v^{n+\half} \),
+since arrays only allow integer indices with base 0.
+We must then introduce a convention: \( v^{1+\half} \) is stored
+in <code>v[n]</code> while \( v^{1-\half} \) is stored in <code>v[n-1]</code>.
+We can then write the algorithm in Python as
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>from numpy import *
-u = zeros(10)
-u[0] = 1
-dt = 0.1
-for i in range(10):
-    u[i+1] = u[i] - dt*a*u[n]
+<pre><code>def solver(I, w, dt, T):
+    dt = float(dt)
+    Nt = int(round(T/dt))
+    u = zeros(Nt+1)
+    v = zeros(Nt+1)
+    t = linspace(0, Nt*dt, Nt+1)  # mesh for u
+    t_v = t + dt/2                # mesh for v
+
+    u[0] = I
+    v[0] = 0 - 0.5*dt*w**2*u[0]
+    for n in range(1, Nt+1):
+        u[n] = u[n-1] + dt*v[n-1]
+        v[n] = v[n-1] - dt*w**2*u[n]
+    return u, t, v, t_v
 </code></pre>
 <!-- end verbatim block -->
-What is the major problem with this program?</p>
+Note that the return \( u \) and \( v \) together with the mesh points such
+that the complete mesh function for \( u \) is described by <code>u</code> and <code>t</code>,
+while <code>v</code> and <code>t_v</code> represents the mesh function for \( v \).
 
-<p><div title="Wrong! True, these are recommended rules, but it is not a problem to do the &quot;star import&quot;: it is legal and convenient."><b>Choice A:</b>
-<code>from numpy import *</code> is not recommended; one should import explicitly the functions needed or do <code>import numpy as np</code>.
-</div></p>
-
-<p><div title="Right! True,  a  is not defined. This is the only reason why one cannot execute the program."><b>Choice B:</b>
-The program aborts with a <code>NameError</code>.
-</div></p>
-
-<p><div title="Wrong! That is definitely a good idea, but it is not a major problem for computing the solution of the differential equation."><b>Choice C:</b>
-The program is &quot;flat&quot;. It should be wrapped in a function <code>solver(U0, dt, N, a)</code>.
-</div></p>
-
-<p><div title="Wrong! Actually, this can be true. Since  a  is not defined, it may happen that  dt=0.1  is a too long time step for the stability restrictions of the Forward Euler method for this differential equation. We need \( \Delta t\leq 1/a \). However, the answer is wrong in the sense that this  potential  instability is not the major problem with the program - it is a bigger problem that  a  is not defined."><b>Choice D:</b>
-The scheme is unstable!
-</div></p>
-<hr>
-<!-- end quiz -->
-
+<h3 id="___sec281">Implementation with half-integer indices </h3>
 
 <p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:stability">Exercise 49: Is the solution correct?</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> You have solved \( u'=-au \) by the Crank-Nicolson scheme and tested
-your program thoroughly. Suddenly you run the program with \( I=1 \), \( a=10 \), \( T=1 \), and \( \Delta t=0.225 \). You get somewhat unexpected results:
-
-<p>
-<center><p><img src="fig-quiz/CN_osc.png" align="bottom" width=500></p></center>
-
-<p>
-The results are unexpected because we know the exact solution should be
-monotone and decreasing, while this numerical solution also shows an
-increasing stage. What is the problem?</p>
-
-<p><div title="Wrong! No, this computation is in fact correct - numerically."><b>Choice A:</b>
-The program is not tested well enough - yet another bug is there.
-</div></p>
-
-<p><div title="Wrong! The analytical solution \( u(t)=Ie^{-at} \) covers all possible cases."><b>Choice B:</b>
-The numerical solution method is more general than the analytical one,
-and this is an example where the solution can increase, but the analytical
-solution technique is not capable of dealing with this situation.
-</div></p>
-
-<p><div title="Right! True. One needs \( \Delta t \leq 2/a = 0.2 \) in this case to avoid oscillations."><b>Choice C:</b>
-The time step is too large and cause an instability in the form of non-physical oscillations.
-</div></p>
-
-<p><div title="Wrong! 1: The first part is true if unconditionally stable means that the solution is bounded and decays with time, but one may also argue that oscillations, which are non-physical, are a kind of instability, and these occur if \( \Delta t >2/a \). 2: Round-off errors are  very  small in this problem, compared to the discretization errors, and cannot cause an oscillating solution."><b>Choice D:</b>
-The Crank-Nicolson scheme is unconditionally stable and can be used with all time-step sizes, but the problem here is that round-off errors due to a &quot;too large&quot; \( a \) (10, not around 1) accumulate to the effect seen in the plot.
-</div></p>
-<hr>
-<!-- end quiz -->
-
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:testfunc">Exercise 50: Is this a proper test function?</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> Suppose we have some function <code>compute</code> that we want to test. We construct
-a unit test and implement an associated test function (according to the
-rules for test functions in the nose or pytest test frameworks):
+Some prefer to see a closer relationship between the code and
+the mathematics for the quantities with half-integer indices.
+For example, we would like to replace the updating equation for
+<code>v[n]</code> by
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>def test_compute(n):
-    expected = (n**2)/4.5 - 1
-    computed = compute(n)
-    assert expected != computed
+<pre><code>v[n+half] = v[n-half] - dt*w**2*u[n]
+</code></pre>
+<!-- end verbatim block -->
+This is easy to do if we could be sure that <code>n+half</code> means <code>n</code> and
+<code>n-half</code> means <code>n-1</code>. A possible solution is to define <code>half</code> as a
+special object such that an integer plus <code>half</code> results in the integer,
+while an integer minus <code>half</code> equals the integer minus 1.
+A simple Python class may realize the <code>half</code> object:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>class HalfInt:
+    def __radd__(self, other):
+        return other
+
+    def __rsub__(self, other):
+        return other - 1
+
+half = HalfInt()
+</code></pre>
+<!-- end verbatim block -->
+The <code>__radd__</code> function is invoked for all expressions <code>n+half</code>
+("right add" with <code>self</code> as <code>half</code> and <code>other</code> as <code>n</code>). Similarly,
+the <code>__rsub__</code> function is invoked for <code>n-half</code> and results in <code>n-1</code>.
+
+<p>
+Using the <code>half</code> object, we can implement the algorithms in an even
+more readable way:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def solver(I, w, dt, T):
+    &quot;&quot;&quot;
+    Solve u'=v, v' = - w**2*u for t in (0,T], u(0)=I and v(0)=0,
+    by a central finite difference method with time step dt.
+    &quot;&quot;&quot;
+    dt = float(dt)
+    Nt = int(round(T/dt))
+    u = zeros(Nt+1)
+    v = zeros(Nt+1)
+    t = linspace(0, Nt*dt, Nt+1)  # mesh for u
+    t_v = t + dt/2                # mesh for v
+
+    u[0] = I
+    v[0+half] = 0 - 0.5*dt*w**2*u[0]
+    for n in range(1, Nt+1):
+        print n, n+half, n-half
+        u[n] = u[n-1] + dt*v[n-half]
+        v[n+half] = v[n-half] - dt*w**2*u[n]
+    return u, t, v, t_v
+
+def test_staggered():
+    I = 1.2; w = 2.0; T = 5; dt = 2/w
+    u, t, v, t_v = solver(I, w, dt, T)
+    from vib_undamped import solver as solver2
+    u2, t2 = solver2(I, w, dt, T)
+    error = abs(u - u2).max()
+    tol = 1E-14
+    assert error &lt; tol
+
+if __name__ == '__main__':
+    test_staggered()
 </code></pre>
 <!-- end verbatim block -->
 
 <p>
-The question is if this test function can be used as is or if improvements
-must be implemented.</p>
+Verification of this code is easy as we can just compare the computed
+<code>u</code> with the <code>u</code> produced by the <code>solver</code> function in
+<code>vib_undamped.py</code> (which solves \( u''+\omega^2u=0 \) directly).  The
+values should coincide to machine precision since the two numerical
+methods are mathematically equivalent.  We refer to the file
+<a href="http://tinyurl.com/nm5587k/vib/vib_undamped_staggered.py" target="_self"><tt>vib_undamped_staggered.py</tt></a>
+for the details of a nose test that checks this property.
 
-<p><div title="Wrong! It is true that an &quot;almost equal&quot; type of assert function is appropriate, but there is nothing in the rules that requires use of special assert functions. The requirement is that an  AssertionError  is raised if the test fails. That is done by a plain  assert  as used here."><b>Choice A:</b>
-One should use special assert functions from <code>nose.tools</code>, here the choice is <code>nose.tools.assert_almost_equal</code>.
-</div></p>
-
-<p><div title="Wrong! This depends on what is inside  compute . If it has several branches depending on the value of  n , one must test for a visit to each branch, which requires multiple  n  values, but if it is a formula (the test might indicate so), one value can be sufficient."><b>Choice B:</b>
-One cannot test <code>compute(n)</code> for only one <code>n</code> value. Many are required for good evidence that the function works.
-</div></p>
-
-<p><div title="Right! The formula for  expected  indicates that this is a real number that is subject to potential round-off errors, so one should use a tolerance:  abs(expected - computed) &lt; 1E-14 . Also, test functions should never take arguments."><b>Choice C:</b>
-The test function does not test <code>expected != computed</code> with a tolerance
-and the <code>n</code> parameter cannot be an argument.
-</div></p>
-
-<p><div title="Wrong! This is always a good idea, but not a requirement."><b>Choice D:</b>
-The <code>assert</code> statement also needs a message explaining what is wrong when the test fails.
-</div></p>
-<hr>
-<!-- end quiz -->
-
+<h2 id="vib:ode2:staggered">A staggered Euler-Cromer scheme for a generalized model</h2>
 
 <p>
-<!-- --- end exercise --- -->
+The more general model for vibration problems,
+
+$$
+\begin{equation}
+mu'' + f(u') + s(u) = F(t),\quad u(0)=I,\ u'(0)=V,\ t\in (0,T],
+\tag{380}
+\end{equation}
+$$
+
+can be rewritten as a first-order ODE system
+
+$$
+\begin{align}
+u' &= v,
+\tag{381} \\ 
+v' &= m^{-1}\left(F(t) - f(v) - s(u)\right)\tp
+\tag{382}
+\end{align}
+$$
+
+It is natural to introduce a staggered mesh (see the section <a href="#vib:model2x2:staggered">The Euler-Cromer scheme on a staggered mesh</a>) and seek \( u \) at mesh points \( t_n \) (the numerical value is
+denoted by \( u^n \)) and \( v \) between mesh points at \( t_{n+1/2} \) (the numerical
+value is denoted by \( v^{n+\half} \)).
+A centered difference approximation to <a href="#mjx-eqn-381">(381)</a>-<a href="#mjx-eqn-382">(382)</a> can then be written in operator notation as
+
+$$
+\begin{align}
+\lbrack D_t u &= v\rbrack^{n-\half},
+\tag{383} \\ 
+\lbrack D_tv &= m^{-1}\left(F(t) - f(v) - s(u)\right)\rbrack^n\tp
+\tag{384}
+\end{align}
+$$
+
+Written out,
+
+$$
+\begin{align}
+\frac{u^n - u^{n-1}}{\Delta t} &= v^{n-\half},
+\tag{385} \\ 
+\frac{v^{n+\half} - v^{n-\half}}{\Delta t}
+&= m^{-1}\left(F^n - f(v^n) - s(u^n)\right)\tp
+\tag{386}
+\end{align}
+$$
+
+With linear damping, \( f(v)=bv \), we can use an arithmetic mean
+for \( f(v^n) \): \( f(v^n)\approx = \half(f(v^{n-\half}) +
+f(v^{n+\half})) \). The system
+<a href="#mjx-eqn-385">(385)</a>-<a href="#mjx-eqn-386">(386)</a>
+can then be solved with respect to the unknowns \( u^n \) and \( v^{n+\half} \):
+
+$$
+\begin{align}
+u^n & = u^{n-1} + {\Delta t}v^{n-\half},
+\tag{387} \\ 
+v^{n+\half} &= \left(1 + \frac{b}{2m}\Delta t\right)^{-1}\left(
+v^{n-\half} + {\Delta t}
+m^{-1}\left(F^n - {\half}f(v^{n-\half}) - s(u^n)\right)\right)\tp
+\tag{388}
+\end{align}
+$$
 
 <p>
-<!-- --- begin exercise --- -->
+In case of quadratic damping, \( f(v)=b|v|v \), we can use a geometric mean:
+\( f(v^n)\approx b|v^{n-\half}|v^{n+\half} \). Inserting this approximation
+in <a href="#mjx-eqn-385">(385)</a>-<a href="#mjx-eqn-386">(386)</a> and
+solving for the unknowns \( u^n \) and \( v^{n+\half} \) results in
 
-<h2 id="decay:quiz:arrayarithm">Exercise 51: Rewrite an expression with array arithmetics</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> A mesh function is initialized with the code segment
-
-<p>
-<!-- begin verbatim block  pypro-->
-<pre><code>from math import exp
-N_t = 100
-T = 3.0
-dt = T/N_t
-t = []
-u = []
-for i in range(len(t)):
-    t.append(i*dt)
-    u.append(1 - exp(-t[-1]))
-</code></pre>
-<!-- end verbatim block -->
-Rewrite this code such that there is no loop and <code>u</code> is computed by
-array arithmetics.</p>
-
-<p><div title="Wrong! The  exp  function is imported from  math  (since  from math import exp  reimports the  exp  name that was imported by  from numpy import * ) and cannot be used with array argument  t ."><b>Choice A:</b>
-<!-- begin verbatim block  pypro-->
-<pre><code>from numpy import *
-from math import exp
-N_t = 100
-t = np.linspace(0, 3, N_t+1)
-u = 1 - exp(-t)
-</code></pre>
-<!-- end verbatim block -->
-</div></p>
-
-<p><div title="Right! "><b>Choice B:</b>
-<!-- begin verbatim block  pypro-->
-<pre><code>import numpy as np
-N_t = 100
-t = np.linspace(0, 3, N_t+1)
-u = 1 - np.exp(-t)
-</code></pre>
-<!-- end verbatim block -->
-</div></p>
-
-<p><div title="Wrong! The computation of  u  applies array arithmetics, but the list comprehension for  t  involves a standard (slow) Python loop."><b>Choice C:</b>
-<!-- begin verbatim block  pypro-->
-<pre><code>N_t = 100
-dt = 3.0/N_t
-t = [i*dt for i in range(N_t+1)]
-from numpy import exp
-u = 1 - exp(-t)
-</code></pre>
-<!-- end verbatim block -->
-</div></p>
-
-<p><div title="Wrong! There are no functions  numpy.mesh  and  numpy.func ."><b>Choice D:</b>
-<!-- begin verbatim block  pypro-->
-<pre><code>import numpy
-t = numpy.mesh([0, 3], 100)
-u = numpy.func(numpy.exp, t)
-</code></pre>
-<!-- end verbatim block -->
-</div></p>
-<hr>
-<!-- end quiz -->
-
+$$
+\begin{align}
+u^n & = u^{n-1} + {\Delta t}v^{n-\half},
+\tag{389} \\ 
+v^{n+\half} &= (1 + \frac{b}{m}|v^{n-\half}|\Delta t)^{-1}\left(
+v^{n-\half} + {\Delta t}
+m^{-1}\left(F^n - s(u^n)\right)\right)\tp
+\tag{390}
+\end{align}
+$$
 
 <p>
-<!-- --- end exercise --- -->
+The initial conditions are derived at the end of
+the section <a href="#vib:model2x2:staggered">The Euler-Cromer scheme on a staggered mesh</a>:
 
-<p>
-<!-- --- begin exercise --- -->
+$$
+\begin{align}
+u^0 &= I,
+\tag{391}\\ 
+v^\half &= V - \half\Delta t\omega^2I
+\tag{392}\tp
+\end{align}
+$$
 
-<h2 id="decay:quiz:trunc">Exercise 52: What is the truncation error?</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> What is the truncation error?</p>
-
-<p><div title="Wrong! This is the global error."><b>Choice A:</b>
-The difference between the exact solution and the numerical solution
-at a mesh point.
-</div></p>
-
-<p><div title="Wrong! This is the amplification factor error or the local error."><b>Choice B:</b>
-The error in the factor that takes <code>u[i]</code> to <code>u[i+1]</code>.
-</div></p>
-
-<p><div title="Wrong! Nobody applies this error measure."><b>Choice C:</b>
-The difference between the exact solution and the numerical
-solution truncated to one decimal.
-</div></p>
-
-<p><div title="Right! "><b>Choice D:</b>
-The error in the scheme when the exact solution is inserted in the
-scheme's difference equation.
-</div></p>
-<hr>
-<!-- end quiz -->
-
-
-<p>
-<!-- --- end exercise --- -->
+<h1 id="___sec283">Exercises </h1>
 
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:quiz:prog:m">Exercise 53: Recognize a programming language</h2>
+<h2 id="vib:exer:quad:damping:fwbw">Exercise 57: Use the forward-backward scheme with quadratic damping</h2>
 
 <p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> What kind of programming language is this?
+We consider the generalized model with quadratic damping, expressed
+as a system of two first-order equations as in the section <a href="#vib:ode2:staggered">A staggered Euler-Cromer scheme for a generalized model</a>:
+
+$$
+\begin{align*}
+u^{\prime} &= v,\\ 
+v' &= \frac{1}{m}\left( F(t) - \beta |v|v - s(u)\right)\tp
+\end{align*}
+$$
+
+However, contrary to what is done in the section <a href="#vib:ode2:staggered">A staggered Euler-Cromer scheme for a generalized model</a>,
+we want to apply the idea of a forward-backward discretization:
+\( u \) is marched forward by a one-sided Forward Euler scheme applied
+to the first equation, and
+thereafter \( v \) can marched forward by a Backward Euler scheme in the
+second
+equation, see in the section <a href="._decay-book-solarized003.html#vib:model2x2:EulerCromer">The Euler-Cromer method</a>.
+Express the idea in operator notation and write out the
+scheme. Unfortunately, the backward difference for the \( v \) equation
+creates a nonlinearity \( |v^{n+1}|v^{n} \).  To linearize this
+nonlinearity, use the known value \( v^n \) inside the absolute value
+factor, i.e., \( |v^{n+1}|v^{n}\approx |v^n|v^{n+1} \).  Show that the
+resulting scheme is equivalent to the one in the section <a href="#vib:ode2:staggered">A staggered Euler-Cromer scheme for a generalized model</a> for some time level \( n\geq 1 \).
 
 <p>
-<!-- begin verbatim block  mcod-->
-<pre><code>function integral = trapezoidal(f, a, b, n)
-    %% Integrate f from a to b with n intervals
-    h = (b-a)/n;
-    result = 0.5*f(a) + 0.5*f(b);
-    for i = 1:(n-1)
-        result = result + f(a + i*h);
-    end
-    integral = h*result;
-end
-</code></pre>
-<!-- end verbatim block --></p>
-
-<p><div title="Wrong! "><b>Choice A:</b>
-Python
-</div></p>
-
-<p><div title="Right! "><b>Choice B:</b>
-MATLAB or Octave
-</div></p>
-
-<p><div title="Wrong! "><b>Choice C:</b>
-Cython
-</div></p>
-
-<p><div title="Wrong! "><b>Choice D:</b>
-FORTRAN 77
-</div></p>
-<hr>
-<!-- end quiz -->
-
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:prog:py">Exercise 54: Recognize a programming language</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> What kind of programming language is this?
-
-<p>
-<!-- begin verbatim block  mcod-->
-<pre><code>def trapezoidal(f, a, b, n):
-    # Integrate f from a to b with n intervals
-    h = (b-a)/float(n)
-    result = 0.5*f(a) + 0.5*f(b)
-    for i in range(1, n):
-        result += f(a + i*h)
-    return h*result
-</code></pre>
-<!-- end verbatim block --></p>
-
-<p><div title="Right! "><b>Choice A:</b>
-Python
-</div></p>
-
-<p><div title="Wrong! "><b>Choice B:</b>
-MATLAB or Octave
-</div></p>
-
-<p><div title="Wrong! "><b>Choice C:</b>
-Cython
-</div></p>
-
-<p><div title="Wrong! "><b>Choice D:</b>
-FORTRAN 77
-</div></p>
-<hr>
-<!-- end quiz -->
-
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:prog:f77">Exercise 55: Recognize a programming language</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> What kind of programming language is this?
-
-<p>
-<!-- begin verbatim block  fcod-->
-<pre><code>      real*8 function trapezoidal(f, a, b, n)
-C     Integrate f from a to b with n intervals
-      real*8 h, result, f
-      external f
-      h = (b-a)/n
-      result = 0.5*f(a) + 0.5*f(b)
-      do i = 1, n-1
-        result = result + f(a + i*h)
-      end do
-      trapezoidal = h*result
-      return
-      end
-</code></pre>
-<!-- end verbatim block --></p>
-
-<p><div title="Wrong! "><b>Choice A:</b>
-Python
-</div></p>
-
-<p><div title="Wrong! "><b>Choice B:</b>
-MATLAB or Octave
-</div></p>
-
-<p><div title="Wrong! "><b>Choice C:</b>
-Cython
-</div></p>
-
-<p><div title="Right! "><b>Choice D:</b>
-FORTRAN 77
-</div></p>
-<hr>
-<!-- end quiz -->
-
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:prog:c">Exercise 56: Recognize a programming language</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> What kind of programming language is this?
-
-<p>
-<!-- begin verbatim block  mcod-->
-<pre><code>double trapezoidal(
-    double (*f)(double), double a, double b, int n)
-{
-    double h, result;
-    h = (b-a)/n;
-    result = 0.5*f(a) + 0.5*f(b);
-    for (i=1; i++; i &lt;= n-1) {
-        result += f(a + i*h);
-    }
-    return h*result;
-}
-</code></pre>
-<!-- end verbatim block --></p>
-
-<p><div title="Right! "><b>Choice A:</b>
-C
-</div></p>
-
-<p><div title="Wrong! "><b>Choice B:</b>
-C++
-</div></p>
-
-<p><div title="Wrong! "><b>Choice C:</b>
-Cython
-</div></p>
-
-<p><div title="Wrong! "><b>Choice D:</b>
-Octave dialect
-</div></p>
-<hr>
-<!-- end quiz -->
-
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:sympy1">Exercise 57: What is SymPy?</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> What is SymPy?</p>
-
-<p><div title="Wrong! SymPy can compute with symmetric matrices, so that is true, but it can do very much more."><b>Choice A:</b>
-A Python module for computing with symmetric matrices.
-</div></p>
-
-<p><div title="Right! "><b>Choice B:</b>
-A Python package for doing symbolic computations (exact/analytical differentiation, integration, equation solves, etc.).
-</div></p>
-
-<p><div title="Wrong! It's the opposite: analytical, not numerical."><b>Choice C:</b>
-A Python package for numerical approximations to differentiation, integration, equation solving, etc.
-</div></p>
-
-<p><div title="Wrong! Could be viewed as such, but Mathematica is a much more advanced tool for symbolic computing."><b>Choice D:</b>
-A free, open source version of Mathematica.
-</div></p>
-<hr>
-<!-- end quiz -->
-
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:testing1">Exercise 58: Testing of code</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> What is an appropriate test for computing the solution of some ODE?</p>
-
-<p><div title="Wrong! This comparison says nothing if the discrepancy is the unavoidable numerical error or if it also contains the effect of bugs in the program."><b>Choice A:</b>
-We compare the numerical solution with the analytical solution
-in a plot. The curves are quite close, showing that the computations
-are correct (here using 31 mesh points).
-
-<p>
-<center><p><img src="fig-quiz/comparison_num_vs_exact_quiz.png" align="bottom" width=500></p></center>
-</div></p>
-
-<p><div title="Wrong! Nobody knows if this is the numerical approximation error or if it also contains programming errors."><b>Choice B:</b>
-The maximum error between the numerical and exact solution at
-the mesh points is \( 1.886\cdot 10^{-5} \), which is small. Therefore, the
-program works.
-</div></p>
-
-<p><div title="Right! This test involves checking of the convergence rate, which is a good test. The only knowledge we have of the numerical error is its rate!"><b>Choice C:</b>
-The scheme is \( \Oof{\Delta t^2} \). With 31 points we get a maximum
-point-wise error of \( 1.243\cdot 10^{-4} \). With 61 points (halving \( \Delta t \))
-the corresponding error is \( 3.108\cdot 10^{-5} \). This is a reduction of
-approximately a factor 4, which is what we expect for such a scheme when
-halving \( \Delta t \).
-</div></p>
-
-<p><div title="Wrong! This test points to convergence of the method, but the error can still contain the effect of bugs. One needs to measure  how fast  the curves get closer and closer."><b>Choice D:</b>
-The numerical solution and the exact solutions get closer and closer
-in a plot as we reduce \( \Delta t \). Therefore, the program works.
-</div></p>
-<hr>
-<!-- end quiz -->
-
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:scheme:CN_error">Exercise 59: What kind of scheme is this?</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> Given \( u^{\prime}=-au + b \), where \( a \) and \( b \) are functions of time.
-Is the following scheme correct?
-
-$$ \frac{u^{n}-u^{n-1}}{\Delta t} = -a(t_n)\frac{1}{2}(u^n + u^{n-1})
-+ b(t_n)\tp$$</p>
-
-<p><div title="Wrong! No, then \( a \) and \( b \) should have been evaluated at \( t_{n-1/2} \)."><b>Choice A:</b>
-Yes, it is a Crank-Nicolson type of scheme.
-</div></p>
-
-<p><div title="Wrong! No, this will be wrong since the arithmetic mean on the right-hand side points sampling the ODE at \( t_{n-1/2} \). Then \( a \) and \( b \) must be evaluated at this point."><b>Choice B:</b>
-Yes, if \( a(t_n) \) and \( b(t_n) \) are evaluated at the previous time
-step, \( a(t_{n-1}) \) and \( a(t_{n-1}) \).
-</div></p>
-
-<p><div title="Right! That is right: they should be evaluated at \( t_{n-1/2} \)."><b>Choice C:</b>
-No, the coefficients \( a \) and \( b \) are not evaluated correctly.
-</div></p>
-
-<p><div title="Wrong! That is right if the scheme should be a Backward Euler scheme, but the arithmetic mean on the right-hand side points to a Crank-Nicolson scheme, though with wrong sampling of \( a \) and \( b \)."><b>Choice D:</b>
-No, the right-hand side should be \( a(t_n)u^n + b(t_n) \).
-</div></p>
-<hr>
-<!-- end quiz -->
-
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:scheme:BE">Exercise 60: What kind of scheme is this?</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> We want to solve \( y'=g(x, y) \) for \( y(x) \) and have the scheme
-
-$$ y^{i+1} = y^i + \Delta t\, g(x_{i+1}, y^{i+1})\tp$$
-
-<p>
-What is this scheme called?</p>
-
-<p><div title="Wrong! There is no midpoint \( i+1/2 \) involved here."><b>Choice A:</b>
-The implicit midpoint scheme.
-</div></p>
-
-<p><div title="Right! "><b>Choice B:</b>
-The Backward Euler scheme or just the backward scheme.
-</div></p>
-
-<p><div title="Wrong! This is true if we had \( g(x_i, y^{i}) \)."><b>Choice C:</b>
-The Forward Euler scheme, Euler's method, or just the forward scheme.
-</div></p>
-
-<p><div title="Wrong! "><b>Choice D:</b>
-The implicit Adams scheme of order one.
-</div></p>
-<hr>
-<!-- end quiz -->
-
-
-<p>
-<!-- --- end exercise --- -->
-
-<p>
-<!-- --- begin exercise --- -->
-
-<h2 id="decay:quiz:scheme:leapfrog">Exercise 61: What kind of scheme is this?</h2>
-
-<p>
-<!-- --- previous heading type: exercise -->
-<!-- begin quiz -->
-<hr>
-<p>
-<b>Question:</b> We want to solve \( y'=g(x, y) \) for \( y(x) \) and have the scheme
-
-$$ y^{i+1} = y^{i-1} + 2\Delta t\, g(x_{i}, y^{i})\tp$$
-
-<p>
-What is this scheme called?</p>
-
-<p><div title="Wrong! It is a midpoint scheme, but it is explicit rather than implicit."><b>Choice A:</b>
-The implicit midpoint scheme.
-</div></p>
-
-<p><div title="Wrong! "><b>Choice B:</b>
-The two-step backward scheme.
-</div></p>
-
-<p><div title="Wrong! No, that looks quite different and is based on a centered difference over \( [x_i,x_{i+1}] \), not \( [x_{i-1},x_{i+1}] \)."><b>Choice C:</b>
-The Crank-Nicolson scheme.
-</div></p>
-
-<p><div title="Right! "><b>Choice D:</b>
-The leapfrog scheme.
-</div></p>
-<hr>
-<!-- end quiz -->
-
+What we learn from this exercise is that the first-order differences
+and the linearization trick play together in "the right way" such that
+the scheme is as good as when we (in the section <a href="#vib:ode2:staggered">A staggered Euler-Cromer scheme for a generalized model</a>)
+carefully apply centered differences and a geometric mean on a
+staggered mesh to achieve second-order accuracy.
+There is a
+difference in the handling of the initial conditions, though, as
+explained at the end of the section <a href="._decay-book-solarized003.html#vib:model2x2:EulerCromer">The Euler-Cromer method</a>.
+Filename: <code>vib_gen_bwdamping</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1567,3 +1704,4 @@ The leapfrog scheme.
 </body>
 </html>
     
+
