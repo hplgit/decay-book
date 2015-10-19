@@ -1,8 +1,8 @@
 
 .. Master file automatically created by doconce sphinx_dir
 
-Finite Difference Computing with Exponential Decay Models
-=========================================================
+Finite Difference Computing with Partial Differential Equations
+===============================================================
 
 Contents:
 
@@ -19,6 +19,14 @@ Contents:
    ._book007
    ._book008
    ._book009
+   ._book010
+   ._book011
+   ._book012
+   ._book013
+   ._book014
+   ._book015
+   ._book016
+   ._book017
 
 
 Index
