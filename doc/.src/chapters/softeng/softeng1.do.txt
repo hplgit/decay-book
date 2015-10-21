@@ -590,10 +590,12 @@ module:
 
 !bc pypro
 import logging
+# Configure logger
 logging.basicConfig(
     filename='myprog.log', filemode='w', level=logging.WARNING,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%m/%d/%Y %I:%M:%S %p')
+# Perform logging
 logging.info('Here is some general info.')
 logging.warning('Here is a warning.')
 logging.debug('Here is some debugging info.')
@@ -639,11 +641,33 @@ Let us let a logger write out intermediate results and some debugging
 results in the `solver` function. Such messages are useful for
 monitoring the simulation and for debugging it, respectively.
 
-@@@CODE src-softeng/decay.py fromto: import logging@import sys
-We can run this new solver function in a shell:
+@@@CODE src-softeng/decay.py fromto: def solver_with_logging@def configure_logger
+The application code that calls `solver_with_logging` needs to configure
+the logger. The `decay` module offers a default configure function:
+
+!bc pycod
+import logging
+
+def configure_basic_logger():
+    logging.basicConfig(
+        filename='decay.log', filemode='w', level=logging.DEBUG,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y.%m.%d %I:%M:%S %p')
+!ec
+If the user of a library does not configure a logger or call this
+configure function, the library should prevent error messages by
+declaring a default logger that does nothing:
+
+!bc pycod
+import logging
+logging.getLogger('decay').addHandler(logging.NullHandler())
+!ec
+
+We can run the new solver function with logging in a shell:
 
 !bc pyshell
 >>> import decay
+>>> decay.configure_basic_logger()
 >>> u, t = decay.solver_with_logging(I=1, a=0.5, T=10, \
            dt=0.5, theta=0.5)
 !ec
@@ -689,7 +713,10 @@ the formula for $u^{n+1}$, we can change the logging level to
 2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
 !ec
 
-
+Logging can be much more sophisticated than shown above. One can, e.g.,
+output critical messages to the screen and all messages to a file.
+This requires more code as demonstrated in the "Logging Cookbook":
+"https://docs.python.org/2/howto/logging-cookbook.html".
 
 ======= User interfaces =======
 label{softeng1:basic:UI}
