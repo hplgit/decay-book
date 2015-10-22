@@ -1,3 +1,4 @@
+
 ======= Exercises =======
 
 ===== Problem: Visualize the accuracy of finite differences =====
