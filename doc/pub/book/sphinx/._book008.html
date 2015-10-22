@@ -712,10 +712,12 @@ to a log file. The messages are classified as debug, info, and warning.</p>
 <p>Here is a simple example using defining a logger, using Python&#8217;s <code class="docutils literal"><span class="pre">logging</span></code>
 module:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
+<span class="c"># Configure logger</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
     <span class="n">filename</span><span class="o">=</span><span class="s">&#39;myprog.log&#39;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
     <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span>
     <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;%m/</span><span class="si">%d</span><span class="s">/%Y %I:%M:%S %p&#39;</span><span class="p">)</span>
+<span class="c"># Perform logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Here is some general info.&#39;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;Here is a warning.&#39;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Here is some debugging info.&#39;</span><span class="p">)</span>
@@ -758,13 +760,7 @@ rules of the <a class="reference external" href="https://docs.python.org/2/libra
 <p>Let us let a logger write out intermediate results and some debugging
 results in the <code class="docutils literal"><span class="pre">solver</span></code> function. Such messages are useful for
 monitoring the simulation and for debugging it, respectively.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
-    <span class="n">filename</span><span class="o">=</span><span class="s">&#39;decay.log&#39;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
-    <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span>
-    <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;%Y.%m.</span><span class="si">%d</span><span class="s"> %I:%M:%S %p&#39;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">solver_with_logging</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">solver_with_logging</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
     <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>               <span class="c"># avoid integer division</span>
     <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>        <span class="c"># no of time intervals</span>
@@ -785,10 +781,349 @@ monitoring the simulation and for debugging it, respectively.</p>
                       <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">,</span>
                        <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">))[</span><span class="mi">7</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
     <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span>
+
+<span class="k">def</span> <span class="nf">configure_basic_logger</span><span class="p">():</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="s">&#39;decay.log&#39;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+        <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span>
+        <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;%Y.%m.</span><span class="si">%d</span><span class="s"> %I:%M:%S %p&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">def</span> <span class="nf">read_command_line_positional</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&#39;Usage: </span><span class="si">%s</span><span class="s"> I a T on/off BE/FE/CN dt1 dt2 dt3 ...&#39;</span> <span class="o">%</span> \
+              <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c"># abort</span>
+
+    <span class="n">I</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+    <span class="c"># Name of schemes: BE (Backward Euler), FE (Forward Euler),</span>
+    <span class="c"># CN (Crank-Nicolson)</span>
+    <span class="n">scheme</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">scheme2theta</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;BE&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;CN&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s">&#39;FE&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">scheme</span> <span class="ow">in</span> <span class="n">scheme2theta</span><span class="p">:</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">scheme2theta</span><span class="p">[</span><span class="n">scheme</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&#39;Invalid scheme name:&#39;</span><span class="p">,</span> <span class="n">scheme</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">dt_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">:]]</span>
+
+    <span class="k">return</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt_values</span>
+
+<span class="k">def</span> <span class="nf">define_command_line_options</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">argparse</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s">&#39;--I&#39;</span><span class="p">,</span> <span class="s">&#39;--initial_condition&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;initial condition, u(0)&#39;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;I&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s">&#39;--a&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s">&#39;coefficient in ODE&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s">&#39;--T&#39;</span><span class="p">,</span> <span class="s">&#39;--stop_time&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;end time of simulation&#39;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;T&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s">&#39;--scheme&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;CN&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s">&#39;FE, BE, or CN&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s">&#39;--dt&#39;</span><span class="p">,</span> <span class="s">&#39;--time_step_values&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;time step values&#39;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;dt&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;dt_values&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span>
+
+<span class="k">def</span> <span class="nf">read_command_line_argparse</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">define_command_line_options</span><span class="p">()</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">scheme2theta</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;BE&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;CN&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s">&#39;FE&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">scheme2theta</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">scheme</span><span class="p">],</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">dt_values</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">def</span> <span class="nf">experiment_compare_dt</span><span class="p">(</span><span class="n">option_value_pairs</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt_values</span> <span class="o">=</span> \
+       <span class="n">read_command_line_argparse</span><span class="p">()</span> <span class="k">if</span> <span class="n">option_value_pairs</span> <span class="k">else</span> \
+       <span class="n">read_command_line_positional</span><span class="p">()</span>
+
+    <span class="n">legends</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">:</span>
+        <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+        <span class="n">legends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;dt=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="n">t_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>       <span class="c"># very fine mesh for u_e</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">legends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;exact&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legends</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">&#39;upper right&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;theta=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">theta</span><span class="p">)</span>
+    <span class="n">plotfile</span> <span class="o">=</span> <span class="s">&#39;tmp&#39;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plotfile</span> <span class="o">+</span> <span class="s">&#39;.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plotfile</span> <span class="o">+</span> <span class="s">&#39;.pdf&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">compute4web</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a case with the solver, compute error measure,</span>
+<span class="sd">    and plot the numerical and exact solutions in a PNG</span>
+<span class="sd">    plot whose data are embedded in an HTML image tag.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">t_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>    <span class="c"># fine mesh for u_e</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">&#39;numerical&#39;</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;u&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;theta=</span><span class="si">%g</span><span class="s">, dt=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">))</span>
+    <span class="c"># Save plot to HTML img tag with PNG code as embedded data</span>
+    <span class="kn">from</span> <span class="nn">parampool.utils</span> <span class="kn">import</span> <span class="n">save_png_to_str</span>
+    <span class="n">html_text</span> <span class="o">=</span> <span class="n">save_png_to_str</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">plotwidth</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">E</span><span class="p">,</span> <span class="n">html_text</span>
+
+<span class="k">def</span> <span class="nf">main_GUI</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">a</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span>
+             <span class="n">dt_values</span><span class="o">=</span><span class="p">[</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+             <span class="n">theta_values</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
+    <span class="c"># Build HTML code for web page. Arrange plots in columns</span>
+    <span class="c"># corresponding to the theta values, with dt down the rows</span>
+    <span class="n">theta2name</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;FE&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;BE&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">:</span> <span class="s">&#39;CN&#39;</span><span class="p">}</span>
+    <span class="n">html_text</span> <span class="o">=</span> <span class="s">&#39;&lt;table&gt;</span><span class="se">\n</span><span class="s">&#39;</span>
+    <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">:</span>
+        <span class="n">html_text</span> <span class="o">+=</span> <span class="s">&#39;&lt;tr&gt;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">theta_values</span><span class="p">:</span>
+            <span class="n">E</span><span class="p">,</span> <span class="n">html</span> <span class="o">=</span> <span class="n">compute4web</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+            <span class="n">html_text</span> <span class="o">+=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;td&gt;</span>
+<span class="s">&lt;center&gt;&lt;b&gt;</span><span class="si">%s</span><span class="s">, dt=</span><span class="si">%g</span><span class="s">, error: </span><span class="si">%.3E</span><span class="s">&lt;/b&gt;&lt;/center&gt;&lt;br&gt;</span>
+<span class="si">%s</span><span class="s"></span>
+<span class="s">&lt;/td&gt;</span>
+<span class="s">&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta2name</span><span class="p">[</span><span class="n">theta</span><span class="p">],</span> <span class="n">dt</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+        <span class="n">html_text</span> <span class="o">+=</span> <span class="s">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s">&#39;</span>
+    <span class="n">html_text</span> <span class="o">+=</span> <span class="s">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s">&#39;</span>
+    <span class="k">return</span> <span class="n">html_text</span>
+
+<span class="k">def</span> <span class="nf">solver_with_doctest</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.</span>
+
+
+<span class="sd">    &gt;&gt;&gt; u, t = solver(I=0.8, a=1.2, T=1.5, dt=0.5, theta=0.5)</span>
+<span class="sd">    &gt;&gt;&gt; for n in range(len(t)):</span>
+<span class="sd">    ...     print &#39;t=%.1f, u=%.14f&#39; % (t[n], u[n])</span>
+<span class="sd">    t=0.0, u=0.80000000000000</span>
+<span class="sd">    t=0.5, u=0.43076923076923</span>
+<span class="sd">    t=1.0, u=0.23195266272189</span>
+<span class="sd">    t=1.5, u=0.12489758761948</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>               <span class="c"># avoid integer division</span>
+    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>        <span class="c"># no of time intervals</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">Nt</span><span class="o">*</span><span class="n">dt</span>                    <span class="c"># adjust T to fit time step dt</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>           <span class="c"># array of u[n] values</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c"># time mesh</span>
+
+    <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">I</span>                  <span class="c"># assign initial condition</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="p">):</span>    <span class="c"># n=0,1,...,Nt-1</span>
+        <span class="n">u</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span>
+
+<span class="k">def</span> <span class="nf">third</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">/</span><span class="mf">3.</span>
+
+<span class="k">def</span> <span class="nf">test_third</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="n">third</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-15</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expected</span> <span class="o">-</span> <span class="n">computed</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span>
+    <span class="k">assert</span> <span class="n">success</span>
+
+<span class="k">def</span> <span class="nf">u_discrete_exact</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return exact discrete solution of the numerical schemes.&quot;&quot;&quot;</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>  <span class="c"># avoid integer division</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">I</span><span class="o">*</span><span class="n">A</span><span class="o">**</span><span class="n">n</span>
+
+<span class="k">def</span> <span class="nf">test_u_discrete_exact</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Check that solver reproduces the exact discr. sol.&quot;&quot;&quot;</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">I</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span> <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.8</span>
+    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>  <span class="c"># no of steps</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">Nt</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
+
+    <span class="c"># Evaluate exact discrete solution on the mesh</span>
+    <span class="n">u_de</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">u_discrete_exact</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+
+    <span class="c"># Find largest deviation</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">u_de</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="n">tol</span>
+    <span class="k">assert</span> <span class="n">success</span>
+
+<span class="k">def</span> <span class="nf">test_potential_integer_division</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Choose variables that can trigger integer division.&quot;&quot;&quot;</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">I</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">Nt</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">Nt</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">u_de</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">u_discrete_exact</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">u_de</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="mf">1E-14</span>
+
+<span class="k">def</span> <span class="nf">test_read_command_line_positional</span><span class="p">():</span>
+    <span class="c"># Decide on a data set of input parameters</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="mf">1.6</span><span class="p">;</span>  <span class="n">a</span> <span class="o">=</span> <span class="mf">1.8</span><span class="p">;</span>  <span class="n">T</span> <span class="o">=</span> <span class="mf">2.2</span><span class="p">;</span>  <span class="n">theta</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">dt_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>
+    <span class="c"># Expected return from read_command_line_positional</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt_values</span><span class="p">]</span>
+    <span class="c"># Construct corresponding sys.argv array</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">I</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="s">&#39;CN&#39;</span><span class="p">]</span> <span class="o">+</span> \
+               <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">]</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="n">read_command_line_positional</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">expected_arg</span><span class="p">,</span> <span class="n">computed_arg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">computed</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">expected_arg</span> <span class="o">==</span> <span class="n">computed_arg</span>
+
+<span class="k">def</span> <span class="nf">test_read_command_line_argparse</span><span class="p">():</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="mf">1.6</span><span class="p">;</span>  <span class="n">a</span> <span class="o">=</span> <span class="mf">1.8</span><span class="p">;</span>  <span class="n">T</span> <span class="o">=</span> <span class="mf">2.2</span><span class="p">;</span>  <span class="n">theta</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">dt_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>
+    <span class="c"># Expected return from read_command_line_argparse</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt_values</span><span class="p">]</span>
+    <span class="c"># Construct corresponding sys.argv array</span>
+    <span class="n">command_line</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> --a </span><span class="si">%s</span><span class="s"> --I </span><span class="si">%s</span><span class="s"> --T </span><span class="si">%s</span><span class="s"> --scheme CN --dt &#39;</span> <span class="o">%</span> \
+                   <span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">command_line</span> <span class="o">+=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">])</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="n">command_line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="n">read_command_line_argparse</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">expected_arg</span><span class="p">,</span> <span class="n">computed_arg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">computed</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">expected_arg</span> <span class="o">==</span> <span class="n">computed_arg</span>
+
+<span class="c"># Classes</span>
+
+<span class="k">class</span> <span class="nc">Problem</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">I</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">T</span>
+
+    <span class="k">def</span> <span class="nf">define_command_line_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">parser</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">argparse</span>
+            <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s">&#39;--I&#39;</span><span class="p">,</span> <span class="s">&#39;--initial_condition&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;initial condition, u(0)&#39;</span><span class="p">,</span>
+            <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;I&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s">&#39;--a&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s">&#39;coefficient in ODE&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s">&#39;--T&#39;</span><span class="p">,</span> <span class="s">&#39;--stop_time&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;end time of simulation&#39;</span><span class="p">,</span>
+            <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;T&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">parser</span>
+
+    <span class="k">def</span> <span class="nf">init_from_command_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="k">def</span> <span class="nf">u_exact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the exact solution u(t)=I*exp(-a*t).&quot;&quot;&quot;</span>
+        <span class="n">I</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span>
+        <span class="k">return</span> <span class="n">I</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Solver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">problem</span> <span class="o">=</span> <span class="n">problem</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">),</span> <span class="n">theta</span>
+
+    <span class="k">def</span> <span class="nf">define_command_line_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s">&#39;--scheme&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;CN&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s">&#39;FE, BE, or CN&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s">&#39;--dt&#39;</span><span class="p">,</span> <span class="s">&#39;--time_step_values&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;time step values&#39;</span><span class="p">,</span>
+            <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;dt&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;dt_values&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">parser</span>
+
+    <span class="k">def</span> <span class="nf">init_from_command_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">theta</span>
+
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return norm of error at the mesh points.&quot;&quot;&quot;</span>
+        <span class="n">u_e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">u_exact</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">E</span>
+
+<span class="k">def</span> <span class="nf">experiment_classes</span><span class="p">():</span>
+    <span class="n">problem</span> <span class="o">=</span> <span class="n">Problem</span><span class="p">()</span>
+    <span class="n">solver</span> <span class="o">=</span> <span class="n">Solver</span><span class="p">(</span><span class="n">problem</span><span class="p">)</span>
+
+    <span class="c"># Read input from the command line</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">define_command_line_options</span><span class="p">()</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span> <span class="n">define_command_line_options</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">problem</span><span class="o">.</span><span class="n">init_from_command_line</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">solver</span><span class="o">.</span> <span class="n">init_from_command_line</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="c"># Solve and plot</span>
+    <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+    <span class="n">t_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>    <span class="c"># very fine mesh for u_e</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;Error:&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">error</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">&#39;numerical, theta=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">theta</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;u&#39;</span><span class="p">)</span>
+    <span class="n">plotfile</span> <span class="o">=</span> <span class="s">&#39;tmp&#39;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plotfile</span> <span class="o">+</span> <span class="s">&#39;.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plotfile</span> <span class="o">+</span> <span class="s">&#39;.pdf&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">configure_logger</span><span class="p">()</span>
+    <span class="n">experiment_compare_dt</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>We can run this new solver function in a shell:</p>
+<p>The application code that calls <code class="docutils literal"><span class="pre">solver_with_logging</span></code> needs to configure
+the logger. The <code class="docutils literal"><span class="pre">decay</span></code> module offers a default configure function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="k">def</span> <span class="nf">configure_basic_logger</span><span class="p">():</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="s">&#39;decay.log&#39;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+        <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span>
+        <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;%Y.%m.</span><span class="si">%d</span><span class="s"> %I:%M:%S %p&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the user of a library does not configure a logger or call this
+configure function, the library should prevent error messages by
+declaring a default logger that does nothing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;decay&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>We can run the new solver function with logging in a shell:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">decay</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decay</span><span class="o">.</span><span class="n">configure_basic_logger</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">decay</span><span class="o">.</span><span class="n">solver_with_logging</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> \
 <span class="go">           dt=0.5, theta=0.5)</span>
 </pre></div>
@@ -831,6 +1166,9 @@ the formula for <span class="math">\(u^{n+1}\)</span>, we can change the logging
 2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
 </pre></div>
 </div>
+<p>Logging can be much more sophisticated than shown above. One can, e.g.,
+output critical messages to the screen and all messages to a file.
+This requires more code as demonstrated in the <a class="reference external" href="https://docs.python.org/2/howto/logging-cookbook.html">Logging Cookbook</a>.</p>
 </div>
 </div>
 </div>

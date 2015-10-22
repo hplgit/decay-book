@@ -1608,10 +1608,12 @@ module:
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">logging</span>
+<span style="color: #408080; font-style: italic"># Configure logger</span>
 logging<span style="color: #666666">.</span>basicConfig(
     filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;myprog.log&#39;</span>, filemode<span style="color: #666666">=</span><span style="color: #BA2121">&#39;w&#39;</span>, level<span style="color: #666666">=</span>logging<span style="color: #666666">.</span>WARNING,
     format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%(asctime)s</span><span style="color: #BA2121"> - </span><span style="color: #BB6688; font-weight: bold">%(levelname)s</span><span style="color: #BA2121"> - </span><span style="color: #BB6688; font-weight: bold">%(message)s</span><span style="color: #BA2121">&#39;</span>,
     datefmt<span style="color: #666666">=</span><span style="color: #BA2121">&#39;%m/</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">/%Y %I:%M:%S %p&#39;</span>)
+<span style="color: #408080; font-style: italic"># Perform logging</span>
 logging<span style="color: #666666">.</span>info(<span style="color: #BA2121">&#39;Here is some general info.&#39;</span>)
 logging<span style="color: #666666">.</span>warning(<span style="color: #BA2121">&#39;Here is a warning.&#39;</span>)
 logging<span style="color: #666666">.</span>debug(<span style="color: #BA2121">&#39;Here is some debugging info.&#39;</span>)
@@ -1667,13 +1669,7 @@ monitoring the simulation and for debugging it, respectively.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">logging</span>
-logging<span style="color: #666666">.</span>basicConfig(
-    filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;decay.log&#39;</span>, filemode<span style="color: #666666">=</span><span style="color: #BA2121">&#39;w&#39;</span>, level<span style="color: #666666">=</span>logging<span style="color: #666666">.</span>DEBUG,
-    format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%(asctime)s</span><span style="color: #BA2121"> - </span><span style="color: #BB6688; font-weight: bold">%(levelname)s</span><span style="color: #BA2121"> - </span><span style="color: #BB6688; font-weight: bold">%(message)s</span><span style="color: #BA2121">&#39;</span>,
-    datefmt<span style="color: #666666">=</span><span style="color: #BA2121">&#39;%Y.%m.</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> %I:%M:%S %p&#39;</span>)
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver_with_logging</span>(I, a, T, dt, theta):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver_with_logging</span>(I, a, T, dt, theta):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
     dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt)               <span style="color: #408080; font-style: italic"># avoid integer division</span>
     Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span>dt))        <span style="color: #408080; font-style: italic"># no of time intervals</span>
@@ -1694,14 +1690,361 @@ logging<span style="color: #666666">.</span>basicConfig(
                       (<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a,
                        <span style="color: #008000">str</span>(<span style="color: #008000">type</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a))[<span style="color: #666666">7</span>:<span style="color: #666666">-2</span>]))
     <span style="color: #008000; font-weight: bold">return</span> u, t
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">configure_basic_logger</span>():
+    logging<span style="color: #666666">.</span>basicConfig(
+        filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;decay.log&#39;</span>, filemode<span style="color: #666666">=</span><span style="color: #BA2121">&#39;w&#39;</span>, level<span style="color: #666666">=</span>logging<span style="color: #666666">.</span>DEBUG,
+        format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%(asctime)s</span><span style="color: #BA2121"> - </span><span style="color: #BB6688; font-weight: bold">%(levelname)s</span><span style="color: #BA2121"> - </span><span style="color: #BB6688; font-weight: bold">%(message)s</span><span style="color: #BA2121">&#39;</span>,
+        datefmt<span style="color: #666666">=</span><span style="color: #BA2121">&#39;%Y.%m.</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> %I:%M:%S %p&#39;</span>)
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">read_command_line_positional</span>():
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">len</span>(sys<span style="color: #666666">.</span>argv) <span style="color: #666666">&lt;</span> <span style="color: #666666">6</span>:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Usage: </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> I a T on/off BE/FE/CN dt1 dt2 dt3 ...&#39;</span> <span style="color: #666666">%</span> \ 
+              sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>]; sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)  <span style="color: #408080; font-style: italic"># abort</span>
+
+    I <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">1</span>])
+    a <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">2</span>])
+    T <span style="color: #666666">=</span> <span style="color: #008000">float</span>(sys<span style="color: #666666">.</span>argv[<span style="color: #666666">3</span>])
+
+    <span style="color: #408080; font-style: italic"># Name of schemes: BE (Backward Euler), FE (Forward Euler),</span>
+    <span style="color: #408080; font-style: italic"># CN (Crank-Nicolson)</span>
+    scheme <span style="color: #666666">=</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">4</span>]
+    scheme2theta <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;BE&#39;</span>: <span style="color: #666666">1</span>, <span style="color: #BA2121">&#39;CN&#39;</span>: <span style="color: #666666">0.5</span>, <span style="color: #BA2121">&#39;FE&#39;</span>: <span style="color: #666666">0</span>}
+    <span style="color: #008000; font-weight: bold">if</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> scheme2theta:
+        theta <span style="color: #666666">=</span> scheme2theta[scheme]
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Invalid scheme name:&#39;</span>, scheme; sys<span style="color: #666666">.</span>exit(<span style="color: #666666">1</span>)
+
+    dt_values <span style="color: #666666">=</span> [<span style="color: #008000">float</span>(arg) <span style="color: #008000; font-weight: bold">for</span> arg <span style="color: #AA22FF; font-weight: bold">in</span> sys<span style="color: #666666">.</span>argv[<span style="color: #666666">5</span>:]]
+
+    <span style="color: #008000; font-weight: bold">return</span> I, a, T, theta, dt_values
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">define_command_line_options</span>():
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">argparse</span>
+    parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+    parser<span style="color: #666666">.</span>add_argument(
+        <span style="color: #BA2121">&#39;--I&#39;</span>, <span style="color: #BA2121">&#39;--initial_condition&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+        default<span style="color: #666666">=1.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;initial condition, u(0)&#39;</span>,
+        metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;I&#39;</span>)
+    parser<span style="color: #666666">.</span>add_argument(
+        <span style="color: #BA2121">&#39;--a&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>, default<span style="color: #666666">=1.0</span>,
+        help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;coefficient in ODE&#39;</span>, metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;a&#39;</span>)
+    parser<span style="color: #666666">.</span>add_argument(
+        <span style="color: #BA2121">&#39;--T&#39;</span>, <span style="color: #BA2121">&#39;--stop_time&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+        default<span style="color: #666666">=1.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;end time of simulation&#39;</span>,
+        metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;T&#39;</span>)
+    parser<span style="color: #666666">.</span>add_argument(
+        <span style="color: #BA2121">&#39;--scheme&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">str</span>, default<span style="color: #666666">=</span><span style="color: #BA2121">&#39;CN&#39;</span>,
+        help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;FE, BE, or CN&#39;</span>)
+    parser<span style="color: #666666">.</span>add_argument(
+        <span style="color: #BA2121">&#39;--dt&#39;</span>, <span style="color: #BA2121">&#39;--time_step_values&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+        default<span style="color: #666666">=</span>[<span style="color: #666666">1.0</span>], help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;time step values&#39;</span>,
+        metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;dt&#39;</span>, nargs<span style="color: #666666">=</span><span style="color: #BA2121">&#39;+&#39;</span>, dest<span style="color: #666666">=</span><span style="color: #BA2121">&#39;dt_values&#39;</span>)
+    <span style="color: #008000; font-weight: bold">return</span> parser
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">read_command_line_argparse</span>():
+    parser <span style="color: #666666">=</span> define_command_line_options()
+    args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+    scheme2theta <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;BE&#39;</span>: <span style="color: #666666">1</span>, <span style="color: #BA2121">&#39;CN&#39;</span>: <span style="color: #666666">0.5</span>, <span style="color: #BA2121">&#39;FE&#39;</span>: <span style="color: #666666">0</span>}
+    data <span style="color: #666666">=</span> (args<span style="color: #666666">.</span>I, args<span style="color: #666666">.</span>a, args<span style="color: #666666">.</span>T, scheme2theta[args<span style="color: #666666">.</span>scheme],
+            args<span style="color: #666666">.</span>dt_values)
+    <span style="color: #008000; font-weight: bold">return</span> data
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">experiment_compare_dt</span>(option_value_pairs<span style="color: #666666">=</span><span style="color: #008000">False</span>):
+    I, a, T, theta, dt_values <span style="color: #666666">=</span> \ 
+       read_command_line_argparse() <span style="color: #008000; font-weight: bold">if</span> option_value_pairs <span style="color: #008000; font-weight: bold">else</span> \ 
+       read_command_line_positional()
+
+    legends <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values:
+        u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)
+        plt<span style="color: #666666">.</span>plot(t, u)
+        legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;dt=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> dt)
+    t_e <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)       <span style="color: #408080; font-style: italic"># very fine mesh for u_e</span>
+    u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
+    plt<span style="color: #666666">.</span>plot(t_e, u_e, <span style="color: #BA2121">&#39;--&#39;</span>)
+    legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;exact&#39;</span>)
+    plt<span style="color: #666666">.</span>legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;upper right&#39;</span>)
+    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;theta=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> theta)
+    plotfile <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;tmp&#39;</span>
+    plt<span style="color: #666666">.</span>savefig(plotfile <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(plotfile <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.pdf&#39;</span>)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">compute4web</span>(I, a, T, dt, theta<span style="color: #666666">=0.5</span>):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Run a case with the solver, compute error measure,</span>
+<span style="color: #BA2121; font-style: italic">    and plot the numerical and exact solutions in a PNG</span>
+<span style="color: #BA2121; font-style: italic">    plot whose data are embedded in an HTML image tag.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    u, t <span style="color: #666666">=</span> solver(I, a, T, dt, theta)
+    u_e <span style="color: #666666">=</span> u_exact(t, I, a)
+    e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> u
+    E <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(dt<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sum(e<span style="color: #666666">**2</span>))
+
+    plt<span style="color: #666666">.</span>figure()
+    t_e <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)    <span style="color: #408080; font-style: italic"># fine mesh for u_e</span>
+    u_e <span style="color: #666666">=</span> u_exact(t_e, I, a)
+    plt<span style="color: #666666">.</span>plot(t,   u,   <span style="color: #BA2121">&#39;r--o&#39;</span>)
+    plt<span style="color: #666666">.</span>plot(t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>)
+    plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;numerical&#39;</span>, <span style="color: #BA2121">&#39;exact&#39;</span>])
+    plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;t&#39;</span>)
+    plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;u&#39;</span>)
+    plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;theta=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, dt=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (theta, dt))
+    <span style="color: #408080; font-style: italic"># Save plot to HTML img tag with PNG code as embedded data</span>
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">parampool.utils</span> <span style="color: #008000; font-weight: bold">import</span> save_png_to_str
+    html_text <span style="color: #666666">=</span> save_png_to_str(plt, plotwidth<span style="color: #666666">=400</span>)
+
+    <span style="color: #008000; font-weight: bold">return</span> E, html_text
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">main_GUI</span>(I<span style="color: #666666">=1.0</span>, a<span style="color: #666666">=.2</span>, T<span style="color: #666666">=4.0</span>,
+             dt_values<span style="color: #666666">=</span>[<span style="color: #666666">1.25</span>, <span style="color: #666666">0.75</span>, <span style="color: #666666">0.5</span>, <span style="color: #666666">0.1</span>],
+             theta_values<span style="color: #666666">=</span>[<span style="color: #666666">0</span>, <span style="color: #666666">0.5</span>, <span style="color: #666666">1</span>]):
+    <span style="color: #408080; font-style: italic"># Build HTML code for web page. Arrange plots in columns</span>
+    <span style="color: #408080; font-style: italic"># corresponding to the theta values, with dt down the rows</span>
+    theta2name <span style="color: #666666">=</span> {<span style="color: #666666">0</span>: <span style="color: #BA2121">&#39;FE&#39;</span>, <span style="color: #666666">1</span>: <span style="color: #BA2121">&#39;BE&#39;</span>, <span style="color: #666666">0.5</span>: <span style="color: #BA2121">&#39;CN&#39;</span>}
+    html_text <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;&lt;table&gt;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+    <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values:
+        html_text <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39;&lt;tr&gt;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+        <span style="color: #008000; font-weight: bold">for</span> theta <span style="color: #AA22FF; font-weight: bold">in</span> theta_values:
+            E, html <span style="color: #666666">=</span> compute4web(I, a, T, dt, theta)
+            html_text <span style="color: #666666">+=</span> <span style="color: #BA2121">&quot;&quot;&quot;</span>
+<span style="color: #BA2121">&lt;td&gt;</span>
+<span style="color: #BA2121">&lt;center&gt;&lt;b&gt;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121">, dt=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">, error: </span><span style="color: #BB6688; font-weight: bold">%.3E</span><span style="color: #BA2121">&lt;/b&gt;&lt;/center&gt;&lt;br&gt;</span>
+<span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"></span>
+<span style="color: #BA2121">&lt;/td&gt;</span>
+<span style="color: #BA2121">&quot;&quot;&quot;</span> <span style="color: #666666">%</span> (theta2name[theta], dt, E, html)
+        html_text <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39;&lt;/tr&gt;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+    html_text <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39;&lt;/table&gt;</span><span style="color: #BB6622; font-weight: bold">\n</span><span style="color: #BA2121">&#39;</span>
+    <span style="color: #008000; font-weight: bold">return</span> html_text
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solver_with_doctest</span>(I, a, T, dt, theta):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.</span>
+
+
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; u, t = solver(I=0.8, a=1.2, T=1.5, dt=0.5, theta=0.5)</span>
+<span style="color: #BA2121; font-style: italic">    &gt;&gt;&gt; for n in range(len(t)):</span>
+<span style="color: #BA2121; font-style: italic">    ...     print &#39;t=%.1f, u=%.14f&#39; % (t[n], u[n])</span>
+<span style="color: #BA2121; font-style: italic">    t=0.0, u=0.80000000000000</span>
+<span style="color: #BA2121; font-style: italic">    t=0.5, u=0.43076923076923</span>
+<span style="color: #BA2121; font-style: italic">    t=1.0, u=0.23195266272189</span>
+<span style="color: #BA2121; font-style: italic">    t=1.5, u=0.12489758761948</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt)               <span style="color: #408080; font-style: italic"># avoid integer division</span>
+    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #008000">round</span>(T<span style="color: #666666">/</span>dt))        <span style="color: #408080; font-style: italic"># no of time intervals</span>
+    T <span style="color: #666666">=</span> Nt<span style="color: #666666">*</span>dt                    <span style="color: #408080; font-style: italic"># adjust T to fit time step dt</span>
+    u <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(Nt<span style="color: #666666">+1</span>)           <span style="color: #408080; font-style: italic"># array of u[n] values</span>
+    t <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, Nt<span style="color: #666666">+1</span>)  <span style="color: #408080; font-style: italic"># time mesh</span>
+
+    u[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> I                  <span style="color: #408080; font-style: italic"># assign initial condition</span>
+    <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Nt):    <span style="color: #408080; font-style: italic"># n=0,1,...,Nt-1</span>
+        u[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)<span style="color: #666666">*</span>u[n]
+    <span style="color: #008000; font-weight: bold">return</span> u, t
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">third</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">/3.</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_third</span>():
+    x <span style="color: #666666">=</span> <span style="color: #666666">0.15</span>
+    expected <span style="color: #666666">=</span> (<span style="color: #666666">1/3.</span>)<span style="color: #666666">*</span>x
+    computed <span style="color: #666666">=</span> third(x)
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-15</span>
+    success <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(expected <span style="color: #666666">-</span> computed) <span style="color: #666666">&lt;</span> tol
+    <span style="color: #008000; font-weight: bold">assert</span> success
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_discrete_exact</span>(n, I, a, theta, dt):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return exact discrete solution of the numerical schemes.&quot;&quot;&quot;</span>
+    dt <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt)  <span style="color: #408080; font-style: italic"># avoid integer division</span>
+    A <span style="color: #666666">=</span> (<span style="color: #666666">1</span> <span style="color: #666666">-</span> (<span style="color: #666666">1-</span>theta)<span style="color: #666666">*</span>a<span style="color: #666666">*</span>dt)<span style="color: #666666">/</span>(<span style="color: #666666">1</span> <span style="color: #666666">+</span> theta<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>a)
+    <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>A<span style="color: #666666">**</span>n
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_u_discrete_exact</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Check that solver reproduces the exact discr. sol.&quot;&quot;&quot;</span>
+    theta <span style="color: #666666">=</span> <span style="color: #666666">0.8</span>; a <span style="color: #666666">=</span> <span style="color: #666666">2</span>; I <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>; dt <span style="color: #666666">=</span> <span style="color: #666666">0.8</span>
+    Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>(<span style="color: #666666">8/</span>dt)  <span style="color: #408080; font-style: italic"># no of steps</span>
+    u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
+
+    <span style="color: #408080; font-style: italic"># Evaluate exact discrete solution on the mesh</span>
+    u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([u_discrete_exact(n, I, a, theta, dt)
+                     <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nt<span style="color: #666666">+1</span>)])
+
+    <span style="color: #408080; font-style: italic"># Find largest deviation</span>
+    diff <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(u_de <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
+    tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+    success <span style="color: #666666">=</span> diff <span style="color: #666666">&lt;</span> tol
+    <span style="color: #008000; font-weight: bold">assert</span> success
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_potential_integer_division</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Choose variables that can trigger integer division.&quot;&quot;&quot;</span>
+    theta <span style="color: #666666">=</span> <span style="color: #666666">1</span>; a <span style="color: #666666">=</span> <span style="color: #666666">1</span>; I <span style="color: #666666">=</span> <span style="color: #666666">1</span>; dt <span style="color: #666666">=</span> <span style="color: #666666">2</span>
+    Nt <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+    u, t <span style="color: #666666">=</span> solver(I<span style="color: #666666">=</span>I, a<span style="color: #666666">=</span>a, T<span style="color: #666666">=</span>Nt<span style="color: #666666">*</span>dt, dt<span style="color: #666666">=</span>dt, theta<span style="color: #666666">=</span>theta)
+    u_de <span style="color: #666666">=</span> np<span style="color: #666666">.</span>array([u_discrete_exact(n, I, a, theta, dt)
+                     <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Nt<span style="color: #666666">+1</span>)])
+    diff <span style="color: #666666">=</span> np<span style="color: #666666">.</span>abs(u_de <span style="color: #666666">-</span> u)<span style="color: #666666">.</span>max()
+    <span style="color: #008000; font-weight: bold">assert</span> diff <span style="color: #666666">&lt;</span> <span style="color: #666666">1E-14</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_read_command_line_positional</span>():
+    <span style="color: #408080; font-style: italic"># Decide on a data set of input parameters</span>
+    I <span style="color: #666666">=</span> <span style="color: #666666">1.6</span>;  a <span style="color: #666666">=</span> <span style="color: #666666">1.8</span>;  T <span style="color: #666666">=</span> <span style="color: #666666">2.2</span>;  theta <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+    dt_values <span style="color: #666666">=</span> [<span style="color: #666666">0.1</span>, <span style="color: #666666">0.2</span>, <span style="color: #666666">0.05</span>]
+    <span style="color: #408080; font-style: italic"># Expected return from read_command_line_positional</span>
+    expected <span style="color: #666666">=</span> [I, a, T, theta, dt_values]
+    <span style="color: #408080; font-style: italic"># Construct corresponding sys.argv array</span>
+    sys<span style="color: #666666">.</span>argv <span style="color: #666666">=</span> [sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>], <span style="color: #008000">str</span>(I), <span style="color: #008000">str</span>(a), <span style="color: #008000">str</span>(T), <span style="color: #BA2121">&#39;CN&#39;</span>] <span style="color: #666666">+</span> \ 
+               [<span style="color: #008000">str</span>(dt) <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values]
+    computed <span style="color: #666666">=</span> read_command_line_positional()
+    <span style="color: #008000; font-weight: bold">for</span> expected_arg, computed_arg <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(expected, computed):
+        <span style="color: #008000; font-weight: bold">assert</span> expected_arg <span style="color: #666666">==</span> computed_arg
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_read_command_line_argparse</span>():
+    I <span style="color: #666666">=</span> <span style="color: #666666">1.6</span>;  a <span style="color: #666666">=</span> <span style="color: #666666">1.8</span>;  T <span style="color: #666666">=</span> <span style="color: #666666">2.2</span>;  theta <span style="color: #666666">=</span> <span style="color: #666666">0.5</span>
+    dt_values <span style="color: #666666">=</span> [<span style="color: #666666">0.1</span>, <span style="color: #666666">0.2</span>, <span style="color: #666666">0.05</span>]
+    <span style="color: #408080; font-style: italic"># Expected return from read_command_line_argparse</span>
+    expected <span style="color: #666666">=</span> [I, a, T, theta, dt_values]
+    <span style="color: #408080; font-style: italic"># Construct corresponding sys.argv array</span>
+    command_line <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> --a </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> --I </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> --T </span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> --scheme CN --dt &#39;</span> <span style="color: #666666">%</span> \ 
+                   (sys<span style="color: #666666">.</span>argv[<span style="color: #666666">0</span>], a, I, T)
+    command_line <span style="color: #666666">+=</span> <span style="color: #BA2121">&#39; &#39;</span><span style="color: #666666">.</span>join([<span style="color: #008000">str</span>(dt) <span style="color: #008000; font-weight: bold">for</span> dt <span style="color: #AA22FF; font-weight: bold">in</span> dt_values])
+    sys<span style="color: #666666">.</span>argv <span style="color: #666666">=</span> command_line<span style="color: #666666">.</span>split()
+    computed <span style="color: #666666">=</span> read_command_line_argparse()
+    <span style="color: #008000; font-weight: bold">for</span> expected_arg, computed_arg <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">zip</span>(expected, computed):
+        <span style="color: #008000; font-weight: bold">assert</span> expected_arg <span style="color: #666666">==</span> computed_arg
+
+<span style="color: #408080; font-style: italic"># Classes</span>
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Problem</span>(<span style="color: #008000">object</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, I<span style="color: #666666">=1</span>, a<span style="color: #666666">=1</span>, T<span style="color: #666666">=10</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>T, <span style="color: #008000">self</span><span style="color: #666666">.</span>I, <span style="color: #008000">self</span><span style="color: #666666">.</span>a <span style="color: #666666">=</span> I, <span style="color: #008000">float</span>(a), T
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">define_command_line_options</span>(<span style="color: #008000">self</span>, parser<span style="color: #666666">=</span><span style="color: #008000">None</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">if</span> parser <span style="color: #AA22FF; font-weight: bold">is</span> <span style="color: #008000">None</span>:
+            <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">argparse</span>
+            parser <span style="color: #666666">=</span> argparse<span style="color: #666666">.</span>ArgumentParser()
+
+        parser<span style="color: #666666">.</span>add_argument(
+            <span style="color: #BA2121">&#39;--I&#39;</span>, <span style="color: #BA2121">&#39;--initial_condition&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+            default<span style="color: #666666">=1.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;initial condition, u(0)&#39;</span>,
+            metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;I&#39;</span>)
+        parser<span style="color: #666666">.</span>add_argument(
+            <span style="color: #BA2121">&#39;--a&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>, default<span style="color: #666666">=1.0</span>,
+            help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;coefficient in ODE&#39;</span>, metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;a&#39;</span>)
+        parser<span style="color: #666666">.</span>add_argument(
+            <span style="color: #BA2121">&#39;--T&#39;</span>, <span style="color: #BA2121">&#39;--stop_time&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+            default<span style="color: #666666">=1.0</span>, help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;end time of simulation&#39;</span>,
+            metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;T&#39;</span>)
+        <span style="color: #008000; font-weight: bold">return</span> parser
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">init_from_command_line</span>(<span style="color: #008000">self</span>, args):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>I, <span style="color: #008000">self</span><span style="color: #666666">.</span>a, <span style="color: #008000">self</span><span style="color: #666666">.</span>T <span style="color: #666666">=</span> args<span style="color: #666666">.</span>I, args<span style="color: #666666">.</span>a, args<span style="color: #666666">.</span>T
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_exact</span>(<span style="color: #008000">self</span>, t):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return the exact solution u(t)=I*exp(-a*t).&quot;&quot;&quot;</span>
+        I, a <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>I, <span style="color: #008000">self</span><span style="color: #666666">.</span>a
+        <span style="color: #008000; font-weight: bold">return</span> I<span style="color: #666666">*</span>exp(<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t)
+
+
+<span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Solver</span>(<span style="color: #008000">object</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">__init__</span>(<span style="color: #008000">self</span>, problem, dt<span style="color: #666666">=0.1</span>, theta<span style="color: #666666">=0.5</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>problem <span style="color: #666666">=</span> problem
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>dt, <span style="color: #008000">self</span><span style="color: #666666">.</span>theta <span style="color: #666666">=</span> <span style="color: #008000">float</span>(dt), theta
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">define_command_line_options</span>(<span style="color: #008000">self</span>, parser):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;</span>
+        parser<span style="color: #666666">.</span>add_argument(
+            <span style="color: #BA2121">&#39;--scheme&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">str</span>, default<span style="color: #666666">=</span><span style="color: #BA2121">&#39;CN&#39;</span>,
+            help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;FE, BE, or CN&#39;</span>)
+        parser<span style="color: #666666">.</span>add_argument(
+            <span style="color: #BA2121">&#39;--dt&#39;</span>, <span style="color: #BA2121">&#39;--time_step_values&#39;</span>, <span style="color: #008000">type</span><span style="color: #666666">=</span><span style="color: #008000">float</span>,
+            default<span style="color: #666666">=</span>[<span style="color: #666666">1.0</span>], help<span style="color: #666666">=</span><span style="color: #BA2121">&#39;time step values&#39;</span>,
+            metavar<span style="color: #666666">=</span><span style="color: #BA2121">&#39;dt&#39;</span>, nargs<span style="color: #666666">=</span><span style="color: #BA2121">&#39;+&#39;</span>, dest<span style="color: #666666">=</span><span style="color: #BA2121">&#39;dt_values&#39;</span>)
+        <span style="color: #008000; font-weight: bold">return</span> parser
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">init_from_command_line</span>(<span style="color: #008000">self</span>, args):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;</span>
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>dt, <span style="color: #008000">self</span><span style="color: #666666">.</span>theta <span style="color: #666666">=</span> args<span style="color: #666666">.</span>dt, args<span style="color: #666666">.</span>theta
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">solve</span>(<span style="color: #008000">self</span>):
+        <span style="color: #008000">self</span><span style="color: #666666">.</span>u, <span style="color: #008000">self</span><span style="color: #666666">.</span>t <span style="color: #666666">=</span> solver(
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>problem<span style="color: #666666">.</span>I, <span style="color: #008000">self</span><span style="color: #666666">.</span>problem<span style="color: #666666">.</span>a, <span style="color: #008000">self</span><span style="color: #666666">.</span>problem<span style="color: #666666">.</span>T,
+            <span style="color: #008000">self</span><span style="color: #666666">.</span>dt, <span style="color: #008000">self</span><span style="color: #666666">.</span>theta)
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">error</span>(<span style="color: #008000">self</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Return norm of error at the mesh points.&quot;&quot;&quot;</span>
+        u_e <span style="color: #666666">=</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>problem<span style="color: #666666">.</span>u_exact(<span style="color: #008000">self</span><span style="color: #666666">.</span>t)
+        e <span style="color: #666666">=</span> u_e <span style="color: #666666">-</span> <span style="color: #008000">self</span><span style="color: #666666">.</span>u
+        E <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(<span style="color: #008000">self</span><span style="color: #666666">.</span>dt<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sum(e<span style="color: #666666">**2</span>))
+        <span style="color: #008000; font-weight: bold">return</span> E
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">experiment_classes</span>():
+    problem <span style="color: #666666">=</span> Problem()
+    solver <span style="color: #666666">=</span> Solver(problem)
+
+    <span style="color: #408080; font-style: italic"># Read input from the command line</span>
+    parser <span style="color: #666666">=</span> problem<span style="color: #666666">.</span>define_command_line_options()
+    parser <span style="color: #666666">=</span> solver<span style="color: #666666">.</span> define_command_line_options(parser)
+    args <span style="color: #666666">=</span> parser<span style="color: #666666">.</span>parse_args()
+    problem<span style="color: #666666">.</span>init_from_command_line(args)
+    solver<span style="color: #666666">.</span> init_from_command_line(args)
+
+    <span style="color: #408080; font-style: italic"># Solve and plot</span>
+    solver<span style="color: #666666">.</span>solve()
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+    t_e <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, <span style="color: #666666">1001</span>)    <span style="color: #408080; font-style: italic"># very fine mesh for u_e</span>
+    u_e <span style="color: #666666">=</span> problem<span style="color: #666666">.</span>u_exact(t_e)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Error:&#39;</span>, solver<span style="color: #666666">.</span>error()
+
+    plt<span style="color: #666666">.</span>plot(t,   u,   <span style="color: #BA2121">&#39;r--o&#39;</span>)
+    plt<span style="color: #666666">.</span>plot(t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>)
+    plt<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;numerical, theta=</span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> theta, <span style="color: #BA2121">&#39;exact&#39;</span>])
+    plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;t&#39;</span>)
+    plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;u&#39;</span>)
+    plotfile <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;tmp&#39;</span>
+    plt<span style="color: #666666">.</span>savefig(plotfile <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(plotfile <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.pdf&#39;</span>)
+    plt<span style="color: #666666">.</span>show()
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:
+    configure_logger()
+    experiment_compare_dt(<span style="color: #008000">True</span>)
+    plt<span style="color: #666666">.</span>show()
 </pre></div>
 <p>
-We can run this new solver function in a shell:
+The application code that calls <code>solver_with_logging</code> needs to configure
+the logger. The <code>decay</code> module offers a default configure function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">logging</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">configure_basic_logger</span>():
+    logging<span style="color: #666666">.</span>basicConfig(
+        filename<span style="color: #666666">=</span><span style="color: #BA2121">&#39;decay.log&#39;</span>, filemode<span style="color: #666666">=</span><span style="color: #BA2121">&#39;w&#39;</span>, level<span style="color: #666666">=</span>logging<span style="color: #666666">.</span>DEBUG,
+        format<span style="color: #666666">=</span><span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%(asctime)s</span><span style="color: #BA2121"> - </span><span style="color: #BB6688; font-weight: bold">%(levelname)s</span><span style="color: #BA2121"> - </span><span style="color: #BB6688; font-weight: bold">%(message)s</span><span style="color: #BA2121">&#39;</span>,
+        datefmt<span style="color: #666666">=</span><span style="color: #BA2121">&#39;%Y.%m.</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> %I:%M:%S %p&#39;</span>)
+</pre></div>
+<p>
+If the user of a library does not configure a logger or call this
+configure function, the library should prevent error messages by
+declaring a default logger that does nothing:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">logging</span>
+logging<span style="color: #666666">.</span>getLogger(<span style="color: #BA2121">&#39;decay&#39;</span>)<span style="color: #666666">.</span>addHandler(logging<span style="color: #666666">.</span>NullHandler())
+</pre></div>
+<p>
+We can run the new solver function with logging in a shell:
 
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">decay</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> decay<span style="color: #666666">.</span>configure_basic_logger()
 <span style="color: #666666">&gt;&gt;&gt;</span> u, t <span style="color: #666666">=</span> decay<span style="color: #666666">.</span>solver_with_logging(I<span style="color: #666666">=1</span>, a<span style="color: #666666">=0.5</span>, T<span style="color: #666666">=10</span>, \ 
            dt<span style="color: #666666">=0.5</span>, theta<span style="color: #666666">=0.5</span>)
 </pre></div>
@@ -1753,6 +2096,10 @@ the formula for \( u^{n+1} \), we can change the logging level to
 2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
 2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
 </pre></div>
+<p>
+Logging can be much more sophisticated than shown above. One can, e.g.,
+output critical messages to the screen and all messages to a file.
+This requires more code as demonstrated in the <a href="https://docs.python.org/2/howto/logging-cookbook.html" target="_self">Logging Cookbook</a>.
 
 <h1 id="softeng1:basic:UI">User interfaces</h1>
 
