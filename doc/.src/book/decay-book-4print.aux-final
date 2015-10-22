@@ -612,139 +612,133 @@
 \newlabel{softeng1:basic:logging}{{5.1.10}{177}{Logging intermediate results}{subsection.5.1.10}{}}
 \@writefile{toc}{\contentsline {paragraph}{Introductory example.}{177}{section*.163}}
 \@writefile{toc}{\contentsline {paragraph}{Using a logger in our solver function.}{178}{section*.164}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}User interfaces}{180}{section.5.2}}
-\newlabel{softeng1:basic:UI}{{5.2}{180}{User interfaces}{section.5.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Command-line arguments}{181}{subsection.5.2.1}}
-\zref@newlabel{mdf@pagelabel-29}{\default{5.2.1}\page{183}\abspage{185}\mdf@pagevalue{183}}
-\pgfsyspdfmark {pgfid53}{4344704}{40127051}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Positional command-line arguments}{183}{subsection.5.2.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}Option-value pairs on the command line}{184}{subsection.5.2.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Creating a graphical web user interface}{187}{subsection.5.2.4}}
-\@writefile{toc}{\contentsline {paragraph}{Making a compute function.}{187}{section*.165}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces  Automatically generated graphical web interface.  \relax }}{188}{figure.caption.166}}
-\newlabel{softeng1:fig:GUI}{{5.3}{188}{Automatically generated graphical web interface.  \relax }{figure.caption.166}{}}
-\@writefile{toc}{\contentsline {paragraph}{Generating the user interface.}{189}{section*.167}}
-\@writefile{toc}{\contentsline {paragraph}{Running the web application.}{190}{section*.168}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Tests for verifying implementations}{190}{section.5.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Doctests}{191}{subsection.5.3.1}}
-\zref@newlabel{mdf@pagelabel-30}{\default{5.3.1}\page{192}\abspage{194}\mdf@pagevalue{192}}
-\pgfsyspdfmark {pgfid55}{6339911}{34571835}
-\zref@newlabel{mdf@pagelabel-31}{\default{5.3.1}\page{192}\abspage{194}\mdf@pagevalue{192}}
-\pgfsyspdfmark {pgfid57}{6339911}{9327883}
-\zref@newlabel{mdf@pagelabel-32}{\default{5.3.1}\page{193}\abspage{195}\mdf@pagevalue{193}}
-\pgfsyspdfmark {pgfid58}{4344704}{42613302}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Unit tests and test functions}{193}{subsection.5.3.2}}
-\@writefile{toc}{\contentsline {paragraph}{Two Python test frameworks: nose and pytest.}{193}{section*.169}}
-\@writefile{toc}{\contentsline {paragraph}{Test function requirements.}{193}{section*.170}}
-\@writefile{toc}{\contentsline {paragraph}{Comparison of real numbers.}{194}{section*.171}}
-\zref@newlabel{mdf@pagelabel-33}{\default{5.3.2}\page{195}\abspage{197}\mdf@pagevalue{195}}
-\pgfsyspdfmark {pgfid60}{4344704}{35738346}
-\@writefile{toc}{\contentsline {paragraph}{Special assert functions from nose.}{195}{section*.172}}
-\@writefile{toc}{\contentsline {paragraph}{Locating test functions.}{195}{section*.173}}
-\@writefile{toc}{\contentsline {paragraph}{Running tests.}{195}{section*.174}}
-\@writefile{toc}{\contentsline {paragraph}{Embedding doctests in a test function.}{196}{section*.175}}
-\@writefile{toc}{\contentsline {paragraph}{Installing nose and pytest.}{197}{section*.176}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}Test function for the solver}{197}{subsection.5.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.4}Test function for reading positional command-line arguments}{198}{subsection.5.3.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.5}Test function for reading option-value pairs}{199}{subsection.5.3.5}}
-\zref@newlabel{mdf@pagelabel-34}{\default{5.3.5}\page{199}\abspage{201}\mdf@pagevalue{199}}
-\pgfsyspdfmark {pgfid62}{4344704}{9455602}
-\zref@newlabel{mdf@pagelabel-35}{\default{5.3.5}\page{200}\abspage{202}\mdf@pagevalue{200}}
-\pgfsyspdfmark {pgfid63}{6339911}{29531649}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.6}Classical class-based unit testing}{200}{subsection.5.3.6}}
-\newlabel{softeng1:basic:unittest}{{5.3.6}{200}{Classical class-based unit testing}{subsection.5.3.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Sharing the software with other users}{202}{section.5.4}}
-\newlabel{softeng1:prog:se:git}{{5.4}{202}{Sharing the software with other users}{section.5.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}Organizing the software directory tree}{202}{subsection.5.4.1}}
-\@writefile{toc}{\contentsline {paragraph}{Distributing just a module file.}{203}{section*.177}}
-\@writefile{toc}{\contentsline {paragraph}{Distributing a package.}{203}{section*.178}}
-\zref@newlabel{mdf@pagelabel-36}{\default{5.4.1}\page{203}\abspage{205}\mdf@pagevalue{203}}
-\pgfsyspdfmark {pgfid65}{4344704}{10475335}
-\zref@newlabel{mdf@pagelabel-37}{\default{5.4.1}\page{204}\abspage{206}\mdf@pagevalue{204}}
-\pgfsyspdfmark {pgfid66}{6339911}{33995751}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}Publishing the software at GitHub}{204}{subsection.5.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}User interfaces}{185}{section.5.2}}
+\newlabel{softeng1:basic:UI}{{5.2}{185}{User interfaces}{section.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Command-line arguments}{186}{subsection.5.2.1}}
+\zref@newlabel{mdf@pagelabel-29}{\default{5.2.1}\page{188}\abspage{190}\mdf@pagevalue{188}}
+\pgfsyspdfmark {pgfid53}{6339911}{22362187}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Positional command-line arguments}{189}{subsection.5.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}Option-value pairs on the command line}{190}{subsection.5.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Creating a graphical web user interface}{193}{subsection.5.2.4}}
+\@writefile{toc}{\contentsline {paragraph}{Making a compute function.}{193}{section*.165}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces  Automatically generated graphical web interface.  \relax }}{193}{figure.caption.166}}
+\newlabel{softeng1:fig:GUI}{{5.3}{193}{Automatically generated graphical web interface.  \relax }{figure.caption.166}{}}
+\@writefile{toc}{\contentsline {paragraph}{Generating the user interface.}{195}{section*.167}}
+\@writefile{toc}{\contentsline {paragraph}{Running the web application.}{195}{section*.168}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Tests for verifying implementations}{196}{section.5.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Doctests}{196}{subsection.5.3.1}}
+\zref@newlabel{mdf@pagelabel-30}{\default{5.3.1}\page{197}\abspage{199}\mdf@pagevalue{197}}
+\pgfsyspdfmark {pgfid55}{4344704}{23857321}
+\zref@newlabel{mdf@pagelabel-31}{\default{5.3.1}\page{198}\abspage{200}\mdf@pagevalue{198}}
+\pgfsyspdfmark {pgfid57}{6339911}{34074072}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Unit tests and test functions}{198}{subsection.5.3.2}}
+\@writefile{toc}{\contentsline {paragraph}{Two Python test frameworks: nose and pytest.}{198}{section*.169}}
+\@writefile{toc}{\contentsline {paragraph}{Test function requirements.}{198}{section*.170}}
+\@writefile{toc}{\contentsline {paragraph}{Comparison of real numbers.}{199}{section*.171}}
+\zref@newlabel{mdf@pagelabel-32}{\default{5.3.2}\page{200}\abspage{202}\mdf@pagevalue{200}}
+\pgfsyspdfmark {pgfid59}{6339911}{25498048}
+\@writefile{toc}{\contentsline {paragraph}{Special assert functions from nose.}{200}{section*.172}}
+\@writefile{toc}{\contentsline {paragraph}{Locating test functions.}{201}{section*.173}}
+\@writefile{toc}{\contentsline {paragraph}{Running tests.}{201}{section*.174}}
+\@writefile{toc}{\contentsline {paragraph}{Embedding doctests in a test function.}{201}{section*.175}}
+\@writefile{toc}{\contentsline {paragraph}{Installing nose and pytest.}{202}{section*.176}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}Test function for the solver}{202}{subsection.5.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.4}Test function for reading positional command-line arguments}{203}{subsection.5.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.5}Test function for reading option-value pairs}{204}{subsection.5.3.5}}
+\zref@newlabel{mdf@pagelabel-33}{\default{5.3.5}\page{205}\abspage{207}\mdf@pagevalue{205}}
+\pgfsyspdfmark {pgfid61}{4344704}{17715312}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.6}Classical class-based unit testing}{205}{subsection.5.3.6}}
+\newlabel{softeng1:basic:unittest}{{5.3.6}{205}{Classical class-based unit testing}{subsection.5.3.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Sharing the software with other users}{207}{section.5.4}}
+\newlabel{softeng1:prog:se:git}{{5.4}{207}{Sharing the software with other users}{section.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}Organizing the software directory tree}{208}{subsection.5.4.1}}
+\@writefile{toc}{\contentsline {paragraph}{Distributing just a module file.}{208}{section*.177}}
+\@writefile{toc}{\contentsline {paragraph}{Distributing a package.}{208}{section*.178}}
+\zref@newlabel{mdf@pagelabel-34}{\default{5.4.1}\page{209}\abspage{211}\mdf@pagevalue{209}}
+\pgfsyspdfmark {pgfid63}{4344704}{22233999}
 \citation{Langtangen_bitgit}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Downloading and installing the software}{206}{subsection.5.4.3}}
-\@writefile{toc}{\contentsline {paragraph}{Installing just a module file.}{206}{section*.179}}
-\@writefile{toc}{\contentsline {paragraph}{Installing a package.}{207}{section*.180}}
-\zref@newlabel{mdf@pagelabel-38}{\default{5.4.3}\page{207}\abspage{209}\mdf@pagevalue{207}}
-\pgfsyspdfmark {pgfid68}{4344704}{18551962}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}Classes for problem and solution method}{207}{section.5.5}}
-\newlabel{softeng1:prog:se:class}{{5.5}{207}{Classes for problem and solution method}{section.5.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}Publishing the software at GitHub}{210}{subsection.5.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Downloading and installing the software}{211}{subsection.5.4.3}}
+\@writefile{toc}{\contentsline {paragraph}{Installing just a module file.}{211}{section*.179}}
+\@writefile{toc}{\contentsline {paragraph}{Installing a package.}{212}{section*.180}}
+\zref@newlabel{mdf@pagelabel-35}{\default{5.4.3}\page{212}\abspage{214}\mdf@pagevalue{212}}
+\pgfsyspdfmark {pgfid65}{6339911}{12268948}
 \citation{Langtangen_2012}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}The problem class}{208}{subsection.5.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}The solver class}{210}{subsection.5.5.2}}
-\@writefile{toc}{\contentsline {paragraph}{Combining the objects.}{211}{section*.181}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.3}Improving the problem and solver classes}{211}{subsection.5.5.3}}
-\newlabel{softeng1:prog:se:class2}{{5.5.3}{211}{Improving the problem and solver classes}{subsection.5.5.3}{}}
-\@writefile{toc}{\contentsline {paragraph}{A generic class for parameters.}{213}{section*.182}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}Automating scientific experiments}{214}{section.5.6}}
-\newlabel{softeng1:experiments}{{5.6}{214}{Automating scientific experiments}{section.5.6}{}}
-\zref@newlabel{mdf@pagelabel-39}{\default{5.6}\page{214}\abspage{216}\mdf@pagevalue{214}}
-\newlabel{softeng1:experiments:model}{{5.4}{214}{Automating scientific experiments}{equation.5.6.4}{}}
-\newlabel{softeng1:experiments:theta}{{5.5}{214}{Automating scientific experiments}{equation.5.6.5}{}}
-\pgfsyspdfmark {pgfid70}{6339911}{11028005}
-\zref@newlabel{mdf@pagelabel-40}{\default{5.6}\page{215}\abspage{217}\mdf@pagevalue{215}}
-\pgfsyspdfmark {pgfid71}{4344704}{42613302}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.1}Available software}{215}{subsection.5.6.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.2}The results we want to produce}{215}{subsection.5.6.2}}
-\zref@newlabel{mdf@pagelabel-41}{\default{5.6.2}\page{216}\abspage{218}\mdf@pagevalue{216}}
-\pgfsyspdfmark {pgfid73}{6339911}{10828185}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.3}Combining plot files}{217}{subsection.5.6.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces  Illustration of the Backward Euler method for four time step values.  \relax }}{217}{figure.caption.183}}
-\newlabel{softeng1:experiments:fig:BE4a}{{5.4}{217}{Illustration of the Backward Euler method for four time step values.  \relax }{figure.caption.183}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.4}Running a program from Python}{218}{subsection.5.6.4}}
-\zref@newlabel{mdf@pagelabel-42}{\default{5.6.4}\page{218}\abspage{220}\mdf@pagevalue{218}}
-\pgfsyspdfmark {pgfid75}{6339911}{10358227}
-\zref@newlabel{mdf@pagelabel-43}{\default{5.6.4}\page{219}\abspage{221}\mdf@pagevalue{219}}
-\pgfsyspdfmark {pgfid76}{4344704}{33643319}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.5}The automating script}{219}{subsection.5.6.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.6}Making a report}{222}{subsection.5.6.6}}
-\newlabel{softeng1:exper:report}{{5.6.6}{222}{Making a report}{subsection.5.6.6}{}}
-\@writefile{toc}{\contentsline {paragraph}{Word, OpenOffice, GoogleDocs.}{222}{section*.184}}
-\@writefile{toc}{\contentsline {paragraph}{HTML with MathJax.}{222}{section*.185}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces  Report in HTML format with MathJax.  \relax }}{223}{figure.caption.186}}
-\newlabel{softeng1:exper:report:fig:mathjax}{{5.5}{223}{Report in HTML format with MathJax.  \relax }{figure.caption.186}{}}
-\@writefile{toc}{\contentsline {paragraph}{{\LaTeX  }.}{223}{section*.187}}
-\@writefile{toc}{\contentsline {paragraph}{Sphinx.}{223}{section*.189}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces  Report in PDF format generated from {\LaTeX  } source.  \relax }}{224}{figure.caption.188}}
-\newlabel{softeng1:exper:report:fig:latex}{{5.6}{224}{Report in PDF format generated from {\LaTeX } source.  \relax }{figure.caption.188}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces  Report in HTML format generated from Sphinx source.  \relax }}{224}{figure.caption.190}}
-\newlabel{softeng1:exper:report:fig:sphinx}{{5.7}{224}{Report in HTML format generated from Sphinx source.  \relax }{figure.caption.190}{}}
-\@writefile{toc}{\contentsline {paragraph}{Markdown.}{224}{section*.191}}
-\@writefile{toc}{\contentsline {paragraph}{IPython/Jupyter notebooks.}{225}{section*.192}}
-\@writefile{toc}{\contentsline {paragraph}{Wiki formats.}{225}{section*.193}}
-\@writefile{toc}{\contentsline {paragraph}{DocOnce.}{225}{section*.194}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.7}Publishing a complete project}{225}{subsection.5.6.7}}
-\newlabel{softeng1:exper:github}{{5.6.7}{225}{Publishing a complete project}{subsection.5.6.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.7}Exercises}{226}{section.5.7}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.1: Make a tool for differentiating curves}{226}{section*.195}}
-\newlabel{softeng1:exer:derivative}{{5.1}{226}{Problem \thedoconceexercisecounter : Make a tool for differentiating curves}{section*.195}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{227}{section*.196}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{227}{section*.197}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{227}{section*.198}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.2: Make solid software for the Trapezoidal rule}{227}{section*.199}}
-\newlabel{softeng1:exer:integral:flat}{{5.2}{227}{Problem \thedoconceexercisecounter : Make solid software for the Trapezoidal rule}{section*.199}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{228}{section*.200}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{228}{section*.201}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{228}{section*.202}}
-\@writefile{toc}{\contentsline {paragraph}{c)}{228}{section*.203}}
-\@writefile{toc}{\contentsline {paragraph}{Hint.}{229}{section*.204}}
-\@writefile{toc}{\contentsline {paragraph}{d)}{229}{section*.205}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.3: Implement classes for the Trapezoidal rule}{229}{section*.206}}
-\newlabel{softeng1:exer:integral:flat2}{{5.3}{229}{Problem \thedoconceexercisecounter : Implement classes for the Trapezoidal rule}{section*.206}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.4: Write a doctest and a test function}{230}{section*.207}}
-\newlabel{softeng1:exer:doctest1}{{5.4}{230}{Problem \thedoconceexercisecounter : Write a doctest and a test function}{section*.207}{}}
-\@writefile{toc}{\contentsline {paragraph}{a)}{230}{section*.208}}
-\@writefile{toc}{\contentsline {paragraph}{b)}{230}{section*.209}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.5: Experiment with tolerances in comparisons}{230}{section*.210}}
-\newlabel{softeng1:exer:tol}{{5.5}{230}{Problem \thedoconceexercisecounter : Experiment with tolerances in comparisons}{section*.210}{}}
-\@writefile{toc}{\contentsline {paragraph}{Remarks.}{230}{section*.211}}
-\@writefile{loe}{\contentsline {doconceexercise}{Exercise 5.6: Make use of a class implementation}{230}{section*.212}}
-\newlabel{softeng1:exer:class:dts}{{5.6}{230}{Exercise \thedoconceexercisecounter : Make use of a class implementation}{section*.212}{}}
-\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.7: Make solid software for a difference equation}{231}{section*.213}}
-\newlabel{softeng1:exer:logistic}{{5.7}{231}{Problem \thedoconceexercisecounter : Make solid software for a difference equation}{section*.213}{}}
-\newlabel{softeng1:exer:logistic:eq}{{5.9}{231}{Problem \thedoconceexercisecounter : Make solid software for a difference equation}{equation.5.7.9}{}}
+\zref@newlabel{mdf@pagelabel-36}{\default{5.4.3}\page{213}\abspage{215}\mdf@pagevalue{213}}
+\pgfsyspdfmark {pgfid66}{4344704}{40885720}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Classes for problem and solution method}{213}{section.5.5}}
+\newlabel{softeng1:prog:se:class}{{5.5}{213}{Classes for problem and solution method}{section.5.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}The problem class}{214}{subsection.5.5.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}The solver class}{215}{subsection.5.5.2}}
+\@writefile{toc}{\contentsline {paragraph}{Combining the objects.}{216}{section*.181}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.3}Improving the problem and solver classes}{217}{subsection.5.5.3}}
+\newlabel{softeng1:prog:se:class2}{{5.5.3}{217}{Improving the problem and solver classes}{subsection.5.5.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{A generic class for parameters.}{218}{section*.182}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Automating scientific experiments}{219}{section.5.6}}
+\newlabel{softeng1:experiments}{{5.6}{219}{Automating scientific experiments}{section.5.6}{}}
+\zref@newlabel{mdf@pagelabel-37}{\default{5.6}\page{219}\abspage{221}\mdf@pagevalue{219}}
+\newlabel{softeng1:experiments:model}{{5.4}{219}{Automating scientific experiments}{equation.5.6.4}{}}
+\pgfsyspdfmark {pgfid68}{4344704}{9778581}
+\zref@newlabel{mdf@pagelabel-38}{\default{5.6}\page{220}\abspage{222}\mdf@pagevalue{220}}
+\newlabel{softeng1:experiments:theta}{{5.5}{220}{Automating scientific experiments}{equation.5.6.5}{}}
+\pgfsyspdfmark {pgfid69}{6339911}{29950247}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.1}Available software}{220}{subsection.5.6.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.2}The results we want to produce}{221}{subsection.5.6.2}}
+\zref@newlabel{mdf@pagelabel-39}{\default{5.6.2}\page{222}\abspage{224}\mdf@pagevalue{222}}
+\pgfsyspdfmark {pgfid71}{6339911}{32164427}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.3}Combining plot files}{222}{subsection.5.6.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces  Illustration of the Backward Euler method for four time step values.  \relax }}{223}{figure.caption.183}}
+\newlabel{softeng1:experiments:fig:BE4a}{{5.4}{223}{Illustration of the Backward Euler method for four time step values.  \relax }{figure.caption.183}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.4}Running a program from Python}{223}{subsection.5.6.4}}
+\zref@newlabel{mdf@pagelabel-40}{\default{5.6.4}\page{224}\abspage{226}\mdf@pagevalue{224}}
+\pgfsyspdfmark {pgfid73}{6339911}{17168497}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.5}The automating script}{225}{subsection.5.6.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.6}Making a report}{227}{subsection.5.6.6}}
+\newlabel{softeng1:exper:report}{{5.6.6}{227}{Making a report}{subsection.5.6.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Word, OpenOffice, GoogleDocs.}{227}{section*.184}}
+\@writefile{toc}{\contentsline {paragraph}{HTML with MathJax.}{228}{section*.185}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces  Report in HTML format with MathJax.  \relax }}{228}{figure.caption.186}}
+\newlabel{softeng1:exper:report:fig:mathjax}{{5.5}{228}{Report in HTML format with MathJax.  \relax }{figure.caption.186}{}}
+\@writefile{toc}{\contentsline {paragraph}{{\LaTeX  }.}{228}{section*.187}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces  Report in PDF format generated from {\LaTeX  } source.  \relax }}{229}{figure.caption.188}}
+\newlabel{softeng1:exper:report:fig:latex}{{5.6}{229}{Report in PDF format generated from {\LaTeX } source.  \relax }{figure.caption.188}{}}
+\@writefile{toc}{\contentsline {paragraph}{Sphinx.}{229}{section*.189}}
+\@writefile{toc}{\contentsline {paragraph}{Markdown.}{229}{section*.191}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces  Report in HTML format generated from Sphinx source.  \relax }}{230}{figure.caption.190}}
+\newlabel{softeng1:exper:report:fig:sphinx}{{5.7}{230}{Report in HTML format generated from Sphinx source.  \relax }{figure.caption.190}{}}
+\@writefile{toc}{\contentsline {paragraph}{IPython/Jupyter notebooks.}{230}{section*.192}}
+\@writefile{toc}{\contentsline {paragraph}{Wiki formats.}{230}{section*.193}}
+\@writefile{toc}{\contentsline {paragraph}{DocOnce.}{231}{section*.194}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.7}Publishing a complete project}{231}{subsection.5.6.7}}
+\newlabel{softeng1:exper:github}{{5.6.7}{231}{Publishing a complete project}{subsection.5.6.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.7}Exercises}{232}{section.5.7}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.1: Make a tool for differentiating curves}{232}{section*.195}}
+\newlabel{softeng1:exer:derivative}{{5.1}{232}{Problem \thedoconceexercisecounter : Make a tool for differentiating curves}{section*.195}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{232}{section*.196}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{232}{section*.197}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{233}{section*.198}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.2: Make solid software for the Trapezoidal rule}{233}{section*.199}}
+\newlabel{softeng1:exer:integral:flat}{{5.2}{233}{Problem \thedoconceexercisecounter : Make solid software for the Trapezoidal rule}{section*.199}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{233}{section*.200}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{234}{section*.201}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{234}{section*.202}}
+\@writefile{toc}{\contentsline {paragraph}{c)}{234}{section*.203}}
+\@writefile{toc}{\contentsline {paragraph}{Hint.}{234}{section*.204}}
+\@writefile{toc}{\contentsline {paragraph}{d)}{235}{section*.205}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.3: Implement classes for the Trapezoidal rule}{235}{section*.206}}
+\newlabel{softeng1:exer:integral:flat2}{{5.3}{235}{Problem \thedoconceexercisecounter : Implement classes for the Trapezoidal rule}{section*.206}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.4: Write a doctest and a test function}{235}{section*.207}}
+\newlabel{softeng1:exer:doctest1}{{5.4}{235}{Problem \thedoconceexercisecounter : Write a doctest and a test function}{section*.207}{}}
+\@writefile{toc}{\contentsline {paragraph}{a)}{236}{section*.208}}
+\@writefile{toc}{\contentsline {paragraph}{b)}{236}{section*.209}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.5: Experiment with tolerances in comparisons}{236}{section*.210}}
+\newlabel{softeng1:exer:tol}{{5.5}{236}{Problem \thedoconceexercisecounter : Experiment with tolerances in comparisons}{section*.210}{}}
+\@writefile{toc}{\contentsline {paragraph}{Remarks.}{236}{section*.211}}
+\@writefile{loe}{\contentsline {doconceexercise}{Exercise 5.6: Make use of a class implementation}{236}{section*.212}}
+\newlabel{softeng1:exer:class:dts}{{5.6}{236}{Exercise \thedoconceexercisecounter : Make use of a class implementation}{section*.212}{}}
+\@writefile{loe}{\contentsline {doconceexercise}{Problem 5.7: Make solid software for a difference equation}{236}{section*.213}}
+\newlabel{softeng1:exer:logistic}{{5.7}{236}{Problem \thedoconceexercisecounter : Make solid software for a difference equation}{section*.213}{}}
+\newlabel{softeng1:exer:logistic:eq}{{5.9}{236}{Problem \thedoconceexercisecounter : Make solid software for a difference equation}{equation.5.7.9}{}}
 \bibstyle{plain}
 \bibdata{../chapters/papers}
 \bibcite{Gander_2015}{1}
@@ -757,8 +751,8 @@
 \bibcite{Langtangen_2012}{8}
 \bibcite{Langtangen_scaling}{9}
 \bibcite{odespy}{10}
-\@writefile{toc}{\contentsline {chapter}{References}{233}{chapter*.214}}
+\@writefile{toc}{\contentsline {chapter}{References}{237}{chapter*.214}}
 \bibcite{parachute_1999}{11}
 \bibcite{Petzold_Ascher_1998}{12}
 \bibcite{index_cards}{13}
-\@writefile{toc}{\contentsline {chapter}{Index}{235}{section*.215}}
+\@writefile{toc}{\contentsline {chapter}{Index}{239}{section*.215}}

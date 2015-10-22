@@ -1623,10 +1623,12 @@ module:
 <p>
 <!-- begin verbatim block  pypro-->
 <pre><code>import logging
+# Configure logger
 logging.basicConfig(
     filename='myprog.log', filemode='w', level=logging.WARNING,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%m/%d/%Y %I:%M:%S %p')
+# Perform logging
 logging.info('Here is some general info.')
 logging.warning('Here is a warning.')
 logging.debug('Here is some debugging info.')
@@ -1680,13 +1682,7 @@ monitoring the simulation and for debugging it, respectively.
 
 <p>
 <!-- begin verbatim block  pycod-->
-<pre><code>import logging
-logging.basicConfig(
-    filename='decay.log', filemode='w', level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    datefmt='%Y.%m.%d %I:%M:%S %p')
-
-def solver_with_logging(I, a, T, dt, theta):
+<pre><code>def solver_with_logging(I, a, T, dt, theta):
     &quot;&quot;&quot;Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;
     dt = float(dt)               # avoid integer division
     Nt = int(round(T/dt))        # no of time intervals
@@ -1707,13 +1703,360 @@ def solver_with_logging(I, a, T, dt, theta):
                       (1 + theta*dt*a,
                        str(type(1 + theta*dt*a))[7:-2]))
     return u, t
+
+def configure_basic_logger():
+    logging.basicConfig(
+        filename='decay.log', filemode='w', level=logging.DEBUG,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y.%m.%d %I:%M:%S %p')
+
+import sys
+
+def read_command_line_positional():
+    if len(sys.argv) &lt; 6:
+        print 'Usage: %s I a T on/off BE/FE/CN dt1 dt2 dt3 ...' % \ 
+              sys.argv[0]; sys.exit(1)  # abort
+
+    I = float(sys.argv[1])
+    a = float(sys.argv[2])
+    T = float(sys.argv[3])
+
+    # Name of schemes: BE (Backward Euler), FE (Forward Euler),
+    # CN (Crank-Nicolson)
+    scheme = sys.argv[4]
+    scheme2theta = {'BE': 1, 'CN': 0.5, 'FE': 0}
+    if scheme in scheme2theta:
+        theta = scheme2theta[scheme]
+    else:
+        print 'Invalid scheme name:', scheme; sys.exit(1)
+
+    dt_values = [float(arg) for arg in sys.argv[5:]]
+
+    return I, a, T, theta, dt_values
+
+def define_command_line_options():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--I', '--initial_condition', type=float,
+        default=1.0, help='initial condition, u(0)',
+        metavar='I')
+    parser.add_argument(
+        '--a', type=float, default=1.0,
+        help='coefficient in ODE', metavar='a')
+    parser.add_argument(
+        '--T', '--stop_time', type=float,
+        default=1.0, help='end time of simulation',
+        metavar='T')
+    parser.add_argument(
+        '--scheme', type=str, default='CN',
+        help='FE, BE, or CN')
+    parser.add_argument(
+        '--dt', '--time_step_values', type=float,
+        default=[1.0], help='time step values',
+        metavar='dt', nargs='+', dest='dt_values')
+    return parser
+
+def read_command_line_argparse():
+    parser = define_command_line_options()
+    args = parser.parse_args()
+    scheme2theta = {'BE': 1, 'CN': 0.5, 'FE': 0}
+    data = (args.I, args.a, args.T, scheme2theta[args.scheme],
+            args.dt_values)
+    return data
+
+def experiment_compare_dt(option_value_pairs=False):
+    I, a, T, theta, dt_values = \ 
+       read_command_line_argparse() if option_value_pairs else \ 
+       read_command_line_positional()
+
+    legends = []
+    for dt in dt_values:
+        u, t = solver(I, a, T, dt, theta)
+        plt.plot(t, u)
+        legends.append('dt=%g' % dt)
+    t_e = np.linspace(0, T, 1001)       # very fine mesh for u_e
+    u_e = u_exact(t_e, I, a)
+    plt.plot(t_e, u_e, '--')
+    legends.append('exact')
+    plt.legend(legends, loc='upper right')
+    plt.title('theta=%g' % theta)
+    plotfile = 'tmp'
+    plt.savefig(plotfile + '.png');  plt.savefig(plotfile + '.pdf')
+
+def compute4web(I, a, T, dt, theta=0.5):
+    &quot;&quot;&quot;
+    Run a case with the solver, compute error measure,
+    and plot the numerical and exact solutions in a PNG
+    plot whose data are embedded in an HTML image tag.
+    &quot;&quot;&quot;
+    u, t = solver(I, a, T, dt, theta)
+    u_e = u_exact(t, I, a)
+    e = u_e - u
+    E = np.sqrt(dt*np.sum(e**2))
+
+    plt.figure()
+    t_e = np.linspace(0, T, 1001)    # fine mesh for u_e
+    u_e = u_exact(t_e, I, a)
+    plt.plot(t,   u,   'r--o')
+    plt.plot(t_e, u_e, 'b-')
+    plt.legend(['numerical', 'exact'])
+    plt.xlabel('t')
+    plt.ylabel('u')
+    plt.title('theta=%g, dt=%g' % (theta, dt))
+    # Save plot to HTML img tag with PNG code as embedded data
+    from parampool.utils import save_png_to_str
+    html_text = save_png_to_str(plt, plotwidth=400)
+
+    return E, html_text
+
+def main_GUI(I=1.0, a=.2, T=4.0,
+             dt_values=[1.25, 0.75, 0.5, 0.1],
+             theta_values=[0, 0.5, 1]):
+    # Build HTML code for web page. Arrange plots in columns
+    # corresponding to the theta values, with dt down the rows
+    theta2name = {0: 'FE', 1: 'BE', 0.5: 'CN'}
+    html_text = '&lt;table&gt;\n'
+    for dt in dt_values:
+        html_text += '&lt;tr&gt;\n'
+        for theta in theta_values:
+            E, html = compute4web(I, a, T, dt, theta)
+            html_text += &quot;&quot;&quot;
+&lt;td&gt;
+&lt;center&gt;&lt;b&gt;%s, dt=%g, error: %.3E&lt;/b&gt;&lt;/center&gt;&lt;br&gt;
+%s
+&lt;/td&gt;
+&quot;&quot;&quot; % (theta2name[theta], dt, E, html)
+        html_text += '&lt;/tr&gt;\n'
+    html_text += '&lt;/table&gt;\n'
+    return html_text
+
+def solver_with_doctest(I, a, T, dt, theta):
+    &quot;&quot;&quot;
+    Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt.
+
+
+    &gt;&gt;&gt; u, t = solver(I=0.8, a=1.2, T=1.5, dt=0.5, theta=0.5)
+    &gt;&gt;&gt; for n in range(len(t)):
+    ...     print 't=%.1f, u=%.14f' % (t[n], u[n])
+    t=0.0, u=0.80000000000000
+    t=0.5, u=0.43076923076923
+    t=1.0, u=0.23195266272189
+    t=1.5, u=0.12489758761948
+    &quot;&quot;&quot;
+    dt = float(dt)               # avoid integer division
+    Nt = int(round(T/dt))        # no of time intervals
+    T = Nt*dt                    # adjust T to fit time step dt
+    u = np.zeros(Nt+1)           # array of u[n] values
+    t = np.linspace(0, T, Nt+1)  # time mesh
+
+    u[0] = I                  # assign initial condition
+    for n in range(0, Nt):    # n=0,1,...,Nt-1
+        u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
+    return u, t
+
+def third(x):
+    return x/3.
+
+def test_third():
+    x = 0.15
+    expected = (1/3.)*x
+    computed = third(x)
+    tol = 1E-15
+    success = abs(expected - computed) &lt; tol
+    assert success
+
+def u_discrete_exact(n, I, a, theta, dt):
+    &quot;&quot;&quot;Return exact discrete solution of the numerical schemes.&quot;&quot;&quot;
+    dt = float(dt)  # avoid integer division
+    A = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)
+    return I*A**n
+
+def test_u_discrete_exact():
+    &quot;&quot;&quot;Check that solver reproduces the exact discr. sol.&quot;&quot;&quot;
+    theta = 0.8; a = 2; I = 0.1; dt = 0.8
+    Nt = int(8/dt)  # no of steps
+    u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
+
+    # Evaluate exact discrete solution on the mesh
+    u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
+                     for n in range(Nt+1)])
+
+    # Find largest deviation
+    diff = np.abs(u_de - u).max()
+    tol = 1E-14
+    success = diff &lt; tol
+    assert success
+
+def test_potential_integer_division():
+    &quot;&quot;&quot;Choose variables that can trigger integer division.&quot;&quot;&quot;
+    theta = 1; a = 1; I = 1; dt = 2
+    Nt = 4
+    u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
+    u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
+                     for n in range(Nt+1)])
+    diff = np.abs(u_de - u).max()
+    assert diff &lt; 1E-14
+
+def test_read_command_line_positional():
+    # Decide on a data set of input parameters
+    I = 1.6;  a = 1.8;  T = 2.2;  theta = 0.5
+    dt_values = [0.1, 0.2, 0.05]
+    # Expected return from read_command_line_positional
+    expected = [I, a, T, theta, dt_values]
+    # Construct corresponding sys.argv array
+    sys.argv = [sys.argv[0], str(I), str(a), str(T), 'CN'] + \ 
+               [str(dt) for dt in dt_values]
+    computed = read_command_line_positional()
+    for expected_arg, computed_arg in zip(expected, computed):
+        assert expected_arg == computed_arg
+
+def test_read_command_line_argparse():
+    I = 1.6;  a = 1.8;  T = 2.2;  theta = 0.5
+    dt_values = [0.1, 0.2, 0.05]
+    # Expected return from read_command_line_argparse
+    expected = [I, a, T, theta, dt_values]
+    # Construct corresponding sys.argv array
+    command_line = '%s --a %s --I %s --T %s --scheme CN --dt ' % \ 
+                   (sys.argv[0], a, I, T)
+    command_line += ' '.join([str(dt) for dt in dt_values])
+    sys.argv = command_line.split()
+    computed = read_command_line_argparse()
+    for expected_arg, computed_arg in zip(expected, computed):
+        assert expected_arg == computed_arg
+
+# Classes
+
+class Problem(object):
+    def __init__(self, I=1, a=1, T=10):
+        self.T, self.I, self.a = I, float(a), T
+
+    def define_command_line_options(self, parser=None):
+        &quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;
+        if parser is None:
+            import argparse
+            parser = argparse.ArgumentParser()
+
+        parser.add_argument(
+            '--I', '--initial_condition', type=float,
+            default=1.0, help='initial condition, u(0)',
+            metavar='I')
+        parser.add_argument(
+            '--a', type=float, default=1.0,
+            help='coefficient in ODE', metavar='a')
+        parser.add_argument(
+            '--T', '--stop_time', type=float,
+            default=1.0, help='end time of simulation',
+            metavar='T')
+        return parser
+
+    def init_from_command_line(self, args):
+        &quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;
+        self.I, self.a, self.T = args.I, args.a, args.T
+
+    def u_exact(self, t):
+        &quot;&quot;&quot;Return the exact solution u(t)=I*exp(-a*t).&quot;&quot;&quot;
+        I, a = self.I, self.a
+        return I*exp(-a*t)
+
+
+class Solver(object):
+    def __init__(self, problem, dt=0.1, theta=0.5):
+        self.problem = problem
+        self.dt, self.theta = float(dt), theta
+
+    def define_command_line_options(self, parser):
+        &quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;
+        parser.add_argument(
+            '--scheme', type=str, default='CN',
+            help='FE, BE, or CN')
+        parser.add_argument(
+            '--dt', '--time_step_values', type=float,
+            default=[1.0], help='time step values',
+            metavar='dt', nargs='+', dest='dt_values')
+        return parser
+
+    def init_from_command_line(self, args):
+        &quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;
+        self.dt, self.theta = args.dt, args.theta
+
+    def solve(self):
+        self.u, self.t = solver(
+            self.problem.I, self.problem.a, self.problem.T,
+            self.dt, self.theta)
+
+    def error(self):
+        &quot;&quot;&quot;Return norm of error at the mesh points.&quot;&quot;&quot;
+        u_e = self.problem.u_exact(self.t)
+        e = u_e - self.u
+        E = np.sqrt(self.dt*np.sum(e**2))
+        return E
+
+def experiment_classes():
+    problem = Problem()
+    solver = Solver(problem)
+
+    # Read input from the command line
+    parser = problem.define_command_line_options()
+    parser = solver. define_command_line_options(parser)
+    args = parser.parse_args()
+    problem.init_from_command_line(args)
+    solver. init_from_command_line(args)
+
+    # Solve and plot
+    solver.solve()
+    import matplotlib.pyplot as plt
+    t_e = np.linspace(0, T, 1001)    # very fine mesh for u_e
+    u_e = problem.u_exact(t_e)
+    print 'Error:', solver.error()
+
+    plt.plot(t,   u,   'r--o')
+    plt.plot(t_e, u_e, 'b-')
+    plt.legend(['numerical, theta=%g' % theta, 'exact'])
+    plt.xlabel('t')
+    plt.ylabel('u')
+    plotfile = 'tmp'
+    plt.savefig(plotfile + '.png');  plt.savefig(plotfile + '.pdf')
+    plt.show()
+
+if __name__ == '__main__':
+    configure_logger()
+    experiment_compare_dt(True)
+    plt.show()
 </code></pre>
 <!-- end verbatim block -->
-We can run this new solver function in a shell:
+The application code that calls <code>solver_with_logging</code> needs to configure
+the logger. The <code>decay</code> module offers a default configure function:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import logging
+
+def configure_basic_logger():
+    logging.basicConfig(
+        filename='decay.log', filemode='w', level=logging.DEBUG,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y.%m.%d %I:%M:%S %p')
+</code></pre>
+<!-- end verbatim block -->
+If the user of a library does not configure a logger or call this
+configure function, the library should prevent error messages by
+declaring a default logger that does nothing:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import logging
+logging.getLogger('decay').addHandler(logging.NullHandler())
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+We can run the new solver function with logging in a shell:
 
 <p>
 <!-- begin verbatim block  pyshell-->
 <pre><code>&gt;&gt;&gt; import decay
+&gt;&gt;&gt; decay.configure_basic_logger()
 &gt;&gt;&gt; u, t = decay.solver_with_logging(I=1, a=0.5, T=10, \ 
            dt=0.5, theta=0.5)
 </code></pre>
@@ -1764,6 +2107,11 @@ the formula for \( u^{n+1} \), we can change the logging level to
 2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
 </code></pre>
 <!-- end verbatim block -->
+
+<p>
+Logging can be much more sophisticated than shown above. One can, e.g.,
+output critical messages to the screen and all messages to a file.
+This requires more code as demonstrated in the <a href="https://docs.python.org/2/howto/logging-cookbook.html" target="_self">Logging Cookbook</a>.
 
 <h1 id="softeng1:basic:UI">User interfaces</h1>
 
