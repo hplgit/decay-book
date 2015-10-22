@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Finite Difference Computing with Partial Differential Equations</title>
+    <title>Finite Difference Computing with Exponential Decay Models</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -43,8 +43,8 @@
         </style>
 
     
-    <link rel="top" title="Finite Difference Computing with Partial Differential Equations" href="#" />
-    <link rel="next" title="Finite Difference Computing with Partial Differential Equations" href="._book000.html" />
+    <link rel="top" title="Finite Difference Computing with Exponential Decay Models" href="#" />
+    <link rel="next" title="Finite Difference Computing with Exponential Decay Models" href="._book000.html" />
  
   
        <style type="text/css">
@@ -63,9 +63,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="._book000.html" title="Finite Difference Computing with Partial Differential Equations"
+          <a href="._book000.html" title="Finite Difference Computing with Exponential Decay Models"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">Finite Difference Computing with Partial Differential Equations</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Finite Difference Computing with Exponential Decay Models</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -74,478 +74,280 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="finite-difference-computing-with-partial-differential-equations">
-<h1>Finite Difference Computing with Partial Differential Equations<a class="headerlink" href="#finite-difference-computing-with-partial-differential-equations" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="finite-difference-computing-with-exponential-decay-models">
+<h1>Finite Difference Computing with Exponential Decay Models<a class="headerlink" href="#finite-difference-computing-with-exponential-decay-models" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="._book000.html">Finite Difference Computing with Partial Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book000.html">Finite Difference Computing with Exponential Decay Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._book001.html">Preface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book001.html#simplify-understand-generalize">Simplify, understand, generalize</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book001.html#constructive-mathematics">Constructive mathematics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book001.html#all-nuts-and-bolts">All nuts and bolts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book001.html#python-as-programming-language">Python as programming language</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book001.html#program-verification">Program verification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book001.html#analysis-via-exact-solutions-of-discrete-equations">Analysis via exact solutions of discrete equations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book001.html#code-inspired-mathematical-notation">Code-inspired mathematical notation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book001.html#limited-scope">Limited scope</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book001.html#independent-chapters">Independent chapters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._book001.html#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._book002.html">Vibration ODEs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#finite-difference-discretization">Finite difference discretization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#a-basic-model-for-vibrations">A basic model for vibrations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#a-centered-finite-difference-scheme">A centered finite difference scheme</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#implementation-1">Implementation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#making-a-solver-function">Making a solver function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#verification-1">Verification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#scaled-model">Scaled model</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#long-time-simulations">Long time simulations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#using-a-moving-plot-window">Using a moving plot window</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#making-animations">Making animations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#using-bokeh-to-compare-graphs">Using Bokeh to compare graphs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#using-a-line-by-line-ascii-plotter">Using a line-by-line ascii plotter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#empirical-analysis-of-the-solution">Empirical analysis of the solution</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#analysis-of-the-numerical-scheme">Analysis of the numerical scheme</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#deriving-a-solution-of-the-numerical-scheme">Deriving a solution of the numerical scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exact-discrete-solution">Exact discrete solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#convergence">Convergence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#the-global-error">The global error</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#stability-1">Stability</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#about-the-accuracy-at-the-stability-limit">About the accuracy at the stability limit</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#alternative-schemes-based-on-1st-order-equations">Alternative schemes based on 1st-order equations</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="._book002.html">Algorithms and implementations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._book002.html#finite-difference-methods">Finite difference methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book002.html#a-basic-model-for-exponential-decay">A basic model for exponential decay</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._book002.html#the-forward-euler-scheme">The Forward Euler scheme</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._book002.html#the-backward-euler-scheme">The Backward Euler scheme</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._book002.html#the-crank-nicolson-scheme">The Crank-Nicolson scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#comparison-of-schemes">Comparison of schemes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#runge-kutta-methods">Runge-Kutta methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#analysis-of-the-forward-euler-scheme-1">Analysis of the Forward Euler scheme</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#energy-considerations">Energy considerations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#derivation-of-the-energy-expression">Derivation of the energy expression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#an-error-measure-based-on-energy">An error measure based on energy</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#the-euler-cromer-method">The Euler-Cromer method</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#forward-backward-discretization">Forward-backward discretization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#equivalence-with-the-scheme-for-the-second-order-ode">Equivalence with the scheme for the second-order ODE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#implementation-2">Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#the-velocity-verlet-algorithm">The velocity Verlet algorithm</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#generalization-damping-nonlinear-spring-and-external-excitation">Generalization: damping, nonlinear spring, and external excitation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#a-centered-scheme-for-linear-damping">A centered scheme for linear damping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#a-centered-scheme-for-quadratic-damping">A centered scheme for quadratic damping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#a-forward-backward-discretization-of-the-quadratic-damping-term">A forward-backward discretization of the quadratic damping term</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#implementation-3">Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#verification-2">Verification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#visualization">Visualization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#user-interface">User interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#the-euler-cromer-scheme-for-the-generalized-model">The Euler-Cromer scheme for the generalized model</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book002.html#exercises-and-problems">Exercises and Problems</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#problem-1-use-linear-quadratic-functions-for-verification">Problem 1: Use linear/quadratic functions for verification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-2-show-linear-growth-of-the-phase-with-time">Exercise 2: Show linear growth of the phase with time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-3-improve-the-accuracy-by-adjusting-the-frequency">Exercise 3: Improve the accuracy by adjusting the frequency</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-4-see-if-adaptive-methods-improve-the-phase-error">Exercise 4: See if adaptive methods improve the phase error</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-5-use-a-taylor-polynomial-to-compute">Exercise 5: Use a Taylor polynomial to compute <span class="math">\(u^1\)</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-6-find-the-minimal-resolution-of-an-oscillatory-function">Exercise 6: Find the minimal resolution of an oscillatory function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-7-visualize-the-accuracy-of-finite-differences-for-a-cosine-function">Exercise 7: Visualize the accuracy of finite differences for a cosine function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-8-verify-convergence-rates-of-the-error-in-energy">Exercise 8: Verify convergence rates of the error in energy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-9-use-linear-quadratic-functions-for-verification">Exercise 9: Use linear/quadratic functions for verification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-10-use-an-exact-discrete-solution-for-verification">Exercise 10: Use an exact discrete solution for verification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-11-use-analytical-solution-for-convergence-rate-tests">Exercise 11: Use analytical solution for convergence rate tests</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-12-investigate-the-amplitude-errors-of-many-solvers">Exercise 12: Investigate the amplitude errors of many solvers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-13-minimize-memory-usage-of-a-vibration-solver">Exercise 13: Minimize memory usage of a vibration solver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-14-implement-the-solver-via-classes">Exercise 14: Implement the solver via classes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-15-interpret-as-a-forward-backward-difference">Exercise 15: Interpret <span class="math">\([D_tD_t u]^n\)</span> as a forward-backward difference</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-16-use-a-backward-difference-for-the-damping-term">Exercise 16: Use a backward difference for the damping term</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book002.html#exercise-17-analysis-of-the-euler-cromer-scheme">Exercise 17: Analysis of the Euler-Cromer scheme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book002.html#the-unifying-rule">The unifying <span class="math">\(\theta\)</span>-rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book002.html#constant-time-step">Constant time step</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book002.html#mathematical-derivation-of-finite-difference-formulas">Mathematical derivation of finite difference formulas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book002.html#compact-operator-notation-for-finite-differences">Compact operator notation for finite differences</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._book003.html">Wave equations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book003.html#simulation-of-waves-on-a-string">Simulation of waves on a string</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#discretizing-the-domain">Discretizing the domain</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#the-discrete-solution">The discrete solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#fulfilling-the-equation-at-the-mesh-points">Fulfilling the equation at the mesh points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#replacing-derivatives-by-finite-differences">Replacing derivatives by finite differences</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#formulating-a-recursive-algorithm">Formulating a recursive algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#sketch-of-an-implementation">Sketch of an implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book003.html">Implementation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#computer-language-python">Computer language: Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#making-a-solver-function">Making a solver function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#integer-division">Integer division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#doc-strings">Doc strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#formatting-numbers">Formatting numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#running-the-program">Running the program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#plotting-the-solution">Plotting the solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#verifying-the-implementation">Verifying the implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book003.html#running-a-few-algorithmic-steps-by-hand">Running a few algorithmic steps by hand</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book003.html#verification-3">Verification</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#a-slightly-generalized-model-problem">A slightly generalized model problem</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#using-an-analytical-solution-of-physical-significance">Using an analytical solution of physical significance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#manufactured-solution">Manufactured solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#constructing-an-exact-solution-of-the-discrete-equations">Constructing an exact solution of the discrete equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#computing-the-numerical-error-as-a-mesh-function">Computing the numerical error as a mesh function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#computing-the-norm-of-the-error-mesh-function">Computing the norm of the error mesh function</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book003.html#scalar-computing">Scalar computing</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book003.html#implementation-4">Implementation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#callback-function-for-user-specific-actions">Callback function for user-specific actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#the-solver-function">The solver function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#verification-exact-quadratic-solution">Verification: exact quadratic solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#visualization-animating-the-solution">Visualization: animating the solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#running-a-case">Running a case</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#working-with-a-scaled-pde-model">Working with a scaled PDE model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#experiments-with-computing-and-plotting">Experiments with computing and plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book003.html#combining-plot-files-1">Combining plot files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book003.html#plotting-with-scitools">Plotting with SciTools</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book003.html#vectorization">Vectorization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#operations-on-slices-of-arrays">Operations on slices of arrays</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#finite-difference-schemes-expressed-as-slices">Finite difference schemes expressed as slices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#verification-4">Verification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#efficiency-measurements">Efficiency measurements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#remark-on-the-updating-of-arrays">Remark on the updating of arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book003.html#memory-saving-implementation">Memory-saving implementation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book003.html#exercises-1">Exercises</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-18-simulate-a-standing-wave">Exercise 18: Simulate a standing wave</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-19-add-storage-of-solution-in-a-user-action-function">Exercise 19: Add storage of solution in a user action function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-20-use-a-class-for-the-user-action-function">Exercise 20: Use a class for the user action function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-21-compare-several-courant-numbers-in-one-movie">Exercise 21: Compare several Courant numbers in one movie</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#project-22-calculus-with-1d-mesh-functions">Project 22: Calculus with 1D mesh functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book004.html">Exercises</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._book004.html#exercise-1-define-a-mesh-function-and-visualize-it">Exercise 1: Define a mesh function and visualize it</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book004.html#remarks-1">Remarks</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book003.html#generalization-reflecting-boundaries">Generalization: reflecting boundaries</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#neumann-boundary-condition">Neumann boundary condition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#discretization-of-derivatives-at-the-boundary">Discretization of derivatives at the boundary</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#implementation-of-neumann-conditions">Implementation of Neumann conditions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#index-set-notation">Index set notation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#verifying-the-implementation-of-neumann-conditions">Verifying the implementation of Neumann conditions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#alternative-implementation-via-ghost-cells">Alternative implementation via ghost cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book004.html#problem-2-differentiate-a-function">Problem 2: Differentiate a function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book004.html#problem-3-experiment-with-divisions">Problem 3: Experiment with divisions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book004.html#problem-4-experiment-with-wrong-computations">Problem 4: Experiment with wrong computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book004.html#problem-5-plot-the-error-function">Problem 5: Plot the error function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book004.html#problem-6-change-formatting-of-numbers-and-debug">Problem 6: Change formatting of numbers and debug</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book003.html#generalization-variable-wave-velocity">Generalization: variable wave velocity</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#the-model-pde-with-a-variable-coefficient">The model PDE with a variable coefficient</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#discretizing-the-variable-coefficient">Discretizing the variable coefficient</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#computing-the-coefficient-between-mesh-points">Computing the coefficient between mesh points</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#how-a-variable-coefficient-affects-the-stability">How a variable coefficient affects the stability</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#neumann-condition-and-a-variable-coefficient">Neumann condition and a variable coefficient</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#implementation-of-variable-coefficients">Implementation of variable coefficients</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#a-more-general-pde-model-with-variable-coefficients">A more general PDE model with variable coefficients</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#generalization-damping">Generalization: damping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book005.html">Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._book005.html#experimental-investigations">Experimental investigations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#discouraging-numerical-solutions">Discouraging numerical solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#detailed-experiments">Detailed experiments</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book003.html#building-a-general-1d-wave-equation-solver">Building a general 1D wave equation solver</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#user-action-function-as-a-class">User action function as a class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#pulse-propagation-in-two-media">Pulse propagation in two media</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book005.html#stability">Stability</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#exact-numerical-solution">Exact numerical solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#stability-properties-derived-from-the-amplification-factor">Stability properties derived from the amplification factor</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book003.html#exercises-2">Exercises</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-23-find-the-analytical-solution-to-a-damped-wave-equation">Exercise 23: Find the analytical solution to a damped wave equation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#problem-24-explore-symmetry-boundary-conditions">Problem 24: Explore symmetry boundary conditions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-25-send-pulse-waves-through-a-layered-medium">Exercise 25: Send pulse waves through a layered medium</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-26-explain-why-numerical-noise-occurs">Exercise 26: Explain why numerical noise occurs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-27-investigate-harmonic-averaging-in-a-1d-model">Exercise 27: Investigate harmonic averaging in a 1D model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#problem-28-implement-open-boundary-conditions">Problem 28: Implement open boundary conditions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-29-implement-periodic-boundary-conditions">Exercise 29: Implement periodic boundary conditions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-30-compare-discretizations-of-a-neumann-condition">Exercise 30: Compare discretizations of a Neumann condition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book003.html#exercise-31-verification-by-a-cubic-polynomial-in-space">Exercise 31: Verification by a cubic polynomial in space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book005.html#accuracy">Accuracy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#visual-comparison-of-amplification-factors">Visual comparison of amplification factors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#series-expansion-of-amplification-factors">Series expansion of amplification factors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#the-ratio-of-numerical-and-exact-amplification-factors">The ratio of numerical and exact amplification factors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#the-global-error-at-a-point">The global error at a point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#integrated-error">Integrated error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#truncation-error">Truncation error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#consistency-stability-and-convergence">Consistency, stability, and convergence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._book005.html#various-types-of-errors-in-a-differential-equation-model">Various types of errors in a differential equation model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#model-errors">Model errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#data-errors">Data errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#discretization-errors">Discretization errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#rounding-errors">Rounding errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#discussion-of-the-size-of-various-errors">Discussion of the size of various errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#problem-7-visualize-the-accuracy-of-finite-differences">Problem 7: Visualize the accuracy of finite differences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#problem-8-explore-the-rule-for-exponential-growth">Problem 8: Explore the <span class="math">\(\theta\)</span>-rule for exponential growth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book005.html#problem-9-explore-rounding-errors-in-numerical-calculus">Problem 9: Explore rounding errors in numerical calculus</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._book004.html">Analysis of the difference equations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book004.html#properties-of-the-solution-of-the-wave-equation">Properties of the solution of the wave equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book004.html#more-precise-definition-of-fourier-representations">More precise definition of Fourier representations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book004.html#stability-2">Stability</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book004.html#preliminary-results">Preliminary results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book004.html#numerical-wave-propagation">Numerical wave propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book006.html">Generalizations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._book006.html#model-extensions">Model extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#generalization-including-a-variable-coefficient">Generalization: including a variable coefficient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#generalization-including-a-source-term">Generalization: including a source term</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#implementation-of-the-generalized-model-problem">Implementation of the generalized model problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#verifying-a-constant-solution">Verifying a constant solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#verification-via-manufactured-solutions">Verification via manufactured solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#computing-convergence-rates">Computing convergence rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#extension-to-systems-of-odes">Extension to systems of ODEs</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book004.html#numerical-dispersion-relation">Numerical dispersion relation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book004.html#extending-the-analysis-to-2d-and-3d">Extending the analysis to 2D and 3D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book006.html#general-first-order-odes">General first-order ODEs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#generic-form-of-first-order-odes">Generic form of first-order ODEs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#the-rule">The <span class="math">\(\theta\)</span>-rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#an-implicit-2-step-backward-scheme">An implicit 2-step backward scheme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#leapfrog-schemes">Leapfrog schemes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#the-2nd-order-runge-kutta-method">The 2nd-order Runge-Kutta method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#a-2nd-order-taylor-series-method">A 2nd-order Taylor-series method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#the-2nd-and-3rd-order-adams-bashforth-schemes">The 2nd- and 3rd-order Adams-Bashforth schemes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#the-4th-order-runge-kutta-method">The 4th-order Runge-Kutta method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#the-odespy-software">The Odespy software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#example-runge-kutta-methods">Example: Runge-Kutta methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#example-adaptive-runge-kutta-methods">Example: Adaptive Runge-Kutta methods</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._book005.html">Finite difference methods for 2D and 3D wave equations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book005.html#multi-dimensional-wave-equations">Multi-dimensional wave equations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book005.html#mesh">Mesh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book005.html#discretization">Discretization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book005.html#discretizing-the-pdes">Discretizing the PDEs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book005.html#handling-boundary-conditions-where-is-known">Handling boundary conditions where <span class="math">\(u\)</span> is known</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book005.html#discretizing-the-neumann-condition">Discretizing the Neumann condition</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book005.html#implementation-6">Implementation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book005.html#scalar-computations">Scalar computations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book005.html#domain-and-mesh">Domain and mesh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book005.html#solution-arrays">Solution arrays</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book005.html#index-sets">Index sets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book005.html#computing-the-solution">Computing the solution</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book005.html#vectorized-computations">Vectorized computations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book005.html#verification-5">Verification</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book005.html#testing-a-quadratic-solution">Testing a quadratic solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book006.html#exercises-3">Exercises</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#exercise-10-experiment-with-precision-in-tests-and-the-size-of">Exercise 10: Experiment with precision in tests and the size of <span class="math">\(u\)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#exercise-11-implement-the-2-step-backward-scheme">Exercise 11: Implement the 2-step backward scheme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#exercise-12-implement-the-2nd-order-adams-bashforth-scheme">Exercise 12: Implement the 2nd-order Adams-Bashforth scheme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#exercise-13-implement-the-3rd-order-adams-bashforth-scheme">Exercise 13: Implement the 3rd-order Adams-Bashforth scheme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#exercise-14-analyze-explicit-2nd-order-methods">Exercise 14: Analyze explicit 2nd-order methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#project-15-implement-and-investigate-the-leapfrog-scheme">Project 15: Implement and investigate the Leapfrog scheme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book006.html#problem-16-make-a-unified-implementation-of-many-schemes">Problem 16: Make a unified implementation of many schemes</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._book005.html#using-classes-to-implement-a-simulator">Using classes to implement a simulator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._book005.html#exercises-3">Exercises</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book005.html#exercise-32-check-that-a-solution-fulfills-the-discrete-model">Exercise 32: Check that a solution fulfills the discrete model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book005.html#project-33-calculus-with-2d-mesh-functions">Project 33: Calculus with 2D mesh functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book005.html#exercise-34-implement-neumann-conditions-in-2d">Exercise 34: Implement Neumann conditions in 2D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book005.html#exercise-35-test-the-efficiency-of-compiled-loops-in-3d">Exercise 35: Test the efficiency of compiled loops in 3D</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book007.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#scaling-1">Scaling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#dimensionless-variables">Dimensionless variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#dimensionless-numbers">Dimensionless numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#a-scaling-for-vanishing-initial-condition">A scaling for vanishing initial condition</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._book006.html">Applications of wave equations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book006.html#waves-on-a-string">Waves on a string</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book006.html#damping">Damping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book006.html#external-forcing">External forcing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book006.html#modeling-the-tension-via-springs">Modeling the tension via springs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#evolution-of-a-population">Evolution of a population</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exponential-growth">Exponential growth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#logistic-growth">Logistic growth</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book006.html#waves-on-a-membrane">Waves on a membrane</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book006.html#elastic-waves-in-a-rod">Elastic waves in a rod</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book006.html#the-acoustic-model-for-seismic-waves">The acoustic model for seismic waves</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book006.html#anisotropy">Anisotropy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#compound-interest-and-inflation">Compound interest and inflation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#newton-s-law-of-cooling">Newton&#8217;s law of cooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#radioactive-decay">Radioactive decay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#deterministic-model">Deterministic model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#stochastic-model">Stochastic model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#relation-between-stochastic-and-deterministic-models">Relation between stochastic and deterministic models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#generalization-of-the-radioactive-decay-modeling">Generalization of the radioactive decay modeling</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book006.html#sound-waves-in-liquids-and-gases">Sound waves in liquids and gases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book006.html#spherical-waves">Spherical waves</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book006.html#the-linear-shallow-water-equations">The linear shallow water equations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book006.html#wind-drag-on-the-surface">Wind drag on the surface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book006.html#bottom-drag">Bottom drag</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book006.html#effect-of-the-earth-s-rotation">Effect of the Earth&#8217;s rotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#chemical-kinetics">Chemical kinetics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#irreversible-reaction-of-two-substances">Irreversible reaction of two substances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#reversible-reaction-of-two-substances">Reversible reaction of two substances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#irreversible-reaction-of-two-substances-into-a-third">Irreversible reaction of two substances into a third</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#a-biochemical-reaction">A biochemical reaction</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book006.html#waves-in-blood-vessels">Waves in blood vessels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book006.html#electromagnetic-waves">Electromagnetic waves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#spreading-of-diseases">Spreading of diseases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#predator-prey-models-in-ecology">Predator-prey models in ecology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#decay-of-atmospheric-pressure-with-altitude">Decay of atmospheric pressure with altitude</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#the-general-model">The general model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#multiple-atmospheric-layers">Multiple atmospheric layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#simplifications">Simplifications</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._book007.html">Exercises</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#exercise-36-simulate-waves-on-a-non-homogeneous-string">Exercise 36: Simulate waves on a non-homogeneous string</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#exercise-37-simulate-damped-waves-on-a-string">Exercise 37: Simulate damped waves on a string</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#exercise-38-simulate-elastic-waves-in-a-rod">Exercise 38: Simulate elastic waves in a rod</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#exercise-39-simulate-spherical-waves">Exercise 39: Simulate spherical waves</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#problem-40-earthquake-generated-tsunami-over-a-subsea-hill">Problem 40: Earthquake-generated tsunami over a subsea hill</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#problem-41-earthquake-generated-tsunami-over-a-3d-hill">Problem 41: Earthquake-generated tsunami over a 3D hill</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#problem-42-investigate-matplotlib-for-visualization">Problem 42: Investigate Matplotlib for visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#problem-43-investigate-visualization-packages">Problem 43: Investigate visualization packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#problem-44-implement-loops-in-compiled-languages">Problem 44: Implement loops in compiled languages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#exercise-45-simulate-seismic-waves-in-2d">Exercise 45: Simulate seismic waves in 2D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#project-46-model-3d-acoustic-waves-in-a-room">Project 46: Model 3D acoustic waves in a room</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#project-47-solve-a-1d-transport-equation">Project 47: Solve a 1D transport equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#problem-48-general-analytical-solution-of-a-1d-damped-wave-equation">Problem 48: General analytical solution of a 1D damped wave equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book007.html#problem-49-general-analytical-solution-of-a-2d-damped-wave-equation">Problem 49: General analytical solution of a 2D damped wave equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#compaction-of-sediments">Compaction of sediments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#vertical-motion-of-a-body-in-a-viscous-fluid">Vertical motion of a body in a viscous fluid</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#overview-of-forces">Overview of forces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#equation-of-motion">Equation of motion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#terminal-velocity">Terminal velocity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#a-crank-nicolson-scheme">A Crank-Nicolson scheme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#physical-data">Physical data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#verification">Verification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#scaling-2">Scaling</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._book008.html">Diffusion equations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book008.html#the-1d-diffusion-equation">The 1D diffusion equation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#the-initial-boundary-value-problem-for-1d-diffusion">The initial-boundary value problem for 1D diffusion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#forward-euler-scheme">Forward Euler scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#backward-euler-scheme">Backward Euler scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#sparse-matrix-implementation">Sparse matrix implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#crank-nicolson-scheme">Crank-Nicolson scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#the-rule">The <span class="math">\(\theta\)</span> rule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#the-laplace-and-poisson-equation">The Laplace and Poisson equation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#extensions">Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#viscoelastic-materials">Viscoelastic materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#decay-odes-from-solving-a-pde-by-fourier-expansions">Decay ODEs from solving a PDE by Fourier expansions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._book007.html#exercises-4">Exercises</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#problem-17-radioactive-decay-of-carbon-14">Problem 17: Radioactive decay of Carbon-14</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-18-derive-schemes-for-newton-s-law-of-cooling">Exercise 18: Derive schemes for Newton&#8217;s law of cooling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-19-implement-schemes-for-newton-s-law-of-cooling">Exercise 19: Implement schemes for Newton&#8217;s law of cooling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-20-find-time-of-murder-from-body-temperature">Exercise 20: Find time of murder from body temperature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-21-simulate-an-oscillating-cooling-process">Exercise 21: Simulate an oscillating cooling process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-22-simulate-stochastic-radioactive-decay">Exercise 22: Simulate stochastic radioactive decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#problem-23-radioactive-decay-of-two-substances">Problem 23: Radioactive decay of two substances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-24-simulate-a-simple-chemical-reaction">Exercise 24: Simulate a simple chemical reaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-25-simulate-an-th-order-chemical-reaction">Exercise 25: Simulate an <span class="math">\(n\)</span>-th order chemical reaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-26-simulate-a-biochemical-process">Exercise 26: Simulate a biochemical process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-27-simulate-spreading-of-a-disease">Exercise 27: Simulate spreading of a disease</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-28-simulate-predator-prey-interaction">Exercise 28: Simulate predator-prey interaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-29-simulate-the-pressure-drop-in-the-atmosphere">Exercise 29: Simulate the pressure drop in the atmosphere</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-30-make-a-program-for-vertical-motion-in-a-fluid">Exercise 30: Make a program for vertical motion in a fluid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#project-31-simulate-parachuting">Project 31: Simulate parachuting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-32-formulate-vertical-motion-in-the-atmosphere">Exercise 32: Formulate vertical motion in the atmosphere</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-33-simulate-vertical-motion-in-the-atmosphere">Exercise 33: Simulate vertical motion in the atmosphere</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#problem-34-compute-by-solving-an-ode">Problem 34: Compute <span class="math">\(y=|x|\)</span> by solving an ODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#problem-35-simulate-fortune-growth-with-random-interest-rate">Problem 35: Simulate fortune growth with random interest rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-36-simulate-a-population-in-a-changing-environment">Exercise 36: Simulate a population in a changing environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-37-simulate-logistic-growth">Exercise 37: Simulate logistic growth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-38-rederive-the-equation-for-continuous-compound-interest">Exercise 38: Rederive the equation for continuous compound interest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book007.html#exercise-39-simulate-the-deformation-of-a-viscoelastic-material">Exercise 39: Simulate the deformation of a viscoelastic material</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book008.html#analysis-of-schemes-for-the-diffusion-equation">Analysis of schemes for the diffusion equation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#properties-of-the-solution">Properties of the solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#example-diffusion-of-a-discontinues-profile">Example: Diffusion of a discontinues profile</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#analysis-of-discrete-equations">Analysis of discrete equations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#analysis-of-the-finite-difference-schemes">Analysis of the finite difference schemes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#analysis-of-the-forward-euler-scheme-2">Analysis of the Forward Euler scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#analysis-of-the-backward-euler-scheme">Analysis of the Backward Euler scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#analysis-of-the-crank-nicolson-scheme">Analysis of the Crank-Nicolson scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#summary-of-accuracy-of-amplification-factors">Summary of accuracy of amplification factors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#exercise-50-explore-symmetry-in-a-1d-problem">Exercise 50: Explore symmetry in a 1D problem</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#exercise-51-investigate-approximation-errors-from-a-boundary-condition">Exercise 51: Investigate approximation errors from a <span class="math">\(u_x=0\)</span> boundary condition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#exercise-52-experiment-with-open-boundary-conditions-in-1d">Exercise 52: Experiment with open boundary conditions in 1D</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#exercise-53-simulate-a-diffused-gaussian-peak-in-2d-3d">Exercise 53: Simulate a diffused Gaussian peak in 2D/3D</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#exercise-54-examine-stability-of-a-diffusion-model-with-a-source-term">Exercise 54: Examine stability of a diffusion model with a source term</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._book008.html#diffusion-in-heterogeneous-media">Diffusion in heterogeneous media</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#stationary-solution">Stationary solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#piecewise-constant-medium">Piecewise constant medium</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#implementation-7">Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#diffusion-equation-in-axi-symmetric-geometries">Diffusion equation in axi-symmetric geometries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#diffusion-equation-in-spherically-symmetric-geometries">Diffusion equation in spherically-symmetric geometries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book008.html">Scientific software engineering</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._book008.html#implementations-with-functions-and-modules">Implementations with functions and modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#mathematical-problem-and-solution-technique">Mathematical problem and solution technique</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#a-first-quick-implementation">A first, quick implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#a-more-decent-program">A more decent program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#prefixing-imported-functions-by-the-module-name">Prefixing imported functions by the module name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#implementing-the-numerical-algorithm-in-a-function">Implementing the numerical algorithm in a function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#do-not-have-several-versions-of-a-code">Do not have several versions of a code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#making-a-module">Making a module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#example-on-extending-the-module-code">Example on extending the module code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#documenting-functions-and-modules">Documenting functions and modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#logging-intermediate-results">Logging intermediate results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._book008.html#user-interfaces">User interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#command-line-arguments">Command-line arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#positional-command-line-arguments">Positional command-line arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#option-value-pairs-on-the-command-line">Option-value pairs on the command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#creating-a-graphical-web-user-interface">Creating a graphical web user interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._book008.html#tests-for-verifying-implementations">Tests for verifying implementations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#doctests">Doctests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#unit-tests-and-test-functions">Unit tests and test functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#test-function-for-the-solver">Test function for the solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#test-function-for-reading-positional-command-line-arguments">Test function for reading positional command-line arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#test-function-for-reading-option-value-pairs">Test function for reading option-value pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#classical-class-based-unit-testing">Classical class-based unit testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._book008.html#sharing-the-software-with-other-users">Sharing the software with other users</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#organizing-the-software-directory-tree">Organizing the software directory tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#publishing-the-software-at-github">Publishing the software at GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#downloading-and-installing-the-software">Downloading and installing the software</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._book008.html#classes-for-problem-and-solution-method">Classes for problem and solution method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#the-problem-class">The problem class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#the-solver-class">The solver class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#improving-the-problem-and-solver-classes">Improving the problem and solver classes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._book008.html#automating-scientific-experiments">Automating scientific experiments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#available-software">Available software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#the-results-we-want-to-produce">The results we want to produce</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#combining-plot-files-2">Combining plot files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#running-a-program-from-python">Running a program from Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#the-automating-script">The automating script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#making-a-report">Making a report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#publishing-a-complete-project">Publishing a complete project</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="._book008.html#exercises-5">Exercises</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#exercise-55-stabilizing-the-crank-nicolson-method-by-rannacher-time-stepping">Exercise 55: Stabilizing the Crank-Nicolson method by Rannacher time stepping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book008.html#project-56-energy-estimates-for-diffusion-problems">Project 56: Energy estimates for diffusion problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#problem-40-make-a-tool-for-differentiating-curves">Problem 40: Make a tool for differentiating curves</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#problem-41-make-solid-software-for-the-trapezoidal-rule">Problem 41: Make solid software for the Trapezoidal rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#problem-42-implement-classes-for-the-trapezoidal-rule">Problem 42: Implement classes for the Trapezoidal rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#problem-43-write-a-doctest-and-a-test-function">Problem 43: Write a doctest and a test function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#problem-44-experiment-with-tolerances-in-comparisons">Problem 44: Experiment with tolerances in comparisons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#exercise-45-make-use-of-a-class-implementation">Exercise 45: Make use of a class implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._book008.html#problem-46-make-solid-software-for-a-difference-equation">Problem 46: Make solid software for a difference equation</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="._book009.html">Staggered mesh discretization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book009.html#the-euler-cromer-scheme-on-a-standard-mesh">The Euler-Cromer scheme on a standard mesh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book009.html#the-euler-cromer-scheme-on-a-staggered-mesh">The Euler-Cromer scheme on a staggered mesh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book009.html#implementation-of-the-scheme-on-a-staggered-mesh">Implementation of the scheme on a staggered mesh</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book009.html#implementation-with-integer-indices">Implementation with integer indices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book009.html#implementation-with-half-integer-indices">Implementation with half-integer indices</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book009.html#a-staggered-euler-cromer-scheme-for-a-generalized-model">A staggered Euler-Cromer scheme for a generalized model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book009.html#exercise-57-use-the-forward-backward-scheme-with-quadratic-damping">Exercise 57: Use the forward-backward scheme with quadratic damping</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book010.html">Appendix: Useful formulas</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book010.html#finite-difference-operator-notation">Finite difference operator notation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book010.html#truncation-errors-of-finite-difference-approximations">Truncation errors of finite difference approximations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book010.html#finite-differences-of-exponential-functions">Finite differences of exponential functions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book010.html#complex-exponentials">Complex exponentials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book010.html#real-exponentials">Real exponentials</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book010.html#finite-differences-of">Finite differences of <span class="math">\(t^n\)</span></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book011.html">Appendix: Truncation error analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book011.html#overview-of-truncation-error-analysis">Overview of truncation error analysis</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book011.html#abstract-problem-setting">Abstract problem setting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book011.html#error-measures">Error measures</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book011.html#truncation-errors-in-finite-difference-formulas">Truncation errors in finite difference formulas</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book011.html#example-the-backward-difference-for">Example: The backward difference for <span class="math">\(u'(t)\)</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book011.html#example-the-forward-difference-for">Example: The forward difference for <span class="math">\(u'(t)\)</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book011.html#example-the-central-difference-for">Example: The central difference for <span class="math">\(u'(t)\)</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book011.html#overview-of-leading-order-error-terms-in-finite-difference-formulas">Overview of leading-order error terms in finite difference formulas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book011.html#software-for-computing-truncation-errors">Software for computing truncation errors</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book012.html">Truncation errors in exponential decay ODE</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book012.html#truncation-error-of-the-forward-euler-scheme">Truncation error of the Forward Euler scheme</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book012.html#truncation-error-of-the-crank-nicolson-scheme">Truncation error of the Crank-Nicolson scheme</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book012.html#truncation-error-of-the-rule">Truncation error of the <span class="math">\(\theta\)</span>-rule</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book012.html#using-symbolic-software">Using symbolic software</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book012.html#empirical-verification-of-the-truncation-error">Empirical verification of the truncation error</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book012.html#increasing-the-accuracy-by-adding-correction-terms">Increasing the accuracy by adding correction terms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book012.html#extension-to-variable-coefficients-1">Extension to variable coefficients</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book012.html#exact-solutions-of-the-finite-difference-equations">Exact solutions of the finite difference equations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book012.html#computing-truncation-errors-in-nonlinear-problems">Computing truncation errors in nonlinear problems</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book013.html">Truncation errors in vibration ODEs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book013.html#linear-model-without-damping">Linear model without damping</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book013.html#the-truncation-error-of-a-centered-finite-difference-scheme">The truncation error of a centered finite difference scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book013.html#the-truncation-error-of-approximating">The truncation error of approximating <span class="math">\(u'(0)\)</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book013.html#truncation-error-of-the-equation-for-the-first-step">Truncation error of the equation for the first step</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book013.html#computing-correction-terms">Computing correction terms</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book013.html#model-with-damping-and-nonlinearity">Model with damping and nonlinearity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book013.html#extension-to-quadratic-damping">Extension to quadratic damping</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book013.html#the-general-model-formulated-as-first-order-odes">The general model formulated as first-order ODEs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book013.html#the-forward-backward-scheme">The forward-backward scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book013.html#a-centered-scheme-on-a-staggered-mesh">A centered scheme on a staggered mesh</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book014.html">Truncation errors in wave equations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book014.html#linear-wave-equation-in-1d">Linear wave equation in 1D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book014.html#finding-correction-terms">Finding correction terms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book014.html#extension-to-variable-coefficients-2">Extension to variable coefficients</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book014.html#d-wave-equation-on-a-staggered-mesh">1D wave equation on a staggered mesh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book014.html#linear-wave-equation-in-2d-3d">Linear wave equation in 2D/3D</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book015.html">Truncation errors in diffusion equations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#linear-diffusion-equation-in-1d">Linear diffusion equation in 1D</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book015.html#the-forward-euler-scheme-in-time">The Forward Euler scheme in time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book015.html#the-crank-nicolson-scheme-in-time">The Crank-Nicolson scheme in time</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#linear-diffusion-equation-in-2d-3d">Linear diffusion equation in 2D/3D</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#a-nonlinear-diffusion-equation-in-2d">A nonlinear diffusion equation in 2D</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book015.html#exercises-7">Exercises</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-58-truncation-error-of-a-weighted-mean">Exercise 58: Truncation error of a weighted mean</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-59-simulate-the-error-of-a-weighted-mean">Exercise 59: Simulate the error of a weighted mean</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-60-verify-a-truncation-error-formula">Exercise 60: Verify a truncation error formula</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-61-truncation-error-of-the-backward-euler-scheme">Exercise 61: Truncation error of the Backward Euler scheme</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-62-empirical-estimation-of-truncation-errors">Exercise 62: Empirical estimation of truncation errors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-63-correction-term-for-a-backward-euler-scheme">Exercise 63: Correction term for a Backward Euler scheme</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-64-verify-the-effect-of-correction-terms">Exercise 64: Verify the effect of correction terms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-65-truncation-error-of-the-crank-nicolson-scheme">Exercise 65: Truncation error of the Crank-Nicolson scheme</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-66-truncation-error-of">Exercise 66: Truncation error of <span class="math">\(u'=f(u,t)\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-67-truncation-error-of">Exercise 67: Truncation error of <span class="math">\([D_t D_tu]^n\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-68-investigate-the-impact-of-approximating">Exercise 68: Investigate the impact of approximating <span class="math">\(u'(0)\)</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="._book015.html#exercise-69-investigate-the-accuracy-of-a-simplified-scheme">Exercise 69: Investigate the accuracy of a simplified scheme</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book016.html">Appendix: Software engineering; wave equation model</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._book016.html#a-1d-wave-equation-simulator">A 1D wave equation simulator</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#mathematical-model">Mathematical model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#numerical-discretization">Numerical discretization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#a-solver-function">A solver function</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book016.html#saving-large-arrays-in-files">Saving large arrays in files</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#using-savez-to-store-arrays-in-files">Using <code class="docutils literal"><span class="pre">savez</span></code> to store arrays in files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#using-joblib-to-store-arrays-in-files">Using <code class="docutils literal"><span class="pre">joblib</span></code> to store arrays in files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#using-a-hash-to-create-a-file-or-directory-name">Using a hash to create a file or directory name</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book016.html#software-for-the-1d-wave-equation">Software for the 1D wave equation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#making-hash-strings-from-input-data">Making hash strings from input data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#avoiding-rerunning-previously-run-cases">Avoiding rerunning previously run cases</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#verification-6">Verification</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book016.html#programming-the-solver-with-classes">Programming the solver with classes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#class-problem">Class Problem</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#class-mesh">Class Mesh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#class-function">Class Function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#class-solver">Class Solver</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book016.html#migrating-loops-to-cython">Migrating loops to Cython</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#declaring-variables-and-annotating-the-code">Declaring variables and annotating the code</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#visual-inspection-of-the-c-translation">Visual inspection of the C translation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#building-the-extension-module-1">Building the extension module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#calling-the-cython-function-from-python">Calling the Cython function from Python</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book016.html#migrating-loops-to-fortran">Migrating loops to Fortran</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#the-fortran-subroutine">The Fortran subroutine</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#building-the-fortran-module-with-f2py">Building the Fortran module with f2py</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#how-to-avoid-array-copying">How to avoid array copying</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book016.html#migrating-loops-to-c-via-cython">Migrating loops to C via Cython</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#translating-index-pairs-to-single-indices">Translating index pairs to single indices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#the-complete-c-code">The complete C code</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#the-cython-interface-file">The Cython interface file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#building-the-extension-module-2">Building the extension module</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book016.html#migrating-loops-to-c-via-f2py">Migrating loops to C via f2py</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#id2">Migrating loops to C++ via f2py</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="._book016.html#exercises-8">Exercises</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._book016.html#exercise-70-make-an-improved-numpy-savez-function">Exercise 70: Make an improved <code class="docutils literal"><span class="pre">numpy.savez</span></code> function</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="._book017.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._book009.html">References</a></li>
 </ul>
 </div>
 </div>
@@ -569,13 +371,13 @@
             </center>
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Finite Difference Computing with Partial Differential Equations</a></li>
+<li><a class="reference internal" href="#">Finite Difference Computing with Exponential Decay Models</a></li>
 <li><a class="reference internal" href="#index">Index</a></li>
 </ul>
 
   <h4>Next topic</h4>
   <p class="topless"><a href="._book000.html"
-                        title="next chapter">Finite Difference Computing with Partial Differential Equations</a></p>
+                        title="next chapter">Finite Difference Computing with Exponential Decay Models</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -607,9 +409,9 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="._book000.html" title="Finite Difference Computing with Partial Differential Equations"
+          <a href="._book000.html" title="Finite Difference Computing with Exponential Decay Models"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">Finite Difference Computing with Partial Differential Equations</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Finite Difference Computing with Exponential Decay Models</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">

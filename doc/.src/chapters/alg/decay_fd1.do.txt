@@ -37,7 +37,6 @@ introduction of key concepts such as mesh, mesh function,
 finite difference approximations, averaging in a mesh,
 derivation of algorithms, and discrete operator notation.
 
-
 ===== A basic model for exponential decay =====
 label{decay:model}
 
