@@ -4,19 +4,27 @@
 .. |nbsp| unicode:: 0xA0
    :trim:
 
+.. TITLE:  A Gentle Introduction to Finite Difference Computing Using Exponential Decay Models: Modeling, Algorithms, Analysis, Programming, and Verification
+
+.. TITLE:  A Gentle Introduction to Finite Difference Computing Using Exponential Decay Models
+
 .. Document title:
 
-Finite Difference Computing with Partial Differential Equations
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Finite Difference Computing with Exponential Decay Models
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Hans Petter Langtangen
 
-This easy-to-read book introduces the basics of solving partial differential
-equations by finite difference methods. The emphasis is on constructing
-finite difference schemes, formulating algorithms, implementing
-algorithms, verifying implementations, analyzing the physical behavior
-of the numerical methods, and applying the methods and software
-to solve problems from physics and biology.
+This easy-to-read tutorial uses a specific case, exponential decay
+models, to introduce the basic ingredients of mathematical modeling on
+computers: model derivation, finite difference methods, computational
+algorithms, implementation in Python, software testing, visualization,
+as well as detailed analysis of the quality of numerical results. The
+primary focus is on how mathematical methods are translated to
+reusable and well-tested software.  Many classical subjects in
+scientific computing are covered in addition to software topics like
+user interfaces, unit testing frameworks, class programming, and
+automating computer experiments.
 
-:Date: Oct 19, 2015
+:Date: Oct 22, 2015
 

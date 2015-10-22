@@ -43,9 +43,9 @@
         </style>
 
     
-    <link rel="top" title="Finite Difference Computing with Partial Differential Equations" href="index.html" />
-    <link rel="next" title="Vibration ODEs" href="._book002.html" />
-    <link rel="prev" title="Finite Difference Computing with Partial Differential Equations" href="._book000.html" />
+    <link rel="top" title="Finite Difference Computing with Exponential Decay Models" href="index.html" />
+    <link rel="next" title="Algorithms and implementations" href="._book002.html" />
+    <link rel="prev" title="Finite Difference Computing with Exponential Decay Models" href="._book000.html" />
  
   
        <style type="text/css">
@@ -64,12 +64,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="._book002.html" title="Vibration ODEs"
+          <a href="._book002.html" title="Algorithms and implementations"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="._book000.html" title="Finite Difference Computing with Partial Differential Equations"
+          <a href="._book000.html" title="Finite Difference Computing with Exponential Decay Models"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Finite Difference Computing with Partial Differential Equations</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Finite Difference Computing with Exponential Decay Models</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -80,58 +80,19 @@
             
   <div class="section" id="preface">
 <span id="ch-preface"></span><h1>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h1>
-<p>There are so many excellent books on finite difference methods for
-ordinary and partial differential equations that writing yet another
-one requires a different view on the topic. The present book is not
-so concerned with the traditional academic presentation of the topic,
-but is focused at teaching the practitioner how to obtain reliable computations
-involving finite difference methods. This focus is based on
-a set of learning outcomes:</p>
-<ol class="arabic simple">
-<li>understanding of the ideas behind finite difference methods,</li>
-<li>understanding how to transform an algorithm to a well-designed computer code,</li>
-<li>understanding how to test (verify) the code,</li>
-<li>understanding the potential artifacts in simulation results.</li>
-</ol>
-<p>Compared to other textbooks, the present one has a particularly strong
-emphasis on computer implementation and verification. It also has a
-strong emphasis on an intuitive understanding of constructing finite
-difference methods. To learn about the potential non-physical
-artifacts of various methods, we study exact solutions of finite
-difference schemes as these give deeper insight into the physical
-behavior of the numerical methods than the traditional (and more
-general) asymptotic error analysis. However, asymptotic results
-regarding convergence rates, typically truncation errors,
-are crucial for testing implementations,
-so an extensive appendix is devoted to the computation of truncation
-errors.</p>
-<p>Various pedagogical elements are utilized to reach the learning outcomes,
-and these are commented upon next.</p>
-<div class="section" id="simplify-understand-generalize">
-<h2>Simplify, understand, generalize<a class="headerlink" href="#simplify-understand-generalize" title="Permalink to this headline">¶</a></h2>
-<p>The book&#8217;s overall pedagogical philosophy is the three-step process of
-first <em>simplifying</em> the problem to something we can <em>understand</em> in
-detail, and when that understanding is in place, we can <em>generalize</em>
-and hopefully address real-world applications with a sound scientific
-problem-solving approach.  For example, in the chapter on a particular
-family of equations we first simplify the problem in question to a 1D,
-constant-coefficient equation with simple boundary conditions. We
-learn how to construct a finite difference method, how to implement
-it, and how to understand the behavior of the numerical solution. Then
-we can generalize to higher dimensions, variable coefficients, a
-source term, and more complicated boundary conditions.
-The solution of a compound problem is in this way
-an assembly of elements that
-are well understood in simpler settings.</p>
-</div>
-<div class="section" id="constructive-mathematics">
-<h2>Constructive mathematics<a class="headerlink" href="#constructive-mathematics" title="Permalink to this headline">¶</a></h2>
-<p>This text favors a constructive approach to mathematics. Instead of
-a set of definitions followed by popping up a method, we emphasize how
-to think about the construction of a method. The aim is to obtain a
-good intuitive understanding of the mathematical methods.</p>
-<p>The text is written in an easy-to-read style much inspired by the
-following quote.</p>
+<p>This book teaches the basic components in the scientific
+computing pipeline: modeling, differential equations, numerical
+algorithms, programming, plotting, and software testing. The pedagogical idea
+is to treat these topics in the context of a very simple
+mathematical model, the
+differential equation for exponential decay, <span class="math">\(u^{\prime}(t)=-au(t)\)</span>,
+where <span class="math">\(u\)</span> is unknown and <span class="math">\(a\)</span> is a given parameter. By keeping the
+mathematical problem simple, the text can go deep into all details
+about how one must combine mathematics and computer science to
+create well-tested, reliable, and flexible software for such a
+mathematical model.</p>
+<p>The writing style is gentle and aims at a broad audience. I am much
+inspired by Nick Trefethen&#8217;s praise of easy learning:</p>
 <blockquote>
 <div><p><em>Some people think that stiff challenges are the best device to
 induce learning, but I am not one of them. The natural way to learn
@@ -145,117 +106,127 @@ exhaustion and failure to resolve.</em></p>
 we will encounter them, so we had better learn to face them boldly.
 Putting them in the curriculum can help teach us to do so. But for
 teaching the skill or subject matter itself, they are overrated.</em>
-<a class="reference internal" href="._book017.html#ref1" id="id1">[Ref1]</a> (p. 86) Lloyd N. Trefethen, Applied Mathematician, 1955-.</p>
+<a class="reference internal" href="._book009.html#ref01" id="id1">[Ref01]</a> (p. 86)</p>
 </div></blockquote>
-<p>This book assumes some basic knowledge of finite difference approximations,
-differential equations, and scientific Python or MATLAB programming,
-as often met in
-an introductory numerical methods course. Readers without this background
-may start with the light companion book &#8220;Finite Difference Computing with
-Exponential Decay Models&#8221; <a class="reference internal" href="._book017.html#ref2" id="id2">[Ref2]</a>. That book will in
-particular be a useful resource for the programming parts of the present book.
-Since the present book deals with partial differential equations, the
-reader is assumed to master multi-variable calculus and linear algebra.</p>
-<p>Fundamental ideas and their associated scientific details are first
-introduced in the simplest possible differential equation setting,
-often an ordinary differential equation, but in a way that easily
-allows reuse in more complex settings with partial differential
-equations. With this approach, new concepts are introduced with a
-minimum of mathematical details. The text should therefore have
-a potential for use early in undergraduate student programs.</p>
+<p>Prerequisite knowledge for this book is basic one-dimensional calculus
+and preferably some experience with computer programming in Python or
+MATLAB.  The material was initially written for self study and
+therefore features comprehensive and easy-to-understand
+explanations. For some readers it may act as an overview and refresher
+of traditional mathematical topics and likely a first introduction to
+many of the software topics. The text can also be used as a case-based
+and mathematically simple introduction to modern multi-disciplinary
+problem solving with computers, using the range of applications in
+the chapter <a class="reference internal" href="._book007.html#decay-app"><span class="std std-ref">Models</span></a> as motivation and then treating the details of
+the mathematical and computer science subjects from the other
+chapters. In particular, I have also had in mind the new groups of
+readers from bio- and geo-sciences who need to enter the world of
+computer-based differential equation modeling, but lack experience
+with (and perhaps also interest in) mathematics and programming.</p>
+<p>The choice of topics in this book is motivated from what is needed in
+more advanced courses on finite difference methods for partial
+differential equations (PDEs).  It turns out that a range of concepts
+and tools needed for PDEs can be introduced and illustrated by very
+simple ordinary differential equation (ODE) examples. The goal of the
+text is therefore to lay a foundation for understanding numerical
+methods for PDEs by first meeting the fundamental ideas in a simpler
+ODE setting. Compared to other books, the present one has a much
+stronger focus on how to turn mathematics into working code.
+It also explains the mathematics and programming in more detail
+than what is common in the literature.</p>
+<p>There is a more advanced companion book in the works, &#8220;Finite
+Difference Computing with Partial Differential Equations&#8221;, which
+treats finite difference methods for PDEs using the same writing style
+and having the same focus on turning mathematical algorithms into
+reliable software.</p>
+<p>Although the main example in the present book is <span class="math">\(u^{\prime}=-au\)</span>, we
+also address the more general model problem <span class="math">\(u'=-a(t)u + b(t)\)</span>, and
+the completely general, nonlinear problem <span class="math">\(u'=f(u,t)\)</span>, both for scalar
+and vector <span class="math">\(u(t)\)</span>. The author believes in the principle <em>simplify,
+understand, and then generalize</em>. That is why we start out with the
+simple model <span class="math">\(u^{\prime}=-au\)</span> and try to understand how methods are
+constructed, how they work, how they are implemented, and how they may
+fail for this problem, before we generalize what we have learned from
+<span class="math">\(u^{\prime}=-au\)</span> to more complicated models.</p>
+<p>The following list of topics will be elaborated on.</p>
+<blockquote>
+<div><ul class="simple">
+<li>How to think when constructing finite difference methods, with special focus
+on the Forward Euler, Backward Euler, and Crank-Nicolson (midpoint)
+schemes.</li>
+<li>How to formulate a computational algorithm and translate it into
+Python code.</li>
+<li>How to make curve plots of the solutions.</li>
+<li>How to compute numerical errors.</li>
+<li>How to compute convergence rates.</li>
+<li>How to test that an implementation is correct (verification) and how
+to automate tests through <em>test functions</em> and <em>unit testing</em>.</li>
+<li>How to work with Python concepts such as arrays, lists, dictionaries,
+lambda functions, and functions in functions (closures).</li>
+<li>How to perform array computing and understand the difference from
+scalar computing.</li>
+<li>How to uncover numerical artifacts in the computed solution.</li>
+<li>How to analyze the numerical schemes mathematically to understand
+why artifacts may occur.</li>
+<li>How to derive mathematical expressions for various measures of
+the error in numerical methods, frequently by using the <code class="docutils literal"><span class="pre">sympy</span></code> software
+for symbolic computations.</li>
+<li>How to understand concepts such as finite difference operators,
+mesh (grid), mesh functions,
+stability, truncation error, consistency, and convergence.</li>
+<li>How to solve the general nonlinear ODE <span class="math">\(u'=f(u,t)\)</span>,
+which is either a scalar ODE or a system of ODEs (i.e., <span class="math">\(u\)</span> and <span class="math">\(f\)</span>
+can either be a function or a vector of functions).</li>
+<li>How to access professional packages for solving ODEs.</li>
+<li>How the model equation <span class="math">\(u'=-au\)</span> arises in a wide range
+of phenomena in physics, biology, chemistry, and finance.</li>
+<li>How to structure a code in terms of functions.</li>
+<li>How to make reusable modules.</li>
+<li>How to read input data flexibly from the command line.</li>
+<li>How to create graphical/web user interfaces.</li>
+<li>How to use test frameworks for automatic unit testing.</li>
+<li>How to refactor code in terms of classes (instead of functions).</li>
+<li>How to conduct and automate large-scale numerical experiments.</li>
+<li>How to write scientific reports in various formats (LaTeX, HTML).</li>
+</ul>
+</div></blockquote>
+<div class="admonition-the-exposition-in-a-nutshell admonition">
+<p class="first admonition-title">The exposition in a nutshell</p>
+<p>Everything we cover is put into a practical, hands-on context. All
+mathematics is translated into working computing codes, and all the
+mathematical theory of finite difference methods presented here is
+motivated from a strong need to understand why we occasionally obtain
+strange results from the programs.
+Two fundamental questions saturate the text:</p>
+<blockquote>
+<div><ul class="simple">
+<li>How do we solve a differential equation problem and produce numbers?</li>
+<li>How do we know that the numbers are correct?</li>
+</ul>
+</div></blockquote>
+<p class="last">Besides answering these two questions, one will learn a
+lot about mathematical modeling in general and the interplay between
+physics, mathematics, numerical methods, and computer science.</p>
 </div>
-<div class="section" id="all-nuts-and-bolts">
-<h2>All nuts and bolts<a class="headerlink" href="#all-nuts-and-bolts" title="Permalink to this headline">¶</a></h2>
-<p>Many has experienced that &#8220;vast amounts of easy, enjoyable time&#8221;, as
-stated in the quote above, arises when mathematics is implemented on a
-computer. The implementation process triggers understanding,
-creativity, and curiosity, but many students find
-the transition from a mathematical algorithm to a working code
-difficult and spend a lot of time on &#8220;programming issues&#8221;.</p>
-<p>Most books on numerical methods concentrate on the mathematics of the
-subject while details on going from the mathematics to a computer
-implementation are less in focus. A major purpose of this text is
-therefore to help the practitioner by providing <em>all nuts and bolts</em>
-necessary for safely going from the mathematics to a well-designed and
-well-tested computer code. A significant portion of the text is
-consequently devoted to programming details.</p>
-</div>
-<div class="section" id="python-as-programming-language">
-<h2>Python as programming language<a class="headerlink" href="#python-as-programming-language" title="Permalink to this headline">¶</a></h2>
-<p>While MATLAB enjoys widespread popularity in books on numerical
-methods, we have chosen to use the Python programming language. Python
-is very similar to MATLAB, but contains a lot of modern software
-engineering tools that have become standard in the software industry
-and that should be adopted also for numerical computing
-projects. Python is at present also experiencing an exponential growth
-in popularity within the scientific computing community. One of the
-book&#8217;s goals is to present an up-to-date Python eco system for
-implementing finite difference methods.</p>
-</div>
-<div class="section" id="program-verification">
-<h2>Program verification<a class="headerlink" href="#program-verification" title="Permalink to this headline">¶</a></h2>
-<p>Program testing, called <em>verification</em>, is a key topic of the book.
-Good verification techniques are indispensable when debugging computer
-code, but also fundamental for achieving reliable simulations.
-Two verification techniques saturate the book: exact solution
-of discrete equations (where the approximation error vanishes) and
-empirical estimation of convergence rates in problems with
-exact (analytical or manufactured) solutions of the
-differential equation(s).</p>
-</div>
-<div class="section" id="analysis-via-exact-solutions-of-discrete-equations">
-<h2>Analysis via exact solutions of discrete equations<a class="headerlink" href="#analysis-via-exact-solutions-of-discrete-equations" title="Permalink to this headline">¶</a></h2>
-<p>Traditional asymptotic analysis of errors is important for
-verification of code using convergence rates, but gives a limited
-understanding of how and why a correctly implemented numerical method
-may give non-physical results. By developing exact solutions, usually
-based on Fourier methods, of the discrete equations, one can obtain a
-physical understanding of the behavior of a numerical method. This
-approach is favored for analysis of methods in this book.</p>
-</div>
-<div class="section" id="code-inspired-mathematical-notation">
-<h2>Code-inspired mathematical notation<a class="headerlink" href="#code-inspired-mathematical-notation" title="Permalink to this headline">¶</a></h2>
-<p>Our primary aim is to have a clean and easy-to-read computer code, and
-we want a close one-to-one relationship between the computer code and
-mathematical description of the algorithm.  This principle calls for a
-mathematical notation that is governed by the natural notation in the
-computer code. The unknown is mostly called <span class="math">\(u\)</span>, but the meaning of
-the symbol <span class="math">\(u\)</span> in the mathematical description changes as we go from
-the exact solution fulfilling the differential equation problem to the
-symbol <code class="docutils literal"><span class="pre">u</span></code> that is naturally used in the code.</p>
-</div>
-<div class="section" id="limited-scope">
-<h2>Limited scope<a class="headerlink" href="#limited-scope" title="Permalink to this headline">¶</a></h2>
-<p>The aim of this book is not to give an overview of a lot of methods
-for a wide range of mathematical models.  Such information can be
-found in numerous existing, more advanced books.  The aim is rather to
-introduce basic concepts and a thorough understanding of how to think
-about computing with finite difference methods.  We therefore go in
-depth with only the most fundamental methods and equations.  However,
-we have a multi-disciplinary scope and address the interplay of
-mathematics, numerics, computer science, and physics.</p>
-</div>
-<div class="section" id="independent-chapters">
-<h2>Independent chapters<a class="headerlink" href="#independent-chapters" title="Permalink to this headline">¶</a></h2>
-<p>Most book authors are careful with avoiding repetitions of material.
-The chapters in this book, however, contain some overlap, because I
-want the chapters to meaningful on their own. Modern publishing
-technology makes it easy to take selected chapters from different
-books to make a new book tailored to a specific course.
-The more a chapter builds on details in other chapters, the more
-difficult it is to reuse chapters in new contexts. Also, most readers
-find it convenient that the most important information is explicitly
-stated, even if it was already met in another chapter.</p>
-</div>
+<p>The book contains a set of exercises in most of the chapters.
+The exercises are divided into three categories: <em>exercises</em>
+refer to the text (usually variations or extensions of examples
+in the text), <em>problems</em> are stand-alone exercises without
+references to the text, and <em>projects</em> are larger problems.
+Exercises, problems, and projects share a common numbering to
+avoid confusion between, e.g., Exercise 4.3 and Problem 4.3
+(it will be Exercise 4.3 and Problem 4.4 if they follow after
+each other).</p>
 <div class="section" id="acknowledgments">
 <h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
-<p>The author is particularly thankful to all the very detailed criticism
-of the text provided by Professor Svein Linge.  Many students have
-provided lots of useful feedback on the exposition and found many
-errors in the text. Special efforts in this regard were made by Imran
-Ali, Shirin Fallahi, Anders Hafreager, Daniel Alexander Mo Søreide
-Houshmand, Kristian Gregorius Hustad, Mathilde Nygaard Kamperud, and
-Fatemeh Miri.</p>
+<p>Professor Svein Linge has provided very detailed and constructive
+feedback on this text, and all his efforts are highly appreciated. I
+also want to thank a number of students who have pointed out
+weaknesses and found errors. The proof reading of Yapi Donatien Achou
+is appreciated.  Many thanks also to Linda Falch-Koslung,
+Dr. Olav Dajani, and the rest of the OUS team for feeding me with
+FOLFIRINOX and thereby keeping me alive and in good enough shape to
+finish this book.</p>
 </div>
 </div>
 
@@ -273,15 +244,6 @@ Fatemeh Miri.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Preface</a><ul>
-<li><a class="reference internal" href="#simplify-understand-generalize">Simplify, understand, generalize</a></li>
-<li><a class="reference internal" href="#constructive-mathematics">Constructive mathematics</a></li>
-<li><a class="reference internal" href="#all-nuts-and-bolts">All nuts and bolts</a></li>
-<li><a class="reference internal" href="#python-as-programming-language">Python as programming language</a></li>
-<li><a class="reference internal" href="#program-verification">Program verification</a></li>
-<li><a class="reference internal" href="#analysis-via-exact-solutions-of-discrete-equations">Analysis via exact solutions of discrete equations</a></li>
-<li><a class="reference internal" href="#code-inspired-mathematical-notation">Code-inspired mathematical notation</a></li>
-<li><a class="reference internal" href="#limited-scope">Limited scope</a></li>
-<li><a class="reference internal" href="#independent-chapters">Independent chapters</a></li>
 <li><a class="reference internal" href="#acknowledgments">Acknowledgments</a></li>
 </ul>
 </li>
@@ -289,10 +251,10 @@ Fatemeh Miri.</p>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="._book000.html"
-                        title="previous chapter">Finite Difference Computing with Partial Differential Equations</a></p>
+                        title="previous chapter">Finite Difference Computing with Exponential Decay Models</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._book002.html"
-                        title="next chapter">Vibration ODEs</a></p>
+                        title="next chapter">Algorithms and implementations</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -324,12 +286,12 @@ Fatemeh Miri.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="._book002.html" title="Vibration ODEs"
+          <a href="._book002.html" title="Algorithms and implementations"
              >next</a> |</li>
         <li class="right" >
-          <a href="._book000.html" title="Finite Difference Computing with Partial Differential Equations"
+          <a href="._book000.html" title="Finite Difference Computing with Exponential Decay Models"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Finite Difference Computing with Partial Differential Equations</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Finite Difference Computing with Exponential Decay Models</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">
