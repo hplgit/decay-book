@@ -178,13 +178,12 @@ each other).
 
 
 
-=== Acknowledgments ===
-
+__Acknowledgments.__
 Professor Svein Linge has provided very detailed and constructive
-feedback on this text, and all his efforts are highly appreciated. I
-also want to thank a number of students who have pointed out
-weaknesses and found errors. The proof reading of Yapi Donatien Achou
-is appreciated.  Many thanks also to Linda Falch-Koslung,
+feedback on this text, and all his efforts are highly appreciated.
+Many students have also pointed out
+weaknesses and found errors. A special thank goes to Yapi Donatien Achou's
+proof reading. Many thanks also to Linda Falch-Koslung,
 Dr. Olav Dajani, and the rest of the OUS team for feeding me with
 FOLFIRINOX and thereby keeping me alive and in good enough shape to
 finish this book.
