@@ -4,6 +4,26 @@ TITLE:  Finite Difference Computing with Exponential Decay Models
 AUTHOR: Hans Petter Langtangen  {copyright|CC BY} at Center for Biomedical Computing, Simula Research Laboratory & Department of Informatics, University of Oslo
 
 __Preface.__
+This text provides a very simple, initial introduction to the complete
+scientific computing pipeline: models, discretization, algorithms,
+programming, verification, and visualization. The pedagogical strategy
+is to use one case study - an ordinary differential equation
+describing exponential decay processes - to illustrate fundamental
+concepts in mathematics and computer science. The book is easy to read
+and only requires a command of one-variable calculus and some very
+basic knowledge about computer programming. Contrary to similar texts
+on numerical methods and programming, this text has a much stronger
+focus on implementation and teaches testing and software engineering
+in particular.
+
+# #ifdef USPs
+ * Easy-to-read mathematics with detailed explanations
+ * Demonstrates the transition of a mathematical problem to well-tested computer code in detail
+ * Uses modern Python-based programming tools and techniques
+ * Illustrates the computing pipeline: model, method, algorithm, implementation, testing, and visualization
+# #endif
+
+# #ifdef MY_ORIG
 This easy-to-read tutorial uses a specific case, exponential decay
 models, to introduce the basic ingredients of mathematical modeling on
 computers: model derivation, finite difference methods, computational
@@ -14,6 +34,7 @@ reusable and well-tested software.  Many classical subjects in
 scientific computing are covered in addition to software topics like
 user interfaces, unit testing frameworks, class programming, and
 automating computer experiments.
+# #endif
 
 DATE: today
 

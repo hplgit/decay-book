@@ -72,7 +72,7 @@ exponential reduction (provided :math:`a>0`).
 Examples include radioactive decay, population
 decay, investment decay, cooling of an object, pressure decay in the
 atmosphere, and retarded motion in fluids. Some models with growth,
-:math:`a<0`, are treated as
+:math:`a < 0`, are treated as
 well, see the chapter :ref:`decay:app` for details and motivation.
 We have chosen this particular ODE not only because
 its applications are relevant, but even more because studying
@@ -1081,11 +1081,10 @@ Compact operator notation for finite differences
 
 Finite difference formulas can be tedious to write and read,
 especially for differential equations with many terms and many
-derivatives. To save space and help the reader spot
-the nature of the difference approximations, we introduce a
-compact notation. For a function :math:`u(t)`,
-a forward difference approximation is denoted
-by the :math:`D_t^+` operator and written as
+derivatives. To save space and help the reader spot the nature of the
+difference approximations, we introduce a compact notation. For a
+function :math:`u(t)`, a forward difference approximation is denoted by the
+:math:`D_t^+` operator and written as
 
 .. _Eq:fd:D:f:
 
@@ -1097,15 +1096,14 @@ by the :math:`D_t^+` operator and written as
         {\thinspace .}
         
 
-The notation consists of an operator that approximates
-differentiation with respect to an independent variable, here :math:`t`.
-The operator is built of the symbol :math:`D`, with the
-independent variable as subscript
-and a superscript denoting the type of difference. The superscript :math:`\,{}^+`
-indicates a forward difference.
-We place square brackets around the operator and the function it operates
-on and specify the mesh point, where the operator is acting, by
-a superscript after the closing bracket.
+The notation consists of an operator that approximates differentiation
+with respect to an independent variable, here :math:`t`.  The operator is
+built of the symbol :math:`D`, with the independent variable as subscript
+and a superscript denoting the type of difference. The superscript
+:math:`\,{}^+` indicates a forward difference.  We place square brackets
+around the operator and the function it operates on and specify the
+mesh point, where the operator is acting, by a superscript after the
+closing bracket.
 
 The corresponding operator notation for a centered difference and
 a backward difference reads

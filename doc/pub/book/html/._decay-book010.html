@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,relative differences,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability,relative differences">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -20,6 +20,13 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
 
 /*
 in.collapse+a.btn.showdetails:before { content:'Hide details'; }
@@ -403,23 +410,6 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'decay:app:exer:cooling:py',
                'decay:app:exer:cooling:py'),
-              ('Bug 1: Wrong time level in the $T_s$ function',
-               3,
-               None,
-               '___sec152'),
-              ('Bug 2: Wrong time level in the $T$ function',
-               3,
-               None,
-               '___sec153'),
-              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec154'),
-              ('Bug 4: Missing `k` in the updating formula',
-               3,
-               None,
-               '___sec155'),
-              ('Bug 5: Using `1-theta` instead of `theta`',
-               3,
-               None,
-               '___sec156'),
               ('Exercise 20: Find time of murder from body temperature',
                2,
                'decay:app:exer:cooling:murder',
@@ -517,9 +507,9 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'softeng1:basic:impl2',
                'softeng1:basic:impl2'),
-              ('Comments in a program', 3, None, '___sec182'),
-              ('Refactoring into functions', 3, None, '___sec183'),
-              ('Program file vs IDE vs notebook', 3, None, '___sec184'),
+              ('Comments in a program', 3, None, '___sec177'),
+              ('Refactoring into functions', 3, None, '___sec178'),
+              ('Program file vs IDE vs notebook', 3, None, '___sec179'),
               ('Prefixing imported functions by the module name',
                2,
                'softeng1:basic:modprefix',
@@ -531,7 +521,7 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
               ('Do not have several versions of a code',
                2,
                None,
-               '___sec187'),
+               '___sec182'),
               ('Making a module',
                2,
                'softeng1:basic:module',
@@ -548,48 +538,48 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'softeng1:basic:logging',
                'softeng1:basic:logging'),
-              ('Introductory example', 3, None, '___sec192'),
-              ('Using a logger in our solver function', 3, None, '___sec193'),
+              ('Introductory example', 3, None, '___sec187'),
+              ('Using a logger in our solver function', 3, None, '___sec188'),
               ('User interfaces',
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec195'),
-              ('Positional command-line arguments', 2, None, '___sec196'),
+              ('Command-line arguments', 2, None, '___sec190'),
+              ('Positional command-line arguments', 2, None, '___sec191'),
               ('Option-value pairs on the command line',
                2,
                None,
-               '___sec197'),
+               '___sec192'),
               ('Creating a graphical web user interface',
                2,
                None,
-               '___sec198'),
-              ('Making a compute function', 3, None, '___sec199'),
-              ('Generating the user interface', 3, None, '___sec200'),
-              ('Running the web application', 3, None, '___sec201'),
-              ('Tests for verifying implementations', 1, None, '___sec202'),
-              ('Doctests', 2, None, '___sec203'),
-              ('Unit tests and test functions', 2, None, '___sec204'),
+               '___sec193'),
+              ('Making a compute function', 3, None, '___sec194'),
+              ('Generating the user interface', 3, None, '___sec195'),
+              ('Running the web application', 3, None, '___sec196'),
+              ('Tests for verifying implementations', 1, None, '___sec197'),
+              ('Doctests', 2, None, '___sec198'),
+              ('Unit tests and test functions', 2, None, '___sec199'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
-               '___sec205'),
-              ('Test function requirements', 3, None, '___sec206'),
-              ('Comparison of real numbers', 3, None, '___sec207'),
-              ('Special assert functions from nose', 3, None, '___sec208'),
-              ('Locating test functions', 3, None, '___sec209'),
-              ('Running tests', 3, None, '___sec210'),
-              ('Embedding doctests in a test function', 3, None, '___sec211'),
-              ('Installing nose and pytest', 3, None, '___sec212'),
-              ('Test function for the solver', 2, None, '___sec213'),
+               '___sec200'),
+              ('Test function requirements', 3, None, '___sec201'),
+              ('Comparison of real numbers', 3, None, '___sec202'),
+              ('Special assert functions from nose', 3, None, '___sec203'),
+              ('Locating test functions', 3, None, '___sec204'),
+              ('Running tests', 3, None, '___sec205'),
+              ('Embedding doctests in a test function', 3, None, '___sec206'),
+              ('Installing nose and pytest', 3, None, '___sec207'),
+              ('Test function for the solver', 2, None, '___sec208'),
               ('Test function for reading positional command-line arguments',
                2,
                None,
-               '___sec214'),
+               '___sec209'),
               ('Test function for reading option-value pairs',
                2,
                None,
-               '___sec215'),
+               '___sec210'),
               ('Classical class-based unit testing',
                2,
                'softeng1:basic:unittest',
@@ -601,54 +591,54 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
               ('Organizing the software directory tree',
                2,
                None,
-               '___sec218'),
-              ('Distributing just a module file', 3, None, '___sec219'),
-              ('Distributing a package', 3, None, '___sec220'),
-              ('Publishing the software at GitHub', 2, None, '___sec221'),
+               '___sec213'),
+              ('Distributing just a module file', 3, None, '___sec214'),
+              ('Distributing a package', 3, None, '___sec215'),
+              ('Publishing the software at GitHub', 2, None, '___sec216'),
               ('Downloading and installing the software',
                2,
                None,
-               '___sec222'),
-              ('Installing just a module file', 3, None, '___sec223'),
-              ('Installing a package', 3, None, '___sec224'),
+               '___sec217'),
+              ('Installing just a module file', 3, None, '___sec218'),
+              ('Installing a package', 3, None, '___sec219'),
               ('Classes for problem and solution method',
                1,
                'softeng1:prog:se:class',
                'softeng1:prog:se:class'),
-              ('The problem class', 2, None, '___sec226'),
-              ('The solver class', 2, None, '___sec227'),
-              ('Combining the objects', 3, None, '___sec228'),
+              ('The problem class', 2, None, '___sec221'),
+              ('The solver class', 2, None, '___sec222'),
+              ('Combining the objects', 3, None, '___sec223'),
               ('Improving the problem and solver classes',
                2,
                'softeng1:prog:se:class2',
                'softeng1:prog:se:class2'),
-              ('A generic class for parameters', 3, None, '___sec230'),
+              ('A generic class for parameters', 3, None, '___sec225'),
               ('Automating scientific experiments',
                1,
                'softeng1:experiments',
                'softeng1:experiments'),
-              ('Available software', 2, None, '___sec232'),
-              ('The results we want to produce', 2, None, '___sec233'),
-              ('Combining plot files', 2, None, '___sec234'),
-              ('Running a program from Python', 2, None, '___sec235'),
-              ('The automating script', 2, None, '___sec236'),
+              ('Available software', 2, None, '___sec227'),
+              ('The results we want to produce', 2, None, '___sec228'),
+              ('Combining plot files', 2, None, '___sec229'),
+              ('Running a program from Python', 2, None, '___sec230'),
+              ('The automating script', 2, None, '___sec231'),
               ('Making a report',
                2,
                'softeng1:exper:report',
                'softeng1:exper:report'),
-              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec238'),
-              ('HTML with MathJax', 3, None, '___sec239'),
-              ('LaTeX', 3, None, '___sec240'),
-              ('Sphinx', 3, None, '___sec241'),
-              ('Markdown', 3, None, '___sec242'),
-              ('IPython/Jupyter notebooks', 3, None, '___sec243'),
-              ('Wiki formats', 3, None, '___sec244'),
-              ('DocOnce', 3, None, '___sec245'),
+              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec233'),
+              ('HTML with MathJax', 3, None, '___sec234'),
+              ('LaTeX', 3, None, '___sec235'),
+              ('Sphinx', 3, None, '___sec236'),
+              ('Markdown', 3, None, '___sec237'),
+              ('IPython/Jupyter notebooks', 3, None, '___sec238'),
+              ('Wiki formats', 3, None, '___sec239'),
+              ('DocOnce', 3, None, '___sec240'),
               ('Publishing a complete project',
                2,
                'softeng1:exper:github',
                'softeng1:exper:github'),
-              ('Exercises', 1, None, '___sec247'),
+              ('Exercises', 1, None, '___sec242'),
               ('Problem 40: Make a tool for differentiating curves',
                2,
                'softeng1:exer:derivative',
@@ -665,11 +655,11 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'softeng1:exer:doctest1',
                'softeng1:exer:doctest1'),
-              ('Problem 44: Experiment with tolerances in comparisons',
+              ('Problem 44: Investigate the size of tolerances in comparisons',
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
-              ('Remarks', 3, None, '___sec253'),
+              ('Remarks', 3, None, '___sec248'),
               ('Exercise 45: Make use of a class implementation',
                2,
                'softeng1:exer:class:dts',
@@ -678,8 +668,8 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('Summarizing multiple-choice questions', 0, None, '___sec256'),
-              ('Quiz', 1, None, '___sec257'),
+              ('Summarizing multiple-choice questions', 0, None, '___sec251'),
+              ('Quiz', 1, None, '___sec252'),
               ('Exercise 47: Characterize a finite difference',
                2,
                'decay:quiz:fd:FE',
@@ -744,7 +734,7 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'decay:quiz:scheme:leapfrog',
                'decay:quiz:scheme:leapfrog'),
-              ('References', 1, None, '___sec274')]}
+              ('References', 1, None, '___sec269')]}
 end of tocinfo -->
 
 <body>
@@ -790,18 +780,282 @@ $$
     </button>
     <a class="navbar-brand" href="decay-book.html">Finite Difference Computing with Exponential Decay Models</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._decay-book001.html#ch:preface" style="font-size: 80%;">Preface</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec1" style="font-size: 80%;">Algorithms and implementations</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis" style="font-size: 80%;">Analysis</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec72" style="font-size: 80%;">Generalizations</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app" style="font-size: 80%;">Models</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book009.html#decay:se" style="font-size: 80%;">Scientific software engineering</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec256" style="font-size: 80%;">Summarizing multiple-choice questions</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec1" style="font-size: 80%;"><b>Algorithms and implementations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#decay:basics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Finite difference methods</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#decay:model" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A basic model for exponential decay</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The exact solution</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A complete problem formulation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#decay:schemes:FE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Forward Euler scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 1: Discretizing the domain</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 2: Fulfilling the equation at discrete time points</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 3: Replacing derivatives by finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 4: Formulating a recursive algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interpretation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing with the recursive formula</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#decay:schemes:BE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Backward Euler scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#decay:schemes:CN" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Crank-Nicolson scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#decay:schemes:theta" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The unifying \( \theta \)-rule</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constant time step</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#decay:fd:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mathematical derivation of finite difference formulas</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The forward difference</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The backward difference</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The centered difference</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book003.html#decay:fd:op" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compact operator notation for finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#decay:impl1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computer language: Python</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#decay:py1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a solver function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#decay:py2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer division</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doc strings</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formatting numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running the program</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting the solution</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifying the implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running a few algorithmic steps by hand</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#decay:computing:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing the numerical error as a mesh function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#decay:computing:error:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing the norm of the error mesh function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar computing</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Experiments with computing and plotting</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combining plot files</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting with SciTools</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Memory-saving implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:meshfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 1: Define a mesh function and visualize it</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:dudt" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 2: Differentiate a function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:intdiv" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 3: Experiment with divisions</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:decay1err" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 4: Experiment with wrong computations</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:plot:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5: Plot the error function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:inexact:output" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 6: Change formatting of numbers and debug</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis" style="font-size: 80%;"><b>Analysis</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Experimental investigations</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discouraging numerical solutions</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Detailed experiments</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stability</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exact numerical solution</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stability properties derived from the amplification factor</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Accuracy</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visual comparison of amplification factors</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Series expansion of amplification factors</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ratio of numerical and exact amplification factors</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:gobal:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The global error at a point</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:gobal:error_int" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integrated error</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:trunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Truncation error</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Consistency, stability, and convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Various types of errors in a differential equation model</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Model errors</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data errors</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discretization errors</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rounding errors</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discussion of the size of various errors</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:exer:fd:exp:plot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 7: Visualize the accuracy of finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:exer:growth" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 8: Explore the \( \theta \)-rule for exponential growth</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:exer:rounding" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 9: Explore rounding errors in numerical calculus</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec72" style="font-size: 80%;"><b>Generalizations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Model extensions</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generalization: including a variable coefficient</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:source" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generalization: including a source term</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:general" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation of the generalized model problem</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deriving the \( \theta \)-rule formula</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python code</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coding of variable coefficients</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:verify:trivial" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifying a constant solution</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:MMS" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification via manufactured solutions</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:convergence:rate" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing convergence rates</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec83" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Estimating \( r \)</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec84" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension to systems of ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;General first-order ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec87" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic form of first-order ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The \( \theta \)-rule</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec89" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An implicit 2-step backward scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec90" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Leapfrog schemes</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec91" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ordinary Leapfrog scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec92" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The filtered Leapfrog scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec93" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 2nd-order Runge-Kutta method</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec94" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A 2nd-order Taylor-series method</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec95" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 2nd- and 3rd-order Adams-Bashforth schemes</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:RK4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 4th-order Runge-Kutta method</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec97" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Odespy software</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec98" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Runge-Kutta methods</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec99" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark about using the \( \theta \)-rule in Odespy</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:adaptiveRK" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Adaptive Runge-Kutta methods</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec101" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:precision" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 10: Experiment with precision in tests and the size of \( u \)</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:bw2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 11: Implement the 2-step backward scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:AB2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 12: Implement the 2nd-order Adams-Bashforth scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:AB3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 13: Implement the 3rd-order Adams-Bashforth scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:exer:RK2:Taylor:analysis" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 14: Analyze explicit 2nd-order methods</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:leapfrog1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project 15: Implement and investigate the Leapfrog scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:uni" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 16: Make a unified implementation of many schemes</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app" style="font-size: 80%;"><b>Models</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:scaling" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scaling</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec111" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless variables</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec112" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec113" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A scaling for vanishing initial condition</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:pop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Evolution of a population</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:pop:exp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exponential growth</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:pop:log" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logistic growth</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:interest" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Compound interest and inflation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:Newton:cooling" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton's law of cooling</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:nuclear" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Radioactive decay</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec120" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deterministic model</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec121" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stochastic model</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec122" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relation between stochastic and deterministic models</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:waitingtime" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generalization of the radioactive decay modeling</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:kinetics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chemical kinetics</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec125" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Irreversible reaction of two substances</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec126" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reversible reaction of two substances</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec127" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Irreversible reaction of two substances into a third</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec128" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A biochemical reaction</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:SIR" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Spreading of diseases</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:predprey" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Predator-prey models in ecology</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:atm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Decay of atmospheric pressure with altitude</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec132" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The general model</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec133" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiple atmospheric layers</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec134" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simplifications</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec135" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constant layer temperature</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec136" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;One-layer model</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:sediment" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Compaction of sediments</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:drag" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vertical motion of a body in a viscous fluid</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec139" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overview of forces</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec140" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equation of motion</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec141" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminal velocity</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec142" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Crank-Nicolson scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec143" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Physical data</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec144" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:drag:scaling" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scaling</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:viscoelasticity" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Viscoelastic materials</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:diffusion:Fourier" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Decay ODEs from solving a PDE by Fourier expansions</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec148" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:radio:C14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 17: Radioactive decay of Carbon-14</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:schemes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 18: Derive schemes for Newton's law of cooling</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:py" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 19: Implement schemes for Newton's law of cooling</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:murder" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 20: Find time of murder from body temperature</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:osc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 21: Simulate an oscillating cooling process</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:stoch:nuclear" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 22: Simulate stochastic radioactive decay</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:radio:twosubst" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 23: Radioactive decay of two substances</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:kinetics:AB" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 24: Simulate a simple chemical reaction</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:kinetics:ABn" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 25: Simulate an \( n \)-th order chemical reaction</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:MMK" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 26: Simulate a biochemical process</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:SIR" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 27: Simulate spreading of a disease</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:predprey" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 28: Simulate predator-prey interaction</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:atm1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 29: Simulate the pressure drop in the atmosphere</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:drag:prog" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 30: Make a program for vertical motion in a fluid</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:parachute" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project 31: Simulate parachuting</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:drag:atm1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 32: Formulate vertical motion in the atmosphere</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:drag:atm2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 33: Simulate vertical motion in the atmosphere</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:signum" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 34: Compute \( y=|x| \) by solving an ODE</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:interest" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 35: Simulate fortune growth with random interest rate</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:pop:at" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 36: Simulate a population in a changing environment</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:pop:logistic1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 37: Simulate logistic growth</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:interest:derive" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 38: Rederive the equation for continuous compound interest</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:viscoelasticity1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 39: Simulate the deformation of a viscoelastic material</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#decay:se" style="font-size: 80%;"><b>Scientific software engineering</b></a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementations with functions and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:math" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mathematical problem and solution technique</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:impl1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A first, quick implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:impl2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A more decent program</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec177" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments in a program</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec178" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Refactoring into functions</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec179" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Program file vs IDE vs notebook</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:modprefix" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prefixing imported functions by the module name</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:func" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementing the numerical algorithm in a function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec182" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do not have several versions of a code</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a module</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:experiment2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example on extending the module code</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:docstring" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documenting functions and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:logging" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logging intermediate results</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec187" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Introductory example</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec188" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using a logger in our solver function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:UI" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;User interfaces</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec190" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec191" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Positional command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec192" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option-value pairs on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec193" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creating a graphical web user interface</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec194" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a compute function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec195" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generating the user interface</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec196" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running the web application</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec197" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Tests for verifying implementations</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec198" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doctests</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec199" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unit tests and test functions</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec200" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Two Python test frameworks: nose and pytest</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec201" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test function requirements</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec202" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comparison of real numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec203" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Special assert functions from nose</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec204" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Locating test functions</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec205" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running tests</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec206" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Embedding doctests in a test function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec207" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installing nose and pytest</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec208" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test function for the solver</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec209" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test function for reading positional command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec210" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test function for reading option-value pairs</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:unittest" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Classical class-based unit testing</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:prog:se:git" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sharing the software with other users</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec213" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Organizing the software directory tree</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec214" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Distributing just a module file</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec215" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Distributing a package</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec216" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publishing the software at GitHub</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec217" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Downloading and installing the software</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec218" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installing just a module file</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec219" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installing a package</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:prog:se:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Classes for problem and solution method</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec221" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The problem class</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec222" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The solver class</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec223" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combining the objects</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:prog:se:class2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Improving the problem and solver classes</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec225" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A generic class for parameters</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:experiments" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Automating scientific experiments</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec227" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Available software</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec228" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The results we want to produce</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec229" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combining plot files</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec230" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running a program from Python</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec231" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The automating script</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exper:report" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a report</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec233" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word, OpenOffice, GoogleDocs</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec234" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML with MathJax</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec235" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LaTeX</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec236" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sphinx</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec237" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Markdown</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec238" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IPython/Jupyter notebooks</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec239" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wiki formats</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec240" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DocOnce</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exper:github" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publishing a complete project</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec242" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 40: Make a tool for differentiating curves</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:integral:flat" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 41: Make solid software for the Trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:integral:flat2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 42: Implement classes for the Trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:doctest1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 43: Write a doctest and a test function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:tol" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 44: Investigate the size of tolerances in comparisons</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec248" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:class:dts" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 45: Make use of a class implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:logistic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 46: Make solid software for a difference equation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec251" style="font-size: 80%;"><b>Summarizing multiple-choice questions</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec252" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Quiz</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:fd:FE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 47: Characterize a finite difference</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:fd:CN" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 48: Characterize a finite difference</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:program" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 49: What is the problem with this program?</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:stability" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 50: Is the solution correct?</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:testfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 51: Is this a proper test function?</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:arrayarithm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 52: Rewrite an expression with array arithmetics</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:trunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 53: What is the truncation error?</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:prog:m" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 54: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:prog:py" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 55: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:prog:f77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 56: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:prog:c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 57: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:sympy1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 58: What is SymPy?</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:testing1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 59: Testing of code</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:scheme:CN_error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 60: What kind of scheme is this?</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:scheme:BE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 61: What kind of scheme is this?</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:quiz:scheme:leapfrog" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 62: What kind of scheme is this?</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book011.html#___sec269" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -817,9 +1071,9 @@ $$
 <a name="part0010"></a>
 <!-- !split -->
 
-<center><h1 id="___sec256">Summarizing multiple-choice questions </h1></center> <!-- chapter heading -->
+<center><h1 id="___sec251">Summarizing multiple-choice questions </h1></center> <!-- chapter heading -->
 
-<h1 id="___sec257">Quiz </h1>
+<h1 id="___sec252">Quiz </h1>
 
 <p>
 <!-- --- begin exercise --- -->

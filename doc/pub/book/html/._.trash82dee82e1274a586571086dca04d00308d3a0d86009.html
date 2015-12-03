@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,relative differences,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability,relative differences">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -20,6 +20,13 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
 
 /*
 in.collapse+a.btn.showdetails:before { content:'Hide details'; }
@@ -403,23 +410,6 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'decay:app:exer:cooling:py',
                'decay:app:exer:cooling:py'),
-              ('Bug 1: Wrong time level in the $T_s$ function',
-               3,
-               None,
-               '___sec152'),
-              ('Bug 2: Wrong time level in the $T$ function',
-               3,
-               None,
-               '___sec153'),
-              ('Bug 3: Missing $\\theta$ in a term', 3, None, '___sec154'),
-              ('Bug 4: Missing `k` in the updating formula',
-               3,
-               None,
-               '___sec155'),
-              ('Bug 5: Using `1-theta` instead of `theta`',
-               3,
-               None,
-               '___sec156'),
               ('Exercise 20: Find time of murder from body temperature',
                2,
                'decay:app:exer:cooling:murder',
@@ -517,9 +507,9 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'softeng1:basic:impl2',
                'softeng1:basic:impl2'),
-              ('Comments in a program', 3, None, '___sec182'),
-              ('Refactoring into functions', 3, None, '___sec183'),
-              ('Program file vs IDE vs notebook', 3, None, '___sec184'),
+              ('Comments in a program', 3, None, '___sec177'),
+              ('Refactoring into functions', 3, None, '___sec178'),
+              ('Program file vs IDE vs notebook', 3, None, '___sec179'),
               ('Prefixing imported functions by the module name',
                2,
                'softeng1:basic:modprefix',
@@ -531,7 +521,7 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
               ('Do not have several versions of a code',
                2,
                None,
-               '___sec187'),
+               '___sec182'),
               ('Making a module',
                2,
                'softeng1:basic:module',
@@ -548,48 +538,48 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'softeng1:basic:logging',
                'softeng1:basic:logging'),
-              ('Introductory example', 3, None, '___sec192'),
-              ('Using a logger in our solver function', 3, None, '___sec193'),
+              ('Introductory example', 3, None, '___sec187'),
+              ('Using a logger in our solver function', 3, None, '___sec188'),
               ('User interfaces',
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec195'),
-              ('Positional command-line arguments', 2, None, '___sec196'),
+              ('Command-line arguments', 2, None, '___sec190'),
+              ('Positional command-line arguments', 2, None, '___sec191'),
               ('Option-value pairs on the command line',
                2,
                None,
-               '___sec197'),
+               '___sec192'),
               ('Creating a graphical web user interface',
                2,
                None,
-               '___sec198'),
-              ('Making a compute function', 3, None, '___sec199'),
-              ('Generating the user interface', 3, None, '___sec200'),
-              ('Running the web application', 3, None, '___sec201'),
-              ('Tests for verifying implementations', 1, None, '___sec202'),
-              ('Doctests', 2, None, '___sec203'),
-              ('Unit tests and test functions', 2, None, '___sec204'),
+               '___sec193'),
+              ('Making a compute function', 3, None, '___sec194'),
+              ('Generating the user interface', 3, None, '___sec195'),
+              ('Running the web application', 3, None, '___sec196'),
+              ('Tests for verifying implementations', 1, None, '___sec197'),
+              ('Doctests', 2, None, '___sec198'),
+              ('Unit tests and test functions', 2, None, '___sec199'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
-               '___sec205'),
-              ('Test function requirements', 3, None, '___sec206'),
-              ('Comparison of real numbers', 3, None, '___sec207'),
-              ('Special assert functions from nose', 3, None, '___sec208'),
-              ('Locating test functions', 3, None, '___sec209'),
-              ('Running tests', 3, None, '___sec210'),
-              ('Embedding doctests in a test function', 3, None, '___sec211'),
-              ('Installing nose and pytest', 3, None, '___sec212'),
-              ('Test function for the solver', 2, None, '___sec213'),
+               '___sec200'),
+              ('Test function requirements', 3, None, '___sec201'),
+              ('Comparison of real numbers', 3, None, '___sec202'),
+              ('Special assert functions from nose', 3, None, '___sec203'),
+              ('Locating test functions', 3, None, '___sec204'),
+              ('Running tests', 3, None, '___sec205'),
+              ('Embedding doctests in a test function', 3, None, '___sec206'),
+              ('Installing nose and pytest', 3, None, '___sec207'),
+              ('Test function for the solver', 2, None, '___sec208'),
               ('Test function for reading positional command-line arguments',
                2,
                None,
-               '___sec214'),
+               '___sec209'),
               ('Test function for reading option-value pairs',
                2,
                None,
-               '___sec215'),
+               '___sec210'),
               ('Classical class-based unit testing',
                2,
                'softeng1:basic:unittest',
@@ -601,54 +591,54 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
               ('Organizing the software directory tree',
                2,
                None,
-               '___sec218'),
-              ('Distributing just a module file', 3, None, '___sec219'),
-              ('Distributing a package', 3, None, '___sec220'),
-              ('Publishing the software at GitHub', 2, None, '___sec221'),
+               '___sec213'),
+              ('Distributing just a module file', 3, None, '___sec214'),
+              ('Distributing a package', 3, None, '___sec215'),
+              ('Publishing the software at GitHub', 2, None, '___sec216'),
               ('Downloading and installing the software',
                2,
                None,
-               '___sec222'),
-              ('Installing just a module file', 3, None, '___sec223'),
-              ('Installing a package', 3, None, '___sec224'),
+               '___sec217'),
+              ('Installing just a module file', 3, None, '___sec218'),
+              ('Installing a package', 3, None, '___sec219'),
               ('Classes for problem and solution method',
                1,
                'softeng1:prog:se:class',
                'softeng1:prog:se:class'),
-              ('The problem class', 2, None, '___sec226'),
-              ('The solver class', 2, None, '___sec227'),
-              ('Combining the objects', 3, None, '___sec228'),
+              ('The problem class', 2, None, '___sec221'),
+              ('The solver class', 2, None, '___sec222'),
+              ('Combining the objects', 3, None, '___sec223'),
               ('Improving the problem and solver classes',
                2,
                'softeng1:prog:se:class2',
                'softeng1:prog:se:class2'),
-              ('A generic class for parameters', 3, None, '___sec230'),
+              ('A generic class for parameters', 3, None, '___sec225'),
               ('Automating scientific experiments',
                1,
                'softeng1:experiments',
                'softeng1:experiments'),
-              ('Available software', 2, None, '___sec232'),
-              ('The results we want to produce', 2, None, '___sec233'),
-              ('Combining plot files', 2, None, '___sec234'),
-              ('Running a program from Python', 2, None, '___sec235'),
-              ('The automating script', 2, None, '___sec236'),
+              ('Available software', 2, None, '___sec227'),
+              ('The results we want to produce', 2, None, '___sec228'),
+              ('Combining plot files', 2, None, '___sec229'),
+              ('Running a program from Python', 2, None, '___sec230'),
+              ('The automating script', 2, None, '___sec231'),
               ('Making a report',
                2,
                'softeng1:exper:report',
                'softeng1:exper:report'),
-              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec238'),
-              ('HTML with MathJax', 3, None, '___sec239'),
-              ('LaTeX', 3, None, '___sec240'),
-              ('Sphinx', 3, None, '___sec241'),
-              ('Markdown', 3, None, '___sec242'),
-              ('IPython/Jupyter notebooks', 3, None, '___sec243'),
-              ('Wiki formats', 3, None, '___sec244'),
-              ('DocOnce', 3, None, '___sec245'),
+              ('Word, OpenOffice, GoogleDocs', 3, None, '___sec233'),
+              ('HTML with MathJax', 3, None, '___sec234'),
+              ('LaTeX', 3, None, '___sec235'),
+              ('Sphinx', 3, None, '___sec236'),
+              ('Markdown', 3, None, '___sec237'),
+              ('IPython/Jupyter notebooks', 3, None, '___sec238'),
+              ('Wiki formats', 3, None, '___sec239'),
+              ('DocOnce', 3, None, '___sec240'),
               ('Publishing a complete project',
                2,
                'softeng1:exper:github',
                'softeng1:exper:github'),
-              ('Exercises', 1, None, '___sec247'),
+              ('Exercises', 1, None, '___sec242'),
               ('Problem 40: Make a tool for differentiating curves',
                2,
                'softeng1:exer:derivative',
@@ -665,11 +655,11 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'softeng1:exer:doctest1',
                'softeng1:exer:doctest1'),
-              ('Problem 44: Experiment with tolerances in comparisons',
+              ('Problem 44: Investigate the size of tolerances in comparisons',
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
-              ('Remarks', 3, None, '___sec253'),
+              ('Remarks', 3, None, '___sec248'),
               ('Exercise 45: Make use of a class implementation',
                2,
                'softeng1:exer:class:dts',
@@ -678,8 +668,8 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
-              ('Summarizing multiple-choice questions', 0, None, '___sec256'),
-              ('Quiz', 1, None, '___sec257'),
+              ('Summarizing multiple-choice questions', 0, None, '___sec251'),
+              ('Quiz', 1, None, '___sec252'),
               ('Exercise 47: Characterize a finite difference',
                2,
                'decay:quiz:fd:FE',
@@ -744,7 +734,7 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                2,
                'decay:quiz:scheme:leapfrog',
                'decay:quiz:scheme:leapfrog'),
-              ('References', 1, None, '___sec274')]}
+              ('References', 1, None, '___sec269')]}
 end of tocinfo -->
 
 <body>
@@ -790,18 +780,282 @@ $$
     </button>
     <a class="navbar-brand" href=".trash82dee82e1274a586571086dca04d00308d3a0d86.html">Finite Difference Computing with Exponential Decay Models</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86001.html#ch:preface" style="font-size: 80%;">Preface</a></li>
-     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec1" style="font-size: 80%;">Algorithms and implementations</a></li>
-     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#decay:analysis" style="font-size: 80%;">Analysis</a></li>
-     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec72" style="font-size: 80%;">Generalizations</a></li>
-     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app" style="font-size: 80%;">Models</a></li>
-     <!-- navigation toc: --> <li><a href="#decay:se" style="font-size: 80%;">Scientific software engineering</a></li>
-     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#___sec256" style="font-size: 80%;">Summarizing multiple-choice questions</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86001.html#ch:preface" style="font-size: 80%;"><b>Preface</b></a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec1" style="font-size: 80%;"><b>Algorithms and implementations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#decay:basics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Finite difference methods</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#decay:model" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A basic model for exponential decay</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The exact solution</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A complete problem formulation</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#decay:schemes:FE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Forward Euler scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 1: Discretizing the domain</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 2: Fulfilling the equation at discrete time points</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 3: Replacing derivatives by finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 4: Formulating a recursive algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interpretation</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing with the recursive formula</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#decay:schemes:BE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Backward Euler scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#decay:schemes:CN" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Crank-Nicolson scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#decay:schemes:theta" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The unifying \( \theta \)-rule</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constant time step</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#decay:fd:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mathematical derivation of finite difference formulas</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The forward difference</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The backward difference</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The centered difference</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86003.html#decay:fd:op" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compact operator notation for finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#decay:impl1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computer language: Python</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#decay:py1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a solver function</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#decay:py2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integer division</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doc strings</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formatting numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running the program</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting the solution</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifying the implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running a few algorithmic steps by hand</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#decay:computing:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing the numerical error as a mesh function</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#decay:computing:error:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing the norm of the error mesh function</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar computing</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Experiments with computing and plotting</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combining plot files</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting with SciTools</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Memory-saving implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86005.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86005.html#decay:exer:meshfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 1: Define a mesh function and visualize it</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86005.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86005.html#decay:exer:dudt" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 2: Differentiate a function</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86005.html#decay:exer:intdiv" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 3: Experiment with divisions</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86005.html#decay:exer:decay1err" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 4: Experiment with wrong computations</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86005.html#decay:exer:plot:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5: Plot the error function</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86005.html#decay:exer:inexact:output" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 6: Change formatting of numbers and debug</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#decay:analysis" style="font-size: 80%;"><b>Analysis</b></a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Experimental investigations</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discouraging numerical solutions</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Detailed experiments</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec51" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stability</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exact numerical solution</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec53" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stability properties derived from the amplification factor</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Accuracy</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visual comparison of amplification factors</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Series expansion of amplification factors</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ratio of numerical and exact amplification factors</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#decay:analysis:gobal:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The global error at a point</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#decay:analysis:gobal:error_int" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Integrated error</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#decay:analysis:trunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Truncation error</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Consistency, stability, and convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Various types of errors in a differential equation model</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Model errors</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data errors</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discretization errors</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rounding errors</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discussion of the size of various errors</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#decay:analysis:exer:fd:exp:plot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 7: Visualize the accuracy of finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#decay:analysis:exer:growth" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 8: Explore the \( \theta \)-rule for exponential growth</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86006.html#decay:analysis:exer:rounding" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 9: Explore rounding errors in numerical calculus</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec72" style="font-size: 80%;"><b>Generalizations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Model extensions</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generalization: including a variable coefficient</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:source" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generalization: including a source term</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:general" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation of the generalized model problem</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deriving the \( \theta \)-rule formula</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec78" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python code</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec79" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coding of variable coefficients</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:verify:trivial" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verifying a constant solution</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:MMS" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification via manufactured solutions</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:convergence:rate" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing convergence rates</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec83" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Estimating \( r \)</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec84" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec85" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension to systems of ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec86" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;General first-order ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec87" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic form of first-order ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec88" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The \( \theta \)-rule</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec89" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An implicit 2-step backward scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec90" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Leapfrog schemes</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec91" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ordinary Leapfrog scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec92" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The filtered Leapfrog scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec93" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 2nd-order Runge-Kutta method</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec94" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A 2nd-order Taylor-series method</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec95" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 2nd- and 3rd-order Adams-Bashforth schemes</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:fd2:RK4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 4th-order Runge-Kutta method</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec97" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Odespy software</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec98" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Runge-Kutta methods</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec99" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark about using the \( \theta \)-rule in Odespy</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:fd2:adaptiveRK" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Adaptive Runge-Kutta methods</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#___sec101" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:fd2:exer:precision" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 10: Experiment with precision in tests and the size of \( u \)</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:fd2:exer:bw2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 11: Implement the 2-step backward scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:fd2:exer:AB2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 12: Implement the 2nd-order Adams-Bashforth scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:fd2:exer:AB3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 13: Implement the 3rd-order Adams-Bashforth scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:exer:RK2:Taylor:analysis" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 14: Analyze explicit 2nd-order methods</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:fd2:exer:leapfrog1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project 15: Implement and investigate the Leapfrog scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:fd2:exer:uni" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 16: Make a unified implementation of many schemes</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app" style="font-size: 80%;"><b>Models</b></a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:scaling" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scaling</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec111" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless variables</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec112" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec113" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A scaling for vanishing initial condition</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:pop" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Evolution of a population</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:pop:exp" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exponential growth</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:pop:log" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logistic growth</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:interest" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Compound interest and inflation</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:Newton:cooling" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Newton's law of cooling</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:nuclear" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Radioactive decay</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec120" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deterministic model</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec121" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stochastic model</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec122" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relation between stochastic and deterministic models</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:waitingtime" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generalization of the radioactive decay modeling</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:kinetics" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Chemical kinetics</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec125" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Irreversible reaction of two substances</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec126" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reversible reaction of two substances</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec127" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Irreversible reaction of two substances into a third</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec128" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A biochemical reaction</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:SIR" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Spreading of diseases</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:predprey" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Predator-prey models in ecology</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:atm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Decay of atmospheric pressure with altitude</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec132" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The general model</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec133" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiple atmospheric layers</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec134" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simplifications</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec135" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constant layer temperature</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec136" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;One-layer model</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:sediment" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Compaction of sediments</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:drag" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Vertical motion of a body in a viscous fluid</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec139" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overview of forces</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec140" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equation of motion</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec141" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminal velocity</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec142" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Crank-Nicolson scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec143" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Physical data</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec144" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verification</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:drag:scaling" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scaling</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:viscoelasticity" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Viscoelastic materials</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:diffusion:Fourier" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Decay ODEs from solving a PDE by Fourier expansions</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#___sec148" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:radio:C14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 17: Radioactive decay of Carbon-14</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:cooling:schemes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 18: Derive schemes for Newton's law of cooling</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:cooling:py" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 19: Implement schemes for Newton's law of cooling</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:cooling:murder" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 20: Find time of murder from body temperature</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:cooling:osc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 21: Simulate an oscillating cooling process</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:stoch:nuclear" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 22: Simulate stochastic radioactive decay</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:radio:twosubst" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 23: Radioactive decay of two substances</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:kinetics:AB" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 24: Simulate a simple chemical reaction</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:kinetics:ABn" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 25: Simulate an \( n \)-th order chemical reaction</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:MMK" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 26: Simulate a biochemical process</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:SIR" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 27: Simulate spreading of a disease</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:predprey" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 28: Simulate predator-prey interaction</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:atm1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 29: Simulate the pressure drop in the atmosphere</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:drag:prog" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 30: Make a program for vertical motion in a fluid</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:parachute" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project 31: Simulate parachuting</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:drag:atm1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 32: Formulate vertical motion in the atmosphere</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:drag:atm2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 33: Simulate vertical motion in the atmosphere</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:signum" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 34: Compute \( y=|x| \) by solving an ODE</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:interest" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 35: Simulate fortune growth with random interest rate</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:pop:at" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 36: Simulate a population in a changing environment</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:pop:logistic1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 37: Simulate logistic growth</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:interest:derive" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 38: Rederive the equation for continuous compound interest</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86008.html#decay:app:exer:viscoelasticity1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 39: Simulate the deformation of a viscoelastic material</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:se" style="font-size: 80%;"><b>Scientific software engineering</b></a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementations with functions and modules</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:math" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mathematical problem and solution technique</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:impl1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A first, quick implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:impl2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A more decent program</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec177" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments in a program</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec178" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Refactoring into functions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec179" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Program file vs IDE vs notebook</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:modprefix" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prefixing imported functions by the module name</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:func" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementing the numerical algorithm in a function</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec182" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do not have several versions of a code</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a module</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:experiment2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example on extending the module code</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:docstring" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documenting functions and modules</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:logging" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logging intermediate results</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec187" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Introductory example</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec188" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using a logger in our solver function</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:UI" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;User interfaces</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec190" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec191" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Positional command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec192" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Option-value pairs on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec193" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creating a graphical web user interface</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec194" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a compute function</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec195" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generating the user interface</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec196" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running the web application</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec197" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Tests for verifying implementations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec198" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doctests</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec199" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unit tests and test functions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec200" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Two Python test frameworks: nose and pytest</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec201" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test function requirements</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec202" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comparison of real numbers</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec203" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Special assert functions from nose</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec204" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Locating test functions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec205" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running tests</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec206" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Embedding doctests in a test function</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec207" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installing nose and pytest</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec208" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test function for the solver</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec209" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test function for reading positional command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec210" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test function for reading option-value pairs</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:basic:unittest" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Classical class-based unit testing</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:prog:se:git" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Sharing the software with other users</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec213" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Organizing the software directory tree</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec214" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Distributing just a module file</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec215" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Distributing a package</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec216" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publishing the software at GitHub</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec217" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Downloading and installing the software</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec218" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installing just a module file</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec219" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installing a package</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:prog:se:class" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Classes for problem and solution method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec221" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The problem class</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec222" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The solver class</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec223" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combining the objects</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:prog:se:class2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Improving the problem and solver classes</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec225" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A generic class for parameters</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:experiments" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Automating scientific experiments</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec227" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Available software</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec228" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The results we want to produce</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec229" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combining plot files</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec230" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running a program from Python</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec231" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The automating script</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:exper:report" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a report</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec233" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word, OpenOffice, GoogleDocs</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec234" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML with MathJax</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec235" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LaTeX</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec236" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sphinx</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec237" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Markdown</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec238" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IPython/Jupyter notebooks</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec239" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wiki formats</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec240" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DocOnce</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:exper:github" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publishing a complete project</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec242" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:exer:derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 40: Make a tool for differentiating curves</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:exer:integral:flat" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 41: Make solid software for the Trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:exer:integral:flat2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 42: Implement classes for the Trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:exer:doctest1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 43: Write a doctest and a test function</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:exer:tol" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 44: Investigate the size of tolerances in comparisons</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec248" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:exer:class:dts" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 45: Make use of a class implementation</a></li>
+     <!-- navigation toc: --> <li><a href="#softeng1:exer:logistic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 46: Make solid software for a difference equation</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#___sec251" style="font-size: 80%;"><b>Summarizing multiple-choice questions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#___sec252" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Quiz</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:fd:FE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 47: Characterize a finite difference</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:fd:CN" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 48: Characterize a finite difference</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:program" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 49: What is the problem with this program?</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:stability" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 50: Is the solution correct?</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:testfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 51: Is this a proper test function?</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:arrayarithm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 52: Rewrite an expression with array arithmetics</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:trunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 53: What is the truncation error?</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:prog:m" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 54: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:prog:py" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 55: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:prog:f77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 56: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:prog:c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 57: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:sympy1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 58: What is SymPy?</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:testing1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 59: Testing of code</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:scheme:CN_error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 60: What kind of scheme is this?</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:scheme:BE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 61: What kind of scheme is this?</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86010.html#decay:quiz:scheme:leapfrog" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 62: What kind of scheme is this?</a></li>
+     <!-- navigation toc: --> <li><a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86011.html#___sec269" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
       </li>
@@ -822,26 +1076,26 @@ $$
 <p>
 Teaching material on scientific computing has traditionally been very
 focused on the mathematics and the applications, while details on how
-the computer is programmed to solve the problems have received little attention.
-Many end up writing as simple programs as possible, without being
-aware of much useful computer science technology that would increase
-the fun, efficiency, and reliability of the their scientific computing
-activities.
+the computer is programmed to solve the problems have received little
+attention.  Many end up writing as simple programs as possible,
+without being aware of much useful computer science technology that
+would increase the fun, efficiency, and reliability of the their
+scientific computing activities.
 
 <p>
-This chapter demonstrates a series of good practices and tools
-from modern computer science, using the simple mathematical problem
-\( u^{\prime}=-au \), \( u(0)=I \), such that we minimize the
-mathematical details and can go more in depth with implementations.
-The goal is to increase the technological
-quality of computer programming and make it match the more
-well-established quality of the mathematics of scientific computing.
+This chapter demonstrates a series of good practices and tools from
+modern computer science, using the simple mathematical problem
+\( u^{\prime}=-au \), \( u(0)=I \), such that we minimize the mathematical
+details and can go more in depth with implementations.  The goal is to
+increase the technological quality of computer programming and make it
+match the more well-established quality of the mathematics of
+scientific computing.
 
 <p>
-The conventions and techniques outlined here will save you a lot of time
-when you incrementally extend software over time from simpler to more
-complicated problems. In particular, you will benefit from
-many good habits:
+The conventions and techniques outlined here will save you a lot of
+time when you incrementally extend software over time from simpler to
+more complicated problems. In particular, you will benefit from many
+good habits:
 
 <ul>
  <li> new code is added in a modular fashion to a library (modules),</li>
@@ -873,8 +1127,8 @@ We address the differential equation problem
 
 $$
 \begin{align}
-u'(t) &= -au(t), \quad t \in (0,T], \tag{200}\\ 
-u(0)  &= I,                         \tag{201}
+u'(t) &= -au(t), \quad t \in (0,T], \tag{5.1}\\ 
+u(0)  &= I,                         \tag{5.2}
 \end{align}
 $$
 
@@ -895,7 +1149,7 @@ A family of popular numerical methods are provided by the \( \theta \) scheme,
 $$
 \begin{equation}
 u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
-\tag{202}
+\tag{5.3}
 \end{equation}
 $$
 
@@ -910,7 +1164,7 @@ scheme when \( \theta=1/2 \).
 <h2 id="softeng1:basic:impl1">A first, quick implementation</h2>
 
 <p>
-Solving <a href="#mjx-eqn-202">(202)</a> in a program is very straightforward:
+Solving <a href="#mjx-eqn-5.3">(5.3)</a> in a program is very straightforward:
 just make a loop over \( n \) and evaluate the formula. The \( u(t_n \))
 values for discrete \( n \) can be stored in an array. This makes it easy
 to also plot the solution. It would be natural to also add
@@ -1016,7 +1270,7 @@ ylabel(<span style="color: #BA2121">&#39;u&#39;</span>)
 show()
 </pre></div>
 
-<h3 id="___sec182">Comments in a program </h3>
+<h3 id="___sec177">Comments in a program </h3>
 
 <p>
 There is obviously not just one way to comment a program, and opinions
@@ -1027,7 +1281,7 @@ constructions, but focus on ideas and (&quot;what happens in the next
 statements?&quot;) and on explaining code that can be found
 complicated.
 
-<h3 id="___sec183">Refactoring into functions </h3>
+<h3 id="___sec178">Refactoring into functions </h3>
 
 <p>
 At first sight, our updated program seems like
@@ -1048,7 +1302,7 @@ but just improve the quality of the code, is known as <em>refactoring</em>.
 After quickly putting together and testing a program, the next
 step is to refactor it so it becomes better prepared for extensions.
 
-<h3 id="___sec184">Program file vs IDE vs notebook </h3>
+<h3 id="___sec179">Program file vs IDE vs notebook </h3>
 
 <p>
 There are basically three different ways of working with Python code:
@@ -1193,11 +1447,11 @@ Other calls to <code>numpy</code> function are done with the prefix, as in
 <h2 id="softeng1:basic:func">Implementing the numerical algorithm in a function</h2>
 
 <p>
-The solution formula <a href="#mjx-eqn-202">(202)</a> is completely general and
+The solution formula <a href="#mjx-eqn-5.3">(5.3)</a> is completely general and
 should be available as a Python function <code>solver</code> with all input data as
 function arguments and all output data returned to the calling code.
 With this <code>solver</code> function we can solve all types of problems
-<a href="#mjx-eqn-200">(200)</a>-<a href="#mjx-eqn-201">(201)</a>
+<a href="#mjx-eqn-5.1">(5.1)</a>-<a href="#mjx-eqn-5.2">(5.2)</a>
 by an easy-to-read one-line statement:
 
 <p>
@@ -1243,7 +1497,7 @@ to zero because of integer division when <code>theta</code>, <code>a</code>, and
 </div>
 
 
-<h2 id="___sec187">Do not have several versions of a code </h2>
+<h2 id="___sec182">Do not have several versions of a code </h2>
 
 <p>
 One of the most serious flaws in computational work is to have several
@@ -1598,7 +1852,7 @@ The professional way to do report intermediate results and problems is,
 however, to use a <em>logger</em>. This is an object that writes messages
 to a log file. The messages are classified as debug, info, and warning.
 
-<h3 id="___sec192">Introductory example </h3>
+<h3 id="___sec187">Introductory example </h3>
 
 <p>
 Here is a simple example using defining a logger, using Python's <code>logging</code>
@@ -1659,7 +1913,7 @@ nothing more is printed on each line. The <code>datefmt</code> string
 specifies the formatting of the date and time, using the
 rules of the <a href="https://docs.python.org/2/library/time.html#time.strftime" target="_self"><tt>time.strftime</tt></a> function.
 
-<h3 id="___sec193">Using a logger in our solver function </h3>
+<h3 id="___sec188">Using a logger in our solver function </h3>
 
 <p>
 Let us let a logger write out intermediate results and some debugging
@@ -2149,7 +2403,7 @@ The essential content is that <code>prog.py</code> has two input parameters: <co
 and <code>p</code>. A user interface will replace the first two assignments to
 <code>delta</code> and <code>p</code>.
 
-<h2 id="___sec195">Command-line arguments </h2>
+<h2 id="___sec190">Command-line arguments </h2>
 
 <p>
 The command-line arguments are all the words that appear on the
@@ -2314,7 +2568,7 @@ the <code>args.delta</code> and <code>args.p</code> variables are automatically 
 Our next task is to use these basic code constructs to equip our
 <code>decay.py</code> module with command-line interfaces.
 
-<h2 id="___sec196">Positional command-line arguments </h2>
+<h2 id="___sec191">Positional command-line arguments </h2>
 
 <p>
 For our <code>decay.py</code> module file, we want to include functionality such
@@ -2401,7 +2655,7 @@ Now we can do
 <p>
 and get `theta=0.5`in the code.
 
-<h2 id="___sec197">Option-value pairs on the command line </h2>
+<h2 id="___sec192">Option-value pairs on the command line </h2>
 
 <p>
 Now we want to specify option-value pairs on the command line,
@@ -2572,7 +2826,7 @@ the command line as positional arguments or option-value pairs:
     plt<span style="color: #666666">.</span>savefig(plotfile <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.png&#39;</span>);  plt<span style="color: #666666">.</span>savefig(plotfile <span style="color: #666666">+</span> <span style="color: #BA2121">&#39;.pdf&#39;</span>)
 </pre></div>
 
-<h2 id="___sec198">Creating a graphical web user interface </h2>
+<h2 id="___sec193">Creating a graphical web user interface </h2>
 
 <p>
 The Python package <a href="https://github.com/hplgit/parampool" target="_self">Parampool</a>
@@ -2583,7 +2837,7 @@ material on equipping our <code>decay</code> module with a GUI is quite technica
 and of significantly less importance than knowing how to make
 a command-line interface.
 
-<h3 id="___sec199">Making a compute function </h3>
+<h3 id="___sec194">Making a compute function </h3>
 
 <p>
 The first step is to identify a function
@@ -2690,7 +2944,7 @@ relevant HTML code in the string <code>html_text</code>. The function looks like
     <span style="color: #008000; font-weight: bold">return</span> E, html_text
 </pre></div>
 
-<h3 id="___sec200">Generating the user interface </h3>
+<h3 id="___sec195">Generating the user interface </h3>
 
 <p>
 The web GUI is automatically generated by
@@ -2720,7 +2974,7 @@ files whose names are specified in the call to <code>generate</code>:
 We only need to run the last program, and there is no need to look into
 these files.
 
-<h3 id="___sec201">Running the web application </h3>
+<h3 id="___sec196">Running the web application </h3>
 
 <p>
 The web GUI is started by
@@ -2739,7 +2993,7 @@ With the techniques demonstrated here, one can
 easily create a tailored web GUI for a particular type of application
 and use it to interactively explore physical and numerical effects.
 
-<h1 id="___sec202">Tests for verifying implementations </h1>
+<h1 id="___sec197">Tests for verifying implementations </h1>
 
 <p>
 Any module with functions should have a set of tests that can
@@ -2755,7 +3009,7 @@ software testing techniques: <em>doctest</em> and <em>unit testing</em>.
 The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.
 
-<h2 id="___sec203">Doctests </h2>
+<h2 id="___sec198">Doctests </h2>
 
 <p>
 A doc string, the first string after the function header, is used to
@@ -2881,7 +3135,7 @@ hide software errors.
 Doctests are highly encouraged as they do two things: 1) demonstrate
 how a function is used and 2) test that the function works.
 
-<h2 id="___sec204">Unit tests and test functions </h2>
+<h2 id="___sec199">Unit tests and test functions </h2>
 
 <p>
 The unit testing technique consists of identifying smaller units
@@ -2897,14 +3151,14 @@ unit testing. The units are naturally larger than in non-scientific
 software. Very often the solution procedure of a mathematical problem
 identifies a unit, such as our <code>solver</code> function.
 
-<h3 id="___sec205">Two Python test frameworks: nose and pytest </h3>
+<h3 id="___sec200">Two Python test frameworks: nose and pytest </h3>
 
 <p>
 Python offers two very easy-to-use software frameworks for implementing
 unit tests: nose and pytest. These work (almost) in the same way,
 but our recommendation is to go for pytest.
 
-<h3 id="___sec206">Test function requirements </h3>
+<h3 id="___sec201">Test function requirements </h3>
 
 <p>
 For a test to qualify as a <em>test function</em> in nose or pytest, three
@@ -2960,7 +3214,7 @@ A better version of the test function is therefore
     <span style="color: #008000; font-weight: bold">assert</span> success, msg
 </pre></div>
 
-<h3 id="___sec207">Comparison of real numbers </h3>
+<h3 id="___sec202">Comparison of real numbers </h3>
 
 <p>
 Because of the finite precision arithmetics on a computer, which gives
@@ -3029,11 +3283,20 @@ So, replace <code>a == b</code>, if <code>a</code> and/or <code>b</code> is <cod
 </pre></div>
 <p>
 The suitable size of <code>tol</code> depends on the size of <code>a</code> and <code>b</code>
-(see <a href="#softeng1:exer:tol">Problem 44: Experiment with tolerances in comparisons</a>).
+(see <a href="#softeng1:exer:tol">Problem 44: Investigate the size of tolerances in comparisons</a>). Unless <code>a</code> and <code>b</code> are around
+unity in size, one should use a <em>relative difference</em>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%">tol <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+<span style="color: #008000">abs</span>((a <span style="color: #666666">-</span> b)<span style="color: #666666">/</span>a) <span style="color: #666666">&lt;</span> tol
+</pre></div>
+<p>
 </div>
 
 
-<h3 id="___sec208">Special assert functions from nose </h3>
+<h3 id="___sec203">Special assert functions from nose </h3>
 
 <p>
 Test frameworks often contain more tailored
@@ -3063,7 +3326,7 @@ depends on the programmer's preference. The examples used in the
 documentation of the pytest framework stick to the plain <code>assert</code>
 statement.
 
-<h3 id="___sec209">Locating test functions </h3>
+<h3 id="___sec204">Locating test functions </h3>
 
 <p>
 Test functions can reside in a module together with the functions they
@@ -3079,7 +3342,7 @@ test functions in the module, but we could equally well have made
 a subdirectory <code>tests</code> and put the test functions in
 <a href="http://tinyurl.com/ofkw6kc/softeng/tests/test_decay.py" target="_self"><tt>tests/test_decay.py</tt></a>.
 
-<h3 id="___sec210">Running tests </h3>
+<h3 id="___sec205">Running tests </h3>
 
 <p>
 To run all test functions in the file <code>decay.py</code> do
@@ -3120,7 +3383,7 @@ with <code>test</code> or end with <code>_test</code> or <code>_tests</code> (wh
 An example of a <code>tests</code> directory with a <code>test*.py</code>
 file is found in <a href="http://tinyurl.com/ofkw6kc/softeng/tests" target="_self"><tt>src/softeng/tests</tt></a>.
 
-<h3 id="___sec211">Embedding doctests in a test function </h3>
+<h3 id="___sec206">Embedding doctests in a test function </h3>
 
 <p>
 Doctests can also be executed from nose/pytest unit tests. Here is an
@@ -3153,20 +3416,20 @@ in the test block, while applying <code>py.test</code> or <code>nosetests</code>
 an import of the file and execution of the test function
 <code>test_decay_modue_with_doctest</code>.
 
-<h3 id="___sec212">Installing nose and pytest </h3>
+<h3 id="___sec207">Installing nose and pytest </h3>
 
 <p>
 With <code>pip</code> available, it is trivial to install nose and/or pytest:
 <code>sudo pip install nose</code> and <code>sudo pip install pytest</code>.
 
-<h2 id="___sec213">Test function for the solver </h2>
+<h2 id="___sec208">Test function for the solver </h2>
 
 <p>
 Finding good test problems for verifying the implementation of numerical
 methods is a topic on its own. The challenge is that we very seldom know
 what the numerical errors are. For the present model problem
-<a href="#mjx-eqn-200">(200)</a>-<a href="#mjx-eqn-201">(201)</a> solved by
-<a href="#mjx-eqn-202">(202)</a> one can, fortunately, derive a formula for
+<a href="#mjx-eqn-5.1">(5.1)</a>-<a href="#mjx-eqn-5.2">(5.2)</a> solved by
+<a href="#mjx-eqn-5.3">(5.3)</a> one can, fortunately, derive a formula for
 the numerical approximation:
 
 $$ u^n = I\left(
@@ -3241,7 +3504,7 @@ expected ones (from theory).
 This type of testing is fully explained in
 the section <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86007.html#decay:convergence:rate">Computing convergence rates</a>.
 
-<h2 id="___sec214">Test function for reading positional command-line arguments </h2>
+<h2 id="___sec209">Test function for reading positional command-line arguments </h2>
 
 <p>
 The function <code>read_command_line_positional</code> extracts numbers from the
@@ -3282,7 +3545,7 @@ can safely use <code>==</code> in tests. Note also that the last element in
 <code>expected</code> and <code>computed</code> is the list <code>dt_values</code>, and <code>==</code> works
 for comparing two lists as well.
 
-<h2 id="___sec215">Test function for reading option-value pairs </h2>
+<h2 id="___sec210">Test function for reading option-value pairs </h2>
 
 <p>
 The function <code>read_command_line_argparse</code> can be verified with a
@@ -3493,7 +3756,7 @@ subsections cover three steps in sharing software:
 <li> Downloading and installing the software.</li>
 </ol>
 
-<h2 id="___sec218">Organizing the software directory tree </h2>
+<h2 id="___sec213">Organizing the software directory tree </h2>
 
 <p>
 We start with organizing our software as a directory tree. Our
@@ -3516,7 +3779,7 @@ file executed by the <code>python</code> program (or more precisely, the first
 <code>python</code> program found in the directories in the <code>PATH</code> environment
 variable).
 
-<h3 id="___sec219">Distributing just a module file </h3>
+<h3 id="___sec214">Distributing just a module file </h3>
 
 <p>
 Let us start out with the minimum solution alternative: distributing
@@ -3545,7 +3808,7 @@ The <code>py_modules</code> argument specifies a list of modules to be installed
 either as a module or as an executable program, so we want users to
 have both possibilities.
 
-<h3 id="___sec220">Distributing a package </h3>
+<h3 id="___sec215">Distributing a package </h3>
 
 <p>
 If the software consists of more files than one or two modules, one
@@ -3623,7 +3886,7 @@ decay.py  __init__.py  tests
 test_decay.py
 </pre></div>
 
-<h2 id="___sec221">Publishing the software at GitHub </h2>
+<h2 id="___sec216">Publishing the software at GitHub </h2>
 
 <p>
 The leading site today for publishing open source software projects is
@@ -3708,7 +3971,7 @@ up and going with this style of
 professional work. And you should put all your writings and programming
 projects in repositories in the cloud!
 
-<h2 id="___sec222">Downloading and installing the software </h2>
+<h2 id="___sec217">Downloading and installing the software </h2>
 
 <p>
 Users of your software go to the Git repo at <code>github.com</code> and
@@ -3723,7 +3986,7 @@ Most users will use the latter, typically
 <p>
 The result is a directory <code>projname</code> with the files in the repo.
 
-<h3 id="___sec223">Installing just a module file </h3>
+<h3 id="___sec218">Installing just a module file </h3>
 
 <p>
 The software package is in the case above a directory <code>decay</code> with three files
@@ -3770,7 +4033,7 @@ directory on the computer system, e.g.,
 <code>/usr/local/lib/python2.7/dist-packages</code>, while executable programs go
 to <code>/usr/local/bin</code>.
 
-<h3 id="___sec224">Installing a package </h3>
+<h3 id="___sec219">Installing a package </h3>
 
 <p>
 When the software is organized as a Python package, the installation is
@@ -3852,14 +4115,14 @@ Other useful resources are
  <li> <code>tutorialspoint.com</code>: <a href="http://www.tutorialspoint.com/python/python_classes_objects.htm" target="_self"><tt>http://www.tutorialspoint.com/python/python_classes_objects.htm</tt></a></li>
 </ul>
 
-<h2 id="___sec226">The problem class </h2>
+<h2 id="___sec221">The problem class </h2>
 
 <p>
 The purpose of the problem class is to store all information about
 the mathematical model. This usually means the physical parameters
 and formulas
 in the problem. Looking at our model problem
-<a href="#mjx-eqn-200">(200)</a>-<a href="#mjx-eqn-201">(201)</a>, the physical data cover
+<a href="#mjx-eqn-5.1">(5.1)</a>-<a href="#mjx-eqn-5.2">(5.2)</a>, the physical data cover
 \( I \), \( a \), and \( T \). Since we have an analytical solution of
 the ODE problem, we may add this solution in terms of a Python
 function (or method) to the problem class as well.
@@ -3955,7 +4218,7 @@ supplied, but if she does not have any, class <code>Problem</code> makes one.
 Python's <code>None</code> object is used to indicate that a variable is not
 initialized with a proper value.
 
-<h2 id="___sec227">The solver class </h2>
+<h2 id="___sec222">The solver class </h2>
 
 <p>
 The solver class stores parameters related to the numerical solution method
@@ -4011,7 +4274,7 @@ of the stand-alone <code>solver</code> function. With a single object of class <
 we have all the physical and numerical data bundled together with the numerical
 solution method.
 
-<h3 id="___sec228">Combining the objects </h3>
+<h3 id="___sec223">Combining the objects </h3>
 
 <p>
 Eventually we need to show how the classes <code>Problem</code> and <code>Solver</code>
@@ -4136,7 +4399,7 @@ solver<span style="color: #666666">.</span>solve()
 u, t <span style="color: #666666">=</span> solver<span style="color: #666666">.</span>u, solver<span style="color: #666666">.</span>t
 </pre></div>
 
-<h3 id="___sec230">A generic class for parameters </h3>
+<h3 id="___sec225">A generic class for parameters </h3>
 
 <p>
 A simplified version of the parameter class looks as follows:
@@ -4216,7 +4479,7 @@ solve the initial-value problem
 $$
 \begin{equation}
 u^\prime(t) = -au(t),\quad u(0)=I,\quad t\in (0,T],
-\tag{203}
+\tag{5.4}
 \end{equation}
 $$
 
@@ -4226,7 +4489,7 @@ $$
 \begin{equation}
 u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n,
 \quad u^0=I\tp
-\tag{204}
+\tag{5.5}
 \end{equation}
 $$
 
@@ -4251,10 +4514,10 @@ investigation.
 </div>
 
 
-<h2 id="___sec232">Available software </h2>
+<h2 id="___sec227">Available software </h2>
 
 <p>
-Appropriate software for implementing <a href="#mjx-eqn-204">(204)</a>
+Appropriate software for implementing <a href="#mjx-eqn-5.5">(5.5)</a>
 is available in a program <a href="http://tinyurl.com/nc4upel/doconce_src/model.py" target="_self"><tt>model.py</tt></a>, which is run as
 
 <p>
@@ -4296,7 +4559,7 @@ The first column is the \( \theta \) value, the next the \( \Delta t \) value,
 and the final column represents the numerical error \( E \) (the
 norm of discrete error function on the mesh).
 
-<h2 id="___sec233">The results we want to produce </h2>
+<h2 id="___sec228">The results we want to produce </h2>
 
 <p>
 The results we need for our investigations are slightly different than
@@ -4360,7 +4623,7 @@ This requires more than an automating script.
 </div>
 
 
-<h2 id="___sec234">Combining plot files </h2>
+<h2 id="___sec229">Combining plot files </h2>
 
 <p>
 The script for running experiments needs to combine multiple image
@@ -4416,7 +4679,7 @@ Terminal&gt; pdfcrop tmp.pdf f.pdf
 Terminal&gt; rm -f tmp.pdf
 </pre></div>
 
-<h2 id="___sec235">Running a program from Python </h2>
+<h2 id="___sec230">Running a program from Python </h2>
 
 <p>
 The script for automating experiments needs to run the <code>model.py</code> program
@@ -4504,7 +4767,7 @@ to such a dictionary of lists (<code>errors</code>):
         errors[theta]<span style="color: #666666">.</span>append(E)
 </pre></div>
 
-<h2 id="___sec236">The automating script </h2>
+<h2 id="___sec231">The automating script </h2>
 
 <p>
 We have now all the core elements in place to write the complete
@@ -4646,7 +4909,7 @@ plot, thereby ensuring that each figure is connected to the
 right data. Take a look at <a href="http://tinyurl.com/nc4upel/_static/sphinx-cloud/" target="_self">a sample report</a>  to see what we have in
 mind.
 
-<h3 id="___sec238">Word, OpenOffice, GoogleDocs </h3>
+<h3 id="___sec233">Word, OpenOffice, GoogleDocs </h3>
 
 <p>
 Microsoft Word, its open source counterparts OpenOffice and
@@ -4665,7 +4928,7 @@ collaborative writing, the merge functionality in Git leads to safer
 simultaneously editing than what is offered even by collaborative
 tools like GoogleDocs.
 
-<h3 id="___sec239">HTML with MathJax </h3>
+<h3 id="___sec234">HTML with MathJax </h3>
 
 <p>
 HTML is the markup language used for web pages.  Nicely typeset computer
@@ -4697,7 +4960,7 @@ statements for creating an <a href="http://tinyurl.com/nc4upel/_static/report_ma
 <p><img src="fig-softeng/report_mathjax.png" align="bottom" width=600></p>
 </center>
 
-<h3 id="___sec240">LaTeX </h3>
+<h3 id="___sec235">LaTeX </h3>
 
 <p>
 <!-- "http://en.wikibooks.org/wiki/LaTeX" -->
@@ -4727,7 +4990,7 @@ generate the LaTeX source from a program.
 <p><img src="fig-softeng/report_latexpdf.png" align="bottom" width=600></p>
 </center>
 
-<h3 id="___sec241">Sphinx </h3>
+<h3 id="___sec236">Sphinx </h3>
 
 <p>
 <!-- give pointers to source pages -->
@@ -4755,7 +5018,7 @@ contents, navigation, and search facilities, see Figure
 <p><img src="fig-softeng/report_sphinx.png" align="bottom" width=600></p>
 </center>
 
-<h3 id="___sec242">Markdown </h3>
+<h3 id="___sec237">Markdown </h3>
 
 <p>
 A recent, very popular format for easy writing of web pages is
@@ -4770,7 +5033,7 @@ OpenOffice/LibreOffice, MediaWiki, and Microsoft Word are some other
 possibilities. A Markdown version of our scientific
 report demo is available as an IPython/Jupyter notebook (described next).
 
-<h3 id="___sec243">IPython/Jupyter notebooks </h3>
+<h3 id="___sec238">IPython/Jupyter notebooks </h3>
 
 <p>
 The <a href="http://ipython.org/notebook.html" target="_self">IPython Notebook</a> is
@@ -4788,7 +5051,7 @@ printed out as PDF reports too.
 A notebook version of our scientific report can be <a href="http://tinyurl.com/p96acy2/_static/report.ipynb" target="_self">downloaded</a> and experimented with
 or <a href="http://nbviewer.ipython.org/url/hplgit.github.com/teamods/writing_reports/_static/report.ipynb" target="_self">just statically viewed</a> in a browser.
 
-<h3 id="___sec244">Wiki formats </h3>
+<h3 id="___sec239">Wiki formats </h3>
 
 <p>
 A range of wiki formats are popular for creating notes on the web,
@@ -4799,7 +5062,7 @@ and also limited tools for displaying computer code in nice ways.
 Wiki formats are therefore less suitable for scientific reports compared
 to the other formats mentioned here.
 
-<h3 id="___sec245">DocOnce </h3>
+<h3 id="___sec240">DocOnce </h3>
 
 <p>
 Since it is difficult to choose the right tool or format for writing a
@@ -4859,7 +5122,7 @@ the <code>report.html</code> file.
 <p>
 <!-- Point to DocOnce version -->
 
-<h1 id="___sec247">Exercises </h1>
+<h1 id="___sec242">Exercises </h1>
 
 <p>
 <!-- --- begin exercise --- -->
@@ -4876,11 +5139,11 @@ The derivative of this curve, defined as a new curve with points
 $$
 \begin{align}
 d_0 &= \frac{y_1-y_0}{\Delta x},
-\tag{205}\\ 
+\tag{5.6}\\ 
 d_i &= \frac{y_{i+1}-y_{i-1}}{2\Delta x},\quad i=1,\ldots,n-1,
-\tag{206}\\ 
+\tag{5.7}\\ 
 d_n &= \frac{y_n-y_{n-1}}{\Delta x}\tp
-\tag{207}
+\tag{5.8}
 \end{align}
 $$
 
@@ -5173,7 +5436,7 @@ Filename: <code>test_roots</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="softeng1:exer:tol">Problem 44: Experiment with tolerances in comparisons</h2>
+<h2 id="softeng1:exer:tol">Problem 44: Investigate the size of tolerances in comparisons</h2>
 
 <p>
 When we replace a comparison <code>a == b</code>, where <code>a</code> and/or <code>b</code> are
@@ -5181,18 +5444,120 @@ When we replace a comparison <code>a == b</code>, where <code>a</code> and/or <c
 the appropriate size of <code>tol</code> depends on the size of <code>a</code> and <code>b</code>.
 Investigate how the size of <code>abs(a-b)</code> varies when <code>b</code> takes on
 values \( 10^k \), \( k=-5,-9,\ldots,20 \) and <code>a=1.0/49*b*49</code>.
+Thereafter, compute the <em>relative</em> difference <code>abs((a-b)/a)</code> for
+the same <code>b</code> values.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_44_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_44_1">
+
+<p>
+Mathematically, \( |a-b| = |\frac{1}{49}b 49-b| =0 \), but because of
+finite precision arithmetics, rounding errors may cause a nonzero
+(but small) value. We see that the size of <code>abs(a-b)</code> depends on
+the size of <code>b</code>:
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">-5</span>, <span style="color: #666666">21</span>):
+<span style="color: #666666">...</span>     b <span style="color: #666666">=</span> <span style="color: #666666">10**</span>k
+<span style="color: #666666">...</span>     a <span style="color: #666666">=</span> <span style="color: #666666">1.0/49*</span>b<span style="color: #666666">*49</span>
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;b=</span><span style="color: #BB6688; font-weight: bold">%.0E</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%.3E</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (b, <span style="color: #008000">abs</span>(a <span style="color: #666666">-</span> b))
+<span style="color: #666666">...</span>
+b<span style="color: #666666">=1E-05</span> <span style="color: #666666">1.694E-21</span>
+b<span style="color: #666666">=1E-04</span> <span style="color: #666666">1.355E-20</span>
+b<span style="color: #666666">=1E-03</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E-02</span> <span style="color: #666666">1.735E-18</span>
+b<span style="color: #666666">=1E-01</span> <span style="color: #666666">1.388E-17</span>
+b<span style="color: #666666">=1E+00</span> <span style="color: #666666">1.110E-16</span>
+b<span style="color: #666666">=1E+01</span> <span style="color: #666666">1.776E-15</span>
+b<span style="color: #666666">=1E+02</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+03</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+04</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+05</span> <span style="color: #666666">1.455E-11</span>
+b<span style="color: #666666">=1E+06</span> <span style="color: #666666">1.164E-10</span>
+b<span style="color: #666666">=1E+07</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+08</span> <span style="color: #666666">1.490E-08</span>
+b<span style="color: #666666">=1E+09</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+10</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+11</span> <span style="color: #666666">1.526E-05</span>
+b<span style="color: #666666">=1E+12</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+13</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+14</span> <span style="color: #666666">1.562E-02</span>
+b<span style="color: #666666">=1E+15</span> <span style="color: #666666">1.250E-01</span>
+b<span style="color: #666666">=1E+16</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+17</span> <span style="color: #666666">1.600E+01</span>
+b<span style="color: #666666">=1E+18</span> <span style="color: #666666">1.280E+02</span>
+b<span style="color: #666666">=1E+19</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+20</span> <span style="color: #666666">1.638E+04</span>
+</pre></div>
+<p>
+Using a relative difference leads numbers around \( 10^{-16} \):
+
+<p>
+
+<!-- code=python (!bc pyshell) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">-5</span>, <span style="color: #666666">21</span>):
+<span style="color: #666666">...</span>     b <span style="color: #666666">=</span> <span style="color: #666666">10**</span>k
+<span style="color: #666666">...</span>     a <span style="color: #666666">=</span> <span style="color: #666666">1.0/49*</span>b<span style="color: #666666">*49</span>
+<span style="color: #666666">...</span>     <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;b=</span><span style="color: #BB6688; font-weight: bold">%.0E</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%.3E</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (b, <span style="color: #008000">abs</span>((a <span style="color: #666666">-</span> b)<span style="color: #666666">/</span>a))
+<span style="color: #666666">...</span>
+b<span style="color: #666666">=1E-05</span> <span style="color: #666666">1.694E-16</span>
+b<span style="color: #666666">=1E-04</span> <span style="color: #666666">1.355E-16</span>
+b<span style="color: #666666">=1E-03</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E-02</span> <span style="color: #666666">1.735E-16</span>
+b<span style="color: #666666">=1E-01</span> <span style="color: #666666">1.388E-16</span>
+b<span style="color: #666666">=1E+00</span> <span style="color: #666666">1.110E-16</span>
+b<span style="color: #666666">=1E+01</span> <span style="color: #666666">1.776E-16</span>
+b<span style="color: #666666">=1E+02</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+03</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+04</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+05</span> <span style="color: #666666">1.455E-16</span>
+b<span style="color: #666666">=1E+06</span> <span style="color: #666666">1.164E-16</span>
+b<span style="color: #666666">=1E+07</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+08</span> <span style="color: #666666">1.490E-16</span>
+b<span style="color: #666666">=1E+09</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+10</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+11</span> <span style="color: #666666">1.526E-16</span>
+b<span style="color: #666666">=1E+12</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+13</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+14</span> <span style="color: #666666">1.563E-16</span>
+b<span style="color: #666666">=1E+15</span> <span style="color: #666666">1.250E-16</span>
+b<span style="color: #666666">=1E+16</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+17</span> <span style="color: #666666">1.600E-16</span>
+b<span style="color: #666666">=1E+18</span> <span style="color: #666666">1.280E-16</span>
+b<span style="color: #666666">=1E+19</span> <span style="color: #666666">0.000E+00</span>
+b<span style="color: #666666">=1E+20</span> <span style="color: #666666">1.638E-16</span>
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
 Filename: <code>tolerance</code>.
 
 <p>
 <!-- Closing remarks for this Problem -->
 
-<h3 id="___sec253">Remarks </h3>
+<h3 id="___sec248">Remarks </h3>
 
 <p>
 You will experience that if <code>a</code> and <code>b</code> are large, as they can be
-in geophysical applications where lengths measured in meters can be of size
+in, e.g.,
+geophysical applications where lengths measured in meters can be of size
 \( 10^6 \) m, <code>tol</code> must be about \( 10^{-9} \), while <code>a</code> and <code>b</code> around unity can
 have <code>tol</code> of size \( 10^{-15} \).
+The way out of the problem with choosing a tolerance is to use
+relative differences.
 
 <p>
 <!-- --- end exercise --- -->
@@ -5226,7 +5591,7 @@ $$
 \begin{equation}
 u^{n+1} = u^n + \Delta t\, r u^n\left(1 - \frac{u^n}{M^n}\right),
 \quad u^0=U_0\tp
-\tag{208}
+\tag{5.9}
 \end{equation}
 $$
 

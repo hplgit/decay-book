@@ -59,7 +59,7 @@ exponential reduction (provided $a>0$).
 Examples include radioactive decay, population
 decay, investment decay, cooling of an object, pressure decay in the
 atmosphere, and retarded motion in fluids. Some models with growth,
-$a<0$, are treated as
+$a < 0$, are treated as
 % if BOOK == "book":
 well, see Chapter ref{decay:app} for details and motivation.
 % else:
@@ -862,11 +862,10 @@ idx{finite difference operator notation} idx{operator notation, finite differenc
 
 Finite difference formulas can be tedious to write and read,
 especially for differential equations with many terms and many
-derivatives. To save space and help the reader spot
-the nature of the difference approximations, we introduce a
-compact notation. For a function $u(t)$,
-a forward difference approximation is denoted
-by the $D_t^+$ operator and written as
+derivatives. To save space and help the reader spot the nature of the
+difference approximations, we introduce a compact notation. For a
+function $u(t)$, a forward difference approximation is denoted by the
+$D_t^+$ operator and written as
 
 !bt
 \begin{equation}
@@ -875,15 +874,14 @@ by the $D_t^+$ operator and written as
 \tp
 \end{equation}
 !et
-The notation consists of an operator that approximates
-differentiation with respect to an independent variable, here $t$.
-The operator is built of the symbol $D$, with the
-independent variable as subscript
-and a superscript denoting the type of difference. The superscript $\,{}^+$
-indicates a forward difference.
-We place square brackets around the operator and the function it operates
-on and specify the mesh point, where the operator is acting, by
-a superscript after the closing bracket.
+The notation consists of an operator that approximates differentiation
+with respect to an independent variable, here $t$.  The operator is
+built of the symbol $D$, with the independent variable as subscript
+and a superscript denoting the type of difference. The superscript
+$\,{}^+$ indicates a forward difference.  We place square brackets
+around the operator and the function it operates on and specify the
+mesh point, where the operator is acting, by a superscript after the
+closing bracket.
 
 The corresponding operator notation for a centered difference and
 a backward difference reads

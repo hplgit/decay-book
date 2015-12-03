@@ -1,24 +1,24 @@
 
 Teaching material on scientific computing has traditionally been very
 focused on the mathematics and the applications, while details on how
-the computer is programmed to solve the problems have received little attention.
-Many end up writing as simple programs as possible, without being
-aware of much useful computer science technology that would increase
-the fun, efficiency, and reliability of the their scientific computing
-activities.
+the computer is programmed to solve the problems have received little
+attention.  Many end up writing as simple programs as possible,
+without being aware of much useful computer science technology that
+would increase the fun, efficiency, and reliability of the their
+scientific computing activities.
 
-This chapter demonstrates a series of good practices and tools
-from modern computer science, using the simple mathematical problem
-$u^{\prime}=-au$, $u(0)=I$, such that we minimize the
-mathematical details and can go more in depth with implementations.
-The goal is to increase the technological
-quality of computer programming and make it match the more
-well-established quality of the mathematics of scientific computing.
+This chapter demonstrates a series of good practices and tools from
+modern computer science, using the simple mathematical problem
+$u^{\prime}=-au$, $u(0)=I$, such that we minimize the mathematical
+details and can go more in depth with implementations.  The goal is to
+increase the technological quality of computer programming and make it
+match the more well-established quality of the mathematics of
+scientific computing.
 
-The conventions and techniques outlined here will save you a lot of time
-when you incrementally extend software over time from simpler to more
-complicated problems. In particular, you will benefit from
-many good habits:
+The conventions and techniques outlined here will save you a lot of
+time when you incrementally extend software over time from simpler to
+more complicated problems. In particular, you will benefit from many
+good habits:
 
  * new code is added in a modular fashion to a library (modules),
  * programs are run through convenient user interfaces,
@@ -1406,6 +1406,8 @@ def test_third():
         assert success
 !ec
 
+idx{relative differences}
+
 !bnotice Always compare real numbers with a tolerance!
 Real numbers should never be compared with the `==` operator, but always
 with the absolute value of the difference and a tolerance.
@@ -1416,7 +1418,13 @@ tol = 1E-14
 abs(a - b) < tol
 !ec
 The suitable size of `tol` depends on the size of `a` and `b`
-(see Problem ref{softeng1:exer:tol}).
+(see Problem ref{softeng1:exer:tol}). Unless `a` and `b` are around
+unity in size, one should use a *relative difference*:
+
+!bc pycod
+tol = 1E-14
+abs((a - b)/a) < tol
+!ec
 !enotice
 
 === Special assert functions from nose ===
@@ -3186,22 +3194,105 @@ same mathematical tests as in a), but with different
 programming technology.
 !esubex
 
-===== Problem: Experiment with tolerances in comparisons =====
+===== Problem: Investigate the size of tolerances in comparisons =====
 
 label{softeng1:exer:tol}
 file=tolerance
+
+idx{relative differences}
 
 When we replace a comparison `a == b`, where `a` and/or `b` are
 `float` objects, by a comparison with tolerance, `abs(a-b) < tol`,
 the appropriate size of `tol` depends on the size of `a` and `b`.
 Investigate how the size of `abs(a-b)` varies when `b` takes on
 values $10^k$, $k=-5,-9,\ldots,20$ and `a=1.0/49*b*49`.
+Thereafter, compute the *relative* difference `abs((a-b)/a)` for
+the same `b` values.
+
+!bsol
+Mathematically, $|a-b| = |\frac{1}{49}b 49-b| =0$, but because of
+finite precision arithmetics, rounding errors may cause a nonzero
+(but small) value. We see that the size of `abs(a-b)` depends on
+the size of `b`:
+
+!bc pyshell
+>>> for k in range(-5, 21):
+...     b = 10**k
+...     a = 1.0/49*b*49
+...     print 'b=%.0E %.3E' % (b, abs(a - b))
+...
+b=1E-05 1.694E-21
+b=1E-04 1.355E-20
+b=1E-03 0.000E+00
+b=1E-02 1.735E-18
+b=1E-01 1.388E-17
+b=1E+00 1.110E-16
+b=1E+01 1.776E-15
+b=1E+02 0.000E+00
+b=1E+03 0.000E+00
+b=1E+04 0.000E+00
+b=1E+05 1.455E-11
+b=1E+06 1.164E-10
+b=1E+07 0.000E+00
+b=1E+08 1.490E-08
+b=1E+09 0.000E+00
+b=1E+10 0.000E+00
+b=1E+11 1.526E-05
+b=1E+12 0.000E+00
+b=1E+13 0.000E+00
+b=1E+14 1.562E-02
+b=1E+15 1.250E-01
+b=1E+16 0.000E+00
+b=1E+17 1.600E+01
+b=1E+18 1.280E+02
+b=1E+19 0.000E+00
+b=1E+20 1.638E+04
+!ec
+Using a relative difference leads numbers around $10^{-16}$:
+
+!bc pyshell
+>>> for k in range(-5, 21):
+...     b = 10**k
+...     a = 1.0/49*b*49
+...     print 'b=%.0E %.3E' % (b, abs((a - b)/a))
+...
+b=1E-05 1.694E-16
+b=1E-04 1.355E-16
+b=1E-03 0.000E+00
+b=1E-02 1.735E-16
+b=1E-01 1.388E-16
+b=1E+00 1.110E-16
+b=1E+01 1.776E-16
+b=1E+02 0.000E+00
+b=1E+03 0.000E+00
+b=1E+04 0.000E+00
+b=1E+05 1.455E-16
+b=1E+06 1.164E-16
+b=1E+07 0.000E+00
+b=1E+08 1.490E-16
+b=1E+09 0.000E+00
+b=1E+10 0.000E+00
+b=1E+11 1.526E-16
+b=1E+12 0.000E+00
+b=1E+13 0.000E+00
+b=1E+14 1.563E-16
+b=1E+15 1.250E-16
+b=1E+16 0.000E+00
+b=1E+17 1.600E-16
+b=1E+18 1.280E-16
+b=1E+19 0.000E+00
+b=1E+20 1.638E-16
+!ec
+!esol
 
 !bremarks
 You will experience that if `a` and `b` are large, as they can be
-in geophysical applications where lengths measured in meters can be of size
+in, e.g.,
+geophysical applications where lengths measured in meters can be of size
 $10^6$ m, `tol` must be about $10^{-9}$, while `a` and `b` around unity can
 have `tol` of size $10^{-15}$.
+The way out of the problem with choosing a tolerance is to use
+relative differences.
 !eremarks
 
 ===== Exercise: Make use of a class implementation =====

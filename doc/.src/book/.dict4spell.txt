@@ -21,6 +21,7 @@ Svein
 Trefethen's
 Yapi
 bio
+discretization
 geo
 refactor
 throuhgout

@@ -46,7 +46,7 @@ def test_solver_three_steps():
 
     tol = 1E-15  # tolerance for comparing floats
     diff = abs(u - u_by_hand).max()
-    success = diff <= tol
+    success = diff < tol
     assert success
 
 test_solver_three_steps()

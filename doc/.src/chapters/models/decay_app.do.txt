@@ -1817,8 +1817,7 @@ We can now start to introduce bugs in the `cooling` function to
 see if it is possible to have some $\Delta t$ and still find
 coinciding curves.
 
-=== Bug 1: Wrong time level in the $T_s$ function ===
-
+__Bug 1: Wrong time level in the $T_s$ function.__
 We replace `T_s[n]` by `T_s[n+1]` in the implementation of the scheme
 and rerun the case. Now the lowest $\Delta t$ is still on top of
 the exact solution, but the numerical solution on the two coarser
@@ -1828,8 +1827,7 @@ the ``overshoot'' on the coarsest meshes in the figure above.
 
 FIGURE: [fig-models/cooling_piecewise_bug1, width=600 frac=0.8]
 
-=== Bug 2: Wrong time level in the $T$ function ===
-
+__Bug 2: Wrong time level in the $T$ function.__
 We can replace `T[n]` by `T[n+1]` on the right-hand side of the scheme.
 This is a serious error since `T[n+1]` is not yet computed and therefore
 equal to zero when `T` was made by calling `np.zeros`. The results
@@ -1837,7 +1835,7 @@ are also nonsense, and one would immediately look for a bug.
 
 FIGURE: [fig-models/cooling_piecewise_bug2, width=600 frac=0.8]
 
-=== Bug 3: Missing $\theta$ in a term ===
+__Bug 3: Missing $\theta$ in a term.__
 
 Let us forget to multiply by `theta` in the nominator of the scheme, i.e.,
 we replace
@@ -1866,15 +1864,13 @@ the value of the (scaled) surrounding temperature.
 Note that if we used the Backward Euler scheme instead of the
 Crank-Nicolson scheme, this bug would have no effect!
 
-=== Bug 4: Missing `k` in the updating formula ===
-
+__Bug 4: Missing `k` in the updating formula.__
 Obviously, when we solve the scaled problem where $k=1$ by definition,
 such a programming mistake has no effect. Otherwise, $k$ influences
 the time scale, so there will be a stretch of the time axis in the
 numerical solution and this should be easily detected in a plot.
 
-=== Bug 5: Using `1-theta` instead of `theta` ===
-
+__Bug 5: Using `1-theta` instead of `theta`.__
 Such an error is not detectable in the Crank-Nicolson scheme, but
 will have a significant effect in the other schemes.
 As a test, we replace `1-theta` in the nominator by `theta`.
