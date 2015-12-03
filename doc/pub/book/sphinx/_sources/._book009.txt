@@ -55,7 +55,7 @@ References
    `https://github.com/hplgit/odespy <https://github.com/hplgit/odespy>`_.
 
 .. [Ref11]
-   **H. P. Langtangen**. *Scaling of Differential Equations*,
+   **H. P. Langtangen and G. K. Pedersen**. *Scaling of Differential Equations*,
    *SimulaSpringerBrief*,
    Springer,
    2015,

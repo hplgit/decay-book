@@ -470,6 +470,18 @@ The conventions boil down to three rules:
    in program abortion (due to an `AssertionError` exception) if
    the test failed.
 
+A typical `assert` statement is to check that a computed result `c`
+equals the expected value `e`: `assert c == e`. However, since real
+numbers are stored in a computer using only 64 units, most numbers
+will feature a small rounding error, typically of size $10^{-16}$.
+That is, real numbers on a computer have finite precision. When doing
+arithmetics with finite precision numbers, the rounding errors may
+accumulate or not, depending on the algorithm.  It does not make sense
+to test `c == e`, since a small rounding error will cause the test to
+fail. Instead, we use an equality with *tolerance* `tol`: `abs(e - c)
+< tol`. The `test_solver_three_steps` functions applies this type of
+test with a tolerance $01^{-15}$.
+
 The main program can routinely run the verification test prior to
 solving the real problem:
 

@@ -7,7 +7,7 @@ We study
 !bt
 \[ u^{\prime}(t) = -au(t),\quad u(0)=I,\]
 !et
-with $a<0$ such that the ODE models exponential growth with
+with $a < 0$ such that the ODE models exponential growth with
 analytical solution $u(t)=Ie^{-at}$.
 
 === Simulations ===
@@ -32,14 +32,14 @@ FIGURE: [fig-decay/exponential_growth_demo, width=800 frac=1]
 === Analysis ===
 
 The amplification factor is the same as when $a>0$, but here we introduce
-$p=-a\Delta t>0$ since $a<0$:
+$p=-a\Delta t>0$ since $a < 0$:
 
 !bt
 \begin{equation}
 A(p) = \frac{1+(1-\theta)p}{1-\theta p}.
 \end{equation}
 !et
-A major problem is that the denominator can be zero when $a<0$. This
+A major problem is that the denominator can be zero when $a < 0$. This
 happens for $p=1/\theta$. The exact amplification factor is $\Aex = e^{p}$.
 
 Here is code for computing and plotting the factors:

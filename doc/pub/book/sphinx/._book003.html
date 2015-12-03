@@ -536,7 +536,7 @@ u^3 &amp;=Au^2= 0.00265290804728\end{split}\]</div>
 
     <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-15</span>  <span class="c"># tolerance for comparing floats</span>
     <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">u_by_hand</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="n">success</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="n">tol</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="n">tol</span>
     <span class="k">assert</span> <span class="n">success</span>
 </pre></div>
 </div>
@@ -558,6 +558,17 @@ in program abortion (due to an <code class="docutils literal"><span class="pre">
 the test failed.</li>
 </ul>
 </div></blockquote>
+<p>A typical <code class="docutils literal"><span class="pre">assert</span></code> statement is to check that a computed result <code class="docutils literal"><span class="pre">c</span></code>
+equals the expected value <code class="docutils literal"><span class="pre">e</span></code>: <code class="docutils literal"><span class="pre">assert</span> <span class="pre">c</span> <span class="pre">==</span> <span class="pre">e</span></code>. However, since real
+numbers are stored in a computer using only 64 units, most numbers
+will feature a small rounding error, typically of size <span class="math">\(10^{-16}\)</span>.
+That is, real numbers on a computer have finite precision. When doing
+arithmetics with finite precision numbers, the rounding errors may
+accumulate or not, depending on the algorithm.  It does not make sense
+to test <code class="docutils literal"><span class="pre">c</span> <span class="pre">==</span> <span class="pre">e</span></code>, since a small rounding error will cause the test to
+fail. Instead, we use an equality with <em>tolerance</em> <code class="docutils literal"><span class="pre">tol</span></code>: <code class="docutils literal"><span class="pre">abs(e</span> <span class="pre">-</span> <span class="pre">c)</span>
+<span class="pre">&lt;</span> <span class="pre">tol</span></code>. The <code class="docutils literal"><span class="pre">test_solver_three_steps</span></code> functions applies this type of
+test with a tolerance <span class="math">\(01^{-15}\)</span>.</p>
 <p>The main program can routinely run the verification test prior to
 solving the real problem:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">test_solver_three_steps</span><span class="p">()</span>

@@ -59,7 +59,7 @@ exponential reduction (provided $a>0$).
 Examples include radioactive decay, population
 decay, investment decay, cooling of an object, pressure decay in the
 atmosphere, and retarded motion in fluids. Some models with growth,
-$a<0$, are treated as
+$a < 0$, are treated as
 % if BOOK == "book":
 well, see Chapter ref{decay:app} for details and motivation.
 % else:

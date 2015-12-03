@@ -121,7 +121,7 @@ exponential reduction (provided <span class="math">\(a&gt;0\)</span>).
 Examples include radioactive decay, population
 decay, investment decay, cooling of an object, pressure decay in the
 atmosphere, and retarded motion in fluids. Some models with growth,
-<span class="math">\(a&lt;0\)</span>, are treated as
+<span class="math">\(a &lt; 0\)</span>, are treated as
 well, see the chapter <a class="reference internal" href="._book007.html#decay-app"><span class="std std-ref">Models</span></a> for details and motivation.
 We have chosen this particular ODE not only because
 its applications are relevant, but even more because studying
@@ -727,25 +727,23 @@ f'(t_n+\frac{1}{2}\Delta t) \approx \frac{f(t_{n+1}) - f(t_n)}{\Delta t}\]</div>
 <span id="decay-fd-op"></span><h3>Compact operator notation for finite differences<a class="headerlink" href="#compact-operator-notation-for-finite-differences" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="index-25"></span><p id="index-26">Finite difference formulas can be tedious to write and read,
 especially for differential equations with many terms and many
-derivatives. To save space and help the reader spot
-the nature of the difference approximations, we introduce a
-compact notation. For a function <span class="math">\(u(t)\)</span>,
-a forward difference approximation is denoted
-by the <span class="math">\(D_t^+\)</span> operator and written as</p>
+derivatives. To save space and help the reader spot the nature of the
+difference approximations, we introduce a compact notation. For a
+function <span class="math">\(u(t)\)</span>, a forward difference approximation is denoted by the
+<span class="math">\(D_t^+\)</span> operator and written as</p>
 <div class="math" id="eq-fd-d-f">
 \[\tag{36}
 [D_t^+u]^n = \frac{u^{n+1} - u^{n}}{\Delta t}
     \ \left( \approx \frac{d}{dt} u(t_n)\right)
     {\thinspace .}\]</div>
-<p>The notation consists of an operator that approximates
-differentiation with respect to an independent variable, here <span class="math">\(t\)</span>.
-The operator is built of the symbol <span class="math">\(D\)</span>, with the
-independent variable as subscript
-and a superscript denoting the type of difference. The superscript <span class="math">\(\,{}^+\)</span>
-indicates a forward difference.
-We place square brackets around the operator and the function it operates
-on and specify the mesh point, where the operator is acting, by
-a superscript after the closing bracket.</p>
+<p>The notation consists of an operator that approximates differentiation
+with respect to an independent variable, here <span class="math">\(t\)</span>.  The operator is
+built of the symbol <span class="math">\(D\)</span>, with the independent variable as subscript
+and a superscript denoting the type of difference. The superscript
+<span class="math">\(\,{}^+\)</span> indicates a forward difference.  We place square brackets
+around the operator and the function it operates on and specify the
+mesh point, where the operator is acting, by a superscript after the
+closing bracket.</p>
 <p>The corresponding operator notation for a centered difference and
 a backward difference reads</p>
 <div class="math" id="eq-fd-d-c">
