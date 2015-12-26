@@ -1610,8 +1610,8 @@ Exercises          (3)
 
 .. _decay:fd2:exer:precision:
 
-Exercise 10: Experiment with precision in tests and the size of :math:`u`
--------------------------------------------------------------------------
+Exercise 4.1: Experiment with precision in tests and the size of :math:`u`
+--------------------------------------------------------------------------
 
 It is claimed in the section :ref:`decay:MMS` that most numerical methods will
 reproduce a linear exact solution to machine precision. Test this
@@ -1632,8 +1632,8 @@ Filename: ``test_precision``.
 
 .. _decay:fd2:exer:bw2:
 
-Exercise 11: Implement the 2-step backward scheme
--------------------------------------------------
+Exercise 4.2: Implement the 2-step backward scheme
+--------------------------------------------------
 
 Implement the 2-step backward method :ref:`(112) <Eq:decay:fd2:bw:2step>` for the
 model :math:`u^{\prime}(t) = -a(t)u(t) + b(t)`, :math:`u(0)=I`.  Allow the first step to
@@ -1655,8 +1655,8 @@ Filename: ``decay_backward2step``.
 
 .. _decay:fd2:exer:AB2:
 
-Exercise 12: Implement the 2nd-order Adams-Bashforth scheme
------------------------------------------------------------
+Exercise 4.3: Implement the 2nd-order Adams-Bashforth scheme
+------------------------------------------------------------
 
 Implement the 2nd-order Adams-Bashforth method :ref:`(119) <Eq:decay:fd2:AB2>`
 for the decay problem :math:`u^{\prime}=-a(t)u + b(t)`, :math:`u(0)=I`, :math:`t\in (0, T]`.
@@ -1673,8 +1673,8 @@ Filename: ``decay_AdamsBashforth2``.
 
 .. _decay:fd2:exer:AB3:
 
-Exercise 13: Implement the 3rd-order Adams-Bashforth scheme
------------------------------------------------------------
+Exercise 4.4: Implement the 3rd-order Adams-Bashforth scheme
+------------------------------------------------------------
 
 Implement the 3rd-order Adams-Bashforth method :ref:`(120) <Eq:decay:fd2:AB3>`
 for the decay problem :math:`u^{\prime}=-a(t)u + b(t)`, :math:`u(0)=I`, :math:`t\in (0, T]`.
@@ -1690,8 +1690,8 @@ Filename: ``decay_AdamsBashforth3``.
 
 .. _decay:exer:RK2:Taylor:analysis:
 
-Exercise 14: Analyze explicit 2nd-order methods
------------------------------------------------
+Exercise 4.5: Analyze explicit 2nd-order methods
+------------------------------------------------
 
 Show that the schemes :ref:`(117) <Eq:decay:fd2:RK2:s2>` and
 :ref:`(118) <Eq:decay:fd2:Taylor2>` are identical in the case :math:`f(u,t)=-a`, where
@@ -1708,8 +1708,8 @@ Filename: ``decay_RK2_Taylor2``.
 
 .. _decay:fd2:exer:leapfrog1:
 
-Project 15: Implement and investigate the Leapfrog scheme
----------------------------------------------------------
+Project 4.6: Implement and investigate the Leapfrog scheme
+----------------------------------------------------------
 
 A Leapfrog scheme
 for the ODE :math:`u^{\prime}(t) = -a(t)u(t) + b(t)` is defined by
@@ -1842,8 +1842,8 @@ Filename: ``decay_leapfrog``.
 
 .. _decay:fd2:exer:uni:
 
-Problem 16: Make a unified implementation of many schemes
----------------------------------------------------------
+Problem 4.7: Make a unified implementation of many schemes
+----------------------------------------------------------
 
 Consider the linear ODE problem :math:`u^{\prime}(t)=-a(t)u(t) + b(t)`, :math:`u(0)=I`.
 Explicit schemes for this problem can be written in the general form

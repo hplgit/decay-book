@@ -80,8 +80,8 @@
             
   <div class="section" id="exercises-1">
 <h1>Exercises<a class="headerlink" href="#exercises-1" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="exercise-1-define-a-mesh-function-and-visualize-it">
-<span id="decay-exer-meshfunc"></span><h2>Exercise 1: Define a mesh function and visualize it<a class="headerlink" href="#exercise-1-define-a-mesh-function-and-visualize-it" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exercise-2-1-define-a-mesh-function-and-visualize-it">
+<span id="decay-exer-meshfunc"></span><h2>Exercise 2.1: Define a mesh function and visualize it<a class="headerlink" href="#exercise-2-1-define-a-mesh-function-and-visualize-it" title="Permalink to this headline">¶</a></h2>
 <p><strong>a)</strong>
 Write a function <code class="docutils literal"><span class="pre">mesh_function(f,</span> <span class="pre">t)</span></code> that returns an array with
 mesh point values <span class="math">\(f(t_0),\ldots,f(t_{N_t})\)</span>, where <code class="docutils literal"><span class="pre">f</span></code> is a Python
@@ -116,8 +116,8 @@ at a time as suggested in a) is a way of out of this problem.</p>
 <span class="math">\(t\in [3,4]\)</span>.</p>
 </div>
 </div>
-<div class="section" id="problem-2-differentiate-a-function">
-<span id="decay-exer-dudt"></span><h2>Problem 2: Differentiate a function<a class="headerlink" href="#problem-2-differentiate-a-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-2-2-differentiate-a-function">
+<span id="decay-exer-dudt"></span><h2>Problem 2.2: Differentiate a function<a class="headerlink" href="#problem-2-2-differentiate-a-function" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="index-0"></span><span class="target" id="index-1"></span><p id="index-2">Given a mesh function <span class="math">\(u^n\)</span> as an array <code class="docutils literal"><span class="pre">u</span></code> with <span class="math">\(u^n\)</span> values at mesh
 points <span class="math">\(t_n=n\Delta t\)</span>, the discrete derivative can be based on
 centered differences:</p>
@@ -169,8 +169,8 @@ test function that compares the result with that of
 <code class="docutils literal"><span class="pre">differentiate</span></code>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">differentiate</span></code>.</p>
 </div>
-<div class="section" id="problem-3-experiment-with-divisions">
-<span id="decay-exer-intdiv"></span><h2>Problem 3: Experiment with divisions<a class="headerlink" href="#problem-3-experiment-with-divisions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-2-3-experiment-with-divisions">
+<span id="decay-exer-intdiv"></span><h2>Problem 2.3: Experiment with divisions<a class="headerlink" href="#problem-2-3-experiment-with-divisions" title="Permalink to this headline">¶</a></h2>
 <p>Explain what happens in the following computations, where
 some are mathematically unexpected:</p>
 <div class="highlight-ipy"><div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">dt</span> <span class="o">=</span> <span class="mi">3</span>
@@ -185,8 +185,8 @@ some are mathematically unexpected:</p>
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">pyproblems</span></code>.</p>
 </div>
-<div class="section" id="problem-4-experiment-with-wrong-computations">
-<span id="decay-exer-decay1err"></span><h2>Problem 4: Experiment with wrong computations<a class="headerlink" href="#problem-4-experiment-with-wrong-computations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-2-4-experiment-with-wrong-computations">
+<span id="decay-exer-decay1err"></span><h2>Problem 2.4: Experiment with wrong computations<a class="headerlink" href="#problem-2-4-experiment-with-wrong-computations" title="Permalink to this headline">¶</a></h2>
 <p>Consider the <code class="docutils literal"><span class="pre">solver</span></code> function in the <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_v1.py">decay_v1.py</a> file
 and the following call:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -206,8 +206,8 @@ why <code class="docutils literal"><span class="pre">u</span></code> is wrong an
 specified <span class="math">\(T=7\)</span>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">decay_v1_err</span></code>.</p>
 </div>
-<div class="section" id="problem-5-plot-the-error-function">
-<span id="decay-exer-plot-error"></span><h2>Problem 5: Plot the error function<a class="headerlink" href="#problem-5-plot-the-error-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-2-5-plot-the-error-function">
+<span id="decay-exer-plot-error"></span><h2>Problem 2.5: Plot the error function<a class="headerlink" href="#problem-2-5-plot-the-error-function" title="Permalink to this headline">¶</a></h2>
 <p>Solve the problem <span class="math">\(u'=-au\)</span>, <span class="math">\(u(0)=I\)</span>, using the Forward Euler, Backward
 Euler, and Crank-Nicolson schemes. For each scheme, plot the error mesh
 function <span class="math">\(e^n = {u_{\small\mbox{e}}}(t_n)-u^n\)</span> for <span class="math">\(\Delta t=0.1, 0.05, 0.025\)</span>,
@@ -217,8 +217,8 @@ where <span class="math">\({u_{\small\mbox{e}}}\)</span> is the exact solution o
 Modify the <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_plot_mpl.py">decay_plot_mpl.py</a> code.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">decay_plot_error</span></code>.</p>
 </div>
-<div class="section" id="problem-6-change-formatting-of-numbers-and-debug">
-<span id="decay-exer-inexact-output"></span><h2>Problem 6: Change formatting of numbers and debug<a class="headerlink" href="#problem-6-change-formatting-of-numbers-and-debug" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-2-6-change-formatting-of-numbers-and-debug">
+<span id="decay-exer-inexact-output"></span><h2>Problem 2.6: Change formatting of numbers and debug<a class="headerlink" href="#problem-2-6-change-formatting-of-numbers-and-debug" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="http://tinyurl.com/ofkw6kc/alg/decay_memsave.py">decay_memsave.py</a> program
 writes the time values and solution values to a file which looks
 like</p>
@@ -269,15 +269,15 @@ terminal window. Why?</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Exercises</a><ul>
-<li><a class="reference internal" href="#exercise-1-define-a-mesh-function-and-visualize-it">Exercise 1: Define a mesh function and visualize it</a><ul>
+<li><a class="reference internal" href="#exercise-2-1-define-a-mesh-function-and-visualize-it">Exercise 2.1: Define a mesh function and visualize it</a><ul>
 <li><a class="reference internal" href="#remarks-1">Remarks</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#problem-2-differentiate-a-function">Problem 2: Differentiate a function</a></li>
-<li><a class="reference internal" href="#problem-3-experiment-with-divisions">Problem 3: Experiment with divisions</a></li>
-<li><a class="reference internal" href="#problem-4-experiment-with-wrong-computations">Problem 4: Experiment with wrong computations</a></li>
-<li><a class="reference internal" href="#problem-5-plot-the-error-function">Problem 5: Plot the error function</a></li>
-<li><a class="reference internal" href="#problem-6-change-formatting-of-numbers-and-debug">Problem 6: Change formatting of numbers and debug</a></li>
+<li><a class="reference internal" href="#problem-2-2-differentiate-a-function">Problem 2.2: Differentiate a function</a></li>
+<li><a class="reference internal" href="#problem-2-3-experiment-with-divisions">Problem 2.3: Experiment with divisions</a></li>
+<li><a class="reference internal" href="#problem-2-4-experiment-with-wrong-computations">Problem 2.4: Experiment with wrong computations</a></li>
+<li><a class="reference internal" href="#problem-2-5-plot-the-error-function">Problem 2.5: Plot the error function</a></li>
+<li><a class="reference internal" href="#problem-2-6-change-formatting-of-numbers-and-debug">Problem 2.6: Change formatting of numbers and debug</a></li>
 </ul>
 </li>
 </ul>

@@ -18,7 +18,7 @@ function system {
 pwd
 preprocess -DFORMAT=html ../chapters/newcommands_keep.p.tex > newcommands_keep.tex
 
-opt="CHAPTER=$CHAPTER BOOK=$BOOK APPENDIX=$APPENDIX"
+opt="CHAPTER=$CHAPTER BOOK=$BOOK APPENDIX=$APPENDIX --exercise_numbering=chapter"
 
 # Compile Bootstrap HTML
 html=decay-book

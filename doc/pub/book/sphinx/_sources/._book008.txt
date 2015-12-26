@@ -3966,8 +3966,8 @@ Exercises          (5)
 
 .. _softeng1:exer:derivative:
 
-Problem 40: Make a tool for differentiating curves
---------------------------------------------------
+Problem 6.1: Make a tool for differentiating curves
+---------------------------------------------------
 
 Suppose we have a curve specified through a set
 of discrete coordinates :math:`(x_i,y_i)`, :math:`i=0,\ldots,n`, where the :math:`x_i`
@@ -4044,8 +4044,8 @@ Filename: ``curvediff``.
 
 .. _softeng1:exer:integral:flat:
 
-Problem 41: Make solid software for the Trapezoidal rule
---------------------------------------------------------
+Problem 6.2: Make solid software for the Trapezoidal rule
+---------------------------------------------------------
 
 An integral
 
@@ -4184,8 +4184,8 @@ Filename: ``trapezoidal``.
 
 .. _softeng1:exer:integral:flat2:
 
-Problem 42: Implement classes for the Trapezoidal rule
-------------------------------------------------------
+Problem 6.3: Implement classes for the Trapezoidal rule
+-------------------------------------------------------
 
 We consider the same problem setting as in :ref:`softeng1:exer:integral:flat`. Make a module with a class ``Problem``
 representing the mathematical problem to be solved and a class
@@ -4200,8 +4200,8 @@ Filename: ``trapezoidal_class``.
 
 .. _softeng1:exer:doctest1:
 
-Problem 43: Write a doctest and a test function
------------------------------------------------
+Problem 6.4: Write a doctest and a test function
+------------------------------------------------
 
 Type in the following program:
 
@@ -4244,8 +4244,8 @@ Filename: ``test_roots``.
 
 .. _softeng1:exer:tol:
 
-Problem 44: Investigate the size of tolerances in comparisons
--------------------------------------------------------------
+Problem 6.5: Investigate the size of tolerances in comparisons
+--------------------------------------------------------------
 
 .. index:: relative differences
 
@@ -4280,8 +4280,8 @@ relative differences.
 
 .. _softeng1:exer:class:dts:
 
-Exercise 45: Make use of a class implementation
------------------------------------------------
+Exercise 6.6: Make use of a class implementation
+------------------------------------------------
 
 Implement the ``experiment_compare_dt`` function from ``decay.py``
 using class ``Problem`` and class ``Solver`` from
@@ -4296,8 +4296,8 @@ Filename: ``experiment_compare_dt_class``.
 
 .. _softeng1:exer:logistic:
 
-Problem 46: Make solid software for a difference equation
----------------------------------------------------------
+Problem 6.7: Make solid software for a difference equation
+----------------------------------------------------------
 
 We have the following evolutionary difference equation for the number
 of individuals :math:`u^n` of a certain specie at time :math:`n\Delta t`:
