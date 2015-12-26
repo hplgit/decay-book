@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Experiments with Schemes for Exponential Decay documentation build configuration file, created by
-# sphinx-quickstart on Mon Aug 24 14:52:08 2015.
+# sphinx-quickstart on Sun Dec 20 03:39:25 2015.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -54,19 +54,31 @@ def setup(app):
 additional_themes_installed = []
 additional_themes_url = {}
 
+# Add any paths that contain custom themes here, relative to this directory.
+html_theme_path = ['_themes']
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
+html_static_path = ['_static']
+
+try:
+    import alabaster
+    additional_themes_installed.append('alabaster')
+except ImportError:
+    additional_themes_url['alabaster'] = 'sudo pip install alabaster'
+
 try:
     import sphinxjp.themes.solarized
-    extensions += ['sphinxjp.themecore', 'sphinxjp.themes.solarized']
     additional_themes_installed.append('solarized')
 except ImportError:
-    additional_themes_url['solarized'] = 'https://bitbucket.org/miiton/sphinxjp.themes.solarized'
+    additional_themes_url['solarized'] = 'https://bitbucket.org/miiton/sphinxjp.themes.solarized: sudo pip install -e hg+https://bitbucket.org/miiton/sphinxjp.themes.solarized#egg=sphinxjp.themes.solarized --upgrade'
 
 try:
     import cloud_sptheme as csp
     additional_themes_installed.append('cloud')
     additional_themes_installed.append('redcloud')
 except ImportError:
-    url = 'https://bitbucket.org/ecollins/cloud_sptheme'
+    url = 'https://bitbucket.org/ecollins/cloud_sptheme: sudo pip install -e hg+https://bitbucket.org/ecollins/cloud_sptheme#egg=cloud_sptheme --upgrade'
     additional_themes_url['cloud'] = url
     additional_themes_url['redcloud'] = url
 
@@ -81,34 +93,48 @@ try:
     additional_themes_installed.append('basicstrap')
 except ImportError:
     # Use basicstrap as an example on a theme with sphinxjp.themecore (??)
-    additional_themes_url['basicstrap'] = 'https://github.com/tell-k/sphinxjp.themes.basicstrap'
+    additional_themes_url['basicstrap'] = 'https://github.com/tell-k/sphinxjp.themes.basicstrap: sudo pip install -e git+https://github.com/ryan-roemer/sphinx-bootstrap-theme#egg=sphinx-bootstrap-theme --upgrade'
 '''
 
 try:
     import sphinxjp.themes.impressjs
     additional_themes_installed.append('impressjs')
-    if not 'sphinxjp.themecore' in extensions:
-        extensions += ['sphinxjp.themecore']
 except ImportError:
-    additional_themes_url['impressjs'] = 'https://github.com/shkumagai/sphinxjp.themes.impressjs'
+    additional_themes_url['impressjs'] = 'https://github.com/shkumagai/sphinxjp.themes.impressjs: sudo pip install -e git+https://github.com/shkumagai/sphinxjp.themes.impressjs#egg=sphinxjp.themes.impressjs --upgrade'
 
 try:
     import sphinx_bootstrap_theme
     additional_themes_installed.append('bootstrap')
 except ImportError:
-    additional_themes_url['bootstrap'] = 'https://github.com/ryan-roemer/sphinx-bootstrap-theme'
+    additional_themes_url['bootstrap'] = 'https://github.com/ryan-roemer/sphinx-bootstrap-theme: sudo pip install -e git+https://github.com/ryan-roemer/sphinx-bootstrap-theme#egg=sphinx-bootstrap-theme --upgrade'
 
 try:
     import icsecontrib.sagecellserver
     extensions += ['icsecontrib.sagecellserver']
 except ImportError:
+    # sudo pip install -e git+https://github.com/kriskda/sphinx-sagecell#egg=sphinx-sagecell --upgrade
     pass
 
+# Is the document built on readthedocs.org? If so, don't import
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+if not on_rtd:  # only import and set the theme if we're building docs locally
+    try:
+        import sphinx_rtd_theme
+        additional_themes_installed.append('sphinx_rtd_theme')
+    except ImportError:
+        additional_themes_url['sphinx_rtd_theme'] = 'sudo pip install sphinx_rtd_theme'
+
+tinker_themes = [
+  'dark', 'flat', 'modern5', 'minimal5', 'responsive']
+# http://tinkerer.me/index.html
+# See Preview Another Theme in the sidebar of the above URL
 try:
-    import sphinx_rtd_theme
-    additional_themes_installed.append('sphinx_rtd_theme')
+    import tinkerer
+    import tinkerer.paths
+    additional_themes_installed += tinker_themes
 except ImportError:
-    additional_themes_url['sphinx_rtd_theme'] = 'sudo pip install sphinx_rtd_theme'
+    for theme in tinker_themes:
+        additional_themes_url[theme] = 'sudo pip install tinkerer --upgrade'
 
 
 
@@ -128,7 +154,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Experiments with Schemes for Exponential Decay'
-copyright = u'2015, Hans Petter Langtangen'
+short_title = project
+copyright = u'2015, Hans Petter Langtangen. Released under CC Attribution 4.0 license'
 author = u'Hans Petter Langtangen'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -189,7 +216,7 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'responsive'
 #html_theme = 'ADCtheme'
 #html_theme = 'agni'
 #html_theme = 'agogo'
@@ -198,22 +225,27 @@ html_theme = 'sphinx_rtd_theme'
 #html_theme = 'basicstrap'
 #html_theme = 'bizstyle'
 #html_theme = 'bloodish'
+#html_theme = 'boilerplate'
 #html_theme = 'bootstrap'
 #html_theme = 'cbc'
 #html_theme = 'classic'
 #html_theme = 'cloud'
+#html_theme = 'dark'
 #html_theme = 'default'
 #html_theme = 'epub'
 #html_theme = 'fenics'
 #html_theme = 'fenics_minimal1'
 #html_theme = 'fenics_minimal2'
+#html_theme = 'flat'
 #html_theme = 'haiku'
-#html_theme = 'impressjs'
 #html_theme = 'jal'
+#html_theme = 'minimal5'
+#html_theme = 'modern5'
 #html_theme = 'nature'
 #html_theme = 'pylons'
 #html_theme = 'pyramid'
 #html_theme = 'redcloud'
+#html_theme = 'responsive'
 #html_theme = 'scipy_lectures'
 #html_theme = 'scrolls'
 #html_theme = 'slim-agogo'
@@ -226,7 +258,7 @@ html_theme = 'sphinx_rtd_theme'
 
 check_additional_themes = [
    'solarized', 'cloud', 'redcloud',
-   'bootstrap', 'impressjs']
+   'alabaster', 'bootstrap', 'impressjs']
 
 for theme in check_additional_themes:
     if html_theme == theme:
@@ -244,7 +276,7 @@ if html_theme == 'solarized':
 # documentation.
 
 # See http://sphinx.pocoo.org/theming.html for options
-if html_theme == 'default':
+if html_theme in ('default', 'classic'):
     # pygments_style =
     html_theme_options = {
        'rightsidebar': 'false',  # 'true'
@@ -274,12 +306,44 @@ if html_theme == 'default':
        #'headfont':         # Font for headings.
     }
 
+elif html_theme == 'alabaster':
+    # Doc: https://pypi.python.org/pypi/alabaster
+    extensions += ['alabaster']
+    html_theme_path += [alabaster.get_path()]
+    html_theme_sidebars = {
+      '**': [
+        'about.html',
+        'navigation.html',
+        'relations.html',
+        'searchbox.html',
+        'donate.html',
+      ]
+    }
+
+elif html_theme == 'sphinx_rtd_theme':
+    # Doc: https://pypi.python.org/pypi/sphinx_rtd_theme
+    if not on_rtd:
+        html_theme_path += [sphinx_rtd_theme.get_html_theme_path()]
+
 elif html_theme == 'sphinxdoc':
+    # Doc: http://sphinx-doc.org/theming.html
     html_theme_options = {
        'nosidebar': 'false',  # 'true'
     }
 
+elif html_theme == 'solarized':
+    extensions += ['sphinxjp.themecore', 'sphinxjp.themes.solarized']
+
+elif html_theme in ('cloud', 'redcloud'):
+    html_theme_path += [csp.get_theme_dir()]
+
+elif html_theme == 'impressjs':
+    html_theme_path += [csp.get_theme_dir()]
+    if not 'sphinxjp.themecore' in extensions:
+        extensions += ['sphinxjp.themecore']
+
 elif html_theme == 'scrolls':
+    # Doc: http://sphinx.pocoo.org/theming.html
     pass
     #html_theme_options = {
        #'headerbordercolor':,
@@ -290,25 +354,45 @@ elif html_theme == 'scrolls':
     #}
 
 elif html_theme == 'agogo':
+    # Doc: http://sphinx.pocoo.org/theming.html
     pass
-    # See http://sphinx.pocoo.org/theming.html for options
 
 elif html_theme == 'nature':
+    # Doc: http://sphinx.pocoo.org/theming.html
     html_theme_options = {
        'nosidebar': 'false',  # 'true'
     }
 
 elif html_theme == 'traditional':
+    # Doc: http://sphinx.pocoo.org/theming.html
     html_theme_options = {
        'nosidebar': 'false',  # 'true'
     }
 
 elif html_theme == 'haiku':
-    pass
-    # See http://sphinx.pocoo.org/theming.html for options
-
+    # Doc: http://sphinx.pocoo.org/theming.html
     html_theme_options = {
        'nosidebar': 'false',  # 'true'
+    }
+
+elif html_theme == 'pyramid':
+    # Doc: http://sphinx.pocoo.org/theming.html
+    html_theme_options = {
+       'nosidebar': 'false',  # 'true'
+    }
+
+elif html_theme == 'bizstyle':
+    # Doc: http://sphinx.pocoo.org/theming.html
+    html_theme_options = {
+       'nosidebar': 'false',  # 'true'
+       'rightsidebar': 'false',  # 'true'
+    }
+
+elif html_theme == 'epub':
+    # Doc: http://sphinx.pocoo.org/theming.html
+    html_theme_options = {
+       'relbar1': 'true',
+       'footer': 'true',
     }
 
 elif html_theme == 'basicstrap':
@@ -317,10 +401,13 @@ elif html_theme == 'basicstrap':
     }
 
 elif html_theme == 'bootstrap':
+    # Doc: https://ryan-roemer.github.io/sphinx-bootstrap-theme/README.html#customization
     html_theme_options = {
+        'navbar_title': short_title,
+
         # Global TOC depth for "site" navbar tab. (Default: 1)
         # Switching to -1 shows all levels.
-        'globaltoc_depth': 2,
+        'globaltoc_depth': -1,
 
         # HTML navbar class (Default: "navbar") to attach to <div> element.
         # For black navbar, do "navbar navbar-inverse"
@@ -332,12 +419,25 @@ elif html_theme == 'bootstrap':
 
         # Location of link to source.
         # Options are "nav" (default), "footer" or anything else to exclude.
-        'source_link_position': "nav",
+        'source_link_position': "footer",
+
+        # Any Bootswatch theme (http://bootswatch.com/) can be used
+        #'bootswatch_theme': 'readable',
+
+        # A list of tuples containing pages or urls to link to.
+        # Valid tuples should be in the following forms:
+        #    (name, page)                 # a link to a page
+        #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
+        #    (name, "http://example.com", True) # arbitrary absolute url
+        # Note the "1" or "True" value above as the third argument to indicate
+        # an arbitrary url.
+        #'navbar_links': [('PDF', '../mydoc.pdf', True), ('HTML', '../mydoc.html', True)],
 
         # TODO: Future.
         # Add page navigation to it's own navigation bar.
         #'navbar_page_separate': True,
     }
+    html_theme_path += sphinx_bootstrap_theme.get_html_theme_path()
 
 elif html_theme == 'scipy_lectures':
     # inherits the default theme and has all those options
@@ -357,24 +457,23 @@ elif html_theme == 'cbc':
     pygments_style = "friendly"
 elif html_theme == 'uio':
     pygments_style = "tango"
+elif html_theme in tinker_themes:
+    html_theme_options = {}
+    extensions += ['tinkerer.ext.blog', 'tinkerer.ext.disqus']
+    html_static_path += [tinkerer.paths.static]
+    html_theme_path += [tinkerer.paths.themes]
 
 
 
 
 
-
-
-
-
-# Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = ['_themes'] + sphinx_bootstrap_theme.get_html_theme_path()  + [csp.get_theme_dir()]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = "Experiments with Schemes for Exponential Decay"
+html_title = project
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
-#html_short_title = None
+html_short_title = short_title
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.

@@ -5,7 +5,7 @@
 if [ $# -gt 0 ]; then
     themes=$@
 else
-    themes="ADCtheme agni alabaster basicstrap bloodish cbc fenics fenics_minimal1 fenics_minimal2 jal pylons scipy_lectures slim-agogo uio vlinux-theme agogo basic bizstyle classic default epub haiku nature pyramid scrolls sphinxdoc traditional bootstrap cloud redcloud  impressjs sphinx_rtd_theme"
+    themes="ADCtheme agni basicstrap bloodish cbc fenics fenics_minimal1 fenics_minimal2 jal pylons scipy_lectures slim-agogo uio vlinux-theme agogo basic bizstyle classic default epub haiku nature pyramid scrolls sphinxdoc traditional alabaster bootstrap cloud redcloud  sphinx_rtd_theme boilerplate dark flat modern5 minimal5 responsive"
 fi
 
 for theme in $themes; do

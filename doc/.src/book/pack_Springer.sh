@@ -23,13 +23,6 @@ for dir in ../fig-*; do
 done
 doconce subst '\{fig-.+?/' '{figs/' $book.tex
 
-# Copy my hacked style files and give them new name with my initials
-cp ~/texmf/tex/latex/misc/t2do.sty t2_hpl.sty
-cp ~/texmf/tex/latex/misc/svmonodo.cls svmono_hpl.cls
-doconce replace '{t2do}' '{t2_hpl}' $book.tex
-doconce replace '{svmonodo}' '{svmono_hpl}' $book.tex
-doconce subst '% Use .+ with doconce modifications.*' '' book.tex
-
 # Copy ready-made discription of how this dir is organized
 cp ../README_Springer_dir.txt 00README.txt
 
@@ -41,7 +34,7 @@ cp ../newcommands_keep.tex .
 # Test that the book can be compiled in this subdir
 rm -rf tmp.txt
 pdflatex book | tee tmp.txt   # output of command in tmp.txt
-rm -rf *.dvi *.aux *.out *.log *.loe *.toc
+rm -rf *.dvi *.aux *.out *.log *.loe *.toc *.idx
 
 # Copy the log file from last run in the parent directory
 # and analyze potential problems (too long lines, etc.) with the script
@@ -68,6 +61,12 @@ rm *~ tmp*
 cp ../${name}.pdf $book.pdf
 
 echo 'Pause before sending tar file to Springer...'
+# cp a copy of the tex file and the tar file to Dropbox
+tarfile=tutorial.tar.gz
+tar czf $tarfile $author_name
+cp ${author_name}/${book}_*.tex $tarfile "~/Dropbox/Springer/Tutorial"
+exit
+
 sleep 2
 cd ..
 # Springer's FTP site info
