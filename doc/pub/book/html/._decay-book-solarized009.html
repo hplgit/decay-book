@@ -585,9 +585,18 @@ div { text-align: justify; text-justify: inter-word; }
               ('Making a compute function', 3, None, '___sec194'),
               ('Generating the user interface', 3, None, '___sec195'),
               ('Running the web application', 3, None, '___sec196'),
-              ('Tests for verifying implementations', 1, None, '___sec197'),
-              ('Doctests', 2, None, '___sec198'),
-              ('Unit tests and test functions', 2, None, '___sec199'),
+              ('Tests for verifying implementations',
+               1,
+               'softeng1:verify',
+               'softeng1:verify'),
+              ('Doctests',
+               2,
+               'softeng1:verify:doctests',
+               'softeng1:verify:doctests'),
+              ('Unit tests and test functions',
+               2,
+               'softeng1:verify:pytest',
+               'softeng1:verify:pytest'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
@@ -2730,7 +2739,7 @@ With the techniques demonstrated here, one can
 easily create a tailored web GUI for a particular type of application
 and use it to interactively explore physical and numerical effects.
 
-<h1 id="___sec197">Tests for verifying implementations </h1>
+<h1 id="softeng1:verify">Tests for verifying implementations</h1>
 
 <p>
 Any module with functions should have a set of tests that can
@@ -2746,7 +2755,7 @@ software testing techniques: <em>doctest</em> and <em>unit testing</em>.
 The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.
 
-<h2 id="___sec198">Doctests </h2>
+<h2 id="softeng1:verify:doctests">Doctests</h2>
 
 <p>
 A doc string, the first string after the function header, is used to
@@ -2875,7 +2884,7 @@ hide software errors.
 Doctests are highly encouraged as they do two things: 1) demonstrate
 how a function is used and 2) test that the function works.
 
-<h2 id="___sec199">Unit tests and test functions </h2>
+<h2 id="softeng1:verify:pytest">Unit tests and test functions</h2>
 
 <p>
 The unit testing technique consists of identifying smaller units
