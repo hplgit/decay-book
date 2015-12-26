@@ -1165,6 +1165,7 @@ easily create a tailored web GUI for a particular type of application
 and use it to interactively explore physical and numerical effects.
 
 ======= Tests for verifying implementations =======
+label{softeng1:verify}
 
 Any module with functions should have a set of tests that can
 check the
@@ -1180,6 +1181,8 @@ The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.
 
 ===== Doctests =====
+label{softeng1:verify:doctests}
+
 
 idx{doctests}
 idx{software testing!doctests}
@@ -1290,6 +1293,7 @@ how a function is used and 2) test that the function works.
 
 
 ===== Unit tests and test functions =====
+label{softeng1:verify:pytest}
 
 idx{`nose` tests}
 idx{`pytest` tests}
