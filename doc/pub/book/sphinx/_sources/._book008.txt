@@ -1872,6 +1872,8 @@ With the techniques demonstrated here, one can
 easily create a tailored web GUI for a particular type of application
 and use it to interactively explore physical and numerical effects.
 
+.. _softeng1:verify:
+
 Tests for verifying implementations
 ===================================
 
@@ -1887,6 +1889,8 @@ tests can tell!). Here we shall illustrate two important
 software testing techniques: *doctest* and *unit testing*.
 The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.
+
+.. _softeng1:verify:doctests:
 
 Doctests
 --------
@@ -2009,6 +2013,8 @@ This edit triggers a report:
 
 Doctests are highly encouraged as they do two things: 1) demonstrate
 how a function is used and 2) test that the function works.
+
+.. _softeng1:verify:pytest:
 
 Unit tests and test functions
 -----------------------------
