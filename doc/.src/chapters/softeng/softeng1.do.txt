@@ -761,6 +761,7 @@ and `p`. A user interface will replace the first two assignments to
 `delta` and `p`.
 
 ===== Command-line arguments =====
+label{softeng1:basic:UI:cmlargs}
 
 The command-line arguments are all the words that appear on the
 command line after the program name. Running a program `prog.py`
@@ -894,6 +895,7 @@ Our next task is to use these basic code constructs to equip our
 `decay.py` module with command-line interfaces.
 
 ===== Positional command-line arguments =====
+label{softeng1:basic:UI:pos_cml}
 
 idx{list comprehension}
 idx{`sys.argv`}
@@ -967,6 +969,7 @@ and get `theta=0.5`in the code.
 
 
 ===== Option-value pairs on the command line =====
+label{softeng1:basic:UI:options_cml}
 
 idx{`argparse` (Python module)}
 idx{`ArgumentParser` (Python class)}

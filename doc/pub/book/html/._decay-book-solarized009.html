@@ -566,12 +566,18 @@ div { text-align: justify; text-justify: inter-word; }
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec190'),
-              ('Positional command-line arguments', 2, None, '___sec191'),
+              ('Command-line arguments',
+               2,
+               'softeng1:basic:UI:cmlargs',
+               'softeng1:basic:UI:cmlargs'),
+              ('Positional command-line arguments',
+               2,
+               'softeng1:basic:UI:pos_cml',
+               'softeng1:basic:UI:pos_cml'),
               ('Option-value pairs on the command line',
                2,
-               None,
-               '___sec192'),
+               'softeng1:basic:UI:options_cml',
+               'softeng1:basic:UI:options_cml'),
               ('Creating a graphical web user interface',
                2,
                None,
@@ -2143,7 +2149,7 @@ The essential content is that <code>prog.py</code> has two input parameters: <co
 and <code>p</code>. A user interface will replace the first two assignments to
 <code>delta</code> and <code>p</code>.
 
-<h2 id="___sec190">Command-line arguments </h2>
+<h2 id="softeng1:basic:UI:cmlargs">Command-line arguments</h2>
 
 <p>
 The command-line arguments are all the words that appear on the
@@ -2304,7 +2310,7 @@ the <code>args.delta</code> and <code>args.p</code> variables are automatically 
 Our next task is to use these basic code constructs to equip our
 <code>decay.py</code> module with command-line interfaces.
 
-<h2 id="___sec191">Positional command-line arguments </h2>
+<h2 id="softeng1:basic:UI:pos_cml">Positional command-line arguments</h2>
 
 <p>
 For our <code>decay.py</code> module file, we want to include functionality such
@@ -2386,7 +2392,7 @@ Now we can do
 <!-- end verbatim block -->
 and get `theta=0.5`in the code.
 
-<h2 id="___sec192">Option-value pairs on the command line </h2>
+<h2 id="softeng1:basic:UI:options_cml">Option-value pairs on the command line</h2>
 
 <p>
 Now we want to specify option-value pairs on the command line,

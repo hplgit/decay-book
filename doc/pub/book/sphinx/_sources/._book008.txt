@@ -1320,6 +1320,8 @@ The essential content is that ``prog.py`` has two input parameters: ``delta``
 and ``p``. A user interface will replace the first two assignments to
 ``delta`` and ``p``.
 
+.. _softeng1:basic:UI:cmlargs:
+
 Command-line arguments
 ----------------------
 
@@ -1467,6 +1469,8 @@ the ``args.delta`` and ``args.p`` variables are automatically of type ``float``.
 Our next task is to use these basic code constructs to equip our
 ``decay.py`` module with command-line interfaces.
 
+.. _softeng1:basic:UI:pos_cml:
+
 Positional command-line arguments
 ---------------------------------
 
@@ -1546,6 +1550,8 @@ Now we can do
         Terminal> python decay.py 1 0.5 4 CN 1.5 0.75 0.1
 
 and get `theta=0.5`in the code.
+
+.. _softeng1:basic:UI:options_cml:
 
 Option-value pairs on the command line
 --------------------------------------
