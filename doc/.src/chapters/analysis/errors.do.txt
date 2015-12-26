@@ -79,8 +79,6 @@ solve differential equations by symbolic software.
 
 ===== Data errors =====
 
-idx{Monte Carlo simulation}
-
 By ``data'' we mean all the input parameters to a model, in our case
 $I$ and $a$. The values of these may contain errors, or at least
 uncertainty. Suppose $I$ and $a$ are measured from some physical
@@ -88,6 +86,8 @@ experiments. Ideally, we have many samples of $I$ and $a$ and
 from these we can fit probability distributions. Assume that $I$
 turns out to be normally distributed with mean 1 and standard deviation 0.2,
 while $a$ is uniformly distributed in the interval $[0.5, 1.5]$.
+
+idx{Monte Carlo simulation}
 
 How will the uncertainty in $I$ and $a$ propagate through the model
 $u=Ie^{-at}$? That is, what is the uncertainty in $u$ at a particular
@@ -128,18 +128,19 @@ unless $u$ is linear in $I$ and $a$ (here $u$ is nonlinear in $a$).
 FIGURE: [fig-analysis/data_errors, width=800 frac=1] Histogram of solution uncertainty at three time points, due to data errors. label{decay:analysis:data_errors:fig}
 
 
-Estimating statistical uncertainty in input data and investigating
-how this uncertainty
-propagates to uncertainty in the response of a differential equation model
-(or other models) are key topics in the scientific field called
-*uncertainty quantification*, simply known as UQ.
-Estimation of the statistical properties of input data can either be
-done directly from physical experiments, or one can find the
+idx{uncertainty quantification}
+
+Estimating statistical uncertainty in input data and investigating how
+this uncertainty propagates to uncertainty in the response of a
+differential equation model (or other models) are key topics in the
+scientific field called *uncertainty quantification*, simply known as
+UQ.  Estimation of the statistical properties of input data can either
+be done directly from physical experiments, or one can find the
 parameter values that provide a ``best fit'' of model predictions with
-experiments. Monte Carlo simulation is a general and widely used
-tool to solve the associated statistical problems.
-The accuracy of the Monte Carlo results increases with increasing
-number of samples $N$, typically the error behaves like $N^{-1/2}$.
+experiments. Monte Carlo simulation is a general and widely used tool
+to solve the associated statistical problems.  The accuracy of the
+Monte Carlo results increases with increasing number of samples $N$,
+typically the error behaves like $N^{-1/2}$.
 
 The computer code required to do the Monte Carlo simulation and
 produce the plots in Figure ref{decay:analysis:data_errors:fig}
@@ -194,15 +195,14 @@ number. When doing arithmetics with floating-point numbers, there will
 be small approximation errors, called round-off errors or rounding
 errors, that may or may not accumulate in comprehensive computations.
 
-The cause and analysis of rounding errors are described in most
-books on numerical analysis, see for instance
-Chapter 2 in Gander et al. cite{Gander_2015}. For very simple
-algorithms it is possible to theoretically establish bounds for
-the rounding errors, but for most algorithms one cannot know to
-what extent rounding errors accumulate and potentially destroy
-the final answer. Exercise ref{decay:analysis:exer:rounding}
-demonstrates the impact of rounding errors on numerical
-differentiation and integration.
+The cause and analysis of rounding errors are described in most books
+on numerical analysis, see for instance Chapter 2 in Gander et
+al. cite{Gander_2015}. For very simple algorithms it is possible to
+theoretically establish bounds for the rounding errors, but for most
+algorithms one cannot know to what extent rounding errors accumulate
+and potentially destroy the final answer. Exercise
+ref{decay:analysis:exer:rounding} demonstrates the impact of rounding
+errors on numerical differentiation and integration.
 
 Here is a simplest possible example of the effect of rounding
 errors:
@@ -213,10 +213,9 @@ errors:
 >>> 1.0/49*49
 0.9999999999999999
 !ec
-We see that the latter result is not exact, but features an
-error of $10^{-16}$. This is the typical level of a rounding error
-from an arithmetic operation with the widely used
-64 bit floating-point number
+We see that the latter result is not exact, but features an error of
+$10^{-16}$. This is the typical level of a rounding error from an
+arithmetic operation with the widely used 64 bit floating-point number
 (`float` object in Python, often called `double` or double precision
 in other languages). One cannot expect more accuracy than $10^{-16}$.
 The big question is if errors at this level accumulate in a given
@@ -234,20 +233,19 @@ and then we run our numerical algorithm (the Crank-Nicolson scheme to
 be precise) with `Decimal` objects for all real numbers and compute
 the maximum error arising from using 4, 16, 64, and 128 digits.
 
-When computing with numbers around unity in size and doing $N_t=40$ time
-steps, we typically get a rounding error of $10^{-d}$, where $d$ is
-the number of digits used. The effect of rounding errors may
+When computing with numbers around unity in size and doing $N_t=40$
+time steps, we typically get a rounding error of $10^{-d}$, where $d$
+is the number of digits used. The effect of rounding errors may
 accumulate if we perform more operations, so increasing the number of
 time steps to 4000 gives a rounding error of the order $10^{-d+2}$.
 Also, if we compute with numbers that are much larger than unity, we
 lose accuracy due to rounding errors. For example, for the $u$ values
-implied by $I=1000$ and $a=100$ ($u\sim 10^3$),
-the rounding errors increase to about
-$10^{-d+3}$. Below is a table summarizing a set of experiments. A
-rough model for the size of rounding errors is $10^{-d+q+r}$, where
-$d$ is the number of digits, the number of time steps is of the order
-$10^q$ time steps, and the size of the numbers in the arithmetic
-expressions are of order $10^r$.
+implied by $I=1000$ and $a=100$ ($u\sim 10^3$), the rounding errors
+increase to about $10^{-d+3}$. Below is a table summarizing a set of
+experiments. A rough model for the size of rounding errors is
+$10^{-d+q+r}$, where $d$ is the number of digits, the number of time
+steps is of the order $10^q$ time steps, and the size of the numbers
+in the arithmetic expressions are of order $10^r$.
 
 |----c-----------------c--------------------------c---------------------c--------------------------------c-------------|
 | digits  | $u\sim 1$, $N_t=40$    | $u\sim 1$, $N_t=4000$    | $u\sim 10^3$, $N_t=40$      | $u\sim 10^3$, $N_t=4000$ |

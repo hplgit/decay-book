@@ -928,14 +928,14 @@ solve differential equations by symbolic software.</p>
 </div>
 <div class="section" id="data-errors">
 <h3>Data errors<a class="headerlink" href="#data-errors" title="Permalink to this headline">¶</a></h3>
-<p id="index-12">By &#8220;data&#8221; we mean all the input parameters to a model, in our case
+<p>By &#8220;data&#8221; we mean all the input parameters to a model, in our case
 <span class="math">\(I\)</span> and <span class="math">\(a\)</span>. The values of these may contain errors, or at least
 uncertainty. Suppose <span class="math">\(I\)</span> and <span class="math">\(a\)</span> are measured from some physical
 experiments. Ideally, we have many samples of <span class="math">\(I\)</span> and <span class="math">\(a\)</span> and
 from these we can fit probability distributions. Assume that <span class="math">\(I\)</span>
 turns out to be normally distributed with mean 1 and standard deviation 0.2,
 while <span class="math">\(a\)</span> is uniformly distributed in the interval <span class="math">\([0.5, 1.5]\)</span>.</p>
-<p>How will the uncertainty in <span class="math">\(I\)</span> and <span class="math">\(a\)</span> propagate through the model
+<p id="index-12">How will the uncertainty in <span class="math">\(I\)</span> and <span class="math">\(a\)</span> propagate through the model
 <span class="math">\(u=Ie^{-at}\)</span>? That is, what is the uncertainty in <span class="math">\(u\)</span> at a particular
 time <span class="math">\(t\)</span>? This answer can easily be answered using <em>Monte Carlo
 simulation</em>. It means that we draw a lot of samples from the
@@ -996,18 +996,17 @@ unless <span class="math">\(u\)</span> is linear in <span class="math">\(I\)</sp
 <span id="decay-analysis-data-errors-fig"></span><a class="reference internal image-reference" href="_images/data_errors.png"><img alt="_images/data_errors.png" src="_images/data_errors.png" style="width: 800px;" /></a>
 <p class="caption"><span class="caption-text"><em>Histogram of solution uncertainty at three time points, due to data errors</em></span></p>
 </div>
-<p>Estimating statistical uncertainty in input data and investigating
-how this uncertainty
-propagates to uncertainty in the response of a differential equation model
-(or other models) are key topics in the scientific field called
-<em>uncertainty quantification</em>, simply known as UQ.
-Estimation of the statistical properties of input data can either be
-done directly from physical experiments, or one can find the
+<p id="index-13">Estimating statistical uncertainty in input data and investigating how
+this uncertainty propagates to uncertainty in the response of a
+differential equation model (or other models) are key topics in the
+scientific field called <em>uncertainty quantification</em>, simply known as
+UQ.  Estimation of the statistical properties of input data can either
+be done directly from physical experiments, or one can find the
 parameter values that provide a &#8220;best fit&#8221; of model predictions with
-experiments. Monte Carlo simulation is a general and widely used
-tool to solve the associated statistical problems.
-The accuracy of the Monte Carlo results increases with increasing
-number of samples <span class="math">\(N\)</span>, typically the error behaves like <span class="math">\(N^{-1/2}\)</span>.</p>
+experiments. Monte Carlo simulation is a general and widely used tool
+to solve the associated statistical problems.  The accuracy of the
+Monte Carlo results increases with increasing number of samples <span class="math">\(N\)</span>,
+typically the error behaves like <span class="math">\(N^{-1/2}\)</span>.</p>
 <p>The computer code required to do the Monte Carlo simulation and
 produce the plots in Figure <a class="reference internal" href="#decay-analysis-data-errors-fig"><span class="std std-ref">Histogram of solution uncertainty at three time points, due to data errors</span></a>
 is shown below.</p>
@@ -1134,15 +1133,13 @@ the floating-point number is an approximation to the underlying real
 number. When doing arithmetics with floating-point numbers, there will
 be small approximation errors, called round-off errors or rounding
 errors, that may or may not accumulate in comprehensive computations.</p>
-<p>The cause and analysis of rounding errors are described in most
-books on numerical analysis, see for instance
-Chapter 2 in Gander et al. <a class="reference internal" href="._book009.html#ref05" id="id1">[Ref05]</a>. For very simple
-algorithms it is possible to theoretically establish bounds for
-the rounding errors, but for most algorithms one cannot know to
-what extent rounding errors accumulate and potentially destroy
-the final answer. <a class="reference internal" href="#decay-analysis-exer-rounding"><span class="std std-ref">Problem 9: Explore rounding errors in numerical calculus</span></a>
-demonstrates the impact of rounding errors on numerical
-differentiation and integration.</p>
+<p>The cause and analysis of rounding errors are described in most books
+on numerical analysis, see for instance Chapter 2 in Gander et
+al. <a class="reference internal" href="._book009.html#ref05" id="id1">[Ref05]</a>. For very simple algorithms it is possible to
+theoretically establish bounds for the rounding errors, but for most
+algorithms one cannot know to what extent rounding errors accumulate
+and potentially destroy the final answer. <a class="reference internal" href="#decay-analysis-exer-rounding"><span class="std std-ref">Problem 9: Explore rounding errors in numerical calculus</span></a> demonstrates the impact of rounding
+errors on numerical differentiation and integration.</p>
 <p>Here is a simplest possible example of the effect of rounding
 errors:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mf">1.0</span><span class="o">/</span><span class="mi">51</span><span class="o">*</span><span class="mi">51</span>
@@ -1151,10 +1148,9 @@ errors:</p>
 <span class="go">0.9999999999999999</span>
 </pre></div>
 </div>
-<p>We see that the latter result is not exact, but features an
-error of <span class="math">\(10^{-16}\)</span>. This is the typical level of a rounding error
-from an arithmetic operation with the widely used
-64 bit floating-point number
+<p>We see that the latter result is not exact, but features an error of
+<span class="math">\(10^{-16}\)</span>. This is the typical level of a rounding error from an
+arithmetic operation with the widely used 64 bit floating-point number
 (<code class="docutils literal"><span class="pre">float</span></code> object in Python, often called <code class="docutils literal"><span class="pre">double</span></code> or double precision
 in other languages). One cannot expect more accuracy than <span class="math">\(10^{-16}\)</span>.
 The big question is if errors at this level accumulate in a given
@@ -1169,20 +1165,19 @@ to use as many digits in floating-point numbers as we like. We take
 and then we run our numerical algorithm (the Crank-Nicolson scheme to
 be precise) with <code class="docutils literal"><span class="pre">Decimal</span></code> objects for all real numbers and compute
 the maximum error arising from using 4, 16, 64, and 128 digits.</p>
-<p>When computing with numbers around unity in size and doing <span class="math">\(N_t=40\)</span> time
-steps, we typically get a rounding error of <span class="math">\(10^{-d}\)</span>, where <span class="math">\(d\)</span> is
-the number of digits used. The effect of rounding errors may
+<p>When computing with numbers around unity in size and doing <span class="math">\(N_t=40\)</span>
+time steps, we typically get a rounding error of <span class="math">\(10^{-d}\)</span>, where <span class="math">\(d\)</span>
+is the number of digits used. The effect of rounding errors may
 accumulate if we perform more operations, so increasing the number of
 time steps to 4000 gives a rounding error of the order <span class="math">\(10^{-d+2}\)</span>.
 Also, if we compute with numbers that are much larger than unity, we
 lose accuracy due to rounding errors. For example, for the <span class="math">\(u\)</span> values
-implied by <span class="math">\(I=1000\)</span> and <span class="math">\(a=100\)</span> (<span class="math">\(u\sim 10^3\)</span>),
-the rounding errors increase to about
-<span class="math">\(10^{-d+3}\)</span>. Below is a table summarizing a set of experiments. A
-rough model for the size of rounding errors is <span class="math">\(10^{-d+q+r}\)</span>, where
-<span class="math">\(d\)</span> is the number of digits, the number of time steps is of the order
-<span class="math">\(10^q\)</span> time steps, and the size of the numbers in the arithmetic
-expressions are of order <span class="math">\(10^r\)</span>.</p>
+implied by <span class="math">\(I=1000\)</span> and <span class="math">\(a=100\)</span> (<span class="math">\(u\sim 10^3\)</span>), the rounding errors
+increase to about <span class="math">\(10^{-d+3}\)</span>. Below is a table summarizing a set of
+experiments. A rough model for the size of rounding errors is
+<span class="math">\(10^{-d+q+r}\)</span>, where <span class="math">\(d\)</span> is the number of digits, the number of time
+steps is of the order <span class="math">\(10^q\)</span> time steps, and the size of the numbers
+in the arithmetic expressions are of order <span class="math">\(10^r\)</span>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="4%" />

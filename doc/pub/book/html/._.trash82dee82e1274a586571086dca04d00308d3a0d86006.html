@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,relative differences,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability,relative differences">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation,uncertainty quantification,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,relative differences,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability,relative differences">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -2215,8 +2215,8 @@ computation and the mean value produced by Monte Carlo simulation.
 <tr><td align="left">   3       </td> <td align="left">   0.07    </td> <td align="left">   0.060      </td> <td align="left">   0.14                </td> </tr>
 </tbody>
     </table>
-  </div>
-</div> <!-- col-xs-3 -->
+  </div> <!-- col-xs-3 -->
+</div> <!-- cell row -->
 <p>
 Actually, \( u(t;I,a) \) becomes a stochastic variable for each \( t \) when
 \( I \) and \( a \) are stochastic variables, as they are in the above
@@ -2232,18 +2232,17 @@ unless \( u \) is linear in \( I \) and \( a \) (here \( u \) is nonlinear in \(
 </center>
 
 <p>
-Estimating statistical uncertainty in input data and investigating
-how this uncertainty
-propagates to uncertainty in the response of a differential equation model
-(or other models) are key topics in the scientific field called
-<em>uncertainty quantification</em>, simply known as UQ.
-Estimation of the statistical properties of input data can either be
-done directly from physical experiments, or one can find the
+Estimating statistical uncertainty in input data and investigating how
+this uncertainty propagates to uncertainty in the response of a
+differential equation model (or other models) are key topics in the
+scientific field called <em>uncertainty quantification</em>, simply known as
+UQ.  Estimation of the statistical properties of input data can either
+be done directly from physical experiments, or one can find the
 parameter values that provide a &quot;best fit&quot; of model predictions with
-experiments. Monte Carlo simulation is a general and widely used
-tool to solve the associated statistical problems.
-The accuracy of the Monte Carlo results increases with increasing
-number of samples \( N \), typically the error behaves like \( N^{-1/2} \).
+experiments. Monte Carlo simulation is a general and widely used tool
+to solve the associated statistical problems.  The accuracy of the
+Monte Carlo results increases with increasing number of samples \( N \),
+typically the error behaves like \( N^{-1/2} \).
 
 <p>
 The computer code required to do the Monte Carlo simulation and
@@ -2324,8 +2323,8 @@ for various choices of \( \Delta t \) and schemes.
 <tr><td align="right">   0.01              </td> <td align="right">   \( 2\cdot 10^{-3} \)    </td> <td align="right">   \( 2\cdot 10^{-3} \)    </td> <td align="right">   $ 3\cdot 10^{-6}$    </td> </tr>
 </tbody>
     </table>
-  </div>
-</div> <!-- col-xs-8 -->
+  </div> <!-- col-xs-8 -->
+</div> <!-- cell row -->
 <p>
 The computer code used to generate the plots appear next. It makes use
 of a <code>solver</code> function
@@ -2373,15 +2372,13 @@ be small approximation errors, called round-off errors or rounding
 errors, that may or may not accumulate in comprehensive computations.
 
 <p>
-The cause and analysis of rounding errors are described in most
-books on numerical analysis, see for instance
-Chapter 2 in Gander et al. <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86011.html#Gander_2015">[5]</a>. For very simple
-algorithms it is possible to theoretically establish bounds for
-the rounding errors, but for most algorithms one cannot know to
-what extent rounding errors accumulate and potentially destroy
-the final answer. <a href="#decay:analysis:exer:rounding">Problem 9: Explore rounding errors in numerical calculus</a>
-demonstrates the impact of rounding errors on numerical
-differentiation and integration.
+The cause and analysis of rounding errors are described in most books
+on numerical analysis, see for instance Chapter 2 in Gander et
+al. <a href="._.trash82dee82e1274a586571086dca04d00308d3a0d86011.html#Gander_2015">[5]</a>. For very simple algorithms it is possible to
+theoretically establish bounds for the rounding errors, but for most
+algorithms one cannot know to what extent rounding errors accumulate
+and potentially destroy the final answer. <a href="#decay:analysis:exer:rounding">Problem 9: Explore rounding errors in numerical calculus</a> demonstrates the impact of rounding
+errors on numerical differentiation and integration.
 
 <p>
 Here is a simplest possible example of the effect of rounding
@@ -2396,10 +2393,9 @@ errors:
 <span style="color: #666666">0.9999999999999999</span>
 </pre></div>
 <p>
-We see that the latter result is not exact, but features an
-error of \( 10^{-16} \). This is the typical level of a rounding error
-from an arithmetic operation with the widely used
-64 bit floating-point number
+We see that the latter result is not exact, but features an error of
+\( 10^{-16} \). This is the typical level of a rounding error from an
+arithmetic operation with the widely used 64 bit floating-point number
 (<code>float</code> object in Python, often called <code>double</code> or double precision
 in other languages). One cannot expect more accuracy than \( 10^{-16} \).
 The big question is if errors at this level accumulate in a given
@@ -2418,20 +2414,19 @@ be precise) with <code>Decimal</code> objects for all real numbers and compute
 the maximum error arising from using 4, 16, 64, and 128 digits.
 
 <p>
-When computing with numbers around unity in size and doing \( N_t=40 \) time
-steps, we typically get a rounding error of \( 10^{-d} \), where \( d \) is
-the number of digits used. The effect of rounding errors may
+When computing with numbers around unity in size and doing \( N_t=40 \)
+time steps, we typically get a rounding error of \( 10^{-d} \), where \( d \)
+is the number of digits used. The effect of rounding errors may
 accumulate if we perform more operations, so increasing the number of
 time steps to 4000 gives a rounding error of the order \( 10^{-d+2} \).
 Also, if we compute with numbers that are much larger than unity, we
 lose accuracy due to rounding errors. For example, for the \( u \) values
-implied by \( I=1000 \) and \( a=100 \) (\( u\sim 10^3 \)),
-the rounding errors increase to about
-\( 10^{-d+3} \). Below is a table summarizing a set of experiments. A
-rough model for the size of rounding errors is \( 10^{-d+q+r} \), where
-\( d \) is the number of digits, the number of time steps is of the order
-\( 10^q \) time steps, and the size of the numbers in the arithmetic
-expressions are of order \( 10^r \).
+implied by \( I=1000 \) and \( a=100 \) (\( u\sim 10^3 \)), the rounding errors
+increase to about \( 10^{-d+3} \). Below is a table summarizing a set of
+experiments. A rough model for the size of rounding errors is
+\( 10^{-d+q+r} \), where \( d \) is the number of digits, the number of time
+steps is of the order \( 10^q \) time steps, and the size of the numbers
+in the arithmetic expressions are of order \( 10^r \).
 
 <p>
 
@@ -2448,8 +2443,8 @@ expressions are of order \( 10^r \).
 <tr><td align="right">   128       </td> <td align="left">   \( 1.60\cdot 10^{-128} \)      </td> <td align="left">   \( 1.56\cdot 10^{-126} \)        </td> <td align="left">   \( 2.41\cdot 10^{-125} \)         </td> <td align="left">   \( 1.07\cdot 10^{-122} \)           </td> </tr>
 </tbody>
     </table>
-  </div>
-</div> <!-- col-xs-12 -->
+  </div> <!-- col-xs-12 -->
+</div> <!-- cell row -->
 <p>
 We realize that rounding errors are at the lowest possible level
 if we scale the differential equation model,
