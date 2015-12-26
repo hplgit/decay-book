@@ -615,10 +615,13 @@
 \@writefile{toc}{\contentsline {section}{\numberline {5.2}User interfaces}{185}{section.5.2}}
 \newlabel{softeng1:basic:UI}{{5.2}{185}{User interfaces}{section.5.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Command-line arguments}{186}{subsection.5.2.1}}
+\newlabel{softeng1:basic:UI:cmlargs}{{5.2.1}{186}{Command-line arguments}{subsection.5.2.1}{}}
 \zref@newlabel{mdf@pagelabel-29}{\default{5.2.1}\page{188}\abspage{190}\mdf@pagevalue{188}}
 \pgfsyspdfmark {pgfid53}{6339911}{22362187}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Positional command-line arguments}{189}{subsection.5.2.2}}
+\newlabel{softeng1:basic:UI:pos_cml}{{5.2.2}{189}{Positional command-line arguments}{subsection.5.2.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}Option-value pairs on the command line}{190}{subsection.5.2.3}}
+\newlabel{softeng1:basic:UI:options_cml}{{5.2.3}{190}{Option-value pairs on the command line}{subsection.5.2.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Creating a graphical web user interface}{193}{subsection.5.2.4}}
 \@writefile{toc}{\contentsline {paragraph}{Making a compute function.}{193}{section*.165}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces  Automatically generated graphical web interface.  \relax }}{193}{figure.caption.166}}
