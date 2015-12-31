@@ -450,6 +450,9 @@ u^3 &=Au^2= 0.00265290804728
 \end{align*}
 !et
 
+idx{test function}
+idx{unit testing}
+
 Comparison of these manual calculations with the result of the
 `solver` function is carried out in the function
 
