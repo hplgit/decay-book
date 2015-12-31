@@ -1295,8 +1295,9 @@ how a function is used and 2) test that the function works.
 ===== Unit tests and test functions =====
 label{softeng1:verify:pytest}
 
-idx{`nose` tests}
-idx{`pytest` tests}
+idx{test function}
+idx{nose}
+idx{pytest}
 idx{unit testing}
 idx{software testing!nose}
 idx{software testing!pytest}
