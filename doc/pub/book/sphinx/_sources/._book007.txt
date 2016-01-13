@@ -1764,7 +1764,7 @@ Exercises          (4)
 
 .. _decay:app:exer:radio:C14:
 
-Problem 5.1: Radioactive decay of Carbon-14
+Problem 4.1: Radioactive decay of Carbon-14
 -------------------------------------------
 
 The `Carbon-14 <http://en.wikipedia.org/wiki/Carbon-14>`__ isotope,
@@ -1805,7 +1805,7 @@ Filename: ``carbon14``.
 
 .. _decay:app:exer:cooling:schemes:
 
-Exercise 5.2: Derive schemes for Newton's law of cooling
+Exercise 4.2: Derive schemes for Newton's law of cooling
 --------------------------------------------------------
 
 Show in detail how we can apply the ideas of the Forward Euler,
@@ -1836,7 +1836,7 @@ Filename: ``schemes_cooling``.
 
 .. _decay:app:exer:cooling:py:
 
-Exercise 5.3: Implement schemes for Newton's law of cooling
+Exercise 4.3: Implement schemes for Newton's law of cooling
 -----------------------------------------------------------
 
 The goal of this exercise is to implement the schemes from
@@ -1980,7 +1980,7 @@ Filename: ``cooling``.
 
 .. _decay:app:exer:cooling:murder:
 
-Exercise 5.4: Find time of murder from body temperature
+Exercise 4.4: Find time of murder from body temperature
 -------------------------------------------------------
 
 .. `<http://www.biology.arizona.edu/BioMath/tutorials/Applications/Cooling.html>`_
@@ -2009,7 +2009,7 @@ Filename: ``detective``.
 
 .. _decay:app:exer:cooling:osc:
 
-Exercise 5.5: Simulate an oscillating cooling process
+Exercise 4.5: Simulate an oscillating cooling process
 -----------------------------------------------------
 
 The surrounding temperature :math:`T_s` in Newton's law of cooling
@@ -2041,7 +2041,7 @@ Filename: ``osc_cooling``.
 
 .. _decay:app:exer:stoch:nuclear:
 
-Exercise 5.6: Simulate stochastic radioactive decay
+Exercise 4.6: Simulate stochastic radioactive decay
 ---------------------------------------------------
 
 The purpose of this exercise is to implement the stochastic model
@@ -2084,7 +2084,7 @@ Filename: ``stochastic_decay``.
 
 .. _decay:app:exer:radio:twosubst:
 
-Problem 5.7: Radioactive decay of two substances
+Problem 4.7: Radioactive decay of two substances
 ------------------------------------------------
 
 Consider two radioactive substances A and B. The nuclei in substance A
@@ -2136,7 +2136,7 @@ Filename: ``radioactive_decay_2subst``.
 
 .. _decay:app:exer:kinetics:AB:
 
-Exercise 5.8: Simulate a simple chemical reaction
+Exercise 4.8: Simulate a simple chemical reaction
 -------------------------------------------------
 
 Consider the simple chemical reaction where a substance A is turned
@@ -2177,7 +2177,7 @@ Filename: ``chemcial_kinetics_AB``.
 
 .. _decay:app:exer:kinetics:ABn:
 
-Exercise 5.9: Simulate an :math:`n`-th order chemical reaction
+Exercise 4.9: Simulate an :math:`n`-th order chemical reaction
 --------------------------------------------------------------
 
 An :math:`n`-order chemical reaction, generalizing the model in
@@ -2209,7 +2209,7 @@ Filename: ``chemcial_kinetics_ABn``.
 
 .. _decay:app:exer:MMK:
 
-Exercise 5.10: Simulate a biochemical process
+Exercise 4.10: Simulate a biochemical process
 ---------------------------------------------
 
 The purpose of this exercise is to simulate the ODE system
@@ -2316,7 +2316,7 @@ in b) to do a partial verification of the solution at each time step.
 .. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 **d)**
-Simulate a case with :math:`T=8`, :math:`\alpha = 1`, :math:`\beta=4`, and two
+Simulate a case with :math:`T=8`, :math:`\alpha = 1.5`, :math:`\beta=1`, and two
 :math:`\epsilon` values: 0.9 and 0.1.
 
 .. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
@@ -2329,7 +2329,7 @@ Filename: ``biochem``.
 
 .. _decay:app:exer:SIR:
 
-Exercise 5.11: Simulate spreading of a disease
+Exercise 4.11: Simulate spreading of a disease
 ----------------------------------------------
 
 The SIR model :ref:`(153) <Eq:decay:app:SIR:S>`-:ref:`(155) <Eq:decay:app:SIR:R>` can be used
@@ -2440,7 +2440,7 @@ Filename: ``SIR``.
 
 .. _decay:app:exer:predprey:
 
-Exercise 5.12: Simulate predator-prey interaction
+Exercise 4.12: Simulate predator-prey interaction
 -------------------------------------------------
 
 The section :ref:`decay:app:predprey` describes a model for the
@@ -2485,7 +2485,7 @@ Filename: ``predator_prey``.
 
 .. _decay:app:exer:atm1:
 
-Exercise 5.13: Simulate the pressure drop in the atmosphere
+Exercise 4.13: Simulate the pressure drop in the atmosphere
 -----------------------------------------------------------
 
 We consider the models for atmospheric pressure in
@@ -2512,7 +2512,7 @@ Filename: ``atmospheric_pressure``.
 
 .. _decay:app:exer:drag:prog:
 
-Exercise 5.14: Make a program for vertical motion in a fluid
+Exercise 4.14: Make a program for vertical motion in a fluid
 ------------------------------------------------------------
 
 Implement the Stokes' drag model :ref:`(166) <Eq:decay:app:fallingbody:model:S>`
@@ -2570,7 +2570,7 @@ Filename: ``vertical_motion``.
 
 .. _decay:app:exer:parachute:
 
-Project 5.15: Simulate parachuting
+Project 4.15: Simulate parachuting
 ----------------------------------
 
 The aim of this project is to develop a general solver for the
@@ -2712,7 +2712,7 @@ Filename: ``parachuting``.
 
 .. _decay:app:exer:drag:atm1:
 
-Exercise 5.16: Formulate vertical motion in the atmosphere
+Exercise 4.16: Formulate vertical motion in the atmosphere
 ----------------------------------------------------------
 
 Vertical motion of a body in the atmosphere needs to take into
@@ -2769,7 +2769,7 @@ Filename: ``falling_in_variable_density``.
 
 .. _decay:app:exer:drag:atm2:
 
-Exercise 5.17: Simulate vertical motion in the atmosphere
+Exercise 4.17: Simulate vertical motion in the atmosphere
 ---------------------------------------------------------
 
 Implement the Forward Euler or the Crank-Nicolson scheme
@@ -2784,7 +2784,7 @@ Filename: ``falling_in_variable_density``.
 
 .. _decay:app:exer:signum:
 
-Problem 5.18: Compute :math:`y=|x|` by solving an ODE
+Problem 4.18: Compute :math:`y=|x|` by solving an ODE
 -----------------------------------------------------
 
 Consider the ODE problem
@@ -2813,7 +2813,7 @@ Filename: ``signum``.
 
 .. _decay:app:exer:interest:
 
-Problem 5.19: Simulate fortune growth with random interest rate
+Problem 4.19: Simulate fortune growth with random interest rate
 ---------------------------------------------------------------
 
 The goal of this exercise is to compute the value of a fortune subject
@@ -2891,7 +2891,7 @@ Filename: ``random_interest``.
 
 .. _decay:app:exer:pop:at:
 
-Exercise 5.20: Simulate a population in a changing environment
+Exercise 4.20: Simulate a population in a changing environment
 --------------------------------------------------------------
 
 We shall study a population modeled by :ref:`(129) <Eq:decay:app:pop:ueq>` where
@@ -2943,7 +2943,7 @@ Filename: ``population.py``.
 
 .. _decay:app:exer:pop:logistic1:
 
-Exercise 5.21: Simulate logistic growth
+Exercise 4.21: Simulate logistic growth
 ---------------------------------------
 
 Solve the logistic ODE
@@ -2964,7 +2964,7 @@ Filename: ``logistic_CN``.
 
 .. _decay:app:exer:interest:derive:
 
-Exercise 5.22: Rederive the equation for continuous compound interest
+Exercise 4.22: Rederive the equation for continuous compound interest
 ---------------------------------------------------------------------
 
 The ODE model :ref:`(133) <Eq:decay:app:interest:eq2>` was derived under the assumption
@@ -2984,7 +2984,7 @@ Filename: ``interest_modeling``.
 
 .. _decay:app:exer:viscoelasticity1:
 
-Exercise 5.23: Simulate the deformation of a viscoelastic material
+Exercise 4.23: Simulate the deformation of a viscoelastic material
 ------------------------------------------------------------------
 
 Stretching a rod made of polymer will cause deformations that are

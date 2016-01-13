@@ -26,11 +26,11 @@ def solver(alpha, beta, epsilon, T, dt=0.1):
     return Q, P, S, E
 
 def demo():
-    alpha = 1
-    beta = 4
+    alpha = 1.5
+    beta = 1
     epsilon = 0.1
     T = 8
-    dt = float(sys.argv[1]) if len(sys.argv) >= 2 else 0.1
+    dt = float(sys.argv[1]) if len(sys.argv) >= 2 else 0.01
     Q, P, S, E = solver(alpha, beta, epsilon, T, dt)
     plt.plot(t, Q, t, P, t, S, t, E)
     plt.legend(['complex', 'product', 'substrate', 'enzyme'],

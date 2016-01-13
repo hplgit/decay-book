@@ -550,6 +550,10 @@ and :math:`\Delta t =0.8` we get
         u^3 &=Au^2= 0.00265290804728
         
 
+.. index:: test function
+
+.. index:: unit testing
+
 Comparison of these manual calculations with the result of the
 ``solver`` function is carried out in the function
 

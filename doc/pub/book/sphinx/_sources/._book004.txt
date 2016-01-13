@@ -7,7 +7,7 @@ Exercises          (1)
 
 .. _decay:exer:meshfunc:
 
-Exercise 2.1: Define a mesh function and visualize it
+Exercise 1.1: Define a mesh function and visualize it
 -----------------------------------------------------
 
 **a)**
@@ -64,7 +64,7 @@ We also remark that the function in b) is the solution of :math:`u^{\prime}=-au`
 
 .. _decay:exer:dudt:
 
-Problem 2.2: Differentiate a function
+Problem 1.2: Differentiate a function
 -------------------------------------
 
 .. index:: array arithmetics
@@ -161,7 +161,7 @@ Filename: ``differentiate``.
 
 .. _decay:exer:intdiv:
 
-Problem 2.3: Experiment with divisions
+Problem 1.3: Experiment with divisions
 --------------------------------------
 
 Explain what happens in the following computations, where
@@ -188,7 +188,7 @@ Filename: ``pyproblems``.
 
 .. _decay:exer:decay1err:
 
-Problem 2.4: Experiment with wrong computations
+Problem 1.4: Experiment with wrong computations
 -----------------------------------------------
 
 Consider the ``solver`` function in the `decay_v1.py <http://tinyurl.com/ofkw6kc/alg/decay_v1.py>`__ file
@@ -223,7 +223,7 @@ Filename: ``decay_v1_err``.
 
 .. _decay:exer:plot:error:
 
-Problem 2.5: Plot the error function
+Problem 1.5: Plot the error function
 ------------------------------------
 
 Solve the problem :math:`u'=-au`, :math:`u(0)=I`, using the Forward Euler, Backward
@@ -249,7 +249,7 @@ Filename: ``decay_plot_error``.
 
 .. _decay:exer:inexact:output:
 
-Problem 2.6: Change formatting of numbers and debug
+Problem 1.6: Change formatting of numbers and debug
 ---------------------------------------------------
 
 The `decay_memsave.py <http://tinyurl.com/ofkw6kc/alg/decay_memsave.py>`__ program

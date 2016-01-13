@@ -1788,7 +1788,7 @@ how a function is used and 2) test that the function works.</p>
 </div>
 <div class="section" id="unit-tests-and-test-functions">
 <span id="softeng1-verify-pytest"></span><h3>Unit tests and test functions<a class="headerlink" href="#unit-tests-and-test-functions" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-15"></span><span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><p id="index-19">The unit testing technique consists of identifying smaller units
+<span class="target" id="index-15"></span><span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><span class="target" id="index-19"></span><p id="index-20">The unit testing technique consists of identifying smaller units
 of code and writing one or more tests for
 each unit. One unit can typically be a function.
 Each test should, ideally, not depend on the outcome of
@@ -1798,8 +1798,8 @@ design and write the unit tests first and <em>then</em> implement the functions!
 unit testing. The units are naturally larger than in non-scientific
 software. Very often the solution procedure of a mathematical problem
 identifies a unit, such as our <code class="docutils literal"><span class="pre">solver</span></code> function.</p>
-<span class="target" id="index-20"></span><div class="section" id="two-python-test-frameworks-nose-and-pytest">
-<span id="index-21"></span><h4>Two Python test frameworks: nose and pytest<a class="headerlink" href="#two-python-test-frameworks-nose-and-pytest" title="Permalink to this headline">¶</a></h4>
+<span class="target" id="index-21"></span><div class="section" id="two-python-test-frameworks-nose-and-pytest">
+<span id="index-22"></span><h4>Two Python test frameworks: nose and pytest<a class="headerlink" href="#two-python-test-frameworks-nose-and-pytest" title="Permalink to this headline">¶</a></h4>
 <p>Python offers two very easy-to-use software frameworks for implementing
 unit tests: nose and pytest. These work (almost) in the same way,
 but our recommendation is to go for pytest.</p>
@@ -1889,7 +1889,7 @@ with a small tolerance:</p>
         <span class="k">assert</span> <span class="n">success</span>
 </pre></div>
 </div>
-<div class="admonition-always-compare-real-numbers-with-a-tolerance admonition" id="index-22">
+<div class="admonition-always-compare-real-numbers-with-a-tolerance admonition" id="index-23">
 <p class="first admonition-title">Always compare real numbers with a tolerance</p>
 <p>Real numbers should never be compared with the <code class="docutils literal"><span class="pre">==</span></code> operator, but always
 with the absolute value of the difference and a tolerance.
@@ -1899,7 +1899,7 @@ So, replace <code class="docutils literal"><span class="pre">a</span> <span clas
 </pre></div>
 </div>
 <p>The suitable size of <code class="docutils literal"><span class="pre">tol</span></code> depends on the size of <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code>
-(see <a class="reference internal" href="#softeng1-exer-tol"><span class="std std-ref">Problem 6.5: Investigate the size of tolerances in comparisons</span></a>). Unless <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> are around
+(see <a class="reference internal" href="#softeng1-exer-tol"><span class="std std-ref">Problem 5.5: Investigate the size of tolerances in comparisons</span></a>). Unless <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> are around
 unity in size, one should use a <em>relative difference</em>:</p>
 <div class="last highlight-python"><div class="highlight"><pre><span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
 <span class="nb">abs</span><span class="p">((</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span>
@@ -1972,7 +1972,7 @@ An example of a <code class="docutils literal"><span class="pre">tests</span></c
 file is found in <a class="reference external" href="http://tinyurl.com/ofkw6kc/softeng/tests">src/softeng/tests</a>.</p>
 </div>
 <div class="section" id="embedding-doctests-in-a-test-function">
-<span id="index-23"></span><h4>Embedding doctests in a test function<a class="headerlink" href="#embedding-doctests-in-a-test-function" title="Permalink to this headline">¶</a></h4>
+<span id="index-24"></span><h4>Embedding doctests in a test function<a class="headerlink" href="#embedding-doctests-in-a-test-function" title="Permalink to this headline">¶</a></h4>
 <p>Doctests can also be executed from nose/pytest unit tests. Here is an
 example of a file <a class="reference external" href="http://tinyurl.com/ofkw6kc/softeng/tests/test_decay_doctest.py">test_decay_doctest.py</a> where we in the test
 block run all the doctests in the imported module <code class="docutils literal"><span class="pre">decay</span></code>, but we also
@@ -2172,7 +2172,7 @@ in IPython the module must first be reloaded (reimported):</p>
 </div>
 <div class="section" id="classical-class-based-unit-testing">
 <span id="softeng1-basic-unittest"></span><h3>Classical class-based unit testing<a class="headerlink" href="#classical-class-based-unit-testing" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-24"></span><span class="target" id="index-25"></span><p id="index-26">The test functions written for the nose and pytest frameworks are
+<span class="target" id="index-25"></span><span class="target" id="index-26"></span><p id="index-27">The test functions written for the nose and pytest frameworks are
 very straightforward and to the point, with no framework-required boilerplate
 code. We just write the statements we need to get the computations and
 comparisons done, before applying the required <code class="docutils literal"><span class="pre">assert</span></code>.</p>
@@ -2189,7 +2189,7 @@ code is written. A short demo of <code class="docutils literal"><span class="pre
 next. (Readers who are not familiar with object-oriented programming
 in Python may find the text hard to understand, but one can safely
 jump to the next section.)</p>
-<span class="target" id="index-27"></span><p id="index-28">Suppose we have a function <code class="docutils literal"><span class="pre">double(x)</span></code> in a module file <code class="docutils literal"><span class="pre">mymod.py</span></code>:</p>
+<span class="target" id="index-28"></span><p id="index-29">Suppose we have a function <code class="docutils literal"><span class="pre">double(x)</span></code> in a module file <code class="docutils literal"><span class="pre">mymod.py</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
 </pre></div>
@@ -2300,7 +2300,7 @@ we need is a directory with this file. This directory will also
 contain an installation script <code class="docutils literal"><span class="pre">setup.py</span></code> and a <code class="docutils literal"><span class="pre">README</span></code> file
 telling what the software is about, the author&#8217;s email address, a URL
 for downloading the software, and other useful information.</p>
-<p id="index-29">The <code class="docutils literal"><span class="pre">setup.py</span></code> file can be as short as</p>
+<p id="index-30">The <code class="docutils literal"><span class="pre">setup.py</span></code> file can be as short as</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">distutils.core</span> <span class="kn">import</span> <span class="n">setup</span>
 <span class="n">setup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;decay&#39;</span><span class="p">,</span>
       <span class="n">version</span><span class="o">=</span><span class="s">&#39;0.1&#39;</span><span class="p">,</span>
@@ -2340,7 +2340,7 @@ in case we want to run <code class="docutils literal"><span class="pre">decay.py
 <p>We have also added some author and download information.
 The reader is referred to the <a class="reference external" href="https://docs.python.org/2/distutils/setupscript.html">Distutils documentation</a> for more information on how to
 write <code class="docutils literal"><span class="pre">setup.py</span></code> scripts.</p>
-<div class="admonition-remark-about-the-executable-file admonition" id="index-30">
+<div class="admonition-remark-about-the-executable-file admonition" id="index-31">
 <p class="first admonition-title">Remark about the executable file</p>
 <p>The executable program, <code class="docutils literal"><span class="pre">decay.py</span></code>, is in the above installation
 script taken to be the complete
@@ -2375,7 +2375,7 @@ test_decay.py
 </div>
 <div class="section" id="publishing-the-software-at-github">
 <h3>Publishing the software at GitHub<a class="headerlink" href="#publishing-the-software-at-github" title="Permalink to this headline">¶</a></h3>
-<p id="index-31">The leading site today for publishing open source software projects is
+<p id="index-32">The leading site today for publishing open source software projects is
 GitHub at <a class="reference external" href="http://github.com">http://github.com</a>, provided you want your software to
 be open to the world. With a paid GitHub account, you can have private
 projects too.</p>
@@ -2477,7 +2477,7 @@ directory on the computer system, e.g.,
 to <code class="docutils literal"><span class="pre">/usr/local/bin</span></code>.</p>
 </div>
 <div class="section" id="installing-a-package">
-<span id="index-32"></span><h4>Installing a package<a class="headerlink" href="#installing-a-package" title="Permalink to this headline">¶</a></h4>
+<span id="index-33"></span><h4>Installing a package<a class="headerlink" href="#installing-a-package" title="Permalink to this headline">¶</a></h4>
 <p>When the software is organized as a Python package, the installation is
 done by running <code class="docutils literal"><span class="pre">setup.py</span></code> exactly as explained above, but the use of a module
 <code class="docutils literal"><span class="pre">decay</span></code> in a package <code class="docutils literal"><span class="pre">decay</span></code> requires the following syntax:</p>
@@ -2542,7 +2542,7 @@ Other useful resources are</p>
 </div></blockquote>
 <div class="section" id="the-problem-class">
 <h3>The problem class<a class="headerlink" href="#the-problem-class" title="Permalink to this headline">¶</a></h3>
-<p id="index-33">The purpose of the problem class is to store all information about
+<p id="index-34">The purpose of the problem class is to store all information about
 the mathematical model. This usually means the physical parameters
 and formulas
 in the problem. Looking at our model problem
@@ -2628,7 +2628,7 @@ initialized with a proper value.</p>
 </div>
 <div class="section" id="the-solver-class">
 <h3>The solver class<a class="headerlink" href="#the-solver-class" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-34"></span><p id="index-35">The solver class stores parameters related to the numerical solution method
+<span class="target" id="index-35"></span><p id="index-36">The solver class stores parameters related to the numerical solution method
 and provides a function <code class="docutils literal"><span class="pre">solve</span></code> for solving the problem.
 For convenience, a problem object is given to the constructor
 in a solver object such that the object gets access to the
@@ -2935,7 +2935,7 @@ the BE method, <code class="docutils literal"><span class="pre">CN.png</span></c
 and <code class="docutils literal"><span class="pre">error.pdf</span></code> with the log-log plot of the numerical error versus <span class="math">\(\Delta t\)</span>.
 In addition, the table with numerical errors is written to a
 file <code class="docutils literal"><span class="pre">error.csv</span></code>.</p>
-<span class="target" id="index-36"></span><div class="admonition-reproducible-and-replicable-science admonition" id="index-37">
+<span class="target" id="index-37"></span><div class="admonition-reproducible-and-replicable-science admonition" id="index-38">
 <p class="first admonition-title">Reproducible and replicable science</p>
 <p>A script that automates running our computer experiments
 will ensure
@@ -3159,7 +3159,7 @@ The complete code is listed below, followed by some explaining comments.</p>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<span class="target" id="index-38"></span><span class="target" id="index-39"></span><p id="index-40">We may comment upon many useful constructs in this script:</p>
+<span class="target" id="index-39"></span><span class="target" id="index-40"></span><p id="index-41">We may comment upon many useful constructs in this script:</p>
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal"><span class="pre">[float(arg)</span> <span class="pre">for</span> <span class="pre">arg</span> <span class="pre">in</span> <span class="pre">sys.argv[1:]]</span></code> builds a list of real numbers
@@ -3191,8 +3191,8 @@ know exactly which input data that were used to generate a specific
 plot, thereby ensuring that each figure is connected to the
 right data. Take a look at <a class="reference external" href="http://tinyurl.com/nc4upel/_static/sphinx-cloud/">a sample report</a>  to see what we have in
 mind.</p>
-<span class="target" id="index-41"></span><span class="target" id="index-42"></span><span class="target" id="index-43"></span><div class="section" id="word-openoffice-googledocs">
-<span id="index-44"></span><h4>Word, OpenOffice, GoogleDocs<a class="headerlink" href="#word-openoffice-googledocs" title="Permalink to this headline">¶</a></h4>
+<span class="target" id="index-42"></span><span class="target" id="index-43"></span><span class="target" id="index-44"></span><div class="section" id="word-openoffice-googledocs">
+<span id="index-45"></span><h4>Word, OpenOffice, GoogleDocs<a class="headerlink" href="#word-openoffice-googledocs" title="Permalink to this headline">¶</a></h4>
 <p>Microsoft Word, its open source counterparts OpenOffice and
 LibreOffice, along with GoogleDocs and similar online services are the
 dominating tools for writing reports today. Nevertheless, scientific
@@ -3208,9 +3208,9 @@ resulting in increased reliability of the writing process. For
 collaborative writing, the merge functionality in Git leads to safer
 simultaneously editing than what is offered even by collaborative
 tools like GoogleDocs.</p>
-<span class="target" id="index-45"></span></div>
+<span class="target" id="index-46"></span></div>
 <div class="section" id="html-with-mathjax">
-<span id="index-46"></span><h4>HTML with MathJax<a class="headerlink" href="#html-with-mathjax" title="Permalink to this headline">¶</a></h4>
+<span id="index-47"></span><h4>HTML with MathJax<a class="headerlink" href="#html-with-mathjax" title="Permalink to this headline">¶</a></h4>
 <p>HTML is the markup language used for web pages.  Nicely typeset computer
 code is straightforward in HTML, and high-quality mathematical
 typesetting is available using an extension to HTML called <a class="reference external" href="http://www.mathjax.org/">MathJax</a>, which allows formulas and equations to be
@@ -3236,7 +3236,7 @@ statements for creating an <a class="reference external" href="http://tinyurl.co
 </div>
 </div>
 <div class="section" id="latex">
-<span id="index-47"></span><h4>LaTeX<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h4>
+<span id="index-48"></span><h4>LaTeX<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h4>
 <p>The <em>de facto</em> language for mathematical typesetting and scientific
 report writing is <a class="reference external" href="http://en.wikipedia.org/wiki/LaTeX">LaTeX</a>. A
 number of very sophisticated packages have been added to the language
@@ -3259,7 +3259,7 @@ generate the LaTeX source from a program.</p>
 </div>
 </div>
 <div class="section" id="sphinx">
-<span id="index-48"></span><h4>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h4>
+<span id="index-49"></span><h4>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h4>
 <p><a class="reference external" href="http://sphinx.pocoo.org/">Sphinx</a> is a typesetting language with
 similarities to HTML and LaTeX, but with much less tagging. It has
 recently become very popular for software documentation and
@@ -3280,7 +3280,7 @@ contents, navigation, and search facilities, see Figure
 </div>
 </div>
 <div class="section" id="markdown">
-<span id="index-49"></span><h4>Markdown<a class="headerlink" href="#markdown" title="Permalink to this headline">¶</a></h4>
+<span id="index-50"></span><h4>Markdown<a class="headerlink" href="#markdown" title="Permalink to this headline">¶</a></h4>
 <p>A recent, very popular format for easy writing of web pages is
 <a class="reference external" href="http://daringfireball.net/projects/markdown/">Markdown</a>.
 Text is written very much like one would do in email, using
@@ -3292,9 +3292,9 @@ HTML is a common output format, but LaTeX, epub, XML,
 OpenOffice/LibreOffice, MediaWiki, and Microsoft Word are some other
 possibilities. A Markdown version of our scientific
 report demo is available as an IPython/Jupyter notebook (described next).</p>
-<span class="target" id="index-50"></span></div>
+<span class="target" id="index-51"></span></div>
 <div class="section" id="ipython-jupyter-notebooks">
-<span id="index-51"></span><h4>IPython/Jupyter notebooks<a class="headerlink" href="#ipython-jupyter-notebooks" title="Permalink to this headline">¶</a></h4>
+<span id="index-52"></span><h4>IPython/Jupyter notebooks<a class="headerlink" href="#ipython-jupyter-notebooks" title="Permalink to this headline">¶</a></h4>
 <p>The <a class="reference external" href="http://ipython.org/notebook.html">IPython Notebook</a> is
 a web-based tool where one can write scientific reports with live computer
 code and graphics. Or the other way around: software can be equipped
@@ -3321,7 +3321,7 @@ Wiki formats are therefore less suitable for scientific reports compared
 to the other formats mentioned here.</p>
 </div>
 <div class="section" id="doconce">
-<span id="index-52"></span><h4>DocOnce<a class="headerlink" href="#doconce" title="Permalink to this headline">¶</a></h4>
+<span id="index-53"></span><h4>DocOnce<a class="headerlink" href="#doconce" title="Permalink to this headline">¶</a></h4>
 <p>Since it is difficult to choose the right tool or format for writing a
 scientific report, it is advantageous to write the content in a format
 that easily translates to LaTeX, HTML, Sphinx, Markdown,
@@ -3336,7 +3336,7 @@ this DocOnce code.</p>
 </div>
 <div class="section" id="publishing-a-complete-project">
 <span id="softeng1-exper-github"></span><h3>Publishing a complete project<a class="headerlink" href="#publishing-a-complete-project" title="Permalink to this headline">¶</a></h3>
-<p id="index-53">To assist the important principle of <em>replicable</em> science,
+<p id="index-54">To assist the important principle of <em>replicable</em> science,
 a report documenting scientific investigations should be accompanied by
 all the software and data used for the investigations so that others
 have a possibility to redo the work and assess the qualify of the results.</p>
@@ -3371,8 +3371,8 @@ the <code class="docutils literal"><span class="pre">report.html</span></code> f
 </div>
 <div class="section" id="exercises-5">
 <h2>Exercises<a class="headerlink" href="#exercises-5" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="problem-6-1-make-a-tool-for-differentiating-curves">
-<span id="softeng1-exer-derivative"></span><h3>Problem 6.1: Make a tool for differentiating curves<a class="headerlink" href="#problem-6-1-make-a-tool-for-differentiating-curves" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="problem-5-1-make-a-tool-for-differentiating-curves">
+<span id="softeng1-exer-derivative"></span><h3>Problem 5.1: Make a tool for differentiating curves<a class="headerlink" href="#problem-5-1-make-a-tool-for-differentiating-curves" title="Permalink to this headline">¶</a></h3>
 <p>Suppose we have a curve specified through a set
 of discrete coordinates <span class="math">\((x_i,y_i)\)</span>, <span class="math">\(i=0,\ldots,n\)</span>, where the <span class="math">\(x_i\)</span>
 values are uniformly distributed with spacing <span class="math">\(\Delta x\)</span>: <span class="math">\(x_i=\Delta x\)</span>.
@@ -3415,8 +3415,8 @@ points in <span class="math">\([0,1]\)</span>. Apply <code class="docutils liter
 resulting curve and the exact <span class="math">\(y=\sin\pi x\)</span> for <span class="math">\(n=6, 11, 21, 41\)</span>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">curvediff</span></code>.</p>
 </div>
-<div class="section" id="problem-6-2-make-solid-software-for-the-trapezoidal-rule">
-<span id="softeng1-exer-integral-flat"></span><h3>Problem 6.2: Make solid software for the Trapezoidal rule<a class="headerlink" href="#problem-6-2-make-solid-software-for-the-trapezoidal-rule" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="problem-5-2-make-solid-software-for-the-trapezoidal-rule">
+<span id="softeng1-exer-integral-flat"></span><h3>Problem 5.2: Make solid software for the Trapezoidal rule<a class="headerlink" href="#problem-5-2-make-solid-software-for-the-trapezoidal-rule" title="Permalink to this headline">¶</a></h3>
 <p>An integral</p>
 <div class="math">
 \[\int_a^b f(x)dx\]</div>
@@ -3513,17 +3513,17 @@ Write a test function for verifying the implementation of
 data reading from the command line.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">trapezoidal</span></code>.</p>
 </div>
-<div class="section" id="problem-6-3-implement-classes-for-the-trapezoidal-rule">
-<span id="softeng1-exer-integral-flat2"></span><h3>Problem 6.3: Implement classes for the Trapezoidal rule<a class="headerlink" href="#problem-6-3-implement-classes-for-the-trapezoidal-rule" title="Permalink to this headline">¶</a></h3>
-<p>We consider the same problem setting as in <a class="reference internal" href="#softeng1-exer-integral-flat"><span class="std std-ref">Problem 6.2: Make solid software for the Trapezoidal rule</span></a>. Make a module with a class <code class="docutils literal"><span class="pre">Problem</span></code>
+<div class="section" id="problem-5-3-implement-classes-for-the-trapezoidal-rule">
+<span id="softeng1-exer-integral-flat2"></span><h3>Problem 5.3: Implement classes for the Trapezoidal rule<a class="headerlink" href="#problem-5-3-implement-classes-for-the-trapezoidal-rule" title="Permalink to this headline">¶</a></h3>
+<p>We consider the same problem setting as in <a class="reference internal" href="#softeng1-exer-integral-flat"><span class="std std-ref">Problem 5.2: Make solid software for the Trapezoidal rule</span></a>. Make a module with a class <code class="docutils literal"><span class="pre">Problem</span></code>
 representing the mathematical problem to be solved and a class
 <code class="docutils literal"><span class="pre">Solver</span></code> representing the solution method.  The rest of the
 functionality of the module, including test functions and reading data
-from the command line, should be as in <a class="reference internal" href="#softeng1-exer-integral-flat"><span class="std std-ref">Problem 6.2: Make solid software for the Trapezoidal rule</span></a>.
+from the command line, should be as in <a class="reference internal" href="#softeng1-exer-integral-flat"><span class="std std-ref">Problem 5.2: Make solid software for the Trapezoidal rule</span></a>.
 Filename: <code class="docutils literal"><span class="pre">trapezoidal_class</span></code>.</p>
 </div>
-<div class="section" id="problem-6-4-write-a-doctest-and-a-test-function">
-<span id="softeng1-exer-doctest1"></span><h3>Problem 6.4: Write a doctest and a test function<a class="headerlink" href="#problem-6-4-write-a-doctest-and-a-test-function" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="problem-5-4-write-a-doctest-and-a-test-function">
+<span id="softeng1-exer-doctest1"></span><h3>Problem 5.4: Write a doctest and a test function<a class="headerlink" href="#problem-5-4-write-a-doctest-and-a-test-function" title="Permalink to this headline">¶</a></h3>
 <p>Type in the following program:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
 <span class="c"># This sqrt(x) returns real if x&gt;0 and complex if x&lt;0</span>
@@ -3555,9 +3555,9 @@ same mathematical tests as in a), but with different
 programming technology.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">test_roots</span></code>.</p>
 </div>
-<div class="section" id="problem-6-5-investigate-the-size-of-tolerances-in-comparisons">
-<span id="softeng1-exer-tol"></span><h3>Problem 6.5: Investigate the size of tolerances in comparisons<a class="headerlink" href="#problem-6-5-investigate-the-size-of-tolerances-in-comparisons" title="Permalink to this headline">¶</a></h3>
-<p id="index-54">When we replace a comparison <code class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></code>, where <code class="docutils literal"><span class="pre">a</span></code> and/or <code class="docutils literal"><span class="pre">b</span></code> are
+<div class="section" id="problem-5-5-investigate-the-size-of-tolerances-in-comparisons">
+<span id="softeng1-exer-tol"></span><h3>Problem 5.5: Investigate the size of tolerances in comparisons<a class="headerlink" href="#problem-5-5-investigate-the-size-of-tolerances-in-comparisons" title="Permalink to this headline">¶</a></h3>
+<p id="index-55">When we replace a comparison <code class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></code>, where <code class="docutils literal"><span class="pre">a</span></code> and/or <code class="docutils literal"><span class="pre">b</span></code> are
 <code class="docutils literal"><span class="pre">float</span></code> objects, by a comparison with tolerance, <code class="docutils literal"><span class="pre">abs(a-b)</span> <span class="pre">&lt;</span> <span class="pre">tol</span></code>,
 the appropriate size of <code class="docutils literal"><span class="pre">tol</span></code> depends on the size of <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code>.
 Investigate how the size of <code class="docutils literal"><span class="pre">abs(a-b)</span></code> varies when <code class="docutils literal"><span class="pre">b</span></code> takes on
@@ -3576,8 +3576,8 @@ The way out of the problem with choosing a tolerance is to use
 relative differences.</p>
 </div>
 </div>
-<div class="section" id="exercise-6-6-make-use-of-a-class-implementation">
-<span id="softeng1-exer-class-dts"></span><h3>Exercise 6.6: Make use of a class implementation<a class="headerlink" href="#exercise-6-6-make-use-of-a-class-implementation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="exercise-5-6-make-use-of-a-class-implementation">
+<span id="softeng1-exer-class-dts"></span><h3>Exercise 5.6: Make use of a class implementation<a class="headerlink" href="#exercise-5-6-make-use-of-a-class-implementation" title="Permalink to this headline">¶</a></h3>
 <p>Implement the <code class="docutils literal"><span class="pre">experiment_compare_dt</span></code> function from <code class="docutils literal"><span class="pre">decay.py</span></code>
 using class <code class="docutils literal"><span class="pre">Problem</span></code> and class <code class="docutils literal"><span class="pre">Solver</span></code> from
 the section <a class="reference internal" href="#softeng1-prog-se-class"><span class="std std-ref">Classes for problem and solution method</span></a>.
@@ -3585,8 +3585,8 @@ The parameters <code class="docutils literal"><span class="pre">I</span></code>,
 <code class="docutils literal"><span class="pre">dt</span></code> values should be read from the command line.
 Filename: <code class="docutils literal"><span class="pre">experiment_compare_dt_class</span></code>.</p>
 </div>
-<div class="section" id="problem-6-7-make-solid-software-for-a-difference-equation">
-<span id="softeng1-exer-logistic"></span><h3>Problem 6.7: Make solid software for a difference equation<a class="headerlink" href="#problem-6-7-make-solid-software-for-a-difference-equation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="problem-5-7-make-solid-software-for-a-difference-equation">
+<span id="softeng1-exer-logistic"></span><h3>Problem 5.7: Make solid software for a difference equation<a class="headerlink" href="#problem-5-7-make-solid-software-for-a-difference-equation" title="Permalink to this headline">¶</a></h3>
 <p>We have the following evolutionary difference equation for the number
 of individuals <span class="math">\(u^n\)</span> of a certain specie at time <span class="math">\(n\Delta t\)</span>:</p>
 <div class="math" id="eq-softeng1-exer-logistic-eq">
@@ -3718,16 +3718,16 @@ Filename: <code class="docutils literal"><span class="pre">logistic</span></code
 </ul>
 </li>
 <li><a class="reference internal" href="#exercises-5">Exercises</a><ul>
-<li><a class="reference internal" href="#problem-6-1-make-a-tool-for-differentiating-curves">Problem 6.1: Make a tool for differentiating curves</a></li>
-<li><a class="reference internal" href="#problem-6-2-make-solid-software-for-the-trapezoidal-rule">Problem 6.2: Make solid software for the Trapezoidal rule</a></li>
-<li><a class="reference internal" href="#problem-6-3-implement-classes-for-the-trapezoidal-rule">Problem 6.3: Implement classes for the Trapezoidal rule</a></li>
-<li><a class="reference internal" href="#problem-6-4-write-a-doctest-and-a-test-function">Problem 6.4: Write a doctest and a test function</a></li>
-<li><a class="reference internal" href="#problem-6-5-investigate-the-size-of-tolerances-in-comparisons">Problem 6.5: Investigate the size of tolerances in comparisons</a><ul>
+<li><a class="reference internal" href="#problem-5-1-make-a-tool-for-differentiating-curves">Problem 5.1: Make a tool for differentiating curves</a></li>
+<li><a class="reference internal" href="#problem-5-2-make-solid-software-for-the-trapezoidal-rule">Problem 5.2: Make solid software for the Trapezoidal rule</a></li>
+<li><a class="reference internal" href="#problem-5-3-implement-classes-for-the-trapezoidal-rule">Problem 5.3: Implement classes for the Trapezoidal rule</a></li>
+<li><a class="reference internal" href="#problem-5-4-write-a-doctest-and-a-test-function">Problem 5.4: Write a doctest and a test function</a></li>
+<li><a class="reference internal" href="#problem-5-5-investigate-the-size-of-tolerances-in-comparisons">Problem 5.5: Investigate the size of tolerances in comparisons</a><ul>
 <li><a class="reference internal" href="#remarks-2">Remarks</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#exercise-6-6-make-use-of-a-class-implementation">Exercise 6.6: Make use of a class implementation</a></li>
-<li><a class="reference internal" href="#problem-6-7-make-solid-software-for-a-difference-equation">Problem 6.7: Make solid software for a difference equation</a></li>
+<li><a class="reference internal" href="#exercise-5-6-make-use-of-a-class-implementation">Exercise 5.6: Make use of a class implementation</a></li>
+<li><a class="reference internal" href="#problem-5-7-make-solid-software-for-a-difference-equation">Problem 5.7: Make solid software for a difference equation</a></li>
 </ul>
 </li>
 </ul>
@@ -3784,7 +3784,7 @@ Filename: <code class="docutils literal"><span class="pre">logistic</span></code
     <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
     <br />
     <br />
-      &copy;2015, Hans Petter Langtangen. Released under CC Attribution 4.0 license.
+      &copy;2016, Hans Petter Langtangen. Released under CC Attribution 4.0 license.
   </div>
 </div>
 

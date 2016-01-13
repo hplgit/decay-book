@@ -362,7 +362,7 @@ variable(s). The rationale behind such a simple variation is that
 almost any relevant numerical solution method for differential
 equation problems is able to reproduce a linear function exactly to
 machine precision (if <span class="math">\(u\)</span> is about unity in size; precision is lost if
-<span class="math">\(u\)</span> takes on large values, see <a class="reference internal" href="#decay-fd2-exer-precision"><span class="std std-ref">Exercise 4.1: Experiment with precision in tests and the size of </span></a>).
+<span class="math">\(u\)</span> takes on large values, see <a class="reference internal" href="#decay-fd2-exer-precision"><span class="std std-ref">Exercise 3.1: Experiment with precision in tests and the size of </span></a>).
 The linear solution also makes some stronger demands to the
 numerical method and the implementation than the constant solution
 used in the section <a class="reference internal" href="#decay-verify-trivial"><span class="std std-ref">Verifying a constant solution</span></a>, at least in more
@@ -735,7 +735,7 @@ the Forward Euler scheme since it is also explicit.</p>
 <div class="section" id="the-filtered-leapfrog-scheme">
 <span id="index-12"></span><h4>The filtered Leapfrog scheme<a class="headerlink" href="#the-filtered-leapfrog-scheme" title="Permalink to this headline">¶</a></h4>
 <p>Unfortunately, the Leapfrog scheme <a class="reference internal" href="#eq-decay-fd2-leapfrog"><span class="std std-ref">(114)</span></a>
-will develop growing oscillations with time (see <a class="reference internal" href="#decay-fd2-exer-leapfrog1"><span class="std std-ref">Project 4.6: Implement and investigate the Leapfrog scheme</span></a>). A remedy for such undesired oscillations
+will develop growing oscillations with time (see <a class="reference internal" href="#decay-fd2-exer-leapfrog1"><span class="std std-ref">Project 3.6: Implement and investigate the Leapfrog scheme</span></a>). A remedy for such undesired oscillations
 is to introduce a <em>filtering technique</em>. First, a standard Leapfrog
 step is taken, according to <a class="reference internal" href="#eq-decay-fd2-leapfrog"><span class="std std-ref">(114)</span></a>, and then
 the previous <span class="math">\(u^n\)</span> value is adjusted according to</p>
@@ -1026,7 +1026,7 @@ the class type (as a string) of an object <code class="docutils literal"><span c
 <p>The runs in Figure <a class="reference internal" href="#decay-odespy-fig1"><span class="std std-ref">Behavior of different schemes for the decay equation</span></a>
 and other experiments reveal that the 2nd-order Runge-Kutta
 method (<code class="docutils literal"><span class="pre">RK2</span></code>) is unstable for <span class="math">\(\Delta t&gt;1\)</span> and decays slower than the
-Backward Euler scheme for large and moderate <span class="math">\(\Delta t\)</span> (see <a class="reference internal" href="#decay-exer-rk2-taylor-analysis"><span class="std std-ref">Exercise 4.5: Analyze explicit 2nd-order methods</span></a> for an analysis).  However, for
+Backward Euler scheme for large and moderate <span class="math">\(\Delta t\)</span> (see <a class="reference internal" href="#decay-exer-rk2-taylor-analysis"><span class="std std-ref">Exercise 3.5: Analyze explicit 2nd-order methods</span></a> for an analysis).  However, for
 fine <span class="math">\(\Delta t = 0.25\)</span> the 2nd-order Runge-Kutta method approaches
 the exact solution faster than the Backward Euler scheme.  That is,
 the latter scheme does a better job for larger <span class="math">\(\Delta t\)</span>, while the
@@ -1131,8 +1131,8 @@ the decay and larger time steps when the solution flattens out.</p>
 </div>
 <div class="section" id="exercises-3">
 <h2>Exercises<a class="headerlink" href="#exercises-3" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="exercise-4-1-experiment-with-precision-in-tests-and-the-size-of">
-<span id="decay-fd2-exer-precision"></span><h3>Exercise 4.1: Experiment with precision in tests and the size of <span class="math">\(u\)</span><a class="headerlink" href="#exercise-4-1-experiment-with-precision-in-tests-and-the-size-of" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="exercise-3-1-experiment-with-precision-in-tests-and-the-size-of">
+<span id="decay-fd2-exer-precision"></span><h3>Exercise 3.1: Experiment with precision in tests and the size of <span class="math">\(u\)</span><a class="headerlink" href="#exercise-3-1-experiment-with-precision-in-tests-and-the-size-of" title="Permalink to this headline">¶</a></h3>
 <p>It is claimed in the section <a class="reference internal" href="#decay-mms"><span class="std std-ref">Verification via manufactured solutions</span></a> that most numerical methods will
 reproduce a linear exact solution to machine precision. Test this
 assertion using the test function <code class="docutils literal"><span class="pre">test_linear_solution</span></code> in the
@@ -1143,8 +1143,8 @@ and the exact solution. What is the relevant value of the tolerance
 in the float comparison in each case?</p>
 <p>Filename: <code class="docutils literal"><span class="pre">test_precision</span></code>.</p>
 </div>
-<div class="section" id="exercise-4-2-implement-the-2-step-backward-scheme">
-<span id="decay-fd2-exer-bw2"></span><h3>Exercise 4.2: Implement the 2-step backward scheme<a class="headerlink" href="#exercise-4-2-implement-the-2-step-backward-scheme" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="exercise-3-2-implement-the-2-step-backward-scheme">
+<span id="decay-fd2-exer-bw2"></span><h3>Exercise 3.2: Implement the 2-step backward scheme<a class="headerlink" href="#exercise-3-2-implement-the-2-step-backward-scheme" title="Permalink to this headline">¶</a></h3>
 <p>Implement the 2-step backward method <a class="reference internal" href="#eq-decay-fd2-bw-2step"><span class="std std-ref">(112)</span></a> for the
 model <span class="math">\(u^{\prime}(t) = -a(t)u(t) + b(t)\)</span>, <span class="math">\(u(0)=I\)</span>.  Allow the first step to
 be computed by either the Backward Euler scheme or the Crank-Nicolson
@@ -1158,8 +1158,8 @@ solution, and determine if the choice of a first-order scheme
 accuracy of this scheme. The expected error goes like <span class="math">\({\mathcal{O}(\Delta t^2)}\)</span>.
 Filename: <code class="docutils literal"><span class="pre">decay_backward2step</span></code>.</p>
 </div>
-<div class="section" id="exercise-4-3-implement-the-2nd-order-adams-bashforth-scheme">
-<span id="decay-fd2-exer-ab2"></span><h3>Exercise 4.3: Implement the 2nd-order Adams-Bashforth scheme<a class="headerlink" href="#exercise-4-3-implement-the-2nd-order-adams-bashforth-scheme" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="exercise-3-3-implement-the-2nd-order-adams-bashforth-scheme">
+<span id="decay-fd2-exer-ab2"></span><h3>Exercise 3.3: Implement the 2nd-order Adams-Bashforth scheme<a class="headerlink" href="#exercise-3-3-implement-the-2nd-order-adams-bashforth-scheme" title="Permalink to this headline">¶</a></h3>
 <p>Implement the 2nd-order Adams-Bashforth method <a class="reference internal" href="#eq-decay-fd2-ab2"><span class="std std-ref">(119)</span></a>
 for the decay problem <span class="math">\(u^{\prime}=-a(t)u + b(t)\)</span>, <span class="math">\(u(0)=I\)</span>, <span class="math">\(t\in (0, T]\)</span>.
 Use the Forward Euler method for the first step such that the overall
@@ -1169,8 +1169,8 @@ Analyze the scheme by searching for solutions <span class="math">\(u^n=A^n\)</sp
 and <span class="math">\(b=0\)</span>. Compare this second-order scheme to the Crank-Nicolson scheme.
 Filename: <code class="docutils literal"><span class="pre">decay_AdamsBashforth2</span></code>.</p>
 </div>
-<div class="section" id="exercise-4-4-implement-the-3rd-order-adams-bashforth-scheme">
-<span id="decay-fd2-exer-ab3"></span><h3>Exercise 4.4: Implement the 3rd-order Adams-Bashforth scheme<a class="headerlink" href="#exercise-4-4-implement-the-3rd-order-adams-bashforth-scheme" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="exercise-3-4-implement-the-3rd-order-adams-bashforth-scheme">
+<span id="decay-fd2-exer-ab3"></span><h3>Exercise 3.4: Implement the 3rd-order Adams-Bashforth scheme<a class="headerlink" href="#exercise-3-4-implement-the-3rd-order-adams-bashforth-scheme" title="Permalink to this headline">¶</a></h3>
 <p>Implement the 3rd-order Adams-Bashforth method <a class="reference internal" href="#eq-decay-fd2-ab3"><span class="std std-ref">(120)</span></a>
 for the decay problem <span class="math">\(u^{\prime}=-a(t)u + b(t)\)</span>, <span class="math">\(u(0)=I\)</span>, <span class="math">\(t\in (0, T]\)</span>.
 Since the scheme is explicit, allow it to be started by two steps with
@@ -1179,8 +1179,8 @@ the Forward Euler method.  Investigate experimentally the case where
 large <span class="math">\(\Delta t\)</span>?
 Filename: <code class="docutils literal"><span class="pre">decay_AdamsBashforth3</span></code>.</p>
 </div>
-<div class="section" id="exercise-4-5-analyze-explicit-2nd-order-methods">
-<span id="decay-exer-rk2-taylor-analysis"></span><h3>Exercise 4.5: Analyze explicit 2nd-order methods<a class="headerlink" href="#exercise-4-5-analyze-explicit-2nd-order-methods" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="exercise-3-5-analyze-explicit-2nd-order-methods">
+<span id="decay-exer-rk2-taylor-analysis"></span><h3>Exercise 3.5: Analyze explicit 2nd-order methods<a class="headerlink" href="#exercise-3-5-analyze-explicit-2nd-order-methods" title="Permalink to this headline">¶</a></h3>
 <p>Show that the schemes <a class="reference internal" href="#eq-decay-fd2-rk2-s2"><span class="std std-ref">(117)</span></a> and
 <a class="reference internal" href="#eq-decay-fd2-taylor2"><span class="std std-ref">(118)</span></a> are identical in the case <span class="math">\(f(u,t)=-a\)</span>, where
 <span class="math">\(a&gt;0\)</span> is a constant. Assume that the numerical solution reads
@@ -1190,8 +1190,8 @@ oscillatory solutions of <span class="math">\(u^{\prime}=-au\)</span>? Plot the 
 amplification factor.
 Filename: <code class="docutils literal"><span class="pre">decay_RK2_Taylor2</span></code>.</p>
 </div>
-<div class="section" id="project-4-6-implement-and-investigate-the-leapfrog-scheme">
-<span id="decay-fd2-exer-leapfrog1"></span><h3>Project 4.6: Implement and investigate the Leapfrog scheme<a class="headerlink" href="#project-4-6-implement-and-investigate-the-leapfrog-scheme" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="project-3-6-implement-and-investigate-the-leapfrog-scheme">
+<span id="decay-fd2-exer-leapfrog1"></span><h3>Project 3.6: Implement and investigate the Leapfrog scheme<a class="headerlink" href="#project-3-6-implement-and-investigate-the-leapfrog-scheme" title="Permalink to this headline">¶</a></h3>
 <p>A Leapfrog scheme
 for the ODE <span class="math">\(u^{\prime}(t) = -a(t)u(t) + b(t)\)</span> is defined by</p>
 <div class="math" id="eq-decay-fd2-exer-leapfrog1-scheme">
@@ -1287,8 +1287,8 @@ Leapfrog scheme and check that it can handle tests where the original
 Leapfrog scheme is unstable.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">decay_leapfrog</span></code>.</p>
 </div>
-<div class="section" id="problem-4-7-make-a-unified-implementation-of-many-schemes">
-<span id="decay-fd2-exer-uni"></span><h3>Problem 4.7: Make a unified implementation of many schemes<a class="headerlink" href="#problem-4-7-make-a-unified-implementation-of-many-schemes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="problem-3-7-make-a-unified-implementation-of-many-schemes">
+<span id="decay-fd2-exer-uni"></span><h3>Problem 3.7: Make a unified implementation of many schemes<a class="headerlink" href="#problem-3-7-make-a-unified-implementation-of-many-schemes" title="Permalink to this headline">¶</a></h3>
 <p>Consider the linear ODE problem <span class="math">\(u^{\prime}(t)=-a(t)u(t) + b(t)\)</span>, <span class="math">\(u(0)=I\)</span>.
 Explicit schemes for this problem can be written in the general form</p>
 <div class="math" id="eq-decay-analysis-exer-sumcj">
@@ -1369,13 +1369,13 @@ Filename: <code class="docutils literal"><span class="pre">decay_schemes_unified
 </ul>
 </li>
 <li><a class="reference internal" href="#exercises-3">Exercises</a><ul>
-<li><a class="reference internal" href="#exercise-4-1-experiment-with-precision-in-tests-and-the-size-of">Exercise 4.1: Experiment with precision in tests and the size of <span class="math">\(u\)</span></a></li>
-<li><a class="reference internal" href="#exercise-4-2-implement-the-2-step-backward-scheme">Exercise 4.2: Implement the 2-step backward scheme</a></li>
-<li><a class="reference internal" href="#exercise-4-3-implement-the-2nd-order-adams-bashforth-scheme">Exercise 4.3: Implement the 2nd-order Adams-Bashforth scheme</a></li>
-<li><a class="reference internal" href="#exercise-4-4-implement-the-3rd-order-adams-bashforth-scheme">Exercise 4.4: Implement the 3rd-order Adams-Bashforth scheme</a></li>
-<li><a class="reference internal" href="#exercise-4-5-analyze-explicit-2nd-order-methods">Exercise 4.5: Analyze explicit 2nd-order methods</a></li>
-<li><a class="reference internal" href="#project-4-6-implement-and-investigate-the-leapfrog-scheme">Project 4.6: Implement and investigate the Leapfrog scheme</a></li>
-<li><a class="reference internal" href="#problem-4-7-make-a-unified-implementation-of-many-schemes">Problem 4.7: Make a unified implementation of many schemes</a></li>
+<li><a class="reference internal" href="#exercise-3-1-experiment-with-precision-in-tests-and-the-size-of">Exercise 3.1: Experiment with precision in tests and the size of <span class="math">\(u\)</span></a></li>
+<li><a class="reference internal" href="#exercise-3-2-implement-the-2-step-backward-scheme">Exercise 3.2: Implement the 2-step backward scheme</a></li>
+<li><a class="reference internal" href="#exercise-3-3-implement-the-2nd-order-adams-bashforth-scheme">Exercise 3.3: Implement the 2nd-order Adams-Bashforth scheme</a></li>
+<li><a class="reference internal" href="#exercise-3-4-implement-the-3rd-order-adams-bashforth-scheme">Exercise 3.4: Implement the 3rd-order Adams-Bashforth scheme</a></li>
+<li><a class="reference internal" href="#exercise-3-5-analyze-explicit-2nd-order-methods">Exercise 3.5: Analyze explicit 2nd-order methods</a></li>
+<li><a class="reference internal" href="#project-3-6-implement-and-investigate-the-leapfrog-scheme">Project 3.6: Implement and investigate the Leapfrog scheme</a></li>
+<li><a class="reference internal" href="#problem-3-7-make-a-unified-implementation-of-many-schemes">Problem 3.7: Make a unified implementation of many schemes</a></li>
 </ul>
 </li>
 </ul>
@@ -1432,7 +1432,7 @@ Filename: <code class="docutils literal"><span class="pre">decay_schemes_unified
     <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
     <br />
     <br />
-      &copy;2015, Hans Petter Langtangen. Released under CC Attribution 4.0 license.
+      &copy;2016, Hans Petter Langtangen. Released under CC Attribution 4.0 license.
   </div>
 </div>
 
