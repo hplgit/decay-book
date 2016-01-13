@@ -27,5 +27,5 @@ on numerical methods and programming, this text has a much stronger
 focus on implementation and teaches testing and software engineering
 in particular.
 
-:Date: Dec 26, 2015
+:Date: Jan 13, 2016
 

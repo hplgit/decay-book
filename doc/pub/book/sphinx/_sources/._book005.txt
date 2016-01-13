@@ -1473,7 +1473,7 @@ Exercises          (2)
 
 .. _decay:analysis:exer:fd:exp:plot:
 
-Problem 3.1: Visualize the accuracy of finite differences
+Problem 2.1: Visualize the accuracy of finite differences
 ---------------------------------------------------------
 
 The purpose of this exercise is to visualize the accuracy of finite difference
@@ -1534,7 +1534,7 @@ Filename: ``decay_plot_fd_error``.
 
 .. _decay:analysis:exer:growth:
 
-Problem 3.2: Explore the :math:`\theta`-rule for exponential growth
+Problem 2.2: Explore the :math:`\theta`-rule for exponential growth
 -------------------------------------------------------------------
 
 This exercise asks you to solve the ODE :math:`u'=-au` with :math:`a < 0` such that
@@ -1578,7 +1578,7 @@ Filename: ``exponential_growth``.
 
 .. _decay:analysis:exer:rounding:
 
-Problem 3.3: Explore rounding errors in numerical calculus
+Problem 2.3: Explore rounding errors in numerical calculus
 ----------------------------------------------------------
 
 **a)**

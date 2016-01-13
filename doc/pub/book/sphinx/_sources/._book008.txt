@@ -2019,9 +2019,11 @@ how a function is used and 2) test that the function works.
 Unit tests and test functions
 -----------------------------
 
-.. index:: nose tests
+.. index:: test function
 
-.. index:: pytest tests
+.. index:: nose
+
+.. index:: pytest
 
 .. index:: unit testing
 
@@ -3966,7 +3968,7 @@ Exercises          (5)
 
 .. _softeng1:exer:derivative:
 
-Problem 6.1: Make a tool for differentiating curves
+Problem 5.1: Make a tool for differentiating curves
 ---------------------------------------------------
 
 Suppose we have a curve specified through a set
@@ -4044,7 +4046,7 @@ Filename: ``curvediff``.
 
 .. _softeng1:exer:integral:flat:
 
-Problem 6.2: Make solid software for the Trapezoidal rule
+Problem 5.2: Make solid software for the Trapezoidal rule
 ---------------------------------------------------------
 
 An integral
@@ -4184,7 +4186,7 @@ Filename: ``trapezoidal``.
 
 .. _softeng1:exer:integral:flat2:
 
-Problem 6.3: Implement classes for the Trapezoidal rule
+Problem 5.3: Implement classes for the Trapezoidal rule
 -------------------------------------------------------
 
 We consider the same problem setting as in :ref:`softeng1:exer:integral:flat`. Make a module with a class ``Problem``
@@ -4200,7 +4202,7 @@ Filename: ``trapezoidal_class``.
 
 .. _softeng1:exer:doctest1:
 
-Problem 6.4: Write a doctest and a test function
+Problem 5.4: Write a doctest and a test function
 ------------------------------------------------
 
 Type in the following program:
@@ -4244,7 +4246,7 @@ Filename: ``test_roots``.
 
 .. _softeng1:exer:tol:
 
-Problem 6.5: Investigate the size of tolerances in comparisons
+Problem 5.5: Investigate the size of tolerances in comparisons
 --------------------------------------------------------------
 
 .. index:: relative differences
@@ -4280,7 +4282,7 @@ relative differences.
 
 .. _softeng1:exer:class:dts:
 
-Exercise 6.6: Make use of a class implementation
+Exercise 5.6: Make use of a class implementation
 ------------------------------------------------
 
 Implement the ``experiment_compare_dt`` function from ``decay.py``
@@ -4296,7 +4298,7 @@ Filename: ``experiment_compare_dt_class``.
 
 .. _softeng1:exer:logistic:
 
-Problem 6.7: Make solid software for a difference equation
+Problem 5.7: Make solid software for a difference equation
 ----------------------------------------------------------
 
 We have the following evolutionary difference equation for the number

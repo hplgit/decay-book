@@ -1138,7 +1138,7 @@ on numerical analysis, see for instance Chapter 2 in Gander et
 al. <a class="reference internal" href="._book009.html#ref05" id="id1">[Ref05]</a>. For very simple algorithms it is possible to
 theoretically establish bounds for the rounding errors, but for most
 algorithms one cannot know to what extent rounding errors accumulate
-and potentially destroy the final answer. <a class="reference internal" href="#decay-analysis-exer-rounding"><span class="std std-ref">Problem 3.3: Explore rounding errors in numerical calculus</span></a> demonstrates the impact of rounding
+and potentially destroy the final answer. <a class="reference internal" href="#decay-analysis-exer-rounding"><span class="std std-ref">Problem 2.3: Explore rounding errors in numerical calculus</span></a> demonstrates the impact of rounding
 errors on numerical differentiation and integration.</p>
 <p>Here is a simplest possible example of the effect of rounding
 errors:</p>
@@ -1303,8 +1303,8 @@ data errors.</p>
 </div>
 <div class="section" id="exercises-2">
 <h2>Exercises<a class="headerlink" href="#exercises-2" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="problem-3-1-visualize-the-accuracy-of-finite-differences">
-<span id="decay-analysis-exer-fd-exp-plot"></span><h3>Problem 3.1: Visualize the accuracy of finite differences<a class="headerlink" href="#problem-3-1-visualize-the-accuracy-of-finite-differences" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="problem-2-1-visualize-the-accuracy-of-finite-differences">
+<span id="decay-analysis-exer-fd-exp-plot"></span><h3>Problem 2.1: Visualize the accuracy of finite differences<a class="headerlink" href="#problem-2-1-visualize-the-accuracy-of-finite-differences" title="Permalink to this headline">¶</a></h3>
 <p>The purpose of this exercise is to visualize the accuracy of finite difference
 approximations of the derivative of a given function.
 For any finite difference approximation, take the Forward Euler difference
@@ -1342,8 +1342,8 @@ expansion. To plot a symbolic expression <code class="docutils literal"><span cl
 expression to a Python function first: <code class="docutils literal"><span class="pre">E</span> <span class="pre">=</span> <span class="pre">sympy.lamdify([p],</span> <span class="pre">E)</span></code>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">decay_plot_fd_error</span></code>.</p>
 </div>
-<div class="section" id="problem-3-2-explore-the-rule-for-exponential-growth">
-<span id="decay-analysis-exer-growth"></span><h3>Problem 3.2: Explore the <span class="math">\(\theta\)</span>-rule for exponential growth<a class="headerlink" href="#problem-3-2-explore-the-rule-for-exponential-growth" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="problem-2-2-explore-the-rule-for-exponential-growth">
+<span id="decay-analysis-exer-growth"></span><h3>Problem 2.2: Explore the <span class="math">\(\theta\)</span>-rule for exponential growth<a class="headerlink" href="#problem-2-2-explore-the-rule-for-exponential-growth" title="Permalink to this headline">¶</a></h3>
 <p>This exercise asks you to solve the ODE <span class="math">\(u'=-au\)</span> with <span class="math">\(a &lt; 0\)</span> such that
 the ODE models exponential growth instead of exponential decay.  A
 central theme is to investigate numerical artifacts and non-physical
@@ -1366,8 +1366,8 @@ Modify the <a class="reference external" href="http://tinyurl.com/ofkw6kc/analys
 (in the <code class="docutils literal"><span class="pre">src/analysis</span></code> directory).</p>
 <p>Filename: <code class="docutils literal"><span class="pre">exponential_growth</span></code>.</p>
 </div>
-<div class="section" id="problem-3-3-explore-rounding-errors-in-numerical-calculus">
-<span id="decay-analysis-exer-rounding"></span><h3>Problem 3.3: Explore rounding errors in numerical calculus<a class="headerlink" href="#problem-3-3-explore-rounding-errors-in-numerical-calculus" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="problem-2-3-explore-rounding-errors-in-numerical-calculus">
+<span id="decay-analysis-exer-rounding"></span><h3>Problem 2.3: Explore rounding errors in numerical calculus<a class="headerlink" href="#problem-2-3-explore-rounding-errors-in-numerical-calculus" title="Permalink to this headline">¶</a></h3>
 <p><strong>a)</strong>
 Compute the absolute values of the errors in the numerical derivative
 of <span class="math">\(e^{-t}\)</span> at <span class="math">\(t=\frac{1}{2}\)</span> for three types of finite difference
@@ -1436,9 +1436,9 @@ f(a+ih)),\quad h = \frac{b-a}{n}{\thinspace .}\]</div>
 </ul>
 </li>
 <li><a class="reference internal" href="#exercises-2">Exercises</a><ul>
-<li><a class="reference internal" href="#problem-3-1-visualize-the-accuracy-of-finite-differences">Problem 3.1: Visualize the accuracy of finite differences</a></li>
-<li><a class="reference internal" href="#problem-3-2-explore-the-rule-for-exponential-growth">Problem 3.2: Explore the <span class="math">\(\theta\)</span>-rule for exponential growth</a></li>
-<li><a class="reference internal" href="#problem-3-3-explore-rounding-errors-in-numerical-calculus">Problem 3.3: Explore rounding errors in numerical calculus</a></li>
+<li><a class="reference internal" href="#problem-2-1-visualize-the-accuracy-of-finite-differences">Problem 2.1: Visualize the accuracy of finite differences</a></li>
+<li><a class="reference internal" href="#problem-2-2-explore-the-rule-for-exponential-growth">Problem 2.2: Explore the <span class="math">\(\theta\)</span>-rule for exponential growth</a></li>
+<li><a class="reference internal" href="#problem-2-3-explore-rounding-errors-in-numerical-calculus">Problem 2.3: Explore rounding errors in numerical calculus</a></li>
 </ul>
 </li>
 </ul>
@@ -1495,7 +1495,7 @@ f(a+ih)),\quad h = \frac{b-a}{n}{\thinspace .}\]</div>
     <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
     <br />
     <br />
-      &copy;2015, Hans Petter Langtangen. Released under CC Attribution 4.0 license.
+      &copy;2016, Hans Petter Langtangen. Released under CC Attribution 4.0 license.
   </div>
 </div>
 

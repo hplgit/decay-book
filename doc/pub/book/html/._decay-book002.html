@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Finite Difference Computing with Exponential Decay Models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation,uncertainty quantification,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,relative differences,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability,relative differences">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,test function,unit testing,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization,stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation,uncertainty quantification,lambda functions,method of manufactured solutions,MMS (method of manufactured solutions),convergence rate,verification,implicit schemes,explicit schemes,theta-rule,$\theta$-rule,backward scheme, 2-step,BDF2 scheme,Leapfrog scheme,Leapfrog scheme, filtered,Heun's method,Runge-Kutta, 2nd-order method,Taylor-series methods (for ODEs),Adams-Bashforth scheme, 2nd-order,Adams-Bashforth scheme, 3rd order,Runge-Kutta, 4th-order method,RK4,adaptive time stepping,Dormand-Prince Runge-Kutta 4-5 method,population dynamics,logistic model,radioactive decay,chemical reactions irreversible,chemical reactions reversible,Lotka-Volterra model,predator-prey model,terminal velocity,geometric mean,averaging geometric,scaling,Kelvin-Voigt material model,viscoelasticity,refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,test function,nose,pytest,unit testing,software testing nose,software testing pytest,test function,software testing test function,relative differences,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability,relative differences">
 
 <title>Finite Difference Computing with Exponential Decay Models</title>
 
@@ -124,28 +124,28 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
               ('Plotting with SciTools', 3, None, '___sec37'),
               ('Memory-saving implementation', 2, None, '___sec38'),
               ('Exercises', 1, None, '___sec39'),
-              ('Exercise 2.1: Define a mesh function and visualize it',
+              ('Exercise 1.1: Define a mesh function and visualize it',
                2,
                'decay:exer:meshfunc',
                'decay:exer:meshfunc'),
               ('Remarks', 3, None, '___sec41'),
-              ('Problem 2.2: Differentiate a function',
+              ('Problem 1.2: Differentiate a function',
                2,
                'decay:exer:dudt',
                'decay:exer:dudt'),
-              ('Problem 2.3: Experiment with divisions',
+              ('Problem 1.3: Experiment with divisions',
                2,
                'decay:exer:intdiv',
                'decay:exer:intdiv'),
-              ('Problem 2.4: Experiment with wrong computations',
+              ('Problem 1.4: Experiment with wrong computations',
                2,
                'decay:exer:decay1err',
                'decay:exer:decay1err'),
-              ('Problem 2.5: Plot the error function',
+              ('Problem 1.5: Plot the error function',
                2,
                'decay:exer:plot:error',
                'decay:exer:plot:error'),
-              ('Problem 2.6: Change formatting of numbers and debug',
+              ('Problem 1.6: Change formatting of numbers and debug',
                2,
                'decay:exer:inexact:output',
                'decay:exer:inexact:output'),
@@ -201,15 +201,15 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                None,
                '___sec67'),
               ('Exercises', 1, None, '___sec68'),
-              ('Problem 3.1: Visualize the accuracy of finite differences',
+              ('Problem 2.1: Visualize the accuracy of finite differences',
                2,
                'decay:analysis:exer:fd:exp:plot',
                'decay:analysis:exer:fd:exp:plot'),
-              ('Problem 3.2: Explore the $\\theta$-rule for exponential growth',
+              ('Problem 2.2: Explore the $\\theta$-rule for exponential growth',
                2,
                'decay:analysis:exer:growth',
                'decay:analysis:exer:growth'),
-              ('Problem 3.3: Explore rounding errors in numerical calculus',
+              ('Problem 2.3: Explore rounding errors in numerical calculus',
                2,
                'decay:analysis:exer:rounding',
                'decay:analysis:exer:rounding'),
@@ -273,31 +273,31 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                'decay:fd2:adaptiveRK',
                'decay:fd2:adaptiveRK'),
               ('Exercises', 1, None, '___sec101'),
-              ('Exercise 4.1: Experiment with precision in tests and the size of $u$',
+              ('Exercise 3.1: Experiment with precision in tests and the size of $u$',
                2,
                'decay:fd2:exer:precision',
                'decay:fd2:exer:precision'),
-              ('Exercise 4.2: Implement the 2-step backward scheme',
+              ('Exercise 3.2: Implement the 2-step backward scheme',
                2,
                'decay:fd2:exer:bw2',
                'decay:fd2:exer:bw2'),
-              ('Exercise 4.3: Implement the 2nd-order Adams-Bashforth scheme',
+              ('Exercise 3.3: Implement the 2nd-order Adams-Bashforth scheme',
                2,
                'decay:fd2:exer:AB2',
                'decay:fd2:exer:AB2'),
-              ('Exercise 4.4: Implement the 3rd-order Adams-Bashforth scheme',
+              ('Exercise 3.4: Implement the 3rd-order Adams-Bashforth scheme',
                2,
                'decay:fd2:exer:AB3',
                'decay:fd2:exer:AB3'),
-              ('Exercise 4.5: Analyze explicit 2nd-order methods',
+              ('Exercise 3.5: Analyze explicit 2nd-order methods',
                2,
                'decay:exer:RK2:Taylor:analysis',
                'decay:exer:RK2:Taylor:analysis'),
-              ('Project 4.6: Implement and investigate the Leapfrog scheme',
+              ('Project 3.6: Implement and investigate the Leapfrog scheme',
                2,
                'decay:fd2:exer:leapfrog1',
                'decay:fd2:exer:leapfrog1'),
-              ('Problem 4.7: Make a unified implementation of many schemes',
+              ('Problem 3.7: Make a unified implementation of many schemes',
                2,
                'decay:fd2:exer:uni',
                'decay:fd2:exer:uni'),
@@ -398,95 +398,95 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                'decay:app:diffusion:Fourier',
                'decay:app:diffusion:Fourier'),
               ('Exercises', 1, None, '___sec148'),
-              ('Problem 5.1: Radioactive decay of Carbon-14',
+              ('Problem 4.1: Radioactive decay of Carbon-14',
                2,
                'decay:app:exer:radio:C14',
                'decay:app:exer:radio:C14'),
-              ("Exercise 5.2: Derive schemes for Newton's law of cooling",
+              ("Exercise 4.2: Derive schemes for Newton's law of cooling",
                2,
                'decay:app:exer:cooling:schemes',
                'decay:app:exer:cooling:schemes'),
-              ("Exercise 5.3: Implement schemes for Newton's law of cooling",
+              ("Exercise 4.3: Implement schemes for Newton's law of cooling",
                2,
                'decay:app:exer:cooling:py',
                'decay:app:exer:cooling:py'),
-              ('Exercise 5.4: Find time of murder from body temperature',
+              ('Exercise 4.4: Find time of murder from body temperature',
                2,
                'decay:app:exer:cooling:murder',
                'decay:app:exer:cooling:murder'),
-              ('Exercise 5.5: Simulate an oscillating cooling process',
+              ('Exercise 4.5: Simulate an oscillating cooling process',
                2,
                'decay:app:exer:cooling:osc',
                'decay:app:exer:cooling:osc'),
-              ('Exercise 5.6: Simulate stochastic radioactive decay',
+              ('Exercise 4.6: Simulate stochastic radioactive decay',
                2,
                'decay:app:exer:stoch:nuclear',
                'decay:app:exer:stoch:nuclear'),
-              ('Problem 5.7: Radioactive decay of two substances',
+              ('Problem 4.7: Radioactive decay of two substances',
                2,
                'decay:app:exer:radio:twosubst',
                'decay:app:exer:radio:twosubst'),
-              ('Exercise 5.8: Simulate a simple chemical reaction',
+              ('Exercise 4.8: Simulate a simple chemical reaction',
                2,
                'decay:app:exer:kinetics:AB',
                'decay:app:exer:kinetics:AB'),
-              ('Exercise 5.9: Simulate an $n$-th order chemical reaction',
+              ('Exercise 4.9: Simulate an $n$-th order chemical reaction',
                2,
                'decay:app:exer:kinetics:ABn',
                'decay:app:exer:kinetics:ABn'),
-              ('Exercise 5.10: Simulate a biochemical process',
+              ('Exercise 4.10: Simulate a biochemical process',
                2,
                'decay:app:exer:MMK',
                'decay:app:exer:MMK'),
-              ('Exercise 5.11: Simulate spreading of a disease',
+              ('Exercise 4.11: Simulate spreading of a disease',
                2,
                'decay:app:exer:SIR',
                'decay:app:exer:SIR'),
-              ('Exercise 5.12: Simulate predator-prey interaction',
+              ('Exercise 4.12: Simulate predator-prey interaction',
                2,
                'decay:app:exer:predprey',
                'decay:app:exer:predprey'),
-              ('Exercise 5.13: Simulate the pressure drop in the atmosphere',
+              ('Exercise 4.13: Simulate the pressure drop in the atmosphere',
                2,
                'decay:app:exer:atm1',
                'decay:app:exer:atm1'),
-              ('Exercise 5.14: Make a program for vertical motion in a fluid',
+              ('Exercise 4.14: Make a program for vertical motion in a fluid',
                2,
                'decay:app:exer:drag:prog',
                'decay:app:exer:drag:prog'),
-              ('Project 5.15: Simulate parachuting',
+              ('Project 4.15: Simulate parachuting',
                2,
                'decay:app:exer:parachute',
                'decay:app:exer:parachute'),
-              ('Exercise 5.16: Formulate vertical motion in the atmosphere',
+              ('Exercise 4.16: Formulate vertical motion in the atmosphere',
                2,
                'decay:app:exer:drag:atm1',
                'decay:app:exer:drag:atm1'),
-              ('Exercise 5.17: Simulate vertical motion in the atmosphere',
+              ('Exercise 4.17: Simulate vertical motion in the atmosphere',
                2,
                'decay:app:exer:drag:atm2',
                'decay:app:exer:drag:atm2'),
-              ('Problem 5.18: Compute $y=|x|$ by solving an ODE',
+              ('Problem 4.18: Compute $y=|x|$ by solving an ODE',
                2,
                'decay:app:exer:signum',
                'decay:app:exer:signum'),
-              ('Problem 5.19: Simulate fortune growth with random interest rate',
+              ('Problem 4.19: Simulate fortune growth with random interest rate',
                2,
                'decay:app:exer:interest',
                'decay:app:exer:interest'),
-              ('Exercise 5.20: Simulate a population in a changing environment',
+              ('Exercise 4.20: Simulate a population in a changing environment',
                2,
                'decay:app:exer:pop:at',
                'decay:app:exer:pop:at'),
-              ('Exercise 5.21: Simulate logistic growth',
+              ('Exercise 4.21: Simulate logistic growth',
                2,
                'decay:app:exer:pop:logistic1',
                'decay:app:exer:pop:logistic1'),
-              ('Exercise 5.22: Rederive the equation for continuous compound interest',
+              ('Exercise 4.22: Rederive the equation for continuous compound interest',
                2,
                'decay:app:exer:interest:derive',
                'decay:app:exer:interest:derive'),
-              ('Exercise 5.23: Simulate the deformation of a viscoelastic material',
+              ('Exercise 4.23: Simulate the deformation of a viscoelastic material',
                2,
                'decay:app:exer:viscoelasticity1',
                'decay:app:exer:viscoelasticity1'),
@@ -654,98 +654,98 @@ in.collapse+a.btn.showdetails:before { content:'Hide details'; }
                'softeng1:exper:github',
                'softeng1:exper:github'),
               ('Exercises', 1, None, '___sec242'),
-              ('Problem 6.1: Make a tool for differentiating curves',
+              ('Problem 5.1: Make a tool for differentiating curves',
                2,
                'softeng1:exer:derivative',
                'softeng1:exer:derivative'),
-              ('Problem 6.2: Make solid software for the Trapezoidal rule',
+              ('Problem 5.2: Make solid software for the Trapezoidal rule',
                2,
                'softeng1:exer:integral:flat',
                'softeng1:exer:integral:flat'),
-              ('Problem 6.3: Implement classes for the Trapezoidal rule',
+              ('Problem 5.3: Implement classes for the Trapezoidal rule',
                2,
                'softeng1:exer:integral:flat2',
                'softeng1:exer:integral:flat2'),
-              ('Problem 6.4: Write a doctest and a test function',
+              ('Problem 5.4: Write a doctest and a test function',
                2,
                'softeng1:exer:doctest1',
                'softeng1:exer:doctest1'),
-              ('Problem 6.5: Investigate the size of tolerances in comparisons',
+              ('Problem 5.5: Investigate the size of tolerances in comparisons',
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
               ('Remarks', 3, None, '___sec248'),
-              ('Exercise 6.6: Make use of a class implementation',
+              ('Exercise 5.6: Make use of a class implementation',
                2,
                'softeng1:exer:class:dts',
                'softeng1:exer:class:dts'),
-              ('Problem 6.7: Make solid software for a difference equation',
+              ('Problem 5.7: Make solid software for a difference equation',
                2,
                'softeng1:exer:logistic',
                'softeng1:exer:logistic'),
               ('Summarizing multiple-choice questions', 0, None, '___sec251'),
               ('Quiz', 1, None, '___sec252'),
-              ('Exercise 7.1: Characterize a finite difference',
+              ('Exercise 6.1: Characterize a finite difference',
                2,
                'decay:quiz:fd:FE',
                'decay:quiz:fd:FE'),
-              ('Exercise 7.2: Characterize a finite difference',
+              ('Exercise 6.2: Characterize a finite difference',
                2,
                'decay:quiz:fd:CN',
                'decay:quiz:fd:CN'),
-              ('Exercise 7.3: What is the problem with this program?',
+              ('Exercise 6.3: What is the problem with this program?',
                2,
                'decay:quiz:program',
                'decay:quiz:program'),
-              ('Exercise 7.4: Is the solution correct?',
+              ('Exercise 6.4: Is the solution correct?',
                2,
                'decay:quiz:stability',
                'decay:quiz:stability'),
-              ('Exercise 7.5: Is this a proper test function?',
+              ('Exercise 6.5: Is this a proper test function?',
                2,
                'decay:quiz:testfunc',
                'decay:quiz:testfunc'),
-              ('Exercise 7.6: Rewrite an expression with array arithmetics',
+              ('Exercise 6.6: Rewrite an expression with array arithmetics',
                2,
                'decay:quiz:arrayarithm',
                'decay:quiz:arrayarithm'),
-              ('Exercise 7.7: What is the truncation error?',
+              ('Exercise 6.7: What is the truncation error?',
                2,
                'decay:quiz:trunc',
                'decay:quiz:trunc'),
-              ('Exercise 7.8: Recognize a programming language',
+              ('Exercise 6.8: Recognize a programming language',
                2,
                'decay:quiz:prog:m',
                'decay:quiz:prog:m'),
-              ('Exercise 7.9: Recognize a programming language',
+              ('Exercise 6.9: Recognize a programming language',
                2,
                'decay:quiz:prog:py',
                'decay:quiz:prog:py'),
-              ('Exercise 7.10: Recognize a programming language',
+              ('Exercise 6.10: Recognize a programming language',
                2,
                'decay:quiz:prog:f77',
                'decay:quiz:prog:f77'),
-              ('Exercise 7.11: Recognize a programming language',
+              ('Exercise 6.11: Recognize a programming language',
                2,
                'decay:quiz:prog:c',
                'decay:quiz:prog:c'),
-              ('Exercise 7.12: What is SymPy?',
+              ('Exercise 6.12: What is SymPy?',
                2,
                'decay:quiz:sympy1',
                'decay:quiz:sympy1'),
-              ('Exercise 7.13: Testing of code',
+              ('Exercise 6.13: Testing of code',
                2,
                'decay:quiz:testing1',
                'decay:quiz:testing1'),
-              ('Exercise 7.14: What kind of scheme is this?',
+              ('Exercise 6.14: What kind of scheme is this?',
                2,
                'decay:quiz:scheme:CN_error',
                'decay:quiz:scheme:CN_error'),
-              ('Exercise 7.15: What kind of scheme is this?',
+              ('Exercise 6.15: What kind of scheme is this?',
                2,
                'decay:quiz:scheme:BE',
                'decay:quiz:scheme:BE'),
-              ('Exercise 7.16: What kind of scheme is this?',
+              ('Exercise 6.16: What kind of scheme is this?',
                2,
                'decay:quiz:scheme:leapfrog',
                'decay:quiz:scheme:leapfrog'),
@@ -841,13 +841,13 @@ $$
      <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting with SciTools</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book004.html#___sec38" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Memory-saving implementation</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book005.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:meshfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 2.1: Define a mesh function and visualize it</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:meshfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 1.1: Define a mesh function and visualize it</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book005.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:dudt" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 2.2: Differentiate a function</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:intdiv" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 2.3: Experiment with divisions</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:decay1err" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 2.4: Experiment with wrong computations</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:plot:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 2.5: Plot the error function</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:inexact:output" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 2.6: Change formatting of numbers and debug</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:dudt" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 1.2: Differentiate a function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:intdiv" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 1.3: Experiment with divisions</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:decay1err" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 1.4: Experiment with wrong computations</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:plot:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 1.5: Plot the error function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book005.html#decay:exer:inexact:output" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 1.6: Change formatting of numbers and debug</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis" style="font-size: 80%;"><b>Analysis</b></a></li>
      <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Experimental investigations</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discouraging numerical solutions</a></li>
@@ -870,9 +870,9 @@ $$
      <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rounding errors</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discussion of the size of various errors</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book006.html#___sec68" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:exer:fd:exp:plot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 3.1: Visualize the accuracy of finite differences</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:exer:growth" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 3.2: Explore the \( \theta \)-rule for exponential growth</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:exer:rounding" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 3.3: Explore rounding errors in numerical calculus</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:exer:fd:exp:plot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 2.1: Visualize the accuracy of finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:exer:growth" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 2.2: Explore the \( \theta \)-rule for exponential growth</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book006.html#decay:analysis:exer:rounding" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 2.3: Explore rounding errors in numerical calculus</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec72" style="font-size: 80%;"><b>Generalizations</b></a></li>
      <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec73" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Model extensions</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec74" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generalization: including a variable coefficient</a></li>
@@ -903,13 +903,13 @@ $$
      <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec99" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark about using the \( \theta \)-rule in Odespy</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:adaptiveRK" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Adaptive Runge-Kutta methods</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book007.html#___sec101" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:precision" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.1: Experiment with precision in tests and the size of \( u \)</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:bw2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Implement the 2-step backward scheme</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:AB2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Implement the 2nd-order Adams-Bashforth scheme</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:AB3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Implement the 3rd-order Adams-Bashforth scheme</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:exer:RK2:Taylor:analysis" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.5: Analyze explicit 2nd-order methods</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:leapfrog1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project 4.6: Implement and investigate the Leapfrog scheme</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:uni" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 4.7: Make a unified implementation of many schemes</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:precision" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.1: Experiment with precision in tests and the size of \( u \)</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:bw2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.2: Implement the 2-step backward scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:AB2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.3: Implement the 2nd-order Adams-Bashforth scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:AB3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.4: Implement the 3rd-order Adams-Bashforth scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:exer:RK2:Taylor:analysis" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 3.5: Analyze explicit 2nd-order methods</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:leapfrog1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project 3.6: Implement and investigate the Leapfrog scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book007.html#decay:fd2:exer:uni" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 3.7: Make a unified implementation of many schemes</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app" style="font-size: 80%;"><b>Models</b></a></li>
      <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:scaling" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scaling</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec111" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dimensionless variables</a></li>
@@ -950,29 +950,29 @@ $$
      <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:viscoelasticity" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Viscoelastic materials</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:diffusion:Fourier" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Decay ODEs from solving a PDE by Fourier expansions</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book008.html#___sec148" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:radio:C14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5.1: Radioactive decay of Carbon-14</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:schemes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.2: Derive schemes for Newton's law of cooling</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:py" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.3: Implement schemes for Newton's law of cooling</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:murder" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.4: Find time of murder from body temperature</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:osc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.5: Simulate an oscillating cooling process</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:stoch:nuclear" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Simulate stochastic radioactive decay</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:radio:twosubst" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5.7: Radioactive decay of two substances</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:kinetics:AB" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.8: Simulate a simple chemical reaction</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:kinetics:ABn" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.9: Simulate an \( n \)-th order chemical reaction</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:MMK" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.10: Simulate a biochemical process</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:SIR" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.11: Simulate spreading of a disease</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:predprey" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.12: Simulate predator-prey interaction</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:atm1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.13: Simulate the pressure drop in the atmosphere</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:drag:prog" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.14: Make a program for vertical motion in a fluid</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:parachute" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project 5.15: Simulate parachuting</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:drag:atm1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.16: Formulate vertical motion in the atmosphere</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:drag:atm2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.17: Simulate vertical motion in the atmosphere</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:signum" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5.18: Compute \( y=|x| \) by solving an ODE</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:interest" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5.19: Simulate fortune growth with random interest rate</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:pop:at" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.20: Simulate a population in a changing environment</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:pop:logistic1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.21: Simulate logistic growth</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:interest:derive" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.22: Rederive the equation for continuous compound interest</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:viscoelasticity1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.23: Simulate the deformation of a viscoelastic material</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:radio:C14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 4.1: Radioactive decay of Carbon-14</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:schemes" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.2: Derive schemes for Newton's law of cooling</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:py" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.3: Implement schemes for Newton's law of cooling</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:murder" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.4: Find time of murder from body temperature</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:cooling:osc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.5: Simulate an oscillating cooling process</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:stoch:nuclear" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.6: Simulate stochastic radioactive decay</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:radio:twosubst" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 4.7: Radioactive decay of two substances</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:kinetics:AB" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.8: Simulate a simple chemical reaction</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:kinetics:ABn" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.9: Simulate an \( n \)-th order chemical reaction</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:MMK" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.10: Simulate a biochemical process</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:SIR" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.11: Simulate spreading of a disease</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:predprey" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.12: Simulate predator-prey interaction</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:atm1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.13: Simulate the pressure drop in the atmosphere</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:drag:prog" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.14: Make a program for vertical motion in a fluid</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:parachute" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project 4.15: Simulate parachuting</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:drag:atm1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.16: Formulate vertical motion in the atmosphere</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:drag:atm2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.17: Simulate vertical motion in the atmosphere</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:signum" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 4.18: Compute \( y=|x| \) by solving an ODE</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:interest" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 4.19: Simulate fortune growth with random interest rate</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:pop:at" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.20: Simulate a population in a changing environment</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:pop:logistic1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.21: Simulate logistic growth</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:interest:derive" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.22: Rederive the equation for continuous compound interest</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book008.html#decay:app:exer:viscoelasticity1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 4.23: Simulate the deformation of a viscoelastic material</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book009.html#decay:se" style="font-size: 80%;"><b>Scientific software engineering</b></a></li>
      <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementations with functions and modules</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:basic:math" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mathematical problem and solution technique</a></li>
@@ -1044,32 +1044,32 @@ $$
      <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec240" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DocOnce</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exper:github" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publishing a complete project</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec242" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 6.1: Make a tool for differentiating curves</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:integral:flat" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 6.2: Make solid software for the Trapezoidal rule</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:integral:flat2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 6.3: Implement classes for the Trapezoidal rule</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:doctest1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 6.4: Write a doctest and a test function</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:tol" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 6.5: Investigate the size of tolerances in comparisons</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5.1: Make a tool for differentiating curves</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:integral:flat" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5.2: Make solid software for the Trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:integral:flat2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5.3: Implement classes for the Trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:doctest1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5.4: Write a doctest and a test function</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:tol" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5.5: Investigate the size of tolerances in comparisons</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book009.html#___sec248" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:class:dts" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.6: Make use of a class implementation</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:logistic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 6.7: Make solid software for a difference equation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:class:dts" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 5.6: Make use of a class implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book009.html#softeng1:exer:logistic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Problem 5.7: Make solid software for a difference equation</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book010.html#___sec251" style="font-size: 80%;"><b>Summarizing multiple-choice questions</b></a></li>
      <!-- navigation toc: --> <li><a href="._decay-book010.html#___sec252" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Quiz</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:fd:FE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.1: Characterize a finite difference</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:fd:CN" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.2: Characterize a finite difference</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:program" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.3: What is the problem with this program?</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:stability" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.4: Is the solution correct?</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:testfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.5: Is this a proper test function?</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:arrayarithm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.6: Rewrite an expression with array arithmetics</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:trunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.7: What is the truncation error?</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:prog:m" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.8: Recognize a programming language</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:prog:py" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.9: Recognize a programming language</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:prog:f77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.10: Recognize a programming language</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:prog:c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.11: Recognize a programming language</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:sympy1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.12: What is SymPy?</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:testing1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.13: Testing of code</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:scheme:CN_error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.14: What kind of scheme is this?</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:scheme:BE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.15: What kind of scheme is this?</a></li>
-     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:scheme:leapfrog" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 7.16: What kind of scheme is this?</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:fd:FE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.1: Characterize a finite difference</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:fd:CN" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.2: Characterize a finite difference</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:program" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.3: What is the problem with this program?</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:stability" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.4: Is the solution correct?</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:testfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.5: Is this a proper test function?</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:arrayarithm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.6: Rewrite an expression with array arithmetics</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:trunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.7: What is the truncation error?</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:prog:m" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.8: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:prog:py" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.9: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:prog:f77" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.10: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:prog:c" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.11: Recognize a programming language</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:sympy1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.12: What is SymPy?</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:testing1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.13: Testing of code</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:scheme:CN_error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.14: What kind of scheme is this?</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:scheme:BE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.15: What kind of scheme is this?</a></li>
+     <!-- navigation toc: --> <li><a href="._decay-book010.html#decay:quiz:scheme:leapfrog" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exercise 6.16: What kind of scheme is this?</a></li>
      <!-- navigation toc: --> <li><a href="._decay-book011.html#___sec269" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;References</a></li>
 
         </ul>
@@ -1114,12 +1114,12 @@ $$
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book004.html#___sec35"> Experiments with computing and plotting </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book004.html#___sec38"> Memory-saving implementation </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#___sec39"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:meshfunc"> Exercise 2.1: Define a mesh function and visualize it </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:dudt"> Problem 2.2: Differentiate a function </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:intdiv"> Problem 2.3: Experiment with divisions </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:decay1err"> Problem 2.4: Experiment with wrong computations </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:plot:error"> Problem 2.5: Plot the error function </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:inexact:output"> Problem 2.6: Change formatting of numbers and debug </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:meshfunc"> Exercise 1.1: Define a mesh function and visualize it </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:dudt"> Problem 1.2: Differentiate a function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:intdiv"> Problem 1.3: Experiment with divisions </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:decay1err"> Problem 1.4: Experiment with wrong computations </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:plot:error"> Problem 1.5: Plot the error function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book005.html#decay:exer:inexact:output"> Problem 1.6: Change formatting of numbers and debug </a><br>
 <a href="._decay-book006.html#decay:analysis"> Analysis </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#___sec48"> Experimental investigations </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#___sec49"> Discouraging numerical solutions </a><br>
@@ -1142,9 +1142,9 @@ $$
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#___sec66"> Rounding errors </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#___sec67"> Discussion of the size of various errors </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#___sec68"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#decay:analysis:exer:fd:exp:plot"> Problem 3.1: Visualize the accuracy of finite differences </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#decay:analysis:exer:growth"> Problem 3.2: Explore the \( \theta \)-rule for exponential growth </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#decay:analysis:exer:rounding"> Problem 3.3: Explore rounding errors in numerical calculus </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#decay:analysis:exer:fd:exp:plot"> Problem 2.1: Visualize the accuracy of finite differences </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#decay:analysis:exer:growth"> Problem 2.2: Explore the \( \theta \)-rule for exponential growth </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book006.html#decay:analysis:exer:rounding"> Problem 2.3: Explore rounding errors in numerical calculus </a><br>
 <a href="._decay-book007.html#___sec72"> Generalizations </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#___sec73"> Model extensions </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#___sec74"> Generalization: including a variable coefficient </a><br>
@@ -1167,13 +1167,13 @@ $$
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#___sec98"> Example: Runge-Kutta methods  </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:adaptiveRK"> Example: Adaptive Runge-Kutta methods  </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#___sec101"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:precision"> Exercise 4.1: Experiment with precision in tests and the size of \( u \) </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:bw2"> Exercise 4.2: Implement the 2-step backward scheme </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:AB2"> Exercise 4.3: Implement the 2nd-order Adams-Bashforth scheme </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:AB3"> Exercise 4.4: Implement the 3rd-order Adams-Bashforth scheme </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:exer:RK2:Taylor:analysis"> Exercise 4.5: Analyze explicit 2nd-order methods </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:leapfrog1"> Project 4.6: Implement and investigate the Leapfrog scheme </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:uni"> Problem 4.7: Make a unified implementation of many schemes </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:precision"> Exercise 3.1: Experiment with precision in tests and the size of \( u \) </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:bw2"> Exercise 3.2: Implement the 2-step backward scheme </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:AB2"> Exercise 3.3: Implement the 2nd-order Adams-Bashforth scheme </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:AB3"> Exercise 3.4: Implement the 3rd-order Adams-Bashforth scheme </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:exer:RK2:Taylor:analysis"> Exercise 3.5: Analyze explicit 2nd-order methods </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:leapfrog1"> Project 3.6: Implement and investigate the Leapfrog scheme </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book007.html#decay:fd2:exer:uni"> Problem 3.7: Make a unified implementation of many schemes </a><br>
 <a href="._decay-book008.html#decay:app"> Models </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:scaling"> Scaling </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec111"> Dimensionless variables </a><br>
@@ -1212,29 +1212,29 @@ $$
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:viscoelasticity"> Viscoelastic materials </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:diffusion:Fourier"> Decay ODEs from solving a PDE by Fourier expansions </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#___sec148"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:radio:C14"> Problem 5.1: Radioactive decay of Carbon-14 </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:cooling:schemes"> Exercise 5.2: Derive schemes for Newton's law of cooling </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:cooling:py"> Exercise 5.3: Implement schemes for Newton's law of cooling </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:cooling:murder"> Exercise 5.4: Find time of murder from body temperature </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:cooling:osc"> Exercise 5.5: Simulate an oscillating cooling process </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:stoch:nuclear"> Exercise 5.6: Simulate stochastic radioactive decay </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:radio:twosubst"> Problem 5.7: Radioactive decay of two substances </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:kinetics:AB"> Exercise 5.8: Simulate a simple chemical reaction </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:kinetics:ABn"> Exercise 5.9: Simulate an \( n \)-th order chemical reaction </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:MMK"> Exercise 5.10: Simulate a biochemical process </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:SIR"> Exercise 5.11: Simulate spreading of a disease </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:predprey"> Exercise 5.12: Simulate predator-prey interaction </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:atm1"> Exercise 5.13: Simulate the pressure drop in the atmosphere </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:prog"> Exercise 5.14: Make a program for vertical motion in a fluid </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:parachute"> Project 5.15: Simulate parachuting </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:atm1"> Exercise 5.16: Formulate vertical motion in the atmosphere </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:atm2"> Exercise 5.17: Simulate vertical motion in the atmosphere </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:signum"> Problem 5.18: Compute \( y=|x| \) by solving an ODE </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:interest"> Problem 5.19: Simulate fortune growth with random interest rate </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:pop:at"> Exercise 5.20: Simulate a population in a changing environment </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:pop:logistic1"> Exercise 5.21: Simulate logistic growth </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:interest:derive"> Exercise 5.22: Rederive the equation for continuous compound interest </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:viscoelasticity1"> Exercise 5.23: Simulate the deformation of a viscoelastic material </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:radio:C14"> Problem 4.1: Radioactive decay of Carbon-14 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:cooling:schemes"> Exercise 4.2: Derive schemes for Newton's law of cooling </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:cooling:py"> Exercise 4.3: Implement schemes for Newton's law of cooling </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:cooling:murder"> Exercise 4.4: Find time of murder from body temperature </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:cooling:osc"> Exercise 4.5: Simulate an oscillating cooling process </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:stoch:nuclear"> Exercise 4.6: Simulate stochastic radioactive decay </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:radio:twosubst"> Problem 4.7: Radioactive decay of two substances </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:kinetics:AB"> Exercise 4.8: Simulate a simple chemical reaction </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:kinetics:ABn"> Exercise 4.9: Simulate an \( n \)-th order chemical reaction </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:MMK"> Exercise 4.10: Simulate a biochemical process </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:SIR"> Exercise 4.11: Simulate spreading of a disease </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:predprey"> Exercise 4.12: Simulate predator-prey interaction </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:atm1"> Exercise 4.13: Simulate the pressure drop in the atmosphere </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:prog"> Exercise 4.14: Make a program for vertical motion in a fluid </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:parachute"> Project 4.15: Simulate parachuting </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:atm1"> Exercise 4.16: Formulate vertical motion in the atmosphere </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:drag:atm2"> Exercise 4.17: Simulate vertical motion in the atmosphere </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:signum"> Problem 4.18: Compute \( y=|x| \) by solving an ODE </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:interest"> Problem 4.19: Simulate fortune growth with random interest rate </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:pop:at"> Exercise 4.20: Simulate a population in a changing environment </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:pop:logistic1"> Exercise 4.21: Simulate logistic growth </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:interest:derive"> Exercise 4.22: Rederive the equation for continuous compound interest </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book008.html#decay:app:exer:viscoelasticity1"> Exercise 4.23: Simulate the deformation of a viscoelastic material </a><br>
 <a href="._decay-book009.html#decay:se"> Scientific software engineering </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic"> Implementations with functions and modules </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:basic:math"> Mathematical problem and solution technique </a><br>
@@ -1276,31 +1276,31 @@ $$
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exper:report"> Making a report </a><br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exper:github"> Publishing a complete project </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#___sec242"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:derivative"> Problem 6.1: Make a tool for differentiating curves </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:integral:flat"> Problem 6.2: Make solid software for the Trapezoidal rule </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:integral:flat2"> Problem 6.3: Implement classes for the Trapezoidal rule </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:doctest1"> Problem 6.4: Write a doctest and a test function </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:tol"> Problem 6.5: Investigate the size of tolerances in comparisons </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:class:dts"> Exercise 6.6: Make use of a class implementation </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:logistic"> Problem 6.7: Make solid software for a difference equation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:derivative"> Problem 5.1: Make a tool for differentiating curves </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:integral:flat"> Problem 5.2: Make solid software for the Trapezoidal rule </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:integral:flat2"> Problem 5.3: Implement classes for the Trapezoidal rule </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:doctest1"> Problem 5.4: Write a doctest and a test function </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:tol"> Problem 5.5: Investigate the size of tolerances in comparisons </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:class:dts"> Exercise 5.6: Make use of a class implementation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book009.html#softeng1:exer:logistic"> Problem 5.7: Make solid software for a difference equation </a><br>
 <a href="._decay-book010.html#___sec251"> Summarizing multiple-choice questions </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#___sec252"> Quiz </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:fd:FE"> Exercise 7.1: Characterize a finite difference </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:fd:CN"> Exercise 7.2: Characterize a finite difference </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:program"> Exercise 7.3: What is the problem with this program? </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:stability"> Exercise 7.4: Is the solution correct? </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:testfunc"> Exercise 7.5: Is this a proper test function? </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:arrayarithm"> Exercise 7.6: Rewrite an expression with array arithmetics </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:trunc"> Exercise 7.7: What is the truncation error? </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:prog:m"> Exercise 7.8: Recognize a programming language </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:prog:py"> Exercise 7.9: Recognize a programming language </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:prog:f77"> Exercise 7.10: Recognize a programming language </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:prog:c"> Exercise 7.11: Recognize a programming language </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:sympy1"> Exercise 7.12: What is SymPy? </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:testing1"> Exercise 7.13: Testing of code </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:scheme:CN_error"> Exercise 7.14: What kind of scheme is this? </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:scheme:BE"> Exercise 7.15: What kind of scheme is this? </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:scheme:leapfrog"> Exercise 7.16: What kind of scheme is this? </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:fd:FE"> Exercise 6.1: Characterize a finite difference </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:fd:CN"> Exercise 6.2: Characterize a finite difference </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:program"> Exercise 6.3: What is the problem with this program? </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:stability"> Exercise 6.4: Is the solution correct? </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:testfunc"> Exercise 6.5: Is this a proper test function? </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:arrayarithm"> Exercise 6.6: Rewrite an expression with array arithmetics </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:trunc"> Exercise 6.7: What is the truncation error? </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:prog:m"> Exercise 6.8: Recognize a programming language </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:prog:py"> Exercise 6.9: Recognize a programming language </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:prog:f77"> Exercise 6.10: Recognize a programming language </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:prog:c"> Exercise 6.11: Recognize a programming language </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:sympy1"> Exercise 6.12: What is SymPy? </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:testing1"> Exercise 6.13: Testing of code </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:scheme:CN_error"> Exercise 6.14: What kind of scheme is this? </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:scheme:BE"> Exercise 6.15: What kind of scheme is this? </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._decay-book010.html#decay:quiz:scheme:leapfrog"> Exercise 6.16: What kind of scheme is this? </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._decay-book011.html#___sec269"> References </a><br>
 </p>
 <p>

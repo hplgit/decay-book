@@ -2313,7 +2313,7 @@ if diff1 < tol or diff2 < tol:
 !esubex
 
 !bsubex
-Simulate a case with $T=8$, $\alpha = 1$, $\beta=4$, and two
+Simulate a case with $T=8$, $\alpha = 1.5$, $\beta=1$, and two
 $\epsilon$ values: 0.9 and 0.1.
 
 !bsol
