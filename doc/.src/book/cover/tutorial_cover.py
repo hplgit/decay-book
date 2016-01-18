@@ -70,7 +70,7 @@ def make_fig(dt=0.5, heading=''):
 
     pos = (1.7, 1.7)
     pos = (1.7, 1.5)
-    text_predict = Text_wArrow("Here we know the slope:\n   u'(t) = f(u)\nLet the solution continue\nlinearly along that slope!",
+    text_predict = Text_wArrow("Here we know the slope:\n   u' = f(u)\nLet the solution continue\nlinearly along that slope!",
                                pos, (t[-1], u[-1]),
                                alignment='left')
     text_next = Text_wArrow("New predicted point",
@@ -91,11 +91,17 @@ def make_fig(dt=0.5, heading=''):
 fig = make_fig(dt=0.5, heading="")
 fig.draw()
 drawing_tool.display()
-drawing_tool.savefig('tmp1.png')
 
-import os
+# Springer demands 300 dpi for cover image
+drawing_tool.savefig('tmp1.png', dpi=300)
+
+import os, commands
+# Get file size
+failure, output = commands.getstatusoutput('identify tmp1.png')
+width, height = output.split()[2].split('x')
+# Remove background color
 os.system('convert tmp1.png -transparent white tmp1b.png')
-# http://www.imagemagick.org/script/color.php
+# ImageMagick colors: http://www.imagemagick.org/script/color.php
 gradient = 'navy-snow'
 gradient = 'yellow-white'
 gradient = 'lightyellow-white'
@@ -107,16 +113,20 @@ gradient = 'SeaGreen3-white'  # 2
 gradient = 'DarkSeaGreen2-white'  # 3
 gradient = 'PaleGreen3-white'  # 1
 gradient = 'yellow2-LemonChiffon' # 1
-gradient = 'PaleGreen3-LightYellow'  # 1
+gradient = 'PaleGreen3-LightYellow'  # FINAL!
 #gradient = 'RoyalBlue1-SlateGray1'
+
+# Combine plot and graded background
 filename = 'tmp0-%s.png' % gradient
-os.system('convert -size 789x494 gradient:%s tmp1b.png -composite %s' % (gradient, filename))
+os.system('convert -size %sx%s gradient:%s tmp1b.png -composite %s' % (width, height, gradient, filename))
+
+# Generate a web page that mimics the front cover
 outfile = open('tmp.html', 'w')
 outfile.write(u"""
 <body bgcolor="black">
   <center>
     <h1 style="font-size:300%%; color:white; font-family:helvetica;">Finite Difference Computing with<br> Exponential Decay Models</h1>
-    <img src="%s">
+    <img src="%s" width=700>
     </center>
 </body>
 """ % filename)
