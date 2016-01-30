@@ -32,7 +32,7 @@ label{decay:basics}
 
 This section explains the basic ideas of finite difference methods
 via the simple ordinary differential equation $u^{\prime}=-au$.
-Emphasis is put on the reasoning behind problem discretizing and
+Emphasis is put on the reasoning around discretization principles and
 introduction of key concepts such as mesh, mesh function,
 finite difference approximations, averaging in a mesh,
 derivation of algorithms, and discrete operator notation.
