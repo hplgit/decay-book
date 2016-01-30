@@ -179,14 +179,17 @@ each other).
 
 
 __Acknowledgments.__
-Professor Svein Linge has provided very detailed and constructive
+Professor Svein Linge provided very detailed and constructive
 feedback on this text, and all his efforts are highly appreciated.
 Many students have also pointed out
 weaknesses and found errors. A special thank goes to Yapi Donatien Achou's
 proof reading. Many thanks also to Linda Falch-Koslung,
 Dr. Olav Dajani, and the rest of the OUS team for feeding me with
 FOLFIRINOX and thereby keeping me alive and in good enough shape to
-finish this book.
+finish this book. As always, the Springer team ensured a smooth and
+rapid review process and production phase. This time special thanks go
+to all the efforts by Martin Peters, Thanh-Ha Le Thi,
+Beate XXXXX, and Yvonne Schlatter.
 
 
 # #if FORMAT in ("latex", "pdflatex")

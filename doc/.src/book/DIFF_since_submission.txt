@@ -1,0 +1,8 @@
+I gave the dropbox URL to Springer on Dec 10.
+
+git diff 8d4709706c87331089d7dcb60b2dac3633f7a017
+
+lists the differences since then.
+
+Major:
+$\alpha$ and $\beta$ values in the biochecm example (new plot submitted).
