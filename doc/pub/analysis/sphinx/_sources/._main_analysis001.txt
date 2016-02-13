@@ -2,9 +2,13 @@
 
 We address the ODE for exponential decay,
 
+.. _Eq:_auto1:
+
 .. math::
+
+    \tag{1}
+    u'(t) = -au(t),\quad u(0)=I,
         
-        u'(t) = -au(t),\quad u(0)=I,
         
 
 where :math:`a` and :math:`I` are given constants. This problem is solved
@@ -14,9 +18,9 @@ the recursive equations
 .. _Eq:decay:analysis:scheme:
 
 .. math::
-   :label: decay:analysis:scheme
-        
-        u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n
+
+    \tag{2}
+    u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n
         
         
 
@@ -24,8 +28,15 @@ for the numerical solution :math:`u^{n+1}`, which approximates the exact
 solution :math:`{u_{\small\mbox{e}}}` at time point :math:`t_{n+1}`. For constant mesh spacing,
 which we assume here, :math:`t_{n+1}=(n+1)\Delta t`.
 
+The example programs associated with this chapter are found in
+the directory `src/analysis <http://tinyurl.com/ofkw6kc/analysis>`__.
+
 Experimental investigations
 ===========================
+
+We first perform a series of numerical explorations to see how the
+methods behave as we change the parameters :math:`I`, :math:`a`, and :math:`\Delta t`
+in the problem.
 
 Discouraging numerical solutions
 --------------------------------
@@ -212,15 +223,15 @@ difference methods.
 Exact numerical solution
 ------------------------
 
-Starting with :math:`u^0=I`, the simple recursion :eq:`decay:analysis:scheme`
+Starting with :math:`u^0=I`, the simple recursion :ref:`(2) <Eq:decay:analysis:scheme>`
 can be applied repeatedly :math:`n` times, with the result that
 
 .. _Eq:decay:analysis:unex:
 
 .. math::
-   :label: decay:analysis:unex
-        
-        u^{n} = IA^n,\quad A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}{\thinspace .}
+
+    \tag{3}
+    u^{n} = IA^n,\quad A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}{\thinspace .}
         
         
 
@@ -239,7 +250,7 @@ can be applied repeatedly :math:`n` times, with the result that
             A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}{\thinspace .} 
    
    This is a solution technique of wider applicability than repeated use of
-   the recursion :eq:`decay:analysis:scheme`.
+   the recursion :ref:`(2) <Eq:decay:analysis:scheme>`.
 
 
 
@@ -260,9 +271,9 @@ We have oscillations due to :math:`A < 0` when
 .. _Eq:decay:th:stability:
 
 .. math::
-   :label: decay:th:stability
-        
-        (1-\theta)a\Delta t > 1 {\thinspace .}
+
+    \tag{4}
+    (1-\theta)a\Delta t > 1 {\thinspace .}
         
         
 
@@ -271,9 +282,13 @@ same basic property (monotonicity) as the exact solution, we may say
 that :math:`A>0` is a *stability criterion*. Expressed in terms of :math:`\Delta t`
 the stability criterion reads
 
+.. _Eq:_auto2:
+
 .. math::
+
+    \tag{5}
+    \Delta t < \frac{1}{(1-\theta)a}{\thinspace .}
         
-        \Delta t < \frac{1}{(1-\theta)a}{\thinspace .}
         
 
 The Backward
@@ -302,20 +317,26 @@ Stability properties derived from the amplification factor
 .. index:: amplification factor
 
 The factor :math:`A` is called the *amplification factor* since the solution
-at a new time level is :math:`A` times the solution at the previous time
-level. For a decay process, we must obviously have :math:`|A|\leq 1`, which
+at a new time level is the solution at the previous time
+level amplified by a factor :math:`A`.
+For a decay process, we must obviously have :math:`|A|\leq 1`, which
 is fulfilled for all :math:`\Delta t` if :math:`\theta \geq 1/2`. Arbitrarily
 large values of :math:`u` can be generated when :math:`|A|>1` and :math:`n` is large
 enough. The numerical solution is in such cases totally irrelevant to
 an ODE modeling decay processes! To avoid this situation, we must
-for :math:`\theta < 1/2` have
+demand :math:`|A|\leq 1` also for :math:`\theta < 1/2`, which implies
+
+.. _Eq:_auto3:
 
 .. math::
+
+    \tag{6}
+    \Delta t \leq \frac{2}{(1-2\theta)a},
         
-        \Delta t \leq \frac{2}{(1-2\theta)a},
         
 
-which means :math:`\Delta t < 2/a` for the Forward Euler scheme.
+For example, :math:`\Delta t` must not exceed  :math:`2/a` when computing with
+the Forward Euler scheme.
 
 .. index:: A-stable methods
 
@@ -359,16 +380,24 @@ solution, we shall now look more into how well the numerical amplification
 factor approximates the exact one. The exact solution reads
 :math:`u(t)=Ie^{-at}`, which can be rewritten as
 
+.. _Eq:_auto4:
+
 .. math::
+
+    \tag{7}
+    {{u_{\small\mbox{e}}}}(t_n) = Ie^{-a n\Delta t} = I(e^{-a\Delta t})^n {\thinspace .}
         
-        {{u_{\small\mbox{e}}}}(t_n) = Ie^{-a n\Delta t} = I(e^{-a\Delta t})^n {\thinspace .}
         
 
 From this formula we see that the exact amplification factor is
 
+.. _Eq:_auto5:
+
 .. math::
+
+    \tag{8}
+    {A_{\small\mbox{e}}} = e^{-a\Delta t} {\thinspace .}
         
-        {A_{\small\mbox{e}}} = e^{-a\Delta t} {\thinspace .}
         
 
 We see from all of our analysis
@@ -425,7 +454,7 @@ discretization parameter, here :math:`\Delta t`, becomes small. In the
 present case, we let :math:`p` be our small discretization parameter, and it
 makes sense to simplify the expressions for :math:`A` and :math:`{A_{\small\mbox{e}}}` by using
 Taylor polynomials around :math:`p=0`.  The Taylor polynomials are accurate
-for small :math:`p` and greatly simplifies the comparison of the analytical
+for small :math:`p` and greatly simplify the comparison of the analytical
 expressions since we then can compare polynomials, term by term.
 
 Calculating the Taylor series for :math:`{A_{\small\mbox{e}}}` is easily done by hand, but
@@ -456,7 +485,7 @@ Let us illustrate ``sympy`` with a standard Python shell syntax
 
         >>> from sympy import *
         >>> # Create p as a mathematical symbol with name 'p'
-        >>> p = Symbol('p')
+        >>> p = Symbols('p')
         >>> # Create a mathematical expression with p
         >>> A_e = exp(-p)
         >>>
@@ -530,14 +559,18 @@ clearly dominates over the higher-order terms (think of :math:`p=0.01`:
 
 Now, :math:`a` is a given parameter in the problem, while :math:`\Delta t` is
 what we can vary. Not surprisingly, the error expressions are usually
-written in terms :math:`\Delta t`. When then have
+written in terms :math:`\Delta t`. We then have
+
+.. _Eq:_auto6:
 
 .. math::
-        
-        A-{A_{\small\mbox{e}}} = \left\lbrace\begin{array}{ll}
+
+    \tag{9}
+    A-{A_{\small\mbox{e}}} = \left\lbrace\begin{array}{ll}
         {\mathcal{O}(\Delta t^2)}, & \hbox{Forward and Backward Euler},\\ 
         {\mathcal{O}(\Delta t^3)}, & \hbox{Crank-Nicolson}
         \end{array}\right.
+        
         
 
 We say that the Crank-Nicolson scheme has an error in the amplification
@@ -591,7 +624,8 @@ over all previous time steps. This error,
 :math:`e^n = u^n-{u_{\small\mbox{e}}}(t_n)`, is known as the *global error*. We
 may look at :math:`u^n` for some :math:`n` and Taylor expand the
 mathematical expressions as functions of :math:`p=a\Delta t` to get a simple
-expression for the global error (for small :math:`p`):
+expression for the global error (for small :math:`p`). Continuing the
+``sympy`` expression from previous section, we can write
 
 .. code-block:: python
 
@@ -620,27 +654,27 @@ the leading-order error terms, these become
 .. _Eq:decay:analysis:gobal:error:FE:
 
 .. math::
-   :label: decay:analysis:gobal:error:FE
-        
-        e^n = \frac{1}{2} n p^2 = {\frac{1}{2}}ta^2\Delta t, \hbox{Forward Euler}
+
+    \tag{10}
+    e^n = \frac{1}{2} n p^2 = {\frac{1}{2}}ta^2\Delta t, \hbox{Forward Euler}
         
         
 
 .. _Eq:decay:analysis:gobal:error:BE:
 
 .. math::
-   :label: decay:analysis:gobal:error:BE
-          
-        e^n = -\frac{1}{2} n p^2 = -{\frac{1}{2}}ta^2\Delta t, \hbox{Backward Euler}
+
+    \tag{11}
+    e^n = -\frac{1}{2} n p^2 = -{\frac{1}{2}}ta^2\Delta t, \hbox{Backward Euler}
         
         
 
 .. _Eq:decay:analysis:gobal:error:CN:
 
 .. math::
-   :label: decay:analysis:gobal:error:CN
-          
-        e^n = \frac{1}{12}np^3 = \frac{1}{12}ta^3\Delta t^2, \hbox{Crank-Nicolson}
+
+    \tag{12}
+    e^n = \frac{1}{12}np^3 = \frac{1}{12}ta^3\Delta t^2, \hbox{Crank-Nicolson}
         
         
 
@@ -665,22 +699,28 @@ Integrated error
 ----------------
 
 The :math:`L^2` norm of the error can be computed by treating :math:`e^n` as a function
-of :math:`t` in ``sympy`` and performing symbolic integration. For
-the Forward Euler scheme we have
+of :math:`t` in ``sympy`` and performing symbolic integration.
+From now on we shall do ``import sympy as sym`` and prefix all functions
+in ``sympy`` by ``sym`` to explicitly notify ourselves that the functions
+are from ``sympy``. This is particularly advantageous when we use
+mathematical functions like ``sin``: ``sym.sin`` is for symbolic expressions,
+while ``sin`` from ``numpy`` or ``math`` is for numerical computation.
+For the Forward Euler scheme we have
 
 .. code-block:: python
 
-        p, n, a, dt, t, T, theta = symbols('p n a dt t T 'theta')
+        import sympy as sym
+        p, n, a, dt, t, T, theta = sym.symbols('p n a dt t T theta')
         A = (1-(1-theta)*p)/(1+theta*p)
-        u_e = exp(-p*n)
+        u_e = sym.exp(-p*n)
         u_n = A**n
         error = u_e.series(p, 0, 4) - u_n.subs(theta, 0).series(p, 0, 4)
         # Introduce t and dt instead of n and p
         error = error.subs('n', 't/dt').subs(p, 'a*dt')
         error = error.as_leading_term(dt) # study only the first term
         print error
-        error_L2 = sqrt(integrate(error**2, (t, 0, T)))
-        print error_L2
+        error_L2 = sym.sqrt(sym.integrate(error**2, (t, 0, T)))
+        print 'L2 error:', sym.simplify(error_error_L2)
 
 The output reads
 
@@ -717,9 +757,9 @@ setting :math:`N_t =T/\Delta t`, and taking the square root gives the expression
 .. _Eq:decay:analysis:gobal:error_int:FE:
 
 .. math::
-   :label: decay:analysis:gobal:error_int:FE
-        
-        ||e^n||_{\ell^2} = \frac{1}{2}\sqrt{\frac{T^3}{3}} a^2\Delta t{\thinspace .}
+
+    \tag{13}
+    ||e^n||_{\ell^2} = \frac{1}{2}\sqrt{\frac{T^3}{3}} a^2\Delta t{\thinspace .}
         
         
 
@@ -729,17 +769,17 @@ the same result, while the Crank-Nicolson scheme leads to
 .. _Eq:decay:analysis:gobal:error_int:CN:
 
 .. math::
-   :label: decay:analysis:gobal:error_int:CN
-        
-        ||e^n||_{\ell^2} = \frac{1}{12}\sqrt{\frac{T^3}{3}}a^3\Delta t^2{\thinspace .}
+
+    \tag{14}
+    ||e^n||_{\ell^2} = \frac{1}{12}\sqrt{\frac{T^3}{3}}a^3\Delta t^2{\thinspace .}
         
         
 
 
 .. admonition:: Summary of errors
 
-   Both the global point-wise errors :eq:`decay:analysis:gobal:error:FE`-:eq:`decay:analysis:gobal:error:CN`
-   and their time-integrated versions :eq:`decay:analysis:gobal:error_int:FE` and :eq:`decay:analysis:gobal:error_int:CN` show that
+   Both the global point-wise errors :ref:`(10) <Eq:decay:analysis:gobal:error:FE>`-:ref:`(12) <Eq:decay:analysis:gobal:error:CN>`
+   and their time-integrated versions :ref:`(13) <Eq:decay:analysis:gobal:error_int:FE>` and :ref:`(14) <Eq:decay:analysis:gobal:error_int:CN>` show that
    
     * the Crank-Nicolson scheme is of second order in :math:`\Delta t`, and
    
@@ -781,9 +821,9 @@ a *residual*, denoted here by :math:`R^n`:
 .. _Eq:decay:analysis:trunc:Req:
 
 .. math::
-   :label: decay:analysis:trunc:Req
-        
-        R^n = \frac{{u_{\small\mbox{e}}}(t_{n+1})-{u_{\small\mbox{e}}}(t_n)}{\Delta t} + a{u_{\small\mbox{e}}}(t_n)
+
+    \tag{15}
+    R^n = \frac{{u_{\small\mbox{e}}}(t_{n+1})-{u_{\small\mbox{e}}}(t_n)}{\Delta t} + a{u_{\small\mbox{e}}}(t_n)
         {\thinspace .}
         
         
@@ -803,7 +843,7 @@ We have that
         \Delta t^2 + \cdots, 
 
 which may be used to reformulate the fraction in
-:eq:`decay:analysis:trunc:Req` so that
+:ref:`(15) <Eq:decay:analysis:trunc:Req>` so that
 
 .. math::
          R^n = {u_{\small\mbox{e}}}'(t_n) + \frac{1}{2}{u_{\small\mbox{e}}}''(t_n)\Delta t + \ldots + a{u_{\small\mbox{e}}}(t_n){\thinspace .}
@@ -908,12 +948,507 @@ consistency, stability, and convergence are much more complicated.
 
 We have seen in the previous analysis that the Forward Euler,
 Backward Euler, and Crank-Nicolson schemes are convergent (:math:`e^n\rightarrow 0`),
-that they are consistent (:math:`R^n\rightarrow 0`, and that they are
+that they are consistent (:math:`R^n\rightarrow 0`), and that they are
 stable under certain conditions on the size of :math:`\Delta t`.
 We have also derived explicit mathematical expressions for :math:`e^n`,
 the truncation error, and the stability criteria.
 
 .. Look in Asher and Petzold, p 40
+
+Various types of errors in a differential equation model
+========================================================
+
+So far we have been concerned with one type of error, namely the
+discretization error committed by replacing the differential equation
+problem by a recursive set of difference equations. There are,
+however, other types of errors that must be considered too. We can
+classify errors into four groups:
+
+1. model errors: how wrong is the ODE model?
+
+2. data errors: how wrong are the input parameters?
+
+3. discretization errors: how wrong is the numerical method?
+
+4. rounding errors: how wrong is the computer arithmetics?
+
+Below, we shall briefly describe and illustrate these four types
+of errors. Each of the errors deserve its own chapter, at least,
+so the treatment here is superficial to give some indication
+about the nature of size of the errors in a specific case.
+Some of the required computer codes quickly become more advanced
+than in the rest of the book, but we include to code to document
+all the details that lie behind the investigations of the errors.
+
+Model errors
+------------
+
+Any mathematical model like :math:`u^{\prime}=-au`, :math:`u(0)=I`, is just an
+approximate description of a real-world phenomenon. How good this
+approximation is can be determined by comparing physical experiments
+with what the model predicts. This is the topic of *validation* and is
+obviously an essential part of mathematical model. One difficulty with
+validation is that we need to estimate the parameters in the model, and
+this brings in data errors. Quantifying data errors is challenging,
+and a frequently used method is to *tune* the parameters in the model
+to make model predictions as close as possible to the experiments.
+That is, we do not attempt to measure or estimate all input
+parameters, but instead find values that "make the model good".
+Another difficulty is that the response in experiments also contains
+errors due to measurement techniques.
+
+Let us try to quantify model errors in a very simple example involving
+:math:`u^{\prime}=-au`, :math:`u(0)=I`, with constant :math:`a`.  Suppose a more
+accurate model has :math:`a` as a function of time rather than a
+constant. Here we take :math:`a(t)` as a simple linear function: :math:`a +
+pt`. Obviously, :math:`u` with :math:`p>0` will go faster to zero with time than a
+constant :math:`a`.
+
+The solution of
+
+.. math::
+         u^{\prime} = (a + pt)u,\quad u(0)=I,
+
+can be shown (see below) to be
+
+.. math::
+         u(t) = I e^{-t \left(a + \frac{1}{2} pt\right)}{\thinspace .}
+
+Let a Python function ``true_model(t, I, a, p)`` implement the
+above :math:`u(t)` and let
+the solution of our primary ODE :math:`u^{\prime}=-au` be available as
+the function ``model(t, I, a)``.
+We can now make some plots of the two models and the error for some values
+of :math:`p`. Figure :ref:`decay:analysis:model_errors:fig:model_u` displays
+``model`` versus ``true_model`` for :math:`p=0.01, 0.1, 1`, while Figure
+:ref:`decay:analysis:model_errors:fig:model_e` shows the difference
+between the two models as a function of :math:`t` for the same :math:`p` values.
+
+.. _decay:analysis:model_errors:fig:model_u:
+
+.. figure:: model_errors_u.png
+   :width: 800
+
+   Comparison of two models for three values of :math:`p`
+
+.. _decay:analysis:model_errors:fig:model_e:
+
+.. figure:: model_errors_e.png
+   :width: 500
+
+   Discrepancy of Comparison of two models for three values of :math:`p`
+
+The code that was used to produce the plots looks like
+
+.. code-block:: python
+
+        from numpy import linspace, exp
+        from matplotlib.pyplot import \ 
+             plot, show, xlabel, ylabel, legend, savefig, figure, title
+        
+        def model_errors():
+            p_values = [0.01, 0.1, 1]
+            a = 1
+            I = 1
+            t = linspace(0, 4, 101)
+            legends = []
+            # Work with figure(1) for the discrepancy and figure(2+i)
+            # for plotting the model and the true model for p value no i
+            for i, p in enumerate(p_values):
+                u = model(t, I, a)
+                u_true = true_model(t, I, a, p)
+                discrepancy = u_true - u
+                figure(1)
+                plot(t, discrepancy)
+                figure(2+i)
+                plot(t, u, 'r-', t, u_true, 'b--')
+                legends.append('p=%g' % p)
+            figure(1)
+            legend(legends, loc='lower right')
+            savefig('tmp1.png'); savefig('tmp1.pdf')
+            for i, p in enumerate(p_values):
+                figure(2+i)
+                legend(['model', 'true model'])
+                title('p=%g' % p)
+                savefig('tmp%d.png' % (2+i)); savefig('tmp%d.pdf' % (2+i))
+
+To derive the analytical solution of the model :math:`u^{\prime}=-(a+pt)u`, :math:`u(0)=I`, we can use SymPy and the code below. This is somewhat advanced
+SymPy use for a newbie, but serves to illustrate the possibilities to
+solve differential equations by symbolic software.
+
+.. code-block:: python
+
+        def derive_true_solution():
+            import sympy as sym
+            u = sym.symbols('u', cls=sym.Function)  # function u(t)
+            t, a, p, I = sym.symbols('t a p I', real=True)
+        
+            def ode(u, t, a, p):
+                """Define ODE: u' = (a + p*t)*u. Return residual."""
+                return sym.diff(u, t) + (a + p*t)*u
+        
+            eq = ode(u(t), t, a, p)
+            s = sym.dsolve(eq)
+            # s is sym.Eq object u(t) == expression, we want u = expression,
+            # so grab the right-hand side of the equality (Eq obj.)
+            u = s.rhs
+            print u
+            # u contains C1, replace it with a symbol we can fit to
+            # the initial condition
+            C1 = sym.symbols('C1', real=True)
+            u = u.subs('C1', C1)
+            print u
+            # Initial condition equation
+            eq = u.subs(t, 0) - I
+            s = sym.solve(eq, C1)  # solve eq wrt C1
+            print s
+            # s is a list s[0] = ...
+            # Replace C1 in u by the solution
+            u = u.subs(C1, s[0])
+            print 'u:', u
+            print sym.latex(u)  # latex formula for reports
+        
+            # Consistency check: u must fulfill ODE and initial condition
+            print 'ODE is fulfilled:', sym.simplify(ode(u, t, a, p))
+            print 'u(0)-I:', sym.simplify(u.subs(t, 0) - I)
+        
+            # Convert u expression to Python numerical function
+            # (modules='numpy' allows numpy arrays as arguments,
+            # we want this for t)
+            u_func = sym.lambdify([t, I, a, p], u, modules='numpy')
+            return u_func
+        
+        true_model = derive_true_solution()
+
+Data errors
+-----------
+
+By "data" we mean all the input parameters to a model, in our case
+:math:`I` and :math:`a`. The values of these may contain errors, or at least
+uncertainty. Suppose :math:`I` and :math:`a` are measured from some physical
+experiments. Ideally, we have many samples of :math:`I` and :math:`a` and
+from these we can fit probability distributions. Assume that :math:`I`
+turns out to be normally distributed with mean 1 and standard deviation 0.2,
+while :math:`a` is uniformly distributed in the interval :math:`[0.5, 1.5]`.
+
+.. index:: Monte Carlo simulation
+
+How will the uncertainty in :math:`I` and :math:`a` propagate through the model
+:math:`u=Ie^{-at}`? That is, what is the uncertainty in :math:`u` at a particular
+time :math:`t`? This answer can easily be answered using *Monte Carlo
+simulation*. It means that we draw a lot of samples from the
+distributions for :math:`I` and :math:`a`. For each combination of :math:`I` and :math:`a`
+sample we compute the corresponding :math:`u` value for selected values of
+:math:`t`.  Afterwards, we can for each selected :math:`t` values make a histogram
+of all the computed :math:`u` values to see what the distribution of :math:`u`
+values look like. Figure :ref:`decay:analysis:data_errors:fig` shows the
+histograms corresponding to :math:`t=0,1,3`. We see that the distribution of
+:math:`u` values is much like a symmetric normal distribution at :math:`t=0`,
+centered around :math:`u=1`. At later times, the distribution gets more
+asymmetric and narrower. It means that the uncertainty decreases with
+time.
+
+From the computed :math:`u` values we can easily calculate the mean and
+standard deviation. The table below shows the mean and standard
+deviation values along with the value if we just use the formula
+:math:`u=Ie^{-at}` with the mean values of :math:`I` and :math:`a`: :math:`I=1` and :math:`a=1`. As
+we see, there is some discrepancy between this latter (naive)
+computation and the mean value produced by Monte Carlo simulation.
+
+====  ====  =======  ==================  
+time  mean  st.dev.  :math:`u(t;I=a=1)`  
+====  ====  =======  ==================  
+0     1.00  0.200    1.00                
+1     0.38  0.135    0.37                
+3     0.07  0.060    0.14                
+====  ====  =======  ==================  
+
+Actually, :math:`u(t;I,a)` becomes a stochastic variable for each :math:`t` when
+:math:`I` and :math:`a` are stochastic variables, as they are in the above
+Monte Carlo simulation. The mean of the stochastic :math:`u(t;I,a)` is
+not equal to :math:`u` with mean values of the input data, :math:`u(t;I=a=1)`,
+unless :math:`u` is linear in :math:`I` and :math:`a` (here :math:`u` is nonlinear in :math:`a`).
+
+.. _decay:analysis:data_errors:fig:
+
+.. figure:: data_errors.png
+   :width: 800
+
+   *Histogram of solution uncertainty at three time points, due to data errors*
+
+.. index:: uncertainty quantification
+
+Estimating statistical uncertainty in input data and investigating how
+this uncertainty propagates to uncertainty in the response of a
+differential equation model (or other models) are key topics in the
+scientific field called *uncertainty quantification*, simply known as
+UQ.  Estimation of the statistical properties of input data can either
+be done directly from physical experiments, or one can find the
+parameter values that provide a "best fit" of model predictions with
+experiments. Monte Carlo simulation is a general and widely used tool
+to solve the associated statistical problems.  The accuracy of the
+Monte Carlo results increases with increasing number of samples :math:`N`,
+typically the error behaves like :math:`N^{-1/2}`.
+
+The computer code required to do the Monte Carlo simulation and
+produce the plots in Figure :ref:`decay:analysis:data_errors:fig`
+is shown below.
+
+.. code-block:: python
+
+        def data_errors():
+            from numpy import random, mean, std
+            from matplotlib.pyplot import hist
+            N = 10000
+            # Draw random numbers for I and a
+            I_values = random.normal(1, 0.2, N)
+            a_values = random.uniform(0.5, 1.5, N)
+            # Compute corresponding u values for some t values
+            t = [0, 1, 3]
+            u_values = {}  # samples for various t values
+            u_mean = {}
+            u_std = {}
+            for t_ in t:
+                # Compute u samples corresponding to I and a samples
+                u_values[t_] = [model(t_, I, a)
+                                for I, a in zip(I_values, a_values)]
+                u_mean[t_] = mean(u_values[t_])
+                u_std[t_] = std(u_values[t_])
+        
+                figure()
+                dummy1, bins, dummy2 = hist(
+                    u_values[t_], bins=30, range=(0, I_values.max()),
+                    normed=True, facecolor='green')
+                #plot(bins)
+                title('t=%g' % t_)
+                savefig('tmp_%g.png' % t_); savefig('tmp_%g.pdf' % t_)
+            # Table of mean and standard deviation values
+            print 'time   mean   st.dev.'
+            for t_ in t:
+                print '%3g    %.2f    %.3f' % (t_, u_mean[t_], u_std[t_])
+
+Discretization errors
+---------------------
+
+The errors implied by solving the differential equation problem by
+the :math:`\theta`-rule has been thoroughly analyzed in the previous
+sections. Below are some plots of the error versus time for the
+Forward Euler (FE), Backward Euler (BN), and Crank-Nicolson (CN)
+schemes for decreasing values of :math:`\Delta t`. Since the difference
+in magnitude between the errors in the CN scheme versus the FE and
+BN schemes grows significantly as :math:`\Delta t` is reduced (the error
+goes like :math:`\Delta t^2` for CN versus :math:`\Delta t` for FE/BE), we have
+plotted the logarithm of the absolute value of the numerical error
+as a mesh function.
+
+.. _decay:analysis:numerical_errors:fig:
+
+.. figure:: numerical_errors.png
+   :width: 700
+
+   *Discretization errors in various schemes for four time step values*
+
+The table below presents exact figures of the discretization error
+for various choices of :math:`\Delta t` and schemes.
+
+================  ======================  ======================  =================  
+:math:`\Delta t`            FE                      BE                    CN         
+================  ======================  ======================  =================  
+             0.4  :math:`9\cdot 10^{-2}`  :math:`6\cdot 10^{-2}`  $ 5\cdot 10^{-3}$  
+             0.1  :math:`2\cdot 10^{-2}`  :math:`2\cdot 10^{-2}`  $ 3\cdot 10^{-4}$  
+            0.01  :math:`2\cdot 10^{-3}`  :math:`2\cdot 10^{-3}`  $ 3\cdot 10^{-6}$  
+================  ======================  ======================  =================  
+
+The computer code used to generate the plots appear next. It makes use
+of a ``solver`` function
+for computing the numerical solution of :math:`u^{\prime}=-au` with
+the :math:`\theta`-rule.
+
+.. code-block:: python
+
+        def discretization_errors():
+            from numpy import log, abs
+            I = 1
+            a = 1
+            T = 4
+            t = linspace(0, T, 101)
+            schemes = {'FE': 0, 'BE': 1, 'CN': 0.5}  # theta to scheme name
+            dt_values = [0.8, 0.4, 0.1, 0.01]
+            for dt in dt_values:
+                figure()
+                legends = []
+                for scheme in schemes:
+                    theta = schemes[scheme]
+                    u, t = solver(I, a, T, dt, theta)
+                    u_e = model(t, I, a)
+                    error = u_e - u
+                    print '%s: dt=%.2f, %d steps, max error: %.2E' % \ 
+                          (scheme, dt, len(u)-1, abs(error).max())
+                    # Plot log(error), but exclude error[0] since it is 0
+                    plot(t[1:], log(abs(error[1:])))
+                    legends.append(scheme)
+                xlabel('t');  ylabel('log(abs(numerical error))')
+                legend(legends, loc='upper right')
+                title(r'$\Delta t=%g$' % dt)
+                savefig('tmp_dt%g.png' % dt); savefig('tmp_dt%g.pdf' % dt)
+
+Rounding errors
+---------------
+
+Real numbers on a computer are represented by `floating-point
+numbers <https://en.wikipedia.org/wiki/Floating_point>`__, which means
+that just a finite number of digits are stored and used. Therefore,
+the floating-point number is an approximation to the underlying real
+number. When doing arithmetics with floating-point numbers, there will
+be small approximation errors, called round-off errors or rounding
+errors, that may or may not accumulate in comprehensive computations.
+
+The cause and analysis of rounding errors are described in most books
+on numerical analysis, see for instance Chapter 2 in Gander et
+al. [Ref1]_. For very simple algorithms it is possible to
+theoretically establish bounds for the rounding errors, but for most
+algorithms one cannot know to what extent rounding errors accumulate
+and potentially destroy the final answer. :ref:`decay:analysis:exer:rounding` demonstrates the impact of rounding
+errors on numerical differentiation and integration.
+
+Here is a simplest possible example of the effect of rounding
+errors:
+
+.. code-block:: python
+
+        >>> 1.0/51*51
+        1.0
+        >>> 1.0/49*49
+        0.9999999999999999
+
+We see that the latter result is not exact, but features an error of
+:math:`10^{-16}`. This is the typical level of a rounding error from an
+arithmetic operation with the widely used 64 bit floating-point number
+(``float`` object in Python, often called ``double`` or double precision
+in other languages). One cannot expect more accuracy than :math:`10^{-16}`.
+The big question is if errors at this level accumulate in a given
+numerical algorithm.
+
+What is the effect of using ``float`` objects and not exact arithmetics
+when solving differential equations? We can investigate this question
+through computer experiments if we have the ability to represent real
+numbers to a desired accuracy. Fortunately, Python has a ``Decimal``
+object in the `decimal <https://docs.python.org/2/library/decimal.html>`__ module that allows us
+to use as many digits in floating-point numbers as we like. We take
+1000 digits as the true answer where rounding errors are negligible,
+and then we run our numerical algorithm (the Crank-Nicolson scheme to
+be precise) with ``Decimal`` objects for all real numbers and compute
+the maximum error arising from using 4, 16, 64, and 128 digits.
+
+When computing with numbers around unity in size and doing :math:`N_t=40`
+time steps, we typically get a rounding error of :math:`10^{-d}`, where :math:`d`
+is the number of digits used. The effect of rounding errors may
+accumulate if we perform more operations, so increasing the number of
+time steps to 4000 gives a rounding error of the order :math:`10^{-d+2}`.
+Also, if we compute with numbers that are much larger than unity, we
+lose accuracy due to rounding errors. For example, for the :math:`u` values
+implied by :math:`I=1000` and :math:`a=100` (:math:`u\sim 10^3`), the rounding errors
+increase to about :math:`10^{-d+3}`. Below is a table summarizing a set of
+experiments. A rough model for the size of rounding errors is
+:math:`10^{-d+q+r}`, where :math:`d` is the number of digits, the number of time
+steps is of the order :math:`10^q` time steps, and the size of the numbers
+in the arithmetic expressions are of order :math:`10^r`.
+
+======  ===============================  =================================  ==================================  ====================================  
+digits  :math:`u\sim 1`, :math:`N_t=40`  :math:`u\sim 1`, :math:`N_t=4000`  :math:`u\sim 10^3`, :math:`N_t=40`  :math:`u\sim 10^3`, :math:`N_t=4000`  
+======  ===============================  =================================  ==================================  ====================================  
+     4  :math:`3.05\cdot 10^{-4}`        :math:`2.51\cdot 10^{-1}`          :math:`3.05\cdot 10^{-1}`           :math:`9.82\cdot 10^{2}`              
+    16  :math:`1.71\cdot 10^{-16}`       :math:`1.42\cdot 10^{-14}`         :math:`1.58\cdot 10^{-13}`          :math:`4.84\cdot 10^{-11}`            
+    64  :math:`2.99\cdot 10^{-64}`       :math:`1.80\cdot 10^{-62}`         :math:`2.06\cdot 10^{-61}`          :math:`1.04\cdot 10^{-57}`            
+   128  :math:`1.60\cdot 10^{-128}`      :math:`1.56\cdot 10^{-126}`        :math:`2.41\cdot 10^{-125}`         :math:`1.07\cdot 10^{-122}`           
+======  ===============================  =================================  ==================================  ====================================  
+
+We realize that rounding errors are at the lowest possible level
+if we scale the differential equation model,
+see the section :ref:`decay:app:scaling`,
+so the numbers entering the computations are of unity in size,
+and if we take a small number of steps (40 steps gives a discretization error
+of :math:`5\cdot 10^{-3}` with the Crank-Nicolson scheme).
+In general, rounding errors are negligible in comparison with other errors
+in differential equation models.
+
+The computer code for doing the reported experiments need a new version
+of the ``solver`` function where we do arithmetics with ``Decimal``
+objects:
+
+.. code-block:: python
+
+        def solver_decimal(I, a, T, dt, theta):
+            """Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt."""
+            from numpy import zeros, linspace
+            from decimal import Decimal as D
+            dt = D(dt)
+            a = D(a)
+            theta = D(theta)
+            Nt = int(round(D(T)/dt))
+            T = Nt*dt
+            u = zeros(Nt+1, dtype=object)  # array of Decimal objects
+            t = linspace(0, float(T), Nt+1)
+        
+            u[0] = D(I)               # assign initial condition
+            for n in range(0, Nt):    # n=0,1,...,Nt-1
+                u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
+            return u, t
+
+The function below carries out the experiments. We can conveniently
+set the number of digits as we want through the ``decimal.getcontext().prec``
+variable.
+
+.. code-block:: python
+
+        def rounding_errors(I=1, a=1, T=4, dt=0.1):
+            import decimal
+            from numpy import log, array, abs
+            digits_values = [4, 16, 64, 128]
+            # "Exact" arithmetics is taken as 1000 decimals here
+            decimal.getcontext().prec = 1000
+            u_e, t = solver_decimal(I=I, a=a, T=T, dt=dt, theta=0.5)
+            for digits in digits_values:
+                decimal.getcontext().prec = digits  # set no of digits
+                u, t = solver_decimal(I=I, a=a, T=T, dt=dt, theta=0.5)
+                error = u_e - u
+                error = array(error[1:], dtype=float)
+                print '%d digits, %d steps, max abs(error): %.2E' % \ 
+                      (digits, len(u)-1, abs(error).max())
+
+Discussion of the size of various errors
+----------------------------------------
+
+The previous computational examples of model, data, discretization,
+and rounding errors are tied to one particular mathematical problem,
+so it is in principle dangerous to make general conclusions.  However,
+the illustrations made point to some common trends that apply to
+differential equation models.
+
+First, rounding errors have very little impact compared to the other
+types of errors.  Second, numerical errors are in general smaller than
+model and data errors, but more importantly, numerical errors are
+often well understood and can be reduced by just increasing the
+computational work (in our example by taking more smaller time steps).
+
+Third, data errors may be significant, and it also takes a significant
+amount of computational work to quantify them and their impact on the
+solution. Many types of input data are also difficult or impossible
+to measure, so finding suitable values requires tuning of the data
+and the model to a known (measured) response.
+Nevertheless, even if the predictive precision of a model
+is limited because of severe errors or uncertainty in input data, the
+model can still be of high value for investigating qualitative
+properties of the underlying phenomenon. Through computer experiments
+with synthetic input data one can understand a lot of the science or
+engineering that goes into the model.
+
+Fourth, model errors are the most challenging type of error to deal
+with. Simplicity of model is in general preferred over complexity,
+but adding complexity is often the only way to improve the predictive
+capabilities of a model. More complexity usually also means a need
+for more input data and consequently the danger of increasing
+data errors.
 
 Exercises
 =========
@@ -922,8 +1457,8 @@ Exercises
 
 .. _decay:analysis:exer:fd:exp:plot:
 
-Exercise 1: Visualize the accuracy of finite differences
---------------------------------------------------------
+Problem 1: Visualize the accuracy of finite differences
+-------------------------------------------------------
 
 The purpose of this exercise is to visualize the accuracy of finite difference
 approximations of the derivative of a given function.
@@ -932,7 +1467,9 @@ as an example, and any specific function, take  :math:`u=e^{-at}`,
 we may introduce an error fraction
 
 .. math::
-         E = \frac{[D_t^+ u]^n}{u'(t_n)} = \frac{\exp{(-a(t_n+\Delta t))} - \exp{(-at_n)}}{-a\exp{(-at_n)\Delta t}} = \frac{1}{a\Delta t}\left(1 -\exp{(-a\Delta t)}\right),
+        
+        E = \frac{[D_t^+ u]^n}{u'(t_n)} &= \frac{\exp{(-a(t_n+\Delta t))} - \exp{(-at_n)}}{-a\exp{(-at_n)\Delta t}}\\ 
+        &= \frac{1}{a\Delta t}\left(1 -\exp{(-a\Delta t)}\right),
         
 
 and view :math:`E` as a function of :math:`\Delta t`. We expect that
@@ -981,8 +1518,8 @@ Filename: ``decay_plot_fd_error``.
 
 .. _decay:analysis:exer:growth:
 
-Exercise 2: Explore the :math:`\theta`-rule for exponential growth
-------------------------------------------------------------------
+Problem 2: Explore the :math:`\theta`-rule for exponential growth
+-----------------------------------------------------------------
 
 This exercise asks you to solve the ODE :math:`u'=-au` with :math:`a < 0` such that
 the ODE models exponential growth instead of exponential decay.  A
@@ -1010,13 +1547,59 @@ explain the observations made in the experiments.
 .. --- begin hint in exercise ---
 
 **Hint.**
-Modify the `decay_ampf_plot.py <http://tinyurl.com/ofkw6kc/analysis/decay_ampf_plot.py>`__ code.
+Modify the `decay_ampf_plot.py <http://tinyurl.com/ofkw6kc/analysis/decay_ampf_plot.py>`__ code
+(in the ``src/analysis`` directory).
 
 .. --- end hint in exercise ---
 
 .. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
 
 Filename: ``exponential_growth``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _decay:analysis:exer:rounding:
+
+Problem 3: Explore rounding errors in numerical calculus
+--------------------------------------------------------
+
+**a)**
+Compute the absolute values of the errors in the numerical derivative
+of :math:`e^{-t}` at :math:`t=\frac{1}{2}` for three types of finite difference
+approximations: a forward difference, a backward difference, and
+a centered difference, for :math:`\Delta t = 2^{-k}`, :math:`k=0,4, 8, 12, \ldots, 60`.
+When do rounding errors destroy the accuracy?
+
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
+**b)**
+Compute the absolute values of the errors in the numerical
+approximation of :math:`\int_0^4 e^{-t}dt` using the Trapezoidal
+and the Midpoint integration methods. Make a table of
+the errors for :math:`n=2^k` intervals, :math:`k=1,3,5=ldots,21`.
+Is there any impact of rounding errors?
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+The Trapezoidal rule for :math:`\int_a^bf(x)dx` reads
+
+.. math::
+         \int_a^bf(x)dx\approx h(\frac{1}{2} f(a) + \frac{1}{2} f(b) + \sum_{i=1}^{n-1}
+        f(a+ih)),\quad h = \frac{b-a}{n}{\thinspace .}
+
+The Midpoint rule is
+
+.. math::
+         \int_a^bf(x)dx\approx h\sum_{i=1}^n f(a + (i+\frac{1}{2})h){\thinspace .}
+
+.. --- end hint in exercise ---
+
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
+Filename: ``rounding``.
 
 .. --- end exercise ---
 

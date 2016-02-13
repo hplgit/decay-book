@@ -18,6 +18,7 @@
 
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="reveal.js/css/reveal.css">
 <link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
@@ -35,14 +36,21 @@
 <link rel="stylesheet" href="reveal.js/css/theme/default.css" id="theme">
 <link rel="stylesheet" href="reveal.js/css/theme/cbc.css" id="theme">
 <link rel="stylesheet" href="reveal.js/css/theme/simula.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
 -->
 
 <!-- For syntax highlighting -->
 <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
 
-<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<!-- Printing and PDF exports -->
 <script>
-document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
 </script>
 
 <style type="text/css">
@@ -57,7 +65,7 @@ document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.l
              text-shadow:0 1px 0 rgba(255,255,255,0.5);
              border:5px solid #bababa;
              -webkit-border-radius: 14px; -moz-border-radius: 14px;
-             border-radius:14px
+             border-radius:14px;
              background-position: 10px 10px;
              background-repeat: no-repeat;
              background-size: 38px;
@@ -121,8 +129,10 @@ td.padding {
 
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
 <p>&nbsp;<br>
-<center><h4>Aug 4, 2015</h4></center> <!-- date -->
+<center><h4>Feb 12, 2016</h4></center> <!-- date -->
+<br>
 
 <h1 id="___sec0">Exponential decay models appear in a wide range of applications! </h1>
 
@@ -152,7 +162,7 @@ Applications are found in physics, biology, chemistry, geology, finance, ...
 </div> <!-- class="reveal" -->
 
 <script src="reveal.js/lib/js/head.min.js"></script>
-<script src="reveal.js/js/reveal.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
 
 <script>
 // Full list of configuration options available here:

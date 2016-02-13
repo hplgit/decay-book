@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Algorithms and implementations for exponential decay models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,test function,unit testing,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization">
 
 <title>Algorithms and implementations for exponential decay models</title>
 
@@ -20,6 +20,13 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
 </style>
 
 
@@ -175,15 +182,58 @@ $$
     </button>
     <a class="navbar-brand" href="alg-sol.html">Algorithms and implementations for exponential decay models</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._alg-sol001.html#decay:basics" style="font-size: 80%;">Finite difference methods</a></li>
-     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:impl1" style="font-size: 80%;">Implementation</a></li>
-     <!-- navigation toc: --> <li><a href="._alg-sol003.html#___sec37" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec45" style="font-size: 80%;">Bibliography</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#decay:basics" style="font-size: 80%;"><b>Finite difference methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#decay:model" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A basic model for exponential decay</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The exact solution</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A complete problem formulation</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#decay:schemes:FE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Forward Euler scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 1: Discretizing the domain</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 2: Fulfilling the equation at discrete time points</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 3: Replacing derivatives by finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 4: Formulating a recursive algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interpretation</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing with the recursive formula</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#decay:schemes:BE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Backward Euler scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#decay:schemes:CN" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Crank-Nicolson scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#decay:schemes:theta" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The unifying \( \theta \)-rule</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Constant time step</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#decay:fd:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mathematical derivation of finite difference formulas</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The forward difference</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The backward difference</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The centered difference</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol001.html#decay:fd:op" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Compact operator notation for finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:impl1" style="font-size: 80%;"><b>Implementation</b></a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computer language: Python</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:py1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making a solver function</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:py2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integer division</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Doc strings</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Formatting numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Running the program</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Plotting the solution</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Verifying the implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running a few algorithmic steps by hand</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:computing:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the numerical error as a mesh function</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:computing:error:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the norm of the error mesh function</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar computing</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Experiments with computing and plotting</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combining plot files</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting with SciTools</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Memory-saving implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#___sec37" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:meshfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Define a mesh function and visualize it</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:dudt" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 2: Differentiate a function</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:intdiv" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 3: Experiment with divisions</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:decay1err" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 4: Experiment with wrong computations</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:plot:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 5: Plot the error function</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:inexact:output" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 6: Change formatting of numbers and debug</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec45" style="font-size: 80%;"><b>Bibliography</b></a></li>
 
         </ul>
       </li>
@@ -213,10 +263,12 @@ $$
     2014.</li>
  <li> <div id="Matplotlib:doc"></div> <b>J. D. Hunter, D. Dale, E. Firing and M. Droettboom</b>. 
     Matplotlib documentation,
-    <a href="http://matplotlib.org/users/" target="_self"><tt>http://matplotlib.org/users/</tt></a>,
-    2012.</li>
+    2012,
+    \urlhttp://matplotlib.org/users/,
+    <a href="http://matplotlib.org/users/" target="_self"><tt>http://matplotlib.org/users/</tt></a>.</li>
  <li> <div id="SciTools:doc"></div> <b>H. P. Langtangen</b>. 
     SciTools documentation,
+    \urlhttp://hplgit.github.io/scitools/doc/web/index.html,
     <a href="http://hplgit.github.io/scitools/doc/web/index.html" target="_self"><tt>http://hplgit.github.io/scitools/doc/web/index.html</tt></a>.</li>
 </ol>
 

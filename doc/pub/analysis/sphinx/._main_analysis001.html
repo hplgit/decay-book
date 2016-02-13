@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -45,7 +44,7 @@
 
     
     <link rel="top" title="Analysis of exponential decay models" href="index.html" />
-    <link rel="next" title="&lt;no title&gt;" href="._main_analysis002.html" />
+    <link rel="next" title="Bibliography" href="._main_analysis002.html" />
     <link rel="prev" title="Analysis of exponential decay models" href="._main_analysis000.html" />
  
   
@@ -57,56 +56,63 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="._main_analysis002.html" title="&lt;no title&gt;"
+          <a href="._main_analysis002.html" title="Bibliography"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="._main_analysis000.html" title="Analysis of exponential decay models"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Analysis of exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Analysis of exponential decay models</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <p>We address the ODE for exponential decay,</p>
-<div class="math">
-\[u'(t) = -au(t),\quad u(0)=I,\]</div>
+<div class="math" id="eq-auto1">
+\[\tag{1}
+u'(t) = -au(t),\quad u(0)=I,\]</div>
 <p>where <span class="math">\(a\)</span> and <span class="math">\(I\)</span> are given constants. This problem is solved
 by the <span class="math">\(\theta\)</span>-rule finite difference scheme, resulting in
 the recursive equations</p>
-<div class="math" id="equation-decay:analysis:scheme">
-<span id="eq-decay-analysis-scheme"></span><span class="eqno">(1)</span>\[     u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n\]</div>
+<div class="math" id="eq-decay-analysis-scheme">
+\[\tag{2}
+u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n\]</div>
 <p>for the numerical solution <span class="math">\(u^{n+1}\)</span>, which approximates the exact
 solution <span class="math">\({u_{\small\mbox{e}}}\)</span> at time point <span class="math">\(t_{n+1}\)</span>. For constant mesh spacing,
 which we assume here, <span class="math">\(t_{n+1}=(n+1)\Delta t\)</span>.</p>
+<p>The example programs associated with this chapter are found in
+the directory <a class="reference external" href="http://tinyurl.com/ofkw6kc/analysis">src/analysis</a>.</p>
 <div class="section" id="experimental-investigations">
 <h1>Experimental investigations<a class="headerlink" href="#experimental-investigations" title="Permalink to this headline">¶</a></h1>
+<p>We first perform a series of numerical explorations to see how the
+methods behave as we change the parameters <span class="math">\(I\)</span>, <span class="math">\(a\)</span>, and <span class="math">\(\Delta t\)</span>
+in the problem.</p>
 <div class="section" id="discouraging-numerical-solutions">
 <h2>Discouraging numerical solutions<a class="headerlink" href="#discouraging-numerical-solutions" title="Permalink to this headline">¶</a></h2>
 <p>Choosing <span class="math">\(I=1\)</span>, <span class="math">\(a=2\)</span>, and running experiments with <span class="math">\(\theta =1,0.5, 0\)</span>
 for <span class="math">\(\Delta t=1.25, 0.75, 0.5, 0.1\)</span>, gives the results in
 Figures <a class="reference internal" href="#decay-analysis-be4c"><span class="std std-ref">Backward Euler</span></a>, <a class="reference internal" href="#decay-analysis-cn4c"><span class="std std-ref">Crank-Nicolson</span></a>, and
 <a class="reference internal" href="#decay-analysis-fe4c"><span class="std std-ref">Forward Euler</span></a>.</p>
-<div class="figure" id="id1">
+<div class="figure" id="id2">
 <span id="decay-analysis-be4c"></span><a class="reference internal image-reference" href="_images/BE4c.png"><img alt="_images/BE4c.png" src="_images/BE4c.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><em>Backward Euler</em></span></p>
 </div>
-<div class="figure" id="id2">
+<div class="figure" id="id3">
 <span id="decay-analysis-cn4c"></span><a class="reference internal image-reference" href="_images/CN4c.png"><img alt="_images/CN4c.png" src="_images/CN4c.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><em>Crank-Nicolson</em></span></p>
 </div>
-<div class="figure" id="id3">
+<div class="figure" id="id4">
 <span id="decay-analysis-fe4c"></span><a class="reference internal image-reference" href="_images/FE4c.png"><img alt="_images/FE4c.png" src="_images/FE4c.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><em>Forward Euler</em></span></p>
 </div>
@@ -224,11 +230,11 @@ and <a class="reference internal" href="#decay-analysis-b-cn"><span class="std s
     <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure" id="id4">
+<div class="figure" id="id5">
 <span id="decay-analysis-b-fe"></span><a class="reference internal image-reference" href="_images/osc_region_FE.png"><img alt="_images/osc_region_FE.png" src="_images/osc_region_FE.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-text"><em>Forward Euler scheme: oscillatory solutions occur for points above the curve</em></span></p>
 </div>
-<div class="figure" id="id5">
+<div class="figure" id="id6">
 <span id="decay-analysis-b-cn"></span><a class="reference internal image-reference" href="_images/osc_region_CN.png"><img alt="_images/osc_region_CN.png" src="_images/osc_region_CN.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-text"><em>Crank-Nicolson scheme: oscillatory solutions occur for points above the curve</em></span></p>
 </div>
@@ -248,10 +254,11 @@ formula for the solution of the equations arising from the finite
 difference methods.</p>
 <div class="section" id="exact-numerical-solution">
 <h2>Exact numerical solution<a class="headerlink" href="#exact-numerical-solution" title="Permalink to this headline">¶</a></h2>
-<p>Starting with <span class="math">\(u^0=I\)</span>, the simple recursion <a href="#equation-decay:analysis:scheme">(1)</a>
+<p>Starting with <span class="math">\(u^0=I\)</span>, the simple recursion <a class="reference internal" href="#eq-decay-analysis-scheme"><span class="std std-ref">(2)</span></a>
 can be applied repeatedly <span class="math">\(n\)</span> times, with the result that</p>
-<div class="math" id="equation-decay:analysis:unex">
-<span id="eq-decay-analysis-unex"></span><span class="eqno">(2)</span>\[     u^{n} = IA^n,\quad A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}{\thinspace .}\]</div>
+<div class="math" id="eq-decay-analysis-unex">
+\[\tag{3}
+u^{n} = IA^n,\quad A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}{\thinspace .}\]</div>
 <div class="admonition-solving-difference-equations admonition">
 <p class="first admonition-title">Solving difference equations</p>
 <p>Difference equations where all terms are linear in
@@ -264,7 +271,7 @@ a polynomial equation in <span class="math">\(A\)</span>. In the present case we
 <div class="math">
 \[A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}{\thinspace .}\]</div>
 <p class="last">This is a solution technique of wider applicability than repeated use of
-the recursion <a href="#equation-decay:analysis:scheme">(1)</a>.</p>
+the recursion <a class="reference internal" href="#eq-decay-analysis-scheme"><span class="std std-ref">(2)</span></a>.</p>
 </div>
 <p>Regardless of the solution approach, we have obtained a formula for
 <span class="math">\(u^n\)</span>.  This formula can explain everything we see in the figures
@@ -275,14 +282,16 @@ raised to an integer power <span class="math">\(n\)</span>, we realize that <spa
 will imply <span class="math">\(u^n &lt; 0\)</span> for odd <span class="math">\(n\)</span> and <span class="math">\(u^n &gt; 0\)</span> for even <span class="math">\(n\)</span>.
 That is, the solution oscillates between the mesh points.
 We have oscillations due to <span class="math">\(A &lt; 0\)</span> when</p>
-<div class="math" id="equation-decay:th:stability">
-<span id="eq-decay-th-stability"></span><span class="eqno">(3)</span>\[\begin{split}     (1-\theta)a\Delta t &gt; 1 {\thinspace .}\end{split}\]</div>
+<div class="math" id="eq-decay-th-stability">
+\[\begin{split}\tag{4}
+(1-\theta)a\Delta t &gt; 1 {\thinspace .}\end{split}\]</div>
 <p>Since <span class="math">\(A&gt;0\)</span> is a requirement for having a numerical solution with the
 same basic property (monotonicity) as the exact solution, we may say
 that <span class="math">\(A&gt;0\)</span> is a <em>stability criterion</em>. Expressed in terms of <span class="math">\(\Delta t\)</span>
 the stability criterion reads</p>
-<div class="math">
-\[\begin{split}\Delta t &lt; \frac{1}{(1-\theta)a}{\thinspace .}\end{split}\]</div>
+<div class="math" id="eq-auto2">
+\[\begin{split}\tag{5}
+\Delta t &lt; \frac{1}{(1-\theta)a}{\thinspace .}\end{split}\]</div>
 <p>The Backward
 Euler scheme is always stable since <span class="math">\(A &lt; 0\)</span> is impossible for <span class="math">\(\theta=1\)</span>, while
 non-oscillating solutions for Forward Euler and Crank-Nicolson
@@ -305,16 +314,19 @@ for <span class="math">\(\Delta t=1.25\)</span> are easily explained by the fact
 <div class="section" id="stability-properties-derived-from-the-amplification-factor">
 <h2>Stability properties derived from the amplification factor<a class="headerlink" href="#stability-properties-derived-from-the-amplification-factor" title="Permalink to this headline">¶</a></h2>
 <p id="index-1">The factor <span class="math">\(A\)</span> is called the <em>amplification factor</em> since the solution
-at a new time level is <span class="math">\(A\)</span> times the solution at the previous time
-level. For a decay process, we must obviously have <span class="math">\(|A|\leq 1\)</span>, which
+at a new time level is the solution at the previous time
+level amplified by a factor <span class="math">\(A\)</span>.
+For a decay process, we must obviously have <span class="math">\(|A|\leq 1\)</span>, which
 is fulfilled for all <span class="math">\(\Delta t\)</span> if <span class="math">\(\theta \geq 1/2\)</span>. Arbitrarily
 large values of <span class="math">\(u\)</span> can be generated when <span class="math">\(|A|&gt;1\)</span> and <span class="math">\(n\)</span> is large
 enough. The numerical solution is in such cases totally irrelevant to
 an ODE modeling decay processes! To avoid this situation, we must
-for <span class="math">\(\theta &lt; 1/2\)</span> have</p>
-<div class="math">
-\[\Delta t \leq \frac{2}{(1-2\theta)a},\]</div>
-<p>which means <span class="math">\(\Delta t &lt; 2/a\)</span> for the Forward Euler scheme.</p>
+demand <span class="math">\(|A|\leq 1\)</span> also for <span class="math">\(\theta &lt; 1/2\)</span>, which implies</p>
+<div class="math" id="eq-auto3">
+\[\tag{6}
+\Delta t \leq \frac{2}{(1-2\theta)a},\]</div>
+<p>For example, <span class="math">\(\Delta t\)</span> must not exceed  <span class="math">\(2/a\)</span> when computing with
+the Forward Euler scheme.</p>
 <span class="target" id="index-2"></span><div class="admonition-stability-properties admonition" id="index-3">
 <p class="first admonition-title">Stability properties</p>
 <p>We may summarize the stability investigations as follows:</p>
@@ -345,11 +357,13 @@ see exactly how large the numerical errors are.</p>
 solution, we shall now look more into how well the numerical amplification
 factor approximates the exact one. The exact solution reads
 <span class="math">\(u(t)=Ie^{-at}\)</span>, which can be rewritten as</p>
-<div class="math">
-\[{{u_{\small\mbox{e}}}}(t_n) = Ie^{-a n\Delta t} = I(e^{-a\Delta t})^n {\thinspace .}\]</div>
+<div class="math" id="eq-auto4">
+\[\tag{7}
+{{u_{\small\mbox{e}}}}(t_n) = Ie^{-a n\Delta t} = I(e^{-a\Delta t})^n {\thinspace .}\]</div>
 <p>From this formula we see that the exact amplification factor is</p>
-<div class="math">
-\[{A_{\small\mbox{e}}} = e^{-a\Delta t} {\thinspace .}\]</div>
+<div class="math" id="eq-auto5">
+\[\tag{8}
+{A_{\small\mbox{e}}} = e^{-a\Delta t} {\thinspace .}\]</div>
 <p>We see from all of our analysis
 that the exact and numerical amplification factors depend
 on <span class="math">\(a\)</span> and <span class="math">\(\Delta t\)</span> through the dimensionless
@@ -362,7 +376,7 @@ and view <span class="math">\(A\)</span> and <span class="math">\({A_{\small\mbo
 factors are clearly closest for the
 Crank-Nicolson method, but that method has
 the unfortunate oscillatory behavior when <span class="math">\(p&gt;2\)</span>.</p>
-<div class="figure" id="id6">
+<div class="figure" id="id7">
 <span id="decay-analysis-fig-a"></span><a class="reference internal image-reference" href="_images/A_factors.png"><img alt="_images/A_factors.png" src="_images/A_factors.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-text"><em>Comparison of amplification factors</em></span></p>
 </div>
@@ -394,7 +408,7 @@ discretization parameter, here <span class="math">\(\Delta t\)</span>, becomes s
 present case, we let <span class="math">\(p\)</span> be our small discretization parameter, and it
 makes sense to simplify the expressions for <span class="math">\(A\)</span> and <span class="math">\({A_{\small\mbox{e}}}\)</span> by using
 Taylor polynomials around <span class="math">\(p=0\)</span>.  The Taylor polynomials are accurate
-for small <span class="math">\(p\)</span> and greatly simplifies the comparison of the analytical
+for small <span class="math">\(p\)</span> and greatly simplify the comparison of the analytical
 expressions since we then can compare polynomials, term by term.</p>
 <p>Calculating the Taylor series for <span class="math">\({A_{\small\mbox{e}}}\)</span> is easily done by hand, but
 the three versions of <span class="math">\(A\)</span> for <span class="math">\(\theta=0,1,{\frac{1}{2}}\)</span> lead to more
@@ -413,7 +427,7 @@ Here is a simple example. We strongly recommend to use
 (<code class="docutils literal"><span class="pre">&gt;&gt;&gt;</span></code> prompt) to compute a Taylor polynomial approximation to <span class="math">\(e^{-p}\)</span>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c"># Create p as a mathematical symbol with name &#39;p&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s">&#39;p&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Symbols</span><span class="p">(</span><span class="s">&#39;p&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c"># Create a mathematical expression with p</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A_e</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="p">)</span>
 <span class="go">&gt;&gt;&gt;</span>
@@ -476,12 +490,13 @@ clearly dominates over the higher-order terms (think of <span class="math">\(p=0
 <span class="math">\(p\)</span> is a hundred times larger than <span class="math">\(p^2\)</span>).</p>
 <p>Now, <span class="math">\(a\)</span> is a given parameter in the problem, while <span class="math">\(\Delta t\)</span> is
 what we can vary. Not surprisingly, the error expressions are usually
-written in terms <span class="math">\(\Delta t\)</span>. When then have</p>
-<div class="math">
-\[\begin{split}A-{A_{\small\mbox{e}}} = \left\lbrace\begin{array}{ll}
-{\mathcal{O}(\Delta t^2)}, &amp; \hbox{Forward and Backward Euler},\\
-{\mathcal{O}(\Delta t^3)}, &amp; \hbox{Crank-Nicolson}
-\end{array}\right.\end{split}\]</div>
+written in terms <span class="math">\(\Delta t\)</span>. We then have</p>
+<div class="math" id="eq-auto6">
+\[\begin{split}\tag{9}
+A-{A_{\small\mbox{e}}} = \left\lbrace\begin{array}{ll}
+    {\mathcal{O}(\Delta t^2)}, &amp; \hbox{Forward and Backward Euler},\\
+    {\mathcal{O}(\Delta t^3)}, &amp; \hbox{Crank-Nicolson}
+    \end{array}\right.\end{split}\]</div>
 <p>We say that the Crank-Nicolson scheme has an error in the amplification
 factor of order <span class="math">\(\Delta t^3\)</span>, while the two other schemes are
 of order <span class="math">\(\Delta t^2\)</span> in the same quantity.</p>
@@ -520,7 +535,8 @@ over all previous time steps. This error,
 <span class="math">\(e^n = u^n-{u_{\small\mbox{e}}}(t_n)\)</span>, is known as the <em>global error</em>. We
 may look at <span class="math">\(u^n\)</span> for some <span class="math">\(n\)</span> and Taylor expand the
 mathematical expressions as functions of <span class="math">\(p=a\Delta t\)</span> to get a simple
-expression for the global error (for small <span class="math">\(p\)</span>):</p>
+expression for the global error (for small <span class="math">\(p\)</span>). Continuing the
+<code class="docutils literal"><span class="pre">sympy</span></code> expression from previous section, we can write</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s">&#39;n&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u_e</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u_n</span> <span class="o">=</span> <span class="n">A</span><span class="o">**</span><span class="n">n</span>
@@ -542,12 +558,15 @@ as <span class="math">\(p\rightarrow 0\)</span> since <span class="math">\(t=n\D
 <span class="math">\(n\)</span> must increase like <span class="math">\(\Delta t^{-1}\)</span>. With <span class="math">\(n\)</span> substituted by
 <span class="math">\(t/\Delta t\)</span> in
 the leading-order error terms, these become</p>
-<div class="math" id="equation-decay:analysis:gobal:error:FE">
-<span id="eq-decay-analysis-gobal-error-fe"></span><span class="eqno">(4)</span>\[     e^n = \frac{1}{2} n p^2 = {\frac{1}{2}}ta^2\Delta t, \hbox{Forward Euler}\]</div>
-<div class="math" id="equation-decay:analysis:gobal:error:BE">
-<span id="eq-decay-analysis-gobal-error-be"></span><span class="eqno">(5)</span>\[     e^n = -\frac{1}{2} n p^2 = -{\frac{1}{2}}ta^2\Delta t, \hbox{Backward Euler}\]</div>
-<div class="math" id="equation-decay:analysis:gobal:error:CN">
-<span id="eq-decay-analysis-gobal-error-cn"></span><span class="eqno">(6)</span>\[     e^n = \frac{1}{12}np^3 = \frac{1}{12}ta^3\Delta t^2, \hbox{Crank-Nicolson}\]</div>
+<div class="math" id="eq-decay-analysis-gobal-error-fe">
+\[\tag{10}
+e^n = \frac{1}{2} n p^2 = {\frac{1}{2}}ta^2\Delta t, \hbox{Forward Euler}\]</div>
+<div class="math" id="eq-decay-analysis-gobal-error-be">
+\[\tag{11}
+e^n = -\frac{1}{2} n p^2 = -{\frac{1}{2}}ta^2\Delta t, \hbox{Backward Euler}\]</div>
+<div class="math" id="eq-decay-analysis-gobal-error-cn">
+\[\tag{12}
+e^n = \frac{1}{12}np^3 = \frac{1}{12}ta^3\Delta t^2, \hbox{Crank-Nicolson}\]</div>
 <p>The global error is therefore of
 second order (in <span class="math">\(\Delta t\)</span>) for the Crank-Nicolson scheme and of
 first order for the other two schemes.</p>
@@ -562,19 +581,25 @@ this is a much desired property of a numerical method.</p>
 <div class="section" id="integrated-error">
 <span id="decay-analysis-gobal-error-int"></span><h2>Integrated error<a class="headerlink" href="#integrated-error" title="Permalink to this headline">¶</a></h2>
 <p>The <span class="math">\(L^2\)</span> norm of the error can be computed by treating <span class="math">\(e^n\)</span> as a function
-of <span class="math">\(t\)</span> in <code class="docutils literal"><span class="pre">sympy</span></code> and performing symbolic integration. For
-the Forward Euler scheme we have</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s">&#39;p n a dt t T &#39;</span><span class="n">theta</span><span class="s">&#39;)</span>
+of <span class="math">\(t\)</span> in <code class="docutils literal"><span class="pre">sympy</span></code> and performing symbolic integration.
+From now on we shall do <code class="docutils literal"><span class="pre">import</span> <span class="pre">sympy</span> <span class="pre">as</span> <span class="pre">sym</span></code> and prefix all functions
+in <code class="docutils literal"><span class="pre">sympy</span></code> by <code class="docutils literal"><span class="pre">sym</span></code> to explicitly notify ourselves that the functions
+are from <code class="docutils literal"><span class="pre">sympy</span></code>. This is particularly advantageous when we use
+mathematical functions like <code class="docutils literal"><span class="pre">sin</span></code>: <code class="docutils literal"><span class="pre">sym.sin</span></code> is for symbolic expressions,
+while <code class="docutils literal"><span class="pre">sin</span></code> from <code class="docutils literal"><span class="pre">numpy</span></code> or <code class="docutils literal"><span class="pre">math</span></code> is for numerical computation.
+For the Forward Euler scheme we have</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sympy</span> <span class="kn">as</span> <span class="nn">sym</span>
+<span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s">&#39;p n a dt t T theta&#39;</span><span class="p">)</span>
 <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">theta</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
-<span class="n">u_e</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+<span class="n">u_e</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
 <span class="n">u_n</span> <span class="o">=</span> <span class="n">A</span><span class="o">**</span><span class="n">n</span>
 <span class="n">error</span> <span class="o">=</span> <span class="n">u_e</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">-</span> <span class="n">u_n</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">series</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="c"># Introduce t and dt instead of n and p</span>
 <span class="n">error</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="s">&#39;n&#39;</span><span class="p">,</span> <span class="s">&#39;t/dt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s">&#39;a*dt&#39;</span><span class="p">)</span>
 <span class="n">error</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">as_leading_term</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="c"># study only the first term</span>
 <span class="k">print</span> <span class="n">error</span>
-<span class="n">error_L2</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">integrate</span><span class="p">(</span><span class="n">error</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">)))</span>
-<span class="k">print</span> <span class="n">error_L2</span>
+<span class="n">error_L2</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">error</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">)))</span>
+<span class="k">print</span> <span class="s">&#39;L2 error:&#39;</span><span class="p">,</span> <span class="n">sym</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">error_error_L2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The output reads</p>
@@ -599,16 +624,18 @@ we have</p>
 =\Delta t\frac{1}{4}p^4 \sum_{n=0}^{N_t} n^2{\thinspace .}\]</div>
 <p>Now, <span class="math">\(\sum_{n=0}^{N_t} n^2\approx \frac{1}{3}N_t^3\)</span>. Using this approximation,
 setting <span class="math">\(N_t =T/\Delta t\)</span>, and taking the square root gives the expression</p>
-<div class="math" id="equation-decay:analysis:gobal:error_int:FE">
-<span id="eq-decay-analysis-gobal-error-int-fe"></span><span class="eqno">(7)</span>\[     ||e^n||_{\ell^2} = \frac{1}{2}\sqrt{\frac{T^3}{3}} a^2\Delta t{\thinspace .}\]</div>
+<div class="math" id="eq-decay-analysis-gobal-error-int-fe">
+\[\tag{13}
+||e^n||_{\ell^2} = \frac{1}{2}\sqrt{\frac{T^3}{3}} a^2\Delta t{\thinspace .}\]</div>
 <p>Calculations for the Backward Euler scheme are very similar and provide
 the same result, while the Crank-Nicolson scheme leads to</p>
-<div class="math" id="equation-decay:analysis:gobal:error_int:CN">
-<span id="eq-decay-analysis-gobal-error-int-cn"></span><span class="eqno">(8)</span>\[     ||e^n||_{\ell^2} = \frac{1}{12}\sqrt{\frac{T^3}{3}}a^3\Delta t^2{\thinspace .}\]</div>
+<div class="math" id="eq-decay-analysis-gobal-error-int-cn">
+\[\tag{14}
+||e^n||_{\ell^2} = \frac{1}{12}\sqrt{\frac{T^3}{3}}a^3\Delta t^2{\thinspace .}\]</div>
 <div class="admonition-summary-of-errors admonition">
 <p class="first admonition-title">Summary of errors</p>
-<p>Both the global point-wise errors <a href="#equation-decay:analysis:gobal:error:FE">(4)</a>-<a href="#equation-decay:analysis:gobal:error:CN">(6)</a>
-and their time-integrated versions <a href="#equation-decay:analysis:gobal:error_int:FE">(7)</a> and <a href="#equation-decay:analysis:gobal:error_int:CN">(8)</a> show that</p>
+<p>Both the global point-wise errors <a class="reference internal" href="#eq-decay-analysis-gobal-error-fe"><span class="std std-ref">(10)</span></a>-<a class="reference internal" href="#eq-decay-analysis-gobal-error-cn"><span class="std std-ref">(12)</span></a>
+and their time-integrated versions <a class="reference internal" href="#eq-decay-analysis-gobal-error-int-fe"><span class="std std-ref">(13)</span></a> and <a class="reference internal" href="#eq-decay-analysis-gobal-error-int-cn"><span class="std std-ref">(14)</span></a> show that</p>
 <blockquote class="last">
 <div><ul class="simple">
 <li>the Crank-Nicolson scheme is of second order in <span class="math">\(\Delta t\)</span>, and</li>
@@ -638,9 +665,10 @@ this equation. Since <span class="math">\({u_{\small\mbox{e}}}(t)\)</span> in ge
 discrete equation, we get an error in the discrete equation. This
 error is called
 a <em>residual</em>, denoted here by <span class="math">\(R^n\)</span>:</p>
-<div class="math" id="equation-decay:analysis:trunc:Req">
-<span id="eq-decay-analysis-trunc-req"></span><span class="eqno">(9)</span>\[     R^n = \frac{{u_{\small\mbox{e}}}(t_{n+1})-{u_{\small\mbox{e}}}(t_n)}{\Delta t} + a{u_{\small\mbox{e}}}(t_n)
-     {\thinspace .}\]</div>
+<div class="math" id="eq-decay-analysis-trunc-req">
+\[\tag{15}
+R^n = \frac{{u_{\small\mbox{e}}}(t_{n+1})-{u_{\small\mbox{e}}}(t_n)}{\Delta t} + a{u_{\small\mbox{e}}}(t_n)
+    {\thinspace .}\]</div>
 <p>The residual is defined at each mesh point and is therefore a mesh
 function with a superscript <span class="math">\(n\)</span>.</p>
 <p>The interesting feature of <span class="math">\(R^n\)</span> is to see how it
@@ -653,7 +681,7 @@ We have that</p>
 \[{u_{\small\mbox{e}}}(t_{n+1}) = {u_{\small\mbox{e}}}(t_n) + {u_{\small\mbox{e}}}'(t_n)\Delta t + \frac{1}{2}{u_{\small\mbox{e}}}''(t_n)
 \Delta t^2 + \cdots,\]</div>
 <p>which may be used to reformulate the fraction in
-<a href="#equation-decay:analysis:trunc:Req">(9)</a> so that</p>
+<a class="reference internal" href="#eq-decay-analysis-trunc-req"><span class="std std-ref">(15)</span></a> so that</p>
 <div class="math">
 \[R^n = {u_{\small\mbox{e}}}'(t_n) + \frac{1}{2}{u_{\small\mbox{e}}}''(t_n)\Delta t + \ldots + a{u_{\small\mbox{e}}}(t_n){\thinspace .}\]</div>
 <p>Now, <span class="math">\({u_{\small\mbox{e}}}\)</span> fulfills the ODE <span class="math">\({u_{\small\mbox{e}}}'=-a{u_{\small\mbox{e}}}\)</span>, which means that the first and last
@@ -736,23 +764,543 @@ in the world of nonlinear differential equations the relations between
 consistency, stability, and convergence are much more complicated.</p>
 <p>We have seen in the previous analysis that the Forward Euler,
 Backward Euler, and Crank-Nicolson schemes are convergent (<span class="math">\(e^n\rightarrow 0\)</span>),
-that they are consistent (<span class="math">\(R^n\rightarrow 0\)</span>, and that they are
+that they are consistent (<span class="math">\(R^n\rightarrow 0\)</span>), and that they are
 stable under certain conditions on the size of <span class="math">\(\Delta t\)</span>.
 We have also derived explicit mathematical expressions for <span class="math">\(e^n\)</span>,
 the truncation error, and the stability criteria.</p>
 </div>
 </div>
+<div class="section" id="various-types-of-errors-in-a-differential-equation-model">
+<h1>Various types of errors in a differential equation model<a class="headerlink" href="#various-types-of-errors-in-a-differential-equation-model" title="Permalink to this headline">¶</a></h1>
+<p>So far we have been concerned with one type of error, namely the
+discretization error committed by replacing the differential equation
+problem by a recursive set of difference equations. There are,
+however, other types of errors that must be considered too. We can
+classify errors into four groups:</p>
+<ol class="arabic simple">
+<li>model errors: how wrong is the ODE model?</li>
+<li>data errors: how wrong are the input parameters?</li>
+<li>discretization errors: how wrong is the numerical method?</li>
+<li>rounding errors: how wrong is the computer arithmetics?</li>
+</ol>
+<p>Below, we shall briefly describe and illustrate these four types
+of errors. Each of the errors deserve its own chapter, at least,
+so the treatment here is superficial to give some indication
+about the nature of size of the errors in a specific case.
+Some of the required computer codes quickly become more advanced
+than in the rest of the book, but we include to code to document
+all the details that lie behind the investigations of the errors.</p>
+<div class="section" id="model-errors">
+<h2>Model errors<a class="headerlink" href="#model-errors" title="Permalink to this headline">¶</a></h2>
+<p>Any mathematical model like <span class="math">\(u^{\prime}=-au\)</span>, <span class="math">\(u(0)=I\)</span>, is just an
+approximate description of a real-world phenomenon. How good this
+approximation is can be determined by comparing physical experiments
+with what the model predicts. This is the topic of <em>validation</em> and is
+obviously an essential part of mathematical model. One difficulty with
+validation is that we need to estimate the parameters in the model, and
+this brings in data errors. Quantifying data errors is challenging,
+and a frequently used method is to <em>tune</em> the parameters in the model
+to make model predictions as close as possible to the experiments.
+That is, we do not attempt to measure or estimate all input
+parameters, but instead find values that &#8220;make the model good&#8221;.
+Another difficulty is that the response in experiments also contains
+errors due to measurement techniques.</p>
+<p>Let us try to quantify model errors in a very simple example involving
+<span class="math">\(u^{\prime}=-au\)</span>, <span class="math">\(u(0)=I\)</span>, with constant <span class="math">\(a\)</span>.  Suppose a more
+accurate model has <span class="math">\(a\)</span> as a function of time rather than a
+constant. Here we take <span class="math">\(a(t)\)</span> as a simple linear function: <span class="math">\(a +
+pt\)</span>. Obviously, <span class="math">\(u\)</span> with <span class="math">\(p&gt;0\)</span> will go faster to zero with time than a
+constant <span class="math">\(a\)</span>.</p>
+<p>The solution of</p>
+<div class="math">
+\[u^{\prime} = (a + pt)u,\quad u(0)=I,\]</div>
+<p>can be shown (see below) to be</p>
+<div class="math">
+\[u(t) = I e^{-t \left(a + \frac{1}{2} pt\right)}{\thinspace .}\]</div>
+<p>Let a Python function <code class="docutils literal"><span class="pre">true_model(t,</span> <span class="pre">I,</span> <span class="pre">a,</span> <span class="pre">p)</span></code> implement the
+above <span class="math">\(u(t)\)</span> and let
+the solution of our primary ODE <span class="math">\(u^{\prime}=-au\)</span> be available as
+the function <code class="docutils literal"><span class="pre">model(t,</span> <span class="pre">I,</span> <span class="pre">a)</span></code>.
+We can now make some plots of the two models and the error for some values
+of <span class="math">\(p\)</span>. Figure <a class="reference internal" href="#decay-analysis-model-errors-fig-model-u"><span class="std std-ref">Comparison of two models for three values of </span></a> displays
+<code class="docutils literal"><span class="pre">model</span></code> versus <code class="docutils literal"><span class="pre">true_model</span></code> for <span class="math">\(p=0.01, 0.1, 1\)</span>, while Figure
+<a class="reference internal" href="#decay-analysis-model-errors-fig-model-e"><span class="std std-ref">Discrepancy of Comparison of two models for three values of </span></a> shows the difference
+between the two models as a function of <span class="math">\(t\)</span> for the same <span class="math">\(p\)</span> values.</p>
+<div class="figure" id="id8">
+<span id="decay-analysis-model-errors-fig-model-u"></span><a class="reference internal image-reference" href="_images/model_errors_u.png"><img alt="_images/model_errors_u.png" src="_images/model_errors_u.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">Comparison of two models for three values of <span class="math">\(p\)</span></span></p>
+</div>
+<div class="figure" id="id9">
+<span id="decay-analysis-model-errors-fig-model-e"></span><a class="reference internal image-reference" href="_images/model_errors_e.png"><img alt="_images/model_errors_e.png" src="_images/model_errors_e.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-text">Discrepancy of Comparison of two models for three values of <span class="math">\(p\)</span></span></p>
+</div>
+<p>The code that was used to produce the plots looks like</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span><span class="p">,</span> <span class="n">exp</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> \
+     <span class="n">plot</span><span class="p">,</span> <span class="n">show</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">legend</span><span class="p">,</span> <span class="n">savefig</span><span class="p">,</span> <span class="n">figure</span><span class="p">,</span> <span class="n">title</span>
+
+<span class="k">def</span> <span class="nf">model_errors</span><span class="p">():</span>
+    <span class="n">p_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+    <span class="n">legends</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c"># Work with figure(1) for the discrepancy and figure(2+i)</span>
+    <span class="c"># for plotting the model and the true model for p value no i</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_values</span><span class="p">):</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">u_true</span> <span class="o">=</span> <span class="n">true_model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">discrepancy</span> <span class="o">=</span> <span class="n">u_true</span> <span class="o">-</span> <span class="n">u</span>
+        <span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">discrepancy</span><span class="p">)</span>
+        <span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="s">&#39;r-&#39;</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u_true</span><span class="p">,</span> <span class="s">&#39;b--&#39;</span><span class="p">)</span>
+        <span class="n">legends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;p=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">legend</span><span class="p">(</span><span class="n">legends</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">&#39;lower right&#39;</span><span class="p">)</span>
+    <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp1.png&#39;</span><span class="p">);</span> <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp1.pdf&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p_values</span><span class="p">):</span>
+        <span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">legend</span><span class="p">([</span><span class="s">&#39;model&#39;</span><span class="p">,</span> <span class="s">&#39;true model&#39;</span><span class="p">])</span>
+        <span class="n">title</span><span class="p">(</span><span class="s">&#39;p=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp</span><span class="si">%d</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">i</span><span class="p">));</span> <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp</span><span class="si">%d</span><span class="s">.pdf&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>To derive the analytical solution of the model <span class="math">\(u^{\prime}=-(a+pt)u\)</span>, <span class="math">\(u(0)=I\)</span>, we can use SymPy and the code below. This is somewhat advanced
+SymPy use for a newbie, but serves to illustrate the possibilities to
+solve differential equations by symbolic software.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">derive_true_solution</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">sympy</span> <span class="kn">as</span> <span class="nn">sym</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s">&#39;u&#39;</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">sym</span><span class="o">.</span><span class="n">Function</span><span class="p">)</span>  <span class="c"># function u(t)</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">I</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s">&#39;t a p I&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Define ODE: u&#39; = (a + p*t)*u. Return residual.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">p</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">u</span>
+
+    <span class="n">eq</span> <span class="o">=</span> <span class="n">ode</span><span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span>
+    <span class="c"># s is sym.Eq object u(t) == expression, we want u = expression,</span>
+    <span class="c"># so grab the right-hand side of the equality (Eq obj.)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">rhs</span>
+    <span class="k">print</span> <span class="n">u</span>
+    <span class="c"># u contains C1, replace it with a symbol we can fit to</span>
+    <span class="c"># the initial condition</span>
+    <span class="n">C1</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s">&#39;C1&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="s">&#39;C1&#39;</span><span class="p">,</span> <span class="n">C1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">u</span>
+    <span class="c"># Initial condition equation</span>
+    <span class="n">eq</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">I</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">C1</span><span class="p">)</span>  <span class="c"># solve eq wrt C1</span>
+    <span class="k">print</span> <span class="n">s</span>
+    <span class="c"># s is a list s[0] = ...</span>
+    <span class="c"># Replace C1 in u by the solution</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span> <span class="s">&#39;u:&#39;</span><span class="p">,</span> <span class="n">u</span>
+    <span class="k">print</span> <span class="n">sym</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>  <span class="c"># latex formula for reports</span>
+
+    <span class="c"># Consistency check: u must fulfill ODE and initial condition</span>
+    <span class="k">print</span> <span class="s">&#39;ODE is fulfilled:&#39;</span><span class="p">,</span> <span class="n">sym</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">ode</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+    <span class="k">print</span> <span class="s">&#39;u(0)-I:&#39;</span><span class="p">,</span> <span class="n">sym</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">I</span><span class="p">)</span>
+
+    <span class="c"># Convert u expression to Python numerical function</span>
+    <span class="c"># (modules=&#39;numpy&#39; allows numpy arrays as arguments,</span>
+    <span class="c"># we want this for t)</span>
+    <span class="n">u_func</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> <span class="n">u</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">u_func</span>
+
+<span class="n">true_model</span> <span class="o">=</span> <span class="n">derive_true_solution</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data-errors">
+<h2>Data errors<a class="headerlink" href="#data-errors" title="Permalink to this headline">¶</a></h2>
+<p>By &#8220;data&#8221; we mean all the input parameters to a model, in our case
+<span class="math">\(I\)</span> and <span class="math">\(a\)</span>. The values of these may contain errors, or at least
+uncertainty. Suppose <span class="math">\(I\)</span> and <span class="math">\(a\)</span> are measured from some physical
+experiments. Ideally, we have many samples of <span class="math">\(I\)</span> and <span class="math">\(a\)</span> and
+from these we can fit probability distributions. Assume that <span class="math">\(I\)</span>
+turns out to be normally distributed with mean 1 and standard deviation 0.2,
+while <span class="math">\(a\)</span> is uniformly distributed in the interval <span class="math">\([0.5, 1.5]\)</span>.</p>
+<p id="index-12">How will the uncertainty in <span class="math">\(I\)</span> and <span class="math">\(a\)</span> propagate through the model
+<span class="math">\(u=Ie^{-at}\)</span>? That is, what is the uncertainty in <span class="math">\(u\)</span> at a particular
+time <span class="math">\(t\)</span>? This answer can easily be answered using <em>Monte Carlo
+simulation</em>. It means that we draw a lot of samples from the
+distributions for <span class="math">\(I\)</span> and <span class="math">\(a\)</span>. For each combination of <span class="math">\(I\)</span> and <span class="math">\(a\)</span>
+sample we compute the corresponding <span class="math">\(u\)</span> value for selected values of
+<span class="math">\(t\)</span>.  Afterwards, we can for each selected <span class="math">\(t\)</span> values make a histogram
+of all the computed <span class="math">\(u\)</span> values to see what the distribution of <span class="math">\(u\)</span>
+values look like. Figure <a class="reference internal" href="#decay-analysis-data-errors-fig"><span class="std std-ref">Histogram of solution uncertainty at three time points, due to data errors</span></a> shows the
+histograms corresponding to <span class="math">\(t=0,1,3\)</span>. We see that the distribution of
+<span class="math">\(u\)</span> values is much like a symmetric normal distribution at <span class="math">\(t=0\)</span>,
+centered around <span class="math">\(u=1\)</span>. At later times, the distribution gets more
+asymmetric and narrower. It means that the uncertainty decreases with
+time.</p>
+<p>From the computed <span class="math">\(u\)</span> values we can easily calculate the mean and
+standard deviation. The table below shows the mean and standard
+deviation values along with the value if we just use the formula
+<span class="math">\(u=Ie^{-at}\)</span> with the mean values of <span class="math">\(I\)</span> and <span class="math">\(a\)</span>: <span class="math">\(I=1\)</span> and <span class="math">\(a=1\)</span>. As
+we see, there is some discrepancy between this latter (naive)
+computation and the mean value produced by Monte Carlo simulation.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="21%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">time</th>
+<th class="head">mean</th>
+<th class="head">st.dev.</th>
+<th class="head"><span class="math">\(u(t;I=a=1)\)</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>1.00</td>
+<td>0.200</td>
+<td>1.00</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>0.38</td>
+<td>0.135</td>
+<td>0.37</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>0.07</td>
+<td>0.060</td>
+<td>0.14</td>
+</tr>
+</tbody>
+</table>
+<p>Actually, <span class="math">\(u(t;I,a)\)</span> becomes a stochastic variable for each <span class="math">\(t\)</span> when
+<span class="math">\(I\)</span> and <span class="math">\(a\)</span> are stochastic variables, as they are in the above
+Monte Carlo simulation. The mean of the stochastic <span class="math">\(u(t;I,a)\)</span> is
+not equal to <span class="math">\(u\)</span> with mean values of the input data, <span class="math">\(u(t;I=a=1)\)</span>,
+unless <span class="math">\(u\)</span> is linear in <span class="math">\(I\)</span> and <span class="math">\(a\)</span> (here <span class="math">\(u\)</span> is nonlinear in <span class="math">\(a\)</span>).</p>
+<div class="figure" id="id10">
+<span id="decay-analysis-data-errors-fig"></span><a class="reference internal image-reference" href="_images/data_errors.png"><img alt="_images/data_errors.png" src="_images/data_errors.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text"><em>Histogram of solution uncertainty at three time points, due to data errors</em></span></p>
+</div>
+<p id="index-13">Estimating statistical uncertainty in input data and investigating how
+this uncertainty propagates to uncertainty in the response of a
+differential equation model (or other models) are key topics in the
+scientific field called <em>uncertainty quantification</em>, simply known as
+UQ.  Estimation of the statistical properties of input data can either
+be done directly from physical experiments, or one can find the
+parameter values that provide a &#8220;best fit&#8221; of model predictions with
+experiments. Monte Carlo simulation is a general and widely used tool
+to solve the associated statistical problems.  The accuracy of the
+Monte Carlo results increases with increasing number of samples <span class="math">\(N\)</span>,
+typically the error behaves like <span class="math">\(N^{-1/2}\)</span>.</p>
+<p>The computer code required to do the Monte Carlo simulation and
+produce the plots in Figure <a class="reference internal" href="#decay-analysis-data-errors-fig"><span class="std std-ref">Histogram of solution uncertainty at three time points, due to data errors</span></a>
+is shown below.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">data_errors</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span>
+    <span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">hist</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+    <span class="c"># Draw random numbers for I and a</span>
+    <span class="n">I_values</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">a_values</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="c"># Compute corresponding u values for some t values</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">u_values</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c"># samples for various t values</span>
+    <span class="n">u_mean</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">u_std</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">t_</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="c"># Compute u samples corresponding to I and a samples</span>
+        <span class="n">u_values</span><span class="p">[</span><span class="n">t_</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="p">(</span><span class="n">t_</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">I_values</span><span class="p">,</span> <span class="n">a_values</span><span class="p">)]</span>
+        <span class="n">u_mean</span><span class="p">[</span><span class="n">t_</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">u_values</span><span class="p">[</span><span class="n">t_</span><span class="p">])</span>
+        <span class="n">u_std</span><span class="p">[</span><span class="n">t_</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="p">(</span><span class="n">u_values</span><span class="p">[</span><span class="n">t_</span><span class="p">])</span>
+
+        <span class="n">figure</span><span class="p">()</span>
+        <span class="n">dummy1</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">dummy2</span> <span class="o">=</span> <span class="n">hist</span><span class="p">(</span>
+            <span class="n">u_values</span><span class="p">[</span><span class="n">t_</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">I_values</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+            <span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s">&#39;green&#39;</span><span class="p">)</span>
+        <span class="c">#plot(bins)</span>
+        <span class="n">title</span><span class="p">(</span><span class="s">&#39;t=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">t_</span><span class="p">)</span>
+        <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp_</span><span class="si">%g</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="n">t_</span><span class="p">);</span> <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp_</span><span class="si">%g</span><span class="s">.pdf&#39;</span> <span class="o">%</span> <span class="n">t_</span><span class="p">)</span>
+    <span class="c"># Table of mean and standard deviation values</span>
+    <span class="k">print</span> <span class="s">&#39;time   mean   st.dev.&#39;</span>
+    <span class="k">for</span> <span class="n">t_</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%3g</span><span class="s">    </span><span class="si">%.2f</span><span class="s">    </span><span class="si">%.3f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t_</span><span class="p">,</span> <span class="n">u_mean</span><span class="p">[</span><span class="n">t_</span><span class="p">],</span> <span class="n">u_std</span><span class="p">[</span><span class="n">t_</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="discretization-errors">
+<h2>Discretization errors<a class="headerlink" href="#discretization-errors" title="Permalink to this headline">¶</a></h2>
+<p>The errors implied by solving the differential equation problem by
+the <span class="math">\(\theta\)</span>-rule has been thoroughly analyzed in the previous
+sections. Below are some plots of the error versus time for the
+Forward Euler (FE), Backward Euler (BN), and Crank-Nicolson (CN)
+schemes for decreasing values of <span class="math">\(\Delta t\)</span>. Since the difference
+in magnitude between the errors in the CN scheme versus the FE and
+BN schemes grows significantly as <span class="math">\(\Delta t\)</span> is reduced (the error
+goes like <span class="math">\(\Delta t^2\)</span> for CN versus <span class="math">\(\Delta t\)</span> for FE/BE), we have
+plotted the logarithm of the absolute value of the numerical error
+as a mesh function.</p>
+<div class="figure" id="id11">
+<span id="decay-analysis-numerical-errors-fig"></span><a class="reference internal image-reference" href="_images/numerical_errors.png"><img alt="_images/numerical_errors.png" src="_images/numerical_errors.png" style="width: 700px;" /></a>
+<p class="caption"><span class="caption-text"><em>Discretization errors in various schemes for four time step values</em></span></p>
+</div>
+<p>The table below presents exact figures of the discretization error
+for various choices of <span class="math">\(\Delta t\)</span> and schemes.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="29%" />
+<col width="29%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="math">\(\Delta t\)</span></th>
+<th class="head">FE</th>
+<th class="head">BE</th>
+<th class="head">CN</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0.4</td>
+<td><span class="math">\(9\cdot 10^{-2}\)</span></td>
+<td><span class="math">\(6\cdot 10^{-2}\)</span></td>
+<td>$ 5cdot 10^{-3}$</td>
+</tr>
+<tr class="row-odd"><td>0.1</td>
+<td><span class="math">\(2\cdot 10^{-2}\)</span></td>
+<td><span class="math">\(2\cdot 10^{-2}\)</span></td>
+<td>$ 3cdot 10^{-4}$</td>
+</tr>
+<tr class="row-even"><td>0.01</td>
+<td><span class="math">\(2\cdot 10^{-3}\)</span></td>
+<td><span class="math">\(2\cdot 10^{-3}\)</span></td>
+<td>$ 3cdot 10^{-6}$</td>
+</tr>
+</tbody>
+</table>
+<p>The computer code used to generate the plots appear next. It makes use
+of a <code class="docutils literal"><span class="pre">solver</span></code> function
+for computing the numerical solution of <span class="math">\(u^{\prime}=-au\)</span> with
+the <span class="math">\(\theta\)</span>-rule.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">discretization_errors</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="nb">abs</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+    <span class="n">schemes</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;FE&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;BE&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;CN&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span>  <span class="c"># theta to scheme name</span>
+    <span class="n">dt_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">:</span>
+        <span class="n">figure</span><span class="p">()</span>
+        <span class="n">legends</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">scheme</span> <span class="ow">in</span> <span class="n">schemes</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">schemes</span><span class="p">[</span><span class="n">scheme</span><span class="p">]</span>
+            <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+            <span class="n">u_e</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
+            <span class="k">print</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">: dt=</span><span class="si">%.2f</span><span class="s">, </span><span class="si">%d</span><span class="s"> steps, max error: </span><span class="si">%.2E</span><span class="s">&#39;</span> <span class="o">%</span> \
+                  <span class="p">(</span><span class="n">scheme</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+            <span class="c"># Plot log(error), but exclude error[0] since it is 0</span>
+            <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">log</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="mi">1</span><span class="p">:])))</span>
+            <span class="n">legends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scheme</span><span class="p">)</span>
+        <span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">);</span>  <span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;log(abs(numerical error))&#39;</span><span class="p">)</span>
+        <span class="n">legend</span><span class="p">(</span><span class="n">legends</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">&#39;upper right&#39;</span><span class="p">)</span>
+        <span class="n">title</span><span class="p">(</span><span class="s">r&#39;$\Delta t=</span><span class="si">%g</span><span class="s">$&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp_dt</span><span class="si">%g</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">);</span> <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp_dt</span><span class="si">%g</span><span class="s">.pdf&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rounding-errors">
+<h2>Rounding errors<a class="headerlink" href="#rounding-errors" title="Permalink to this headline">¶</a></h2>
+<p>Real numbers on a computer are represented by <a class="reference external" href="https://en.wikipedia.org/wiki/Floating_point">floating-point
+numbers</a>, which means
+that just a finite number of digits are stored and used. Therefore,
+the floating-point number is an approximation to the underlying real
+number. When doing arithmetics with floating-point numbers, there will
+be small approximation errors, called round-off errors or rounding
+errors, that may or may not accumulate in comprehensive computations.</p>
+<p>The cause and analysis of rounding errors are described in most books
+on numerical analysis, see for instance Chapter 2 in Gander et
+al. <a class="reference internal" href="._main_analysis002.html#ref1" id="id1">[Ref1]</a>. For very simple algorithms it is possible to
+theoretically establish bounds for the rounding errors, but for most
+algorithms one cannot know to what extent rounding errors accumulate
+and potentially destroy the final answer. <a class="reference internal" href="#decay-analysis-exer-rounding"><span class="std std-ref">Problem 3: Explore rounding errors in numerical calculus</span></a> demonstrates the impact of rounding
+errors on numerical differentiation and integration.</p>
+<p>Here is a simplest possible example of the effect of rounding
+errors:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mf">1.0</span><span class="o">/</span><span class="mi">51</span><span class="o">*</span><span class="mi">51</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">1.0</span><span class="o">/</span><span class="mi">49</span><span class="o">*</span><span class="mi">49</span>
+<span class="go">0.9999999999999999</span>
+</pre></div>
+</div>
+<p>We see that the latter result is not exact, but features an error of
+<span class="math">\(10^{-16}\)</span>. This is the typical level of a rounding error from an
+arithmetic operation with the widely used 64 bit floating-point number
+(<code class="docutils literal"><span class="pre">float</span></code> object in Python, often called <code class="docutils literal"><span class="pre">double</span></code> or double precision
+in other languages). One cannot expect more accuracy than <span class="math">\(10^{-16}\)</span>.
+The big question is if errors at this level accumulate in a given
+numerical algorithm.</p>
+<p>What is the effect of using <code class="docutils literal"><span class="pre">float</span></code> objects and not exact arithmetics
+when solving differential equations? We can investigate this question
+through computer experiments if we have the ability to represent real
+numbers to a desired accuracy. Fortunately, Python has a <code class="docutils literal"><span class="pre">Decimal</span></code>
+object in the <a class="reference external" href="https://docs.python.org/2/library/decimal.html">decimal</a> module that allows us
+to use as many digits in floating-point numbers as we like. We take
+1000 digits as the true answer where rounding errors are negligible,
+and then we run our numerical algorithm (the Crank-Nicolson scheme to
+be precise) with <code class="docutils literal"><span class="pre">Decimal</span></code> objects for all real numbers and compute
+the maximum error arising from using 4, 16, 64, and 128 digits.</p>
+<p>When computing with numbers around unity in size and doing <span class="math">\(N_t=40\)</span>
+time steps, we typically get a rounding error of <span class="math">\(10^{-d}\)</span>, where <span class="math">\(d\)</span>
+is the number of digits used. The effect of rounding errors may
+accumulate if we perform more operations, so increasing the number of
+time steps to 4000 gives a rounding error of the order <span class="math">\(10^{-d+2}\)</span>.
+Also, if we compute with numbers that are much larger than unity, we
+lose accuracy due to rounding errors. For example, for the <span class="math">\(u\)</span> values
+implied by <span class="math">\(I=1000\)</span> and <span class="math">\(a=100\)</span> (<span class="math">\(u\sim 10^3\)</span>), the rounding errors
+increase to about <span class="math">\(10^{-d+3}\)</span>. Below is a table summarizing a set of
+experiments. A rough model for the size of rounding errors is
+<span class="math">\(10^{-d+q+r}\)</span>, where <span class="math">\(d\)</span> is the number of digits, the number of time
+steps is of the order <span class="math">\(10^q\)</span> time steps, and the size of the numbers
+in the arithmetic expressions are of order <span class="math">\(10^r\)</span>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="4%" />
+<col width="22%" />
+<col width="24%" />
+<col width="24%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">digits</th>
+<th class="head"><span class="math">\(u\sim 1\)</span>, <span class="math">\(N_t=40\)</span></th>
+<th class="head"><span class="math">\(u\sim 1\)</span>, <span class="math">\(N_t=4000\)</span></th>
+<th class="head"><span class="math">\(u\sim 10^3\)</span>, <span class="math">\(N_t=40\)</span></th>
+<th class="head"><span class="math">\(u\sim 10^3\)</span>, <span class="math">\(N_t=4000\)</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>4</td>
+<td><span class="math">\(3.05\cdot 10^{-4}\)</span></td>
+<td><span class="math">\(2.51\cdot 10^{-1}\)</span></td>
+<td><span class="math">\(3.05\cdot 10^{-1}\)</span></td>
+<td><span class="math">\(9.82\cdot 10^{2}\)</span></td>
+</tr>
+<tr class="row-odd"><td>16</td>
+<td><span class="math">\(1.71\cdot 10^{-16}\)</span></td>
+<td><span class="math">\(1.42\cdot 10^{-14}\)</span></td>
+<td><span class="math">\(1.58\cdot 10^{-13}\)</span></td>
+<td><span class="math">\(4.84\cdot 10^{-11}\)</span></td>
+</tr>
+<tr class="row-even"><td>64</td>
+<td><span class="math">\(2.99\cdot 10^{-64}\)</span></td>
+<td><span class="math">\(1.80\cdot 10^{-62}\)</span></td>
+<td><span class="math">\(2.06\cdot 10^{-61}\)</span></td>
+<td><span class="math">\(1.04\cdot 10^{-57}\)</span></td>
+</tr>
+<tr class="row-odd"><td>128</td>
+<td><span class="math">\(1.60\cdot 10^{-128}\)</span></td>
+<td><span class="math">\(1.56\cdot 10^{-126}\)</span></td>
+<td><span class="math">\(2.41\cdot 10^{-125}\)</span></td>
+<td><span class="math">\(1.07\cdot 10^{-122}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We realize that rounding errors are at the lowest possible level
+if we scale the differential equation model,
+see the section <span class="xref std std-ref">decay:app:scaling</span>,
+so the numbers entering the computations are of unity in size,
+and if we take a small number of steps (40 steps gives a discretization error
+of <span class="math">\(5\cdot 10^{-3}\)</span> with the Crank-Nicolson scheme).
+In general, rounding errors are negligible in comparison with other errors
+in differential equation models.</p>
+<p>The computer code for doing the reported experiments need a new version
+of the <code class="docutils literal"><span class="pre">solver</span></code> function where we do arithmetics with <code class="docutils literal"><span class="pre">Decimal</span></code>
+objects:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">solver_decimal</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">linspace</span>
+    <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span> <span class="k">as</span> <span class="n">D</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">D</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">D</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">D</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">D</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">Nt</span><span class="o">*</span><span class="n">dt</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>  <span class="c"># array of Decimal objects</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">D</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>               <span class="c"># assign initial condition</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="p">):</span>    <span class="c"># n=0,1,...,Nt-1</span>
+        <span class="n">u</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span>
+</pre></div>
+</div>
+<p>The function below carries out the experiments. We can conveniently
+set the number of digits as we want through the <code class="docutils literal"><span class="pre">decimal.getcontext().prec</span></code>
+variable.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">rounding_errors</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">decimal</span>
+    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="nb">abs</span>
+    <span class="n">digits_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">]</span>
+    <span class="c"># &quot;Exact&quot; arithmetics is taken as 1000 decimals here</span>
+    <span class="n">decimal</span><span class="o">.</span><span class="n">getcontext</span><span class="p">()</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">u_e</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver_decimal</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">digits</span> <span class="ow">in</span> <span class="n">digits_values</span><span class="p">:</span>
+        <span class="n">decimal</span><span class="o">.</span><span class="n">getcontext</span><span class="p">()</span><span class="o">.</span><span class="n">prec</span> <span class="o">=</span> <span class="n">digits</span>  <span class="c"># set no of digits</span>
+        <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver_decimal</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;</span><span class="si">%d</span><span class="s"> digits, </span><span class="si">%d</span><span class="s"> steps, max abs(error): </span><span class="si">%.2E</span><span class="s">&#39;</span> <span class="o">%</span> \
+              <span class="p">(</span><span class="n">digits</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="discussion-of-the-size-of-various-errors">
+<h2>Discussion of the size of various errors<a class="headerlink" href="#discussion-of-the-size-of-various-errors" title="Permalink to this headline">¶</a></h2>
+<p>The previous computational examples of model, data, discretization,
+and rounding errors are tied to one particular mathematical problem,
+so it is in principle dangerous to make general conclusions.  However,
+the illustrations made point to some common trends that apply to
+differential equation models.</p>
+<p>First, rounding errors have very little impact compared to the other
+types of errors.  Second, numerical errors are in general smaller than
+model and data errors, but more importantly, numerical errors are
+often well understood and can be reduced by just increasing the
+computational work (in our example by taking more smaller time steps).</p>
+<p>Third, data errors may be significant, and it also takes a significant
+amount of computational work to quantify them and their impact on the
+solution. Many types of input data are also difficult or impossible
+to measure, so finding suitable values requires tuning of the data
+and the model to a known (measured) response.
+Nevertheless, even if the predictive precision of a model
+is limited because of severe errors or uncertainty in input data, the
+model can still be of high value for investigating qualitative
+properties of the underlying phenomenon. Through computer experiments
+with synthetic input data one can understand a lot of the science or
+engineering that goes into the model.</p>
+<p>Fourth, model errors are the most challenging type of error to deal
+with. Simplicity of model is in general preferred over complexity,
+but adding complexity is often the only way to improve the predictive
+capabilities of a model. More complexity usually also means a need
+for more input data and consequently the danger of increasing
+data errors.</p>
+</div>
+</div>
 <div class="section" id="exercises">
 <h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="exercise-1-visualize-the-accuracy-of-finite-differences">
-<span id="decay-analysis-exer-fd-exp-plot"></span><h2>Exercise 1: Visualize the accuracy of finite differences<a class="headerlink" href="#exercise-1-visualize-the-accuracy-of-finite-differences" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-1-visualize-the-accuracy-of-finite-differences">
+<span id="decay-analysis-exer-fd-exp-plot"></span><h2>Problem 1: Visualize the accuracy of finite differences<a class="headerlink" href="#problem-1-visualize-the-accuracy-of-finite-differences" title="Permalink to this headline">¶</a></h2>
 <p>The purpose of this exercise is to visualize the accuracy of finite difference
 approximations of the derivative of a given function.
 For any finite difference approximation, take the Forward Euler difference
 as an example, and any specific function, take  <span class="math">\(u=e^{-at}\)</span>,
 we may introduce an error fraction</p>
 <div class="math">
-\[E = \frac{[D_t^+ u]^n}{u'(t_n)} = \frac{\exp{(-a(t_n+\Delta t))} - \exp{(-at_n)}}{-a\exp{(-at_n)\Delta t}} = \frac{1}{a\Delta t}\left(1 -\exp{(-a\Delta t)}\right),\]</div>
+\[\begin{split}E = \frac{[D_t^+ u]^n}{u'(t_n)} &amp;= \frac{\exp{(-a(t_n+\Delta t))} - \exp{(-at_n)}}{-a\exp{(-at_n)\Delta t}}\\
+&amp;= \frac{1}{a\Delta t}\left(1 -\exp{(-a\Delta t)}\right),\end{split}\]</div>
 <p>and view <span class="math">\(E\)</span> as a function of <span class="math">\(\Delta t\)</span>. We expect that
 <span class="math">\(\lim_{\Delta t\rightarrow 0}E=1\)</span>, while <span class="math">\(E\)</span> may deviate significantly from
 unity for large <span class="math">\(\Delta t\)</span>. How the error depends on <span class="math">\(\Delta t\)</span> is best
@@ -782,8 +1330,8 @@ expansion. To plot a symbolic expression <code class="docutils literal"><span cl
 expression to a Python function first: <code class="docutils literal"><span class="pre">E</span> <span class="pre">=</span> <span class="pre">sympy.lamdify([p],</span> <span class="pre">E)</span></code>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">decay_plot_fd_error</span></code>.</p>
 </div>
-<div class="section" id="exercise-2-explore-the-rule-for-exponential-growth">
-<span id="decay-analysis-exer-growth"></span><h2>Exercise 2: Explore the <span class="math">\(\theta\)</span>-rule for exponential growth<a class="headerlink" href="#exercise-2-explore-the-rule-for-exponential-growth" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-2-explore-the-rule-for-exponential-growth">
+<span id="decay-analysis-exer-growth"></span><h2>Problem 2: Explore the <span class="math">\(\theta\)</span>-rule for exponential growth<a class="headerlink" href="#problem-2-explore-the-rule-for-exponential-growth" title="Permalink to this headline">¶</a></h2>
 <p>This exercise asks you to solve the ODE <span class="math">\(u'=-au\)</span> with <span class="math">\(a &lt; 0\)</span> such that
 the ODE models exponential growth instead of exponential decay.  A
 central theme is to investigate numerical artifacts and non-physical
@@ -802,8 +1350,33 @@ Write up the amplification factor and plot it for <span class="math">\(\theta=0,
 together with the exact one for <span class="math">\(a\Delta t &lt; 0\)</span>. Use the plot to
 explain the observations made in the experiments.</p>
 <p><strong>Hint.</strong>
-Modify the <a class="reference external" href="http://tinyurl.com/ofkw6kc/analysis/decay_ampf_plot.py">decay_ampf_plot.py</a> code.</p>
+Modify the <a class="reference external" href="http://tinyurl.com/ofkw6kc/analysis/decay_ampf_plot.py">decay_ampf_plot.py</a> code
+(in the <code class="docutils literal"><span class="pre">src/analysis</span></code> directory).</p>
 <p>Filename: <code class="docutils literal"><span class="pre">exponential_growth</span></code>.</p>
+</div>
+<div class="section" id="problem-3-explore-rounding-errors-in-numerical-calculus">
+<span id="decay-analysis-exer-rounding"></span><h2>Problem 3: Explore rounding errors in numerical calculus<a class="headerlink" href="#problem-3-explore-rounding-errors-in-numerical-calculus" title="Permalink to this headline">¶</a></h2>
+<p><strong>a)</strong>
+Compute the absolute values of the errors in the numerical derivative
+of <span class="math">\(e^{-t}\)</span> at <span class="math">\(t=\frac{1}{2}\)</span> for three types of finite difference
+approximations: a forward difference, a backward difference, and
+a centered difference, for <span class="math">\(\Delta t = 2^{-k}\)</span>, <span class="math">\(k=0,4, 8, 12, \ldots, 60\)</span>.
+When do rounding errors destroy the accuracy?</p>
+<p><strong>b)</strong>
+Compute the absolute values of the errors in the numerical
+approximation of <span class="math">\(\int_0^4 e^{-t}dt\)</span> using the Trapezoidal
+and the Midpoint integration methods. Make a table of
+the errors for <span class="math">\(n=2^k\)</span> intervals, <span class="math">\(k=1,3,5=ldots,21\)</span>.
+Is there any impact of rounding errors?</p>
+<p><strong>Hint.</strong>
+The Trapezoidal rule for <span class="math">\(\int_a^bf(x)dx\)</span> reads</p>
+<div class="math">
+\[\int_a^bf(x)dx\approx h(\frac{1}{2} f(a) + \frac{1}{2} f(b) + \sum_{i=1}^{n-1}
+f(a+ih)),\quad h = \frac{b-a}{n}{\thinspace .}\]</div>
+<p>The Midpoint rule is</p>
+<div class="math">
+\[\int_a^bf(x)dx\approx h\sum_{i=1}^n f(a + (i+\frac{1}{2})h){\thinspace .}\]</div>
+<p>Filename: <code class="docutils literal"><span class="pre">rounding</span></code>.</p>
 </div>
 </div>
 
@@ -811,7 +1384,7 @@ Modify the <a class="reference external" href="http://tinyurl.com/ofkw6kc/analys
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <center>
             <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
@@ -840,9 +1413,18 @@ Modify the <a class="reference external" href="http://tinyurl.com/ofkw6kc/analys
 <li><a class="reference internal" href="#consistency-stability-and-convergence">Consistency, stability, and convergence</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#various-types-of-errors-in-a-differential-equation-model">Various types of errors in a differential equation model</a><ul>
+<li><a class="reference internal" href="#model-errors">Model errors</a></li>
+<li><a class="reference internal" href="#data-errors">Data errors</a></li>
+<li><a class="reference internal" href="#discretization-errors">Discretization errors</a></li>
+<li><a class="reference internal" href="#rounding-errors">Rounding errors</a></li>
+<li><a class="reference internal" href="#discussion-of-the-size-of-various-errors">Discussion of the size of various errors</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#exercises">Exercises</a><ul>
-<li><a class="reference internal" href="#exercise-1-visualize-the-accuracy-of-finite-differences">Exercise 1: Visualize the accuracy of finite differences</a></li>
-<li><a class="reference internal" href="#exercise-2-explore-the-rule-for-exponential-growth">Exercise 2: Explore the <span class="math">\(\theta\)</span>-rule for exponential growth</a></li>
+<li><a class="reference internal" href="#problem-1-visualize-the-accuracy-of-finite-differences">Problem 1: Visualize the accuracy of finite differences</a></li>
+<li><a class="reference internal" href="#problem-2-explore-the-rule-for-exponential-growth">Problem 2: Explore the <span class="math">\(\theta\)</span>-rule for exponential growth</a></li>
+<li><a class="reference internal" href="#problem-3-explore-rounding-errors-in-numerical-calculus">Problem 3: Explore rounding errors in numerical calculus</a></li>
 </ul>
 </li>
 </ul>
@@ -852,16 +1434,18 @@ Modify the <a class="reference external" href="http://tinyurl.com/ofkw6kc/analys
                         title="previous chapter">Analysis of exponential decay models</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._main_analysis002.html"
-                        title="next chapter">&lt;no title&gt;</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/._main_analysis001.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+                        title="next chapter">Bibliography</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._main_analysis001.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -875,24 +1459,27 @@ Modify the <a class="reference external" href="http://tinyurl.com/ofkw6kc/analys
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="._main_analysis002.html" title="&lt;no title&gt;"
+          <a href="._main_analysis002.html" title="Bibliography"
              >next</a> |</li>
         <li class="right" >
           <a href="._main_analysis000.html" title="Analysis of exponential decay models"
              >previous</a> |</li>
-        <li><a href="index.html">Analysis of exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Analysis of exponential decay models</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">
   <div class="footer">
-  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;H. P. Langtangen.
   </div>
 </div>
 

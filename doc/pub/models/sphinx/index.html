@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -56,8 +55,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -66,14 +65,14 @@
         <li class="right" >
           <a href="._main_models000.html" title="Generalizations of exponential decay models"
              accesskey="N">next</a> |</li>
-        <li><a href="#">Generalizations of exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Generalizations of exponential decay models</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="generalizations-of-exponential-decay-models">
 <h1>Generalizations of exponential decay models<a class="headerlink" href="#generalizations-of-exponential-decay-models" title="Permalink to this headline">¶</a></h1>
@@ -81,7 +80,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="._main_models000.html">Generalizations of exponential decay models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="._main_models001.html">Scaling  (1)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="._main_models001.html">Scaling</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#dimensionless-variables">Dimensionless variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#dimensionless-numbers">Dimensionless numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#a-scaling-for-vanishing-initial-condition">A scaling for vanishing initial condition</a></li>
@@ -109,14 +108,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._main_models001.html#spreading-of-diseases">Spreading of diseases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._main_models001.html#predator-prey-models-in-ecology">Predator-prey models in ecology</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._main_models001.html#decay-of-atmospheric-pressure-with-altitude">Decay of atmospheric pressure with altitude</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#the-general-model">The general model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#multiple-atmospheric-layers">Multiple atmospheric layers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#simplifications">Simplifications</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_models001.html#constant-layer-temperature">Constant layer temperature</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_models001.html#one-layer-model">One-layer model</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#simplifications">Simplifications</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._main_models001.html#compaction-of-sediments">Compaction of sediments</a></li>
@@ -127,44 +123,45 @@
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#a-crank-nicolson-scheme">A Crank-Nicolson scheme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#physical-data">Physical data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#verification">Verification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#scaling-2">Scaling  (2)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#scaling-2">Scaling</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="._main_models001.html#viscoelastic-materials">Viscoelastic materials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._main_models001.html#decay-odes-from-solving-a-pde-by-fourier-expansions">Decay ODEs from solving a PDE by Fourier expansions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._main_models001.html#exercises">Exercises</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-1-radioactive-decay-of-carbon-14">Exercise 1: Radioactive decay of Carbon-14</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#problem-1-radioactive-decay-of-carbon-14">Problem 1: Radioactive decay of Carbon-14</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-2-derive-schemes-for-newton-s-law-of-cooling">Exercise 2: Derive schemes for Newton&#8217;s law of cooling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-3-implement-schemes-for-newton-s-law-of-cooling">Exercise 3: Implement schemes for Newton&#8217;s law of cooling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-4-find-time-of-murder-from-body-temperature">Exercise 4: Find time of murder from body temperature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-5-simulate-an-oscillating-cooling-process">Exercise 5: Simulate an oscillating cooling process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-6-simulate-stochastic-radioactive-decay">Exercise 6: Simulate stochastic radioactive decay</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-7-radioactive-decay-of-two-substances">Exercise 7: Radioactive decay of two substances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#problem-7-radioactive-decay-of-two-substances">Problem 7: Radioactive decay of two substances</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-8-simulate-a-simple-chemical-reaction">Exercise 8: Simulate a simple chemical reaction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-9-simulate-an-th-order-chemical-reaction">Exercise 9: Simulate an <span class="math">\(n\)</span>-th order chemical reaction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-10-simulate-spreading-of-a-disease">Exercise 10: Simulate spreading of a disease</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-11-simulate-a-biochemical-process">Exercise 11: Simulate a biochemical process</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-12-simulate-the-pressure-drop-in-the-atmosphere">Exercise 12: Simulate the pressure drop in the atmosphere</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-13-make-a-program-for-vertical-motion-in-a-fluid">Exercise 13: Make a program for vertical motion in a fluid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#project-14-simulate-parachuting">Project 14: Simulate parachuting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-15-formulate-vertical-motion-in-the-atmosphere">Exercise 15: Formulate vertical motion in the atmosphere</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-16-simulate-vertical-motion-in-the-atmosphere">Exercise 16: Simulate vertical motion in the atmosphere</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-17-compute-by-solving-an-ode">Exercise 17: Compute <span class="math">\(y=|x|\)</span> by solving an ODE</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-18-simulate-fortune-growth-with-random-interest-rate">Exercise 18: Simulate fortune growth with random interest rate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-19-simulate-a-population-in-a-changing-environment">Exercise 19: Simulate a population in a changing environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-20-simulate-logistic-growth">Exercise 20: Simulate logistic growth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-21-rederive-the-equation-for-continuous-compound-interest">Exercise 21: Rederive the equation for continuous compound interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-10-simulate-a-biochemical-process">Exercise 10: Simulate a biochemical process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-11-simulate-spreading-of-a-disease">Exercise 11: Simulate spreading of a disease</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-12-simulate-predator-prey-interaction">Exercise 12: Simulate predator-prey interaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-13-simulate-the-pressure-drop-in-the-atmosphere">Exercise 13: Simulate the pressure drop in the atmosphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-14-make-a-program-for-vertical-motion-in-a-fluid">Exercise 14: Make a program for vertical motion in a fluid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#project-15-simulate-parachuting">Project 15: Simulate parachuting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-16-formulate-vertical-motion-in-the-atmosphere">Exercise 16: Formulate vertical motion in the atmosphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-17-simulate-vertical-motion-in-the-atmosphere">Exercise 17: Simulate vertical motion in the atmosphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#problem-18-compute-by-solving-an-ode">Problem 18: Compute <span class="math">\(y=|x|\)</span> by solving an ODE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#problem-19-simulate-fortune-growth-with-random-interest-rate">Problem 19: Simulate fortune growth with random interest rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-20-simulate-a-population-in-a-changing-environment">Exercise 20: Simulate a population in a changing environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-21-simulate-logistic-growth">Exercise 21: Simulate logistic growth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-22-rederive-the-equation-for-continuous-compound-interest">Exercise 22: Rederive the equation for continuous compound interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_models001.html#exercise-23-simulate-the-deformation-of-a-viscoelastic-material">Exercise 23: Simulate the deformation of a viscoelastic material</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._main_models002.html">Bibliography</a></li>
 </ul>
 </div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="index">
+<h1>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 </div>
 
@@ -172,7 +169,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <center>
             <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
@@ -182,21 +179,23 @@
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Generalizations of exponential decay models</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#index">Index</a></li>
 </ul>
 
   <h4>Next topic</h4>
   <p class="topless"><a href="._main_models000.html"
                         title="next chapter">Generalizations of exponential decay models</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -210,7 +209,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -219,12 +218,15 @@
         <li class="right" >
           <a href="._main_models000.html" title="Generalizations of exponential decay models"
              >next</a> |</li>
-        <li><a href="#">Generalizations of exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Generalizations of exponential decay models</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">
   <div class="footer">
-  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;H. P. Langtangen.
   </div>
 </div>
 

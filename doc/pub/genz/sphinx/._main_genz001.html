@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -57,8 +56,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -70,119 +69,153 @@
         <li class="right" >
           <a href="._main_genz000.html" title="Generalizations of exponential decay models"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Generalizations of exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Generalizations of exponential decay models</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="model-extensions">
 <h1>Model extensions<a class="headerlink" href="#model-extensions" title="Permalink to this headline">¶</a></h1>
+<p>This section looks at the generalizations to <span class="math">\(u^{\prime}=-a(t)u\)</span>
+and <span class="math">\(u^{\prime}=-a(t)u + b(t)\)</span>. We sketch the corresponding
+implementations of the <span class="math">\(\theta\)</span>-rule for such variable-coefficient ODEs.
+Verification can no longer make use of an exact solution of the
+numerical problem so we make use of manufactured solutions,
+for deriving an exact solution of the ODE problem, and then we can
+compute empirical convergence rates for the method and see if these
+coincide with the expected rates from theory.
+Finally, we see how our numerical methods can be applied to systems
+of ODEs.</p>
+<p>The example programs associated with this chapter are found in
+the directory <a class="reference external" href="http://tinyurl.com/ofkw6kc/genz">src/genz</a>.</p>
 <div class="section" id="generalization-including-a-variable-coefficient">
 <h2>Generalization: including a variable coefficient<a class="headerlink" href="#generalization-including-a-variable-coefficient" title="Permalink to this headline">¶</a></h2>
 <p>In the ODE for decay, <span class="math">\(u^{\prime}=-au\)</span>, we now consider the case where <span class="math">\(a\)</span>
 depends on time:</p>
-<div class="math" id="equation-decay:problem:a">
-<span id="eq-decay-problem-a"></span><span class="eqno">(1)</span>\[     u^{\prime}(t) = -a(t)u(t),\quad t\in (0,T],\quad u(0)=I {\thinspace .}\]</div>
-<p>A Forward Euler scheme consist of evaluating <a href="#equation-decay:problem:a">(1)</a>
+<div class="math" id="eq-decay-problem-a">
+\[\tag{1}
+u^{\prime}(t) = -a(t)u(t),\quad t\in (0,T],\quad u(0)=I {\thinspace .}\]</div>
+<p>A Forward Euler scheme consists of evaluating <a class="reference internal" href="#eq-decay-problem-a"><span class="std std-ref">(1)</span></a>
 at <span class="math">\(t=t_n\)</span> and approximating the derivative with a forward
 difference <span class="math">\([D^+_t u]^n\)</span>:</p>
-<div class="math">
-\[\frac{u^{n+1} - u^n}{\Delta t} = -a(t_n)u^n
-{\thinspace .}\]</div>
+<div class="math" id="eq-auto1">
+\[\tag{2}
+\frac{u^{n+1} - u^n}{\Delta t} = -a(t_n)u^n
+    {\thinspace .}\]</div>
 <p>The Backward Euler scheme becomes</p>
-<div class="math">
-\[\frac{u^{n} - u^{n-1}}{\Delta t} = -a(t_n)u^n
-{\thinspace .}\]</div>
+<div class="math" id="eq-auto2">
+\[\tag{3}
+\frac{u^{n} - u^{n-1}}{\Delta t} = -a(t_n)u^n
+    {\thinspace .}\]</div>
 <p>The Crank-Nicolson method builds on sampling the ODE at
 <span class="math">\(t_{n+\frac{1}{2}}\)</span>. We can evaluate <span class="math">\(a\)</span> at <span class="math">\(t_{n+\frac{1}{2}}\)</span>
 and use an average for <span class="math">\(u\)</span> at
 times <span class="math">\(t_n\)</span> and <span class="math">\(t_{n+1}\)</span>:</p>
-<div class="math">
-\[\frac{u^{n+1} - u^{n}}{\Delta t} = -a(t_{n+\frac{1}{2}})\frac{1}{2}(u^n + u^{n+1})
-{\thinspace .}\]</div>
+<div class="math" id="eq-auto3">
+\[\tag{4}
+\frac{u^{n+1} - u^{n}}{\Delta t} = -a(t_{n+\frac{1}{2}})\frac{1}{2}(u^n + u^{n+1})
+    {\thinspace .}\]</div>
 <p>Alternatively, we can use an average for the product <span class="math">\(au\)</span>:</p>
-<div class="math">
-\[\frac{u^{n+1} - u^{n}}{\Delta t} = -\frac{1}{2}(a(t_n)u^n + a(t_{n+1})u^{n+1})
-{\thinspace .}\]</div>
+<div class="math" id="eq-auto4">
+\[\tag{5}
+\frac{u^{n+1} - u^{n}}{\Delta t} = -\frac{1}{2}(a(t_n)u^n + a(t_{n+1})u^{n+1})
+    {\thinspace .}\]</div>
 <p>The <span class="math">\(\theta\)</span>-rule unifies the three mentioned schemes. One version is to
 have <span class="math">\(a\)</span> evaluated at the weighted time point <span class="math">\((1-\theta)t_n + \theta t_{n+1}\)</span>,</p>
-<div class="math">
-\[\frac{u^{n+1} - u^{n}}{\Delta t} = -a((1-\theta)t_n + \theta t_{n+1})((1-\theta) u^n + \theta u^{n+1})
-{\thinspace .}\]</div>
+<div class="math" id="eq-auto5">
+\[\tag{6}
+\frac{u^{n+1} - u^{n}}{\Delta t} = -a((1-\theta)t_n + \theta t_{n+1})((1-\theta) u^n + \theta u^{n+1})
+    {\thinspace .}\]</div>
 <p>Another possibility is to apply a weighted average for the product <span class="math">\(au\)</span>,</p>
-<div class="math">
-\[\frac{u^{n+1} - u^{n}}{\Delta t} = -(1-\theta) a(t_n)u^n - \theta
-a(t_{n+1})u^{n+1}
-{\thinspace .}\]</div>
+<div class="math" id="eq-auto6">
+\[\tag{7}
+\frac{u^{n+1} - u^{n}}{\Delta t} = -(1-\theta) a(t_n)u^n - \theta
+    a(t_{n+1})u^{n+1}
+    {\thinspace .}\]</div>
 <p>With the finite difference operator notation the Forward Euler and Backward
 Euler schemes can be summarized as</p>
-<div class="math">
-\[\lbrack D^+_t u = -au\rbrack^n,\]</div>
-<div class="math">
-\[\lbrack D^-_t u = -au\rbrack^n
-{\thinspace .}\]</div>
+<div class="math" id="eq-auto7">
+\[\tag{8}
+\lbrack D^+_t u = -au\rbrack^n,\]</div>
+<div class="math" id="eq-auto8">
+\[\tag{9}
+\lbrack D^-_t u = -au\rbrack^n
+    {\thinspace .}\]</div>
 <p>The Crank-Nicolson and <span class="math">\(\theta\)</span> schemes depend on whether we evaluate
 <span class="math">\(a\)</span> at the sample point for the ODE or if we use an average. The
 various versions are written as</p>
-<div class="math">
-\[\lbrack D_t u = -a\overline{u}^t\rbrack^{n+\frac{1}{2}},\]</div>
-<div class="math">
-\[\lbrack D_t u = -\overline{au}^t\rbrack^{n+\frac{1}{2}},\]</div>
-<div class="math">
-\[\lbrack D_t u = -a\overline{u}^{t,\theta}\rbrack^{n+\theta},\]</div>
-<div class="math">
-\[\lbrack D_t u = -\overline{au}^{t,\theta}\rbrack^{n+\theta}
-{\thinspace .}\]</div>
+<div class="math" id="eq-auto9">
+\[\tag{10}
+\lbrack D_t u = -a\overline{u}^t\rbrack^{n+\frac{1}{2}},\]</div>
+<div class="math" id="eq-auto10">
+\[\tag{11}
+\lbrack D_t u = -\overline{au}^t\rbrack^{n+\frac{1}{2}},\]</div>
+<div class="math" id="eq-auto11">
+\[\tag{12}
+\lbrack D_t u = -a\overline{u}^{t,\theta}\rbrack^{n+\theta},\]</div>
+<div class="math" id="eq-auto12">
+\[\tag{13}
+\lbrack D_t u = -\overline{au}^{t,\theta}\rbrack^{n+\theta}
+    {\thinspace .}\]</div>
 </div>
 <div class="section" id="generalization-including-a-source-term">
 <span id="decay-source"></span><h2>Generalization: including a source term<a class="headerlink" href="#generalization-including-a-source-term" title="Permalink to this headline">¶</a></h2>
 <p>A further extension of the model ODE is to include a source term <span class="math">\(b(t)\)</span>:</p>
-<div class="math" id="equation-decay:problem:ab">
-<span id="eq-decay-problem-ab"></span><span class="eqno">(2)</span>\[     u^{\prime}(t) = -a(t)u(t) + b(t),\quad t\in (0,T],\quad u(0)=I
-     {\thinspace .}\]</div>
+<div class="math" id="eq-decay-problem-ab">
+\[\tag{14}
+u^{\prime}(t) = -a(t)u(t) + b(t),\quad t\in (0,T],\quad u(0)=I
+    {\thinspace .}\]</div>
 <p>The time point where we sample the ODE determines where <span class="math">\(b(t)\)</span> is
 evaluated. For the Crank-Nicolson scheme and the <span class="math">\(\theta\)</span>-rule we
 have a choice of whether to evaluate <span class="math">\(a(t)\)</span> and <span class="math">\(b(t)\)</span> at the
 correct point or use an average. The chosen strategy becomes
 particularly clear if we write up the schemes in the operator notation:</p>
-<div class="math">
-\[\lbrack D^+_t u = -au + b\rbrack^n,\]</div>
-<div class="math">
-\[\lbrack D^-_t u = -au + b\rbrack^n,\]</div>
-<div class="math">
-\[\lbrack D_t u   = -a\overline{u}^t + b\rbrack^{n+\frac{1}{2}},\]</div>
-<div class="math">
-\[\lbrack D_t u   = \overline{-au+b}^t\rbrack^{n+\frac{1}{2}},\]</div>
-<div class="math">
-\[\lbrack D_t u   = -a\overline{u}^{t,\theta} + b\rbrack^{n+\theta},\]</div>
-<div class="math" id="equation-decay:problem:ab:theta:avg:all:op">
-<span id="eq-decay-problem-ab-theta-avg-all-op"></span><span class="eqno">(3)</span>\[     \lbrack D_t u   = \overline{-au+b}^{t,\theta}\rbrack^{n+\theta}\]\[     {\thinspace .}\]</div>
+<div class="math" id="eq-auto13">
+\[\tag{15}
+\lbrack D^+_t u = -au + b\rbrack^n,\]</div>
+<div class="math" id="eq-auto14">
+\[\tag{16}
+\lbrack D^-_t u = -au + b\rbrack^n,\]</div>
+<div class="math" id="eq-auto15">
+\[\tag{17}
+\lbrack D_t u   = -a\overline{u}^t + b\rbrack^{n+\frac{1}{2}},\]</div>
+<div class="math" id="eq-auto16">
+\[\tag{18}
+\lbrack D_t u   = \overline{-au+b}^t\rbrack^{n+\frac{1}{2}},\]</div>
+<div class="math" id="eq-auto17">
+\[\tag{19}
+\lbrack D_t u   = -a\overline{u}^{t,\theta} + b\rbrack^{n+\theta},\]</div>
+<div class="math" id="eq-decay-problem-ab-theta-avg-all-op">
+\[\tag{20}
+\lbrack D_t u   = \overline{-au+b}^{t,\theta}\rbrack^{n+\theta}\]\[    {\thinspace .}\]</div>
 </div>
 <div class="section" id="implementation-of-the-generalized-model-problem">
 <span id="decay-general"></span><h2>Implementation of the generalized model problem<a class="headerlink" href="#implementation-of-the-generalized-model-problem" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="deriving-the-rule-formula">
 <h3>Deriving the <span class="math">\(\theta\)</span>-rule formula<a class="headerlink" href="#deriving-the-rule-formula" title="Permalink to this headline">¶</a></h3>
-<p>Writing out the <span class="math">\(\theta\)</span>-rule in <a href="#equation-decay:problem:ab:theta:avg:all:op">(3)</a>,
+<p>Writing out the <span class="math">\(\theta\)</span>-rule in <a class="reference internal" href="#eq-decay-problem-ab-theta-avg-all-op"><span class="std std-ref">(20)</span></a>,
 using (<span class="xref std std-ref">decay:fd1:Du:theta</span>)
 and (<span class="xref std std-ref">decay:fd1:wmean:a</span>), we get</p>
-<div class="math" id="equation-decay:problem:ab:theta:avg:all">
-<span id="eq-decay-problem-ab-theta-avg-all"></span><span class="eqno">(4)</span>\[     \frac{u^{n+1}-u^n}{\Delta t} = \theta(-a^{n+1}u^{n+1} + b^{n+1}))
-     + (1-\theta)(-a^nu^{n} + b^n)),\]</div>
+<div class="math" id="eq-decay-problem-ab-theta-avg-all">
+\[\tag{21}
+\frac{u^{n+1}-u^n}{\Delta t} = \theta(-a^{n+1}u^{n+1} + b^{n+1}))
+    + (1-\theta)(-a^nu^{n} + b^n)),\]</div>
 <p>where <span class="math">\(a^n\)</span> means evaluating <span class="math">\(a\)</span> at <span class="math">\(t=t_n\)</span> and similar for
 <span class="math">\(a^{n+1}\)</span>, <span class="math">\(b^n\)</span>, and <span class="math">\(b^{n+1}\)</span>.
 We solve for <span class="math">\(u^{n+1}\)</span>:</p>
-<div class="math">
-\[u^{n+1} = ((1 - \Delta t(1-\theta)a^n)u^n
-+ \Delta t(\theta b^{n+1} + (1-\theta)b^n))(1 + \Delta t\theta a^{n+1})^{-1}
-{\thinspace .}\]</div>
+<div class="math" id="eq-auto18">
+\[\tag{22}
+u^{n+1} = ((1 - \Delta t(1-\theta)a^n)u^n
+    + \Delta t(\theta b^{n+1} + (1-\theta)b^n))(1 + \Delta t\theta a^{n+1})^{-1}
+    {\thinspace .}\]</div>
 </div>
 <div class="section" id="python-code">
 <h3>Python code<a class="headerlink" href="#python-code" title="Permalink to this headline">¶</a></h3>
-<p>Here is a suitable implementation of <a href="#equation-decay:problem:ab:theta:avg:all">(4)</a>
+<p>Here is a suitable implementation of <a class="reference internal" href="#eq-decay-problem-ab-theta-avg-all"><span class="std std-ref">(21)</span></a>
 where <span class="math">\(a(t)\)</span> and <span class="math">\(b(t)\)</span> are given as
 Python functions:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
@@ -277,7 +310,7 @@ set <span class="math">\(b=a(t)C\)</span> and <span class="math">\(I=C\)</span>.
 <span class="sd">    Test problem where u=u_const is the exact solution, to be</span>
 <span class="sd">    reproduced (to machine precision) by any relevant method.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">u_const</span>
 
     <span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
@@ -291,7 +324,7 @@ set <span class="math">\(b=a(t)C\)</span> and <span class="math">\(I=C\)</span>.
     <span class="n">Nt</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c"># enough with a few steps</span>
     <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">Nt</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
     <span class="k">print</span> <span class="n">u</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
     <span class="n">difference</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c"># max deviation</span>
     <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
     <span class="k">assert</span> <span class="n">difference</span> <span class="o">&lt;</span> <span class="n">tol</span>
@@ -327,7 +360,7 @@ complicated applications. Still, the constant solution is often
 ideal for initial debugging before proceeding with a linear solution.</p>
 <p>We choose a linear solution <span class="math">\(u(t) = ct + d\)</span>. From the initial condition it
 follows that <span class="math">\(d=I\)</span>.
-Inserting this <span class="math">\(u\)</span> in the left-hand side of <a href="#equation-decay:problem:ab">(2)</a>, i.e.,
+Inserting this <span class="math">\(u\)</span> in the left-hand side of <a class="reference internal" href="#eq-decay-problem-ab"><span class="std std-ref">(14)</span></a>, i.e.,
 the ODE, we get</p>
 <div class="math">
 \[c = -a(t)u + b(t) {\thinspace .}\]</div>
@@ -341,12 +374,15 @@ fulfills the discrete equations. For these calculations, and
 later calculations involving linear solutions inserted in
 finite difference schemes, it is convenient to
 compute the action of a difference operator on a linear function <span class="math">\(t\)</span>:</p>
-<div class="math" id="equation-decay:fd2:Dop:tn:fw">
-<span id="eq-decay-fd2-dop-tn-fw"></span><span class="eqno">(5)</span>\[     \lbrack D_t^+ t\rbrack^n = \frac{t_{n+1}-t_n}{\Delta t}=1,\]</div>
-<div class="math" id="equation-decay:fd2:Dop:tn:bw">
-<span id="eq-decay-fd2-dop-tn-bw"></span><span class="eqno">(6)</span>\[     \lbrack D_t^- t\rbrack^n = \frac{t_{n}-t_{n-1}}{\Delta t}=1,\]</div>
-<div class="math" id="equation-decay:fd2:Dop:tn:cn">
-<span id="eq-decay-fd2-dop-tn-cn"></span><span class="eqno">(7)</span>\[     \lbrack D_t t\rbrack^n = \frac{t_{n+\frac{1}{2}}-t_{n-\frac{1}{2}}}{\Delta t}=\frac{(n+\frac{1}{2})\Delta t - (n-\frac{1}{2})\Delta t}{\Delta t}=1\]\[     {\thinspace .}\]</div>
+<div class="math" id="eq-decay-fd2-dop-tn-fw">
+\[\tag{23}
+\lbrack D_t^+ t\rbrack^n = \frac{t_{n+1}-t_n}{\Delta t}=1,\]</div>
+<div class="math" id="eq-decay-fd2-dop-tn-bw">
+\[\tag{24}
+\lbrack D_t^- t\rbrack^n = \frac{t_{n}-t_{n-1}}{\Delta t}=1,\]</div>
+<div class="math" id="eq-decay-fd2-dop-tn-cn">
+\[\tag{25}
+\lbrack D_t t\rbrack^n = \frac{t_{n+\frac{1}{2}}-t_{n-\frac{1}{2}}}{\Delta t}=\frac{(n+\frac{1}{2})\Delta t - (n-\frac{1}{2})\Delta t}{\Delta t}=1\]\[    {\thinspace .}\]</div>
 <p>Clearly, all three finite difference approximations to the derivative are
 exact for <span class="math">\(u(t)=t\)</span> or its mesh function counterpart <span class="math">\(u^n = t_n\)</span>.</p>
 <p>The difference equation for the Forward Euler scheme</p>
@@ -369,20 +405,20 @@ test based on a linear exact solution:</p>
 <span class="sd">    Test problem where u=c*t+I is the exact solution, to be</span>
 <span class="sd">    reproduced (to machine precision) by any relevant method.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">c</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">I</span>
 
     <span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">**</span><span class="mf">0.5</span>  <span class="c"># can be arbitrary</span>
 
     <span class="k">def</span> <span class="nf">b</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
     <span class="n">theta</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">;</span> <span class="n">I</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span> <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span> <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span>
     <span class="n">T</span> <span class="o">=</span> <span class="mi">4</span>
     <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>  <span class="c"># no of steps</span>
     <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">Nt</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
-    <span class="n">u_e</span> <span class="o">=</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
     <span class="n">difference</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c"># max deviation</span>
     <span class="k">print</span> <span class="n">difference</span>
     <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>  <span class="c"># depends on c!</span>
@@ -407,10 +443,11 @@ this can always be obtained by the method of manufactured solutions.</p>
 reduced if the mesh size <span class="math">\(\Delta t\)</span> is decreased. More specifically,
 many numerical methods obey a power-law relation between <span class="math">\(E\)</span> and
 <span class="math">\(\Delta t\)</span>:</p>
-<div class="math" id="equation-decay:E:dt">
-<span id="eq-decay-e-dt"></span><span class="eqno">(8)</span>\[     E = C\Delta t^r,\]</div>
+<div class="math" id="eq-decay-e-dt">
+\[\tag{26}
+E = C\Delta t^r,\]</div>
 <p>where <span class="math">\(C\)</span> and <span class="math">\(r\)</span> are (usually unknown) constants independent of <span class="math">\(\Delta t\)</span>.
-The formula <a href="#equation-decay:E:dt">(8)</a> is viewed as an asymptotic model valid for
+The formula <a class="reference internal" href="#eq-decay-e-dt"><span class="std std-ref">(26)</span></a> is viewed as an asymptotic model valid for
 sufficiently small <span class="math">\(\Delta t\)</span>. How small is normally hard to estimate
 without doing numerical estimations of <span class="math">\(r\)</span>.</p>
 <p>The parameter <span class="math">\(r\)</span> is known as the <em>convergence rate</em>. For example,
@@ -426,7 +463,7 @@ methods are most common in scientific computing.</p>
 and <span class="math">\(\Delta t_{i} &lt; \Delta t_{i-1}\)</span> (i.e., decreasing cell size).</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>Take the logarithm of <a href="#equation-decay:E:dt">(8)</a>, <span class="math">\(\ln E = r\ln \Delta t + \ln C\)</span>,
+<li>Take the logarithm of <a class="reference internal" href="#eq-decay-e-dt"><span class="std std-ref">(26)</span></a>, <span class="math">\(\ln E = r\ln \Delta t + \ln C\)</span>,
 and fit a straight line to the data points <span class="math">\((\Delta t_i, E_i)\)</span>,
 <span class="math">\(i=0,\ldots,m-1\)</span>.</li>
 <li>Consider two consecutive experiments, <span class="math">\((\Delta t_i, E_i)\)</span> and
@@ -435,53 +472,90 @@ and fit a straight line to the data points <span class="math">\((\Delta t_i, E_i
 for <span class="math">\(r\)</span> yields</li>
 </ol>
 </div></blockquote>
-<div class="math" id="equation-decay:conv:rate">
-<span id="eq-decay-conv-rate"></span><span class="eqno">(9)</span>\[     r_{i-1} = \frac{\ln (E_{i-1}/E_i)}{\ln (\Delta t_{i-1}/\Delta t_i)}\]</div>
+<div class="math" id="eq-decay-conv-rate">
+\[\tag{27}
+r_{i-1} = \frac{\ln (E_{i-1}/E_i)}{\ln (\Delta t_{i-1}/\Delta t_i)}\]</div>
 <p>for <span class="math">\(i=1,\ldots,m-1\)</span>. Note that we have introduced a subindex <span class="math">\(i-1\)</span>
-on <span class="math">\(r\)</span> in <a href="#equation-decay:conv:rate">(9)</a> because <span class="math">\(r\)</span> estimated from
+on <span class="math">\(r\)</span> in <a class="reference internal" href="#eq-decay-conv-rate"><span class="std std-ref">(27)</span></a> because <span class="math">\(r\)</span> estimated from
 a pair of experiments must be expected to change with <span class="math">\(i\)</span>.</p>
-<p>The disadvantage of method 1 is that <a href="#equation-decay:E:dt">(8)</a> might not be valid
+<p>The disadvantage of method 1 is that <a class="reference internal" href="#eq-decay-e-dt"><span class="std std-ref">(26)</span></a> might not be valid
 for the coarsest meshes (largest <span class="math">\(\Delta t\)</span> values). Fitting a line
 to all the data points is then misleading.  Method 2 computes
 convergence rates for pairs of experiments and allows us to see
 if the sequence <span class="math">\(r_i\)</span> converges to some value as <span class="math">\(i\rightarrow m-2\)</span>.
 The final <span class="math">\(r_{m-2}\)</span> can then be taken as the convergence rate.
 If the coarsest meshes have a differing rate, the corresponding
-time steps are probably too large for <a href="#equation-decay:E:dt">(8)</a> to be valid.
+time steps are probably too large for <a class="reference internal" href="#eq-decay-e-dt"><span class="std std-ref">(26)</span></a> to be valid.
 That is, those time steps lie outside the asymptotic range of
-<span class="math">\(\Delta t\)</span> values where the error behaves like <a href="#equation-decay:E:dt">(8)</a>.</p>
+<span class="math">\(\Delta t\)</span> values where the error behaves like <a class="reference internal" href="#eq-decay-e-dt"><span class="std std-ref">(26)</span></a>.</p>
 </div>
 <div class="section" id="implementation">
 <h3>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
-<p>Suppose we have some function <code class="docutils literal"><span class="pre">error(dt,</span> <span class="pre">...)</span></code> that can compute the numerical
-error in our mathematical model. To compute
-<span class="math">\(r_0, r_1, \ldots, r_{m-2}\)</span>
-from <a href="#equation-decay:E:dt">(8)</a>, we just wrap a loop over <span class="math">\(\Delta t\)</span> values
-(<code class="docutils literal"><span class="pre">dt_values</span></code>) around
-the <code class="docutils literal"><span class="pre">error</span></code> function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">E_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">error</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">]</span>
-
-<span class="c"># Compute pairwise convergence rates</span>
-<span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dt_values</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="n">log</span><span class="p">(</span><span class="n">E_values</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">E_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span>
-     <span class="n">log</span><span class="p">(</span><span class="n">dt_values</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">dt_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
-
-<span class="c"># Strip off to 2 decimals</span>
-<span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">r_</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">r_</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+<p>We can compute <span class="math">\(r_0, r_1, \ldots, r_{m-2}\)</span> from <span class="math">\(E_i\)</span> and <span class="math">\(\Delta t_i\)</span>
+by the following function</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">compute_rates</span><span class="p">(</span><span class="n">dt_values</span><span class="p">,</span> <span class="n">E_values</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dt_values</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="n">log</span><span class="p">(</span><span class="n">E_values</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">E_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span>
+         <span class="n">log</span><span class="p">(</span><span class="n">dt_values</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">dt_values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="c"># Round to two decimals</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">r_</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">r_</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">r</span>
 </pre></div>
 </div>
-<p>We can run the convergence rate estimate computations for the
-<span class="math">\(\theta\)</span>-rule discretization of <span class="math">\(u'=-au\)</span>, using <span class="math">\(\Delta t = 0.5,-.25, 0.1, 0.05, 0.025, 0.01\)</span>:</p>
-<div class="highlight-text"><div class="highlight"><pre>FE: 1.33 1.15 1.07 1.03 1.02
-BE: 0.98 0.99 0.99 1.00 1.00
-CN: 2.14 2.07 2.03 2.01 2.01
+<p>Experiments with a series of time step values and <span class="math">\(\theta=0,1,0.5\)</span>
+can be set up as follows, here embedded in a real test function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_convergence_rates</span><span class="p">():</span>
+    <span class="c"># Create a manufactured solution</span>
+    <span class="c"># define u_exact(t), a(t), b(t)</span>
+
+    <span class="n">dt_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)]</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">):</span>
+        <span class="n">E_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">:</span>
+            <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
+            <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+            <span class="n">E_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">compute_rates</span><span class="p">(</span><span class="n">dt_values</span><span class="p">,</span> <span class="n">E_values</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;theta=</span><span class="si">%g</span><span class="s">, r: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="n">expected_rate</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">theta</span> <span class="o">==</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="n">tol</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expected_rate</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="n">tol</span>
 </pre></div>
 </div>
-<p>The Forward and Backward Euler methods seem to have an <span class="math">\(r\)</span> value which
-stabilizes at 1, while the Crank-Nicolson seems to be a second-order
-method with <span class="math">\(r=2\)</span>. These results are in very good agreement with
-various theoretical considerations for <span class="math">\(r\)</span>.</p>
+<p>The manufactured solution is conveniently computed by <code class="docutils literal"><span class="pre">sympy</span></code>.
+Let us choose <span class="math">\({u_{\small\mbox{e}}}(t) = \sin(t)e^{-2t}\)</span> and <span class="math">\(a(t)=t^2\)</span>.
+This implies that we must fit <span class="math">\(b\)</span> as <span class="math">\(b(t)=u'(t)-a(t)\)</span>.
+We first compute with <code class="docutils literal"><span class="pre">sympy</span></code> expressions and then we convert
+the exact solution, <span class="math">\(a\)</span>, and <span class="math">\(b\)</span> to Python functions that we
+can use in the subsequent numerical computing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Create a manufactured solution with sympy</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="kn">as</span> <span class="nn">sym</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">u_e</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">u_e</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">u_exact</span>
+
+<span class="c"># Turn sympy expressions into Python function</span>
+<span class="n">u_exact</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">],</span> <span class="n">u_e</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">t</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="s">&#39;numpy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The complete code is found in the function <code class="docutils literal"><span class="pre">test_convergence_rates</span></code>
+in the file <a class="reference external" href="http://tinyurl.com/ofkw6kc/genz/decay_vc.py">decay_vc.py</a>.</p>
+<p>Running this code gives the output</p>
+<div class="highlight-text"><div class="highlight"><pre>theta=0, r: [1.06, 1.03, 1.01, 1.01, 1.0, 1.0]
+theta=1, r: [0.94, 0.97, 0.99, 0.99, 1.0, 1.0]
+theta=0.5, r: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0]
+</pre></div>
+</div>
+<p>We clearly see how the convergence rates approach the expected values.</p>
 <div class="admonition-why-convergence-rates-are-important admonition" id="index-4">
 <p class="first admonition-title">Why convergence rates are important</p>
 <p class="last">The strong practical application of computing convergence rates is for
@@ -497,30 +571,38 @@ expected convergence rate.</p>
 <p>Many ODE models involve more than one unknown function and more
 than one equation. Here is an example of two unknown functions <span class="math">\(u(t)\)</span>
 and <span class="math">\(v(t)\)</span>:</p>
-<div class="math">
-\[u^{\prime} = a u + bv,\]</div>
-<div class="math">
-\[v^{\prime} = cu +  dv,\]</div>
+<div class="math" id="eq-auto19">
+\[\tag{28}
+u^{\prime} = a u + bv,\]</div>
+<div class="math" id="eq-auto20">
+\[\tag{29}
+v^{\prime} = cu +  dv,\]</div>
 <p>for constants <span class="math">\(a,b,c,d\)</span>.
 Applying the Forward Euler method to each equation results in a simple
 updating formula:</p>
-<div class="math">
-\[u^{n+1} = u^n + \Delta t (a u^n + b v^n),\]</div>
-<div class="math">
-\[v^{n+1} = u^n + \Delta t (cu^n + dv^n)
-{\thinspace .}\]</div>
+<div class="math" id="eq-auto21">
+\[\tag{30}
+u^{n+1} = u^n + \Delta t (a u^n + b v^n),\]</div>
+<div class="math" id="eq-auto22">
+\[\tag{31}
+v^{n+1} = u^n + \Delta t (cu^n + dv^n)
+    {\thinspace .}\]</div>
 <p>On the other hand, the Crank-Nicolson or Backward Euler schemes result in a
 <span class="math">\(2\times 2\)</span> linear system for the new unknowns. The latter scheme becomes</p>
-<div class="math">
-\[u^{n+1} = u^n + \Delta t (a u^{n+1} + b v^{n+1}),\]</div>
-<div class="math">
-\[v^{n+1} = v^n + \Delta t (c u^{n+1} + d v^{n+1}){\thinspace .}\]</div>
+<div class="math" id="eq-auto23">
+\[\tag{32}
+u^{n+1} = u^n + \Delta t (a u^{n+1} + b v^{n+1}),\]</div>
+<div class="math" id="eq-auto24">
+\[\tag{33}
+v^{n+1} = v^n + \Delta t (c u^{n+1} + d v^{n+1}){\thinspace .}\]</div>
 <p>Collecting <span class="math">\(u^{n+1}\)</span> as well as <span class="math">\(v^{n+1}\)</span> on the left-hand side results
 in</p>
-<div class="math">
-\[(1 - \Delta t a)u^{n+1} + bv^{n+1} = u^n ,\]</div>
-<div class="math">
-\[c u^{n+1} + (1 - \Delta t d) v^{n+1} = v^n ,\]</div>
+<div class="math" id="eq-auto25">
+\[\tag{34}
+(1 - \Delta t a)u^{n+1} + bv^{n+1} = u^n ,\]</div>
+<div class="math" id="eq-auto26">
+\[\tag{35}
+c u^{n+1} + (1 - \Delta t d) v^{n+1} = v^n ,\]</div>
 <p>which is a system of two coupled, linear, algebraic equations in two
 unknowns. These equations can be solved by hand (using standard
 techniques for two algebraic equations with two unknowns <span class="math">\(x\)</span> and <span class="math">\(y\)</span>),
@@ -543,27 +625,28 @@ of different software for general first-order ODE systems.</p>
 <div class="section" id="generic-form-of-first-order-odes">
 <h2>Generic form of first-order ODEs<a class="headerlink" href="#generic-form-of-first-order-odes" title="Permalink to this headline">¶</a></h2>
 <p>ODEs are commonly written in the generic form</p>
-<div class="math" id="equation-decay:ode:general">
-<span id="eq-decay-ode-general"></span><span class="eqno">(10)</span>\[     u^{\prime} = f(u,t),\quad u(0)=I,\]</div>
+<div class="math" id="eq-decay-ode-general">
+\[\tag{36}
+u^{\prime} = f(u,t),\quad u(0)=I,\]</div>
 <p>where <span class="math">\(f(u,t)\)</span>  is some prescribed function.
 As an example, our most
-general exponential decay model <a href="#equation-decay:problem:ab">(2)</a> has
+general exponential decay model <a class="reference internal" href="#eq-decay-problem-ab"><span class="std std-ref">(14)</span></a> has
 <span class="math">\(f(u,t)=-a(t)u(t) + b(t)\)</span>.</p>
-<p>The unknown <span class="math">\(u\)</span> in <a href="#equation-decay:ode:general">(10)</a> may either be
+<p>The unknown <span class="math">\(u\)</span> in <a class="reference internal" href="#eq-decay-ode-general"><span class="std std-ref">(36)</span></a> may either be
 a scalar function of time <span class="math">\(t\)</span>, or a vector valued function of <span class="math">\(t\)</span> in
 case of a <em>system of ODEs</em> with <span class="math">\(m\)</span> unknown components:</p>
 <div class="math">
 \[u(t) = (u^{(0)}(t),u^{(1)}(t),\ldots,u^{(m-1)}(t)) {\thinspace .}\]</div>
-<p>In that case, the right-hand side is vector-valued function with <span class="math">\(m\)</span>
+<p>In that case, the right-hand side is a vector-valued function with <span class="math">\(m\)</span>
 components,</p>
 <div class="math">
 \[\begin{split}f(u, t) = ( &amp; f^{(0)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\
             &amp; f^{(1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\
-            &amp; \vdots,\\
+            &amp; \vdots\\
             &amp; f^{(m-1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)))
 {\thinspace .}\end{split}\]</div>
 <p>Actually, any system of ODEs can
-be written in the form <a href="#equation-decay:ode:general">(10)</a>, but higher-order
+be written in the form <a class="reference internal" href="#eq-decay-ode-general"><span class="std std-ref">(36)</span></a>, but higher-order
 ODEs then need auxiliary unknown functions to enable conversion to
 a first-order system.</p>
 <p>Next we list some well-known methods for <span class="math">\(u^{\prime}=f(u,t)\)</span>, valid both for
@@ -572,14 +655,16 @@ a single ODE (scalar <span class="math">\(u\)</span>) and systems of ODEs (vecto
 <div class="section" id="the-rule">
 <h2>The <span class="math">\(\theta\)</span>-rule<a class="headerlink" href="#the-rule" title="Permalink to this headline">¶</a></h2>
 <p>The <span class="math">\(\theta\)</span>-rule scheme applied to <span class="math">\(u^{\prime}=f(u,t)\)</span> becomes</p>
-<div class="math" id="equation-decay:fd2:theta">
-<span id="eq-decay-fd2-theta"></span><span class="eqno">(11)</span>\[     \frac{u^{n+1}-u^n}{\Delta t} = \theta f(u^{n+1},t_{n+1}) +
-     (1-\theta)f(u^n, t_n){\thinspace .}\]</div>
+<div class="math" id="eq-decay-fd2-theta">
+\[\tag{37}
+\frac{u^{n+1}-u^n}{\Delta t} = \theta f(u^{n+1},t_{n+1}) +
+    (1-\theta)f(u^n, t_n){\thinspace .}\]</div>
 <p>Bringing the unknown <span class="math">\(u^{n+1}\)</span> to the left-hand side and the known terms
 on the right-hand side gives</p>
-<span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><div class="math" id="index-8">
-\[u^{n+1} - \Delta t \theta f(u^{n+1},t_{n+1}) =
-u^n + \Delta t(1-\theta)f(u^n, t_n){\thinspace .}\]</div>
+<span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><div class="math" id="eq-auto27">
+<span id="index-8"></span>\[\tag{38}
+u^{n+1} - \Delta t \theta f(u^{n+1},t_{n+1}) =
+    u^n + \Delta t(1-\theta)f(u^n, t_n){\thinspace .}\]</div>
 <p>For a general <span class="math">\(f\)</span> (not linear in <span class="math">\(u\)</span>), this equation is <em>nonlinear</em> in
 the unknown <span class="math">\(u^{n+1}\)</span> unless <span class="math">\(\theta = 0\)</span>. For a scalar ODE (<span class="math">\(m=1\)</span>),
 we have to solve a single nonlinear algebraic equation for <span class="math">\(u^{n+1}\)</span>,
@@ -599,15 +684,16 @@ three-level backward difference as approximation to <span class="math">\(u^{\pri
 \[u^{\prime}(t_{n+1}) \approx \frac{3u^{n+1} - 4u^{n} + u^{n-1}}{2\Delta t},\]</div>
 <p>which is an approximation of order <span class="math">\(\Delta t^2\)</span> to the first derivative.
 The resulting scheme for <span class="math">\(u^{\prime}=f(u,t)\)</span> reads</p>
-<div class="math" id="equation-decay:fd2:bw:2step">
-<span id="eq-decay-fd2-bw-2step"></span><span class="eqno">(12)</span>\[     u^{n+1} = \frac{4}{3}u^n - \frac{1}{3}u^{n-1} +
-     \frac{2}{3}\Delta t f(u^{n+1}, t_{n+1})
-     {\thinspace .}\]</div>
-<p>Higher-order versions of the scheme <a href="#equation-decay:fd2:bw:2step">(12)</a> can
+<div class="math" id="eq-decay-fd2-bw-2step">
+\[\tag{39}
+u^{n+1} = \frac{4}{3}u^n - \frac{1}{3}u^{n-1} +
+    \frac{2}{3}\Delta t f(u^{n+1}, t_{n+1})
+    {\thinspace .}\]</div>
+<p>Higher-order versions of the scheme <a class="reference internal" href="#eq-decay-fd2-bw-2step"><span class="std std-ref">(39)</span></a> can
 be constructed by including more time levels. These schemes are known
 as the Backward Differentiation Formulas (BDF), and the particular
-version <a href="#equation-decay:fd2:bw:2step">(12)</a> is often referred to as BDF2.</p>
-<p>Note that the scheme <a href="#equation-decay:fd2:bw:2step">(12)</a> is implicit and requires
+version <a class="reference internal" href="#eq-decay-fd2-bw-2step"><span class="std std-ref">(39)</span></a> is often referred to as BDF2.</p>
+<p>Note that the scheme <a class="reference internal" href="#eq-decay-fd2-bw-2step"><span class="std std-ref">(39)</span></a> is implicit and requires
 solution of nonlinear equations when <span class="math">\(f\)</span> is nonlinear in <span class="math">\(u\)</span>.  The
 standard 1st-order Backward Euler method or the Crank-Nicolson scheme
 can be used for the first step.</p>
@@ -618,17 +704,19 @@ can be used for the first step.</p>
 <span id="index-11"></span><h3>The ordinary Leapfrog scheme<a class="headerlink" href="#the-ordinary-leapfrog-scheme" title="Permalink to this headline">¶</a></h3>
 <p>The derivative of <span class="math">\(u\)</span> at some point <span class="math">\(t_n\)</span> can be approximated by
 a central difference over two time steps,</p>
-<div class="math">
-\[u^{\prime}(t_n)\approx \frac{u^{n+1}-u^{n-1}}{2\Delta t} = [D_{2t}u]^n\]</div>
+<div class="math" id="eq-auto28">
+\[\tag{40}
+u^{\prime}(t_n)\approx \frac{u^{n+1}-u^{n-1}}{2\Delta t} = [D_{2t}u]^n\]</div>
 <p>which is an approximation of second order in <span class="math">\(\Delta t\)</span>. The scheme
 can then be written as</p>
 <div class="math">
 \[[D_{2t}u=f(u,t)]^n,\]</div>
 <p>in operator notation. Solving for <span class="math">\(u^{n+1}\)</span> gives</p>
-<div class="math" id="equation-decay:fd2:leapfrog">
-<span id="eq-decay-fd2-leapfrog"></span><span class="eqno">(13)</span>\[     u^{n+1} = u^{n-1} + 2\Delta t f(u^n, t_n)
-     {\thinspace .}\]</div>
-<p>Observe that <a href="#equation-decay:fd2:leapfrog">(13)</a> is an explicit scheme, and that
+<div class="math" id="eq-decay-fd2-leapfrog">
+\[\tag{41}
+u^{n+1} = u^{n-1} + 2\Delta t f(u^n, t_n)
+    {\thinspace .}\]</div>
+<p>Observe that <a class="reference internal" href="#eq-decay-fd2-leapfrog"><span class="std std-ref">(41)</span></a> is an explicit scheme, and that
 a nonlinear <span class="math">\(f\)</span> (in <span class="math">\(u\)</span>) is trivial to handle since it only involves
 the known <span class="math">\(u^n\)</span> value.
 Some other scheme must be used as starter to compute <span class="math">\(u^1\)</span>, preferably
@@ -636,13 +724,14 @@ the Forward Euler scheme since it is also explicit.</p>
 </div>
 <div class="section" id="the-filtered-leapfrog-scheme">
 <span id="index-12"></span><h3>The filtered Leapfrog scheme<a class="headerlink" href="#the-filtered-leapfrog-scheme" title="Permalink to this headline">¶</a></h3>
-<p>Unfortunately, the Leapfrog scheme <a href="#equation-decay:fd2:leapfrog">(13)</a>
-will develop growing oscillations with time (see <a class="reference internal" href="#decay-fd2-exer-leapfrog1"><span class="std std-ref">Problem 6: Implement and investigate the Leapfrog scheme</span></a>). A remedy for such undesired oscillations
+<p>Unfortunately, the Leapfrog scheme <a class="reference internal" href="#eq-decay-fd2-leapfrog"><span class="std std-ref">(41)</span></a>
+will develop growing oscillations with time (see <a class="reference internal" href="#decay-fd2-exer-leapfrog1"><span class="std std-ref">Project 6: Implement and investigate the Leapfrog scheme</span></a>). A remedy for such undesired oscillations
 is to introduce a <em>filtering technique</em>. First, a standard Leapfrog
-step is taken, according to <a href="#equation-decay:fd2:leapfrog">(13)</a>, and then
+step is taken, according to <a class="reference internal" href="#eq-decay-fd2-leapfrog"><span class="std std-ref">(41)</span></a>, and then
 the previous <span class="math">\(u^n\)</span> value is adjusted according to</p>
-<div class="math" id="equation-decay:fd2:leapfrog:filtered">
-<span id="eq-decay-fd2-leapfrog-filtered"></span><span class="eqno">(14)</span>\[     u^n\ \leftarrow\ u^n + \gamma (u^{n-1} - 2u^n + u^{n+1})\]\[     {\thinspace .}\]</div>
+<div class="math" id="eq-decay-fd2-leapfrog-filtered">
+\[\tag{42}
+u^n\ \leftarrow\ u^n + \gamma (u^{n-1} - 2u^n + u^{n+1})\]\[    {\thinspace .}\]</div>
 <p>The <span class="math">\(\gamma\)</span>-terms will effectively damp oscillations in the solution,
 especially those with short wavelength (like point-to-point oscillations).
 A common choice of <span class="math">\(\gamma\)</span> is 0.6 (a value used in the
@@ -652,16 +741,18 @@ famous NCAR Climate Model).</p>
 <div class="section" id="the-2nd-order-runge-kutta-method">
 <h2>The 2nd-order Runge-Kutta method<a class="headerlink" href="#the-2nd-order-runge-kutta-method" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="index-13"></span><p id="index-14">The two-step scheme</p>
-<div class="math" id="equation-decay:fd2:RK2:s1">
-<span id="eq-decay-fd2-rk2-s1"></span><span class="eqno">(15)</span>\[     u^* = u^n + \Delta t f(u^n, t_n),\]</div>
-<div class="math" id="equation-decay:fd2:RK2:s2">
-<span id="eq-decay-fd2-rk2-s2"></span><span class="eqno">(16)</span>\[     u^{n+1} = u^n + \Delta t \frac{1}{2} \left( f(u^n, t_n) + f(u^*, t_{n+1})
-     \right),\]</div>
-<p>essentially applies a Crank-Nicolson method <a href="#equation-decay:fd2:RK2:s2">(16)</a>
+<div class="math" id="eq-decay-fd2-rk2-s1">
+\[\tag{43}
+u^* = u^n + \Delta t f(u^n, t_n),\]</div>
+<div class="math" id="eq-decay-fd2-rk2-s2">
+\[\tag{44}
+u^{n+1} = u^n + \Delta t \frac{1}{2} \left( f(u^n, t_n) + f(u^*, t_{n+1})
+    \right),\]</div>
+<p>essentially applies a Crank-Nicolson method <a class="reference internal" href="#eq-decay-fd2-rk2-s2"><span class="std std-ref">(44)</span></a>
 to the ODE, but replaces
 the term <span class="math">\(f(u^{n+1}, t_{n+1})\)</span> by a prediction
-<span class="math">\(f(u^{*}, t_{n+1})\)</span> based on a Forward Euler step <a href="#equation-decay:fd2:RK2:s1">(15)</a>.
-The scheme <a href="#equation-decay:fd2:RK2:s1">(15)</a>-<a href="#equation-decay:fd2:RK2:s2">(16)</a> is
+<span class="math">\(f(u^{*}, t_{n+1})\)</span> based on a Forward Euler step <a class="reference internal" href="#eq-decay-fd2-rk2-s1"><span class="std std-ref">(43)</span></a>.
+The scheme <a class="reference internal" href="#eq-decay-fd2-rk2-s1"><span class="std std-ref">(43)</span></a>-<a class="reference internal" href="#eq-decay-fd2-rk2-s2"><span class="std std-ref">(44)</span></a> is
 known as Huen&#8217;s method, but is also a 2nd-order Runge-Kutta method.
 The scheme is explicit, and the error is expected to behave as <span class="math">\(\Delta t^2\)</span>.</p>
 </div>
@@ -681,30 +772,33 @@ u^{\prime\prime}(t_n) &amp;=
 &amp;=  f(u^n,t_n)\frac{\partial f}{\partial u}(u^n,t_n)  +
 \frac{\partial f}{\partial t},\end{split}\]</div>
 <p>resulting in the scheme</p>
-<div class="math" id="equation-decay:fd2:Taylor2">
-<span id="eq-decay-fd2-taylor2"></span><span class="eqno">(17)</span>\[     u^{n+1} = u^n + f(u^n,t_n)\Delta t + \frac{1}{2}\left(
-     f(u^n,t_n)\frac{\partial f}{\partial u}(u^n,t_n)  +
-     \frac{\partial f}{\partial t}\right)\Delta t^2
-     {\thinspace .}\]</div>
+<div class="math" id="eq-decay-fd2-taylor2">
+\[\tag{45}
+u^{n+1} = u^n + f(u^n,t_n)\Delta t + \frac{1}{2}\left(
+    f(u^n,t_n)\frac{\partial f}{\partial u}(u^n,t_n)  +
+    \frac{\partial f}{\partial t}\right)\Delta t^2
+    {\thinspace .}\]</div>
 <p>More terms in the series could be included in the Taylor polynomial to
 obtain methods of higher order than 2.</p>
 </div>
 <div class="section" id="the-2nd-and-3rd-order-adams-bashforth-schemes">
 <h2>The 2nd- and 3rd-order Adams-Bashforth schemes<a class="headerlink" href="#the-2nd-and-3rd-order-adams-bashforth-schemes" title="Permalink to this headline">¶</a></h2>
 <p id="index-16">The following method is known as the 2nd-order Adams-Bashforth scheme:</p>
-<div class="math" id="equation-decay:fd2:AB2">
-<span id="eq-decay-fd2-ab2"></span><span class="eqno">(18)</span>\[     u^{n+1} = u^n + \frac{1}{2}\Delta t\left( 3f(u^n, t_n) - f(u^{n-1}, t_{n-1})
-     \right)
-     {\thinspace .}\]</div>
+<div class="math" id="eq-decay-fd2-ab2">
+\[\tag{46}
+u^{n+1} = u^n + \frac{1}{2}\Delta t\left( 3f(u^n, t_n) - f(u^{n-1}, t_{n-1})
+    \right)
+    {\thinspace .}\]</div>
 <p>The scheme is explicit and requires another one-step scheme to compute
 <span class="math">\(u^1\)</span> (the Forward Euler scheme or Heun&#8217;s method, for instance).
 As the name implies, the error behaves like <span class="math">\(\Delta t^2\)</span>.</p>
 <p id="index-17">Another explicit scheme, involving four time levels, is the
 3rd-order Adams-Bashforth scheme</p>
-<div class="math" id="equation-decay:fd2:AB3">
-<span id="eq-decay-fd2-ab3"></span><span class="eqno">(19)</span>\[     u^{n+1} = u^n + \frac{1}{12}\left( 23f(u^n, t_n) - 16 f(u^{n-1},t_{n-1})
-     + 5f(u^{n-2}, t_{n-2})\right)
-     {\thinspace .}\]</div>
+<div class="math" id="eq-decay-fd2-ab3">
+\[\tag{47}
+u^{n+1} = u^n + \frac{1}{12}\left( 23f(u^n, t_n) - 16 f(u^{n-1},t_{n-1})
+    + 5f(u^{n-2}, t_{n-2})\right)
+    {\thinspace .}\]</div>
 <p>The numerical error is of order <span class="math">\(\Delta t^3\)</span>, and the scheme needs
 some method for computing <span class="math">\(u^1\)</span> and <span class="math">\(u^2\)</span>.</p>
 <p>More general, higher-order Adams-Bashforth schemes (also called
@@ -749,17 +843,20 @@ are approximations to <span class="math">\(f^{n+\frac{1}{2}}\)</span> and
 For <span class="math">\(\hat{f}^{n+\frac{1}{2}}\)</span> we can apply
 an approximation to <span class="math">\(u^{n+\frac{1}{2}}\)</span> using the Forward Euler
 method with step <span class="math">\(\frac{1}{2}\Delta t\)</span>:</p>
-<div class="math" id="equation-decay:fd2:RK4:hatf">
-<span id="eq-decay-fd2-rk4-hatf"></span><span class="eqno">(20)</span>\[     \hat{f}^{n+\frac{1}{2}} = f(u^n + \frac{1}{2}{\Delta t} f^n, t_{n+\frac{1}{2}})\]</div>
+<div class="math" id="eq-decay-fd2-rk4-hatf">
+\[\tag{48}
+\hat{f}^{n+\frac{1}{2}} = f(u^n + \frac{1}{2}{\Delta t} f^n, t_{n+\frac{1}{2}})\]</div>
 <p>Since this gives us a prediction of <span class="math">\(f^{n+\frac{1}{2}}\)</span>, we can for
 <span class="math">\(\tilde{f}^{n+\frac{1}{2}}\)</span> try a Backward Euler method to approximate <span class="math">\(u^{n+\frac{1}{2}}\)</span>:</p>
-<div class="math" id="equation-decay:fd2:RK4:tildef">
-<span id="eq-decay-fd2-rk4-tildef"></span><span class="eqno">(21)</span>\[     \tilde{f}^{n+\frac{1}{2}} = f(u^n + \frac{1}{2}\Delta t\hat{f}^{n+\frac{1}{2}}, t_{n+\frac{1}{2}}){\thinspace .}\]</div>
+<div class="math" id="eq-decay-fd2-rk4-tildef">
+\[\tag{49}
+\tilde{f}^{n+\frac{1}{2}} = f(u^n + \frac{1}{2}\Delta t\hat{f}^{n+\frac{1}{2}}, t_{n+\frac{1}{2}}){\thinspace .}\]</div>
 <p>With <span class="math">\(\tilde{f}^{n+\frac{1}{2}}\)</span> as a hopefully good approximation to
 <span class="math">\(f^{n+\frac{1}{2}}\)</span>, we can for the final term <span class="math">\(\bar{f}^{n+1}\)</span> use
-a Crank-Nicolson method to approximate <span class="math">\(u^{n+1}\)</span>:</p>
-<div class="math" id="equation-decay:fd2:RK4:barf">
-<span id="eq-decay-fd2-rk4-barf"></span><span class="eqno">(22)</span>\[     \bar{f}^{n+1} = f(u^n + \Delta t \hat{f}^{n+\frac{1}{2}}, t_{n+1}){\thinspace .}\]</div>
+a Crank-Nicolson method on <span class="math">\([t_n, t_{n+1}]\)</span> to approximate <span class="math">\(u^{n+1}\)</span>:</p>
+<div class="math" id="eq-decay-fd2-rk4-barf">
+\[\tag{50}
+\bar{f}^{n+1} = f(u^n + \Delta t \hat{f}^{n+\frac{1}{2}}, t_{n+1}){\thinspace .}\]</div>
 <p>We have now used the Forward and Backward Euler methods as well as the
 Crank-Nicolson method in the context of Simpson&#8217;s rule. The hope is
 that the combination of these methods yields an overall time-stepping
@@ -767,12 +864,13 @@ scheme from <span class="math">\(t_n\)</span> to <span class="math">\(t_n{+1}\)<
 <span class="math">\({\mathcal{O}(\Delta t)}\)</span> and <span class="math">\({\mathcal{O}(\Delta t^2)}\)</span> of the individual steps.
 This is indeed true: the overall accuracy is <span class="math">\({\mathcal{O}(\Delta t^4)}\)</span>!</p>
 <p>To summarize, the 4th-order Runge-Kutta method becomes</p>
-<div class="math">
-\[u^{n+1} = u^n +
-\frac{\Delta t}{6}\left( f^n + 2\hat{f}^{n+\frac{1}{2}}
-+ 2\tilde{f}^{n+\frac{1}{2}} + \bar{f}^{n+1}\right),\]</div>
+<div class="math" id="eq-auto29">
+\[\tag{51}
+u^{n+1} = u^n +
+    \frac{\Delta t}{6}\left( f^n + 2\hat{f}^{n+\frac{1}{2}}
+    + 2\tilde{f}^{n+\frac{1}{2}} + \bar{f}^{n+1}\right),\]</div>
 <p>where the quantities on the right-hand side are computed from
-<a href="#equation-decay:fd2:RK4:hatf">(20)</a>-<a href="#equation-decay:fd2:RK4:barf">(22)</a>. Note that
+<a class="reference internal" href="#eq-decay-fd2-rk4-hatf"><span class="std std-ref">(48)</span></a>-<a class="reference internal" href="#eq-decay-fd2-rk4-barf"><span class="std std-ref">(50)</span></a>. Note that
 the scheme is fully explicit so there is never any need to solve linear or
 nonlinear algebraic
 equations. However, the stability is conditional and depends on <span class="math">\(f\)</span>.
@@ -785,7 +883,7 @@ next section explains.</p>
 </div>
 <div class="section" id="the-odespy-software">
 <h2>The Odespy software<a class="headerlink" href="#the-odespy-software" title="Permalink to this headline">¶</a></h2>
-<p>A wide range of methods and software exist for solving <a href="#equation-decay:ode:general">(10)</a>.
+<p>A wide range of methods and software exist for solving <a class="reference internal" href="#eq-decay-ode-general"><span class="std std-ref">(36)</span></a>.
 Many of the methods are accessible through a unified Python interface offered
 by the <a class="reference external" href="https://github.com/hplgit/odespy">Odespy</a> <a class="reference internal" href="._main_genz002.html#ref5" id="id5">[Ref5]</a> package.
 Odespy features simple Python implementations of the most fundamental
@@ -793,9 +891,9 @@ schemes as well as Python interfaces to several famous packages for
 solving ODEs: <a class="reference external" href="https://computation.llnl.gov/casc/odepack/odepack_home.html">ODEPACK</a>, <a class="reference external" href="https://computation.llnl.gov/casc/odepack/odepack_home.html">Vode</a>,
 <a class="reference external" href="http://www.netlib.org/ode/rkc.f">rkc.f</a>, <a class="reference external" href="http://www.netlib.org/ode/rkf45.f">rkf45.f</a>, as well
 as the ODE solvers in <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html">SciPy</a>, <a class="reference external" href="http://docs.sympy.org/dev/modules/mpmath/calculus/odes.html">SymPy</a>, and <a class="reference external" href="http://olivierverdier.github.com/odelab/">odelab</a>.</p>
-<p>The usage of Odespy follows this setup for the ODE <span class="math">\(u^{\prime}=-au\)</span>,
-<span class="math">\(u(0)=I\)</span>, <span class="math">\(t\in (0,T]\)</span>, here solved
-by the famous 4th-order Runge-Kutta method with <span class="math">\(\Delta t=1\)</span>
+<p>The code below illustrates the usage of Odespy the solving <span class="math">\(u^{\prime}=-au\)</span>,
+<span class="math">\(u(0)=I\)</span>, <span class="math">\(t\in (0,T]\)</span>,
+by the famous 4th-order Runge-Kutta method, using <span class="math">\(\Delta t=1\)</span>
 and <span class="math">\(N_t=6\)</span> steps:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">u</span>
@@ -987,7 +1085,7 @@ error tolerance. The code goes like</p>
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">u</span>
 
-<span class="k">def</span> <span class="nf">exact_solution</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">I</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
 
 <span class="n">I</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">5</span>
@@ -1005,7 +1103,7 @@ error tolerance. The code goes like</p>
 <span class="c"># solver.u_all and solver.t_all contains all computed points</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">solver</span><span class="o">.</span><span class="n">t_all</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">u_all</span><span class="p">,</span> <span class="s">&#39;ko&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hold</span><span class="p">(</span><span class="s">&#39;on&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_fine</span><span class="p">,</span> <span class="n">exact_solution</span><span class="p">(</span><span class="n">t_fine</span><span class="p">),</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_fine</span><span class="p">,</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_fine</span><span class="p">),</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">&#39;tol=</span><span class="si">%.0E</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">tol</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp_odespy_adaptive.png&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1032,12 +1130,12 @@ assertion using the test function <code class="docutils literal"><span class="pr
 Vary the parameter <code class="docutils literal"><span class="pre">c</span></code> from very small, via <code class="docutils literal"><span class="pre">c=1</span></code> to many larger values,
 and print out the maximum difference between the numerical solution
 and the exact solution. What is the relevant value of the tolerance
-in the float comparison in each case?
-Filename: <code class="docutils literal"><span class="pre">test_precision</span></code>.</p>
+in the float comparison in each case?</p>
+<p>Filename: <code class="docutils literal"><span class="pre">test_precision</span></code>.</p>
 </div>
 <div class="section" id="exercise-2-implement-the-2-step-backward-scheme">
 <span id="decay-fd2-exer-bw2"></span><h2>Exercise 2: Implement the 2-step backward scheme<a class="headerlink" href="#exercise-2-implement-the-2-step-backward-scheme" title="Permalink to this headline">¶</a></h2>
-<p>Implement the 2-step backward method <a href="#equation-decay:fd2:bw:2step">(12)</a> for the
+<p>Implement the 2-step backward method <a class="reference internal" href="#eq-decay-fd2-bw-2step"><span class="std std-ref">(39)</span></a> for the
 model <span class="math">\(u^{\prime}(t) = -a(t)u(t) + b(t)\)</span>, <span class="math">\(u(0)=I\)</span>.  Allow the first step to
 be computed by either the Backward Euler scheme or the Crank-Nicolson
 scheme. Verify the implementation by choosing <span class="math">\(a(t)\)</span> and <span class="math">\(b(t)\)</span> such
@@ -1052,7 +1150,7 @@ Filename: <code class="docutils literal"><span class="pre">decay_backward2step</
 </div>
 <div class="section" id="exercise-3-implement-the-2nd-order-adams-bashforth-scheme">
 <span id="decay-fd2-exer-ab2"></span><h2>Exercise 3: Implement the 2nd-order Adams-Bashforth scheme<a class="headerlink" href="#exercise-3-implement-the-2nd-order-adams-bashforth-scheme" title="Permalink to this headline">¶</a></h2>
-<p>Implement the 2nd-order Adams-Bashforth method <a href="#equation-decay:fd2:AB2">(18)</a>
+<p>Implement the 2nd-order Adams-Bashforth method <a class="reference internal" href="#eq-decay-fd2-ab2"><span class="std std-ref">(46)</span></a>
 for the decay problem <span class="math">\(u^{\prime}=-a(t)u + b(t)\)</span>, <span class="math">\(u(0)=I\)</span>, <span class="math">\(t\in (0, T]\)</span>.
 Use the Forward Euler method for the first step such that the overall
 scheme is explicit. Verify the implementation using an exact
@@ -1063,7 +1161,7 @@ Filename: <code class="docutils literal"><span class="pre">decay_AdamsBashforth2
 </div>
 <div class="section" id="exercise-4-implement-the-3rd-order-adams-bashforth-scheme">
 <span id="decay-fd2-exer-ab3"></span><h2>Exercise 4: Implement the 3rd-order Adams-Bashforth scheme<a class="headerlink" href="#exercise-4-implement-the-3rd-order-adams-bashforth-scheme" title="Permalink to this headline">¶</a></h2>
-<p>Implement the 3rd-order Adams-Bashforth method <a href="#equation-decay:fd2:AB3">(19)</a>
+<p>Implement the 3rd-order Adams-Bashforth method <a class="reference internal" href="#eq-decay-fd2-ab3"><span class="std std-ref">(47)</span></a>
 for the decay problem <span class="math">\(u^{\prime}=-a(t)u + b(t)\)</span>, <span class="math">\(u(0)=I\)</span>, <span class="math">\(t\in (0, T]\)</span>.
 Since the scheme is explicit, allow it to be started by two steps with
 the Forward Euler method.  Investigate experimentally the case where
@@ -1073,8 +1171,8 @@ Filename: <code class="docutils literal"><span class="pre">decay_AdamsBashforth3
 </div>
 <div class="section" id="exercise-5-analyze-explicit-2nd-order-methods">
 <span id="decay-exer-rk2-taylor-analysis"></span><h2>Exercise 5: Analyze explicit 2nd-order methods<a class="headerlink" href="#exercise-5-analyze-explicit-2nd-order-methods" title="Permalink to this headline">¶</a></h2>
-<p>Show that the schemes <a href="#equation-decay:fd2:RK2:s2">(16)</a> and
-<a href="#equation-decay:fd2:Taylor2">(17)</a> are identical in the case <span class="math">\(f(u,t)=-a\)</span>, where
+<p>Show that the schemes <a class="reference internal" href="#eq-decay-fd2-rk2-s2"><span class="std std-ref">(44)</span></a> and
+<a class="reference internal" href="#eq-decay-fd2-taylor2"><span class="std std-ref">(45)</span></a> are identical in the case <span class="math">\(f(u,t)=-a\)</span>, where
 <span class="math">\(a&gt;0\)</span> is a constant. Assume that the numerical solution reads
 <span class="math">\(u^n=A^n\)</span> for some unknown amplification factor <span class="math">\(A\)</span> to be determined.
 Find <span class="math">\(A\)</span> and derive stability criteria. Can the scheme produce
@@ -1082,12 +1180,13 @@ oscillatory solutions of <span class="math">\(u^{\prime}=-au\)</span>? Plot the 
 amplification factor.
 Filename: <code class="docutils literal"><span class="pre">decay_RK2_Taylor2</span></code>.</p>
 </div>
-<div class="section" id="problem-6-implement-and-investigate-the-leapfrog-scheme">
-<span id="decay-fd2-exer-leapfrog1"></span><h2>Problem 6: Implement and investigate the Leapfrog scheme<a class="headerlink" href="#problem-6-implement-and-investigate-the-leapfrog-scheme" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="project-6-implement-and-investigate-the-leapfrog-scheme">
+<span id="decay-fd2-exer-leapfrog1"></span><h2>Project 6: Implement and investigate the Leapfrog scheme<a class="headerlink" href="#project-6-implement-and-investigate-the-leapfrog-scheme" title="Permalink to this headline">¶</a></h2>
 <p>A Leapfrog scheme
 for the ODE <span class="math">\(u^{\prime}(t) = -a(t)u(t) + b(t)\)</span> is defined by</p>
-<div class="math">
-\[\lbrack D_{2t}u = -au+b\rbrack^n{\thinspace .}\]</div>
+<div class="math" id="eq-decay-fd2-exer-leapfrog1-scheme">
+\[\tag{52}
+\lbrack D_{2t}u = -au+b\rbrack^n{\thinspace .}\]</div>
 <p>A separate method is needed to compute <span class="math">\(u^1\)</span>. The Forward Euler
 scheme is a possible candidate.</p>
 <p><strong>a)</strong>
@@ -1150,11 +1249,11 @@ Leapfrog scheme is <span class="math">\({\mathcal{O}(\Delta t^2)}\)</span>. Does
 1st-order method for the first step impact the convergence rate?</p>
 <p><strong>e)</strong>
 Set up a set of experiments to demonstrate that the Leapfrog scheme
-<a href="#equation-decay:fd2:leapfrog">(13)</a> is associated with numerical artifacts
+<a class="reference internal" href="#eq-decay-fd2-exer-leapfrog1-scheme"><span class="std std-ref">(52)</span></a> is associated with numerical artifacts
 (instabilities). Document the main results from this investigation.</p>
 <p><strong>f)</strong>
 Analyze and explain the
-instabilities of the Leapfrog scheme <a href="#equation-decay:fd2:leapfrog">(13)</a>:</p>
+instabilities of the Leapfrog scheme <a class="reference internal" href="#eq-decay-fd2-exer-leapfrog1-scheme"><span class="std std-ref">(52)</span></a>:</p>
 <ol class="arabic simple">
 <li>Choose <span class="math">\(a=\mbox{const}\)</span> and <span class="math">\(b=0\)</span>. Assume that an exact solution
 of the discrete equations has
@@ -1182,18 +1281,19 @@ Leapfrog scheme is unstable.</p>
 <span id="decay-fd2-exer-uni"></span><h2>Problem 7: Make a unified implementation of many schemes<a class="headerlink" href="#problem-7-make-a-unified-implementation-of-many-schemes" title="Permalink to this headline">¶</a></h2>
 <p>Consider the linear ODE problem <span class="math">\(u^{\prime}(t)=-a(t)u(t) + b(t)\)</span>, <span class="math">\(u(0)=I\)</span>.
 Explicit schemes for this problem can be written in the general form</p>
-<div class="math" id="equation-decay:analysis:exer:sumcj">
-<span id="eq-decay-analysis-exer-sumcj"></span><span class="eqno">(23)</span>\[     u^{n+1} = \sum_{j=0}^m c_ju^{n-j},\]</div>
+<div class="math" id="eq-decay-analysis-exer-sumcj">
+\[\tag{53}
+u^{n+1} = \sum_{j=0}^m c_ju^{n-j},\]</div>
 <p>for some choice of <span class="math">\(c_0,\ldots,c_m\)</span>.
 Find expressions for the <span class="math">\(c_j\)</span> coefficients in case of the
 <span class="math">\(\theta\)</span>-rule, the three-level backward scheme,
 the Leapfrog scheme, the 2nd-order Runge-Kutta method,
 and the 3rd-order Adams-Bashforth scheme.</p>
 <p>Make a class <code class="docutils literal"><span class="pre">ExpDecay</span></code> that implements the
-general updating formula <a href="#equation-decay:analysis:exer:sumcj">(23)</a>.
+general updating formula <a class="reference internal" href="#eq-decay-analysis-exer-sumcj"><span class="std std-ref">(53)</span></a>.
 The formula cannot be applied for <span class="math">\(n &lt; m\)</span>, and for those <span class="math">\(n\)</span> values, other
 schemes must be used. Assume for simplicity that we just
-repeat Crank-Nicolson steps until <a href="#equation-decay:analysis:exer:sumcj">(23)</a> can be used.
+repeat Crank-Nicolson steps until <a class="reference internal" href="#eq-decay-analysis-exer-sumcj"><span class="std std-ref">(53)</span></a> can be used.
 Use a subclass
 to specify the list <span class="math">\(c_0,\ldots,c_m\)</span> for a particular method, and
 implement subclasses for all the mentioned schemes.
@@ -1207,7 +1307,7 @@ Filename: <code class="docutils literal"><span class="pre">decay_schemes_unified
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <center>
             <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
@@ -1262,7 +1362,7 @@ Filename: <code class="docutils literal"><span class="pre">decay_schemes_unified
 <li><a class="reference internal" href="#exercise-3-implement-the-2nd-order-adams-bashforth-scheme">Exercise 3: Implement the 2nd-order Adams-Bashforth scheme</a></li>
 <li><a class="reference internal" href="#exercise-4-implement-the-3rd-order-adams-bashforth-scheme">Exercise 4: Implement the 3rd-order Adams-Bashforth scheme</a></li>
 <li><a class="reference internal" href="#exercise-5-analyze-explicit-2nd-order-methods">Exercise 5: Analyze explicit 2nd-order methods</a></li>
-<li><a class="reference internal" href="#problem-6-implement-and-investigate-the-leapfrog-scheme">Problem 6: Implement and investigate the Leapfrog scheme</a></li>
+<li><a class="reference internal" href="#project-6-implement-and-investigate-the-leapfrog-scheme">Project 6: Implement and investigate the Leapfrog scheme</a></li>
 <li><a class="reference internal" href="#problem-7-make-a-unified-implementation-of-many-schemes">Problem 7: Make a unified implementation of many schemes</a></li>
 </ul>
 </li>
@@ -1274,15 +1374,17 @@ Filename: <code class="docutils literal"><span class="pre">decay_schemes_unified
   <h4>Next topic</h4>
   <p class="topless"><a href="._main_genz002.html"
                         title="next chapter">Bibliography</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/._main_genz001.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._main_genz001.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -1296,7 +1398,7 @@ Filename: <code class="docutils literal"><span class="pre">decay_schemes_unified
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1308,12 +1410,15 @@ Filename: <code class="docutils literal"><span class="pre">decay_schemes_unified
         <li class="right" >
           <a href="._main_genz000.html" title="Generalizations of exponential decay models"
              >previous</a> |</li>
-        <li><a href="index.html">Generalizations of exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Generalizations of exponential decay models</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">
   <div class="footer">
-  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;H. P. Langtangen.
   </div>
 </div>
 

@@ -140,7 +140,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'decay:exer:RK2:Taylor:analysis',
                'decay:exer:RK2:Taylor:analysis'),
-              ('Problem 6: Implement and investigate the Leapfrog scheme',
+              ('Project 6: Implement and investigate the Leapfrog scheme',
                2,
                'decay:fd2:exer:leapfrog1',
                'decay:fd2:exer:leapfrog1'),
@@ -195,6 +195,22 @@ $$
 
 <h1 id="___sec0">Model extensions </h1>
 
+<p>
+This section looks at the generalizations to \( u^{\prime}=-a(t)u \)
+and \( u^{\prime}=-a(t)u + b(t) \). We sketch the corresponding
+implementations of the \( \theta \)-rule for such variable-coefficient ODEs.
+Verification can no longer make use of an exact solution of the
+numerical problem so we make use of manufactured solutions,
+for deriving an exact solution of the ODE problem, and then we can
+compute empirical convergence rates for the method and see if these
+coincide with the expected rates from theory.
+Finally, we see how our numerical methods can be applied to systems
+of ODEs.
+
+<p>
+The example programs associated with this chapter are found in
+the directory <a href="http://tinyurl.com/ofkw6kc/genz" target="_self"><tt>src/genz</tt></a>.
+
 <h2 id="___sec1">Generalization: including a variable coefficient </h2>
 
 <p>
@@ -209,7 +225,7 @@ u^{\prime}(t) = -a(t)u(t),\quad t\in (0,T],\quad u(0)=I \tp
 $$
 
 <p>
-A Forward Euler scheme consist of evaluating <a href="#mjx-eqn-1">(1)</a>
+A Forward Euler scheme consists of evaluating <a href="#mjx-eqn-1">(1)</a>
 at \( t=t_n \) and approximating the derivative with a forward
 difference \( [D^+_t u]^n \):
 
@@ -217,6 +233,7 @@ $$
 \begin{equation}
 \frac{u^{n+1} - u^n}{\Delta t} = -a(t_n)u^n
 \tp
+\tag{2}
 \end{equation}
 $$
 
@@ -225,6 +242,7 @@ $$
 \begin{equation}
 \frac{u^{n} - u^{n-1}}{\Delta t} = -a(t_n)u^n
 \tp
+\tag{3}
 \end{equation}
 $$
 
@@ -236,6 +254,7 @@ $$
 \begin{equation}
 \frac{u^{n+1} - u^{n}}{\Delta t} = -a(t_{n+\half})\half(u^n + u^{n+1})
 \tp
+\tag{4}
 \end{equation}
 $$
 
@@ -245,6 +264,7 @@ $$
 \begin{equation}
 \frac{u^{n+1} - u^{n}}{\Delta t} = -\half(a(t_n)u^n + a(t_{n+1})u^{n+1})
 \tp
+\tag{5}
 \end{equation}
 $$
 
@@ -255,6 +275,7 @@ $$
 \begin{equation}
 \frac{u^{n+1} - u^{n}}{\Delta t} = -a((1-\theta)t_n + \theta t_{n+1})((1-\theta) u^n + \theta u^{n+1})
 \tp
+\tag{6}
 \end{equation}
 $$
 
@@ -264,6 +285,7 @@ $$
 \frac{u^{n+1} - u^{n}}{\Delta t} = -(1-\theta) a(t_n)u^n - \theta
 a(t_{n+1})u^{n+1}
 \tp
+\tag{7}
 \end{equation}
 $$
 
@@ -273,9 +295,11 @@ Euler schemes can be summarized as
 
 $$
 \begin{align}
-\lbrack D^+_t u &= -au\rbrack^n,\\ 
+\lbrack D^+_t u &= -au\rbrack^n,
+\tag{8}\\ 
 \lbrack D^-_t u &= -au\rbrack^n
 \tp
+\tag{9}
 \end{align}
 $$
 
@@ -285,11 +309,15 @@ various versions are written as
 
 $$
 \begin{align}
-\lbrack D_t u &= -a\overline{u}^t\rbrack^{n+\half},\\ 
-\lbrack D_t u &= -\overline{au}^t\rbrack^{n+\half},\\ 
-\lbrack D_t u &= -a\overline{u}^{t,\theta}\rbrack^{n+\theta},\\ 
+\lbrack D_t u &= -a\overline{u}^t\rbrack^{n+\half},
+\tag{10}\\ 
+\lbrack D_t u &= -\overline{au}^t\rbrack^{n+\half},
+\tag{11}\\ 
+\lbrack D_t u &= -a\overline{u}^{t,\theta}\rbrack^{n+\theta},
+\tag{12}\\ 
 \lbrack D_t u &= -\overline{au}^{t,\theta}\rbrack^{n+\theta}
 \tp
+\tag{13}
 \end{align}
 $$
 
@@ -302,7 +330,7 @@ $$
 \begin{equation}
 u^{\prime}(t) = -a(t)u(t) + b(t),\quad t\in (0,T],\quad u(0)=I
 \tp
-\tag{2}
+\tag{14}
 \end{equation}
 $$
 
@@ -315,13 +343,18 @@ particularly clear if we write up the schemes in the operator notation:
 
 $$
 \begin{align}
-\lbrack D^+_t u &= -au + b\rbrack^n,\\ 
-\lbrack D^-_t u &= -au + b\rbrack^n,\\ 
-\lbrack D_t u   &= -a\overline{u}^t + b\rbrack^{n+\half},\\ 
-\lbrack D_t u   &= \overline{-au+b}^t\rbrack^{n+\half},\\ 
-\lbrack D_t u   &= -a\overline{u}^{t,\theta} + b\rbrack^{n+\theta},\\ 
+\lbrack D^+_t u &= -au + b\rbrack^n,
+\tag{15}\\ 
+\lbrack D^-_t u &= -au + b\rbrack^n,
+\tag{16}\\ 
+\lbrack D_t u   &= -a\overline{u}^t + b\rbrack^{n+\half},
+\tag{17}\\ 
+\lbrack D_t u   &= \overline{-au+b}^t\rbrack^{n+\half},
+\tag{18}\\ 
+\lbrack D_t u   &= -a\overline{u}^{t,\theta} + b\rbrack^{n+\theta},
+\tag{19}\\ 
 \lbrack D_t u   &= \overline{-au+b}^{t,\theta}\rbrack^{n+\theta}
-\tag{3}
+\tag{20}
 \tp
 \end{align}
 $$
@@ -331,14 +364,14 @@ $$
 <h3 id="___sec4">Deriving the \( \theta \)-rule formula </h3>
 
 <p>
-Writing out the \( \theta \)-rule in <a href="#mjx-eqn-3">(3)</a>,
+Writing out the \( \theta \)-rule in <a href="#mjx-eqn-20">(20)</a>,
 using \eqref{decay:fd1:Du:theta}
 and \eqref{decay:fd1:wmean:a}, we get
 $$
 \begin{equation}
 \frac{u^{n+1}-u^n}{\Delta t} = \theta(-a^{n+1}u^{n+1} + b^{n+1}))
 + (1-\theta)(-a^nu^{n} + b^n)),
-\tag{4}
+\tag{21}
 \end{equation}
 $$
 
@@ -350,13 +383,14 @@ $$
 u^{n+1} = ((1 - \Delta t(1-\theta)a^n)u^n
 + \Delta t(\theta b^{n+1} + (1-\theta)b^n))(1 + \Delta t\theta a^{n+1})^{-1}
 \tp
+\tag{22}
 \end{equation}
 $$
 
 <h3 id="___sec5">Python code </h3>
 
 <p>
-Here is a suitable implementation of <a href="#mjx-eqn-4">(4)</a>
+Here is a suitable implementation of <a href="#mjx-eqn-21">(21)</a>
 where \( a(t) \) and \( b(t) \) are given as
 Python functions:
 
@@ -484,7 +518,7 @@ set \( b=a(t)C \) and \( I=C \). An appropriate test function is
 <span style="color: #CD5555">    Test problem where u=u_const is the exact solution, to be</span>
 <span style="color: #CD5555">    reproduced (to machine precision) by any relevant method.</span>
 <span style="color: #CD5555">    &quot;&quot;&quot;</span>
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">exact_solution</span>(t):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">u_exact</span>(t):
         <span style="color: #8B008B; font-weight: bold">return</span> u_const
 
     <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">a</span>(t):
@@ -498,7 +532,7 @@ set \( b=a(t)C \) and \( I=C \). An appropriate test function is
     Nt = <span style="color: #B452CD">4</span>  <span style="color: #228B22"># enough with a few steps</span>
     u, t = solver(I=I, a=a, b=b, T=Nt*dt, dt=dt, theta=theta)
     <span style="color: #8B008B; font-weight: bold">print</span> u
-    u_e = exact_solution(t)
+    u_e = u_exact(t)
     difference = <span style="color: #658b00">abs</span>(u_e - u).max()  <span style="color: #228B22"># max deviation</span>
     tol = <span style="color: #B452CD">1E-14</span>
     <span style="color: #8B008B; font-weight: bold">assert</span> difference &lt; tol
@@ -539,7 +573,7 @@ ideal for initial debugging before proceeding with a linear solution.
 <p>
 We choose a linear solution \( u(t) = ct + d \). From the initial condition it
 follows that \( d=I \).
-Inserting this \( u \) in the left-hand side of <a href="#mjx-eqn-2">(2)</a>, i.e.,
+Inserting this \( u \) in the left-hand side of <a href="#mjx-eqn-14">(14)</a>, i.e.,
 the ODE, we get
 $$ c = -a(t)u + b(t) \tp  $$
 
@@ -559,11 +593,11 @@ compute the action of a difference operator on a linear function \( t \):
 $$
 \begin{align}
 \lbrack D_t^+ t\rbrack^n &= \frac{t_{n+1}-t_n}{\Delta t}=1,
-\tag{5}\\ 
+\tag{23}\\ 
 \lbrack D_t^- t\rbrack^n &= \frac{t_{n}-t_{n-1}}{\Delta t}=1,
-\tag{6}\\ 
+\tag{24}\\ 
 \lbrack D_t t\rbrack^n &= \frac{t_{n+\half}-t_{n-\half}}{\Delta t}=\frac{(n+\half)\Delta t - (n-\half)\Delta t}{\Delta t}=1
-\tag{7}
+\tag{25}
 \tp
 \end{align}
 $$
@@ -600,20 +634,20 @@ test based on a linear exact solution:
 <span style="color: #CD5555">    Test problem where u=c*t+I is the exact solution, to be</span>
 <span style="color: #CD5555">    reproduced (to machine precision) by any relevant method.</span>
 <span style="color: #CD5555">    &quot;&quot;&quot;</span>
-    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">exact_solution</span>(t):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">u_exact</span>(t):
         <span style="color: #8B008B; font-weight: bold">return</span> c*t + I
 
     <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">a</span>(t):
         <span style="color: #8B008B; font-weight: bold">return</span> t**<span style="color: #B452CD">0.5</span>  <span style="color: #228B22"># can be arbitrary</span>
 
     <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">b</span>(t):
-        <span style="color: #8B008B; font-weight: bold">return</span> c + a(t)*exact_solution(t)
+        <span style="color: #8B008B; font-weight: bold">return</span> c + a(t)*u_exact(t)
 
     theta = <span style="color: #B452CD">0.4</span>; I = <span style="color: #B452CD">0.1</span>; dt = <span style="color: #B452CD">0.1</span>; c = -<span style="color: #B452CD">0.5</span>
     T = <span style="color: #B452CD">4</span>
     Nt = <span style="color: #658b00">int</span>(T/dt)  <span style="color: #228B22"># no of steps</span>
     u, t = solver(I=I, a=a, b=b, T=Nt*dt, dt=dt, theta=theta)
-    u_e = exact_solution(t)
+    u_e = u_exact(t)
     difference = <span style="color: #658b00">abs</span>(u_e - u).max()  <span style="color: #228B22"># max deviation</span>
     <span style="color: #8B008B; font-weight: bold">print</span> difference
     tol = <span style="color: #B452CD">1E-14</span>  <span style="color: #228B22"># depends on c!</span>
@@ -645,12 +679,12 @@ many numerical methods obey a power-law relation between \( E \) and
 $$
 \begin{equation}
 E = C\Delta t^r,
-\tag{8}
+\tag{26}
 \end{equation}
 $$
 
 where \( C \) and \( r \) are (usually unknown) constants independent of \( \Delta t \).
-The formula <a href="#mjx-eqn-8">(8)</a> is viewed as an asymptotic model valid for
+The formula <a href="#mjx-eqn-26">(26)</a> is viewed as an asymptotic model valid for
 sufficiently small \( \Delta t \). How small is normally hard to estimate
 without doing numerical estimations of \( r \).
 
@@ -670,7 +704,7 @@ There are two alternative ways of estimating \( C \) and \( r \) based on a set 
 and \( \Delta t_{i} < \Delta t_{i-1} \) (i.e., decreasing cell size).
 
 <ol>
- <li> Take the logarithm of <a href="#mjx-eqn-8">(8)</a>, \( \ln E = r\ln \Delta t + \ln C \),
+ <li> Take the logarithm of <a href="#mjx-eqn-26">(26)</a>, \( \ln E = r\ln \Delta t + \ln C \),
     and fit a straight line to the data points \( (\Delta t_i, E_i) \),
     \( i=0,\ldots,m-1 \).</li>
  <li> Consider two consecutive experiments, \( (\Delta t_i, E_i) \) and
@@ -682,66 +716,112 @@ and \( \Delta t_{i} < \Delta t_{i-1} \) (i.e., decreasing cell size).
 $$
 \begin{equation}
 r_{i-1} = \frac{\ln (E_{i-1}/E_i)}{\ln (\Delta t_{i-1}/\Delta t_i)}
-\tag{9}
+\tag{27}
 \end{equation}
 $$
 
 for \( i=1,\ldots,m-1 \). Note that we have introduced a subindex \( i-1 \)
-on \( r \) in <a href="#mjx-eqn-9">(9)</a> because \( r \) estimated from
+on \( r \) in <a href="#mjx-eqn-27">(27)</a> because \( r \) estimated from
 a pair of experiments must be expected to change with \( i \).
 
 <p>
-The disadvantage of method 1 is that <a href="#mjx-eqn-8">(8)</a> might not be valid
+The disadvantage of method 1 is that <a href="#mjx-eqn-26">(26)</a> might not be valid
 for the coarsest meshes (largest \( \Delta t \) values). Fitting a line
 to all the data points is then misleading.  Method 2 computes
 convergence rates for pairs of experiments and allows us to see
 if the sequence \( r_i \) converges to some value as \( i\rightarrow m-2 \).
 The final \( r_{m-2} \) can then be taken as the convergence rate.
 If the coarsest meshes have a differing rate, the corresponding
-time steps are probably too large for <a href="#mjx-eqn-8">(8)</a> to be valid.
+time steps are probably too large for <a href="#mjx-eqn-26">(26)</a> to be valid.
 That is, those time steps lie outside the asymptotic range of
-\( \Delta t \) values where the error behaves like <a href="#mjx-eqn-8">(8)</a>.
+\( \Delta t \) values where the error behaves like <a href="#mjx-eqn-26">(26)</a>.
 
 <h3 id="___sec11">Implementation </h3>
 
 <p>
-Suppose we have some function <code>error(dt, ...)</code> that can compute the numerical
-error in our mathematical model. To compute
-\( r_0, r_1, \ldots, r_{m-2} \)
-from <a href="#mjx-eqn-8">(8)</a>, we just wrap a loop over \( \Delta t \) values
-(<code>dt_values</code>) around
-the <code>error</code> function:
+We can compute \( r_0, r_1, \ldots, r_{m-2} \) from \( E_i \) and \( \Delta t_i \)
+by the following function
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
-<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%">E_values = [error(dt, ...) <span style="color: #8B008B; font-weight: bold">for</span> dt <span style="color: #8B008B">in</span> dt_values]
-
-<span style="color: #228B22"># Compute pairwise convergence rates</span>
-m = <span style="color: #658b00">len</span>(dt_values)
-r = [log(E_values[i-<span style="color: #B452CD">1</span>]/E_values[i])/
-     log(dt_values[i-<span style="color: #B452CD">1</span>]/dt_values[i])
-     <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">1</span>, m, <span style="color: #B452CD">1</span>)]
-
-<span style="color: #228B22"># Strip off to 2 decimals</span>
-r = [<span style="color: #658b00">round</span>(r_, <span style="color: #B452CD">2</span>) <span style="color: #8B008B; font-weight: bold">for</span> r_ <span style="color: #8B008B">in</span> r]
+<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">compute_rates</span>(dt_values, E_values):
+    m = <span style="color: #658b00">len</span>(dt_values)
+    r = [log(E_values[i-<span style="color: #B452CD">1</span>]/E_values[i])/
+         log(dt_values[i-<span style="color: #B452CD">1</span>]/dt_values[i])
+         <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">1</span>, m, <span style="color: #B452CD">1</span>)]
+    <span style="color: #228B22"># Round to two decimals</span>
+    r = [<span style="color: #658b00">round</span>(r_, <span style="color: #B452CD">2</span>) <span style="color: #8B008B; font-weight: bold">for</span> r_ <span style="color: #8B008B">in</span> r]
+    <span style="color: #8B008B; font-weight: bold">return</span> r
 </pre></div>
 <p>
-We can run the convergence rate estimate computations for the
-\( \theta \)-rule discretization of \( u'=-au \), using \( \Delta t = 0.5,-.25, 0.1, 0.05, 0.025, 0.01 \):
+Experiments with a series of time step values and \( \theta=0,1,0.5 \)
+can be set up as follows, here embedded in a real test function:
 
 <p>
 
-<!-- code=text typeset with pygments style "perldoc" -->
-<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%">FE: 1.33 1.15 1.07 1.03 1.02
-BE: 0.98 0.99 0.99 1.00 1.00
-CN: 2.14 2.07 2.03 2.01 2.01
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_convergence_rates</span>():
+    <span style="color: #228B22"># Create a manufactured solution</span>
+    <span style="color: #228B22"># define u_exact(t), a(t), b(t)</span>
+
+    dt_values = [<span style="color: #B452CD">0.1</span>*<span style="color: #B452CD">2</span>**(-i) <span style="color: #8B008B; font-weight: bold">for</span> i <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">7</span>)]
+    I = u_exact(<span style="color: #B452CD">0</span>)
+
+    <span style="color: #8B008B; font-weight: bold">for</span> theta <span style="color: #8B008B">in</span> (<span style="color: #B452CD">0</span>, <span style="color: #B452CD">1</span>, <span style="color: #B452CD">0.5</span>):
+        E_values = []
+        <span style="color: #8B008B; font-weight: bold">for</span> dt <span style="color: #8B008B">in</span> dt_values:
+            u, t = solver(I=I, a=a, b=b, T=<span style="color: #B452CD">6</span>, dt=dt, theta=theta)
+            u_e = u_exact(t)
+            e = u_e - u
+            E = sqrt(dt*<span style="color: #658b00">sum</span>(e**<span style="color: #B452CD">2</span>))
+            E_values.append(E)
+        r = compute_rates(dt_values, E_values)
+        <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;theta=%g, r: %s&#39;</span> % (theta, r)
+        expected_rate = <span style="color: #B452CD">2</span> <span style="color: #8B008B; font-weight: bold">if</span> theta == <span style="color: #B452CD">0.5</span> <span style="color: #8B008B; font-weight: bold">else</span> <span style="color: #B452CD">1</span>
+        tol = <span style="color: #B452CD">0.1</span>
+        diff = <span style="color: #658b00">abs</span>(expected_rate - r[-<span style="color: #B452CD">1</span>])
+        <span style="color: #8B008B; font-weight: bold">assert</span> diff &lt; tol
 </pre></div>
 <p>
-The Forward and Backward Euler methods seem to have an \( r \) value which
-stabilizes at 1, while the Crank-Nicolson seems to be a second-order
-method with \( r=2 \). These results are in very good agreement with
-various theoretical considerations for \( r \).
+The manufactured solution is conveniently computed by <code>sympy</code>.
+Let us choose \( \uex(t) = \sin(t)e^{-2t} \) and \( a(t)=t^2 \).
+This implies that we must fit \( b \) as \( b(t)=u'(t)-a(t) \).
+We first compute with <code>sympy</code> expressions and then we convert
+the exact solution, \( a \), and \( b \) to Python functions that we
+can use in the subsequent numerical computing:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #228B22"># Create a manufactured solution with sympy</span>
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">sympy</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">sym</span>
+t = sym.symbols(<span style="color: #CD5555">&#39;t&#39;</span>)
+u_e = sym.sin(t)*sym.exp(-<span style="color: #B452CD">2</span>*t)
+a = t**<span style="color: #B452CD">2</span>
+b = sym.diff(u_e, t) + a*u_exact
+
+<span style="color: #228B22"># Turn sympy expressions into Python function</span>
+u_exact = sym.lambdify([t], u_e, modules=<span style="color: #CD5555">&#39;numpy&#39;</span>)
+a = sym.lambdify([t], a, modules=<span style="color: #CD5555">&#39;numpy&#39;</span>)
+b = sym.lambdify([t], b, modules=<span style="color: #CD5555">&#39;numpy&#39;</span>)
+</pre></div>
+<p>
+The complete code is found in the function <code>test_convergence_rates</code>
+in the file <a href="http://tinyurl.com/ofkw6kc/genz/decay_vc.py" target="_self"><tt>decay_vc.py</tt></a>.
+
+<p>
+Running this code gives the output
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%">theta=0, r: [1.06, 1.03, 1.01, 1.01, 1.0, 1.0]
+theta=1, r: [0.94, 0.97, 0.99, 0.99, 1.0, 1.0]
+theta=0.5, r: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0]
+</pre></div>
+<p>
+We clearly see how the convergence rates approach the expected values.
 
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
@@ -764,8 +844,10 @@ and \( v(t) \):
 
 $$
 \begin{align}
-u^{\prime} &= a u + bv,\\ 
+u^{\prime} &= a u + bv,
+\tag{28}\\ 
 v^{\prime} &= cu +  dv,
+\tag{29}
 \end{align}
 $$
 
@@ -775,9 +857,11 @@ updating formula:
 
 $$
 \begin{align}
-u^{n+1} &= u^n + \Delta t (a u^n + b v^n),\\ 
+u^{n+1} &= u^n + \Delta t (a u^n + b v^n),
+\tag{30}\\ 
 v^{n+1} &= u^n + \Delta t (cu^n + dv^n)
 \tp
+\tag{31}
 \end{align}
 $$
 
@@ -786,8 +870,10 @@ On the other hand, the Crank-Nicolson or Backward Euler schemes result in a
 
 $$
 \begin{align}
-u^{n+1} &= u^n + \Delta t (a u^{n+1} + b v^{n+1}),\\ 
+u^{n+1} &= u^n + \Delta t (a u^{n+1} + b v^{n+1}),
+\tag{32}\\ 
 v^{n+1} &= v^n + \Delta t (c u^{n+1} + d v^{n+1})\tp
+\tag{33}
 \end{align}
 $$
 
@@ -795,8 +881,10 @@ Collecting \( u^{n+1} \) as well as \( v^{n+1} \) on the left-hand side results
 in
 $$
 \begin{align}
-(1 - \Delta t a)u^{n+1} + bv^{n+1} &= u^n ,\\ 
+(1 - \Delta t a)u^{n+1} + bv^{n+1} &= u^n ,
+\tag{34}\\ 
 c u^{n+1} + (1 - \Delta t d) v^{n+1} &= v^n ,
+\tag{35}
 \end{align}
 $$
 
@@ -828,28 +916,28 @@ ODEs are commonly written in the generic form
 $$
 \begin{equation}
 u^{\prime} = f(u,t),\quad u(0)=I,
-\tag{10}
+\tag{36}
 \end{equation}
 $$
 
 where \( f(u,t) \)  is some prescribed function.
 As an example, our most
-general exponential decay model <a href="#mjx-eqn-2">(2)</a> has
+general exponential decay model <a href="#mjx-eqn-14">(14)</a> has
 \( f(u,t)=-a(t)u(t) + b(t) \).
 
 <p>
-The unknown \( u \) in <a href="#mjx-eqn-10">(10)</a> may either be
+The unknown \( u \) in <a href="#mjx-eqn-36">(36)</a> may either be
 a scalar function of time \( t \), or a vector valued function of \( t \) in
 case of a <em>system of ODEs</em> with \( m \) unknown components:
 $$ u(t) = (u^{(0)}(t),u^{(1)}(t),\ldots,u^{(m-1)}(t)) \tp  $$
 
-In that case, the right-hand side is vector-valued function with \( m \)
+In that case, the right-hand side is a vector-valued function with \( m \)
 components,
 $$
 \begin{align*}
 f(u, t) = ( & f^{(0)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\ 
             & f^{(1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)),\\ 
-            & \vdots,\\ 
+            & \vdots\\ 
             & f^{(m-1)}(u^{(0)}(t),\ldots,u^{(m-1)}(t)))
 \tp
 \end{align*}
@@ -857,7 +945,7 @@ $$
 
 <p>
 Actually, any system of ODEs can
-be written in the form <a href="#mjx-eqn-10">(10)</a>, but higher-order
+be written in the form <a href="#mjx-eqn-36">(36)</a>, but higher-order
 ODEs then need auxiliary unknown functions to enable conversion to
 a first-order system.
 
@@ -874,7 +962,7 @@ $$
 \begin{equation}
 \frac{u^{n+1}-u^n}{\Delta t} = \theta f(u^{n+1},t_{n+1}) +
 (1-\theta)f(u^n, t_n)\tp
-\tag{11}
+\tag{37}
 \end{equation}
 $$
 
@@ -885,6 +973,7 @@ $$
 \begin{equation}
 u^{n+1} - \Delta t \theta f(u^{n+1},t_{n+1}) =
 u^n + \Delta t(1-\theta)f(u^n, t_n)\tp
+\tag{38}
 \end{equation}
 $$
 
@@ -913,17 +1002,17 @@ $$
 u^{n+1} = \frac{4}{3}u^n - \frac{1}{3}u^{n-1} +
 \frac{2}{3}\Delta t f(u^{n+1}, t_{n+1})
 \tp
-\tag{12}
+\tag{39}
 \end{equation}
 $$
 
-Higher-order versions of the scheme <a href="#mjx-eqn-12">(12)</a> can
+Higher-order versions of the scheme <a href="#mjx-eqn-39">(39)</a> can
 be constructed by including more time levels. These schemes are known
 as the Backward Differentiation Formulas (BDF), and the particular
-version <a href="#mjx-eqn-12">(12)</a> is often referred to as BDF2.
+version <a href="#mjx-eqn-39">(39)</a> is often referred to as BDF2.
 
 <p>
-Note that the scheme <a href="#mjx-eqn-12">(12)</a> is implicit and requires
+Note that the scheme <a href="#mjx-eqn-39">(39)</a> is implicit and requires
 solution of nonlinear equations when \( f \) is nonlinear in \( u \).  The
 standard 1st-order Backward Euler method or the Crank-Nicolson scheme
 can be used for the first step.
@@ -939,6 +1028,7 @@ a central difference over two time steps,
 $$
 \begin{equation}
 u^{\prime}(t_n)\approx \frac{u^{n+1}-u^{n-1}}{2\Delta t} = [D_{2t}u]^n
+\tag{40}
 \end{equation}
 $$
 
@@ -953,11 +1043,11 @@ $$
 \begin{equation}
 u^{n+1} = u^{n-1} + 2\Delta t f(u^n, t_n)
 \tp
-\tag{13}
+\tag{41}
 \end{equation}
 $$
 
-Observe that <a href="#mjx-eqn-13">(13)</a> is an explicit scheme, and that
+Observe that <a href="#mjx-eqn-41">(41)</a> is an explicit scheme, and that
 a nonlinear \( f \) (in \( u \)) is trivial to handle since it only involves
 the known \( u^n \) value.
 Some other scheme must be used as starter to compute \( u^1 \), preferably
@@ -966,15 +1056,15 @@ the Forward Euler scheme since it is also explicit.
 <h3 id="___sec19">The filtered Leapfrog scheme </h3>
 
 <p>
-Unfortunately, the Leapfrog scheme <a href="#mjx-eqn-13">(13)</a>
-will develop growing oscillations with time (see <a href="#decay:fd2:exer:leapfrog1">Problem 6: Implement and investigate the Leapfrog scheme</a>). A remedy for such undesired oscillations
+Unfortunately, the Leapfrog scheme <a href="#mjx-eqn-41">(41)</a>
+will develop growing oscillations with time (see <a href="#decay:fd2:exer:leapfrog1">Project 6: Implement and investigate the Leapfrog scheme</a>). A remedy for such undesired oscillations
 is to introduce a <em>filtering technique</em>. First, a standard Leapfrog
-step is taken, according to <a href="#mjx-eqn-13">(13)</a>, and then
+step is taken, according to <a href="#mjx-eqn-41">(41)</a>, and then
 the previous \( u^n \) value is adjusted according to
 $$
 \begin{equation}
 u^n\ \leftarrow\ u^n + \gamma (u^{n-1} - 2u^n + u^{n+1})
-\tag{14}
+\tag{42}
 \tp
 \end{equation}
 $$
@@ -986,7 +1076,7 @@ famous NCAR Climate Model).
 
 <p>
 <!-- Need to elaborate more on this: -->
-<!-- The difference in th \( \gamma \) term in <a href="#mjx-eqn-14">(14)</a> -->
+<!-- The difference in th \( \gamma \) term in <a href="#mjx-eqn-42">(42)</a> -->
 <!-- can be recognized as a finite difference approximation to -->
 <!-- \( \Delta t^2 u^{\prime\prime}(t_n) \). -->
 
@@ -998,18 +1088,18 @@ The two-step scheme
 $$
 \begin{align}
 u^* &= u^n + \Delta t f(u^n, t_n),
-\tag{15}\\ 
+\tag{43}\\ 
 u^{n+1} &= u^n + \Delta t \half \left( f(u^n, t_n) + f(u^*, t_{n+1})
 \right),
-\tag{16}
+\tag{44}
 \end{align}
 $$
 
-essentially applies a Crank-Nicolson method <a href="#mjx-eqn-16">(16)</a>
+essentially applies a Crank-Nicolson method <a href="#mjx-eqn-44">(44)</a>
 to the ODE, but replaces
 the term \( f(u^{n+1}, t_{n+1}) \) by a prediction
-\( f(u^{*}, t_{n+1}) \) based on a Forward Euler step <a href="#mjx-eqn-15">(15)</a>.
-The scheme <a href="#mjx-eqn-15">(15)</a>-<a href="#mjx-eqn-16">(16)</a> is
+\( f(u^{*}, t_{n+1}) \) based on a Forward Euler step <a href="#mjx-eqn-43">(43)</a>.
+The scheme <a href="#mjx-eqn-43">(43)</a>-<a href="#mjx-eqn-44">(44)</a> is
 known as Huen's method, but is also a 2nd-order Runge-Kutta method.
 The scheme is explicit, and the error is expected to behave as \( \Delta t^2 \).
 
@@ -1042,7 +1132,7 @@ u^{n+1} = u^n + f(u^n,t_n)\Delta t + \half\left(
 f(u^n,t_n)\frac{\partial f}{\partial u}(u^n,t_n)  +
 \frac{\partial f}{\partial t}\right)\Delta t^2
 \tp
-\tag{17}
+\tag{45}
 \end{equation}
 $$
 
@@ -1059,7 +1149,7 @@ $$
 u^{n+1} = u^n + \half\Delta t\left( 3f(u^n, t_n) - f(u^{n-1}, t_{n-1})
 \right)
 \tp
-\tag{18}
+\tag{46}
 \end{equation}
 $$
 
@@ -1076,7 +1166,7 @@ $$
 u^{n+1} = u^n + \frac{1}{12}\left( 23f(u^n, t_n) - 16 f(u^{n-1},t_{n-1})
 + 5f(u^{n-2}, t_{n-2})\right)
 \tp
-\tag{19}
+\tag{47}
 \end{equation}
 $$
 
@@ -1139,7 +1229,7 @@ method with step \( \half\Delta t \):
 $$
 \begin{equation}
 \hat{f}^{n+\half} = f(u^n + \half{\Delta t} f^n, t_{n+\half})
-\tag{20}
+\tag{48}
 \end{equation}
 $$
 
@@ -1149,18 +1239,18 @@ Since this gives us a prediction of \( f^{n+\half} \), we can for
 $$
 \begin{equation}
 \tilde{f}^{n+\half} = f(u^n + \half\Delta t\hat{f}^{n+\half}, t_{n+\half})\tp
-\tag{21}
+\tag{49}
 \end{equation}
 $$
 
 With \( \tilde{f}^{n+\half} \) as a hopefully good approximation to
 \( f^{n+\half} \), we can for the final term \( \bar{f}^{n+1} \) use
-a Crank-Nicolson method to approximate \( u^{n+1} \):
+a Crank-Nicolson method on \( [t_n, t_{n+1}] \) to approximate \( u^{n+1} \):
 
 $$
 \begin{equation}
 \bar{f}^{n+1} = f(u^n + \Delta t \hat{f}^{n+\half}, t_{n+1})\tp
-\tag{22}
+\tag{50}
 \end{equation}
 $$
 
@@ -1179,11 +1269,12 @@ $$
 u^{n+1} = u^n +
 \frac{\Delta t}{6}\left( f^n + 2\hat{f}^{n+\half}
 + 2\tilde{f}^{n+\half} + \bar{f}^{n+1}\right),
+\tag{51}
 \end{equation}
 $$
 
 where the quantities on the right-hand side are computed from
-<a href="#mjx-eqn-20">(20)</a>-<a href="#mjx-eqn-22">(22)</a>. Note that
+<a href="#mjx-eqn-48">(48)</a>-<a href="#mjx-eqn-50">(50)</a>. Note that
 the scheme is fully explicit so there is never any need to solve linear or
 nonlinear algebraic
 equations. However, the stability is conditional and depends on \( f \).
@@ -1199,7 +1290,7 @@ next section explains.
 <h2 id="___sec24">The Odespy software </h2>
 
 <p>
-A wide range of methods and software exist for solving <a href="#mjx-eqn-10">(10)</a>.
+A wide range of methods and software exist for solving <a href="#mjx-eqn-36">(36)</a>.
 Many of the methods are accessible through a unified Python interface offered
 by the <a href="https://github.com/hplgit/odespy" target="_self">Odespy</a> <a href="._genz-solarized002.html#odespy">[5]</a> package.
 Odespy features simple Python implementations of the most fundamental
@@ -1209,9 +1300,9 @@ solving ODEs: <a href="https://computation.llnl.gov/casc/odepack/odepack_home.ht
 as the ODE solvers in <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.ode.html" target="_self">SciPy</a>, <a href="http://docs.sympy.org/dev/modules/mpmath/calculus/odes.html" target="_self">SymPy</a>, and <a href="http://olivierverdier.github.com/odelab/" target="_self">odelab</a>.
 
 <p>
-The usage of Odespy follows this setup for the ODE \( u^{\prime}=-au \),
-\( u(0)=I \), \( t\in (0,T] \), here solved
-by the famous 4th-order Runge-Kutta method with \( \Delta t=1 \)
+The code below illustrates the usage of Odespy the solving \( u^{\prime}=-au \),
+\( u(0)=I \), \( t\in (0,T] \),
+by the famous 4th-order Runge-Kutta method, using \( \Delta t=1 \)
 and \( N_t=6 \) steps:
 
 <p>
@@ -1343,9 +1434,9 @@ the class type (as a string) of an object <code>obj</code> is obtained by
 
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:odespy:fig1"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 1:  Behavior of different schemes for the decay equation. <div id="decay:odespy:fig1"></div> </p></center>
+<center><p class="caption">Figure 1:  Behavior of different schemes for the decay equation.  <!-- caption label: decay:odespy:fig1 --> </p></center>
 <p><img src="fig-genz/decay_odespy1_png.png" align="bottom" width=600></p>
 </center>
 
@@ -1436,7 +1527,7 @@ error tolerance. The code goes like
 <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">f</span>(u, t):
     <span style="color: #8B008B; font-weight: bold">return</span> -a*u
 
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">exact_solution</span>(t):
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">u_exact</span>(t):
     <span style="color: #8B008B; font-weight: bold">return</span> I*np.exp(-a*t)
 
 I = <span style="color: #B452CD">1</span>; a = <span style="color: #B452CD">2</span>; T = <span style="color: #B452CD">5</span>
@@ -1454,7 +1545,7 @@ u, t = solver.solve(t_mesh)
 <span style="color: #228B22"># solver.u_all and solver.t_all contains all computed points</span>
 plt.plot(solver.t_all, solver.u_all, <span style="color: #CD5555">&#39;ko&#39;</span>)
 plt.hold(<span style="color: #CD5555">&#39;on&#39;</span>)
-plt.plot(t_fine, exact_solution(t_fine), <span style="color: #CD5555">&#39;b-&#39;</span>)
+plt.plot(t_fine, u_exact(t_fine), <span style="color: #CD5555">&#39;b-&#39;</span>)
 plt.legend([<span style="color: #CD5555">&#39;tol=%.0E&#39;</span> % tol, <span style="color: #CD5555">&#39;exact&#39;</span>])
 plt.savefig(<span style="color: #CD5555">&#39;tmp_odespy_adaptive.png&#39;</span>)
 plt.show()
@@ -1466,9 +1557,9 @@ Intuitively, one would expect denser points in the beginning of
 the decay and larger time steps when the solution flattens out.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:odespy:fig2"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 2:  Choice of adaptive time mesh by the Dormand-Prince method for different tolerances. <div id="decay:odespy:fig2"></div> </p></center>
+<center><p class="caption">Figure 2:  Choice of adaptive time mesh by the Dormand-Prince method for different tolerances.  <!-- caption label: decay:odespy:fig2 --> </p></center>
 <p><img src="fig-genz/decay_DormandPrince_adaptivity.png" align="bottom" width=800></p>
 </center>
 
@@ -1488,7 +1579,10 @@ Vary the parameter <code>c</code> from very small, via <code>c=1</code> to many 
 and print out the maximum difference between the numerical solution
 and the exact solution. What is the relevant value of the tolerance
 in the float comparison in each case?
-Filename: <code>test_precision</code>.
+
+<p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>test_precision</code>.
 
 <p>
 <!-- --- end exercise --- -->
@@ -1499,7 +1593,7 @@ Filename: <code>test_precision</code>.
 <h2 id="decay:fd2:exer:bw2">Exercise 2: Implement the 2-step backward scheme</h2>
 
 <p>
-Implement the 2-step backward method <a href="#mjx-eqn-12">(12)</a> for the
+Implement the 2-step backward method <a href="#mjx-eqn-39">(39)</a> for the
 model \( u^{\prime}(t) = -a(t)u(t) + b(t) \), \( u(0)=I \).  Allow the first step to
 be computed by either the Backward Euler scheme or the Crank-Nicolson
 scheme. Verify the implementation by choosing \( a(t) \) and \( b(t) \) such
@@ -1523,7 +1617,7 @@ Filename: <code>decay_backward2step</code>.
 <h2 id="decay:fd2:exer:AB2">Exercise 3: Implement the 2nd-order Adams-Bashforth scheme</h2>
 
 <p>
-Implement the 2nd-order Adams-Bashforth method <a href="#mjx-eqn-18">(18)</a>
+Implement the 2nd-order Adams-Bashforth method <a href="#mjx-eqn-46">(46)</a>
 for the decay problem \( u^{\prime}=-a(t)u + b(t) \), \( u(0)=I \), \( t\in (0, T] \).
 Use the Forward Euler method for the first step such that the overall
 scheme is explicit. Verify the implementation using an exact
@@ -1541,7 +1635,7 @@ Filename: <code>decay_AdamsBashforth2</code>.
 <h2 id="decay:fd2:exer:AB3">Exercise 4: Implement the 3rd-order Adams-Bashforth scheme</h2>
 
 <p>
-Implement the 3rd-order Adams-Bashforth method <a href="#mjx-eqn-19">(19)</a>
+Implement the 3rd-order Adams-Bashforth method <a href="#mjx-eqn-47">(47)</a>
 for the decay problem \( u^{\prime}=-a(t)u + b(t) \), \( u(0)=I \), \( t\in (0, T] \).
 Since the scheme is explicit, allow it to be started by two steps with
 the Forward Euler method.  Investigate experimentally the case where
@@ -1558,8 +1652,8 @@ Filename: <code>decay_AdamsBashforth3</code>.
 <h2 id="decay:exer:RK2:Taylor:analysis">Exercise 5: Analyze explicit 2nd-order methods</h2>
 
 <p>
-Show that the schemes <a href="#mjx-eqn-16">(16)</a> and
-<a href="#mjx-eqn-17">(17)</a> are identical in the case \( f(u,t)=-a \), where
+Show that the schemes <a href="#mjx-eqn-44">(44)</a> and
+<a href="#mjx-eqn-45">(45)</a> are identical in the case \( f(u,t)=-a \), where
 \( a>0 \) is a constant. Assume that the numerical solution reads
 \( u^n=A^n \) for some unknown amplification factor \( A \) to be determined.
 Find \( A \) and derive stability criteria. Can the scheme produce
@@ -1573,13 +1667,18 @@ Filename: <code>decay_RK2_Taylor2</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="decay:fd2:exer:leapfrog1">Problem 6: Implement and investigate the Leapfrog scheme</h2>
+<h2 id="decay:fd2:exer:leapfrog1">Project 6: Implement and investigate the Leapfrog scheme</h2>
 
 <p>
 A Leapfrog scheme
 for the ODE \( u^{\prime}(t) = -a(t)u(t) + b(t) \) is defined by
 
-$$ \lbrack D_{2t}u = -au+b\rbrack^n\tp$$
+$$
+\begin{equation}
+\lbrack D_{2t}u = -au+b\rbrack^n\tp
+\tag{52}
+\end{equation}
+$$
 
 A separate method is needed to compute \( u^1 \). The Forward Euler
 scheme is a possible candidate.
@@ -1668,13 +1767,13 @@ Leapfrog scheme is \( \Oof{\Delta t^2} \). Does the use of a
 <p>
 <b>e)</b>
 Set up a set of experiments to demonstrate that the Leapfrog scheme
-<a href="#mjx-eqn-13">(13)</a> is associated with numerical artifacts
+<a href="#mjx-eqn-52">(52)</a> is associated with numerical artifacts
 (instabilities). Document the main results from this investigation.
 
 <p>
 <b>f)</b>
 Analyze and explain the
-instabilities of the Leapfrog scheme <a href="#mjx-eqn-13">(13)</a>:
+instabilities of the Leapfrog scheme <a href="#mjx-eqn-52">(52)</a>:
 
 <ol>
 <li> Choose \( a=\mbox{const} \) and \( b=0 \). Assume that an exact solution
@@ -1716,7 +1815,7 @@ Explicit schemes for this problem can be written in the general form
 $$
 \begin{equation}
 u^{n+1} = \sum_{j=0}^m c_ju^{n-j},
-\tag{23}
+\tag{53}
 \end{equation}
 $$
 
@@ -1728,10 +1827,10 @@ and the 3rd-order Adams-Bashforth scheme.
 
 <p>
 Make a class <code>ExpDecay</code> that implements the
-general updating formula <a href="#mjx-eqn-23">(23)</a>.
+general updating formula <a href="#mjx-eqn-53">(53)</a>.
 The formula cannot be applied for \( n < m \), and for those \( n \) values, other
 schemes must be used. Assume for simplicity that we just
-repeat Crank-Nicolson steps until <a href="#mjx-eqn-23">(23)</a> can be used.
+repeat Crank-Nicolson steps until <a href="#mjx-eqn-53">(53)</a> can be used.
 Use a subclass
 to specify the list \( c_0,\ldots,c_m \) for a particular method, and
 implement subclasses for all the mentioned schemes.

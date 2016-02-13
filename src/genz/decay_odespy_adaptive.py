@@ -8,7 +8,7 @@ import scitools.std as plt
 def f(u, t):
     return -a*u
 
-def exact_solution(t):
+def u_exact(t):
     return I*np.exp(-a*t)
 
 I = 1; a = 2; T = 5
@@ -26,7 +26,7 @@ u, t = solver.solve(t_mesh)
 # solver.u_all and solver.t_all contains all computed points
 plt.plot(solver.t_all, solver.u_all, 'ko')
 plt.hold('on')
-plt.plot(t_fine, exact_solution(t_fine), 'b-')
+plt.plot(t_fine, u_exact(t_fine), 'b-')
 plt.legend(['tol=%.0E' % tol, 'exact'])
 plt.savefig('tmp_odespy_adaptive.png')
 plt.show()

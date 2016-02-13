@@ -21,6 +21,7 @@ SciTools
 VTK
 VisIt
 backend
+discretization
 discretizing
 implementational
 nominator

@@ -87,7 +87,7 @@ centered differences:
         
         
 
-At the end points we use forward and backward differences:
+At the end points we may use forward and backward differences:
 
 .. math::
          d^0 = [D_t^+u]^n = \frac{u^{1}-u^{0}}{\Delta t},
@@ -96,6 +96,11 @@ and
 
 .. math::
          d^{N_t} = [D_t^-u]^n = \frac{u^{N_t}-u^{N_t-1}}{\Delta t}{\thinspace .}
+
+(Note that the formulas for the derivative at the end points are
+less accurate than the formula used for the internal mesh points.
+We can easily employ equally accurate finite differences at the end
+points, but these involve three instead of two points.)
 
 **a)**
 Write a function

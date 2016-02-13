@@ -20,6 +20,13 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
 </style>
 
 
@@ -106,7 +113,7 @@ code { color: inherit; background-color: transparent; }
                2,
                'decay:exer:RK2:Taylor:analysis',
                'decay:exer:RK2:Taylor:analysis'),
-              ('Problem 6: Implement and investigate the Leapfrog scheme',
+              ('Project 6: Implement and investigate the Leapfrog scheme',
                2,
                'decay:fd2:exer:leapfrog1',
                'decay:fd2:exer:leapfrog1'),
@@ -155,15 +162,49 @@ $$
     </button>
     <a class="navbar-brand" href="genz-sol.html">Generalizations of exponential decay models</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec0" style="font-size: 80%;">Model extensions</a></li>
-     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec13" style="font-size: 80%;">General first-order ODEs</a></li>
-     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec28" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec36" style="font-size: 80%;">Bibliography</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec0" style="font-size: 80%;"><b>Model extensions</b></a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Generalization: including a variable coefficient</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:source" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Generalization: including a source term</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:general" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementation of the generalized model problem</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deriving the \( \theta \)-rule formula</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python code</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Coding of variable coefficients</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:verify:trivial" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Verifying a constant solution</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:MMS" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Verification via manufactured solutions</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:convergence:rate" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing convergence rates</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Estimating \( r \)</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Extension to systems of ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec13" style="font-size: 80%;"><b>General first-order ODEs</b></a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Generic form of first-order ODEs</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The \( \theta \)-rule</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;An implicit 2-step backward scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Leapfrog schemes</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ordinary Leapfrog scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The filtered Leapfrog scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The 2nd-order Runge-Kutta method</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A 2nd-order Taylor-series method</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The 2nd- and 3rd-order Adams-Bashforth schemes</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:fd2:RK4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The 4th-order Runge-Kutta method</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Odespy software</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Runge-Kutta methods</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remark about using the \( \theta \)-rule in Odespy</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:fd2:adaptiveRK" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example: Adaptive Runge-Kutta methods</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#___sec28" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:fd2:exer:precision" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Experiment with precision in tests and the size of \( u \)</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:fd2:exer:bw2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 2: Implement the 2-step backward scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:fd2:exer:AB2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 3: Implement the 2nd-order Adams-Bashforth scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:fd2:exer:AB3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 4: Implement the 3rd-order Adams-Bashforth scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:exer:RK2:Taylor:analysis" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 5: Analyze explicit 2nd-order methods</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:fd2:exer:leapfrog1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Project 6: Implement and investigate the Leapfrog scheme</a></li>
+     <!-- navigation toc: --> <li><a href="._genz-sol001.html#decay:fd2:exer:uni" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 7: Make a unified implementation of many schemes</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec36" style="font-size: 80%;"><b>Bibliography</b></a></li>
 
         </ul>
       </li>
@@ -203,6 +244,7 @@ $$
     2010.</li>
  <li> <div id="odespy"></div> <b>H. P. Langtangen and L. Wang</b>. 
     Odespy Software Package,
+    \urlhttps://github.com/hplgit/odespy,
     <a href="https://github.com/hplgit/odespy" target="_self"><tt>https://github.com/hplgit/odespy</tt></a>.</li>
 </ol>
 

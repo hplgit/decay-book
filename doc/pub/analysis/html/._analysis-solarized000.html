@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Analysis of exponential decay models">
-<meta name="keywords" content="stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence">
+<meta name="keywords" content="stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation,uncertainty quantification">
 
 <title>Analysis of exponential decay models</title>
 
@@ -99,16 +99,32 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                None,
                '___sec13'),
-              ('Exercises', 1, None, '___sec14'),
-              ('Exercise 1: Visualize the accuracy of finite differences',
+              ('Various types of errors in a differential equation model',
+               1,
+               None,
+               '___sec14'),
+              ('Model errors', 2, None, '___sec15'),
+              ('Data errors', 2, None, '___sec16'),
+              ('Discretization errors', 2, None, '___sec17'),
+              ('Rounding errors', 2, None, '___sec18'),
+              ('Discussion of the size of various errors',
+               2,
+               None,
+               '___sec19'),
+              ('Exercises', 1, None, '___sec20'),
+              ('Problem 1: Visualize the accuracy of finite differences',
                2,
                'decay:analysis:exer:fd:exp:plot',
                'decay:analysis:exer:fd:exp:plot'),
-              ('Exercise 2: Explore the $\\theta$-rule for exponential growth',
+              ('Problem 2: Explore the $\\theta$-rule for exponential growth',
                2,
                'decay:analysis:exer:growth',
                'decay:analysis:exer:growth'),
-              ('Bibliography', 1, None, '___sec17')]}
+              ('Problem 3: Explore rounding errors in numerical calculus',
+               2,
+               'decay:analysis:exer:rounding',
+               'decay:analysis:exer:rounding'),
+              ('Bibliography', 1, None, '___sec24')]}
 end of tocinfo -->
 
 <body>
@@ -169,8 +185,10 @@ $$
 
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
 <p>
-<center><h4>Aug 4, 2015</h4></center> <!-- date -->
+<center><h4>Feb 12, 2016</h4></center> <!-- date -->
+<br>
 
 <h2>Table of contents</h2>
 
@@ -189,10 +207,17 @@ $$
 &nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#decay:analysis:gobal:error_int"> Integrated error </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#decay:analysis:trunc"> Truncation error </a><br>
 &nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#___sec13"> Consistency, stability, and convergence </a><br>
-<a href="._analysis-solarized001.html#___sec14"> Exercises </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#decay:analysis:exer:fd:exp:plot"> Exercise 1: Visualize the accuracy of finite differences </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#decay:analysis:exer:growth"> Exercise 2: Explore the \( \theta \)-rule for exponential growth </a><br>
-<a href="._analysis-solarized002.html#___sec17"> Bibliography </a><br>
+<a href="._analysis-solarized001.html#___sec14"> Various types of errors in a differential equation model </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#___sec15"> Model errors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#___sec16"> Data errors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#___sec17"> Discretization errors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#___sec18"> Rounding errors </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#___sec19"> Discussion of the size of various errors </a><br>
+<a href="._analysis-solarized001.html#___sec20"> Exercises </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#decay:analysis:exer:fd:exp:plot"> Problem 1: Visualize the accuracy of finite differences </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#decay:analysis:exer:growth"> Problem 2: Explore the \( \theta \)-rule for exponential growth </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._analysis-solarized001.html#decay:analysis:exer:rounding"> Problem 3: Explore rounding errors in numerical calculus </a><br>
+<a href="._analysis-solarized002.html#___sec24"> Bibliography </a><br>
 </p>
 <p>
 <p>

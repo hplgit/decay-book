@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Algorithms and implementations for exponential decay models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,test function,unit testing,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization">
 
 <title>Algorithms and implementations for exponential decay models</title>
 
@@ -703,9 +703,9 @@ Fortunately, the numerical solution approaches the exact one as
 \( \Delta t \) is reduced.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:fig:v2"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 6:  Comparison of numerical and exact solution. <div id="decay:fig:v2"></div> </p></center>
+<center><p class="caption">Figure 6:  Comparison of numerical and exact solution.  <!-- caption label: decay:fig:v2 --> </p></center>
 <p><img src="fig-alg/decay_v2.png" align="bottom" width=500></p>
 </center>
 
@@ -800,7 +800,7 @@ Comparison of these manual calculations with the result of the
 
     tol = <span style="color: #B452CD">1E-15</span>  <span style="color: #228B22"># tolerance for comparing floats</span>
     diff = <span style="color: #658b00">abs</span>(u - u_by_hand).max()
-    success = diff &lt;= tol
+    success = diff &lt; tol
     <span style="color: #8B008B; font-weight: bold">assert</span> success
 </pre></div>
 <p>
@@ -822,6 +822,19 @@ The conventions boil down to three rules:
    the test failed.</li>
 </ul>
 
+A typical <code>assert</code> statement is to check that a computed result <code>c</code>
+equals the expected value <code>e</code>: <code>assert c == e</code>. However, since real
+numbers are stored in a computer using only 64 units, most numbers
+will feature a small rounding error, typically of size \( 10^{-16} \).
+That is, real numbers on a computer have finite precision. When doing
+arithmetics with finite precision numbers, the rounding errors may
+accumulate or not, depending on the algorithm.  It does not make sense
+to test <code>c == e</code>, since a small rounding error will cause the test to
+fail. Instead, we use an equality with <em>tolerance</em> <code>tol</code>: <code>abs(e - c)
+&lt; tol</code>. The <code>test_solver_three_steps</code> functions applies this type of
+test with a tolerance \( 01^{-15} \).
+
+<p>
 The main program can routinely run the verification test prior to
 solving the real problem:
 
@@ -1208,9 +1221,9 @@ accuracy improves considerably by reducing the time step by a factor
 of 10.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:fig:FE1"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 7:  The Forward Euler scheme for two values of the time step. <div id="decay:fig:FE1"></div> </p></center>
+<center><p class="caption">Figure 7:  The Forward Euler scheme for two values of the time step.  <!-- caption label: decay:fig:FE1 --> </p></center>
 <p><img src="fig-alg/FE1.png" align="bottom" width=600></p>
 </center>
 
@@ -1220,16 +1233,16 @@ and <a href="#decay:fig:CN1">9</a>. Crank-Nicolson is obviously the most accurat
 scheme from this visual point of view.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:fig:BE1"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 8:  The Backward Euler scheme for two values of the time step. <div id="decay:fig:BE1"></div> </p></center>
+<center><p class="caption">Figure 8:  The Backward Euler scheme for two values of the time step.  <!-- caption label: decay:fig:BE1 --> </p></center>
 <p><img src="fig-alg/BE1.png" align="bottom" width=600></p>
 </center>
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:fig:CN1"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 9:  The Crank-Nicolson scheme for two values of the time step. <div id="decay:fig:CN1"></div> </p></center>
+<center><p class="caption">Figure 9:  The Crank-Nicolson scheme for two values of the time step.  <!-- caption label: decay:fig:CN1 --> </p></center>
 <p><img src="fig-alg/CN1.png" align="bottom" width=600></p>
 </center>
 

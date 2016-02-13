@@ -2,24 +2,24 @@
 
 Teaching material on scientific computing has traditionally been very
 focused on the mathematics and the applications, while details on how
-the computer is programmed to solve the problems have received little attention.
-Many end up writing as simple programs as possible, without being
-aware of much useful computer science technology that would increase
-the fun, efficiency, and reliability of the their scientific computing
-activities.
+the computer is programmed to solve the problems have received little
+attention.  Many end up writing as simple programs as possible,
+without being aware of much useful computer science technology that
+would increase the fun, efficiency, and reliability of the their
+scientific computing activities.
 
-This chapter demonstrates a series of good practices and tools
-from modern computer science, using the simple mathematical problem
-:math:`u^{\prime}=-au`, :math:`u(0)=I`, such that we minimize the
-mathematical details and can go more in depth with implementations.
-The goal is to increase the technological
-quality of computer programming and make it match the more
-well-established quality of the mathematics of scientific computing.
+This chapter demonstrates a series of good practices and tools from
+modern computer science, using the simple mathematical problem
+:math:`u^{\prime}=-au`, :math:`u(0)=I`, such that we minimize the mathematical
+details and can go more in depth with implementations.  The goal is to
+increase the technological quality of computer programming and make it
+match the more well-established quality of the mathematics of
+scientific computing.
 
-The conventions and techniques outlined here will save you a lot of time
-when you incrementally extend software over time from simpler to more
-complicated problems. In particular, you will benefit from
-many good habits:
+The conventions and techniques outlined here will save you a lot of
+time when you incrementally extend software over time from simpler to
+more complicated problems. In particular, you will benefit from many
+good habits:
 
  * new code is added in a modular fashion to a library (modules),
 
@@ -792,10 +792,12 @@ module:
 .. code-block:: python
 
         import logging
+        # Configure logger
         logging.basicConfig(
             filename='myprog.log', filemode='w', level=logging.WARNING,
             format='%(asctime)s - %(levelname)s - %(message)s',
             datefmt='%m/%d/%Y %I:%M:%S %p')
+        # Perform logging
         logging.info('Here is some general info.')
         logging.warning('Here is a warning.')
         logging.debug('Here is some debugging info.')
@@ -845,12 +847,6 @@ monitoring the simulation and for debugging it, respectively.
 
 .. code-block:: python
 
-        import logging
-        logging.basicConfig(
-            filename='decay.log', filemode='w', level=logging.DEBUG,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            datefmt='%Y.%m.%d %I:%M:%S %p')
-        
         def solver_with_logging(I, a, T, dt, theta):
             """Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt."""
             dt = float(dt)               # avoid integer division
@@ -872,12 +868,355 @@ monitoring the simulation and for debugging it, respectively.
                               (1 + theta*dt*a,
                                str(type(1 + theta*dt*a))[7:-2]))
             return u, t
+        
+        def configure_basic_logger():
+            logging.basicConfig(
+                filename='decay.log', filemode='w', level=logging.DEBUG,
+                format='%(asctime)s - %(levelname)s - %(message)s',
+                datefmt='%Y.%m.%d %I:%M:%S %p')
+        
+        import sys
+        
+        def read_command_line_positional():
+            if len(sys.argv) < 6:
+                print 'Usage: %s I a T on/off BE/FE/CN dt1 dt2 dt3 ...' % \ 
+                      sys.argv[0]; sys.exit(1)  # abort
+        
+            I = float(sys.argv[1])
+            a = float(sys.argv[2])
+            T = float(sys.argv[3])
+        
+            # Name of schemes: BE (Backward Euler), FE (Forward Euler),
+            # CN (Crank-Nicolson)
+            scheme = sys.argv[4]
+            scheme2theta = {'BE': 1, 'CN': 0.5, 'FE': 0}
+            if scheme in scheme2theta:
+                theta = scheme2theta[scheme]
+            else:
+                print 'Invalid scheme name:', scheme; sys.exit(1)
+        
+            dt_values = [float(arg) for arg in sys.argv[5:]]
+        
+            return I, a, T, theta, dt_values
+        
+        def define_command_line_options():
+            import argparse
+            parser = argparse.ArgumentParser()
+            parser.add_argument(
+                '--I', '--initial_condition', type=float,
+                default=1.0, help='initial condition, u(0)',
+                metavar='I')
+            parser.add_argument(
+                '--a', type=float, default=1.0,
+                help='coefficient in ODE', metavar='a')
+            parser.add_argument(
+                '--T', '--stop_time', type=float,
+                default=1.0, help='end time of simulation',
+                metavar='T')
+            parser.add_argument(
+                '--scheme', type=str, default='CN',
+                help='FE, BE, or CN')
+            parser.add_argument(
+                '--dt', '--time_step_values', type=float,
+                default=[1.0], help='time step values',
+                metavar='dt', nargs='+', dest='dt_values')
+            return parser
+        
+        def read_command_line_argparse():
+            parser = define_command_line_options()
+            args = parser.parse_args()
+            scheme2theta = {'BE': 1, 'CN': 0.5, 'FE': 0}
+            data = (args.I, args.a, args.T, scheme2theta[args.scheme],
+                    args.dt_values)
+            return data
+        
+        def experiment_compare_dt(option_value_pairs=False):
+            I, a, T, theta, dt_values = \ 
+               read_command_line_argparse() if option_value_pairs else \ 
+               read_command_line_positional()
+        
+            legends = []
+            for dt in dt_values:
+                u, t = solver(I, a, T, dt, theta)
+                plt.plot(t, u)
+                legends.append('dt=%g' % dt)
+            t_e = np.linspace(0, T, 1001)       # very fine mesh for u_e
+            u_e = u_exact(t_e, I, a)
+            plt.plot(t_e, u_e, '--')
+            legends.append('exact')
+            plt.legend(legends, loc='upper right')
+            plt.title('theta=%g' % theta)
+            plotfile = 'tmp'
+            plt.savefig(plotfile + '.png');  plt.savefig(plotfile + '.pdf')
+        
+        def compute4web(I, a, T, dt, theta=0.5):
+            """
+            Run a case with the solver, compute error measure,
+            and plot the numerical and exact solutions in a PNG
+            plot whose data are embedded in an HTML image tag.
+            """
+            u, t = solver(I, a, T, dt, theta)
+            u_e = u_exact(t, I, a)
+            e = u_e - u
+            E = np.sqrt(dt*np.sum(e**2))
+        
+            plt.figure()
+            t_e = np.linspace(0, T, 1001)    # fine mesh for u_e
+            u_e = u_exact(t_e, I, a)
+            plt.plot(t,   u,   'r--o')
+            plt.plot(t_e, u_e, 'b-')
+            plt.legend(['numerical', 'exact'])
+            plt.xlabel('t')
+            plt.ylabel('u')
+            plt.title('theta=%g, dt=%g' % (theta, dt))
+            # Save plot to HTML img tag with PNG code as embedded data
+            from parampool.utils import save_png_to_str
+            html_text = save_png_to_str(plt, plotwidth=400)
+        
+            return E, html_text
+        
+        def main_GUI(I=1.0, a=.2, T=4.0,
+                     dt_values=[1.25, 0.75, 0.5, 0.1],
+                     theta_values=[0, 0.5, 1]):
+            # Build HTML code for web page. Arrange plots in columns
+            # corresponding to the theta values, with dt down the rows
+            theta2name = {0: 'FE', 1: 'BE', 0.5: 'CN'}
+            html_text = '<table>\n'
+            for dt in dt_values:
+                html_text += '<tr>\n'
+                for theta in theta_values:
+                    E, html = compute4web(I, a, T, dt, theta)
+                    html_text += """
+        <td>
+        <center><b>%s, dt=%g, error: %.3E</b></center><br>
+        %s
+        </td>
+        """ % (theta2name[theta], dt, E, html)
+                html_text += '</tr>\n'
+            html_text += '</table>\n'
+            return html_text
+        
+        def solver_with_doctest(I, a, T, dt, theta):
+            """
+            Solve u'=-a*u, u(0)=I, for t in (0,T] with steps of dt.
+        
+        
+            >>> u, t = solver(I=0.8, a=1.2, T=1.5, dt=0.5, theta=0.5)
+            >>> for n in range(len(t)):
+            ...     print 't=%.1f, u=%.14f' % (t[n], u[n])
+            t=0.0, u=0.80000000000000
+            t=0.5, u=0.43076923076923
+            t=1.0, u=0.23195266272189
+            t=1.5, u=0.12489758761948
+            """
+            dt = float(dt)               # avoid integer division
+            Nt = int(round(T/dt))        # no of time intervals
+            T = Nt*dt                    # adjust T to fit time step dt
+            u = np.zeros(Nt+1)           # array of u[n] values
+            t = np.linspace(0, T, Nt+1)  # time mesh
+        
+            u[0] = I                  # assign initial condition
+            for n in range(0, Nt):    # n=0,1,...,Nt-1
+                u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
+            return u, t
+        
+        def third(x):
+            return x/3.
+        
+        def test_third():
+            x = 0.15
+            expected = (1/3.)*x
+            computed = third(x)
+            tol = 1E-15
+            success = abs(expected - computed) < tol
+            assert success
+        
+        def u_discrete_exact(n, I, a, theta, dt):
+            """Return exact discrete solution of the numerical schemes."""
+            dt = float(dt)  # avoid integer division
+            A = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)
+            return I*A**n
+        
+        def test_u_discrete_exact():
+            """Check that solver reproduces the exact discr. sol."""
+            theta = 0.8; a = 2; I = 0.1; dt = 0.8
+            Nt = int(8/dt)  # no of steps
+            u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
+        
+            # Evaluate exact discrete solution on the mesh
+            u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
+                             for n in range(Nt+1)])
+        
+            # Find largest deviation
+            diff = np.abs(u_de - u).max()
+            tol = 1E-14
+            success = diff < tol
+            assert success
+        
+        def test_potential_integer_division():
+            """Choose variables that can trigger integer division."""
+            theta = 1; a = 1; I = 1; dt = 2
+            Nt = 4
+            u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
+            u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
+                             for n in range(Nt+1)])
+            diff = np.abs(u_de - u).max()
+            assert diff < 1E-14
+        
+        def test_read_command_line_positional():
+            # Decide on a data set of input parameters
+            I = 1.6;  a = 1.8;  T = 2.2;  theta = 0.5
+            dt_values = [0.1, 0.2, 0.05]
+            # Expected return from read_command_line_positional
+            expected = [I, a, T, theta, dt_values]
+            # Construct corresponding sys.argv array
+            sys.argv = [sys.argv[0], str(I), str(a), str(T), 'CN'] + \ 
+                       [str(dt) for dt in dt_values]
+            computed = read_command_line_positional()
+            for expected_arg, computed_arg in zip(expected, computed):
+                assert expected_arg == computed_arg
+        
+        def test_read_command_line_argparse():
+            I = 1.6;  a = 1.8;  T = 2.2;  theta = 0.5
+            dt_values = [0.1, 0.2, 0.05]
+            # Expected return from read_command_line_argparse
+            expected = [I, a, T, theta, dt_values]
+            # Construct corresponding sys.argv array
+            command_line = '%s --a %s --I %s --T %s --scheme CN --dt ' % \ 
+                           (sys.argv[0], a, I, T)
+            command_line += ' '.join([str(dt) for dt in dt_values])
+            sys.argv = command_line.split()
+            computed = read_command_line_argparse()
+            for expected_arg, computed_arg in zip(expected, computed):
+                assert expected_arg == computed_arg
+        
+        # Classes
+        
+        class Problem(object):
+            def __init__(self, I=1, a=1, T=10):
+                self.T, self.I, self.a = I, float(a), T
+        
+            def define_command_line_options(self, parser=None):
+                """Return updated (parser) or new ArgumentParser object."""
+                if parser is None:
+                    import argparse
+                    parser = argparse.ArgumentParser()
+        
+                parser.add_argument(
+                    '--I', '--initial_condition', type=float,
+                    default=1.0, help='initial condition, u(0)',
+                    metavar='I')
+                parser.add_argument(
+                    '--a', type=float, default=1.0,
+                    help='coefficient in ODE', metavar='a')
+                parser.add_argument(
+                    '--T', '--stop_time', type=float,
+                    default=1.0, help='end time of simulation',
+                    metavar='T')
+                return parser
+        
+            def init_from_command_line(self, args):
+                """Load attributes from ArgumentParser into instance."""
+                self.I, self.a, self.T = args.I, args.a, args.T
+        
+            def u_exact(self, t):
+                """Return the exact solution u(t)=I*exp(-a*t)."""
+                I, a = self.I, self.a
+                return I*exp(-a*t)
+        
+        
+        class Solver(object):
+            def __init__(self, problem, dt=0.1, theta=0.5):
+                self.problem = problem
+                self.dt, self.theta = float(dt), theta
+        
+            def define_command_line_options(self, parser):
+                """Return updated (parser) or new ArgumentParser object."""
+                parser.add_argument(
+                    '--scheme', type=str, default='CN',
+                    help='FE, BE, or CN')
+                parser.add_argument(
+                    '--dt', '--time_step_values', type=float,
+                    default=[1.0], help='time step values',
+                    metavar='dt', nargs='+', dest='dt_values')
+                return parser
+        
+            def init_from_command_line(self, args):
+                """Load attributes from ArgumentParser into instance."""
+                self.dt, self.theta = args.dt, args.theta
+        
+            def solve(self):
+                self.u, self.t = solver(
+                    self.problem.I, self.problem.a, self.problem.T,
+                    self.dt, self.theta)
+        
+            def error(self):
+                """Return norm of error at the mesh points."""
+                u_e = self.problem.u_exact(self.t)
+                e = u_e - self.u
+                E = np.sqrt(self.dt*np.sum(e**2))
+                return E
+        
+        def experiment_classes():
+            problem = Problem()
+            solver = Solver(problem)
+        
+            # Read input from the command line
+            parser = problem.define_command_line_options()
+            parser = solver. define_command_line_options(parser)
+            args = parser.parse_args()
+            problem.init_from_command_line(args)
+            solver. init_from_command_line(args)
+        
+            # Solve and plot
+            solver.solve()
+            import matplotlib.pyplot as plt
+            t_e = np.linspace(0, T, 1001)    # very fine mesh for u_e
+            u_e = problem.u_exact(t_e)
+            print 'Error:', solver.error()
+        
+            plt.plot(t,   u,   'r--o')
+            plt.plot(t_e, u_e, 'b-')
+            plt.legend(['numerical, theta=%g' % theta, 'exact'])
+            plt.xlabel('t')
+            plt.ylabel('u')
+            plotfile = 'tmp'
+            plt.savefig(plotfile + '.png');  plt.savefig(plotfile + '.pdf')
+            plt.show()
+        
+        if __name__ == '__main__':
+            configure_logger()
+            experiment_compare_dt(True)
+            plt.show()
 
-We can run this new solver function in a shell:
+The application code that calls ``solver_with_logging`` needs to configure
+the logger. The ``decay`` module offers a default configure function:
+
+.. code-block:: python
+
+        import logging
+        
+        def configure_basic_logger():
+            logging.basicConfig(
+                filename='decay.log', filemode='w', level=logging.DEBUG,
+                format='%(asctime)s - %(levelname)s - %(message)s',
+                datefmt='%Y.%m.%d %I:%M:%S %p')
+
+If the user of a library does not configure a logger or call this
+configure function, the library should prevent error messages by
+declaring a default logger that does nothing:
+
+.. code-block:: python
+
+        import logging
+        logging.getLogger('decay').addHandler(logging.NullHandler())
+
+We can run the new solver function with logging in a shell:
 
 .. code-block:: python
 
         >>> import decay
+        >>> decay.configure_basic_logger()
         >>> u, t = decay.solver_with_logging(I=1, a=0.5, T=10, \ 
                    dt=0.5, theta=0.5)
 
@@ -923,6 +1262,10 @@ the formula for :math:`u^{n+1}`, we can change the logging level to
         2015.09.26 05:40:01 AM - INFO - u[4]=0.36595
         2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
         2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
+
+Logging can be much more sophisticated than shown above. One can, e.g.,
+output critical messages to the screen and all messages to a file.
+This requires more code as demonstrated in the `Logging Cookbook <https://docs.python.org/2/howto/logging-cookbook.html>`__.
 
 .. _softeng1:basic:UI:
 
@@ -971,6 +1314,8 @@ example:
 The essential content is that ``prog.py`` has two input parameters: ``delta``
 and ``p``. A user interface will replace the first two assignments to
 ``delta`` and ``p``.
+
+.. _softeng1:basic:UI:cmlargs:
 
 Command-line arguments
 ----------------------
@@ -1119,6 +1464,8 @@ the ``args.delta`` and ``args.p`` variables are automatically of type ``float``.
 Our next task is to use these basic code constructs to equip our
 ``decay.py`` module with command-line interfaces.
 
+.. _softeng1:basic:UI:pos_cml:
+
 Positional command-line arguments
 ---------------------------------
 
@@ -1198,6 +1545,8 @@ Now we can do
         Terminal> python decay.py 1 0.5 4 CN 1.5 0.75 0.1
 
 and get `theta=0.5`in the code.
+
+.. _softeng1:basic:UI:options_cml:
 
 Option-value pairs on the command line
 --------------------------------------
@@ -1518,6 +1867,8 @@ With the techniques demonstrated here, one can
 easily create a tailored web GUI for a particular type of application
 and use it to interactively explore physical and numerical effects.
 
+.. _softeng1:verify:
+
 Tests for verifying implementations
 ===================================
 
@@ -1533,6 +1884,8 @@ tests can tell!). Here we shall illustrate two important
 software testing techniques: *doctest* and *unit testing*.
 The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.
+
+.. _softeng1:verify:doctests:
 
 Doctests
 --------
@@ -1656,12 +2009,16 @@ This edit triggers a report:
 Doctests are highly encouraged as they do two things: 1) demonstrate
 how a function is used and 2) test that the function works.
 
+.. _softeng1:verify:pytest:
+
 Unit tests and test functions
 -----------------------------
 
-.. index:: nose tests
+.. index:: test function
 
-.. index:: pytest tests
+.. index:: nose
+
+.. index:: pytest
 
 .. index:: unit testing
 
@@ -1794,6 +2151,8 @@ with a small tolerance:
                 success = abs(expected - computed) < tol
                 assert success
 
+.. index:: relative differences
+
 
 .. admonition:: Always compare real numbers with a tolerance
 
@@ -1807,7 +2166,13 @@ with a small tolerance:
            abs(a - b) < tol
    
    The suitable size of ``tol`` depends on the size of ``a`` and ``b``
-   (see :ref:`softeng1:exer:tol`).
+   (see :ref:`softeng1:exer:tol`). Unless ``a`` and ``b`` are around
+   unity in size, one should use a *relative difference*:
+   
+   .. code-block:: python
+   
+           tol = 1E-14
+           abs((a - b)/a) < tol
 
 
 
@@ -3874,14 +4239,21 @@ Filename: ``test_roots``.
 
 .. _softeng1:exer:tol:
 
-Problem 5: Experiment with tolerances in comparisons
-----------------------------------------------------
+Problem 5: Investigate the size of tolerances in comparisons
+------------------------------------------------------------
+
+.. index:: relative differences
 
 When we replace a comparison ``a == b``, where ``a`` and/or ``b`` are
 ``float`` objects, by a comparison with tolerance, ``abs(a-b) < tol``,
 the appropriate size of ``tol`` depends on the size of ``a`` and ``b``.
 Investigate how the size of ``abs(a-b)`` varies when ``b`` takes on
 values :math:`10^k`, :math:`k=-5,-9,\ldots,20` and ``a=1.0/49*b*49``.
+Thereafter, compute the *relative* difference ``abs((a-b)/a)`` for
+the same ``b`` values.
+
+.. removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+
 Filename: ``tolerance``.
 
 .. Closing remarks for this Problem
@@ -3890,9 +4262,12 @@ Remarks
 ~~~~~~~
 
 You will experience that if ``a`` and ``b`` are large, as they can be
-in geophysical applications where lengths measured in meters can be of size
+in, e.g.,
+geophysical applications where lengths measured in meters can be of size
 :math:`10^6` m, ``tol`` must be about :math:`10^{-9}`, while ``a`` and ``b`` around unity can
 have ``tol`` of size :math:`10^{-15}`.
+The way out of the problem with choosing a tolerance is to use
+relative differences.
 
 .. --- end exercise ---
 

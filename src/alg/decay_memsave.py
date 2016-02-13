@@ -41,7 +41,7 @@ def read_file_numpy(filename='sol.dat'):
     u = data[:,1]
     return t, u
 
-def exact_solution(t, I, a):
+def u_exact(t, I, a):
     return I*np.exp(-a*t)
 
 def explore(I, a, T, dt, theta=0.5, makeplot=True):
@@ -54,13 +54,13 @@ def explore(I, a, T, dt, theta=0.5, makeplot=True):
     u, t = solver_memsave(I, a, T, dt, theta, filename)
 
     t, u = read_file(filename)
-    u_e = exact_solution(t, I, a)
+    u_e = u_exact(t, I, a)
     e = u_e - u
     E = np.sqrt(dt*np.sum(e**2))
     if makeplot:
         plt.figure()                     # create new plot
         t_e = np.linspace(0, T, 1001)    # very fine mesh for u_e
-        u_e = exact_solution(t_e, I, a)
+        u_e = u_exact(t_e, I, a)
         plt.plot(t,   u,   'r--o')       # red dashes w/circles
         plt.plot(t_e, u_e, 'b-')         # blue line for u_e
         plt.legend(['numerical', 'exact'])
@@ -75,7 +75,7 @@ def explore(I, a, T, dt, theta=0.5, makeplot=True):
 
 def test_solver_minmem():
 
-    def exact_discrete_solution(n, I, a, theta, dt):
+    def u_discrete_exact(n, I, a, theta, dt):
         A = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)
         return I*A**n
 
@@ -91,7 +91,7 @@ def test_solver_minmem():
     file_reading = (t == t_).all() and (u == u_).all()
 
     # Compare numerical values
-    u_de = np.array([exact_discrete_solution(n, I, a, theta, dt)
+    u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
                      for n in range(Nt+1)])
     difference = abs(u_de - u).max()
     tol = 1E-15  # tolerance for comparing floats

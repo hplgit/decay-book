@@ -31,11 +31,11 @@ doc_scale = 'http://hplgit.github.io/scaling-book/doc'
 doc_scale = 'http://tinyurl.com/qfjgxmf'
 
 chapters = {
- 'alg': 'Algorithms and implementations for exponential decay models',
- 'softeng': 'Software engineering with exponential decay models',
- 'analysis': 'Analysis of exponential decay models',
- 'genz': 'Generalizations of exponential decay models',
- 'models': 'Exponential decay models',
+ 'alg': 'Algorithms and implementations',
+ 'softeng': 'Software engineering',
+ 'analysis': 'Analysis',
+ 'genz': 'Generalizations',
+ 'models': 'Models',
 }
 
 def format_specific(text, formats, else_text=''):

@@ -80,22 +80,22 @@
             
   <p>Teaching material on scientific computing has traditionally been very
 focused on the mathematics and the applications, while details on how
-the computer is programmed to solve the problems have received little attention.
-Many end up writing as simple programs as possible, without being
-aware of much useful computer science technology that would increase
-the fun, efficiency, and reliability of the their scientific computing
-activities.</p>
-<p>This chapter demonstrates a series of good practices and tools
-from modern computer science, using the simple mathematical problem
-<span class="math">\(u^{\prime}=-au\)</span>, <span class="math">\(u(0)=I\)</span>, such that we minimize the
-mathematical details and can go more in depth with implementations.
-The goal is to increase the technological
-quality of computer programming and make it match the more
-well-established quality of the mathematics of scientific computing.</p>
-<p>The conventions and techniques outlined here will save you a lot of time
-when you incrementally extend software over time from simpler to more
-complicated problems. In particular, you will benefit from
-many good habits:</p>
+the computer is programmed to solve the problems have received little
+attention.  Many end up writing as simple programs as possible,
+without being aware of much useful computer science technology that
+would increase the fun, efficiency, and reliability of the their
+scientific computing activities.</p>
+<p>This chapter demonstrates a series of good practices and tools from
+modern computer science, using the simple mathematical problem
+<span class="math">\(u^{\prime}=-au\)</span>, <span class="math">\(u(0)=I\)</span>, such that we minimize the mathematical
+details and can go more in depth with implementations.  The goal is to
+increase the technological quality of computer programming and make it
+match the more well-established quality of the mathematics of
+scientific computing.</p>
+<p>The conventions and techniques outlined here will save you a lot of
+time when you incrementally extend software over time from simpler to
+more complicated problems. In particular, you will benefit from many
+good habits:</p>
 <blockquote>
 <div><ul class="simple">
 <li>new code is added in a modular fashion to a library (modules),</li>
@@ -710,10 +710,12 @@ to a log file. The messages are classified as debug, info, and warning.</p>
 <p>Here is a simple example using defining a logger, using Python&#8217;s <code class="docutils literal"><span class="pre">logging</span></code>
 module:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
+<span class="c"># Configure logger</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
     <span class="n">filename</span><span class="o">=</span><span class="s">&#39;myprog.log&#39;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
     <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span>
     <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;%m/</span><span class="si">%d</span><span class="s">/%Y %I:%M:%S %p&#39;</span><span class="p">)</span>
+<span class="c"># Perform logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Here is some general info.&#39;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;Here is a warning.&#39;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Here is some debugging info.&#39;</span><span class="p">)</span>
@@ -756,13 +758,7 @@ rules of the <a class="reference external" href="https://docs.python.org/2/libra
 <p>Let us let a logger write out intermediate results and some debugging
 results in the <code class="docutils literal"><span class="pre">solver</span></code> function. Such messages are useful for
 monitoring the simulation and for debugging it, respectively.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
-    <span class="n">filename</span><span class="o">=</span><span class="s">&#39;decay.log&#39;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
-    <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span>
-    <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;%Y.%m.</span><span class="si">%d</span><span class="s"> %I:%M:%S %p&#39;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">solver_with_logging</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">solver_with_logging</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
     <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>               <span class="c"># avoid integer division</span>
     <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>        <span class="c"># no of time intervals</span>
@@ -783,10 +779,349 @@ monitoring the simulation and for debugging it, respectively.</p>
                       <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">,</span>
                        <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">))[</span><span class="mi">7</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
     <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span>
+
+<span class="k">def</span> <span class="nf">configure_basic_logger</span><span class="p">():</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="s">&#39;decay.log&#39;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+        <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span>
+        <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;%Y.%m.</span><span class="si">%d</span><span class="s"> %I:%M:%S %p&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">def</span> <span class="nf">read_command_line_positional</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&#39;Usage: </span><span class="si">%s</span><span class="s"> I a T on/off BE/FE/CN dt1 dt2 dt3 ...&#39;</span> <span class="o">%</span> \
+              <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c"># abort</span>
+
+    <span class="n">I</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+    <span class="c"># Name of schemes: BE (Backward Euler), FE (Forward Euler),</span>
+    <span class="c"># CN (Crank-Nicolson)</span>
+    <span class="n">scheme</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">scheme2theta</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;BE&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;CN&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s">&#39;FE&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">scheme</span> <span class="ow">in</span> <span class="n">scheme2theta</span><span class="p">:</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">scheme2theta</span><span class="p">[</span><span class="n">scheme</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&#39;Invalid scheme name:&#39;</span><span class="p">,</span> <span class="n">scheme</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">dt_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">:]]</span>
+
+    <span class="k">return</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt_values</span>
+
+<span class="k">def</span> <span class="nf">define_command_line_options</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">argparse</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s">&#39;--I&#39;</span><span class="p">,</span> <span class="s">&#39;--initial_condition&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;initial condition, u(0)&#39;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;I&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s">&#39;--a&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s">&#39;coefficient in ODE&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s">&#39;--T&#39;</span><span class="p">,</span> <span class="s">&#39;--stop_time&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;end time of simulation&#39;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;T&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s">&#39;--scheme&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;CN&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s">&#39;FE, BE, or CN&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s">&#39;--dt&#39;</span><span class="p">,</span> <span class="s">&#39;--time_step_values&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;time step values&#39;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;dt&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;dt_values&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span>
+
+<span class="k">def</span> <span class="nf">read_command_line_argparse</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">define_command_line_options</span><span class="p">()</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">scheme2theta</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;BE&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;CN&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s">&#39;FE&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">scheme2theta</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">scheme</span><span class="p">],</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">dt_values</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">def</span> <span class="nf">experiment_compare_dt</span><span class="p">(</span><span class="n">option_value_pairs</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt_values</span> <span class="o">=</span> \
+       <span class="n">read_command_line_argparse</span><span class="p">()</span> <span class="k">if</span> <span class="n">option_value_pairs</span> <span class="k">else</span> \
+       <span class="n">read_command_line_positional</span><span class="p">()</span>
+
+    <span class="n">legends</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">:</span>
+        <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+        <span class="n">legends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;dt=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="n">t_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>       <span class="c"># very fine mesh for u_e</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">legends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;exact&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legends</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s">&#39;upper right&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;theta=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">theta</span><span class="p">)</span>
+    <span class="n">plotfile</span> <span class="o">=</span> <span class="s">&#39;tmp&#39;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plotfile</span> <span class="o">+</span> <span class="s">&#39;.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plotfile</span> <span class="o">+</span> <span class="s">&#39;.pdf&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">compute4web</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a case with the solver, compute error measure,</span>
+<span class="sd">    and plot the numerical and exact solutions in a PNG</span>
+<span class="sd">    plot whose data are embedded in an HTML image tag.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="n">u</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">t_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>    <span class="c"># fine mesh for u_e</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">&#39;numerical&#39;</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;u&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;theta=</span><span class="si">%g</span><span class="s">, dt=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">))</span>
+    <span class="c"># Save plot to HTML img tag with PNG code as embedded data</span>
+    <span class="kn">from</span> <span class="nn">parampool.utils</span> <span class="kn">import</span> <span class="n">save_png_to_str</span>
+    <span class="n">html_text</span> <span class="o">=</span> <span class="n">save_png_to_str</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">plotwidth</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">E</span><span class="p">,</span> <span class="n">html_text</span>
+
+<span class="k">def</span> <span class="nf">main_GUI</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">a</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span>
+             <span class="n">dt_values</span><span class="o">=</span><span class="p">[</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+             <span class="n">theta_values</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]):</span>
+    <span class="c"># Build HTML code for web page. Arrange plots in columns</span>
+    <span class="c"># corresponding to the theta values, with dt down the rows</span>
+    <span class="n">theta2name</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;FE&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;BE&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">:</span> <span class="s">&#39;CN&#39;</span><span class="p">}</span>
+    <span class="n">html_text</span> <span class="o">=</span> <span class="s">&#39;&lt;table&gt;</span><span class="se">\n</span><span class="s">&#39;</span>
+    <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">:</span>
+        <span class="n">html_text</span> <span class="o">+=</span> <span class="s">&#39;&lt;tr&gt;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">theta_values</span><span class="p">:</span>
+            <span class="n">E</span><span class="p">,</span> <span class="n">html</span> <span class="o">=</span> <span class="n">compute4web</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+            <span class="n">html_text</span> <span class="o">+=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;td&gt;</span>
+<span class="s">&lt;center&gt;&lt;b&gt;</span><span class="si">%s</span><span class="s">, dt=</span><span class="si">%g</span><span class="s">, error: </span><span class="si">%.3E</span><span class="s">&lt;/b&gt;&lt;/center&gt;&lt;br&gt;</span>
+<span class="si">%s</span><span class="s"></span>
+<span class="s">&lt;/td&gt;</span>
+<span class="s">&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta2name</span><span class="p">[</span><span class="n">theta</span><span class="p">],</span> <span class="n">dt</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+        <span class="n">html_text</span> <span class="o">+=</span> <span class="s">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s">&#39;</span>
+    <span class="n">html_text</span> <span class="o">+=</span> <span class="s">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s">&#39;</span>
+    <span class="k">return</span> <span class="n">html_text</span>
+
+<span class="k">def</span> <span class="nf">solver_with_doctest</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.</span>
+
+
+<span class="sd">    &gt;&gt;&gt; u, t = solver(I=0.8, a=1.2, T=1.5, dt=0.5, theta=0.5)</span>
+<span class="sd">    &gt;&gt;&gt; for n in range(len(t)):</span>
+<span class="sd">    ...     print &#39;t=%.1f, u=%.14f&#39; % (t[n], u[n])</span>
+<span class="sd">    t=0.0, u=0.80000000000000</span>
+<span class="sd">    t=0.5, u=0.43076923076923</span>
+<span class="sd">    t=1.0, u=0.23195266272189</span>
+<span class="sd">    t=1.5, u=0.12489758761948</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>               <span class="c"># avoid integer division</span>
+    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">))</span>        <span class="c"># no of time intervals</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">Nt</span><span class="o">*</span><span class="n">dt</span>                    <span class="c"># adjust T to fit time step dt</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>           <span class="c"># array of u[n] values</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c"># time mesh</span>
+
+    <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">I</span>                  <span class="c"># assign initial condition</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Nt</span><span class="p">):</span>    <span class="c"># n=0,1,...,Nt-1</span>
+        <span class="n">u</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">t</span>
+
+<span class="k">def</span> <span class="nf">third</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">/</span><span class="mf">3.</span>
+
+<span class="k">def</span> <span class="nf">test_third</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">*</span><span class="n">x</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="n">third</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-15</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expected</span> <span class="o">-</span> <span class="n">computed</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span>
+    <span class="k">assert</span> <span class="n">success</span>
+
+<span class="k">def</span> <span class="nf">u_discrete_exact</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return exact discrete solution of the numerical schemes.&quot;&quot;&quot;</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>  <span class="c"># avoid integer division</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">theta</span><span class="o">*</span><span class="n">dt</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">I</span><span class="o">*</span><span class="n">A</span><span class="o">**</span><span class="n">n</span>
+
+<span class="k">def</span> <span class="nf">test_u_discrete_exact</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Check that solver reproduces the exact discr. sol.&quot;&quot;&quot;</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">I</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span> <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.8</span>
+    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>  <span class="c"># no of steps</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">Nt</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
+
+    <span class="c"># Evaluate exact discrete solution on the mesh</span>
+    <span class="n">u_de</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">u_discrete_exact</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+
+    <span class="c"># Find largest deviation</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">u_de</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="n">tol</span>
+    <span class="k">assert</span> <span class="n">success</span>
+
+<span class="k">def</span> <span class="nf">test_potential_integer_division</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Choose variables that can trigger integer division.&quot;&quot;&quot;</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">I</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">Nt</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">Nt</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">u_de</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">u_discrete_exact</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+                     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">u_de</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="mf">1E-14</span>
+
+<span class="k">def</span> <span class="nf">test_read_command_line_positional</span><span class="p">():</span>
+    <span class="c"># Decide on a data set of input parameters</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="mf">1.6</span><span class="p">;</span>  <span class="n">a</span> <span class="o">=</span> <span class="mf">1.8</span><span class="p">;</span>  <span class="n">T</span> <span class="o">=</span> <span class="mf">2.2</span><span class="p">;</span>  <span class="n">theta</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">dt_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>
+    <span class="c"># Expected return from read_command_line_positional</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt_values</span><span class="p">]</span>
+    <span class="c"># Construct corresponding sys.argv array</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">I</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="s">&#39;CN&#39;</span><span class="p">]</span> <span class="o">+</span> \
+               <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">]</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="n">read_command_line_positional</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">expected_arg</span><span class="p">,</span> <span class="n">computed_arg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">computed</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">expected_arg</span> <span class="o">==</span> <span class="n">computed_arg</span>
+
+<span class="k">def</span> <span class="nf">test_read_command_line_argparse</span><span class="p">():</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="mf">1.6</span><span class="p">;</span>  <span class="n">a</span> <span class="o">=</span> <span class="mf">1.8</span><span class="p">;</span>  <span class="n">T</span> <span class="o">=</span> <span class="mf">2.2</span><span class="p">;</span>  <span class="n">theta</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">dt_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>
+    <span class="c"># Expected return from read_command_line_argparse</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dt_values</span><span class="p">]</span>
+    <span class="c"># Construct corresponding sys.argv array</span>
+    <span class="n">command_line</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> --a </span><span class="si">%s</span><span class="s"> --I </span><span class="si">%s</span><span class="s"> --T </span><span class="si">%s</span><span class="s"> --scheme CN --dt &#39;</span> <span class="o">%</span> \
+                   <span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">command_line</span> <span class="o">+=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_values</span><span class="p">])</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="n">command_line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="n">read_command_line_argparse</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">expected_arg</span><span class="p">,</span> <span class="n">computed_arg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">computed</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">expected_arg</span> <span class="o">==</span> <span class="n">computed_arg</span>
+
+<span class="c"># Classes</span>
+
+<span class="k">class</span> <span class="nc">Problem</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">I</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">T</span>
+
+    <span class="k">def</span> <span class="nf">define_command_line_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">parser</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">argparse</span>
+            <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s">&#39;--I&#39;</span><span class="p">,</span> <span class="s">&#39;--initial_condition&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;initial condition, u(0)&#39;</span><span class="p">,</span>
+            <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;I&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s">&#39;--a&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s">&#39;coefficient in ODE&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s">&#39;--T&#39;</span><span class="p">,</span> <span class="s">&#39;--stop_time&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;end time of simulation&#39;</span><span class="p">,</span>
+            <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;T&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">parser</span>
+
+    <span class="k">def</span> <span class="nf">init_from_command_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="k">def</span> <span class="nf">u_exact</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the exact solution u(t)=I*exp(-a*t).&quot;&quot;&quot;</span>
+        <span class="n">I</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span>
+        <span class="k">return</span> <span class="n">I</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Solver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">problem</span> <span class="o">=</span> <span class="n">problem</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dt</span><span class="p">),</span> <span class="n">theta</span>
+
+    <span class="k">def</span> <span class="nf">define_command_line_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s">&#39;--scheme&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;CN&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s">&#39;FE, BE, or CN&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s">&#39;--dt&#39;</span><span class="p">,</span> <span class="s">&#39;--time_step_values&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;time step values&#39;</span><span class="p">,</span>
+            <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;dt&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">&#39;+&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;dt_values&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">parser</span>
+
+    <span class="k">def</span> <span class="nf">init_from_command_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">theta</span>
+
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return norm of error at the mesh points.&quot;&quot;&quot;</span>
+        <span class="n">u_e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">problem</span><span class="o">.</span><span class="n">u_exact</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">u_e</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">E</span>
+
+<span class="k">def</span> <span class="nf">experiment_classes</span><span class="p">():</span>
+    <span class="n">problem</span> <span class="o">=</span> <span class="n">Problem</span><span class="p">()</span>
+    <span class="n">solver</span> <span class="o">=</span> <span class="n">Solver</span><span class="p">(</span><span class="n">problem</span><span class="p">)</span>
+
+    <span class="c"># Read input from the command line</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">define_command_line_options</span><span class="p">()</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span> <span class="n">define_command_line_options</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">problem</span><span class="o">.</span><span class="n">init_from_command_line</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">solver</span><span class="o">.</span> <span class="n">init_from_command_line</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="c"># Solve and plot</span>
+    <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+    <span class="n">t_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>    <span class="c"># very fine mesh for u_e</span>
+    <span class="n">u_e</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">u_exact</span><span class="p">(</span><span class="n">t_e</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;Error:&#39;</span><span class="p">,</span> <span class="n">solver</span><span class="o">.</span><span class="n">error</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>   <span class="n">u</span><span class="p">,</span>   <span class="s">&#39;r--o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_e</span><span class="p">,</span> <span class="n">u_e</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">&#39;numerical, theta=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">theta</span><span class="p">,</span> <span class="s">&#39;exact&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;u&#39;</span><span class="p">)</span>
+    <span class="n">plotfile</span> <span class="o">=</span> <span class="s">&#39;tmp&#39;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plotfile</span> <span class="o">+</span> <span class="s">&#39;.png&#39;</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plotfile</span> <span class="o">+</span> <span class="s">&#39;.pdf&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">configure_logger</span><span class="p">()</span>
+    <span class="n">experiment_compare_dt</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>We can run this new solver function in a shell:</p>
+<p>The application code that calls <code class="docutils literal"><span class="pre">solver_with_logging</span></code> needs to configure
+the logger. The <code class="docutils literal"><span class="pre">decay</span></code> module offers a default configure function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="k">def</span> <span class="nf">configure_basic_logger</span><span class="p">():</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="s">&#39;decay.log&#39;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+        <span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> - </span><span class="si">%(levelname)s</span><span class="s"> - </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span>
+        <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;%Y.%m.</span><span class="si">%d</span><span class="s"> %I:%M:%S %p&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the user of a library does not configure a logger or call this
+configure function, the library should prevent error messages by
+declaring a default logger that does nothing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;decay&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>We can run the new solver function with logging in a shell:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">decay</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">decay</span><span class="o">.</span><span class="n">configure_basic_logger</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">decay</span><span class="o">.</span><span class="n">solver_with_logging</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> \
 <span class="go">           dt=0.5, theta=0.5)</span>
 </pre></div>
@@ -829,6 +1164,9 @@ the formula for <span class="math">\(u^{n+1}\)</span>, we can change the logging
 2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
 </pre></div>
 </div>
+<p>Logging can be much more sophisticated than shown above. One can, e.g.,
+output critical messages to the screen and all messages to a file.
+This requires more code as demonstrated in the <a class="reference external" href="https://docs.python.org/2/howto/logging-cookbook.html">Logging Cookbook</a>.</p>
 </div>
 </div>
 </div>
@@ -871,7 +1209,7 @@ example:</p>
 and <code class="docutils literal"><span class="pre">p</span></code>. A user interface will replace the first two assignments to
 <code class="docutils literal"><span class="pre">delta</span></code> and <code class="docutils literal"><span class="pre">p</span></code>.</p>
 <div class="section" id="command-line-arguments">
-<h2>Command-line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h2>
+<span id="softeng1-basic-ui-cmlargs"></span><h2>Command-line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h2>
 <p>The command-line arguments are all the words that appear on the
 command line after the program name. Running a program <code class="docutils literal"><span class="pre">prog.py</span></code>
 as <code class="docutils literal"><span class="pre">python</span> <span class="pre">prog.py</span> <span class="pre">arg1</span> <span class="pre">arg2</span></code> means that there are two command-line arguments
@@ -997,7 +1335,7 @@ the <code class="docutils literal"><span class="pre">args.delta</span></code> an
 <code class="docutils literal"><span class="pre">decay.py</span></code> module with command-line interfaces.</p>
 </div>
 <div class="section" id="positional-command-line-arguments">
-<h2>Positional command-line arguments<a class="headerlink" href="#positional-command-line-arguments" title="Permalink to this headline">¶</a></h2>
+<span id="softeng1-basic-ui-pos-cml"></span><h2>Positional command-line arguments<a class="headerlink" href="#positional-command-line-arguments" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="index-5"></span><span class="target" id="index-6"></span><p id="index-7">For our <code class="docutils literal"><span class="pre">decay.py</span></code> module file, we want to include functionality such
 that we can read <span class="math">\(I\)</span>, <span class="math">\(a\)</span>, <span class="math">\(T\)</span>, <span class="math">\(\theta\)</span>, and a range of <span class="math">\(\Delta t\)</span>
 values from the command line.  A plot is then to be made, comparing
@@ -1057,7 +1395,7 @@ for Crank-Nicolson. Then we must map this string to the proper
 <p>and get <a href="#id1"><span class="problematic" id="id2">`</span></a>theta=0.5`in the code.</p>
 </div>
 <div class="section" id="option-value-pairs-on-the-command-line">
-<h2>Option-value pairs on the command line<a class="headerlink" href="#option-value-pairs-on-the-command-line" title="Permalink to this headline">¶</a></h2>
+<span id="softeng1-basic-ui-options-cml"></span><h2>Option-value pairs on the command line<a class="headerlink" href="#option-value-pairs-on-the-command-line" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="index-8"></span><span class="target" id="index-9"></span><span class="target" id="index-10"></span><span class="target" id="index-11"></span><p id="index-12">Now we want to specify option-value pairs on the command line,
 using <code class="docutils literal"><span class="pre">--I</span></code> for <code class="docutils literal"><span class="pre">I</span></code> (<span class="math">\(I\)</span>), <code class="docutils literal"><span class="pre">--a</span></code> for <code class="docutils literal"><span class="pre">a</span></code> (<span class="math">\(a\)</span>), <code class="docutils literal"><span class="pre">--T</span></code> for <code class="docutils literal"><span class="pre">T</span></code> (<span class="math">\(T\)</span>),
 <code class="docutils literal"><span class="pre">--scheme</span></code> for the scheme name (<code class="docutils literal"><span class="pre">BE</span></code>, <code class="docutils literal"><span class="pre">FE</span></code>, <code class="docutils literal"><span class="pre">CN</span></code>),
@@ -1336,7 +1674,7 @@ and use it to interactively explore physical and numerical effects.</p>
 </div>
 </div>
 <div class="section" id="tests-for-verifying-implementations">
-<h1>Tests for verifying implementations<a class="headerlink" href="#tests-for-verifying-implementations" title="Permalink to this headline">¶</a></h1>
+<span id="softeng1-verify"></span><h1>Tests for verifying implementations<a class="headerlink" href="#tests-for-verifying-implementations" title="Permalink to this headline">¶</a></h1>
 <p>Any module with functions should have a set of tests that can
 check the
 correctness of the implementations.
@@ -1350,7 +1688,7 @@ software testing techniques: <em>doctest</em> and <em>unit testing</em>.
 The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.</p>
 <div class="section" id="doctests">
-<h2>Doctests<a class="headerlink" href="#doctests" title="Permalink to this headline">¶</a></h2>
+<span id="softeng1-verify-doctests"></span><h2>Doctests<a class="headerlink" href="#doctests" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="index-13"></span><p id="index-14">A doc string, the first string after the function header, is used to
 document the purpose of functions and their arguments
 (see the section <a class="reference internal" href="#softeng1-basic-func"><span class="std std-ref">Implementing the numerical algorithm in a function</span></a>). Very often it
@@ -1447,8 +1785,8 @@ hide software errors.</p>
 how a function is used and 2) test that the function works.</p>
 </div>
 <div class="section" id="unit-tests-and-test-functions">
-<h2>Unit tests and test functions<a class="headerlink" href="#unit-tests-and-test-functions" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-15"></span><span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><p id="index-19">The unit testing technique consists of identifying smaller units
+<span id="softeng1-verify-pytest"></span><h2>Unit tests and test functions<a class="headerlink" href="#unit-tests-and-test-functions" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-15"></span><span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><span class="target" id="index-19"></span><p id="index-20">The unit testing technique consists of identifying smaller units
 of code and writing one or more tests for
 each unit. One unit can typically be a function.
 Each test should, ideally, not depend on the outcome of
@@ -1458,8 +1796,8 @@ design and write the unit tests first and <em>then</em> implement the functions!
 unit testing. The units are naturally larger than in non-scientific
 software. Very often the solution procedure of a mathematical problem
 identifies a unit, such as our <code class="docutils literal"><span class="pre">solver</span></code> function.</p>
-<span class="target" id="index-20"></span><div class="section" id="two-python-test-frameworks-nose-and-pytest">
-<span id="index-21"></span><h3>Two Python test frameworks: nose and pytest<a class="headerlink" href="#two-python-test-frameworks-nose-and-pytest" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-21"></span><div class="section" id="two-python-test-frameworks-nose-and-pytest">
+<span id="index-22"></span><h3>Two Python test frameworks: nose and pytest<a class="headerlink" href="#two-python-test-frameworks-nose-and-pytest" title="Permalink to this headline">¶</a></h3>
 <p>Python offers two very easy-to-use software frameworks for implementing
 unit tests: nose and pytest. These work (almost) in the same way,
 but our recommendation is to go for pytest.</p>
@@ -1549,7 +1887,7 @@ with a small tolerance:</p>
         <span class="k">assert</span> <span class="n">success</span>
 </pre></div>
 </div>
-<div class="admonition-always-compare-real-numbers-with-a-tolerance admonition">
+<div class="admonition-always-compare-real-numbers-with-a-tolerance admonition" id="index-23">
 <p class="first admonition-title">Always compare real numbers with a tolerance</p>
 <p>Real numbers should never be compared with the <code class="docutils literal"><span class="pre">==</span></code> operator, but always
 with the absolute value of the difference and a tolerance.
@@ -1558,8 +1896,13 @@ So, replace <code class="docutils literal"><span class="pre">a</span> <span clas
 <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span>
 </pre></div>
 </div>
-<p class="last">The suitable size of <code class="docutils literal"><span class="pre">tol</span></code> depends on the size of <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code>
-(see <a class="reference internal" href="#softeng1-exer-tol"><span class="std std-ref">Problem 5: Experiment with tolerances in comparisons</span></a>).</p>
+<p>The suitable size of <code class="docutils literal"><span class="pre">tol</span></code> depends on the size of <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code>
+(see <a class="reference internal" href="#softeng1-exer-tol"><span class="std std-ref">Problem 5: Investigate the size of tolerances in comparisons</span></a>). Unless <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> are around
+unity in size, one should use a <em>relative difference</em>:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
+<span class="nb">abs</span><span class="p">((</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="special-assert-functions-from-nose">
@@ -1627,7 +1970,7 @@ An example of a <code class="docutils literal"><span class="pre">tests</span></c
 file is found in <a class="reference external" href="http://tinyurl.com/ofkw6kc/softeng/tests">src/softeng/tests</a>.</p>
 </div>
 <div class="section" id="embedding-doctests-in-a-test-function">
-<span id="index-22"></span><h3>Embedding doctests in a test function<a class="headerlink" href="#embedding-doctests-in-a-test-function" title="Permalink to this headline">¶</a></h3>
+<span id="index-24"></span><h3>Embedding doctests in a test function<a class="headerlink" href="#embedding-doctests-in-a-test-function" title="Permalink to this headline">¶</a></h3>
 <p>Doctests can also be executed from nose/pytest unit tests. Here is an
 example of a file <a class="reference external" href="http://tinyurl.com/ofkw6kc/softeng/tests/test_decay_doctest.py">test_decay_doctest.py</a> where we in the test
 block run all the doctests in the imported module <code class="docutils literal"><span class="pre">decay</span></code>, but we also
@@ -1825,7 +2168,7 @@ in IPython the module must first be reloaded (reimported):</p>
 </div>
 <div class="section" id="classical-class-based-unit-testing">
 <span id="softeng1-basic-unittest"></span><h2>Classical class-based unit testing<a class="headerlink" href="#classical-class-based-unit-testing" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-23"></span><span class="target" id="index-24"></span><p id="index-25">The test functions written for the nose and pytest frameworks are
+<span class="target" id="index-25"></span><span class="target" id="index-26"></span><p id="index-27">The test functions written for the nose and pytest frameworks are
 very straightforward and to the point, with no framework-required boilerplate
 code. We just write the statements we need to get the computations and
 comparisons done, before applying the required <code class="docutils literal"><span class="pre">assert</span></code>.</p>
@@ -1842,7 +2185,7 @@ code is written. A short demo of <code class="docutils literal"><span class="pre
 next. (Readers who are not familiar with object-oriented programming
 in Python may find the text hard to understand, but one can safely
 jump to the next section.)</p>
-<span class="target" id="index-26"></span><p id="index-27">Suppose we have a function <code class="docutils literal"><span class="pre">double(x)</span></code> in a module file <code class="docutils literal"><span class="pre">mymod.py</span></code>:</p>
+<span class="target" id="index-28"></span><p id="index-29">Suppose we have a function <code class="docutils literal"><span class="pre">double(x)</span></code> in a module file <code class="docutils literal"><span class="pre">mymod.py</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
 </pre></div>
@@ -1953,7 +2296,7 @@ we need is a directory with this file. This directory will also
 contain an installation script <code class="docutils literal"><span class="pre">setup.py</span></code> and a <code class="docutils literal"><span class="pre">README</span></code> file
 telling what the software is about, the author&#8217;s email address, a URL
 for downloading the software, and other useful information.</p>
-<p id="index-28">The <code class="docutils literal"><span class="pre">setup.py</span></code> file can be as short as</p>
+<p id="index-30">The <code class="docutils literal"><span class="pre">setup.py</span></code> file can be as short as</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">distutils.core</span> <span class="kn">import</span> <span class="n">setup</span>
 <span class="n">setup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;decay&#39;</span><span class="p">,</span>
       <span class="n">version</span><span class="o">=</span><span class="s">&#39;0.1&#39;</span><span class="p">,</span>
@@ -1993,7 +2336,7 @@ in case we want to run <code class="docutils literal"><span class="pre">decay.py
 <p>We have also added some author and download information.
 The reader is referred to the <a class="reference external" href="https://docs.python.org/2/distutils/setupscript.html">Distutils documentation</a> for more information on how to
 write <code class="docutils literal"><span class="pre">setup.py</span></code> scripts.</p>
-<div class="admonition-remark-about-the-executable-file admonition" id="index-29">
+<div class="admonition-remark-about-the-executable-file admonition" id="index-31">
 <p class="first admonition-title">Remark about the executable file</p>
 <p>The executable program, <code class="docutils literal"><span class="pre">decay.py</span></code>, is in the above installation
 script taken to be the complete
@@ -2028,7 +2371,7 @@ test_decay.py
 </div>
 <div class="section" id="publishing-the-software-at-github">
 <h2>Publishing the software at GitHub<a class="headerlink" href="#publishing-the-software-at-github" title="Permalink to this headline">¶</a></h2>
-<p id="index-30">The leading site today for publishing open source software projects is
+<p id="index-32">The leading site today for publishing open source software projects is
 GitHub at <a class="reference external" href="http://github.com">http://github.com</a>, provided you want your software to
 be open to the world. With a paid GitHub account, you can have private
 projects too.</p>
@@ -2130,7 +2473,7 @@ directory on the computer system, e.g.,
 to <code class="docutils literal"><span class="pre">/usr/local/bin</span></code>.</p>
 </div>
 <div class="section" id="installing-a-package">
-<span id="index-31"></span><h3>Installing a package<a class="headerlink" href="#installing-a-package" title="Permalink to this headline">¶</a></h3>
+<span id="index-33"></span><h3>Installing a package<a class="headerlink" href="#installing-a-package" title="Permalink to this headline">¶</a></h3>
 <p>When the software is organized as a Python package, the installation is
 done by running <code class="docutils literal"><span class="pre">setup.py</span></code> exactly as explained above, but the use of a module
 <code class="docutils literal"><span class="pre">decay</span></code> in a package <code class="docutils literal"><span class="pre">decay</span></code> requires the following syntax:</p>
@@ -2195,7 +2538,7 @@ Other useful resources are</p>
 </div></blockquote>
 <div class="section" id="the-problem-class">
 <h2>The problem class<a class="headerlink" href="#the-problem-class" title="Permalink to this headline">¶</a></h2>
-<p id="index-32">The purpose of the problem class is to store all information about
+<p id="index-34">The purpose of the problem class is to store all information about
 the mathematical model. This usually means the physical parameters
 and formulas
 in the problem. Looking at our model problem
@@ -2281,7 +2624,7 @@ initialized with a proper value.</p>
 </div>
 <div class="section" id="the-solver-class">
 <h2>The solver class<a class="headerlink" href="#the-solver-class" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-33"></span><p id="index-34">The solver class stores parameters related to the numerical solution method
+<span class="target" id="index-35"></span><p id="index-36">The solver class stores parameters related to the numerical solution method
 and provides a function <code class="docutils literal"><span class="pre">solve</span></code> for solving the problem.
 For convenience, a problem object is given to the constructor
 in a solver object such that the object gets access to the
@@ -2588,7 +2931,7 @@ the BE method, <code class="docutils literal"><span class="pre">CN.png</span></c
 and <code class="docutils literal"><span class="pre">error.pdf</span></code> with the log-log plot of the numerical error versus <span class="math">\(\Delta t\)</span>.
 In addition, the table with numerical errors is written to a
 file <code class="docutils literal"><span class="pre">error.csv</span></code>.</p>
-<span class="target" id="index-35"></span><div class="admonition-reproducible-and-replicable-science admonition" id="index-36">
+<span class="target" id="index-37"></span><div class="admonition-reproducible-and-replicable-science admonition" id="index-38">
 <p class="first admonition-title">Reproducible and replicable science</p>
 <p>A script that automates running our computer experiments
 will ensure
@@ -2812,7 +3155,7 @@ The complete code is listed below, followed by some explaining comments.</p>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<span class="target" id="index-37"></span><span class="target" id="index-38"></span><p id="index-39">We may comment upon many useful constructs in this script:</p>
+<span class="target" id="index-39"></span><span class="target" id="index-40"></span><p id="index-41">We may comment upon many useful constructs in this script:</p>
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal"><span class="pre">[float(arg)</span> <span class="pre">for</span> <span class="pre">arg</span> <span class="pre">in</span> <span class="pre">sys.argv[1:]]</span></code> builds a list of real numbers
@@ -2844,8 +3187,8 @@ know exactly which input data that were used to generate a specific
 plot, thereby ensuring that each figure is connected to the
 right data. Take a look at <a class="reference external" href="http://tinyurl.com/nc4upel/_static/sphinx-cloud/">a sample report</a>  to see what we have in
 mind.</p>
-<span class="target" id="index-40"></span><span class="target" id="index-41"></span><span class="target" id="index-42"></span><div class="section" id="word-openoffice-googledocs">
-<span id="index-43"></span><h3>Word, OpenOffice, GoogleDocs<a class="headerlink" href="#word-openoffice-googledocs" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-42"></span><span class="target" id="index-43"></span><span class="target" id="index-44"></span><div class="section" id="word-openoffice-googledocs">
+<span id="index-45"></span><h3>Word, OpenOffice, GoogleDocs<a class="headerlink" href="#word-openoffice-googledocs" title="Permalink to this headline">¶</a></h3>
 <p>Microsoft Word, its open source counterparts OpenOffice and
 LibreOffice, along with GoogleDocs and similar online services are the
 dominating tools for writing reports today. Nevertheless, scientific
@@ -2861,9 +3204,9 @@ resulting in increased reliability of the writing process. For
 collaborative writing, the merge functionality in Git leads to safer
 simultaneously editing than what is offered even by collaborative
 tools like GoogleDocs.</p>
-<span class="target" id="index-44"></span></div>
+<span class="target" id="index-46"></span></div>
 <div class="section" id="html-with-mathjax">
-<span id="index-45"></span><h3>HTML with MathJax<a class="headerlink" href="#html-with-mathjax" title="Permalink to this headline">¶</a></h3>
+<span id="index-47"></span><h3>HTML with MathJax<a class="headerlink" href="#html-with-mathjax" title="Permalink to this headline">¶</a></h3>
 <p>HTML is the markup language used for web pages.  Nicely typeset computer
 code is straightforward in HTML, and high-quality mathematical
 typesetting is available using an extension to HTML called <a class="reference external" href="http://www.mathjax.org/">MathJax</a>, which allows formulas and equations to be
@@ -2889,7 +3232,7 @@ statements for creating an <a class="reference external" href="http://tinyurl.co
 </div>
 </div>
 <div class="section" id="latex">
-<span id="index-46"></span><h3>LaTeX<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h3>
+<span id="index-48"></span><h3>LaTeX<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h3>
 <p>The <em>de facto</em> language for mathematical typesetting and scientific
 report writing is <a class="reference external" href="http://en.wikipedia.org/wiki/LaTeX">LaTeX</a>. A
 number of very sophisticated packages have been added to the language
@@ -2912,7 +3255,7 @@ generate the LaTeX source from a program.</p>
 </div>
 </div>
 <div class="section" id="sphinx">
-<span id="index-47"></span><h3>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h3>
+<span id="index-49"></span><h3>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://sphinx.pocoo.org/">Sphinx</a> is a typesetting language with
 similarities to HTML and LaTeX, but with much less tagging. It has
 recently become very popular for software documentation and
@@ -2933,7 +3276,7 @@ contents, navigation, and search facilities, see Figure
 </div>
 </div>
 <div class="section" id="markdown">
-<span id="index-48"></span><h3>Markdown<a class="headerlink" href="#markdown" title="Permalink to this headline">¶</a></h3>
+<span id="index-50"></span><h3>Markdown<a class="headerlink" href="#markdown" title="Permalink to this headline">¶</a></h3>
 <p>A recent, very popular format for easy writing of web pages is
 <a class="reference external" href="http://daringfireball.net/projects/markdown/">Markdown</a>.
 Text is written very much like one would do in email, using
@@ -2945,9 +3288,9 @@ HTML is a common output format, but LaTeX, epub, XML,
 OpenOffice/LibreOffice, MediaWiki, and Microsoft Word are some other
 possibilities. A Markdown version of our scientific
 report demo is available as an IPython/Jupyter notebook (described next).</p>
-<span class="target" id="index-49"></span></div>
+<span class="target" id="index-51"></span></div>
 <div class="section" id="ipython-jupyter-notebooks">
-<span id="index-50"></span><h3>IPython/Jupyter notebooks<a class="headerlink" href="#ipython-jupyter-notebooks" title="Permalink to this headline">¶</a></h3>
+<span id="index-52"></span><h3>IPython/Jupyter notebooks<a class="headerlink" href="#ipython-jupyter-notebooks" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference external" href="http://ipython.org/notebook.html">IPython Notebook</a> is
 a web-based tool where one can write scientific reports with live computer
 code and graphics. Or the other way around: software can be equipped
@@ -2974,7 +3317,7 @@ Wiki formats are therefore less suitable for scientific reports compared
 to the other formats mentioned here.</p>
 </div>
 <div class="section" id="doconce">
-<span id="index-51"></span><h3>DocOnce<a class="headerlink" href="#doconce" title="Permalink to this headline">¶</a></h3>
+<span id="index-53"></span><h3>DocOnce<a class="headerlink" href="#doconce" title="Permalink to this headline">¶</a></h3>
 <p>Since it is difficult to choose the right tool or format for writing a
 scientific report, it is advantageous to write the content in a format
 that easily translates to LaTeX, HTML, Sphinx, Markdown,
@@ -2989,7 +3332,7 @@ this DocOnce code.</p>
 </div>
 <div class="section" id="publishing-a-complete-project">
 <span id="softeng1-exper-github"></span><h2>Publishing a complete project<a class="headerlink" href="#publishing-a-complete-project" title="Permalink to this headline">¶</a></h2>
-<p id="index-52">To assist the important principle of <em>replicable</em> science,
+<p id="index-54">To assist the important principle of <em>replicable</em> science,
 a report documenting scientific investigations should be accompanied by
 all the software and data used for the investigations so that others
 have a possibility to redo the work and assess the qualify of the results.</p>
@@ -3208,20 +3551,25 @@ same mathematical tests as in a), but with different
 programming technology.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">test_roots</span></code>.</p>
 </div>
-<div class="section" id="problem-5-experiment-with-tolerances-in-comparisons">
-<span id="softeng1-exer-tol"></span><h2>Problem 5: Experiment with tolerances in comparisons<a class="headerlink" href="#problem-5-experiment-with-tolerances-in-comparisons" title="Permalink to this headline">¶</a></h2>
-<p>When we replace a comparison <code class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></code>, where <code class="docutils literal"><span class="pre">a</span></code> and/or <code class="docutils literal"><span class="pre">b</span></code> are
+<div class="section" id="problem-5-investigate-the-size-of-tolerances-in-comparisons">
+<span id="softeng1-exer-tol"></span><h2>Problem 5: Investigate the size of tolerances in comparisons<a class="headerlink" href="#problem-5-investigate-the-size-of-tolerances-in-comparisons" title="Permalink to this headline">¶</a></h2>
+<p id="index-55">When we replace a comparison <code class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">b</span></code>, where <code class="docutils literal"><span class="pre">a</span></code> and/or <code class="docutils literal"><span class="pre">b</span></code> are
 <code class="docutils literal"><span class="pre">float</span></code> objects, by a comparison with tolerance, <code class="docutils literal"><span class="pre">abs(a-b)</span> <span class="pre">&lt;</span> <span class="pre">tol</span></code>,
 the appropriate size of <code class="docutils literal"><span class="pre">tol</span></code> depends on the size of <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code>.
 Investigate how the size of <code class="docutils literal"><span class="pre">abs(a-b)</span></code> varies when <code class="docutils literal"><span class="pre">b</span></code> takes on
 values <span class="math">\(10^k\)</span>, <span class="math">\(k=-5,-9,\ldots,20\)</span> and <code class="docutils literal"><span class="pre">a=1.0/49*b*49</span></code>.
-Filename: <code class="docutils literal"><span class="pre">tolerance</span></code>.</p>
+Thereafter, compute the <em>relative</em> difference <code class="docutils literal"><span class="pre">abs((a-b)/a)</span></code> for
+the same <code class="docutils literal"><span class="pre">b</span></code> values.</p>
+<p>Filename: <code class="docutils literal"><span class="pre">tolerance</span></code>.</p>
 <div class="section" id="remarks">
 <h3>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h3>
 <p>You will experience that if <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> are large, as they can be
-in geophysical applications where lengths measured in meters can be of size
+in, e.g.,
+geophysical applications where lengths measured in meters can be of size
 <span class="math">\(10^6\)</span> m, <code class="docutils literal"><span class="pre">tol</span></code> must be about <span class="math">\(10^{-9}\)</span>, while <code class="docutils literal"><span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">b</span></code> around unity can
-have <code class="docutils literal"><span class="pre">tol</span></code> of size <span class="math">\(10^{-15}\)</span>.</p>
+have <code class="docutils literal"><span class="pre">tol</span></code> of size <span class="math">\(10^{-15}\)</span>.
+The way out of the problem with choosing a tolerance is to use
+relative differences.</p>
 </div>
 </div>
 <div class="section" id="exercise-6-make-use-of-a-class-implementation">
@@ -3368,7 +3716,7 @@ Filename: <code class="docutils literal"><span class="pre">logistic</span></code
 <li><a class="reference internal" href="#problem-2-make-solid-software-for-the-trapezoidal-rule">Problem 2: Make solid software for the Trapezoidal rule</a></li>
 <li><a class="reference internal" href="#problem-3-implement-classes-for-the-trapezoidal-rule">Problem 3: Implement classes for the Trapezoidal rule</a></li>
 <li><a class="reference internal" href="#problem-4-write-a-doctest-and-a-test-function">Problem 4: Write a doctest and a test function</a></li>
-<li><a class="reference internal" href="#problem-5-experiment-with-tolerances-in-comparisons">Problem 5: Experiment with tolerances in comparisons</a><ul>
+<li><a class="reference internal" href="#problem-5-investigate-the-size-of-tolerances-in-comparisons">Problem 5: Investigate the size of tolerances in comparisons</a><ul>
 <li><a class="reference internal" href="#remarks">Remarks</a></li>
 </ul>
 </li>

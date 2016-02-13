@@ -154,7 +154,7 @@ $$
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <br>
 <p>&nbsp;<br>
-<center><h4>Oct 18, 2015</h4></center> <!-- date -->
+<center><h4>Feb 12, 2016</h4></center> <!-- date -->
 <br>
 </section>
 
@@ -517,10 +517,8 @@ Think of edits in the flat program that are required to produce this plot (!)
     <span style="color: #d0d0d0">plt.savefig(plotfile</span> <span style="color: #d0d0d0">+</span> <span style="color: #ed9d13">&#39;.png&#39;</span><span style="color: #d0d0d0">);</span>  <span style="color: #d0d0d0">plt.savefig(plotfile</span> <span style="color: #d0d0d0">+</span> <span style="color: #ed9d13">&#39;.pdf&#39;</span><span style="color: #d0d0d0">)</span>
 
 <span style="color: #6ab825; font-weight: bold">import</span> <span style="color: #447fcf; text-decoration: underline">logging</span>
-<span style="color: #d0d0d0">logging.basicConfig(</span>
-    <span style="color: #d0d0d0">filename=</span><span style="color: #ed9d13">&#39;decay.log&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">filemode=</span><span style="color: #ed9d13">&#39;w&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">level=logging.DEBUG,</span>
-    <span style="color: #d0d0d0">format=</span><span style="color: #ed9d13">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span><span style="color: #d0d0d0">,</span>
-    <span style="color: #d0d0d0">datefmt=</span><span style="color: #ed9d13">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #999999; font-style: italic"># Define a default logger that does nothing</span>
+<span style="color: #d0d0d0">logging.getLogger(</span><span style="color: #ed9d13">&#39;decay&#39;</span><span style="color: #d0d0d0">).addHandler(logging.NullHandler())</span>
 
 <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">solver_with_logging</span><span style="color: #d0d0d0">(I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #d0d0d0">dt,</span> <span style="color: #d0d0d0">theta):</span>
     <span style="color: #ed9d13">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
@@ -543,6 +541,12 @@ Think of edits in the flat program that are required to produce this plot (!)
                       <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a,</span>
                        <span style="color: #24909d">str</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">type</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a))[</span><span style="color: #3677a9">7</span><span style="color: #d0d0d0">:-</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">]))</span>
     <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span>
+
+<span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">configure_basic_logger</span><span style="color: #d0d0d0">():</span>
+    <span style="color: #d0d0d0">logging.basicConfig(</span>
+        <span style="color: #d0d0d0">filename=</span><span style="color: #ed9d13">&#39;decay.log&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">filemode=</span><span style="color: #ed9d13">&#39;w&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">level=logging.DEBUG,</span>
+        <span style="color: #d0d0d0">format=</span><span style="color: #ed9d13">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span><span style="color: #d0d0d0">,</span>
+        <span style="color: #d0d0d0">datefmt=</span><span style="color: #ed9d13">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span><span style="color: #d0d0d0">)</span>
 </pre></div>
 </section>
 
@@ -722,10 +726,8 @@ Levels: critical, error, warning, info, debug
 
 <!-- code=python (!bc pycod) typeset with pygments style "native" -->
 <div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #6ab825; font-weight: bold">import</span> <span style="color: #447fcf; text-decoration: underline">logging</span>
-<span style="color: #d0d0d0">logging.basicConfig(</span>
-    <span style="color: #d0d0d0">filename=</span><span style="color: #ed9d13">&#39;decay.log&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">filemode=</span><span style="color: #ed9d13">&#39;w&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">level=logging.DEBUG,</span>
-    <span style="color: #d0d0d0">format=</span><span style="color: #ed9d13">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span><span style="color: #d0d0d0">,</span>
-    <span style="color: #d0d0d0">datefmt=</span><span style="color: #ed9d13">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #999999; font-style: italic"># Define a default logger that does nothing</span>
+<span style="color: #d0d0d0">logging.getLogger(</span><span style="color: #ed9d13">&#39;decay&#39;</span><span style="color: #d0d0d0">).addHandler(logging.NullHandler())</span>
 
 <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">solver_with_logging</span><span style="color: #d0d0d0">(I,</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">T,</span> <span style="color: #d0d0d0">dt,</span> <span style="color: #d0d0d0">theta):</span>
     <span style="color: #ed9d13">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
@@ -748,6 +750,12 @@ Levels: critical, error, warning, info, debug
                       <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a,</span>
                        <span style="color: #24909d">str</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">type</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a))[</span><span style="color: #3677a9">7</span><span style="color: #d0d0d0">:-</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">]))</span>
     <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span>
+
+<span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">configure_basic_logger</span><span style="color: #d0d0d0">():</span>
+    <span style="color: #d0d0d0">logging.basicConfig(</span>
+        <span style="color: #d0d0d0">filename=</span><span style="color: #ed9d13">&#39;decay.log&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">filemode=</span><span style="color: #ed9d13">&#39;w&#39;</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">level=logging.DEBUG,</span>
+        <span style="color: #d0d0d0">format=</span><span style="color: #ed9d13">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span><span style="color: #d0d0d0">,</span>
+        <span style="color: #d0d0d0">datefmt=</span><span style="color: #ed9d13">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span><span style="color: #d0d0d0">)</span>
 </pre></div>
 </section>
 

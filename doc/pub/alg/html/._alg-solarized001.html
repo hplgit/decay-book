@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Algorithms and implementations for exponential decay models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,test function,unit testing,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization">
 
 <title>Algorithms and implementations for exponential decay models</title>
 
@@ -246,7 +246,7 @@ really work correctly.
 <p>
 This section explains the basic ideas of finite difference methods
 via the simple ordinary differential equation \( u^{\prime}=-au \).
-Emphasis is put on the reasoning behind problem discretizing and
+Emphasis is put on the reasoning around discretization principles and
 introduction of key concepts such as mesh, mesh function,
 finite difference approximations, averaging in a mesh,
 derivation of algorithms, and discrete operator notation.
@@ -376,9 +376,9 @@ we often place a subscript e on the exact solution, as in \( \uex(t_n) \).
 Figure <a href="#decay:fdu:e">1</a> shows the \( t_n \) and \( u^n \) points for \( n=0,1,\ldots,N_t=7 \) as well as \( \uex(t) \) as the dashed line.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:fdu:e"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 1:  Time mesh with discrete solution values at points and a dashed line indicating the true solution. <div id="decay:fdu:e"></div> </p></center>
+<center><p class="caption">Figure 1:  Time mesh with discrete solution values at points and a dashed line indicating the true solution.  <!-- caption label: decay:fdu:e --> </p></center>
 <p><img src="fig-alg/fdm_u_ue.png" align="bottom" width=600></p>
 </center>
 
@@ -403,9 +403,9 @@ u(t) \approx u^n + \frac{u^{n+1}-u^n}{t_{n+1}-t_n}(t - t_n)\tp
 $$
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:fdu:ei"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 2:  Linear interpolation between the discrete solution values (dashed curve is exact solution). <div id="decay:fdu:ei"></div> </p></center>
+<center><p class="caption">Figure 2:  Linear interpolation between the discrete solution values (dashed curve is exact solution).  <!-- caption label: decay:fdu:ei --> </p></center>
 <p><img src="fig-alg/fdm_u_uei.png" align="bottom" width=600></p>
 </center>
 
@@ -491,9 +491,9 @@ the approximate values of \( u \) at
 the mesh points: \( u^n \), \( n=1,2,\ldots,N_t \).
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:sketch:FE"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 3:  Illustration of a forward difference. <div id="decay:sketch:FE"></div> </p></center>
+<center><p class="caption">Figure 3:  Illustration of a forward difference.  <!-- caption label: decay:sketch:FE --> </p></center>
 <p><img src="fig-alg/fd_forward.png" align="bottom" width=400></p>
 </center>
 
@@ -612,9 +612,9 @@ Backward Euler difference.
 Figure <a href="#decay:sketch:BE">4</a> explains the idea.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:sketch:BE"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 4:  Illustration of a backward difference. <div id="decay:sketch:BE"></div> </p></center>
+<center><p class="caption">Figure 4:  Illustration of a backward difference.  <!-- caption label: decay:sketch:BE --> </p></center>
 <p><img src="fig-alg/fd_backward.png" align="bottom" width=400></p>
 </center>
 
@@ -687,9 +687,9 @@ in the center of the interval \( [t_{n},t_{n+1}] \) or at the end points.
 We shall later see that it is more accurate at the center point.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:sketch:CN"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 5:  Illustration of a centered difference. <div id="decay:sketch:CN"></div> </p></center>
+<center><p class="caption">Figure 5:  Illustration of a centered difference.  <!-- caption label: decay:sketch:CN --> </p></center>
 <p><img src="fig-alg/fd_centered_CN.png" align="bottom" width=400></p>
 </center>
 
@@ -1110,11 +1110,10 @@ is more accurate than the forward and backward differences for small
 <p>
 Finite difference formulas can be tedious to write and read,
 especially for differential equations with many terms and many
-derivatives. To save space and help the reader spot
-the nature of the difference approximations, we introduce a
-compact notation. For a function \( u(t) \),
-a forward difference approximation is denoted
-by the \( D_t^+ \) operator and written as
+derivatives. To save space and help the reader spot the nature of the
+difference approximations, we introduce a compact notation. For a
+function \( u(t) \), a forward difference approximation is denoted by the
+\( D_t^+ \) operator and written as
 
 $$
 \begin{equation}
@@ -1124,15 +1123,14 @@ $$
 \end{equation}
 $$
 
-The notation consists of an operator that approximates
-differentiation with respect to an independent variable, here \( t \).
-The operator is built of the symbol \( D \), with the
-independent variable as subscript
-and a superscript denoting the type of difference. The superscript \( \,{}^+ \)
-indicates a forward difference.
-We place square brackets around the operator and the function it operates
-on and specify the mesh point, where the operator is acting, by
-a superscript after the closing bracket.
+The notation consists of an operator that approximates differentiation
+with respect to an independent variable, here \( t \).  The operator is
+built of the symbol \( D \), with the independent variable as subscript
+and a superscript denoting the type of difference. The superscript
+\( \,{}^+ \) indicates a forward difference.  We place square brackets
+around the operator and the function it operates on and specify the
+mesh point, where the operator is acting, by a superscript after the
+closing bracket.
 
 <p>
 The corresponding operator notation for a centered difference and

@@ -176,6 +176,9 @@ avoid confusion between, e.g., Exercise 4.3 and Problem 4.3
 (it will be Exercise 4.3 and Problem 4.4 if they follow after
 each other).
 
+All program and data files referred to in this book are available
+from the book's primary web site:
+URL: http://hplgit.github.io/decay-book/doc/web/.
 
 
 __Acknowledgments.__
