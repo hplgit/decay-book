@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Software engineering with exponential decay models">
-<meta name="keywords" content="refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,test function,nose,pytest,unit testing,software testing nose,software testing pytest,test function,software testing test function,relative differences,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability,relative differences">
 
 <title>Software engineering with exponential decay models</title>
 
@@ -20,6 +20,13 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
 </style>
 
 
@@ -77,9 +84,18 @@ code { color: inherit; background-color: transparent; }
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec17'),
-              ('Positional command-line arguments', 2, None, '___sec18'),
-              ('Option-value pairs on the command line', 2, None, '___sec19'),
+              ('Command-line arguments',
+               2,
+               'softeng1:basic:UI:cmlargs',
+               'softeng1:basic:UI:cmlargs'),
+              ('Positional command-line arguments',
+               2,
+               'softeng1:basic:UI:pos_cml',
+               'softeng1:basic:UI:pos_cml'),
+              ('Option-value pairs on the command line',
+               2,
+               'softeng1:basic:UI:options_cml',
+               'softeng1:basic:UI:options_cml'),
               ('Creating a graphical web user interface',
                2,
                None,
@@ -87,9 +103,18 @@ code { color: inherit; background-color: transparent; }
               ('Making a compute function', 3, None, '___sec21'),
               ('Generating the user interface', 3, None, '___sec22'),
               ('Running the web application', 3, None, '___sec23'),
-              ('Tests for verifying implementations', 1, None, '___sec24'),
-              ('Doctests', 2, None, '___sec25'),
-              ('Unit tests and test functions', 2, None, '___sec26'),
+              ('Tests for verifying implementations',
+               1,
+               'softeng1:verify',
+               'softeng1:verify'),
+              ('Doctests',
+               2,
+               'softeng1:verify:doctests',
+               'softeng1:verify:doctests'),
+              ('Unit tests and test functions',
+               2,
+               'softeng1:verify:pytest',
+               'softeng1:verify:pytest'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
@@ -182,7 +207,7 @@ code { color: inherit; background-color: transparent; }
                2,
                'softeng1:exer:doctest1',
                'softeng1:exer:doctest1'),
-              ('Problem 5: Experiment with tolerances in comparisons',
+              ('Problem 5: Investigate the size of tolerances in comparisons',
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
@@ -233,19 +258,91 @@ $$
     </button>
     <a class="navbar-brand" href="softeng.html">Software engineering with exponential decay models</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic" style="font-size: 80%;">Implementations with functions and modules</a></li>
-     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:UI" style="font-size: 80%;">User interfaces</a></li>
-     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec24" style="font-size: 80%;">Tests for verifying implementations</a></li>
-     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:prog:se:git" style="font-size: 80%;">Sharing the software with other users</a></li>
-     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:prog:se:class" style="font-size: 80%;">Classes for problem and solution method</a></li>
-     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:experiments" style="font-size: 80%;">Automating scientific experiments</a></li>
-     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec69" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec78" style="font-size: 80%;">Bibliography</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic" style="font-size: 80%;"><b>Implementations with functions and modules</b></a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:math" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mathematical problem and solution technique</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:impl1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A first, quick implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:impl2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A more decent program</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comments in a program</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Refactoring into functions</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Program file vs IDE vs notebook</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:modprefix" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Prefixing imported functions by the module name</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:func" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Implementing the numerical algorithm in a function</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Do not have several versions of a code</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making a module</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:experiment2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Example on extending the module code</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:docstring" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Documenting functions and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:logging" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Logging intermediate results</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Introductory example</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using a logger in our solver function</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:UI" style="font-size: 80%;"><b>User interfaces</b></a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:UI:cmlargs" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:UI:pos_cml" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Positional command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:UI:options_cml" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Option-value pairs on the command line</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Creating a graphical web user interface</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Making a compute function</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec22" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generating the user interface</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running the web application</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:verify" style="font-size: 80%;"><b>Tests for verifying implementations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:verify:doctests" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Doctests</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:verify:pytest" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Unit tests and test functions</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Two Python test frameworks: nose and pytest</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test function requirements</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comparison of real numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec30" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Special assert functions from nose</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec31" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Locating test functions</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running tests</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Embedding doctests in a test function</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installing nose and pytest</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Test function for the solver</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Test function for reading positional command-line arguments</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec37" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Test function for reading option-value pairs</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:basic:unittest" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Classical class-based unit testing</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:prog:se:git" style="font-size: 80%;"><b>Sharing the software with other users</b></a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec40" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Organizing the software directory tree</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec41" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Distributing just a module file</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec42" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Distributing a package</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec43" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Publishing the software at GitHub</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec44" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Downloading and installing the software</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec45" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installing just a module file</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec46" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installing a package</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:prog:se:class" style="font-size: 80%;"><b>Classes for problem and solution method</b></a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec48" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The problem class</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec49" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The solver class</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec50" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combining the objects</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:prog:se:class2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Improving the problem and solver classes</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec52" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A generic class for parameters</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:experiments" style="font-size: 80%;"><b>Automating scientific experiments</b></a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec54" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Available software</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec55" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The results we want to produce</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec56" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Combining plot files</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec57" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Running a program from Python</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec58" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The automating script</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:exper:report" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making a report</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec60" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word, OpenOffice, GoogleDocs</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec61" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML with MathJax</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec62" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LaTeX</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec63" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sphinx</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec64" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Markdown</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec65" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IPython/Jupyter notebooks</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec66" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wiki formats</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec67" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DocOnce</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:exper:github" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Publishing a complete project</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec69" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:exer:derivative" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 1: Make a tool for differentiating curves</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:exer:integral:flat" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 2: Make solid software for the Trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:exer:integral:flat2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 3: Implement classes for the Trapezoidal rule</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:exer:doctest1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 4: Write a doctest and a test function</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:exer:tol" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 5: Investigate the size of tolerances in comparisons</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#___sec75" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:exer:class:dts" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 6: Make use of a class implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._softeng001.html#softeng1:exer:logistic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 7: Make solid software for a difference equation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec78" style="font-size: 80%;"><b>Bibliography</b></a></li>
 
         </ul>
       </li>
@@ -269,6 +366,7 @@ $$
 <ol>
  <li> <div id="Langtangen_bitgit"></div> <b>H. P. Langtangen</b>. 
     Quick Intro to Version Control Systems and Project Hosting Sites,
+    \urlhttp://hplgit.github.io/teamods/bitgit/html/,
     <a href="http://hplgit.github.io/teamods/bitgit/html/" target="_self"><tt>http://hplgit.github.io/teamods/bitgit/html/</tt></a>.</li>
  <li> <div id="Langtangen_2012"></div> <b>H. P. Langtangen</b>. 
     <em>A Primer on Scientific Programming with Python</em>,

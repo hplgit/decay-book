@@ -19,6 +19,7 @@
 
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="reveal.js/css/reveal.css">
 <link rel="stylesheet" href="reveal.js/css/theme/darkgray.css" id="theme">
@@ -36,14 +37,21 @@
 <link rel="stylesheet" href="reveal.js/css/theme/default.css" id="theme">
 <link rel="stylesheet" href="reveal.js/css/theme/cbc.css" id="theme">
 <link rel="stylesheet" href="reveal.js/css/theme/simula.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
 -->
 
 <!-- For syntax highlighting -->
 <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
 
-<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<!-- Printing and PDF exports -->
 <script>
-document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
 </script>
 
 <style type="text/css">
@@ -58,7 +66,7 @@ document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.l
              text-shadow:0 1px 0 rgba(255,255,255,0.5);
              border:5px solid #bababa;
              -webkit-border-radius: 14px; -moz-border-radius: 14px;
-             border-radius:14px
+             border-radius:14px;
              background-position: 10px 10px;
              background-repeat: no-repeat;
              background-size: 38px;
@@ -116,6 +124,7 @@ MathJax.Hub.Config({
 <!-- newcommands_keep.tex -->
 $$
 \newcommand{\half}{\frac{1}{2}}
+\newcommand{\uex}{{u_{\small\mbox{e}}}}
 $$
 
 
@@ -144,8 +153,10 @@ $$
 
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
 <p>&nbsp;<br>
-<center><h4>Aug 4, 2015</h4></center> <!-- date -->
+<center><h4>Feb 12, 2016</h4></center> <!-- date -->
+<br>
 </section>
 
 
@@ -173,6 +184,7 @@ The Forward Euler scheme:
 $$
 \begin{equation}
 \frac{u^{n+1} - u^n}{\Delta t} = -a(t_n)u^n
+\tag{2}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -183,6 +195,7 @@ The Backward Euler scheme:
 $$
 \begin{equation}
 \frac{u^{n} - u^{n-1}}{\Delta t} = -a(t_n)u^n
+\tag{3}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -199,6 +212,7 @@ using an average for \( u \):
 $$
 \begin{equation}
 \frac{u^{n+1} - u^{n}}{\Delta t} = -a(t_{n+\half})\half(u^n + u^{n+1})
+\tag{4}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -209,6 +223,7 @@ Using an average for \( a \) and \( u \):
 $$
 \begin{equation}
 \frac{u^{n+1} - u^{n}}{\Delta t} = -\half(a(t_n)u^n + a(t_{n+1})u^{n+1})
+\tag{5}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -225,6 +240,7 @@ The \( \theta \)-rule unifies the three mentioned schemes,
 $$
 \begin{equation}
 \frac{u^{n+1} - u^{n}}{\Delta t} = -a((1-\theta)t_n + \theta t_{n+1})((1-\theta) u^n + \theta u^{n+1})
+\tag{6}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -235,6 +251,7 @@ $$
 \begin{equation}
 \frac{u^{n+1} - u^{n}}{\Delta t} = -(1-\theta) a(t_n)u^n - \theta
 a(t_{n+1})u^{n+1}
+\tag{7}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -264,7 +281,7 @@ $$
 $$
 \begin{equation}
 u'(t) = -a(t)u(t) + b(t),\quad t\in (0,T],\quad u(0)=I
-\tag{2}
+\tag{8}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -290,6 +307,7 @@ $$
 \begin{equation}
 u^{n+1} = ((1 - \Delta t(1-\theta)a^n)u^n
 + \Delta t(\theta b^{n+1} + (1-\theta)b^n))(1 + \Delta t\theta a^{n+1})^{-1}
+\tag{9}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -432,7 +450,7 @@ A lambda function can appear anywhere where a variable can appear.
 <span style="color: #ed9d13">    Test problem where u=u_const is the exact solution, to be</span>
 <span style="color: #ed9d13">    reproduced (to machine precision) by any relevant method.</span>
 <span style="color: #ed9d13">    &quot;&quot;&quot;</span>
-    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">exact_solution</span><span style="color: #d0d0d0">(t):</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">u_exact</span><span style="color: #d0d0d0">(t):</span>
         <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">u_const</span>
 
     <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">a</span><span style="color: #d0d0d0">(t):</span>
@@ -446,7 +464,7 @@ A lambda function can appear anywhere where a variable can appear.
     <span style="color: #d0d0d0">Nt</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">4</span>  <span style="color: #999999; font-style: italic"># enough with a few steps</span>
     <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">solver(I=I,</span> <span style="color: #d0d0d0">a=a,</span> <span style="color: #d0d0d0">b=b,</span> <span style="color: #d0d0d0">T=Nt*dt,</span> <span style="color: #d0d0d0">dt=dt,</span> <span style="color: #d0d0d0">theta=theta)</span>
     <span style="color: #6ab825; font-weight: bold">print</span> <span style="color: #d0d0d0">u</span>
-    <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">exact_solution(t)</span>
+    <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">u_exact(t)</span>
     <span style="color: #d0d0d0">difference</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">abs</span><span style="color: #d0d0d0">(u_e</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">u).max()</span>  <span style="color: #999999; font-style: italic"># max deviation</span>
     <span style="color: #d0d0d0">tol</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">1E-14</span>
     <span style="color: #6ab825; font-weight: bold">assert</span> <span style="color: #d0d0d0">difference</span> <span style="color: #d0d0d0">&lt;</span> <span style="color: #d0d0d0">tol</span>
@@ -458,17 +476,17 @@ A lambda function can appear anywhere where a variable can appear.
 <h2 id="decay:MMS">Verification via manufactured solutions</h2>
 
 <ul>
- <p><li> Choose <em>any</em> formula for \( u(t) \).</li>
+ <p><li> Choose <em>any</em> formula for \( u(t) \)</li>
  <p><li> Fit \( I \), \( a(t) \), and \( b(t) \) in \( u'=-au+b \), \( u(0)=I \),
-   to make the chosen formula a solution of the ODE problem.</li>
- <p><li> Then we can always have an analytical solution (!).</li>
- <p><li> Ideal for verification: testing convergence rates.</li>
+   to make the chosen formula a solution of the ODE problem</li>
+ <p><li> Then we can always have an analytical solution (!)</li>
+ <p><li> Ideal for verification: testing convergence rates</li>
  <p><li> Called the <em>method of manufactured solutions</em> (MMS)</li>
  <p><li> Special case: \( u \) linear in \( t \), because all sound numerical
-   methods will reproduce a linear \( u \) exactly (machine precision).</li>
- <p><li> \( u(t) = ct + d \). \( u(0)=0 \) means \( d=I \).</li>
- <p><li> ODE implies \( c = -a(t)u + b(t) \).</li>
- <p><li> Choose \( a(t) \) and \( c \), and set \( b(t) = c + a(t)(ct + I) \).</li>
+   methods will reproduce a linear \( u \) exactly (machine precision)</li>
+ <p><li> \( u(t) = ct + d \). \( u(0)=0 \) means \( d=I \)</li>
+ <p><li> ODE implies \( c = -a(t)u + b(t) \)</li>
+ <p><li> Choose \( a(t) \) and \( c \), and set \( b(t) = c + a(t)(ct + I) \)</li>
  <p><li> Any error in the formula for \( u^{n+1} \) makes \( u\neq ct+I \)!</li>
 </ul>
 </section>
@@ -487,10 +505,10 @@ First,
 $$
 \begin{align}
 \lbrack D_t^+ t\rbrack^n &= \frac{t_{n+1}-t_n}{\Delta t}=1,
-\tag{3}\\ 
+\tag{10}\\ 
 \lbrack D_t^- t\rbrack^n &= \frac{t_{n}-t_{n-1}}{\Delta t}=1,
-\tag{4}\\ 
-\lbrack D_t t\rbrack^n &= \frac{t_{n+\half}-t_{n-\half}}{\Delta t}=\frac{(n+\half)\Delta t - (n-\half)\Delta t}{\Delta t}=1\tag{5}
+\tag{11}\\ 
+\lbrack D_t t\rbrack^n &= \frac{t_{n+\half}-t_{n-\half}}{\Delta t}=\frac{(n+\half)\Delta t - (n-\half)\Delta t}{\Delta t}=1\tag{12}
 \end{align}
 $$
 <p>&nbsp;<br>
@@ -523,20 +541,20 @@ $$ c = -a(t_n)(ct_n+I) + c + a(t_n)(ct_n + I) = c $$
 <span style="color: #ed9d13">    Test problem where u=c*t+I is the exact solution, to be</span>
 <span style="color: #ed9d13">    reproduced (to machine precision) by any relevant method.</span>
 <span style="color: #ed9d13">    &quot;&quot;&quot;</span>
-    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">exact_solution</span><span style="color: #d0d0d0">(t):</span>
+    <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">u_exact</span><span style="color: #d0d0d0">(t):</span>
         <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">c*t</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">I</span>
 
     <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">a</span><span style="color: #d0d0d0">(t):</span>
         <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">t**</span><span style="color: #3677a9">0.5</span>  <span style="color: #999999; font-style: italic"># can be arbitrary</span>
 
     <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">b</span><span style="color: #d0d0d0">(t):</span>
-        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">c</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">a(t)*exact_solution(t)</span>
+        <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">c</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">a(t)*u_exact(t)</span>
 
     <span style="color: #d0d0d0">theta</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0.4</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">I</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0.1</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">dt</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0.1</span><span style="color: #d0d0d0">;</span> <span style="color: #d0d0d0">c</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">-</span><span style="color: #3677a9">0.5</span>
     <span style="color: #d0d0d0">T</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">4</span>
     <span style="color: #d0d0d0">Nt</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">int</span><span style="color: #d0d0d0">(T/dt)</span>  <span style="color: #999999; font-style: italic"># no of steps</span>
     <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">solver(I=I,</span> <span style="color: #d0d0d0">a=a,</span> <span style="color: #d0d0d0">b=b,</span> <span style="color: #d0d0d0">T=Nt*dt,</span> <span style="color: #d0d0d0">dt=dt,</span> <span style="color: #d0d0d0">theta=theta)</span>
-    <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">exact_solution(t)</span>
+    <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">u_exact(t)</span>
     <span style="color: #d0d0d0">difference</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">abs</span><span style="color: #d0d0d0">(u_e</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">u).max()</span>  <span style="color: #999999; font-style: italic"># max deviation</span>
     <span style="color: #6ab825; font-weight: bold">print</span> <span style="color: #d0d0d0">difference</span>
     <span style="color: #d0d0d0">tol</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">1E-14</span>  <span style="color: #999999; font-style: italic"># depends on c!</span>
@@ -546,7 +564,207 @@ $$ c = -a(t_n)(ct_n+I) + c + a(t_n)(ct_n + I) = c $$
 
 
 <section>
-<h2 id="___sec15">Extension to systems of ODEs </h2>
+<h1 id="decay:convrates">Computing convergence rates</h1>
+
+<p>
+Frequent assumption on the relation between the numerical error \( E \) and
+some discretization parameter \( \Delta t \):
+
+<p>&nbsp;<br>
+$$
+\begin{equation}
+E = C\Delta t^r,
+\tag{13}
+\end{equation}
+$$
+<p>&nbsp;<br>
+
+
+<ul>
+ <p><li> Unknown: \( C \) and \( r \).</li>
+ <p><li> Goal: estimate \( r \) (and \( C \)) from numerical experiments</li>
+</ul>
+</section>
+
+
+<section>
+<h2 id="___sec16">Estimating the convergence rate \( r \) </h2>
+
+<p>
+Perform numerical experiments: \( (\Delta t_i, E_i) \), \( i=0,\ldots,m-1 \).
+Two methods for finding \( r \) (and \( C \)):
+
+<ol>
+ <p><li> Take the logarithm of <a href="#mjx-eqn-13">(13)</a>, \( \ln E = r\ln \Delta t + \ln C \),
+    and fit a straight line to the data points \( (\Delta t_i, E_i) \),
+    \( i=0,\ldots,m-1 \).</li>
+ <p><li> Consider two consecutive experiments, \( (\Delta t_i, E_i) \) and
+    \( (\Delta t_{i-1}, E_{i-1}) \). Dividing the equation
+    \( E_{i-1}=C\Delta t_{i-1}^r \) by \( E_{i}=C\Delta t_{i}^r \) and solving
+    for \( r \) yields</li>
+</ol>
+<p>&nbsp;<br>
+$$
+\begin{equation}
+r_{i-1} = \frac{\ln (E_{i-1}/E_i)}{\ln (\Delta t_{i-1}/\Delta t_i)}
+\tag{14}
+\end{equation}
+$$
+<p>&nbsp;<br>
+
+for \( i=1,=\ldots,m-1 \).
+
+<p>
+Method 2 is best.
+</section>
+
+
+<section>
+<h2 id="___sec17">Brief implementation </h2>
+
+<p>
+Compute \( r_0, r_1, \ldots, r_{m-2} \) from \( E_i \) and \( \Delta t_i \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">compute_rates</span><span style="color: #d0d0d0">(dt_values,</span> <span style="color: #d0d0d0">E_values):</span>
+    <span style="color: #d0d0d0">m</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">len</span><span style="color: #d0d0d0">(dt_values)</span>
+    <span style="color: #d0d0d0">r</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">[log(E_values[i-</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">]/E_values[i])/</span>
+         <span style="color: #d0d0d0">log(dt_values[i-</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">]/dt_values[i])</span>
+         <span style="color: #6ab825; font-weight: bold">for</span> <span style="color: #d0d0d0">i</span> <span style="color: #6ab825; font-weight: bold">in</span> <span style="color: #24909d">range</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">m,</span> <span style="color: #3677a9">1</span><span style="color: #d0d0d0">)]</span>
+    <span style="color: #999999; font-style: italic"># Round to two decimals</span>
+    <span style="color: #d0d0d0">r</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">[</span><span style="color: #24909d">round</span><span style="color: #d0d0d0">(r_,</span> <span style="color: #3677a9">2</span><span style="color: #d0d0d0">)</span> <span style="color: #6ab825; font-weight: bold">for</span> <span style="color: #d0d0d0">r_</span> <span style="color: #6ab825; font-weight: bold">in</span> <span style="color: #d0d0d0">r]</span>
+    <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #d0d0d0">r</span>
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec18">We embed the code in a real test function </h2>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">test_convergence_rates</span><span style="color: #d0d0d0">():</span>
+    <span style="color: #999999; font-style: italic"># Create a manufactured solution</span>
+    <span style="color: #999999; font-style: italic"># define u_exact(t), a(t), b(t)</span>
+
+    <span style="color: #d0d0d0">dt_values</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">[</span><span style="color: #3677a9">0.1</span><span style="color: #d0d0d0">*</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">**(-i)</span> <span style="color: #6ab825; font-weight: bold">for</span> <span style="color: #d0d0d0">i</span> <span style="color: #6ab825; font-weight: bold">in</span> <span style="color: #24909d">range</span><span style="color: #d0d0d0">(</span><span style="color: #3677a9">7</span><span style="color: #d0d0d0">)]</span>
+    <span style="color: #d0d0d0">I</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">u_exact(</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">)</span>
+
+    <span style="color: #6ab825; font-weight: bold">for</span> <span style="color: #d0d0d0">theta</span> <span style="color: #6ab825; font-weight: bold">in</span> <span style="color: #d0d0d0">(</span><span style="color: #3677a9">0</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">1</span><span style="color: #d0d0d0">,</span> <span style="color: #3677a9">0.5</span><span style="color: #d0d0d0">):</span>
+        <span style="color: #d0d0d0">E_values</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">[]</span>
+        <span style="color: #6ab825; font-weight: bold">for</span> <span style="color: #d0d0d0">dt</span> <span style="color: #6ab825; font-weight: bold">in</span> <span style="color: #d0d0d0">dt_values:</span>
+            <span style="color: #d0d0d0">u,</span> <span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">solver(I=I,</span> <span style="color: #d0d0d0">a=a,</span> <span style="color: #d0d0d0">b=b,</span> <span style="color: #d0d0d0">T=</span><span style="color: #3677a9">6</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">dt=dt,</span> <span style="color: #d0d0d0">theta=theta)</span>
+            <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">u_exact(t)</span>
+            <span style="color: #d0d0d0">e</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">u_e</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">u</span>
+            <span style="color: #d0d0d0">E</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">sqrt(dt*</span><span style="color: #24909d">sum</span><span style="color: #d0d0d0">(e**</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">))</span>
+            <span style="color: #d0d0d0">E_values.append(E)</span>
+        <span style="color: #d0d0d0">r</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">compute_rates(dt_values,</span> <span style="color: #d0d0d0">E_values)</span>
+        <span style="color: #6ab825; font-weight: bold">print</span> <span style="color: #ed9d13">&#39;theta=%g, r: %s&#39;</span> <span style="color: #d0d0d0">%</span> <span style="color: #d0d0d0">(theta,</span> <span style="color: #d0d0d0">r)</span>
+        <span style="color: #d0d0d0">expected_rate</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">2</span> <span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #d0d0d0">theta</span> <span style="color: #d0d0d0">==</span> <span style="color: #3677a9">0.5</span> <span style="color: #6ab825; font-weight: bold">else</span> <span style="color: #3677a9">1</span>
+        <span style="color: #d0d0d0">tol</span> <span style="color: #d0d0d0">=</span> <span style="color: #3677a9">0.1</span>
+        <span style="color: #d0d0d0">diff</span> <span style="color: #d0d0d0">=</span> <span style="color: #24909d">abs</span><span style="color: #d0d0d0">(expected_rate</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">r[-</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">])</span>
+        <span style="color: #6ab825; font-weight: bold">assert</span> <span style="color: #d0d0d0">diff</span> <span style="color: #d0d0d0">&lt;</span> <span style="color: #d0d0d0">tol</span>
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec19">The manufactured solution can be computed by sympy </h2>
+
+<p>
+We choose \( \uex(t) = \sin(t)e^{-2t} \), \( a(t)=t^2 \), fit \( b(t)=u'(t)-a(t) \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #999999; font-style: italic"># Create a manufactured solution with sympy</span>
+<span style="color: #6ab825; font-weight: bold">import</span> <span style="color: #447fcf; text-decoration: underline">sympy</span> <span style="color: #6ab825; font-weight: bold">as</span> <span style="color: #447fcf; text-decoration: underline">sym</span>
+<span style="color: #d0d0d0">t</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">sym.symbols(</span><span style="color: #ed9d13">&#39;t&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #d0d0d0">u_exact</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">sym.sin(t)*sym.exp(-</span><span style="color: #3677a9">2</span><span style="color: #d0d0d0">*t)</span>
+<span style="color: #d0d0d0">a</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">t**</span><span style="color: #3677a9">2</span>
+<span style="color: #d0d0d0">b</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">sym.diff(u_exact,</span> <span style="color: #d0d0d0">t)</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">a*u_exact</span>
+
+<span style="color: #999999; font-style: italic"># Turn sympy expressions into Python function</span>
+<span style="color: #d0d0d0">u_exact</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">sym.lambdify([t],</span> <span style="color: #d0d0d0">u_exact,</span> <span style="color: #d0d0d0">modules=</span><span style="color: #ed9d13">&#39;numpy&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #d0d0d0">a</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">sym.lambdify([t],</span> <span style="color: #d0d0d0">a,</span> <span style="color: #d0d0d0">modules=</span><span style="color: #ed9d13">&#39;numpy&#39;</span><span style="color: #d0d0d0">)</span>
+<span style="color: #d0d0d0">b</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">sym.lambdify([t],</span> <span style="color: #d0d0d0">b,</span> <span style="color: #d0d0d0">modules=</span><span style="color: #ed9d13">&#39;numpy&#39;</span><span style="color: #d0d0d0">)</span>
+</pre></div>
+<p>
+Complete code: <a href="http://tinyurl.com/ofkw6kc/genz/decay_vc.py" target="_self"><tt>decay_vc.py</tt></a>.
+</section>
+
+
+<section>
+<h2 id="___sec20">Execution </h2>
+
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; python decay_vc.py
+...
+theta=0, r: [1.06, 1.03, 1.01, 1.01, 1.0, 1.0]
+theta=1, r: [0.94, 0.97, 0.99, 0.99, 1.0, 1.0]
+theta=0.5, r: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0]
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec21">Debugging via convergence rates </h2>
+
+<p>
+Potential bug: missing <code>a</code> in the denominator,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #d0d0d0">u[n+</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">]</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">-</span> <span style="color: #d0d0d0">(</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-theta)*a*dt)/(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt)*u[n]</span>
+</pre></div>
+<p>
+Running <code>decay_convrate.py</code> gives same rates.
+
+<p>
+Why? The value of \( a \)... (\( a=1 \))
+
+<p>
+0 and 1 are <em>bad values</em> in tests!
+
+<p>
+Better:
+<p>
+
+<!-- code=text (!bc sys) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%">Terminal&gt; python decay_convrate.py --a 2.1 --I 0.1  \ 
+          --dt 0.5 0.25 0.1 0.05 0.025 0.01
+...
+Pairwise convergence rates for theta=0:
+1.49 1.18 1.07 1.04 1.02
+
+Pairwise convergence rates for theta=0.5:
+-1.42 -0.22 -0.07 -0.03 -0.01
+
+Pairwise convergence rates for theta=1:
+0.21 0.12 0.06 0.03 0.01
+</pre></div>
+<p>
+Forward Euler works...because \( \theta=0 \) hides the bug.
+
+<p>
+This bug gives \( r\approx 0 \):
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "native" -->
+<div class="highlight" style="background: #202020"><pre style="font-size: 80%; line-height: 125%"><span style="color: #d0d0d0">u[n+</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">]</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">((</span><span style="color: #3677a9">1</span><span style="color: #d0d0d0">-theta)*a*dt)/(</span><span style="color: #3677a9">1</span> <span style="color: #d0d0d0">+</span> <span style="color: #d0d0d0">theta*dt*a)*u[n]</span>
+</pre></div>
+</section>
+
+
+<section>
+<h2 id="___sec22">Extension to systems of ODEs </h2>
 
 <p>
 Sample system:
@@ -554,8 +772,10 @@ Sample system:
 <p>&nbsp;<br>
 $$
 \begin{align}
-u' &= a u + bv\\ 
+u' &= a u + bv
+\tag{15}\\ 
 v' &= cu +  dv
+\tag{16}
 \end{align}
 $$
 <p>&nbsp;<br>
@@ -566,8 +786,10 @@ The Forward Euler method:
 <p>&nbsp;<br>
 $$
 \begin{align}
-u^{n+1} &= u^n + \Delta t (a u^n + b v^n)\\ 
+u^{n+1} &= u^n + \Delta t (a u^n + b v^n)
+\tag{17}\\ 
 v^{n+1} &= u^n + \Delta t (cu^n + dv^n)
+\tag{18}
 \end{align}
 $$
 <p>&nbsp;<br>
@@ -575,7 +797,7 @@ $$
 
 
 <section>
-<h2 id="___sec16">The Backward Euler method gives a system of algebraic equations </h2>
+<h2 id="___sec23">The Backward Euler method gives a system of algebraic equations </h2>
 
 <p>
 The Backward Euler scheme:
@@ -583,8 +805,10 @@ The Backward Euler scheme:
 <p>&nbsp;<br>
 $$
 \begin{align}
-u^{n+1} &= u^n + \Delta t (a u^{n+1} + b v^{n+1})\\ 
+u^{n+1} &= u^n + \Delta t (a u^{n+1} + b v^{n+1})
+\tag{19}\\ 
 v^{n+1} &= v^n + \Delta t (c u^{n+1} + d v^{n+1})
+\tag{20}
 \end{align}
 $$
 <p>&nbsp;<br>
@@ -594,8 +818,10 @@ which is a \( 2\times 2 \) linear system:
 <p>&nbsp;<br>
 $$
 \begin{align}
-(1 - \Delta t a)u^{n+1} + bv^{n+1} &= u^n \\ 
+(1 - \Delta t a)u^{n+1} + bv^{n+1} &= u^n 
+\tag{21}\\ 
 c u^{n+1} + (1 - \Delta t d) v^{n+1} &= v^n
+\tag{22}
 \end{align}
 $$
 <p>&nbsp;<br>
@@ -611,7 +837,7 @@ Crank-Nicolson also gives a \( 2\times 2 \) linear system.
 
 
 <section>
-<h2 id="___sec18">Generic form </h2>
+<h2 id="___sec25">Generic form </h2>
 
 <p>
 The standard form for ODEs:
@@ -619,7 +845,7 @@ The standard form for ODEs:
 $$
 \begin{equation}
 u' = f(u,t),\quad u(0)=I
-\tag{6}
+\tag{23}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -647,14 +873,14 @@ $$
 
 
 <section>
-<h2 id="___sec19">The \( \theta \)-rule </h2>
+<h2 id="___sec26">The \( \theta \)-rule </h2>
 
 <p>&nbsp;<br>
 $$
 \begin{equation}
 \frac{u^{n+1}-u^n}{\Delta t} = \theta f(u^{n+1},t_{n+1}) +
 (1-\theta)f(u^n, t_n)
-\tag{7}
+\tag{24}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -667,6 +893,7 @@ $$
 \begin{equation}
 u^{n+1} - \Delta t \theta f(u^{n+1},t_{n+1}) =
 u^n + \Delta t(1-\theta)f(u^n, t_n)
+\tag{25}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -676,7 +903,7 @@ This is a <em>nonlinear</em> equation in \( u^{n+1} \) (unless \( f \) is linear
 
 
 <section>
-<h2 id="___sec20">Implicit 2-step backward scheme </h2>
+<h2 id="___sec27">Implicit 2-step backward scheme </h2>
 
 <p>&nbsp;<br>
 $$ u'(t_{n+1}) \approx \frac{3u^{n+1} - 4u^{n} + u^{n-1}}{2\Delta t}$$
@@ -687,7 +914,7 @@ Scheme:
 <p>&nbsp;<br>
 $$ u^{n+1} = \frac{4}{3}u^n - \frac{1}{3}u^{n-1} +
 \frac{2}{3}\Delta t f(u^{n+1}, t_{n+1})
-\tag{8}
+\tag{26}
 $$
 <p>&nbsp;<br>
 
@@ -696,7 +923,7 @@ Nonlinear equation for \( u^{n+1} \).
 
 
 <section>
-<h2 id="___sec21">The Leapfrog scheme </h2>
+<h2 id="___sec28">The Leapfrog scheme </h2>
 
 <p>
 Idea:
@@ -704,6 +931,7 @@ Idea:
 $$
 \begin{equation}
 u'(t_n)\approx \frac{u^{n+1}-u^{n-1}}{2\Delta t} = [D_{2t} u]^n
+\tag{27}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -720,7 +948,7 @@ or written out,
 $$
 \begin{equation}
 u^{n+1} = u^{n-1} + \Delta t f(u^n, t_n)
-\tag{9}
+\tag{28}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -735,7 +963,7 @@ $$
 
 
 <section>
-<h2 id="___sec22">The filtered Leapfrog scheme </h2>
+<h2 id="___sec29">The filtered Leapfrog scheme </h2>
 
 <p>
 After computing \( u^{n+1} \), stabilize Leapfrog by
@@ -743,7 +971,7 @@ After computing \( u^{n+1} \), stabilize Leapfrog by
 $$
 \begin{equation}
 u^n\ \leftarrow\ u^n + \gamma (u^{n-1} - 2u^n + u^{n+1})
-\tag{10}
+\tag{29}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -751,7 +979,7 @@ $$
 
 
 <section>
-<h2 id="___sec23">2nd-order Runge-Kutta scheme </h2>
+<h2 id="___sec30">2nd-order Runge-Kutta scheme </h2>
 
 <p>
 Forward-Euler + approximate Crank-Nicolson:
@@ -759,10 +987,10 @@ Forward-Euler + approximate Crank-Nicolson:
 $$
 \begin{align}
 u^* &= u^n + \Delta t f(u^n, t_n),
-\tag{11}\\ 
+\tag{30}\\ 
 u^{n+1} &= u^n + \Delta t \half \left( f(u^n, t_n) + f(u^*, t_{n+1})
 \right)
-\tag{12}
+\tag{31}
 \end{align}
 $$
 <p>&nbsp;<br>
@@ -781,14 +1009,14 @@ $$
 
 
 <section>
-<h2 id="___sec25">2nd-order Adams-Bashforth scheme </h2>
+<h2 id="___sec32">2nd-order Adams-Bashforth scheme </h2>
 
 <p>&nbsp;<br>
 $$
 \begin{equation}
 u^{n+1} = u^n + \half\Delta t\left( 3f(u^n, t_n) - f(u^{n-1}, t_{n-1})
 \right)
-\tag{13}
+\tag{32}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -796,14 +1024,14 @@ $$
 
 
 <section>
-<h2 id="___sec26">3rd-order Adams-Bashforth scheme </h2>
+<h2 id="___sec33">3rd-order Adams-Bashforth scheme </h2>
 
 <p>&nbsp;<br>
 $$
 \begin{equation}
 u^{n+1} = u^n + \frac{1}{12}\left( 23f(u^n, t_n) - 16 f(u^{n-1},t_{n-1})
 + 5f(u^{n-2}, t_{n-2})\right)
-\tag{14}
+\tag{33}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -811,7 +1039,7 @@ $$
 
 
 <section>
-<h2 id="___sec27">The Odespy software </h2>
+<h2 id="___sec34">The Odespy software </h2>
 
 <p>
 <a href="https://github.com/hplgit/odespy" target="_self">Odespy</a>
@@ -854,7 +1082,7 @@ u, t = solver.solve(t_mesh)
 
 
 <section>
-<h2 id="___sec28">Example: Runge-Kutta methods  </h2>
+<h2 id="___sec35">Example: Runge-Kutta methods  </h2>
 
 <p>
 
@@ -874,7 +1102,7 @@ u, t = solver.solve(t_mesh)
 
 
 <section>
-<h2 id="___sec29">Plots from the experiments </h2>
+<h2 id="___sec36">Plots from the experiments </h2>
 
 <p>
 <center><p><img src="fig-genz/decay_odespy1_png.png" align="bottom" width=800></p></center>
@@ -885,7 +1113,7 @@ The 4-th order Runge-Kutta method (<code>RK4</code>) is the method of choice!
 
 
 <section>
-<h2 id="___sec30">Example: Adaptive Runge-Kutta methods  </h2>
+<h2 id="___sec37">Example: Adaptive Runge-Kutta methods  </h2>
 
 <ul>
  <p><li> Adaptive methods find "optimal" locations of the mesh points
@@ -906,7 +1134,7 @@ The 4-th order Runge-Kutta method (<code>RK4</code>) is the method of choice!
 </div> <!-- class="reveal" -->
 
 <script src="reveal.js/lib/js/head.min.js"></script>
-<script src="reveal.js/js/reveal.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
 
 <script>
 // Full list of configuration options available here:

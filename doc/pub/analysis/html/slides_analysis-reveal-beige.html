@@ -19,6 +19,7 @@
 
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 <link rel="stylesheet" href="reveal.js/css/reveal.css">
 <link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
@@ -36,14 +37,21 @@
 <link rel="stylesheet" href="reveal.js/css/theme/default.css" id="theme">
 <link rel="stylesheet" href="reveal.js/css/theme/cbc.css" id="theme">
 <link rel="stylesheet" href="reveal.js/css/theme/simula.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
+<link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
 -->
 
 <!-- For syntax highlighting -->
 <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
 
-<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<!-- Printing and PDF exports -->
 <script>
-document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
 </script>
 
 <style type="text/css">
@@ -58,7 +66,7 @@ document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.l
              text-shadow:0 1px 0 rgba(255,255,255,0.5);
              border:5px solid #bababa;
              -webkit-border-radius: 14px; -moz-border-radius: 14px;
-             border-radius:14px
+             border-radius:14px;
              background-position: 10px 10px;
              background-repeat: no-repeat;
              background-size: 38px;
@@ -147,8 +155,10 @@ $$
 
 <center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<br>
 <p>&nbsp;<br>
-<center><h4>Aug 4, 2015</h4></center> <!-- date -->
+<center><h4>Feb 12, 2016</h4></center> <!-- date -->
+<br>
 </section>
 
 
@@ -161,6 +171,7 @@ Model:
 $$
 \begin{equation}
 u'(t) = -au(t),\quad u(0)=I
+\tag{1}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -171,7 +182,7 @@ Method:
 $$
 \begin{equation}
 u^{n+1} = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}u^n
-\tag{1}
+\tag{2}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -291,14 +302,14 @@ Seems that \( a\Delta t < 1 \) for FE and 2 for CN.
 <h2 id="___sec7">Exact numerical solution </h2>
 
 <p>
-Starting with \( u^0=I \), the simple recursion <a href="#mjx-eqn-1">(1)</a>
+Starting with \( u^0=I \), the simple recursion <a href="#mjx-eqn-2">(2)</a>
 can be applied repeatedly \( n \) times, with the result that
 
 <p>&nbsp;<br>
 $$
 \begin{equation}
 u^{n} = IA^n,\quad A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}
-\tag{2}
+\tag{3}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -342,6 +353,7 @@ To avoid oscillatory solutions we must have \( A> 0 \) and
 $$
 \begin{equation}
 \Delta t < \frac{1}{(1-\theta)a}\ 
+\tag{4}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -365,7 +377,7 @@ $$
 $$
 \begin{equation}
 -1\leq\frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t} \leq 1
-\tag{3}
+\tag{5}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -543,6 +555,7 @@ A-\Aex = \left\lbrace\begin{array}{ll}
 \Oof{\Delta t^2}, & \hbox{Forward and Backward Euler},\\ 
 \Oof{\Delta t^3}, & \hbox{Crank-Nicolson}
 \end{array}\right.
+\tag{6}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -689,7 +702,7 @@ Insert \( \uex \) (which does not in general fulfill this equation):
 $$
 \begin{equation}
 \frac{\uex(t_{n+1})-\uex(t_n)}{\Delta t} + a\uex(t_n) = R^n \neq 0
-\tag{4}
+\tag{7}
 \end{equation}
 $$
 <p>&nbsp;<br>
@@ -713,7 +726,7 @@ $$ \uex(t_{n+1}) = \uex(t_n) + \uex'(t_n)\Delta t + \half\uex''(t_n)
 \Delta t^2 + \cdots $$
 <p>&nbsp;<br>
 
-Inserting this Taylor series in <a href="#mjx-eqn-4">(4)</a> gives
+Inserting this Taylor series in <a href="#mjx-eqn-7">(7)</a> gives
 
 <p>&nbsp;<br>
 $$ R^n = \uex'(t_n) + \half\uex''(t_n)\Delta t + \ldots + a\uex(t_n)$$
@@ -783,7 +796,7 @@ convergence.)
 </div> <!-- class="reveal" -->
 
 <script src="reveal.js/lib/js/head.min.js"></script>
-<script src="reveal.js/js/reveal.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
 
 <script>
 // Full list of configuration options available here:

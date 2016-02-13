@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -56,8 +55,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -66,14 +65,14 @@
         <li class="right" >
           <a href="._main_genz000.html" title="Generalizations of exponential decay models"
              accesskey="N">next</a> |</li>
-        <li><a href="#">Generalizations of exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Generalizations of exponential decay models</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="generalizations-of-exponential-decay-models">
 <h1>Generalizations of exponential decay models<a class="headerlink" href="#generalizations-of-exponential-decay-models" title="Permalink to this headline">¶</a></h1>
@@ -84,19 +83,10 @@
 <li class="toctree-l1"><a class="reference internal" href="._main_genz001.html">Model extensions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#generalization-including-a-variable-coefficient">Generalization: including a variable coefficient</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#generalization-including-a-source-term">Generalization: including a source term</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#implementation-of-the-generalized-model-problem">Implementation of the generalized model problem</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_genz001.html#deriving-the-rule-formula">Deriving the <span class="math">\(\theta\)</span>-rule formula</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_genz001.html#python-code">Python code</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_genz001.html#coding-of-variable-coefficients">Coding of variable coefficients</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#implementation-of-the-generalized-model-problem">Implementation of the generalized model problem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#verifying-a-constant-solution">Verifying a constant solution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#verification-via-manufactured-solutions">Verification via manufactured solutions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#computing-convergence-rates">Computing convergence rates</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_genz001.html#estimating">Estimating <span class="math">\(r\)</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_genz001.html#implementation">Implementation</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#computing-convergence-rates">Computing convergence rates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#extension-to-systems-of-odes">Extension to systems of ODEs</a></li>
 </ul>
 </li>
@@ -104,20 +94,13 @@
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#generic-form-of-first-order-odes">Generic form of first-order ODEs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#the-rule">The <span class="math">\(\theta\)</span>-rule</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#an-implicit-2-step-backward-scheme">An implicit 2-step backward scheme</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#leapfrog-schemes">Leapfrog schemes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_genz001.html#the-ordinary-leapfrog-scheme">The ordinary Leapfrog scheme</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._main_genz001.html#the-filtered-leapfrog-scheme">The filtered Leapfrog scheme</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#leapfrog-schemes">Leapfrog schemes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#the-2nd-order-runge-kutta-method">The 2nd-order Runge-Kutta method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#a-2nd-order-taylor-series-method">A 2nd-order Taylor-series method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#the-2nd-and-3rd-order-adams-bashforth-schemes">The 2nd- and 3rd-order Adams-Bashforth schemes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#the-4th-order-runge-kutta-method">The 4th-order Runge-Kutta method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#the-odespy-software">The Odespy software</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#example-runge-kutta-methods">Example: Runge-Kutta methods</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._main_genz001.html#remark-about-using-the-rule-in-odespy">Remark about using the <span class="math">\(\theta\)</span>-rule in Odespy</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#example-runge-kutta-methods">Example: Runge-Kutta methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#example-adaptive-runge-kutta-methods">Example: Adaptive Runge-Kutta methods</a></li>
 </ul>
 </li>
@@ -127,7 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#exercise-3-implement-the-2nd-order-adams-bashforth-scheme">Exercise 3: Implement the 2nd-order Adams-Bashforth scheme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#exercise-4-implement-the-3rd-order-adams-bashforth-scheme">Exercise 4: Implement the 3rd-order Adams-Bashforth scheme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#exercise-5-analyze-explicit-2nd-order-methods">Exercise 5: Analyze explicit 2nd-order methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#problem-6-implement-and-investigate-the-leapfrog-scheme">Problem 6: Implement and investigate the Leapfrog scheme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#project-6-implement-and-investigate-the-leapfrog-scheme">Project 6: Implement and investigate the Leapfrog scheme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._main_genz001.html#problem-7-make-a-unified-implementation-of-many-schemes">Problem 7: Make a unified implementation of many schemes</a></li>
 </ul>
 </li>
@@ -135,12 +118,10 @@
 </ul>
 </div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="index">
+<h1>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 </div>
 
@@ -148,7 +129,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <center>
             <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
@@ -158,21 +139,23 @@
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Generalizations of exponential decay models</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#index">Index</a></li>
 </ul>
 
   <h4>Next topic</h4>
   <p class="topless"><a href="._main_genz000.html"
                         title="next chapter">Generalizations of exponential decay models</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -186,7 +169,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -195,12 +178,15 @@
         <li class="right" >
           <a href="._main_genz000.html" title="Generalizations of exponential decay models"
              >next</a> |</li>
-        <li><a href="#">Generalizations of exponential decay models</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Generalizations of exponential decay models</a> &raquo;</li> 
       </ul>
     </div>
 <div class="wrapper">
   <div class="footer">
-  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;H. P. Langtangen.
   </div>
 </div>
 

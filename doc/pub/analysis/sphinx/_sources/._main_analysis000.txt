@@ -7,5 +7,5 @@ Analysis of exponential decay models
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Hans Petter Langtangen
-:Date: Aug 4, 2015
+:Date: Feb 12, 2016
 

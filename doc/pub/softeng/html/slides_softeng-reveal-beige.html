@@ -154,7 +154,7 @@ $$
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <br>
 <p>&nbsp;<br>
-<center><h4>Oct 18, 2015</h4></center> <!-- date -->
+<center><h4>Feb 12, 2016</h4></center> <!-- date -->
 <br>
 </section>
 
@@ -517,10 +517,8 @@ Think of edits in the flat program that are required to produce this plot (!)
     plt.savefig(plotfile + <span style="color: #CD5555">&#39;.png&#39;</span>);  plt.savefig(plotfile + <span style="color: #CD5555">&#39;.pdf&#39;</span>)
 
 <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">logging</span>
-logging.basicConfig(
-    filename=<span style="color: #CD5555">&#39;decay.log&#39;</span>, filemode=<span style="color: #CD5555">&#39;w&#39;</span>, level=logging.DEBUG,
-    format=<span style="color: #CD5555">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span>,
-    datefmt=<span style="color: #CD5555">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span>)
+<span style="color: #228B22"># Define a default logger that does nothing</span>
+logging.getLogger(<span style="color: #CD5555">&#39;decay&#39;</span>).addHandler(logging.NullHandler())
 
 <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solver_with_logging</span>(I, a, T, dt, theta):
     <span style="color: #CD5555">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
@@ -543,6 +541,12 @@ logging.basicConfig(
                       (<span style="color: #B452CD">1</span> + theta*dt*a,
                        <span style="color: #658b00">str</span>(<span style="color: #658b00">type</span>(<span style="color: #B452CD">1</span> + theta*dt*a))[<span style="color: #B452CD">7</span>:-<span style="color: #B452CD">2</span>]))
     <span style="color: #8B008B; font-weight: bold">return</span> u, t
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">configure_basic_logger</span>():
+    logging.basicConfig(
+        filename=<span style="color: #CD5555">&#39;decay.log&#39;</span>, filemode=<span style="color: #CD5555">&#39;w&#39;</span>, level=logging.DEBUG,
+        format=<span style="color: #CD5555">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span>,
+        datefmt=<span style="color: #CD5555">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span>)
 </pre></div>
 </section>
 
@@ -722,10 +726,8 @@ Levels: critical, error, warning, info, debug
 
 <!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
 <div class="highlight" style="background: #eeeedd"><pre style="font-size: 80%; line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">logging</span>
-logging.basicConfig(
-    filename=<span style="color: #CD5555">&#39;decay.log&#39;</span>, filemode=<span style="color: #CD5555">&#39;w&#39;</span>, level=logging.DEBUG,
-    format=<span style="color: #CD5555">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span>,
-    datefmt=<span style="color: #CD5555">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span>)
+<span style="color: #228B22"># Define a default logger that does nothing</span>
+logging.getLogger(<span style="color: #CD5555">&#39;decay&#39;</span>).addHandler(logging.NullHandler())
 
 <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solver_with_logging</span>(I, a, T, dt, theta):
     <span style="color: #CD5555">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
@@ -748,6 +750,12 @@ logging.basicConfig(
                       (<span style="color: #B452CD">1</span> + theta*dt*a,
                        <span style="color: #658b00">str</span>(<span style="color: #658b00">type</span>(<span style="color: #B452CD">1</span> + theta*dt*a))[<span style="color: #B452CD">7</span>:-<span style="color: #B452CD">2</span>]))
     <span style="color: #8B008B; font-weight: bold">return</span> u, t
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">configure_basic_logger</span>():
+    logging.basicConfig(
+        filename=<span style="color: #CD5555">&#39;decay.log&#39;</span>, filemode=<span style="color: #CD5555">&#39;w&#39;</span>, level=logging.DEBUG,
+        format=<span style="color: #CD5555">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span>,
+        datefmt=<span style="color: #CD5555">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span>)
 </pre></div>
 </section>
 

@@ -521,7 +521,7 @@ and <span class="math">\(\Delta t =0.8\)</span> we get</p>
 \[\begin{split}u^1 &amp;= AI=0.0298245614035,\\
 u^2 &amp;= Au^1= 0.00889504462912,\\
 u^3 &amp;=Au^2= 0.00265290804728\end{split}\]</div>
-<p>Comparison of these manual calculations with the result of the
+<span class="target" id="index-7"></span><p id="index-8">Comparison of these manual calculations with the result of the
 <code class="docutils literal"><span class="pre">solver</span></code> function is carried out in the function</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_solver_three_steps</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Compare three steps with known manual computations.&quot;&quot;&quot;</span>
@@ -536,7 +536,7 @@ u^3 &amp;=Au^2= 0.00265290804728\end{split}\]</div>
 
     <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-15</span>  <span class="c"># tolerance for comparing floats</span>
     <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">u_by_hand</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="n">success</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="n">tol</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="n">tol</span>
     <span class="k">assert</span> <span class="n">success</span>
 </pre></div>
 </div>
@@ -558,6 +558,17 @@ in program abortion (due to an <code class="docutils literal"><span class="pre">
 the test failed.</li>
 </ul>
 </div></blockquote>
+<p>A typical <code class="docutils literal"><span class="pre">assert</span></code> statement is to check that a computed result <code class="docutils literal"><span class="pre">c</span></code>
+equals the expected value <code class="docutils literal"><span class="pre">e</span></code>: <code class="docutils literal"><span class="pre">assert</span> <span class="pre">c</span> <span class="pre">==</span> <span class="pre">e</span></code>. However, since real
+numbers are stored in a computer using only 64 units, most numbers
+will feature a small rounding error, typically of size <span class="math">\(10^{-16}\)</span>.
+That is, real numbers on a computer have finite precision. When doing
+arithmetics with finite precision numbers, the rounding errors may
+accumulate or not, depending on the algorithm.  It does not make sense
+to test <code class="docutils literal"><span class="pre">c</span> <span class="pre">==</span> <span class="pre">e</span></code>, since a small rounding error will cause the test to
+fail. Instead, we use an equality with <em>tolerance</em> <code class="docutils literal"><span class="pre">tol</span></code>: <code class="docutils literal"><span class="pre">abs(e</span> <span class="pre">-</span> <span class="pre">c)</span>
+<span class="pre">&lt;</span> <span class="pre">tol</span></code>. The <code class="docutils literal"><span class="pre">test_solver_three_steps</span></code> functions applies this type of
+test with a tolerance <span class="math">\(01^{-15}\)</span>.</p>
 <p>The main program can routinely run the verification test prior to
 solving the real problem:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">test_solver_three_steps</span><span class="p">()</span>
@@ -578,7 +589,7 @@ found in the file <a class="reference external" href="http://tinyurl.com/ofkw6kc
 position to compare the computed <span class="math">\(u^n\)</span> values in the <code class="docutils literal"><span class="pre">u</span></code> array with
 the exact <span class="math">\(u\)</span> values at the mesh points, in order to study the error
 in the numerical solution.</p>
-<p id="index-7">A natural way to compare the exact and discrete solutions is to
+<p id="index-9">A natural way to compare the exact and discrete solutions is to
 calculate their difference as a mesh function for the error:</p>
 <div class="math" id="eq-auto8">
 \[\tag{46}
@@ -597,7 +608,7 @@ the difference of two mesh functions.</p>
 </div>
 <p>Note that the mesh functions <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">u_e</span></code> are represented by arrays
 and associated with the points in the array <code class="docutils literal"><span class="pre">t</span></code>.</p>
-<span class="target" id="index-8"></span><span class="target" id="index-9"></span><div class="admonition-array-arithmetics admonition" id="index-10">
+<span class="target" id="index-10"></span><span class="target" id="index-11"></span><div class="admonition-array-arithmetics admonition" id="index-12">
 <p class="first admonition-title">Array arithmetics</p>
 <p>The last statements</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">u_e</span> <span class="o">=</span> <span class="n">u_exact</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
@@ -620,7 +631,7 @@ arithmetics is known as <em>vectorization</em>.</p>
 </div>
 <div class="section" id="computing-the-norm-of-the-error-mesh-function">
 <span id="decay-computing-error-norm"></span><h2>Computing the norm of the error mesh function<a class="headerlink" href="#computing-the-norm-of-the-error-mesh-function" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-11"></span><p id="index-12">Instead of working with the error <span class="math">\(e^n\)</span> on the entire mesh, we
+<span class="target" id="index-13"></span><p id="index-14">Instead of working with the error <span class="math">\(e^n\)</span> on the entire mesh, we
 often want a single number expressing the size of the error.
 This is obtained by taking the norm of the error function.</p>
 <p>Let us first define norms of a function <span class="math">\(f(t)\)</span>
@@ -653,7 +664,7 @@ the function.</p>
 <p>with <span class="math">\(p\)</span> real. In particular,
 <span class="math">\(p=1\)</span> corresponds to the <span class="math">\(L^1\)</span> norm above while <span class="math">\(p=\infty\)</span> is the
 <span class="math">\(L^\infty\)</span> norm.</p>
-<span class="target" id="index-13"></span><span class="target" id="index-14"></span><p id="index-15">Numerical computations involving mesh functions need corresponding norms.
+<span class="target" id="index-15"></span><span class="target" id="index-16"></span><p id="index-17">Numerical computations involving mesh functions need corresponding norms.
 Given a set of function values, <span class="math">\(f^n\)</span>, and some associated mesh points, <span class="math">\(t_n\)</span>,
 a numerical integration rule can be used to calculate the <span class="math">\(L^2\)</span> and
 <span class="math">\(L^1\)</span> norms defined above. Imagining that the mesh function is extended
@@ -720,7 +731,7 @@ norm <span class="xref std std-ref">(51)</span> or the max norm <span class="mat
 <a class="reference internal" href="#eq-decay-norms-vl2"><span class="std std-ref">(54)</span></a>-<a class="reference internal" href="#eq-decay-norms-vlinf"><span class="std std-ref">(56)</span></a> are also much used
 in numerical computations, so it is important to know the different
 norms and the relations between them.</p>
-<p id="index-16">A single number that expresses the size of the numerical error
+<p id="index-18">A single number that expresses the size of the numerical error
 will be taken as <span class="math">\(||e^n||_{\ell^2}\)</span> and called <span class="math">\(E\)</span>:</p>
 <div class="math" id="eq-decay-e">
 \[\tag{57}
@@ -733,7 +744,7 @@ E = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}\]</div>
 of an array. Also the <code class="docutils literal"><span class="pre">sqrt</span></code> function is from <code class="docutils literal"><span class="pre">numpy</span></code> and computes the
 square root of each element in the array argument.</p>
 <div class="section" id="scalar-computing">
-<span id="index-17"></span><h3>Scalar computing<a class="headerlink" href="#scalar-computing" title="Permalink to this headline">¶</a></h3>
+<span id="index-19"></span><h3>Scalar computing<a class="headerlink" href="#scalar-computing" title="Permalink to this headline">¶</a></h3>
 <p>Instead of doing array computing <code class="docutils literal"><span class="pre">sqrt(dt*sum(e**2))</span></code> we can compute with
 one element at a time:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>     <span class="c"># length of u array (alt: u.size)</span>
@@ -801,7 +812,7 @@ acronym for the method name (FE, BE, or CN):</p>
 <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_</span><span class="si">%g</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">theta2name</span><span class="p">[</span><span class="n">theta</span><span class="p">],</span> <span class="n">dt</span><span class="p">))</span>
 </pre></div>
 </div>
-<span class="target" id="index-18"></span><span class="target" id="index-19"></span><span class="target" id="index-20"></span><p id="index-21">The <code class="docutils literal"><span class="pre">explore</span></code> function stores the plot in two different image file formats:
+<span class="target" id="index-20"></span><span class="target" id="index-21"></span><span class="target" id="index-22"></span><p id="index-23">The <code class="docutils literal"><span class="pre">explore</span></code> function stores the plot in two different image file formats:
 PNG and PDF. The PNG format is suitable for
 being included in HTML documents, while the PDF format provides
 higher quality for LaTeX (i.e., pdfLaTeX) documents.
@@ -864,8 +875,8 @@ scheme from this visual point of view.</p>
 <span id="decay-fig-cn1"></span><a class="reference internal image-reference" href="_images/CN1.png"><img alt="_images/CN1.png" src="_images/CN1.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text"><em>The Crank-Nicolson scheme for two values of the time step</em></span></p>
 </div>
-<span class="target" id="index-22"></span><div class="section" id="combining-plot-files">
-<span id="index-23"></span><h3>Combining plot files<a class="headerlink" href="#combining-plot-files" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-24"></span><div class="section" id="combining-plot-files">
+<span id="index-25"></span><h3>Combining plot files<a class="headerlink" href="#combining-plot-files" title="Permalink to this headline">¶</a></h3>
 <p>Mounting two PNG files beside each other, as done in Figures
 <a class="reference internal" href="#decay-fig-fe1"><span class="std std-ref">The Forward Euler scheme for two values of the time step</span></a>-<a class="reference internal" href="#decay-fig-cn1"><span class="std std-ref">The Crank-Nicolson scheme for two values of the time step</span></a>, is easily carried out by the
 <a class="reference external" href="http://www.imagemagick.org/script/montage.php">montage</a> program
@@ -882,7 +893,7 @@ the vertical direction. A series of image files to be combined are then listed,
 with the name of the resulting combined image, here <code class="docutils literal"><span class="pre">FE1.png</span></code> at the end.
 The <code class="docutils literal"><span class="pre">convert</span> <span class="pre">-trim</span></code> command removes surrounding white areas in the figure
 (an operation usually known as <em>cropping</em> in image manipulation programs).</p>
-<span class="target" id="index-24"></span><span class="target" id="index-25"></span><p id="index-26">For LaTeX reports it is not recommended to use <code class="docutils literal"><span class="pre">montage</span></code> and PNG files
+<span class="target" id="index-26"></span><span class="target" id="index-27"></span><p id="index-28">For LaTeX reports it is not recommended to use <code class="docutils literal"><span class="pre">montage</span></code> and PNG files
 as the result has too low resolution. Instead, plots should be made
 in the PDF format and combined using the <code class="docutils literal"><span class="pre">pdftk</span></code>, <code class="docutils literal"><span class="pre">pdfnup</span></code>, and <code class="docutils literal"><span class="pre">pdfcrop</span></code> tools
 (on Linux/Unix):</p>

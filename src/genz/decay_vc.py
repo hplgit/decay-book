@@ -25,7 +25,7 @@ def test_constant_solution():
     Test problem where u=u_const is the exact solution, to be
     reproduced (to machine precision) by any relevant method.
     """
-    def exact_solution(t):
+    def u_exact(t):
         return u_const
 
     def a(t):
@@ -39,7 +39,7 @@ def test_constant_solution():
     Nt = 4  # enough with a few steps
     u, t = solver(I=I, a=a, b=b, T=Nt*dt, dt=dt, theta=theta)
     print u
-    u_e = exact_solution(t)
+    u_e = u_exact(t)
     difference = abs(u_e - u).max()  # max deviation
     tol = 1E-14
     assert difference < tol
@@ -49,25 +49,66 @@ def test_linear_solution():
     Test problem where u=c*t+I is the exact solution, to be
     reproduced (to machine precision) by any relevant method.
     """
-    def exact_solution(t):
+    def u_exact(t):
         return c*t + I
 
     def a(t):
         return t**0.5  # can be arbitrary
 
     def b(t):
-        return c + a(t)*exact_solution(t)
+        return c + a(t)*u_exact(t)
 
     theta = 0.4; I = 0.1; dt = 0.1; c = -0.5
     T = 4
     Nt = int(T/dt)  # no of steps
     u, t = solver(I=I, a=a, b=b, T=Nt*dt, dt=dt, theta=theta)
-    u_e = exact_solution(t)
+    u_e = u_exact(t)
     difference = abs(u_e - u).max()  # max deviation
     print difference
     tol = 1E-14  # depends on c!
     assert difference < tol
 
+def test_convergence_rates():
+    # Create a manufactured solution with sympy
+    import sympy as sym
+    t = sym.symbols('t')
+    u_e = sym.sin(t)*sym.exp(-2*t)
+    a = t**2
+    b = sym.diff(u_e, t) + a*u_exact
+
+    # Turn sympy expressions into Python function
+    u_exact = sym.lambdify([t], u_e, modules='numpy')
+    a = sym.lambdify([t], a, modules='numpy')
+    b = sym.lambdify([t], b, modules='numpy')
+
+    def compute_rates(dt_values, E_values):
+        m = len(dt_values)
+        r = [log(E_values[i-1]/E_values[i])/
+             log(dt_values[i-1]/dt_values[i])
+             for i in range(1, m, 1)]
+        # Round to two decimals
+        r = [round(r_, 2) for r_ in r]
+        return r
+
+    dt_values = [0.1*2**(-i) for i in range(7)]
+    I = u_exact(0)
+
+    for theta in (0, 1, 0.5):
+        E_values = []
+        for dt in dt_values:
+            u, t = solver(I=I, a=a, b=b, T=6, dt=dt, theta=theta)
+            u_e = u_exact(t)
+            e = u_e - u
+            E = sqrt(dt*sum(e**2))
+            E_values.append(E)
+        r = compute_rates(dt_values, E_values)
+        print 'theta=%g, r: %s' % (theta, r)
+        expected_rate = 2 if theta == 0.5 else 1
+        tol = 0.1
+        diff = abs(expected_rate - r[-1])
+        assert diff < tol
+
 if __name__ == '__main__':
-    #test_constant_solution()
+    test_constant_solution()
     test_linear_solution()
+    test_convergence_rates()

@@ -1,1 +1,11 @@
 .. !split
+
+Bibliography
+============
+
+.. [Ref1]
+   **W. Gander, M. J. Gander and F. Kwok**. *Scientific Computing - An Introducting Using Maple and MATLAB*,
+   *Texts in Computational Science and Engineering*,
+   Springer,
+   2015.
+

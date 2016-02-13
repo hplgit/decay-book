@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Analysis of exponential decay models">
-<meta name="keywords" content="stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence">
+<meta name="keywords" content="stability,amplification factor,A-stable methods,L-stable methods,interactive Python,error amplification factor,error global,consistency,stability,convergence,Monte Carlo simulation,uncertainty quantification">
 
 <title>Analysis of exponential decay models</title>
 
@@ -20,6 +20,13 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
 </style>
 
 
@@ -65,16 +72,32 @@ code { color: inherit; background-color: transparent; }
                2,
                None,
                '___sec13'),
-              ('Exercises', 1, None, '___sec14'),
-              ('Exercise 1: Visualize the accuracy of finite differences',
+              ('Various types of errors in a differential equation model',
+               1,
+               None,
+               '___sec14'),
+              ('Model errors', 2, None, '___sec15'),
+              ('Data errors', 2, None, '___sec16'),
+              ('Discretization errors', 2, None, '___sec17'),
+              ('Rounding errors', 2, None, '___sec18'),
+              ('Discussion of the size of various errors',
+               2,
+               None,
+               '___sec19'),
+              ('Exercises', 1, None, '___sec20'),
+              ('Problem 1: Visualize the accuracy of finite differences',
                2,
                'decay:analysis:exer:fd:exp:plot',
                'decay:analysis:exer:fd:exp:plot'),
-              ('Exercise 2: Explore the $\\theta$-rule for exponential growth',
+              ('Problem 2: Explore the $\\theta$-rule for exponential growth',
                2,
                'decay:analysis:exer:growth',
                'decay:analysis:exer:growth'),
-              ('Bibliography', 1, None, '___sec17')]}
+              ('Problem 3: Explore rounding errors in numerical calculus',
+               2,
+               'decay:analysis:exer:rounding',
+               'decay:analysis:exer:rounding'),
+              ('Bibliography', 1, None, '___sec24')]}
 end of tocinfo -->
 
 <body>
@@ -116,16 +139,37 @@ $$
     </button>
     <a class="navbar-brand" href="analysis.html">Analysis of exponential decay models</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec0" style="font-size: 80%;">Experimental investigations</a></li>
-     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec3" style="font-size: 80%;">Stability</a></li>
-     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec6" style="font-size: 80%;">Accuracy</a></li>
-     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec14" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">Bibliography</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec0" style="font-size: 80%;"><b>Experimental investigations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Discouraging numerical solutions</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Detailed experiments</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec3" style="font-size: 80%;"><b>Stability</b></a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exact numerical solution</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Stability properties derived from the amplification factor</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec6" style="font-size: 80%;"><b>Accuracy</b></a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Visual comparison of amplification factors</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Series expansion of amplification factors</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The ratio of numerical and exact amplification factors</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#decay:analysis:gobal:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The global error at a point</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#decay:analysis:gobal:error_int" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integrated error</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#decay:analysis:trunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Truncation error</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Consistency, stability, and convergence</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec14" style="font-size: 80%;"><b>Various types of errors in a differential equation model</b></a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Model errors</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Data errors</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Discretization errors</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Rounding errors</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Discussion of the size of various errors</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#___sec20" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#decay:analysis:exer:fd:exp:plot" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 1: Visualize the accuracy of finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#decay:analysis:exer:growth" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 2: Explore the \( \theta \)-rule for exponential growth</a></li>
+     <!-- navigation toc: --> <li><a href="._analysis001.html#decay:analysis:exer:rounding" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 3: Explore rounding errors in numerical calculus</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec24" style="font-size: 80%;"><b>Bibliography</b></a></li>
 
         </ul>
       </li>
@@ -141,12 +185,19 @@ $$
 <a name="part0002"></a>
 <!-- !split -->
 
-<h1 id="___sec17">Bibliography </h1>
+<h1 id="___sec24">Bibliography </h1>
 
 <p>
 <!-- begin bibliography -->
 
-<p>
+<ol>
+ <li> <div id="Gander_2015"></div> <b>W. Gander, M. J. Gander and F. Kwok</b>. 
+    <em>Scientific Computing - An Introducting Using Maple and MATLAB</em>,
+    <em>Texts in Computational Science and Engineering</em>,
+    Springer,
+    2015.</li>
+</ol>
+
 <!-- end bibliography -->
 
 <p>

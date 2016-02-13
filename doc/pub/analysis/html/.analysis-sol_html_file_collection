@@ -5,6 +5,10 @@ fig-analysis/FE4c.png
 fig-analysis/osc_region_FE.png
 fig-analysis/osc_region_CN.png
 fig-analysis/A_factors.png
+fig-analysis/model_errors_u.png
+fig-analysis/model_errors_e.png
+fig-analysis/data_errors.png
+fig-analysis/numerical_errors.png
 fig-analysis/decay_plot_fd_error.png
 fig-analysis/exponential_growth_demo.png
 fig-analysis/A_growth.png

@@ -125,12 +125,16 @@ centered differences:</p>
 \[\tag{58}
 d^n = [D_{2t}u]^n =
     \frac{u^{n+1}-u^{n-1}}{2\Delta t},\quad n=1,\ldots,N_t-1{\thinspace .}\]</div>
-<p>At the end points we use forward and backward differences:</p>
+<p>At the end points we may use forward and backward differences:</p>
 <div class="math">
 \[d^0 = [D_t^+u]^n = \frac{u^{1}-u^{0}}{\Delta t},\]</div>
 <p>and</p>
 <div class="math">
 \[d^{N_t} = [D_t^-u]^n = \frac{u^{N_t}-u^{N_t-1}}{\Delta t}{\thinspace .}\]</div>
+<p>(Note that the formulas for the derivative at the end points are
+less accurate than the formula used for the internal mesh points.
+We can easily employ equally accurate finite differences at the end
+points, but these involve three instead of two points.)</p>
 <p><strong>a)</strong>
 Write a function
 <code class="docutils literal"><span class="pre">differentiate(u,</span> <span class="pre">dt)</span></code> that returns the discrete derivative <span class="math">\(d^n\)</span> of the

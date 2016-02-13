@@ -14,7 +14,7 @@ def solver(I, a, T, dt, theta):
         u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
     return u, t
 
-def exact_solution(t, I, a):
+def u_exact(t, I, a):
     return I*exp(-a*t)
 
 def explore(I, a, T, dt, theta=0.5, makeplot=True):
@@ -23,13 +23,13 @@ def explore(I, a, T, dt, theta=0.5, makeplot=True):
     and plot the numerical and exact solutions (if makeplot=True).
     """
     u, t = solver(I, a, T, dt, theta)    # Numerical solution
-    u_e = exact_solution(t, I, a)
+    u_e = u_exact(t, I, a)
     e = u_e - u
     E = sqrt(dt*sum(e**2))
     if makeplot:
         figure()                         # create new plot
         t_e = linspace(0, T, 1001)       # fine mesh for u_e
-        u_e = exact_solution(t_e, I, a)
+        u_e = u_exact(t_e, I, a)
         plot(t,   u,   'r--o')           # red dashes w/circles
         plot(t_e, u_e, 'b-')             # blue line for exact sol.
         legend(['numerical', 'exact'])

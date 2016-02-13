@@ -13,7 +13,7 @@ def solver(I, a, T, dt, theta):
         u[n+1] = (1 - (1-theta)*a*dt)/(1 + theta*dt*a)*u[n]
     return u, t
 
-def exact_solution(t, I, a):
+def u_exact(t, I, a):
     return I*exp(-a*t)
 
 from matplotlib.pyplot import *
@@ -23,7 +23,7 @@ def plot_numerical_and_exact(theta, I, a, T, dt):
     u, t = solver(I=I, a=a, T=T, dt=dt, theta=theta)
 
     t_e = linspace(0, T, 1001)        # fine mesh for u_e
-    u_e = exact_solution(t_e, I, a)
+    u_e = u_exact(t_e, I, a)
 
     plot(t,   u,   'r--o',            # red dashes w/circles
          t_e, u_e, 'b-')              # blue line for exact sol.
@@ -46,7 +46,7 @@ def test_solver_three_steps():
 
     tol = 1E-15  # tolerance for comparing floats
     diff = abs(u - u_by_hand).max()
-    success = diff <= tol
+    success = diff < tol
     assert success
 
 test_solver_three_steps()

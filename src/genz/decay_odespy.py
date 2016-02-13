@@ -13,15 +13,14 @@ t_mesh = np.linspace(0, Nt*dt, Nt+1)
 
 solvers = [odespy.RK2(f),
            odespy.RK3(f),
-           odespy.RK4(f),]
+           odespy.RK4(f),
+           odespy.BackwardEuler(
+               f, f_is_linear=True, jac=lambda u, t: -a)]
 
-# BackwardEuler must use Newton solver to converge
-# (Picard is default and leads to divergence)
-solvers.append(
-    odespy.BackwardEuler(f, nonlinear_solver='Newton'))
-# Or tell BackwardEuler that it is a linear problem
-solvers[-1] = odespy.BackwardEuler(f, f_is_linear=True,
-                                   jac=lambda u, t: -a)]
+# (If f_is_linear is not specified in BackwardEuler, a
+# nonlinear solver is invoked and this must be Newton
+# (nonlinear_solver='Newton') since the default choice,
+# nonlinear_solver='Picard', diverges in this problem.)
 
 legends = []
 for solver in solvers:

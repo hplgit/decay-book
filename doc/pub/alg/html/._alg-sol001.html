@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Algorithms and implementations for exponential decay models">
-<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization">
+<meta name="keywords" content="decay ODE,exponential decay,mesh,grid,mesh function,finite differences,forward difference,finite differences forward,difference equation,discrete equation,algebraic equation,finite difference scheme,Forward Euler scheme,backward difference,finite differences backward,backward scheme, 1-step,Backward Euler scheme,Crank-Nicolson scheme,centered difference,finite differences centered,averaging arithmetic,weighted average,theta-rule,$\theta$-rule,time step,finite difference operator notation,operator notation, finite differences,directory,folder,doc strings,printf format,format string syntax (Python),plotting curves,visualizing curves,test function,unit testing,representative (mesh function),array arithmetics,array computing,vectorization,continuous function norms,norm continuous,discrete function norms,mesh function norms,norm discrete (mesh function),error norms,scalar computing,PNG plot,PDF plot,EPS plot,viewing graphics files,cropping images,array arithmetics,array computing,vectorization">
 
 <title>Algorithms and implementations for exponential decay models</title>
 
@@ -20,6 +20,13 @@ Automatically generated HTML file from DocOnce source
 <style type="text/css">
 /* Let inline verbatim have the same color as the surroundings */
 code { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
 </style>
 
 
@@ -175,15 +182,58 @@ $$
     </button>
     <a class="navbar-brand" href="alg-sol.html">Algorithms and implementations for exponential decay models</a>
   </div>
+
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="#decay:basics" style="font-size: 80%;">Finite difference methods</a></li>
-     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:impl1" style="font-size: 80%;">Implementation</a></li>
-     <!-- navigation toc: --> <li><a href="._alg-sol003.html#___sec37" style="font-size: 80%;">Exercises</a></li>
-     <!-- navigation toc: --> <li><a href="._alg-sol004.html#___sec45" style="font-size: 80%;">Bibliography</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:basics" style="font-size: 80%;"><b>Finite difference methods</b></a></li>
+     <!-- navigation toc: --> <li><a href="#decay:model" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;A basic model for exponential decay</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The exact solution</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A complete problem formulation</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:schemes:FE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Forward Euler scheme</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 1: Discretizing the domain</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 2: Fulfilling the equation at discrete time points</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 3: Replacing derivatives by finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Step 4: Formulating a recursive algorithm</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interpretation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing with the recursive formula</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:schemes:BE" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Backward Euler scheme</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:schemes:CN" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The Crank-Nicolson scheme</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:schemes:theta" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The unifying \( \theta \)-rule</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Constant time step</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:fd:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Mathematical derivation of finite difference formulas</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The forward difference</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The backward difference</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The centered difference</a></li>
+     <!-- navigation toc: --> <li><a href="#decay:fd:op" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Compact operator notation for finite differences</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:impl1" style="font-size: 80%;"><b>Implementation</b></a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec21" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computer language: Python</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:py1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Making a solver function</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:py2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Integer division</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Doc strings</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec25" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Formatting numbers</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec26" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Running the program</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec27" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Plotting the solution</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Verifying the implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec29" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running a few algorithmic steps by hand</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:computing:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the numerical error as a mesh function</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#decay:computing:error:norm" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Computing the norm of the error mesh function</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec32" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scalar computing</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec33" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Experiments with computing and plotting</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec34" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combining plot files</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec35" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plotting with SciTools</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol002.html#___sec36" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Memory-saving implementation</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#___sec37" style="font-size: 80%;"><b>Exercises</b></a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:meshfunc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Exercise 1: Define a mesh function and visualize it</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#___sec39" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remarks</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:dudt" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 2: Differentiate a function</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:intdiv" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 3: Experiment with divisions</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:decay1err" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 4: Experiment with wrong computations</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:plot:error" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 5: Plot the error function</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol003.html#decay:exer:inexact:output" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Problem 6: Change formatting of numbers and debug</a></li>
+     <!-- navigation toc: --> <li><a href="._alg-sol004.html#___sec45" style="font-size: 80%;"><b>Bibliography</b></a></li>
 
         </ul>
       </li>
@@ -232,7 +282,7 @@ really work correctly.
 <p>
 This section explains the basic ideas of finite difference methods
 via the simple ordinary differential equation \( u^{\prime}=-au \).
-Emphasis is put on the reasoning behind problem discretizing and
+Emphasis is put on the reasoning around discretization principles and
 introduction of key concepts such as mesh, mesh function,
 finite difference approximations, averaging in a mesh,
 derivation of algorithms, and discrete operator notation.
@@ -362,9 +412,9 @@ we often place a subscript e on the exact solution, as in \( \uex(t_n) \).
 Figure <a href="#decay:fdu:e">1</a> shows the \( t_n \) and \( u^n \) points for \( n=0,1,\ldots,N_t=7 \) as well as \( \uex(t) \) as the dashed line.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:fdu:e"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 1:  Time mesh with discrete solution values at points and a dashed line indicating the true solution. <div id="decay:fdu:e"></div> </p></center>
+<center><p class="caption">Figure 1:  Time mesh with discrete solution values at points and a dashed line indicating the true solution.  <!-- caption label: decay:fdu:e --> </p></center>
 <p><img src="fig-alg/fdm_u_ue.png" align="bottom" width=600></p>
 </center>
 
@@ -389,9 +439,9 @@ u(t) \approx u^n + \frac{u^{n+1}-u^n}{t_{n+1}-t_n}(t - t_n)\tp
 $$
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:fdu:ei"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 2:  Linear interpolation between the discrete solution values (dashed curve is exact solution). <div id="decay:fdu:ei"></div> </p></center>
+<center><p class="caption">Figure 2:  Linear interpolation between the discrete solution values (dashed curve is exact solution).  <!-- caption label: decay:fdu:ei --> </p></center>
 <p><img src="fig-alg/fdm_u_uei.png" align="bottom" width=600></p>
 </center>
 
@@ -475,9 +525,9 @@ the approximate values of \( u \) at
 the mesh points: \( u^n \), \( n=1,2,\ldots,N_t \).
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:sketch:FE"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 3:  Illustration of a forward difference. <div id="decay:sketch:FE"></div> </p></center>
+<center><p class="caption">Figure 3:  Illustration of a forward difference.  <!-- caption label: decay:sketch:FE --> </p></center>
 <p><img src="fig-alg/fd_forward.png" align="bottom" width=400></p>
 </center>
 
@@ -596,9 +646,9 @@ Backward Euler difference.
 Figure <a href="#decay:sketch:BE">4</a> explains the idea.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:sketch:BE"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 4:  Illustration of a backward difference. <div id="decay:sketch:BE"></div> </p></center>
+<center><p class="caption">Figure 4:  Illustration of a backward difference.  <!-- caption label: decay:sketch:BE --> </p></center>
 <p><img src="fig-alg/fd_backward.png" align="bottom" width=400></p>
 </center>
 
@@ -671,9 +721,9 @@ in the center of the interval \( [t_{n},t_{n+1}] \) or at the end points.
 We shall later see that it is more accurate at the center point.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="decay:sketch:CN"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 5:  Illustration of a centered difference. <div id="decay:sketch:CN"></div> </p></center>
+<center><p class="caption">Figure 5:  Illustration of a centered difference.  <!-- caption label: decay:sketch:CN --> </p></center>
 <p><img src="fig-alg/fd_centered_CN.png" align="bottom" width=400></p>
 </center>
 
@@ -1090,11 +1140,10 @@ is more accurate than the forward and backward differences for small
 <p>
 Finite difference formulas can be tedious to write and read,
 especially for differential equations with many terms and many
-derivatives. To save space and help the reader spot
-the nature of the difference approximations, we introduce a
-compact notation. For a function \( u(t) \),
-a forward difference approximation is denoted
-by the \( D_t^+ \) operator and written as
+derivatives. To save space and help the reader spot the nature of the
+difference approximations, we introduce a compact notation. For a
+function \( u(t) \), a forward difference approximation is denoted by the
+\( D_t^+ \) operator and written as
 
 $$
 \begin{equation}
@@ -1104,15 +1153,14 @@ $$
 \end{equation}
 $$
 
-The notation consists of an operator that approximates
-differentiation with respect to an independent variable, here \( t \).
-The operator is built of the symbol \( D \), with the
-independent variable as subscript
-and a superscript denoting the type of difference. The superscript \( \,{}^+ \)
-indicates a forward difference.
-We place square brackets around the operator and the function it operates
-on and specify the mesh point, where the operator is acting, by
-a superscript after the closing bracket.
+The notation consists of an operator that approximates differentiation
+with respect to an independent variable, here \( t \).  The operator is
+built of the symbol \( D \), with the independent variable as subscript
+and a superscript denoting the type of difference. The superscript
+\( \,{}^+ \) indicates a forward difference.  We place square brackets
+around the operator and the function it operates on and specify the
+mesh point, where the operator is acting, by a superscript after the
+closing bracket.
 
 <p>
 The corresponding operator notation for a centered difference and

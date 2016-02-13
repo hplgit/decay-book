@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Software engineering with exponential decay models">
-<meta name="keywords" content="refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,test function,nose,pytest,unit testing,software testing nose,software testing pytest,test function,software testing test function,relative differences,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability,relative differences">
 
 <title>Software engineering with exponential decay models</title>
 
@@ -111,9 +111,18 @@ div { text-align: justify; text-justify: inter-word; }
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec17'),
-              ('Positional command-line arguments', 2, None, '___sec18'),
-              ('Option-value pairs on the command line', 2, None, '___sec19'),
+              ('Command-line arguments',
+               2,
+               'softeng1:basic:UI:cmlargs',
+               'softeng1:basic:UI:cmlargs'),
+              ('Positional command-line arguments',
+               2,
+               'softeng1:basic:UI:pos_cml',
+               'softeng1:basic:UI:pos_cml'),
+              ('Option-value pairs on the command line',
+               2,
+               'softeng1:basic:UI:options_cml',
+               'softeng1:basic:UI:options_cml'),
               ('Creating a graphical web user interface',
                2,
                None,
@@ -121,9 +130,18 @@ div { text-align: justify; text-justify: inter-word; }
               ('Making a compute function', 3, None, '___sec21'),
               ('Generating the user interface', 3, None, '___sec22'),
               ('Running the web application', 3, None, '___sec23'),
-              ('Tests for verifying implementations', 1, None, '___sec24'),
-              ('Doctests', 2, None, '___sec25'),
-              ('Unit tests and test functions', 2, None, '___sec26'),
+              ('Tests for verifying implementations',
+               1,
+               'softeng1:verify',
+               'softeng1:verify'),
+              ('Doctests',
+               2,
+               'softeng1:verify:doctests',
+               'softeng1:verify:doctests'),
+              ('Unit tests and test functions',
+               2,
+               'softeng1:verify:pytest',
+               'softeng1:verify:pytest'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
@@ -216,7 +234,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'softeng1:exer:doctest1',
                'softeng1:exer:doctest1'),
-              ('Problem 5: Experiment with tolerances in comparisons',
+              ('Problem 5: Investigate the size of tolerances in comparisons',
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
@@ -274,26 +292,26 @@ $$
 <p>
 Teaching material on scientific computing has traditionally been very
 focused on the mathematics and the applications, while details on how
-the computer is programmed to solve the problems have received little attention.
-Many end up writing as simple programs as possible, without being
-aware of much useful computer science technology that would increase
-the fun, efficiency, and reliability of the their scientific computing
-activities.
+the computer is programmed to solve the problems have received little
+attention.  Many end up writing as simple programs as possible,
+without being aware of much useful computer science technology that
+would increase the fun, efficiency, and reliability of the their
+scientific computing activities.
 
 <p>
-This chapter demonstrates a series of good practices and tools
-from modern computer science, using the simple mathematical problem
-\( u^{\prime}=-au \), \( u(0)=I \), such that we minimize the
-mathematical details and can go more in depth with implementations.
-The goal is to increase the technological
-quality of computer programming and make it match the more
-well-established quality of the mathematics of scientific computing.
+This chapter demonstrates a series of good practices and tools from
+modern computer science, using the simple mathematical problem
+\( u^{\prime}=-au \), \( u(0)=I \), such that we minimize the mathematical
+details and can go more in depth with implementations.  The goal is to
+increase the technological quality of computer programming and make it
+match the more well-established quality of the mathematics of
+scientific computing.
 
 <p>
-The conventions and techniques outlined here will save you a lot of time
-when you incrementally extend software over time from simpler to more
-complicated problems. In particular, you will benefit from
-many good habits:
+The conventions and techniques outlined here will save you a lot of
+time when you incrementally extend software over time from simpler to
+more complicated problems. In particular, you will benefit from many
+good habits:
 
 <ul>
  <li> new code is added in a modular fashion to a library (modules),</li>
@@ -521,9 +539,9 @@ refactoring code and increase the use of functions after initial
 experimentation.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="softeng1:ipynb"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 1:  Experimental code in a notebook. <div id="softeng1:ipynb"></div> </p></center>
+<center><p class="caption">Figure 1:  Experimental code in a notebook.  <!-- caption label: softeng1:ipynb --> </p></center>
 <p><img src="fig-softeng/ipynb_flat.png" align="bottom" width=700></p>
 </center>
 
@@ -1038,9 +1056,9 @@ Figure <a href="#softeng1:basic:docstring:fig">2</a> provides an example of what
 the above doc strings look like when Sphinx has transformed them to HTML.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="softeng1:basic:docstring:fig"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 2:  Example on Sphinx API manual in HTML. <div id="softeng1:basic:docstring:fig"></div> </p></center>
+<center><p class="caption">Figure 2:  Example on Sphinx API manual in HTML.  <!-- caption label: softeng1:basic:docstring:fig --> </p></center>
 <p><img src="fig-softeng/selfdoc_numpy.png" align="bottom" width=700></p>
 </center>
 
@@ -1072,10 +1090,12 @@ module:
 
 <!-- code=python (!bc pypro) typeset with pygments style "perldoc" -->
 <div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">logging</span>
+<span style="color: #228B22"># Configure logger</span>
 logging.basicConfig(
     filename=<span style="color: #CD5555">&#39;myprog.log&#39;</span>, filemode=<span style="color: #CD5555">&#39;w&#39;</span>, level=logging.WARNING,
     format=<span style="color: #CD5555">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span>,
     datefmt=<span style="color: #CD5555">&#39;%m/%d/%Y %I:%M:%S %p&#39;</span>)
+<span style="color: #228B22"># Perform logging</span>
 logging.info(<span style="color: #CD5555">&#39;Here is some general info.&#39;</span>)
 logging.warning(<span style="color: #CD5555">&#39;Here is a warning.&#39;</span>)
 logging.debug(<span style="color: #CD5555">&#39;Here is some debugging info.&#39;</span>)
@@ -1131,13 +1151,7 @@ monitoring the simulation and for debugging it, respectively.
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
-<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">logging</span>
-logging.basicConfig(
-    filename=<span style="color: #CD5555">&#39;decay.log&#39;</span>, filemode=<span style="color: #CD5555">&#39;w&#39;</span>, level=logging.DEBUG,
-    format=<span style="color: #CD5555">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span>,
-    datefmt=<span style="color: #CD5555">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span>)
-
-<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solver_with_logging</span>(I, a, T, dt, theta):
+<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solver_with_logging</span>(I, a, T, dt, theta):
     <span style="color: #CD5555">&quot;&quot;&quot;Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.&quot;&quot;&quot;</span>
     dt = <span style="color: #658b00">float</span>(dt)               <span style="color: #228B22"># avoid integer division</span>
     Nt = <span style="color: #658b00">int</span>(<span style="color: #658b00">round</span>(T/dt))        <span style="color: #228B22"># no of time intervals</span>
@@ -1158,14 +1172,361 @@ logging.basicConfig(
                       (<span style="color: #B452CD">1</span> + theta*dt*a,
                        <span style="color: #658b00">str</span>(<span style="color: #658b00">type</span>(<span style="color: #B452CD">1</span> + theta*dt*a))[<span style="color: #B452CD">7</span>:-<span style="color: #B452CD">2</span>]))
     <span style="color: #8B008B; font-weight: bold">return</span> u, t
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">configure_basic_logger</span>():
+    logging.basicConfig(
+        filename=<span style="color: #CD5555">&#39;decay.log&#39;</span>, filemode=<span style="color: #CD5555">&#39;w&#39;</span>, level=logging.DEBUG,
+        format=<span style="color: #CD5555">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span>,
+        datefmt=<span style="color: #CD5555">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span>)
+
+<span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">sys</span>
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">read_command_line_positional</span>():
+    <span style="color: #8B008B; font-weight: bold">if</span> <span style="color: #658b00">len</span>(sys.argv) &lt; <span style="color: #B452CD">6</span>:
+        <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;Usage: %s I a T on/off BE/FE/CN dt1 dt2 dt3 ...&#39;</span> % \ 
+              sys.argv[<span style="color: #B452CD">0</span>]; sys.exit(<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># abort</span>
+
+    I = <span style="color: #658b00">float</span>(sys.argv[<span style="color: #B452CD">1</span>])
+    a = <span style="color: #658b00">float</span>(sys.argv[<span style="color: #B452CD">2</span>])
+    T = <span style="color: #658b00">float</span>(sys.argv[<span style="color: #B452CD">3</span>])
+
+    <span style="color: #228B22"># Name of schemes: BE (Backward Euler), FE (Forward Euler),</span>
+    <span style="color: #228B22"># CN (Crank-Nicolson)</span>
+    scheme = sys.argv[<span style="color: #B452CD">4</span>]
+    scheme2theta = {<span style="color: #CD5555">&#39;BE&#39;</span>: <span style="color: #B452CD">1</span>, <span style="color: #CD5555">&#39;CN&#39;</span>: <span style="color: #B452CD">0.5</span>, <span style="color: #CD5555">&#39;FE&#39;</span>: <span style="color: #B452CD">0</span>}
+    <span style="color: #8B008B; font-weight: bold">if</span> scheme <span style="color: #8B008B">in</span> scheme2theta:
+        theta = scheme2theta[scheme]
+    <span style="color: #8B008B; font-weight: bold">else</span>:
+        <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;Invalid scheme name:&#39;</span>, scheme; sys.exit(<span style="color: #B452CD">1</span>)
+
+    dt_values = [<span style="color: #658b00">float</span>(arg) <span style="color: #8B008B; font-weight: bold">for</span> arg <span style="color: #8B008B">in</span> sys.argv[<span style="color: #B452CD">5</span>:]]
+
+    <span style="color: #8B008B; font-weight: bold">return</span> I, a, T, theta, dt_values
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">define_command_line_options</span>():
+    <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">argparse</span>
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        <span style="color: #CD5555">&#39;--I&#39;</span>, <span style="color: #CD5555">&#39;--initial_condition&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+        default=<span style="color: #B452CD">1.0</span>, help=<span style="color: #CD5555">&#39;initial condition, u(0)&#39;</span>,
+        metavar=<span style="color: #CD5555">&#39;I&#39;</span>)
+    parser.add_argument(
+        <span style="color: #CD5555">&#39;--a&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>, default=<span style="color: #B452CD">1.0</span>,
+        help=<span style="color: #CD5555">&#39;coefficient in ODE&#39;</span>, metavar=<span style="color: #CD5555">&#39;a&#39;</span>)
+    parser.add_argument(
+        <span style="color: #CD5555">&#39;--T&#39;</span>, <span style="color: #CD5555">&#39;--stop_time&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+        default=<span style="color: #B452CD">1.0</span>, help=<span style="color: #CD5555">&#39;end time of simulation&#39;</span>,
+        metavar=<span style="color: #CD5555">&#39;T&#39;</span>)
+    parser.add_argument(
+        <span style="color: #CD5555">&#39;--scheme&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">str</span>, default=<span style="color: #CD5555">&#39;CN&#39;</span>,
+        help=<span style="color: #CD5555">&#39;FE, BE, or CN&#39;</span>)
+    parser.add_argument(
+        <span style="color: #CD5555">&#39;--dt&#39;</span>, <span style="color: #CD5555">&#39;--time_step_values&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+        default=[<span style="color: #B452CD">1.0</span>], help=<span style="color: #CD5555">&#39;time step values&#39;</span>,
+        metavar=<span style="color: #CD5555">&#39;dt&#39;</span>, nargs=<span style="color: #CD5555">&#39;+&#39;</span>, dest=<span style="color: #CD5555">&#39;dt_values&#39;</span>)
+    <span style="color: #8B008B; font-weight: bold">return</span> parser
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">read_command_line_argparse</span>():
+    parser = define_command_line_options()
+    args = parser.parse_args()
+    scheme2theta = {<span style="color: #CD5555">&#39;BE&#39;</span>: <span style="color: #B452CD">1</span>, <span style="color: #CD5555">&#39;CN&#39;</span>: <span style="color: #B452CD">0.5</span>, <span style="color: #CD5555">&#39;FE&#39;</span>: <span style="color: #B452CD">0</span>}
+    data = (args.I, args.a, args.T, scheme2theta[args.scheme],
+            args.dt_values)
+    <span style="color: #8B008B; font-weight: bold">return</span> data
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">experiment_compare_dt</span>(option_value_pairs=<span style="color: #658b00">False</span>):
+    I, a, T, theta, dt_values = \ 
+       read_command_line_argparse() <span style="color: #8B008B; font-weight: bold">if</span> option_value_pairs <span style="color: #8B008B; font-weight: bold">else</span> \ 
+       read_command_line_positional()
+
+    legends = []
+    <span style="color: #8B008B; font-weight: bold">for</span> dt <span style="color: #8B008B">in</span> dt_values:
+        u, t = solver(I, a, T, dt, theta)
+        plt.plot(t, u)
+        legends.append(<span style="color: #CD5555">&#39;dt=%g&#39;</span> % dt)
+    t_e = np.linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)       <span style="color: #228B22"># very fine mesh for u_e</span>
+    u_e = u_exact(t_e, I, a)
+    plt.plot(t_e, u_e, <span style="color: #CD5555">&#39;--&#39;</span>)
+    legends.append(<span style="color: #CD5555">&#39;exact&#39;</span>)
+    plt.legend(legends, loc=<span style="color: #CD5555">&#39;upper right&#39;</span>)
+    plt.title(<span style="color: #CD5555">&#39;theta=%g&#39;</span> % theta)
+    plotfile = <span style="color: #CD5555">&#39;tmp&#39;</span>
+    plt.savefig(plotfile + <span style="color: #CD5555">&#39;.png&#39;</span>);  plt.savefig(plotfile + <span style="color: #CD5555">&#39;.pdf&#39;</span>)
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">compute4web</span>(I, a, T, dt, theta=<span style="color: #B452CD">0.5</span>):
+    <span style="color: #CD5555">&quot;&quot;&quot;</span>
+<span style="color: #CD5555">    Run a case with the solver, compute error measure,</span>
+<span style="color: #CD5555">    and plot the numerical and exact solutions in a PNG</span>
+<span style="color: #CD5555">    plot whose data are embedded in an HTML image tag.</span>
+<span style="color: #CD5555">    &quot;&quot;&quot;</span>
+    u, t = solver(I, a, T, dt, theta)
+    u_e = u_exact(t, I, a)
+    e = u_e - u
+    E = np.sqrt(dt*np.sum(e**<span style="color: #B452CD">2</span>))
+
+    plt.figure()
+    t_e = np.linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)    <span style="color: #228B22"># fine mesh for u_e</span>
+    u_e = u_exact(t_e, I, a)
+    plt.plot(t,   u,   <span style="color: #CD5555">&#39;r--o&#39;</span>)
+    plt.plot(t_e, u_e, <span style="color: #CD5555">&#39;b-&#39;</span>)
+    plt.legend([<span style="color: #CD5555">&#39;numerical&#39;</span>, <span style="color: #CD5555">&#39;exact&#39;</span>])
+    plt.xlabel(<span style="color: #CD5555">&#39;t&#39;</span>)
+    plt.ylabel(<span style="color: #CD5555">&#39;u&#39;</span>)
+    plt.title(<span style="color: #CD5555">&#39;theta=%g, dt=%g&#39;</span> % (theta, dt))
+    <span style="color: #228B22"># Save plot to HTML img tag with PNG code as embedded data</span>
+    <span style="color: #8B008B; font-weight: bold">from</span> <span style="color: #008b45; text-decoration: underline">parampool.utils</span> <span style="color: #8B008B; font-weight: bold">import</span> save_png_to_str
+    html_text = save_png_to_str(plt, plotwidth=<span style="color: #B452CD">400</span>)
+
+    <span style="color: #8B008B; font-weight: bold">return</span> E, html_text
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">main_GUI</span>(I=<span style="color: #B452CD">1.0</span>, a=.<span style="color: #B452CD">2</span>, T=<span style="color: #B452CD">4.0</span>,
+             dt_values=[<span style="color: #B452CD">1.25</span>, <span style="color: #B452CD">0.75</span>, <span style="color: #B452CD">0.5</span>, <span style="color: #B452CD">0.1</span>],
+             theta_values=[<span style="color: #B452CD">0</span>, <span style="color: #B452CD">0.5</span>, <span style="color: #B452CD">1</span>]):
+    <span style="color: #228B22"># Build HTML code for web page. Arrange plots in columns</span>
+    <span style="color: #228B22"># corresponding to the theta values, with dt down the rows</span>
+    theta2name = {<span style="color: #B452CD">0</span>: <span style="color: #CD5555">&#39;FE&#39;</span>, <span style="color: #B452CD">1</span>: <span style="color: #CD5555">&#39;BE&#39;</span>, <span style="color: #B452CD">0.5</span>: <span style="color: #CD5555">&#39;CN&#39;</span>}
+    html_text = <span style="color: #CD5555">&#39;&lt;table&gt;\n&#39;</span>
+    <span style="color: #8B008B; font-weight: bold">for</span> dt <span style="color: #8B008B">in</span> dt_values:
+        html_text += <span style="color: #CD5555">&#39;&lt;tr&gt;\n&#39;</span>
+        <span style="color: #8B008B; font-weight: bold">for</span> theta <span style="color: #8B008B">in</span> theta_values:
+            E, html = compute4web(I, a, T, dt, theta)
+            html_text += <span style="color: #CD5555">&quot;&quot;&quot;</span>
+<span style="color: #CD5555">&lt;td&gt;</span>
+<span style="color: #CD5555">&lt;center&gt;&lt;b&gt;%s, dt=%g, error: %.3E&lt;/b&gt;&lt;/center&gt;&lt;br&gt;</span>
+<span style="color: #CD5555">%s</span>
+<span style="color: #CD5555">&lt;/td&gt;</span>
+<span style="color: #CD5555">&quot;&quot;&quot;</span> % (theta2name[theta], dt, E, html)
+        html_text += <span style="color: #CD5555">&#39;&lt;/tr&gt;\n&#39;</span>
+    html_text += <span style="color: #CD5555">&#39;&lt;/table&gt;\n&#39;</span>
+    <span style="color: #8B008B; font-weight: bold">return</span> html_text
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solver_with_doctest</span>(I, a, T, dt, theta):
+    <span style="color: #CD5555">&quot;&quot;&quot;</span>
+<span style="color: #CD5555">    Solve u&#39;=-a*u, u(0)=I, for t in (0,T] with steps of dt.</span>
+
+
+<span style="color: #CD5555">    &gt;&gt;&gt; u, t = solver(I=0.8, a=1.2, T=1.5, dt=0.5, theta=0.5)</span>
+<span style="color: #CD5555">    &gt;&gt;&gt; for n in range(len(t)):</span>
+<span style="color: #CD5555">    ...     print &#39;t=%.1f, u=%.14f&#39; % (t[n], u[n])</span>
+<span style="color: #CD5555">    t=0.0, u=0.80000000000000</span>
+<span style="color: #CD5555">    t=0.5, u=0.43076923076923</span>
+<span style="color: #CD5555">    t=1.0, u=0.23195266272189</span>
+<span style="color: #CD5555">    t=1.5, u=0.12489758761948</span>
+<span style="color: #CD5555">    &quot;&quot;&quot;</span>
+    dt = <span style="color: #658b00">float</span>(dt)               <span style="color: #228B22"># avoid integer division</span>
+    Nt = <span style="color: #658b00">int</span>(<span style="color: #658b00">round</span>(T/dt))        <span style="color: #228B22"># no of time intervals</span>
+    T = Nt*dt                    <span style="color: #228B22"># adjust T to fit time step dt</span>
+    u = np.zeros(Nt+<span style="color: #B452CD">1</span>)           <span style="color: #228B22"># array of u[n] values</span>
+    t = np.linspace(<span style="color: #B452CD">0</span>, T, Nt+<span style="color: #B452CD">1</span>)  <span style="color: #228B22"># time mesh</span>
+
+    u[<span style="color: #B452CD">0</span>] = I                  <span style="color: #228B22"># assign initial condition</span>
+    <span style="color: #8B008B; font-weight: bold">for</span> n <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(<span style="color: #B452CD">0</span>, Nt):    <span style="color: #228B22"># n=0,1,...,Nt-1</span>
+        u[n+<span style="color: #B452CD">1</span>] = (<span style="color: #B452CD">1</span> - (<span style="color: #B452CD">1</span>-theta)*a*dt)/(<span style="color: #B452CD">1</span> + theta*dt*a)*u[n]
+    <span style="color: #8B008B; font-weight: bold">return</span> u, t
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">third</span>(x):
+    <span style="color: #8B008B; font-weight: bold">return</span> x/<span style="color: #B452CD">3.</span>
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_third</span>():
+    x = <span style="color: #B452CD">0.15</span>
+    expected = (<span style="color: #B452CD">1</span>/<span style="color: #B452CD">3.</span>)*x
+    computed = third(x)
+    tol = <span style="color: #B452CD">1E-15</span>
+    success = <span style="color: #658b00">abs</span>(expected - computed) &lt; tol
+    <span style="color: #8B008B; font-weight: bold">assert</span> success
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">u_discrete_exact</span>(n, I, a, theta, dt):
+    <span style="color: #CD5555">&quot;&quot;&quot;Return exact discrete solution of the numerical schemes.&quot;&quot;&quot;</span>
+    dt = <span style="color: #658b00">float</span>(dt)  <span style="color: #228B22"># avoid integer division</span>
+    A = (<span style="color: #B452CD">1</span> - (<span style="color: #B452CD">1</span>-theta)*a*dt)/(<span style="color: #B452CD">1</span> + theta*dt*a)
+    <span style="color: #8B008B; font-weight: bold">return</span> I*A**n
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_u_discrete_exact</span>():
+    <span style="color: #CD5555">&quot;&quot;&quot;Check that solver reproduces the exact discr. sol.&quot;&quot;&quot;</span>
+    theta = <span style="color: #B452CD">0.8</span>; a = <span style="color: #B452CD">2</span>; I = <span style="color: #B452CD">0.1</span>; dt = <span style="color: #B452CD">0.8</span>
+    Nt = <span style="color: #658b00">int</span>(<span style="color: #B452CD">8</span>/dt)  <span style="color: #228B22"># no of steps</span>
+    u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
+
+    <span style="color: #228B22"># Evaluate exact discrete solution on the mesh</span>
+    u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
+                     <span style="color: #8B008B; font-weight: bold">for</span> n <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(Nt+<span style="color: #B452CD">1</span>)])
+
+    <span style="color: #228B22"># Find largest deviation</span>
+    diff = np.abs(u_de - u).max()
+    tol = <span style="color: #B452CD">1E-14</span>
+    success = diff &lt; tol
+    <span style="color: #8B008B; font-weight: bold">assert</span> success
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_potential_integer_division</span>():
+    <span style="color: #CD5555">&quot;&quot;&quot;Choose variables that can trigger integer division.&quot;&quot;&quot;</span>
+    theta = <span style="color: #B452CD">1</span>; a = <span style="color: #B452CD">1</span>; I = <span style="color: #B452CD">1</span>; dt = <span style="color: #B452CD">2</span>
+    Nt = <span style="color: #B452CD">4</span>
+    u, t = solver(I=I, a=a, T=Nt*dt, dt=dt, theta=theta)
+    u_de = np.array([u_discrete_exact(n, I, a, theta, dt)
+                     <span style="color: #8B008B; font-weight: bold">for</span> n <span style="color: #8B008B">in</span> <span style="color: #658b00">range</span>(Nt+<span style="color: #B452CD">1</span>)])
+    diff = np.abs(u_de - u).max()
+    <span style="color: #8B008B; font-weight: bold">assert</span> diff &lt; <span style="color: #B452CD">1E-14</span>
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_read_command_line_positional</span>():
+    <span style="color: #228B22"># Decide on a data set of input parameters</span>
+    I = <span style="color: #B452CD">1.6</span>;  a = <span style="color: #B452CD">1.8</span>;  T = <span style="color: #B452CD">2.2</span>;  theta = <span style="color: #B452CD">0.5</span>
+    dt_values = [<span style="color: #B452CD">0.1</span>, <span style="color: #B452CD">0.2</span>, <span style="color: #B452CD">0.05</span>]
+    <span style="color: #228B22"># Expected return from read_command_line_positional</span>
+    expected = [I, a, T, theta, dt_values]
+    <span style="color: #228B22"># Construct corresponding sys.argv array</span>
+    sys.argv = [sys.argv[<span style="color: #B452CD">0</span>], <span style="color: #658b00">str</span>(I), <span style="color: #658b00">str</span>(a), <span style="color: #658b00">str</span>(T), <span style="color: #CD5555">&#39;CN&#39;</span>] + \ 
+               [<span style="color: #658b00">str</span>(dt) <span style="color: #8B008B; font-weight: bold">for</span> dt <span style="color: #8B008B">in</span> dt_values]
+    computed = read_command_line_positional()
+    <span style="color: #8B008B; font-weight: bold">for</span> expected_arg, computed_arg <span style="color: #8B008B">in</span> <span style="color: #658b00">zip</span>(expected, computed):
+        <span style="color: #8B008B; font-weight: bold">assert</span> expected_arg == computed_arg
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">test_read_command_line_argparse</span>():
+    I = <span style="color: #B452CD">1.6</span>;  a = <span style="color: #B452CD">1.8</span>;  T = <span style="color: #B452CD">2.2</span>;  theta = <span style="color: #B452CD">0.5</span>
+    dt_values = [<span style="color: #B452CD">0.1</span>, <span style="color: #B452CD">0.2</span>, <span style="color: #B452CD">0.05</span>]
+    <span style="color: #228B22"># Expected return from read_command_line_argparse</span>
+    expected = [I, a, T, theta, dt_values]
+    <span style="color: #228B22"># Construct corresponding sys.argv array</span>
+    command_line = <span style="color: #CD5555">&#39;%s --a %s --I %s --T %s --scheme CN --dt &#39;</span> % \ 
+                   (sys.argv[<span style="color: #B452CD">0</span>], a, I, T)
+    command_line += <span style="color: #CD5555">&#39; &#39;</span>.join([<span style="color: #658b00">str</span>(dt) <span style="color: #8B008B; font-weight: bold">for</span> dt <span style="color: #8B008B">in</span> dt_values])
+    sys.argv = command_line.split()
+    computed = read_command_line_argparse()
+    <span style="color: #8B008B; font-weight: bold">for</span> expected_arg, computed_arg <span style="color: #8B008B">in</span> <span style="color: #658b00">zip</span>(expected, computed):
+        <span style="color: #8B008B; font-weight: bold">assert</span> expected_arg == computed_arg
+
+<span style="color: #228B22"># Classes</span>
+
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Problem</span>(<span style="color: #658b00">object</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, I=<span style="color: #B452CD">1</span>, a=<span style="color: #B452CD">1</span>, T=<span style="color: #B452CD">10</span>):
+        <span style="color: #658b00">self</span>.T, <span style="color: #658b00">self</span>.I, <span style="color: #658b00">self</span>.a = I, <span style="color: #658b00">float</span>(a), T
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">define_command_line_options</span>(<span style="color: #658b00">self</span>, parser=<span style="color: #658b00">None</span>):
+        <span style="color: #CD5555">&quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;</span>
+        <span style="color: #8B008B; font-weight: bold">if</span> parser <span style="color: #8B008B">is</span> <span style="color: #658b00">None</span>:
+            <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">argparse</span>
+            parser = argparse.ArgumentParser()
+
+        parser.add_argument(
+            <span style="color: #CD5555">&#39;--I&#39;</span>, <span style="color: #CD5555">&#39;--initial_condition&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+            default=<span style="color: #B452CD">1.0</span>, help=<span style="color: #CD5555">&#39;initial condition, u(0)&#39;</span>,
+            metavar=<span style="color: #CD5555">&#39;I&#39;</span>)
+        parser.add_argument(
+            <span style="color: #CD5555">&#39;--a&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>, default=<span style="color: #B452CD">1.0</span>,
+            help=<span style="color: #CD5555">&#39;coefficient in ODE&#39;</span>, metavar=<span style="color: #CD5555">&#39;a&#39;</span>)
+        parser.add_argument(
+            <span style="color: #CD5555">&#39;--T&#39;</span>, <span style="color: #CD5555">&#39;--stop_time&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+            default=<span style="color: #B452CD">1.0</span>, help=<span style="color: #CD5555">&#39;end time of simulation&#39;</span>,
+            metavar=<span style="color: #CD5555">&#39;T&#39;</span>)
+        <span style="color: #8B008B; font-weight: bold">return</span> parser
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">init_from_command_line</span>(<span style="color: #658b00">self</span>, args):
+        <span style="color: #CD5555">&quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;</span>
+        <span style="color: #658b00">self</span>.I, <span style="color: #658b00">self</span>.a, <span style="color: #658b00">self</span>.T = args.I, args.a, args.T
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">u_exact</span>(<span style="color: #658b00">self</span>, t):
+        <span style="color: #CD5555">&quot;&quot;&quot;Return the exact solution u(t)=I*exp(-a*t).&quot;&quot;&quot;</span>
+        I, a = <span style="color: #658b00">self</span>.I, <span style="color: #658b00">self</span>.a
+        <span style="color: #8B008B; font-weight: bold">return</span> I*exp(-a*t)
+
+
+<span style="color: #8B008B; font-weight: bold">class</span> <span style="color: #008b45; font-weight: bold">Solver</span>(<span style="color: #658b00">object</span>):
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">__init__</span>(<span style="color: #658b00">self</span>, problem, dt=<span style="color: #B452CD">0.1</span>, theta=<span style="color: #B452CD">0.5</span>):
+        <span style="color: #658b00">self</span>.problem = problem
+        <span style="color: #658b00">self</span>.dt, <span style="color: #658b00">self</span>.theta = <span style="color: #658b00">float</span>(dt), theta
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">define_command_line_options</span>(<span style="color: #658b00">self</span>, parser):
+        <span style="color: #CD5555">&quot;&quot;&quot;Return updated (parser) or new ArgumentParser object.&quot;&quot;&quot;</span>
+        parser.add_argument(
+            <span style="color: #CD5555">&#39;--scheme&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">str</span>, default=<span style="color: #CD5555">&#39;CN&#39;</span>,
+            help=<span style="color: #CD5555">&#39;FE, BE, or CN&#39;</span>)
+        parser.add_argument(
+            <span style="color: #CD5555">&#39;--dt&#39;</span>, <span style="color: #CD5555">&#39;--time_step_values&#39;</span>, <span style="color: #658b00">type</span>=<span style="color: #658b00">float</span>,
+            default=[<span style="color: #B452CD">1.0</span>], help=<span style="color: #CD5555">&#39;time step values&#39;</span>,
+            metavar=<span style="color: #CD5555">&#39;dt&#39;</span>, nargs=<span style="color: #CD5555">&#39;+&#39;</span>, dest=<span style="color: #CD5555">&#39;dt_values&#39;</span>)
+        <span style="color: #8B008B; font-weight: bold">return</span> parser
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">init_from_command_line</span>(<span style="color: #658b00">self</span>, args):
+        <span style="color: #CD5555">&quot;&quot;&quot;Load attributes from ArgumentParser into instance.&quot;&quot;&quot;</span>
+        <span style="color: #658b00">self</span>.dt, <span style="color: #658b00">self</span>.theta = args.dt, args.theta
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">solve</span>(<span style="color: #658b00">self</span>):
+        <span style="color: #658b00">self</span>.u, <span style="color: #658b00">self</span>.t = solver(
+            <span style="color: #658b00">self</span>.problem.I, <span style="color: #658b00">self</span>.problem.a, <span style="color: #658b00">self</span>.problem.T,
+            <span style="color: #658b00">self</span>.dt, <span style="color: #658b00">self</span>.theta)
+
+    <span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">error</span>(<span style="color: #658b00">self</span>):
+        <span style="color: #CD5555">&quot;&quot;&quot;Return norm of error at the mesh points.&quot;&quot;&quot;</span>
+        u_e = <span style="color: #658b00">self</span>.problem.u_exact(<span style="color: #658b00">self</span>.t)
+        e = u_e - <span style="color: #658b00">self</span>.u
+        E = np.sqrt(<span style="color: #658b00">self</span>.dt*np.sum(e**<span style="color: #B452CD">2</span>))
+        <span style="color: #8B008B; font-weight: bold">return</span> E
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">experiment_classes</span>():
+    problem = Problem()
+    solver = Solver(problem)
+
+    <span style="color: #228B22"># Read input from the command line</span>
+    parser = problem.define_command_line_options()
+    parser = solver. define_command_line_options(parser)
+    args = parser.parse_args()
+    problem.init_from_command_line(args)
+    solver. init_from_command_line(args)
+
+    <span style="color: #228B22"># Solve and plot</span>
+    solver.solve()
+    <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">matplotlib.pyplot</span> <span style="color: #8B008B; font-weight: bold">as</span> <span style="color: #008b45; text-decoration: underline">plt</span>
+    t_e = np.linspace(<span style="color: #B452CD">0</span>, T, <span style="color: #B452CD">1001</span>)    <span style="color: #228B22"># very fine mesh for u_e</span>
+    u_e = problem.u_exact(t_e)
+    <span style="color: #8B008B; font-weight: bold">print</span> <span style="color: #CD5555">&#39;Error:&#39;</span>, solver.error()
+
+    plt.plot(t,   u,   <span style="color: #CD5555">&#39;r--o&#39;</span>)
+    plt.plot(t_e, u_e, <span style="color: #CD5555">&#39;b-&#39;</span>)
+    plt.legend([<span style="color: #CD5555">&#39;numerical, theta=%g&#39;</span> % theta, <span style="color: #CD5555">&#39;exact&#39;</span>])
+    plt.xlabel(<span style="color: #CD5555">&#39;t&#39;</span>)
+    plt.ylabel(<span style="color: #CD5555">&#39;u&#39;</span>)
+    plotfile = <span style="color: #CD5555">&#39;tmp&#39;</span>
+    plt.savefig(plotfile + <span style="color: #CD5555">&#39;.png&#39;</span>);  plt.savefig(plotfile + <span style="color: #CD5555">&#39;.pdf&#39;</span>)
+    plt.show()
+
+<span style="color: #8B008B; font-weight: bold">if</span> __name__ == <span style="color: #CD5555">&#39;__main__&#39;</span>:
+    configure_logger()
+    experiment_compare_dt(<span style="color: #658b00">True</span>)
+    plt.show()
 </pre></div>
 <p>
-We can run this new solver function in a shell:
+The application code that calls <code>solver_with_logging</code> needs to configure
+the logger. The <code>decay</code> module offers a default configure function:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">logging</span>
+
+<span style="color: #8B008B; font-weight: bold">def</span> <span style="color: #008b45">configure_basic_logger</span>():
+    logging.basicConfig(
+        filename=<span style="color: #CD5555">&#39;decay.log&#39;</span>, filemode=<span style="color: #CD5555">&#39;w&#39;</span>, level=logging.DEBUG,
+        format=<span style="color: #CD5555">&#39;%(asctime)s - %(levelname)s - %(message)s&#39;</span>,
+        datefmt=<span style="color: #CD5555">&#39;%Y.%m.%d %I:%M:%S %p&#39;</span>)
+</pre></div>
+<p>
+If the user of a library does not configure a logger or call this
+configure function, the library should prevent error messages by
+declaring a default logger that does nothing:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">logging</span>
+logging.getLogger(<span style="color: #CD5555">&#39;decay&#39;</span>).addHandler(logging.NullHandler())
+</pre></div>
+<p>
+We can run the new solver function with logging in a shell:
 
 <p>
 
 <!-- code=python (!bc pyshell) typeset with pygments style "perldoc" -->
 <div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%">&gt;&gt;&gt; <span style="color: #8B008B; font-weight: bold">import</span> <span style="color: #008b45; text-decoration: underline">decay</span>
+&gt;&gt;&gt; decay.configure_basic_logger()
 &gt;&gt;&gt; u, t = decay.solver_with_logging(I=<span style="color: #B452CD">1</span>, a=<span style="color: #B452CD">0.5</span>, T=<span style="color: #B452CD">10</span>, \ 
            dt=<span style="color: #B452CD">0.5</span>, theta=<span style="color: #B452CD">0.5</span>)
 </pre></div>
@@ -1217,6 +1578,10 @@ the formula for \( u^{n+1} \), we can change the logging level to
 2015.09.26 05:40:01 AM - DEBUG - 1 - (1-theta)*a*dt: 0.875, float
 2015.09.26 05:40:01 AM - DEBUG - 1 + theta*dt*a: 1.125, float
 </pre></div>
+<p>
+Logging can be much more sophisticated than shown above. One can, e.g.,
+output critical messages to the screen and all messages to a file.
+This requires more code as demonstrated in the <a href="https://docs.python.org/2/howto/logging-cookbook.html" target="_self">Logging Cookbook</a>.
 
 <h1 id="softeng1:basic:UI">User interfaces</h1>
 
@@ -1266,7 +1631,7 @@ The essential content is that <code>prog.py</code> has two input parameters: <co
 and <code>p</code>. A user interface will replace the first two assignments to
 <code>delta</code> and <code>p</code>.
 
-<h2 id="___sec17">Command-line arguments </h2>
+<h2 id="softeng1:basic:UI:cmlargs">Command-line arguments</h2>
 
 <p>
 The command-line arguments are all the words that appear on the
@@ -1433,7 +1798,7 @@ the <code>args.delta</code> and <code>args.p</code> variables are automatically 
 Our next task is to use these basic code constructs to equip our
 <code>decay.py</code> module with command-line interfaces.
 
-<h2 id="___sec18">Positional command-line arguments </h2>
+<h2 id="softeng1:basic:UI:pos_cml">Positional command-line arguments</h2>
 
 <p>
 For our <code>decay.py</code> module file, we want to include functionality such
@@ -1520,7 +1885,7 @@ Now we can do
 <p>
 and get `theta=0.5`in the code.
 
-<h2 id="___sec19">Option-value pairs on the command line </h2>
+<h2 id="softeng1:basic:UI:options_cml">Option-value pairs on the command line</h2>
 
 <p>
 Now we want to specify option-value pairs on the command line,
@@ -1720,9 +2085,9 @@ graphical web interface may look like after results are computed
 visible in the figure).
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="softeng1:fig:GUI"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 3:  Automatically generated graphical web interface. <div id="softeng1:fig:GUI"></div> </p></center>
+<center><p class="caption">Figure 3:  Automatically generated graphical web interface.  <!-- caption label: softeng1:fig:GUI --> </p></center>
 <p><img src="fig-softeng/web_GUI.png" align="bottom" width=800></p>
 </center>
 
@@ -1858,7 +2223,7 @@ With the techniques demonstrated here, one can
 easily create a tailored web GUI for a particular type of application
 and use it to interactively explore physical and numerical effects.
 
-<h1 id="___sec24">Tests for verifying implementations </h1>
+<h1 id="softeng1:verify">Tests for verifying implementations</h1>
 
 <p>
 Any module with functions should have a set of tests that can
@@ -1874,7 +2239,7 @@ software testing techniques: <em>doctest</em> and <em>unit testing</em>.
 The first one is Python specific, while unit testing is the dominating
 test technique in the software industry today.
 
-<h2 id="___sec25">Doctests </h2>
+<h2 id="softeng1:verify:doctests">Doctests</h2>
 
 <p>
 A doc string, the first string after the function header, is used to
@@ -2004,7 +2369,7 @@ hide software errors.
 Doctests are highly encouraged as they do two things: 1) demonstrate
 how a function is used and 2) test that the function works.
 
-<h2 id="___sec26">Unit tests and test functions </h2>
+<h2 id="softeng1:verify:pytest">Unit tests and test functions</h2>
 
 <p>
 The unit testing technique consists of identifying smaller units
@@ -2154,7 +2519,16 @@ So, replace <code>a == b</code>, if <code>a</code> and/or <code>b</code> is <cod
 </pre></div>
 <p>
 The suitable size of <code>tol</code> depends on the size of <code>a</code> and <code>b</code>
-(see <a href="#softeng1:exer:tol">Problem 5: Experiment with tolerances in comparisons</a>).
+(see <a href="#softeng1:exer:tol">Problem 5: Investigate the size of tolerances in comparisons</a>). Unless <code>a</code> and <code>b</code> are around
+unity in size, one should use a <em>relative difference</em>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "perldoc" -->
+<div class="highlight" style="background: #eee8d5"><pre style="line-height: 125%">tol = <span style="color: #B452CD">1E-14</span>
+<span style="color: #658b00">abs</span>((a - b)/a) &lt; tol
+</pre></div>
+
 </div>
 
 
@@ -3514,9 +3888,9 @@ file <code>f.png</code>, see
 Figure <a href="#softeng1:experiments:fig:BE4a">4</a> for an example.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="softeng1:experiments:fig:BE4a"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 4:  Illustration of the Backward Euler method for four time step values. <div id="softeng1:experiments:fig:BE4a"></div> </p></center>
+<center><p class="caption">Figure 4:  Illustration of the Backward Euler method for four time step values.  <!-- caption label: softeng1:experiments:fig:BE4a --> </p></center>
 <p><img src="fig-softeng/BE.png" align="bottom" width=800></p>
 </center>
 
@@ -3826,9 +4200,9 @@ to perform the numerical experiments and then runs Python
 statements for creating an <a href="http://tinyurl.com/nc4upel/_static/report_mathjax.html.html" target="_self">HTML file</a> with the source code for <a href="http://tinyurl.com/nc4upel/_static/report_mathjax.html" target="_self">the scientific report</a>.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="softeng1:exper:report:fig:mathjax"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 5:  Report in HTML format with MathJax. <div id="softeng1:exper:report:fig:mathjax"></div> </p></center>
+<center><p class="caption">Figure 5:  Report in HTML format with MathJax.  <!-- caption label: softeng1:exper:report:fig:mathjax --> </p></center>
 <p><img src="fig-softeng/report_mathjax.png" align="bottom" width=600></p>
 </center>
 
@@ -3856,9 +4230,9 @@ nice-looking PDFs.  The file <a href="http://tinyurl.com/p96acy2/report_generati
 generate the LaTeX source from a program.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="softeng1:exper:report:fig:latex"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 6:  Report in PDF format generated from LaTeX source. <div id="softeng1:exper:report:fig:latex"></div> </p></center>
+<center><p class="caption">Figure 6:  Report in PDF format generated from LaTeX source.  <!-- caption label: softeng1:exper:report:fig:latex --> </p></center>
 <p><img src="fig-softeng/report_latexpdf.png" align="bottom" width=600></p>
 </center>
 
@@ -3884,9 +4258,9 @@ contents, navigation, and search facilities, see Figure
 <a href="#softeng1:exper:report:fig:sphinx">7</a>.
 
 <p>
-<center> <!-- figure -->
+<center> <!-- figure label: --> <div id="softeng1:exper:report:fig:sphinx"></div> <!-- FIGURE -->
 <hr class="figure">
-<center><p class="caption">Figure 7:  Report in HTML format generated from Sphinx source. <div id="softeng1:exper:report:fig:sphinx"></div> </p></center>
+<center><p class="caption">Figure 7:  Report in HTML format generated from Sphinx source.  <!-- caption label: softeng1:exper:report:fig:sphinx --> </p></center>
 <p><img src="fig-softeng/report_sphinx.png" align="bottom" width=600></p>
 </center>
 
@@ -4286,7 +4660,7 @@ Filename: <code>test_roots</code>.
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="softeng1:exer:tol">Problem 5: Experiment with tolerances in comparisons</h2>
+<h2 id="softeng1:exer:tol">Problem 5: Investigate the size of tolerances in comparisons</h2>
 
 <p>
 When we replace a comparison <code>a == b</code>, where <code>a</code> and/or <code>b</code> are
@@ -4294,7 +4668,12 @@ When we replace a comparison <code>a == b</code>, where <code>a</code> and/or <c
 the appropriate size of <code>tol</code> depends on the size of <code>a</code> and <code>b</code>.
 Investigate how the size of <code>abs(a-b)</code> varies when <code>b</code> takes on
 values \( 10^k \), \( k=-5,-9,\ldots,20 \) and <code>a=1.0/49*b*49</code>.
-Filename: <code>tolerance</code>.
+Thereafter, compute the <em>relative</em> difference <code>abs((a-b)/a)</code> for
+the same <code>b</code> values.
+
+<p>
+<!-- removed !bsol ... !esol environment (because of the command-line option --without_solutions)
+ -->Filename: <code>tolerance</code>.
 
 <p>
 <!-- Closing remarks for this Problem -->
@@ -4303,9 +4682,12 @@ Filename: <code>tolerance</code>.
 
 <p>
 You will experience that if <code>a</code> and <code>b</code> are large, as they can be
-in geophysical applications where lengths measured in meters can be of size
+in, e.g.,
+geophysical applications where lengths measured in meters can be of size
 \( 10^6 \) m, <code>tol</code> must be about \( 10^{-9} \), while <code>a</code> and <code>b</code> around unity can
 have <code>tol</code> of size \( 10^{-15} \).
+The way out of the problem with choosing a tolerance is to use
+relative differences.
 
 <p>
 <!-- --- end exercise --- -->

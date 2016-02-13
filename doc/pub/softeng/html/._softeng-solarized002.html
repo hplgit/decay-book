@@ -7,7 +7,7 @@ Automatically generated HTML file from DocOnce source
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="Software engineering with exponential decay models">
-<meta name="keywords" content="refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,unit testing,software testing nose,software testing pytest,test function,software testing test function,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability">
+<meta name="keywords" content="refactoring,importing modules,logger,debugging,list comprehension,command-line arguments,option-value pairs (command line),command-line arguments,reading the command line,doctests,software testing doctests,test function,nose,pytest,unit testing,software testing nose,software testing pytest,test function,software testing test function,relative differences,doctest in test function,unit testing,software testing unit testing (class-based),Distutils,GitHub,importing modules,problem class,solver class,wrapper (code),reproducibility,replicability,Unix wildcard notation,wildcard notation (Unix),Word (Microsoft),LibreOffice,OpenOffice,Google Docs,HTML,MathJax,LaTeX,Sphinx (typesetting tool),Markdown,IPython notebooks,Jupyter notebooks,DocOnce,replicability,relative differences">
 
 <title>Software engineering with exponential decay models</title>
 
@@ -111,9 +111,18 @@ div { text-align: justify; text-justify: inter-word; }
                1,
                'softeng1:basic:UI',
                'softeng1:basic:UI'),
-              ('Command-line arguments', 2, None, '___sec17'),
-              ('Positional command-line arguments', 2, None, '___sec18'),
-              ('Option-value pairs on the command line', 2, None, '___sec19'),
+              ('Command-line arguments',
+               2,
+               'softeng1:basic:UI:cmlargs',
+               'softeng1:basic:UI:cmlargs'),
+              ('Positional command-line arguments',
+               2,
+               'softeng1:basic:UI:pos_cml',
+               'softeng1:basic:UI:pos_cml'),
+              ('Option-value pairs on the command line',
+               2,
+               'softeng1:basic:UI:options_cml',
+               'softeng1:basic:UI:options_cml'),
               ('Creating a graphical web user interface',
                2,
                None,
@@ -121,9 +130,18 @@ div { text-align: justify; text-justify: inter-word; }
               ('Making a compute function', 3, None, '___sec21'),
               ('Generating the user interface', 3, None, '___sec22'),
               ('Running the web application', 3, None, '___sec23'),
-              ('Tests for verifying implementations', 1, None, '___sec24'),
-              ('Doctests', 2, None, '___sec25'),
-              ('Unit tests and test functions', 2, None, '___sec26'),
+              ('Tests for verifying implementations',
+               1,
+               'softeng1:verify',
+               'softeng1:verify'),
+              ('Doctests',
+               2,
+               'softeng1:verify:doctests',
+               'softeng1:verify:doctests'),
+              ('Unit tests and test functions',
+               2,
+               'softeng1:verify:pytest',
+               'softeng1:verify:pytest'),
               ('Two Python test frameworks: nose and pytest',
                3,
                None,
@@ -216,7 +234,7 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'softeng1:exer:doctest1',
                'softeng1:exer:doctest1'),
-              ('Problem 5: Experiment with tolerances in comparisons',
+              ('Problem 5: Investigate the size of tolerances in comparisons',
                2,
                'softeng1:exer:tol',
                'softeng1:exer:tol'),
@@ -278,6 +296,7 @@ $$
 <ol>
  <li> <div id="Langtangen_bitgit"></div> <b>H. P. Langtangen</b>. 
     Quick Intro to Version Control Systems and Project Hosting Sites,
+    \urlhttp://hplgit.github.io/teamods/bitgit/html/,
     <a href="http://hplgit.github.io/teamods/bitgit/html/" target="_self"><tt>http://hplgit.github.io/teamods/bitgit/html/</tt></a>.</li>
  <li> <div id="Langtangen_2012"></div> <b>H. P. Langtangen</b>. 
     <em>A Primer on Scientific Programming with Python</em>,
