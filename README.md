@@ -1,6 +1,10 @@
 ## decay-book
 
-Resources for the book *Finite Difference Computing with Exponential Decay Models* by H. P. Langtangen
+Resources for the book *Finite Difference Computing with Exponential
+Decay Models* by H. P. Langtangen, published by Springer, 2016. This
+is an open access book where the author has all rights and publishes
+various [ebook formats](http://hplgit.github.io/decay-book/doc/web/index.html) in the present
+repository.
 
 ### Organization
 
