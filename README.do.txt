@@ -1,14 +1,15 @@
-## decay-book
+======= decay-book =======
 
 Resources for the book *Finite Difference Computing with Exponential Decay Models* by H. P. Langtangen
 
-### Organization
+===== Organization =====
 
-The book is written in [DocOnce](https://github.com/hplgit/doconce) using
+The book is written in "DocOnce": "https://github.com/hplgit/doconce" using
 the directory organization described in the repo
-[setup4book-doconce](http://hplgit.github.io/setup4book-doconce/doc/web/index.html).
+"setup4book-doconce":
+"http://hplgit.github.io/setup4book-doconce/doc/web/index.html".
 
-### Key directories
+===== Key directories =====
 
  * The book: `doc/.src/book`
  * Individual chapters: `doc/.src./chapters` (text in `*.do.txt` files)
@@ -16,7 +17,7 @@ the directory organization described in the repo
  * Figures for chapter `X`: `doc/.src/chapters/X/fig-X`
  * Slides for chapter `X`: `doc/.src/chapters/slides-X/` (slides in `*.do.txt` tiles)
 
-### Nicknames for chapters
+===== Nicknames for chapters =====
 
 Directories in this repo apply a nickname as a short form of a chapter:
 
@@ -26,16 +27,14 @@ Directories in this repo apply a nickname as a short form of a chapter:
  * `models`: Models
  * `softeng`: Software engineering
 
-### Published material
+===== Published material =====
 
  * `doc/pub`
 
-### How to modify slides
+===== How to modify slides =====
 
-1. Go to the directory for the chapter: `doc/.src/chapters/X`
-2. Go to the `slides-X` subdirectory
-3. Modify the `*.do.txt` files as desired
-4. Compile both the textbook material *and* the slides with `bash make.sh`
+ o Go to the directory for the chapter: `doc/.src/chapters/X`
+ o Go to the `slides-X` subdirectory
+ o Modify the `*.do.txt` files as desired
+ o Compile both the textbook material *and* the slides with `bash make.sh`
    in the parent directory `doc/.src/chapters/X`
-
-
