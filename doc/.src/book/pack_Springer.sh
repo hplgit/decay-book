@@ -15,7 +15,8 @@ book=book
 rm -rf $author_name
 mkdir $author_name
 cd $author_name
-# Copy the single tex file for the entire book
+# Copy the single tex file for the entire book (paper version is
+# generated as last tex file in make.sh)
 cp ../${name}.tex $book.tex
 
 # Copy all figures to one directory

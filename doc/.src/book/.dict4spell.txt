@@ -16,12 +16,15 @@ ODEs
 OUS
 PDEs
 Runge
+Schlatter
 Simula
 Svein
+Thi
 Trefethen's
 Yapi
 bio
 discretization
 geo
+io
 refactor
 throuhgout
