@@ -641,7 +641,7 @@ Let us let a logger write out intermediate results and some debugging
 results in the `solver` function. Such messages are useful for
 monitoring the simulation and for debugging it, respectively.
 
-@@@CODE src-softeng/decay.py fromto: def solver_with_logging@def configure_logger
+@@@CODE src-softeng/decay.py fromto: def solver_with_logging@def configure_basic_logger
 The application code that calls `solver_with_logging` needs to configure
 the logger. The `decay` module offers a default configure function:
 
