@@ -192,7 +192,7 @@ FOLFIRINOX and thereby keeping me alive and in good enough shape to
 finish this book. As always, the Springer team ensured a smooth and
 rapid review process and production phase. This time special thanks go
 to all the efforts by Martin Peters, Thanh-Ha Le Thi,
-Beate XXXXX, and Yvonne Schlatter.
+and Yvonne Schlatter.
 
 
 # #if FORMAT in ("latex", "pdflatex")
