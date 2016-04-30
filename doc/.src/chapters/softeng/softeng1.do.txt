@@ -1077,6 +1077,7 @@ the command line as positional arguments or option-value pairs:
 
 
 ===== Creating a graphical web user interface =====
+label{softeng1:basic:UI:parampool}
 
 The Python package "Parampool": "https://github.com/hplgit/parampool"
 can be used to automatically generate a web-based *graphical user interface*
@@ -2324,11 +2325,14 @@ used. The only remaining code is to make the plot, but this code is
 identical to previous versions when the numerical solution is
 available in an object `u` and the exact one in `u_e`.
 
-The advantage with the `Parameters` class is that it scales to problems
-with a large number of physical and numerical parameters:
-as long as the parameters are defined once via a dictionary,
-the compact code in class `Parameters` can handle any collection of
-parameters of any size.
+The advantage with the `Parameters` class is that it scales to
+problems with a large number of physical and numerical parameters: as
+long as the parameters are defined once via a dictionary, the compact
+code in class `Parameters` can handle any collection of parameters of
+any size. More advanced tools for storing large collections of
+parameters in hierarchical structures is provided by the
+"Parampool": "https://github.com/hplgit/parampool" package
+(used in Section ref{softeng1:basic:UI:parampool}).
 
 ======= Automating scientific experiments =======
 label{softeng1:experiments}
@@ -2877,9 +2881,9 @@ report demo is available as an IPython/Jupyter notebook (described next).
 idx{IPython notebooks}
 idx{Jupyter notebooks}
 
-=== IPython/Jupyter notebooks ===
+=== Jupyter notebooks ===
 
-The "IPython Notebook": "http://ipython.org/notebook.html" is
+The "Jupyter Notebook": "http://jupyter.org" is
 a web-based tool where one can write scientific reports with live computer
 code and graphics. Or the other way around: software can be equipped
 with documentation in the style of scientific reports.
@@ -2887,7 +2891,7 @@ A slightly extended version of Markdown is used for writing text and
 mathematics, and the "source code of a notebook": "${writing_reports}/_static/report.ipynb.html" is in json format.
 The interest in the notebook has grown amazingly fast
 over just a few years, and further development now takes place
-in the "Jupyter project": "https://jupyter.org/", which
+in the Jupyter project, which
 supports a lot of programming languages for interactive notebook computing.
 Jupyter notebooks are primarily live electronic documents, but they can be
 printed out as PDF reports too.
@@ -2936,15 +2940,17 @@ idx{replicability}
 To assist the important principle of *replicable* science,
 a report documenting scientific investigations should be accompanied by
 all the software and data used for the investigations so that others
-have a possibility to redo the work and assess the qualify of the results.
+have a possibility to redo the work and assess the quality of the results.
 
 One way of documenting a complete project is to make a directory tree
-with all relevant files. Preferably, the tree is published at
-some project hosting site like "Bitbucket or GitHub": "http://hplgit.github.com/teamods/bitgit/html/" so that others can download it
-as a tarfile, zipfile, or clone the files directly using the Git version control
-system.
-For the investigations outlined in Section ref{softeng1:exper:report},
-we can create a directory tree with files
+with all relevant files. Preferably, the tree is published at some
+project hosting site like "Bitbucket or GitHub":
+"http://hplgit.github.com/teamods/bitgit/html/" so that others can
+download it as a tarfile, zipfile, or clone or fork the files directly
+using the Git version control system.  For the investigations outlined
+in Section ref{softeng1:exper:report}, we can create a directory tree
+with files
+
 !bc
 setup.py
 ./src:

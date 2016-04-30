@@ -1,5 +1,5 @@
 
-======= Implementation =======
+======= Implementations =======
 label{decay:impl1}
 
 We want to make a computer program for solving

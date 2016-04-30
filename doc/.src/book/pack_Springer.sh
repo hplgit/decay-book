@@ -57,7 +57,6 @@ if [ ! -d stylefiles ]; then
     mkdir stylefiles
 fi
 sh ./tmpcp.sh  # copy all style files
-rm tmpcp.sh
 rm *~ tmp*
 
 # Use most recently compiled PDF in the parent dir as official PDF

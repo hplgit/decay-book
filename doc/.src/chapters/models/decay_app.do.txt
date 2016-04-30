@@ -1077,7 +1077,7 @@ where $C_D$ is a dimensionless drag coefficient depending on the body's shape,
 and $A$ is the cross-sectional area as
 produced by a cut plane, perpendicular to the motion, through the thickest
 part of the body. The superscripts $\,{}^q$ and $\,{}^S$ in
-$F_d^{(S)}$ and $F_d^{(q)}$ indicate Stokes drag and quadratic drag,
+$F_d^{(S)}$ and $F_d^{(q)}$ indicate Stokes' drag and quadratic drag,
 respectively.
 
 ===== Equation of motion =====
@@ -1090,7 +1090,7 @@ $a$ in the vertical direction.
 !bt
 \begin{equation*} ma = F_g + F_d^{(S)} + F_b \tp\end{equation*}
 !et
-Here we have chosen to model the fluid resistance by the Stokes drag.
+Here we have chosen to model the fluid resistance by the Stokes' drag.
 Inserting the expressions for the forces yields
 
 !bt
