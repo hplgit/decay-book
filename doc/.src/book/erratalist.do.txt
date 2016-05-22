@@ -1,0 +1,14 @@
+TITLE: Erratalist
+AUTHOR: H. P. Langtangen
+DATE: today
+
+===== Page 126, Section 4.11 =====
+
+Some will claim that it is an error
+when we do not inlcude the added mass term $m_aa$ in
+the equation of motion in Section ref{decay:app:drag}
+*Vertical motion of a body in a viscous fluid*.
+For motion in a gas, $m_aa$ can be neglected in comparison with
+$ma$, but in a liquid, we have $m_aa = \frac{1}{2}\varrho V$, where
+$\varrho$ is the density of the liquid, and $V$ is the volume of a
+spherical body.
