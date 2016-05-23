@@ -1077,7 +1077,7 @@ where $C_D$ is a dimensionless drag coefficient depending on the body's shape,
 and $A$ is the cross-sectional area as
 produced by a cut plane, perpendicular to the motion, through the thickest
 part of the body. The superscripts $\,{}^q$ and $\,{}^S$ in
-$F_d^{(S)}$ and $F_d^{(q)}$ indicate Stokes drag and quadratic drag,
+$F_d^{(S)}$ and $F_d^{(q)}$ indicate Stokes' drag and quadratic drag,
 respectively.
 
 ===== Equation of motion =====
@@ -1088,13 +1088,19 @@ these forces must equal the mass of the body times its acceleration
 $a$ in the vertical direction.
 
 !bt
-\begin{equation*} ma = F_g + F_d^{(S)} + F_b \tp\end{equation*}
+\begin{equation*} (m+m_a)a = F_g + F_d^{(S)} + F_b \tp\end{equation*}
 !et
-Here we have chosen to model the fluid resistance by the Stokes drag.
+Here we have chosen to model the fluid resistance by the Stokes' drag.
+Note that the extra term $m_a a$: this is the acceleration of
+the *added mass* of the surrounding fluid that must
+normally be taken into account for motion in liquids.
+For a sphere, $m_a = \half \varrho V$, so that
+$m+m_a = (\varrho_b +\half\varrho)V$, if we introduce $\varrho_b$ as the
+density of the body.
 Inserting the expressions for the forces yields
 
 !bt
-\[  ma = -mg - 3\pi d\mu v + \varrho gV
+\[  (m+m_a)a = -mg - 3\pi d\mu v + \varrho gV
 \tp
 \]
 !et
@@ -1105,22 +1111,22 @@ This is our second equation.
 We can easily eliminate $a$ and get a single differential equation for $v$:
 
 !bt
-\[ m{dv\over dt} = -mg - 3\pi d\mu v + \varrho gV
+\[ (m+m_a){dv\over dt} = -mg - 3\pi d\mu v + \varrho gV
 \tp
 \]
 !et
 A small rewrite of this equation is handy: We express $m$ as $\varrho_bV$,
-where $\varrho_b$ is the density of the body, and we divide by
-the mass to get
+and we divide by $m+m_a = (\varrho_b +\half\varrho)V$ to get
 
 !bt
 \begin{equation}
-v^{\prime}(t) = - \frac{3\pi d\mu}{\varrho_b V} v + g\left(\frac{\varrho}{\varrho_b} -1\right)
+v^{\prime}(t) = - \frac{3\pi d\mu}{(\varrho_b +\half\varrho)V} v + g\left(\frac{\varrho}{\varrho_b +\half\varrho} -\frac{1}{(1 +\half\varrho/\varrho_b)}\right)
 label{decay:app:fallingbody:model:S}
 \tp
 \end{equation}
 !et
 We may introduce the constants
+
 !bt
 \begin{equation}
 a = \frac{3\pi d\mu}{\varrho_b V},\quad
@@ -1146,7 +1152,7 @@ $F_d^{(q)}$, leading to the result
 \begin{equation}
 v^{\prime}(t) =
 -{1\over2}C_D{\varrho A\over\varrho_b V}|v|v +
-g\left({\varrho\over\varrho_b} - 1\right)
+g\left(\frac{\varrho}{\varrho_b +\half\varrho} - \frac{1}{(1 +\half\varrho/\varrho_b)}\right)
 \tp
 label{decay:app:fallingbody:model:q}
 \end{equation}

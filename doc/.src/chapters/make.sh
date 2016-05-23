@@ -74,9 +74,17 @@ preprocess -DFORMAT=pdflatex ../newcommands_keep.p.tex > newcommands_keep.tex
 
 # PDF with solutions (start with this and let .aux be the most
 # relevant version for xr references
-system doconce format pdflatex ${mainname} $preprocessor_opt $comments --latex_table_format=center --device=screen "--latex_code_style=default:vrb-blue1@sys:vrb[frame=lines,label=\\fbox{{\tiny Terminal}},framesep=2.5mm,framerule=0.7pt,fontsize=\fontsize{9pt}{9pt}]" $opt
+system doconce format pdflatex ${mainname} $preprocessor_opt $comments --latex_table_format=center --device=screen "--latex_code_style=default:lst[style=blue1_bluegreen]@pypro:lst[style=blue1bar_bluegreen]@dat:lst[style=gray]@sys:vrb[frame=lines,label=\\fbox{{\tiny Terminal}},framesep=2.5mm,framerule=0.7pt,fontsize=\fontsize{9pt}{9pt}]" $opt
+
 doconce latex_exercise_toc ${mainname}
-doconce subst 'frametitlebackgroundcolor=.*?,' 'frametitlebackgroundcolor=blue!5,' ${mainname}.tex
+# Auto edits
+# With t4/svmono linewidth has some too large value before \mymainmatter
+# is called, so the box width as linewidth+2mm is wrong, it must be
+# explicitly set to 120mm.
+doconce replace '\setlength{\lstboxwidth}{\linewidth+2mm}' '\setlength{\lstboxwidth}{120mm}' $name.tex  # lst
+system doconce replace 'linecolor=black,' 'linecolor=darkblue,' $name.tex
+system doconce subst 'frametitlebackgroundcolor=.*?,' 'frametitlebackgroundcolor=blue!5,' $name.tex
+
 system pdflatex ${mainname}
 makeindex ${mainname}
 bibtex ${mainname}
