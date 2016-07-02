@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Experiments with Schemes for Exponential Decay documentation build configuration file, created by
-# sphinx-quickstart on Sun May 22 01:57:59 2016.
+# sphinx-quickstart on Sat Jul  2 05:08:20 2016.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
