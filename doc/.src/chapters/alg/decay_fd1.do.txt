@@ -308,13 +308,8 @@ and continue the solution curve along that slope. As soon as we have
 chosen the next point on this line, we have a new $t$ and $u$ value and
 can compute a new slope and continue the process.
 
-<linebreak>
-<linebreak>
-
 FIGURE: [fig-alg/FE_idea, width=600 frac=0.8]
 
-<linebreak>
-<linebreak>
 
 === Computing with the recursive formula ===
 
