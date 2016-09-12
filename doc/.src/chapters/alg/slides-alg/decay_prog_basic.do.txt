@@ -30,9 +30,11 @@ for $\theta\in [0,1]$. Note
   * Display the numerical and exact solution $\uex(t)=e^{-at}$
   * Bring evidence to a correct implementation (*verification*)
   * Compare the numerical and the exact solution in a plot
-  * computes the error $\uex (t_n) - u^n$
-  * computes the convergence rate of the numerical scheme
-  * reads its input data from the command line
+  * Compute the error $\uex (t_n) - u^n$
+# #ifdef ADVANCED  
+  * If wanted, compute the convergence rate of the numerical scheme
+# #endif  
+  * Read its input data from the command line
 
 !split
 ===== Tools to learn =====
@@ -284,7 +286,7 @@ u^3 &=Au^2= 0.00265290804728
 \end{align*}
 !et
 
-See the function `verify_three_steps` in "`decay_verf1.py`": "${src_alg}/decay_verf1.py".
+See the function `test_solver_three_steps` in "`decay_v3.py`": "${src_alg}/decay_v3.py".
 
 !split
 ===== Comparison with an exact discrete solution =====

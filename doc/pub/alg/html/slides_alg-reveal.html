@@ -155,7 +155,7 @@ $$
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <br>
 <p>&nbsp;<br>
-<center><h4>Feb 12, 2016</h4></center> <!-- date -->
+<center><h4>Sep 13, 2016</h4></center> <!-- date -->
 <br>
 </section>
 
@@ -286,23 +286,7 @@ This is the power of applied mathematics!
 
 
 <section>
-<h2 id="___sec6">The exam </h2>
-
-<ul>
- <p><li class="fragment"> Oral exam</li>
- <p><li class="fragment"> 6 problems (topics) are announced two weeks before the exam</li>
- <p><li class="fragment"> Work out a 20 min presentations (talks) for each problem</li>
- <p><li class="fragment"> At the exam: throw a die to pick your problem to be presented</li>
- <p><li class="fragment"> Aids: plots, computer programs</li>
- <p><li class="fragment"> Why? Very effective way of learning</li>
- <p><li class="fragment"> Sure? Excellent results over 15 years</li>
- <p><li class="fragment"> When? Late december</li>
-</ul>
-</section>
-
-
-<section>
-<h2 id="___sec7">Required software </h2>
+<h2 id="___sec6">Required software </h2>
 
 <ul>
  <p><li> Our software platform: Python (sometimes combined with Cython,
@@ -316,7 +300,7 @@ This is the power of applied mathematics!
 
 
 <section>
-<h2 id="___sec8">Assumed/ideal background </h2>
+<h2 id="___sec7">Assumed/ideal background </h2>
 
 <ul>
  <p><li> INF1100: Python programming, solution of ODEs</li>
@@ -331,7 +315,7 @@ This is the power of applied mathematics!
 
 
 <section>
-<h2 id="___sec9">Start-up example for the course </h2>
+<h2 id="___sec8">Start-up example for the course </h2>
 
 <p>
 What if you don't have this ideal background?
@@ -358,7 +342,7 @@ What if you don't have this ideal background?
 
 
 <section>
-<h2 id="___sec10">Start-up example </h2>
+<h2 id="___sec9">Start-up example </h2>
 
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
@@ -377,7 +361,7 @@ solving PDEs!
 
 
 <section>
-<h2 id="___sec11">What to learn in the start-up example; standard topics </h2>
+<h2 id="___sec10">What to learn in the start-up example; standard topics </h2>
 
 <ul>
  <p><li> How to think when constructing finite difference methods, with special focus
@@ -393,7 +377,7 @@ solving PDEs!
 
 
 <section>
-<h2 id="___sec12">What to learn in the start-up example; programming topics </h2>
+<h2 id="___sec11">What to learn in the start-up example; programming topics </h2>
 
 <ul>
  <p><li> How to verify an implementation and automate verification
@@ -411,7 +395,7 @@ solving PDEs!
 
 
 <section>
-<h2 id="___sec13">What to learn in the start-up example; mathematical analysis </h2>
+<h2 id="___sec12">What to learn in the start-up example; mathematical analysis </h2>
 
 <ul>
  <p><li> How to uncover numerical artifacts in the computed solution</li>
@@ -428,7 +412,7 @@ solving PDEs!
 
 
 <section>
-<h2 id="___sec14">What to learn in the start-up example; generalizations </h2>
+<h2 id="___sec13">What to learn in the start-up example; generalizations </h2>
 
 <ul>
  <p><li> Generalize the example to \( u'(t)=-a(t)u(t) + b(t) \)</li>
@@ -458,7 +442,7 @@ solving PDEs!
 
 
 <section>
-<h2 id="___sec16">Topics in the first intro to the finite difference method </h2>
+<h2 id="___sec15">Topics in the first intro to the finite difference method </h2>
 
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
@@ -514,7 +498,7 @@ simple as possible while learning computer tools.
 
 
 <section>
-<h2 id="___sec18">The ODE model has a range of applications in many fields </h2>
+<h2 id="___sec17">The ODE model has a range of applications in many fields </h2>
 
 <ul>
  <p><li> Growth and decay of populations (cells, animals, human)</li>
@@ -532,9 +516,9 @@ See the <a href="http://tinyurl.com/nclmcng/pub/sphinx-decay/._main_decay008.htm
 
 
 <section>
-<h2 id="___sec19">The ODE problem has a continuous and discrete version </h2>
+<h2 id="___sec18">The ODE problem has a continuous and discrete version </h2>
 
-<h3 id="___sec20">Continuous problem </h3>
+<h3 id="___sec19">Continuous problem </h3>
 
 <p>&nbsp;<br>
 $$
@@ -547,7 +531,7 @@ $$
 
 (varies with a continuous \( t \))
 
-<h3 id="___sec21">Discrete problem </h3>
+<h3 id="___sec20">Discrete problem </h3>
 
 <p>
 Numerical methods applied to the continuous problem turns it into
@@ -556,7 +540,7 @@ a discrete problem
 <p>&nbsp;<br>
 $$
 \begin{equation}
-u^{n+1} = \mbox{const} u^n, \quad n=0,1,\ldots N_t-1, \quad u^n=I
+u^{n+1} = \mbox{const} \cdot u^n, \quad n=0,1,\ldots N_t-1, \quad u^n=I
 \tag{2}
 \end{equation}
 $$
@@ -583,7 +567,7 @@ consists of four steps:
 
 
 <section>
-<h2 id="___sec23">Step 1: Discretizing the domain </h2>
+<h2 id="___sec22">Step 1: Discretizing the domain </h2>
 
 <p>
 The time domain \( [0,T] \) is represented by a <em>mesh</em>: a finite number of
@@ -606,7 +590,7 @@ $$0 = t_0 < t_1 < t_2 < \cdots < t_{N_t-1} < t_{N_t} = T$$
 
 
 <section>
-<h2 id="___sec24">Step 1: Discretizing the domain </h2>
+<h2 id="___sec23">Step 1: Discretizing the domain </h2>
 
 <p>
 \( u^n \) is a mesh function, defined at the mesh points \( t_n \), \( n=0,\ldots,N_t \)
@@ -618,7 +602,7 @@ only.
 
 
 <section>
-<h2 id="___sec25">What about a mesh function between the mesh points? </h2>
+<h2 id="___sec24">What about a mesh function between the mesh points? </h2>
 
 <p>
 Can extend the mesh function to yield values between mesh points
@@ -639,7 +623,7 @@ $$
 
 
 <section>
-<h2 id="___sec26">Step 2: Fulfilling the equation at discrete time points </h2>
+<h2 id="___sec25">Step 2: Fulfilling the equation at discrete time points </h2>
 
 <ul>
  <p><li> The ODE holds for all \( t\in (0,T] \) (infinite no of points)</li>
@@ -657,7 +641,7 @@ $$
 
 
 <section>
-<h2 id="___sec27">Step 3: Replacing derivatives by finite differences </h2>
+<h2 id="___sec26">Step 3: Replacing derivatives by finite differences </h2>
 
 <p>
 Now it is time for the <em>finite difference</em> approximations of
@@ -678,7 +662,7 @@ $$
 
 
 <section>
-<h2 id="___sec28">Step 3: Replacing derivatives by finite differences </h2>
+<h2 id="___sec27">Step 3: Replacing derivatives by finite differences </h2>
 
 <p>
 Inserting the finite difference approximation in
@@ -705,7 +689,7 @@ or <em>finite difference method/scheme</em>)
 
 
 <section>
-<h2 id="___sec29">Step 4: Formulating a recursive algorithm </h2>
+<h2 id="___sec28">Step 4: Formulating a recursive algorithm </h2>
 
 <p>
 How can we actually compute the \( u^n \) values?
@@ -743,7 +727,7 @@ $$
 
 
 <section>
-<h2 id="___sec30">Let us apply the scheme by hand </h2>
+<h2 id="___sec29">Let us apply the scheme by hand </h2>
 
 <p>
 Assume constant time spacing: \( \Delta t = t_{n+1}-t_n=\mbox{const} \)
@@ -768,7 +752,7 @@ example)! No need for a computer (yet)...
 
 
 <section>
-<h2 id="___sec31">A backward difference </h2>
+<h2 id="___sec30">A backward difference </h2>
 
 <p>
 Here is another finite difference approximation to the
@@ -789,7 +773,7 @@ $$
 
 
 <section>
-<h2 id="___sec32">The Backward Euler scheme </h2>
+<h2 id="___sec31">The Backward Euler scheme </h2>
 
 <p>
 Inserting the finite difference approximation in \( u'(t_n)=-au(t_n) \) yields
@@ -818,7 +802,7 @@ $$
 
 
 <section>
-<h2 id="___sec33">A centered difference </h2>
+<h2 id="___sec32">A centered difference </h2>
 
 <p>
 Centered differences are better approximations than forward or
@@ -840,7 +824,7 @@ $$ u'(t_{n+\half}) = -au(t_{n+\half})$$
 <p>&nbsp;<br>
 
 <p>
-Idea 2: approximate \( u'(t_{n+\half} \) by a centered difference
+Idea 2: approximate \( u'(t_{n+\half}) \) by a centered difference
 
 <p>&nbsp;<br>
 $$
@@ -864,7 +848,7 @@ $$ u(t_{n+\half}) \approx \half(u^n + u^{n+1}) $$
 
 
 <section>
-<h2 id="___sec35">The Crank-Nicolson scheme; result </h2>
+<h2 id="___sec34">The Crank-Nicolson scheme; result </h2>
 
 <p>
 Result:
@@ -924,7 +908,7 @@ $$
 <p>&nbsp;<br>
 $$
 \begin{equation}
-u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)}
+u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)} u^n
 \tag{15}
 \end{equation}
 $$
@@ -933,7 +917,7 @@ $$
 
 
 <section>
-<h2 id="___sec37">Constant time step </h2>
+<h2 id="___sec36">Constant time step </h2>
 
 <p>
 Very common assumption (not important, but exclusively used for
@@ -961,7 +945,7 @@ $$
 
 
 <section>
-<h2 id="___sec38">Test the understanding! </h2>
+<h2 id="___sec37">Test the understanding! </h2>
 
 <p>
 Derive Forward Euler, Backward Euler, and Crank-Nicolson schemes for
@@ -1003,7 +987,7 @@ $$
 
 
 <section>
-<h2 id="___sec40">Specific notation for difference operators </h2>
+<h2 id="___sec39">Specific notation for difference operators </h2>
 
 <p>
 Forward difference:
@@ -1017,7 +1001,7 @@ $$
 $$
 <p>&nbsp;<br>
 
-Centered difference:
+Centered difference (around \( t_n \)):
 
 <p>&nbsp;<br>
 $$
@@ -1042,7 +1026,7 @@ $$
 
 
 <section>
-<h2 id="___sec41">The Backward Euler scheme with operator notation </h2>
+<h2 id="___sec40">The Backward Euler scheme with operator notation </h2>
 
 <p>&nbsp;<br>
 $$
@@ -1067,7 +1051,7 @@ $$
 
 
 <section>
-<h2 id="___sec42">The Forward Euler scheme with operator notation </h2>
+<h2 id="___sec41">The Forward Euler scheme with operator notation </h2>
 
 <p>&nbsp;<br>
 $$
@@ -1081,7 +1065,7 @@ $$
 
 
 <section>
-<h2 id="___sec43">The Crank-Nicolson scheme with operator notation </h2>
+<h2 id="___sec42">The Crank-Nicolson scheme with operator notation </h2>
 
 <p>
 Introduce an averaging operator:
@@ -1144,7 +1128,7 @@ for \( \theta\in [0,1] \). Note
 
 
 <section>
-<h2 id="___sec45">Requirements of a program </h2>
+<h2 id="___sec44">Requirements of a program </h2>
 
 <ul>
 
@@ -1156,17 +1140,15 @@ for \( \theta\in [0,1] \). Note
 
 <p><li> Compare the numerical and the exact solution in a plot</li>
 
-<p><li> computes the error \( \uex (t_n) - u^n \)</li>
+<p><li> Compute the error \( \uex (t_n) - u^n \)</li>
 
-<p><li> computes the convergence rate of the numerical scheme</li>
-
-<p><li> reads its input data from the command line</li>
+<p><li> Read its input data from the command line</li>
 </ul>
 </section>
 
 
 <section>
-<h2 id="___sec46">Tools to learn </h2>
+<h2 id="___sec45">Tools to learn </h2>
 
 <ul>
 
@@ -1190,7 +1172,7 @@ All programs are in the directory
 
 
 <section>
-<h2 id="___sec47">Why implement in Python? </h2>
+<h2 id="___sec46">Why implement in Python? </h2>
 
 <ul>
 
@@ -1209,7 +1191,7 @@ All programs are in the directory
 
 
 <section>
-<h2 id="___sec48">Why implement in Python? </h2>
+<h2 id="___sec47">Why implement in Python? </h2>
 
 <ul>
 
@@ -1253,7 +1235,7 @@ All programs are in the directory
 
 
 <section>
-<h2 id="___sec50">Translation to Python function </h2>
+<h2 id="___sec49">Translation to Python function </h2>
 
 <p>
 
@@ -1287,7 +1269,7 @@ Sample call:
 
 
 <section>
-<h2 id="___sec51">Integer division </h2>
+<h2 id="___sec50">Integer division </h2>
 
 <p>
 Python applies integer division: <code>1/2</code> is 0, while <code>1./2</code> or <code>1.0/2</code> or
@@ -1318,7 +1300,7 @@ A safer <code>solver</code> function (<code>dt = float(dt)</code> - guarantee fl
 
 
 <section>
-<h2 id="___sec52">Doc strings </h2>
+<h2 id="___sec51">Doc strings </h2>
 
 <ul>
  <p><li> First string after the function heading</li>
@@ -1349,7 +1331,7 @@ A safer <code>solver</code> function (<code>dt = float(dt)</code> - guarantee fl
 
 
 <section>
-<h2 id="___sec53">Formatting of numbers </h2>
+<h2 id="___sec52">Formatting of numbers </h2>
 
 <p>
 Can control formatting of reals and integers through the <em>printf</em> format:
@@ -1370,7 +1352,7 @@ Or the alternative <em>format string syntax</em>:
 
 
 <section>
-<h2 id="___sec54">Running the program </h2>
+<h2 id="___sec53">Running the program </h2>
 
 <p>
 How to run the program <a href="http://tinyurl.com/ofkw6kc/alg/decay_v1.py" target="_self"><tt>decay_v1.py</tt></a>.
@@ -1401,7 +1383,7 @@ Terminal&gt; ./decay_v1.py
 
 
 <section>
-<h2 id="___sec55">Plotting the solution </h2>
+<h2 id="___sec54">Plotting the solution </h2>
 
 <p>
 Basic syntax:
@@ -1420,7 +1402,7 @@ Can (and should!) add labels on axes, title, legends.
 
 
 <section>
-<h2 id="___sec56">Comparing with the exact solution </h2>
+<h2 id="___sec55">Comparing with the exact solution </h2>
 
 <p>
 Python function for the exact solution \( \uex(t)=Ie^{-at} \):
@@ -1460,7 +1442,7 @@ Remedy: Introduce a very fine mesh for \( \uex \).
 
 
 <section>
-<h2 id="___sec57">Add legends, axes labels, title, and wrap in a function </h2>
+<h2 id="___sec56">Add legends, axes labels, title, and wrap in a function </h2>
 
 <p>
 
@@ -1492,7 +1474,7 @@ Complete code in
 
 
 <section>
-<h2 id="___sec58">Plotting with SciTools </h2>
+<h2 id="___sec57">Plotting with SciTools </h2>
 
 <p>
 <a href="https://github.com/hplgit/scitools" target="_self">SciTools</a> provides a
@@ -1542,7 +1524,7 @@ Terminal&gt; python decay_plot_st.py --SCITOOLS_easyviz_backend grace
 
 
 <section>
-<h2 id="___sec60">Simplest method: run a few algorithmic steps by hand </h2>
+<h2 id="___sec59">Simplest method: run a few algorithmic steps by hand </h2>
 
 <p>
 Use a calculator (\( I=0.1 \), \( \theta=0.8 \), \( \Delta t =0.8 \)):
@@ -1562,12 +1544,12 @@ $$
 <p>&nbsp;<br>
 
 <p>
-See the function <code>verify_three_steps</code> in <a href="http://tinyurl.com/ofkw6kc/alg/decay_verf1.py" target="_self"><tt>decay_verf1.py</tt></a>.
+See the function <code>test_solver_three_steps</code> in <a href="http://tinyurl.com/ofkw6kc/alg/decay_v3.py" target="_self"><tt>decay_v3.py</tt></a>.
 </section>
 
 
 <section>
-<h2 id="___sec61">Comparison with an exact discrete solution </h2>
+<h2 id="___sec60">Comparison with an exact discrete solution </h2>
 
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
@@ -1597,7 +1579,7 @@ $$
 
 
 <section>
-<h2 id="___sec62">Making a test based on an exact discrete solution </h2>
+<h2 id="___sec61">Making a test based on an exact discrete solution </h2>
 
 <p>
 The exact discrete solution is
@@ -1631,7 +1613,7 @@ Implementation in <a href="http://tinyurl.com/ofkw6kc/alg/decay_verf2.py" target
 
 
 <section>
-<h2 id="___sec63">Test the understanding! </h2>
+<h2 id="___sec62">Test the understanding! </h2>
 
 <p>
 Make a program for solving Newton's law of cooling
@@ -1711,7 +1693,7 @@ $$
 
 
 <section>
-<h2 id="___sec66">Norms of mesh functions </h2>
+<h2 id="___sec65">Norms of mesh functions </h2>
 
 <ul>
  <p><li> Problem: \( f^n =f(t_n) \) is a mesh function and hence not defined for all \( t \).
@@ -1738,7 +1720,7 @@ $$ ||f^n||_{\ell^2} = \left(\Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2}$$
 
 
 <section>
-<h2 id="___sec67">Implementation of the norm of the error </h2>
+<h2 id="___sec66">Implementation of the norm of the error </h2>
 
 <p>&nbsp;<br>
 $$ E = ||e^n||_{\ell^2}  = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}$$
@@ -1757,7 +1739,7 @@ Python w/array arithmetics:
 
 
 <section>
-<h2 id="___sec68">Comment on array vs scalar computation </h2>
+<h2 id="___sec67">Comment on array vs scalar computation </h2>
 
 <p>
 Scalar computing of <code>E = sqrt(dt*sum(e**2))</code>:
@@ -1798,7 +1780,7 @@ Compute on entire arrays (when possible)!
 
 
 <section>
-<h2 id="___sec69">Memory-saving implementation </h2>
+<h2 id="___sec68">Memory-saving implementation </h2>
 
 <ul>
  <p><li> Note 1: we store the entire array <code>u</code>, i.e., \( u^n \) for \( n=0,1,\ldots,N_t \)</li>
@@ -1814,7 +1796,7 @@ Compute on entire arrays (when possible)!
 
 
 <section>
-<h2 id="___sec70">Memory-saving solver function </h2>
+<h2 id="___sec69">Memory-saving solver function </h2>
 
 <p>
 
@@ -1845,7 +1827,7 @@ Compute on entire arrays (when possible)!
 
 
 <section>
-<h2 id="___sec71">Reading computed data from file </h2>
+<h2 id="___sec70">Reading computed data from file </h2>
 
 <p>
 
@@ -1881,7 +1863,7 @@ in a two-dimensional array (which we try to prevent now!).
 
 
 <section>
-<h2 id="___sec72">Usage of memory-saving code </h2>
+<h2 id="___sec71">Usage of memory-saving code </h2>
 
 <p>
 
