@@ -183,7 +183,7 @@ $$
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <br>
 <p>
-<center><h4>Feb 12, 2016</h4></center> <!-- date -->
+<center><h4>Sep 13, 2016</h4></center> <!-- date -->
 <br>
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
@@ -288,7 +288,7 @@ The characteristics of the displayed curves can be summarized as follows:
 
 <ul>
   <p><li> The Backward Euler scheme <em>always</em> gives a monotone solution, lying above
-    the exact curve.</li>
+    the exact solution.</li>
   <p><li> The Crank-Nicolson scheme gives the most accurate results, but for
     \( \Delta t=1.25 \) the solution oscillates.</li>
   <p><li> The Forward Euler scheme gives a growing, oscillating solution for
@@ -339,6 +339,9 @@ Another question to be raised is
 The solution is oscillatory if
 $$ u^{n} > u^{n-1}$$
 
+{\tiny ("Safe choices" of \( \Delta t \), when lying
+under the following curve as a function of \( a \), ensure \( u^{n} \le u^{n-1} \).)}
+
 <p>
 <center><p><img src="fig-analysis/osc_region_FE.png" align="bottom" width=400></p></center>
 
@@ -362,7 +365,13 @@ u^{n} = IA^n,\quad A = \frac{1 - (1-\theta) a\Delta t}{1 + \theta a\Delta t}
 $$
 
 <p>
-Such an exact discrete solution is unusual, but very handy for analysis.
+Such a formula for the exact discrete solution is unusual to obtain in
+practice, but very handy for our analysis here.
+
+<p>
+Note: An exact dicrete
+solution fulfills a discrete equation (without round-off
+errors), whereas an exact solution fulfills the original mathematical equation.
 
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
@@ -370,7 +379,7 @@ Such an exact discrete solution is unusual, but very handy for analysis.
 <h2 id="___sec8">Stability </h2>
 
 <p>
-Since \( u^n\sim A^n \),
+Since \( u^n=I A^n \),
 
 <ul>
  <p><li> \( A < 0 \) gives a factor \( (-1)^n \) and oscillatory solutions</li>
@@ -421,12 +430,11 @@ $$
 \end{equation}
 $$
 
-\( -1 \) is the critical limit:
+\( -1 \) is the critical limit (because \( A\le 1 \) is always satisfied):
 
 $$
 \begin{align*}
-\Delta t &\leq \frac{2}{(1-2\theta)a},\quad \theta < \half\\ 
-\Delta t &\geq \frac{2}{(1-2\theta)a},\quad \theta > {\half}
+\Delta t &\leq \frac{2}{(1-2\theta)a},\quad \mbox{when }\theta < \half
 \end{align*}
 $$
 
@@ -615,7 +623,7 @@ Same leading-order terms as for the error measure \( A-\Aex \).
 <h2 id="decay:analysis:gobal:error">The true/global error at a point</h2>
 
 <ul>
- <p><li> The error in \( A \) reflects the <em>local error</em> when going from one
+ <p><li> The error in \( A \) reflects the <em>local (amplification) error</em> when going from one
    time step to the next</li>
  <p><li> What is the <em>global (true) error</em> at \( t_n \)?
    \( e^n = \uex(t_n) - u^n = Ie^{-at_n} - IA^n \)</li>
@@ -703,13 +711,13 @@ Analysis of both the pointwise and the time-integrated true errors:
  <p><li> Possible answer: see how well \( \uex \) fits the discrete equation</li>
 </ul>
 
-$$ \lbrack D_t u = -au\rbrack^n$$
+$$ \lbrack D^{+}_t u = -au\rbrack^n$$
 
 i.e.,
 
 $$ \frac{u^{n+1}-u^n}{\Delta t} = -au^n$$
 
-Insert \( \uex \) (which does not in general fulfill this equation):
+Insert \( \uex \) (which does not in general fulfill this discrete equation):
 
 $$
 \begin{equation}
