@@ -83,8 +83,8 @@ The solution is oscillatory if
 !bt
 \[ u^{n} > u^{n-1}\]
 !et
-{\tiny ("Safe choices" of $\Delta t$, when lying
-under the following curve as a function of $a$, ensure $u^{n} \le u^{n-1}$.)}
+("Safe choices" of $\Delta t$ lie
+under the following curve as a function of $a$.)
 
 FIGURE: [fig-analysis/osc_region_FE.png, width=400]
 
@@ -178,7 +178,7 @@ FIGURE: [fig-analysis/FE4c, width=500 frac=1.1]
  * $a\Delta t= 2\cdot 1.25=2.5$ and $A=-1.5$: oscillations and growth
  * $a\Delta t = 2\cdot 0.75=1.5$ and $A=-0.5$: oscillations and decay
  * $\Delta t=0.5$ and $A=0$: $u^n=0$ for $n>0$
- * Smaller $Delta t$: qualitatively correct solution
+ * Smaller $\Delta t$: qualitatively correct solution
 
 
 !split
