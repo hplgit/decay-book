@@ -87,32 +87,31 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                None,
                '___sec5'),
-              ('The exam', 2, None, '___sec6'),
-              ('Required software', 2, None, '___sec7'),
-              ('Assumed/ideal background', 2, None, '___sec8'),
-              ('Start-up example for the course', 2, None, '___sec9'),
-              ('Start-up example', 2, None, '___sec10'),
+              ('Required software', 2, None, '___sec6'),
+              ('Assumed/ideal background', 2, None, '___sec7'),
+              ('Start-up example for the course', 2, None, '___sec8'),
+              ('Start-up example', 2, None, '___sec9'),
               ('What to learn in the start-up example; standard topics',
                2,
                None,
-               '___sec11'),
+               '___sec10'),
               ('What to learn in the start-up example; programming topics',
                2,
                None,
-               '___sec12'),
+               '___sec11'),
               ('What to learn in the start-up example; mathematical analysis',
                2,
                None,
-               '___sec13'),
+               '___sec12'),
               ('What to learn in the start-up example; generalizations',
                2,
                None,
-               '___sec14'),
+               '___sec13'),
               ('Finite difference methods', 1, 'decay:fdm', 'decay:fdm'),
               ('Topics in the first intro to the finite difference method',
                2,
                None,
-               '___sec16'),
+               '___sec15'),
               ('A basic model for exponential decay',
                2,
                'decay:model',
@@ -120,24 +119,28 @@ div { text-align: justify; text-justify: inter-word; }
               ('The ODE model has a range of applications in many fields',
                2,
                None,
-               '___sec18'),
+               '___sec17'),
               ('The ODE problem has a continuous and discrete version',
                2,
                None,
-               '___sec19'),
-              ('Continuous problem', 3, None, '___sec20'),
-              ('Discrete problem', 3, None, '___sec21'),
+               '___sec18'),
+              ('Continuous problem', 3, None, '___sec19'),
+              ('Discrete problem', 3, None, '___sec20'),
               ('The steps in the finite difference method',
                2,
                'decay:schemes:keysteps',
                'decay:schemes:keysteps'),
+              ('Step 1: Discretizing the domain', 2, None, '___sec22'),
               ('Step 1: Discretizing the domain', 2, None, '___sec23'),
-              ('Step 1: Discretizing the domain', 2, None, '___sec24'),
               ('What about a mesh function between the mesh points?',
                2,
                None,
-               '___sec25'),
+               '___sec24'),
               ('Step 2: Fulfilling the equation at discrete time points',
+               2,
+               None,
+               '___sec25'),
+              ('Step 3: Replacing derivatives by finite differences',
                2,
                None,
                '___sec26'),
@@ -145,29 +148,25 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                None,
                '___sec27'),
-              ('Step 3: Replacing derivatives by finite differences',
-               2,
-               None,
-               '___sec28'),
               ('Step 4: Formulating a recursive algorithm',
                2,
                None,
-               '___sec29'),
-              ('Let us apply the scheme by hand', 2, None, '___sec30'),
-              ('A backward difference', 2, None, '___sec31'),
-              ('The Backward Euler scheme', 2, None, '___sec32'),
-              ('A centered difference', 2, None, '___sec33'),
+               '___sec28'),
+              ('Let us apply the scheme by hand', 2, None, '___sec29'),
+              ('A backward difference', 2, None, '___sec30'),
+              ('The Backward Euler scheme', 2, None, '___sec31'),
+              ('A centered difference', 2, None, '___sec32'),
               ('The Crank-Nicolson scheme; ideas',
                2,
                'decay:schemes:CN',
                'decay:schemes:CN'),
-              ('The Crank-Nicolson scheme; result', 2, None, '___sec35'),
+              ('The Crank-Nicolson scheme; result', 2, None, '___sec34'),
               ('The unifying $\\theta$-rule',
                2,
                'decay:schemes:theta',
                'decay:schemes:theta'),
-              ('Constant time step', 2, None, '___sec37'),
-              ('Test the understanding!', 2, None, '___sec38'),
+              ('Constant time step', 2, None, '___sec36'),
+              ('Test the understanding!', 2, None, '___sec37'),
               ('Compact operator notation for finite differences',
                2,
                'decay:fd:op',
@@ -175,37 +174,37 @@ div { text-align: justify; text-justify: inter-word; }
               ('Specific notation for difference operators',
                2,
                None,
-               '___sec40'),
+               '___sec39'),
               ('The Backward Euler scheme with operator notation',
                2,
                None,
-               '___sec41'),
+               '___sec40'),
               ('The Forward Euler scheme with operator notation',
                2,
                None,
-               '___sec42'),
+               '___sec41'),
               ('The Crank-Nicolson scheme with operator notation',
                2,
                None,
-               '___sec43'),
+               '___sec42'),
               ('Implementation', 1, 'decay:impl1', 'decay:impl1'),
-              ('Requirements of a program', 2, None, '___sec45'),
-              ('Tools to learn', 2, None, '___sec46'),
+              ('Requirements of a program', 2, None, '___sec44'),
+              ('Tools to learn', 2, None, '___sec45'),
+              ('Why implement in Python?', 2, None, '___sec46'),
               ('Why implement in Python?', 2, None, '___sec47'),
-              ('Why implement in Python?', 2, None, '___sec48'),
               ('Algorithm', 2, 'decay:py1', 'decay:py1'),
-              ('Translation to Python function', 2, None, '___sec50'),
-              ('Integer division', 2, None, '___sec51'),
-              ('Doc strings', 2, None, '___sec52'),
-              ('Formatting of numbers', 2, None, '___sec53'),
-              ('Running the program', 2, None, '___sec54'),
-              ('Plotting the solution', 2, None, '___sec55'),
-              ('Comparing with the exact solution', 2, None, '___sec56'),
+              ('Translation to Python function', 2, None, '___sec49'),
+              ('Integer division', 2, None, '___sec50'),
+              ('Doc strings', 2, None, '___sec51'),
+              ('Formatting of numbers', 2, None, '___sec52'),
+              ('Running the program', 2, None, '___sec53'),
+              ('Plotting the solution', 2, None, '___sec54'),
+              ('Comparing with the exact solution', 2, None, '___sec55'),
               ('Add legends, axes labels, title, and wrap in a function',
                2,
                None,
-               '___sec57'),
-              ('Plotting with SciTools', 2, None, '___sec58'),
+               '___sec56'),
+              ('Plotting with SciTools', 2, None, '___sec57'),
               ('Verifying the implementation',
                1,
                'decay:verification',
@@ -213,16 +212,16 @@ div { text-align: justify; text-justify: inter-word; }
               ('Simplest method: run a few algorithmic steps by hand',
                2,
                None,
-               '___sec60'),
+               '___sec59'),
               ('Comparison with an exact discrete solution',
                2,
                None,
-               '___sec61'),
+               '___sec60'),
               ('Making a test based on an exact discrete solution',
                2,
                None,
-               '___sec62'),
-              ('Test the understanding!', 2, None, '___sec63'),
+               '___sec61'),
+              ('Test the understanding!', 2, None, '___sec62'),
               ('Computing the numerical error as a mesh function',
                2,
                'decay:computing:error',
@@ -231,16 +230,16 @@ div { text-align: justify; text-justify: inter-word; }
                2,
                'decay:computing:error:norm',
                'decay:computing:error:norm'),
-              ('Norms of mesh functions', 2, None, '___sec66'),
+              ('Norms of mesh functions', 2, None, '___sec65'),
               ('Implementation of the norm of the error',
                2,
                None,
-               '___sec67'),
-              ('Comment on array vs scalar computation', 2, None, '___sec68'),
-              ('Memory-saving implementation', 2, None, '___sec69'),
-              ('Memory-saving solver function', 2, None, '___sec70'),
-              ('Reading computed data from file', 2, None, '___sec71'),
-              ('Usage of memory-saving code', 2, None, '___sec72')]}
+               '___sec66'),
+              ('Comment on array vs scalar computation', 2, None, '___sec67'),
+              ('Memory-saving implementation', 2, None, '___sec68'),
+              ('Memory-saving solver function', 2, None, '___sec69'),
+              ('Reading computed data from file', 2, None, '___sec70'),
+              ('Usage of memory-saving code', 2, None, '___sec71')]}
 end of tocinfo -->
 
 <body>
@@ -289,7 +288,7 @@ $$
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <br>
 <p>
-<center><h4>Feb 12, 2016</h4></center> <!-- date -->
+<center><h4>Sep 13, 2016</h4></center> <!-- date -->
 <br>
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
@@ -303,71 +302,70 @@ $$
 &nbsp; &nbsp; &nbsp; <a href="#___sec3"> More specific contents: finite element methods </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec4"> More specific contents: nonlinear and advanced problems </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec5"> Philosophy: simplify, understand, generalize </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec6"> The exam </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec7"> Required software </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec8"> Assumed/ideal background </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec9"> Start-up example for the course </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec10"> Start-up example </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec11"> What to learn in the start-up example; standard topics </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec12"> What to learn in the start-up example; programming topics </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec13"> What to learn in the start-up example; mathematical analysis </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec14"> What to learn in the start-up example; generalizations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec6"> Required software </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec7"> Assumed/ideal background </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec8"> Start-up example for the course </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec9"> Start-up example </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec10"> What to learn in the start-up example; standard topics </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec11"> What to learn in the start-up example; programming topics </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec12"> What to learn in the start-up example; mathematical analysis </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec13"> What to learn in the start-up example; generalizations </a><br>
 <a href="#decay:fdm"> Finite difference methods  </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec16"> Topics in the first intro to the finite difference method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec15"> Topics in the first intro to the finite difference method </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#decay:model"> A basic model for exponential decay </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec18"> The ODE model has a range of applications in many fields </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec19"> The ODE problem has a continuous and discrete version </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec17"> The ODE model has a range of applications in many fields </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec18"> The ODE problem has a continuous and discrete version </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#decay:schemes:keysteps"> The steps in the finite difference method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec22"> Step 1: Discretizing the domain </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec23"> Step 1: Discretizing the domain </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec24"> Step 1: Discretizing the domain </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec25"> What about a mesh function between the mesh points? </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec26"> Step 2: Fulfilling the equation at discrete time points </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec24"> What about a mesh function between the mesh points? </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec25"> Step 2: Fulfilling the equation at discrete time points </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec26"> Step 3: Replacing derivatives by finite differences </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec27"> Step 3: Replacing derivatives by finite differences </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec28"> Step 3: Replacing derivatives by finite differences </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec29"> Step 4: Formulating a recursive algorithm </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec30"> Let us apply the scheme by hand </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec31"> A backward difference </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec32"> The Backward Euler scheme </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec33"> A centered difference </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec28"> Step 4: Formulating a recursive algorithm </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec29"> Let us apply the scheme by hand </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec30"> A backward difference </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec31"> The Backward Euler scheme </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec32"> A centered difference </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#decay:schemes:CN"> The Crank-Nicolson scheme; ideas </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec35"> The Crank-Nicolson scheme; result </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec34"> The Crank-Nicolson scheme; result </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#decay:schemes:theta"> The unifying \( \theta \)-rule </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec37"> Constant time step </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec38"> Test the understanding! </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec36"> Constant time step </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec37"> Test the understanding! </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#decay:fd:op"> Compact operator notation for finite differences </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec40"> Specific notation for difference operators </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec41"> The Backward Euler scheme with operator notation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec42"> The Forward Euler scheme with operator notation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec43"> The Crank-Nicolson scheme with operator notation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec39"> Specific notation for difference operators </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec40"> The Backward Euler scheme with operator notation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec41"> The Forward Euler scheme with operator notation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec42"> The Crank-Nicolson scheme with operator notation </a><br>
 <a href="#decay:impl1"> Implementation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec45"> Requirements of a program </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec46"> Tools to learn </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec44"> Requirements of a program </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec45"> Tools to learn </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec46"> Why implement in Python? </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec47"> Why implement in Python? </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec48"> Why implement in Python? </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#decay:py1"> Algorithm </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec50"> Translation to Python function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec51"> Integer division </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec52"> Doc strings </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec53"> Formatting of numbers </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec54"> Running the program </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec55"> Plotting the solution </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec56"> Comparing with the exact solution </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec57"> Add legends, axes labels, title, and wrap in a function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec58"> Plotting with SciTools </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec49"> Translation to Python function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec50"> Integer division </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec51"> Doc strings </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec52"> Formatting of numbers </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec53"> Running the program </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec54"> Plotting the solution </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec55"> Comparing with the exact solution </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec56"> Add legends, axes labels, title, and wrap in a function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec57"> Plotting with SciTools </a><br>
 <a href="#decay:verification"> Verifying the implementation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec60"> Simplest method: run a few algorithmic steps by hand </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec61"> Comparison with an exact discrete solution </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec62"> Making a test based on an exact discrete solution </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec63"> Test the understanding! </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec59"> Simplest method: run a few algorithmic steps by hand </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec60"> Comparison with an exact discrete solution </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec61"> Making a test based on an exact discrete solution </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec62"> Test the understanding! </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#decay:computing:error"> Computing the numerical error as a mesh function </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#decay:computing:error:norm"> Computing the norm of the error </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec66"> Norms of mesh functions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec67"> Implementation of the norm of the error </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec68"> Comment on array vs scalar computation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec69"> Memory-saving implementation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec70"> Memory-saving solver function </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec71"> Reading computed data from file </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec72"> Usage of memory-saving code </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec65"> Norms of mesh functions </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec66"> Implementation of the norm of the error </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec67"> Comment on array vs scalar computation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec68"> Memory-saving implementation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec69"> Memory-saving solver function </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec70"> Reading computed data from file </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec71"> Usage of memory-saving code </a><br>
 </p>
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
@@ -500,28 +498,7 @@ This is the power of applied mathematics!
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec6">The exam </h2>
-
-<p>
-<!-- !bpop -->
-
-<ul>
- <p><li> Oral exam</li>
- <p><li> 6 problems (topics) are announced two weeks before the exam</li>
- <p><li> Work out a 20 min presentations (talks) for each problem</li>
- <p><li> At the exam: throw a die to pick your problem to be presented</li>
- <p><li> Aids: plots, computer programs</li>
- <p><li> Why? Very effective way of learning</li>
- <p><li> Sure? Excellent results over 15 years</li>
- <p><li> When? Late december</li>
-</ul>
-
-<!-- !epop -->
-
-<p>
-<!-- !split --><br><br><br><br><br><br><br><br>
-
-<h2 id="___sec7">Required software </h2>
+<h2 id="___sec6">Required software </h2>
 
 <ul>
  <p><li> Our software platform: Python (sometimes combined with Cython,
@@ -534,7 +511,7 @@ This is the power of applied mathematics!
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec8">Assumed/ideal background </h2>
+<h2 id="___sec7">Assumed/ideal background </h2>
 
 <ul>
  <p><li> INF1100: Python programming, solution of ODEs</li>
@@ -548,7 +525,7 @@ This is the power of applied mathematics!
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec9">Start-up example for the course </h2>
+<h2 id="___sec8">Start-up example for the course </h2>
 
 <p>
 What if you don't have this ideal background?
@@ -571,7 +548,7 @@ What if you don't have this ideal background?
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec10">Start-up example </h2>
+<h2 id="___sec9">Start-up example </h2>
 
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
@@ -590,7 +567,7 @@ solving PDEs!
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec11">What to learn in the start-up example; standard topics </h2>
+<h2 id="___sec10">What to learn in the start-up example; standard topics </h2>
 
 <ul>
  <p><li> How to think when constructing finite difference methods, with special focus
@@ -605,7 +582,7 @@ solving PDEs!
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec12">What to learn in the start-up example; programming topics </h2>
+<h2 id="___sec11">What to learn in the start-up example; programming topics </h2>
 
 <ul>
  <p><li> How to verify an implementation and automate verification
@@ -622,7 +599,7 @@ solving PDEs!
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec13">What to learn in the start-up example; mathematical analysis </h2>
+<h2 id="___sec12">What to learn in the start-up example; mathematical analysis </h2>
 
 <ul>
  <p><li> How to uncover numerical artifacts in the computed solution</li>
@@ -638,7 +615,7 @@ solving PDEs!
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec14">What to learn in the start-up example; generalizations </h2>
+<h2 id="___sec13">What to learn in the start-up example; generalizations </h2>
 
 <ul>
  <p><li> Generalize the example to \( u'(t)=-a(t)u(t) + b(t) \)</li>
@@ -666,7 +643,7 @@ solving PDEs!
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec16">Topics in the first intro to the finite difference method </h2>
+<h2 id="___sec15">Topics in the first intro to the finite difference method </h2>
 
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
@@ -722,7 +699,7 @@ simple as possible while learning computer tools.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec18">The ODE model has a range of applications in many fields </h2>
+<h2 id="___sec17">The ODE model has a range of applications in many fields </h2>
 
 <ul>
  <p><li> Growth and decay of populations (cells, animals, human)</li>
@@ -739,9 +716,9 @@ See the <a href="http://tinyurl.com/nclmcng/pub/sphinx-decay/._main_decay008.htm
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec19">The ODE problem has a continuous and discrete version </h2>
+<h2 id="___sec18">The ODE problem has a continuous and discrete version </h2>
 
-<h3 id="___sec20">Continuous problem </h3>
+<h3 id="___sec19">Continuous problem </h3>
 
 $$
 \begin{equation}
@@ -752,7 +729,7 @@ $$
 
 (varies with a continuous \( t \))
 
-<h3 id="___sec21">Discrete problem </h3>
+<h3 id="___sec20">Discrete problem </h3>
 
 <p>
 Numerical methods applied to the continuous problem turns it into
@@ -760,7 +737,7 @@ a discrete problem
 
 $$
 \begin{equation}
-u^{n+1} = \mbox{const} u^n, \quad n=0,1,\ldots N_t-1, \quad u^n=I
+u^{n+1} = \mbox{const} \cdot u^n, \quad n=0,1,\ldots N_t-1, \quad u^n=I
 \label{decay:problem:discrete}
 \end{equation}
 $$
@@ -785,7 +762,7 @@ consists of four steps:
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec23">Step 1: Discretizing the domain </h2>
+<h2 id="___sec22">Step 1: Discretizing the domain </h2>
 
 <p>
 The time domain \( [0,T] \) is represented by a <em>mesh</em>: a finite number of
@@ -805,7 +782,7 @@ $$0 = t_0 < t_1 < t_2 < \cdots < t_{N_t-1} < t_{N_t} = T$$
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec24">Step 1: Discretizing the domain </h2>
+<h2 id="___sec23">Step 1: Discretizing the domain </h2>
 
 <p>
 \( u^n \) is a mesh function, defined at the mesh points \( t_n \), \( n=0,\ldots,N_t \)
@@ -817,7 +794,7 @@ only.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec25">What about a mesh function between the mesh points? </h2>
+<h2 id="___sec24">What about a mesh function between the mesh points? </h2>
 
 <p>
 Can extend the mesh function to yield values between mesh points
@@ -836,7 +813,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec26">Step 2: Fulfilling the equation at discrete time points </h2>
+<h2 id="___sec25">Step 2: Fulfilling the equation at discrete time points </h2>
 
 <ul>
  <p><li> The ODE holds for all \( t\in (0,T] \) (infinite no of points)</li>
@@ -853,7 +830,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec27">Step 3: Replacing derivatives by finite differences </h2>
+<h2 id="___sec26">Step 3: Replacing derivatives by finite differences </h2>
 
 <p>
 Now it is time for the <em>finite difference</em> approximations of
@@ -872,7 +849,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec28">Step 3: Replacing derivatives by finite differences </h2>
+<h2 id="___sec27">Step 3: Replacing derivatives by finite differences </h2>
 
 <p>
 Inserting the finite difference approximation in
@@ -895,7 +872,7 @@ or <em>finite difference method/scheme</em>)
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec29">Step 4: Formulating a recursive algorithm </h2>
+<h2 id="___sec28">Step 4: Formulating a recursive algorithm </h2>
 
 <p>
 How can we actually compute the \( u^n \) values?
@@ -927,7 +904,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec30">Let us apply the scheme by hand </h2>
+<h2 id="___sec29">Let us apply the scheme by hand </h2>
 
 <p>
 Assume constant time spacing: \( \Delta t = t_{n+1}-t_n=\mbox{const} \)
@@ -950,7 +927,7 @@ example)! No need for a computer (yet)...
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec31">A backward difference </h2>
+<h2 id="___sec30">A backward difference </h2>
 
 <p>
 Here is another finite difference approximation to the
@@ -969,7 +946,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec32">The Backward Euler scheme </h2>
+<h2 id="___sec31">The Backward Euler scheme </h2>
 
 <p>
 Inserting the finite difference approximation in \( u'(t_n)=-au(t_n) \) yields
@@ -994,7 +971,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec33">A centered difference </h2>
+<h2 id="___sec32">A centered difference </h2>
 
 <p>
 Centered differences are better approximations than forward or
@@ -1014,7 +991,7 @@ Idea 1: let the ODE hold at \( t_{n+\half} \)
 $$ u'(t_{n+\half}) = -au(t_{n+\half})$$
 
 <p>
-Idea 2: approximate \( u'(t_{n+\half} \) by a centered difference
+Idea 2: approximate \( u'(t_{n+\half}) \) by a centered difference
 
 $$
 \begin{equation}
@@ -1034,7 +1011,7 @@ $$ u(t_{n+\half}) \approx \half(u^n + u^{n+1}) $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec35">The Crank-Nicolson scheme; result </h2>
+<h2 id="___sec34">The Crank-Nicolson scheme; result </h2>
 
 <p>
 Result:
@@ -1086,7 +1063,7 @@ $$
 
 $$
 \begin{equation}
-u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)}
+u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)} u^n
 \label{decay:th}
 \end{equation}
 $$
@@ -1094,7 +1071,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec37">Constant time step </h2>
+<h2 id="___sec36">Constant time step </h2>
 
 <p>
 Very common assumption (not important, but exclusively used for
@@ -1122,7 +1099,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec38">Test the understanding! </h2>
+<h2 id="___sec37">Test the understanding! </h2>
 
 <p>
 Derive Forward Euler, Backward Euler, and Crank-Nicolson schemes for
@@ -1160,7 +1137,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec40">Specific notation for difference operators </h2>
+<h2 id="___sec39">Specific notation for difference operators </h2>
 
 <p>
 Forward difference:
@@ -1172,7 +1149,7 @@ $$
 \end{equation}
 $$
 
-Centered difference:
+Centered difference (around \( t_n \)):
 
 $$
 \begin{equation}
@@ -1193,7 +1170,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec41">The Backward Euler scheme with operator notation </h2>
+<h2 id="___sec40">The Backward Euler scheme with operator notation </h2>
 
 $$
 \begin{equation*}
@@ -1214,7 +1191,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec42">The Forward Euler scheme with operator notation </h2>
+<h2 id="___sec41">The Forward Euler scheme with operator notation </h2>
 
 $$
 \begin{equation}
@@ -1226,7 +1203,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec43">The Crank-Nicolson scheme with operator notation </h2>
+<h2 id="___sec42">The Crank-Nicolson scheme with operator notation </h2>
 
 <p>
 Introduce an averaging operator:
@@ -1280,21 +1257,20 @@ for \( \theta\in [0,1] \). Note
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec45">Requirements of a program </h2>
+<h2 id="___sec44">Requirements of a program </h2>
 
 <ul>
   <p><li> Compute the numerical solution \( u^n \), \( n=1,2,\ldots,N_t \)</li>
   <p><li> Display the numerical and exact solution \( \uex(t)=e^{-at} \)</li>
   <p><li> Bring evidence to a correct implementation (<em>verification</em>)</li>
   <p><li> Compare the numerical and the exact solution in a plot</li>
-  <p><li> computes the error \( \uex (t_n) - u^n \)</li>
-  <p><li> computes the convergence rate of the numerical scheme</li>
-  <p><li> reads its input data from the command line</li>
+  <p><li> Compute the error \( \uex (t_n) - u^n \)</li>
+  <p><li> Read its input data from the command line</li>
 </ul>
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec46">Tools to learn </h2>
+<h2 id="___sec45">Tools to learn </h2>
 
 <ul>
   <p><li> Basic <a href="http://python.org" target="_self">Python</a> programming</li>
@@ -1314,7 +1290,7 @@ All programs are in the directory
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec47">Why implement in Python? </h2>
+<h2 id="___sec46">Why implement in Python? </h2>
 
 <ul>
   <p><li> Python has a very clean, readable syntax (often known as
@@ -1328,7 +1304,7 @@ All programs are in the directory
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec48">Why implement in Python? </h2>
+<h2 id="___sec47">Why implement in Python? </h2>
 
 <ul>
   <p><li> Python has a rich set of modules for scientific computing, and its
@@ -1363,7 +1339,7 @@ All programs are in the directory
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec50">Translation to Python function </h2>
+<h2 id="___sec49">Translation to Python function </h2>
 
 <p>
 
@@ -1396,7 +1372,7 @@ Sample call:
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec51">Integer division </h2>
+<h2 id="___sec50">Integer division </h2>
 
 <p>
 Python applies integer division: <code>1/2</code> is 0, while <code>1./2</code> or <code>1.0/2</code> or
@@ -1426,7 +1402,7 @@ A safer <code>solver</code> function (<code>dt = float(dt)</code> - guarantee fl
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec52">Doc strings </h2>
+<h2 id="___sec51">Doc strings </h2>
 
 <ul>
  <p><li> First string after the function heading</li>
@@ -1457,7 +1433,7 @@ A safer <code>solver</code> function (<code>dt = float(dt)</code> - guarantee fl
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec53">Formatting of numbers </h2>
+<h2 id="___sec52">Formatting of numbers </h2>
 
 <p>
 Can control formatting of reals and integers through the <em>printf</em> format:
@@ -1477,7 +1453,7 @@ Or the alternative <em>format string syntax</em>:
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec54">Running the program </h2>
+<h2 id="___sec53">Running the program </h2>
 
 <p>
 How to run the program <a href="http://tinyurl.com/ofkw6kc/alg/decay_v1.py" target="_self"><tt>decay_v1.py</tt></a>.
@@ -1507,7 +1483,7 @@ Terminal&gt; ./decay_v1.py
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec55">Plotting the solution </h2>
+<h2 id="___sec54">Plotting the solution </h2>
 
 <p>
 Basic syntax:
@@ -1526,7 +1502,7 @@ Can (and should!) add labels on axes, title, legends.
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec56">Comparing with the exact solution </h2>
+<h2 id="___sec55">Comparing with the exact solution </h2>
 
 <p>
 Python function for the exact solution \( \uex(t)=Ie^{-at} \):
@@ -1565,7 +1541,7 @@ plot(t_e, u_e, <span style="color: #BA2121">&#39;b-&#39;</span>,            <spa
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec57">Add legends, axes labels, title, and wrap in a function </h2>
+<h2 id="___sec56">Add legends, axes labels, title, and wrap in a function </h2>
 
 <p>
 
@@ -1597,7 +1573,7 @@ Complete code in
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec58">Plotting with SciTools </h2>
+<h2 id="___sec57">Plotting with SciTools </h2>
 
 <p>
 <a href="https://github.com/hplgit/scitools" target="_self">SciTools</a> provides a
@@ -1645,7 +1621,7 @@ Terminal&gt; python decay_plot_st.py --SCITOOLS_easyviz_backend grace
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec60">Simplest method: run a few algorithmic steps by hand </h2>
+<h2 id="___sec59">Simplest method: run a few algorithmic steps by hand </h2>
 
 <p>
 Use a calculator (\( I=0.1 \), \( \theta=0.8 \), \( \Delta t =0.8 \)):
@@ -1662,12 +1638,12 @@ u^3 &=Au^2= 0.00265290804728
 $$
 
 <p>
-See the function <code>verify_three_steps</code> in <a href="http://tinyurl.com/ofkw6kc/alg/decay_verf1.py" target="_self"><tt>decay_verf1.py</tt></a>.
+See the function <code>test_solver_three_steps</code> in <a href="http://tinyurl.com/ofkw6kc/alg/decay_v3.py" target="_self"><tt>decay_v3.py</tt></a>.
 
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec61">Comparison with an exact discrete solution </h2>
+<h2 id="___sec60">Comparison with an exact discrete solution </h2>
 
 <p>
 <div class="alert alert-block alert-notice alert-text-normal">
@@ -1694,7 +1670,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec62">Making a test based on an exact discrete solution </h2>
+<h2 id="___sec61">Making a test based on an exact discrete solution </h2>
 
 <p>
 The exact discrete solution is
@@ -1725,7 +1701,7 @@ Implementation in <a href="http://tinyurl.com/ofkw6kc/alg/decay_verf2.py" target
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec63">Test the understanding! </h2>
+<h2 id="___sec62">Test the understanding! </h2>
 
 <p>
 Make a program for solving Newton's law of cooling
@@ -1803,7 +1779,7 @@ $$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec66">Norms of mesh functions </h2>
+<h2 id="___sec65">Norms of mesh functions </h2>
 
 <ul>
  <p><li> Problem: \( f^n =f(t_n) \) is a mesh function and hence not defined for all \( t \).
@@ -1825,7 +1801,7 @@ $$ ||f^n||_{\ell^2} = \left(\Delta t\sum_{n=0}^{N_t} (f^n)^2\right)^{1/2}$$
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec67">Implementation of the norm of the error </h2>
+<h2 id="___sec66">Implementation of the norm of the error </h2>
 
 $$ E = ||e^n||_{\ell^2}  = \sqrt{\Delta t\sum_{n=0}^{N_t} (e^n)^2}$$
 
@@ -1841,7 +1817,7 @@ E <span style="color: #666666">=</span> sqrt(dt<span style="color: #666666">*</s
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec68">Comment on array vs scalar computation </h2>
+<h2 id="___sec67">Comment on array vs scalar computation </h2>
 
 <p>
 Scalar computing of <code>E = sqrt(dt*sum(e**2))</code>:
@@ -1882,7 +1858,7 @@ Compute on entire arrays (when possible)!
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec69">Memory-saving implementation </h2>
+<h2 id="___sec68">Memory-saving implementation </h2>
 
 <ul>
  <p><li> Note 1: we store the entire array <code>u</code>, i.e., \( u^n \) for \( n=0,1,\ldots,N_t \)</li>
@@ -1897,7 +1873,7 @@ Compute on entire arrays (when possible)!
 
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec70">Memory-saving solver function </h2>
+<h2 id="___sec69">Memory-saving solver function </h2>
 
 <p>
 
@@ -1927,7 +1903,7 @@ Compute on entire arrays (when possible)!
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec71">Reading computed data from file </h2>
+<h2 id="___sec70">Reading computed data from file </h2>
 
 <p>
 
@@ -1963,7 +1939,7 @@ in a two-dimensional array (which we try to prevent now!).
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
 
-<h2 id="___sec72">Usage of memory-saving code </h2>
+<h2 id="___sec71">Usage of memory-saving code </h2>
 
 <p>
 

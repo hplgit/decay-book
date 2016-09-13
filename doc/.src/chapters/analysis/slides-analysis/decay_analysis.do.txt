@@ -45,7 +45,7 @@ FIGURE: [fig-analysis/FE4c, width=600 frac=1.1]
 The characteristics of the displayed curves can be summarized as follows:
 
   * The Backward Euler scheme *always* gives a monotone solution, lying above
-    the exact curve.
+    the exact solution.
   * The Crank-Nicolson scheme gives the most accurate results, but for
     $\Delta t=1.25$ the solution oscillates.
   * The Forward Euler scheme gives a growing, oscillating solution for
@@ -83,6 +83,8 @@ The solution is oscillatory if
 !bt
 \[ u^{n} > u^{n-1}\]
 !et
+("Safe choices" of $\Delta t$ lie
+under the following curve as a function of $a$.)
 
 FIGURE: [fig-analysis/osc_region_FE.png, width=400]
 
@@ -101,14 +103,19 @@ label{decay:analysis:unex}
 \end{equation}
 !et
 
-Such an exact discrete solution is unusual, but very handy for analysis.
+Such a formula for the exact discrete solution is unusual to obtain in
+practice, but very handy for our analysis here.
+
+Note: An exact dicrete
+solution fulfills a discrete equation (without round-off
+errors), whereas an exact solution fulfills the original mathematical equation.
 
 !split
 ===== Stability =====
 
 idx{stability}
 
-Since $u^n\sim A^n$,
+Since $u^n=I A^n$,
 
  * $A < 0$ gives a factor $(-1)^n$ and oscillatory solutions
  * $|A|>1$ gives growing solutions
@@ -149,12 +156,14 @@ $|A|\leq 1$ means $-1\leq A\leq 1$
 label{decay:th:stability}
 \end{equation}
 !et
-$-1$ is the critical limit:
+$-1$ is the critical limit (because $A\le 1$ is always satisfied):
 
 !bt
 \begin{align*}
-\Delta t &\leq \frac{2}{(1-2\theta)a},\quad \theta < \half\\
+\Delta t &\leq \frac{2}{(1-2\theta)a},\quad \mbox{when }\theta < \half
+# #ifdef NOUSE
 \Delta t &\geq \frac{2}{(1-2\theta)a},\quad \theta > {\half}
+# #endif
 \end{align*}
 !et
 
@@ -169,7 +178,7 @@ FIGURE: [fig-analysis/FE4c, width=500 frac=1.1]
  * $a\Delta t= 2\cdot 1.25=2.5$ and $A=-1.5$: oscillations and growth
  * $a\Delta t = 2\cdot 0.75=1.5$ and $A=-0.5$: oscillations and decay
  * $\Delta t=0.5$ and $A=0$: $u^n=0$ for $n>0$
- * Smaller $Delta t$: qualitatively correct solution
+ * Smaller $\Delta t$: qualitatively correct solution
 
 
 !split
@@ -298,7 +307,7 @@ Same leading-order terms as for the error measure $A-\Aex$.
 ===== The true/global error at a point =====
 label{decay:analysis:gobal:error}
 
- * The error in $A$ reflects the *local error* when going from one
+ * The error in $A$ reflects the *local (amplification) error* when going from one
    time step to the next
  * What is the *global (true) error* at $t_n$?
    $e^n = \uex(t_n) - u^n = Ie^{-at_n} - IA^n$
@@ -372,14 +381,14 @@ Analysis of both the pointwise and the time-integrated true errors:
 
 
 !bt
-\[ \lbrack D_t u = -au\rbrack^n\]
+\[ \lbrack D^{+}_t u = -au\rbrack^n\]
 !et
 i.e.,
 
 !bt
 \[ \frac{u^{n+1}-u^n}{\Delta t} = -au^n\]
 !et
-Insert $\uex$ (which does not in general fulfill this equation):
+Insert $\uex$ (which does not in general fulfill this discrete equation):
 
 !bt
 \begin{equation}

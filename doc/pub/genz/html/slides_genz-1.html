@@ -186,7 +186,7 @@ $$
 <center>[2] <b>Department of Informatics, University of Oslo</b></center>
 <br>
 <p>
-<center><h4>Feb 12, 2016</h4></center> <!-- date -->
+<center><h4>Sep 13, 2016</h4></center> <!-- date -->
 <br>
 <p>
 <!-- !split --><br><br><br><br><br><br><br><br>
@@ -533,7 +533,7 @@ A lambda function can appear anywhere where a variable can appear.
  <p><li> Called the <em>method of manufactured solutions</em> (MMS)</li>
  <p><li> Special case: \( u \) linear in \( t \), because all sound numerical
    methods will reproduce a linear \( u \) exactly (machine precision)</li>
- <p><li> \( u(t) = ct + d \). \( u(0)=0 \) means \( d=I \)</li>
+ <p><li> \( u(t) = ct + d \). \( u(0)=I \) means \( d=I \)</li>
  <p><li> ODE implies \( c = -a(t)u + b(t) \)</li>
  <p><li> Choose \( a(t) \) and \( c \), and set \( b(t) = c + a(t)(ct + I) \)</li>
  <p><li> Any error in the formula for \( u^{n+1} \) makes \( u\neq ct+I \)!</li>
@@ -621,7 +621,7 @@ $$
 
 <ul>
  <p><li> Unknown: \( C \) and \( r \).</li>
- <p><li> Goal: estimate \( r \) (and \( C \)) from numerical experiments</li>
+ <p><li> Goal: estimate \( r \) (and \( C \)) from numerical experiments, by looking at consecutive pairs of \( (\Delta t_i, E_i) \) and \( (\Delta t_{i-1}, E_{i-1}) \).</li>
 </ul>
 
 <!-- !split --><br><br><br><br><br><br><br><br>
@@ -954,7 +954,7 @@ $$ [D_{2t} u = f(u,t)]^n$$
 or written out,
 $$
 \begin{equation}
-u^{n+1} = u^{n-1} + \Delta t f(u^n, t_n)
+u^{n+1} = u^{n-1} + 2 \Delta t f(u^n, t_n)
 \label{decay:fd2:leapfrog}
 \end{equation}
 $$

@@ -81,7 +81,7 @@ a discrete problem
 
 !bt
 \begin{equation}
-u^{n+1} = \mbox{const} u^n, \quad n=0,1,\ldots N_t-1, \quad u^n=I
+u^{n+1} = \mbox{const} \cdot u^n, \quad n=0,1,\ldots N_t-1, \quad u^n=I
 label{decay:problem:discrete}
 \end{equation}
 !et
@@ -304,7 +304,7 @@ Idea 1: let the ODE hold at $t_{n+\half}$
 \[ u'(t_{n+\half}) = -au(t_{n+\half})\]
 !et
 
-Idea 2: approximate $u'(t_{n+\half}$ by a centered difference
+Idea 2: approximate $u'(t_{n+\half})$ by a centered difference
 
 !bt
 \begin{equation}
@@ -369,7 +369,7 @@ $u^n$ is known, solve for $u^{n+1}$:
 
 !bt
 \begin{equation}
-u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)}
+u^{n+1} = \frac{1 - (1-\theta) a(t_{n+1}-t_n)}{1 + \theta a(t_{n+1}-t_n)} u^n
 label{decay:th}
 \end{equation}
 !et
@@ -459,7 +459,7 @@ Forward difference:
 \approx \frac{d}{dt} u(t_n) label{fd:D:f}
 \end{equation}
 !et
-Centered difference:
+Centered difference (around $t_n$):
 
 !bt
 \begin{equation}

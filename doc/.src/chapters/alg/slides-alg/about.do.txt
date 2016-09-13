@@ -1,4 +1,3 @@
-
 !split
 ======= INF5620 in a nutshell =======
 label{5620:about}
@@ -78,6 +77,7 @@ After having completed INF5620 you
 
 This is the power of applied mathematics!
 
+# #ifdef OLD_EXAM_INFO
 !split
 ===== The exam =====
 
@@ -91,6 +91,7 @@ This is the power of applied mathematics!
  * Sure? Excellent results over 15 years
  * When? Late december
 !epop
+# #endif
 
 !split
 ===== Required software =====
