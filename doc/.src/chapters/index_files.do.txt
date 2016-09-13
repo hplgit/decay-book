@@ -48,7 +48,9 @@ TOC: off
  * HTML5:
    "reveal.js dark": "${pub_url}/${name}/html/slides_${name}-reveal.html",
    "reveal.js beige": "${pub_url}/${name}/html/slides_${name}-reveal-beige.html",
-   "remark": "${pub_url}/${name}/html/slides_${name}-remark.html",
+# #ifdef NO_USE
+"remark": "${pub_url}/${name}/html/slides_${name}-remark.html",
+# #endif
    "plain HTML one big file": "${pub_url}/${name}/html/slides_${name}-1.html",
    "solarized HTML one big file": "${pub_url}/${name}/html/slides_${name}-solarized.html"
  * LaTeX Beamer:
@@ -62,6 +64,7 @@ TOC: off
 ======= Finite difference comptuing with exponential decay models =======
 # #endif
 
+ * "Official open-access book published at Springer": "http://link.springer.com/book/10.1007%2F978-3-319-29439-1"
  * Traditional LaTeX book: "for electronic viewing": "book/pdf/decay-book-4screen.pdf", "for printing": "book/pdf/decay-book-4print.pdf", "for printing w/2 pages per sheet": "book/pdf/decay-book-4print-2up.pdf"
  * "Sphinx ebook": "book/sphinx/index.html"
  * "HTML Bootstrap ebook": "book/html/decay-book.html"
